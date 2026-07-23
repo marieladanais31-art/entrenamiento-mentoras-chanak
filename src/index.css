@@ -1,0 +1,29 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-navy: #0d1b2a;
+  --color-teal: #2a8c74;
+  --color-gold: #c9963a;
+  --color-cream: #f5f0e8;
+  --color-coral: #d45a3c;
+  --font-sans: 'Avenir Next', 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-navy);
+  -webkit-font-smoothing: antialiased;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: white;
+  }
+  .print-area {
+    box-shadow: none !important;
+    border: none !important;
+  }
+}
