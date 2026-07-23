@@ -42,8 +42,11 @@ npm run build    # genera dist/
 
 ## Despliegue
 
-Desplegado en Vercel. Cada push a `main` redespliega automáticamente (si el repo está
-conectado) o ejecuta `vercel --prod`.
+**Producción:** https://entrenamiento-mentoras-chanak.vercel.app
+
+Proyecto Vercel: `entrenamiento-mentoras-chanak` (equipo mariela-andrades-projects).
+Para redesplegar cambios: conectar el repo de GitHub desde el dashboard de Vercel
+(recomendado, redespliega en cada push a `main`) o ejecutar `npx vercel --prod`.
 
 ---
 
