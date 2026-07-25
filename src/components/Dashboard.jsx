@@ -7,7 +7,14 @@ import {
 import ProgressRing from './ui/ProgressRing'
 import EstadoBadge from './ui/EstadoBadge'
 
-export default function Dashboard({ mentora, esAdmin, onAbrirBloque, onVerHoras }) {
+export default function Dashboard({
+  mentora,
+  esAdmin,
+  onAbrirBloque,
+  onVerHoras,
+  onVerCurso,
+  onVerCertificado,
+}) {
   const r = resumenMentora(mentora.id)
   const bloquesNivel1 = BLOQUES.filter((b) => b.nivel === 1)
   const bloquesNivel2 = BLOQUES.filter((b) => b.nivel === 2)
@@ -36,17 +43,38 @@ export default function Dashboard({ mentora, esAdmin, onAbrirBloque, onVerHoras 
         </div>
       </section>
 
+      {/* Presentación del curso */}
+      <button
+        onClick={onVerCurso}
+        className="flex w-full items-center gap-3 rounded-2xl border-2 border-teal/25 bg-teal/6 px-4 py-3.5 text-left transition hover:bg-teal/12"
+      >
+        <span className="text-xl" aria-hidden>
+          📘
+        </span>
+        <span className="min-w-0 flex-1">
+          <span className="block text-sm font-bold text-navy">
+            Presentación del programa
+          </span>
+          <span className="block text-xs text-navy/60">
+            Objetivos, metodología, temario y certificaciones
+          </span>
+        </span>
+        <span className="shrink-0 text-teal">→</span>
+      </button>
+
       {/* Banners de certificación */}
       {r.elegibleCoordinadora ? (
-        <Banner color="bg-gold/15 border-gold text-navy">
-          🎓 <b>Elegible para Certificación Chanak-Certified Coordinator</b> — 300h completadas.
-          La certificación la emite la Head of LSP con visto bueno del Board.
-        </Banner>
+        <BannerCert
+          titulo="Elegible para Certificación Chanak-Certified Coordinator"
+          detalle="300h completadas. La certificación la emite la Head of LSP con visto bueno del Board."
+          onVer={() => onVerCertificado(2)}
+        />
       ) : r.elegibleMentor ? (
-        <Banner color="bg-gold/15 border-gold text-navy">
-          🎓 <b>Elegible para Certificación Chanak-Certified Mentor</b> — 180h completadas.
-          Certificado archivado en 05_PRACTICES y registrado en el SIS.
-        </Banner>
+        <BannerCert
+          titulo="Elegible para Certificación Chanak-Certified Mentor"
+          detalle="180h completadas. Certificado archivado en 05_PRACTICES y registrado en el SIS."
+          onVer={() => onVerCertificado(1)}
+        />
       ) : null}
 
       {/* Bloques Nivel 1 */}
@@ -118,10 +146,19 @@ function Stat({ n, etiqueta, color }) {
   )
 }
 
-function Banner({ children, color }) {
+function BannerCert({ titulo, detalle, onVer }) {
   return (
-    <div className={`rounded-2xl border-2 px-4 py-3 text-sm leading-relaxed ${color}`}>
-      {children}
+    <div className="rounded-2xl border-2 border-gold bg-gold/12 px-4 py-4">
+      <div className="text-sm leading-relaxed text-navy">
+        🎓 <b>{titulo}</b>
+        <div className="mt-0.5 text-xs text-navy/70">{detalle}</div>
+      </div>
+      <button
+        onClick={onVer}
+        className="mt-3 w-full rounded-xl bg-gold py-2.5 text-sm font-bold text-navy transition hover:bg-gold/90"
+      >
+        📜 Ver e imprimir certificado
+      </button>
     </div>
   )
 }

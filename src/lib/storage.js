@@ -65,6 +65,23 @@ export function setEstadoModulo(mentoraId, moduloId, estado, fecha = null) {
   return progreso
 }
 
+// Resultado del Knowledge Check: { aciertos, total, aprobado }
+export function setQuizModulo(mentoraId, moduloId, resultado) {
+  const progreso = getProgreso(mentoraId)
+  const actual = progreso.modulos[moduloId] || { estado: 'pendiente' }
+  // Abrir el módulo automáticamente al primer intento del test
+  const estado = actual.estado === 'pendiente' ? 'en_curso' : actual.estado
+  const hoy = new Date().toISOString().slice(0, 10)
+  progreso.modulos[moduloId] = {
+    ...actual,
+    estado,
+    fechaInicio: actual.fechaInicio || hoy,
+    quiz: resultado,
+  }
+  guardarJSON(keyProgreso(mentoraId), progreso)
+  return progreso
+}
+
 export function setNotasModulo(mentoraId, moduloId, notas) {
   const progreso = getProgreso(mentoraId)
   progreso.modulos[moduloId] = { ...(progreso.modulos[moduloId] || { estado: 'pendiente' }), notas }

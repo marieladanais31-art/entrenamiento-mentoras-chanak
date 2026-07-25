@@ -9,7 +9,7 @@ import {
   formatearFecha,
 } from '../lib/storage'
 
-export default function AdminView({ onVerMentora, onCambio }) {
+export default function AdminView({ onVerMentora, onVerCertificado, onCambio }) {
   const [, setTick] = useState(0)
   const refrescar = () => {
     setTick((t) => t + 1)
@@ -65,19 +65,18 @@ export default function AdminView({ onVerMentora, onCambio }) {
                     style={{ width: `${pct}%` }}
                   />
                 </div>
-                {r.elegibleMentor && !r.elegibleCoordinadora && (
-                  <div className="mt-2 text-[11px] font-semibold text-gold">
-                    🎓 Elegible: Chanak-Certified Mentor
-                  </div>
-                )}
-                {r.elegibleCoordinadora && (
-                  <div className="mt-2 text-[11px] font-semibold text-gold">
-                    🎓 Elegible: Chanak-Certified Coordinator
-                  </div>
+                {(r.elegibleMentor || r.elegibleCoordinadora) && (
+                  <button
+                    onClick={() => onVerCertificado(m.id, r.elegibleCoordinadora ? 2 : 1)}
+                    className="mt-2 w-full rounded-lg bg-gold/15 py-2 text-[11px] font-bold text-gold transition hover:bg-gold/25"
+                  >
+                    🎓 Emitir certificado:{' '}
+                    {r.elegibleCoordinadora ? 'Chanak-Certified Coordinator' : 'Chanak-Certified Mentor'}
+                  </button>
                 )}
                 <button
                   onClick={() => onVerMentora(m.id)}
-                  className="mt-3 w-full rounded-lg bg-navy/5 py-2 text-xs font-semibold text-navy transition hover:bg-navy/10"
+                  className="mt-2 w-full rounded-lg bg-navy/5 py-2 text-xs font-semibold text-navy transition hover:bg-navy/10"
                 >
                   Abrir su panel completo →
                 </button>

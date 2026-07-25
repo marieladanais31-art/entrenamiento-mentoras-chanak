@@ -9,18 +9,11 @@ export default function Login({ onEntrar }) {
       <div className="w-full max-w-sm">
         {/* Emblema */}
         <div className="mb-8 text-center text-cream">
-          <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center">
-            <svg viewBox="0 0 100 100" className="h-20 w-20">
-              <path
-                d="M50 5 L90 20 L90 55 Q90 80 50 95 Q10 80 10 55 L10 20 Z"
-                fill="none"
-                stroke="#C9963A"
-                strokeWidth="4"
-              />
-              <path d="M50 22 Q46 30 48 38 L44 70 L56 70 L52 38 Q54 30 50 22 Z" fill="#C9963A" />
-              <circle cx="50" cy="20" r="6" fill="#2A8C74" />
-            </svg>
-          </div>
+          <img
+            src="/logo-chanak.png"
+            alt="Chanak International Academy"
+            className="mx-auto mb-4 h-24 w-24 rounded-2xl bg-white/95 p-2"
+          />
           <h1 className="text-2xl font-bold tracking-wide">Chanak Academy</h1>
           <p className="mt-1 text-sm text-cream/70">Formación de Mentoras y Coordinadoras</p>
           <p className="mt-1 text-xs text-cream/50">180h Mentora · 300h Coordinadora · MSA-CESS</p>

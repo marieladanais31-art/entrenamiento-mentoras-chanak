@@ -26,4 +26,17 @@ body {
     box-shadow: none !important;
     border: none !important;
   }
+  /* El certificado se imprime a página completa en horizontal */
+  .print-cert {
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+  .print-cert:has(*) {
+    page-break-inside: avoid;
+  }
+}
+
+/* Orientación horizontal cuando se imprime un certificado */
+@page {
+  margin: 12mm;
 }

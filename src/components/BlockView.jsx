@@ -60,11 +60,18 @@ export default function BlockView({ mentora, bloqueId, onAbrirModulo, onVolver }
                   </span>
                 ))}
               </div>
-              {estado === 'completado' && p?.fechaCompletado && (
-                <div className="mt-2 text-[11px] font-medium text-gold">
-                  ✅ Completado el {formatearFecha(p.fechaCompletado)}
-                </div>
-              )}
+              <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] font-medium">
+                {estado === 'completado' && p?.fechaCompletado && (
+                  <span className="text-gold">
+                    ✅ Completado el {formatearFecha(p.fechaCompletado)}
+                  </span>
+                )}
+                {p?.quiz && (
+                  <span className={p.quiz.aprobado ? 'text-teal' : 'text-coral'}>
+                    {p.quiz.aprobado ? '✓' : '↻'} Knowledge Check {p.quiz.aciertos}/{p.quiz.total}
+                  </span>
+                )}
+              </div>
             </button>
           )
         })}

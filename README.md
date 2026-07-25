@@ -17,6 +17,25 @@ formación y se registra su progreso. Sirve como evidencia del indicador **MSA T
 > contienen 24 y 14 módulos respectivamente. Las horas sí cuadran exactamente (180h/120h).
 > La app carga todos los módulos de las tablas.
 
+## Contenido pedagógico
+
+Arquitectura al estilo Prospero Learning: **38 módulos · 101 lecciones · 169 preguntas**.
+
+- **Portada del curso** ([src/data/curso.js](src/data/curso.js)): resumen ejecutivo, objetivos de
+  aprendizaje, metodología, temario y certificaciones.
+- **Lecciones** ([src/data/contenido/](src/data/contenido/)): cada una con guion desarrollado listo
+  para grabar en Google Vids, notas de recursos visuales para la diapositiva y un espacio reservado
+  para incrustar el vídeo.
+- **Knowledge Check** por módulo: 3-5 preguntas tipo test con corrección inmediata, explicación de
+  la respuesta y aprobación al **80%** (mismo estándar de Mastery Learning que aplicamos a los
+  estudiantes). Reintentos ilimitados.
+- **Certificado** imprimible 180h/300h con logo Chanak, marca de agua, referencia MSA T5a y espacio
+  para firma de Head of LSP y Board.
+
+Fuentes del contenido: chanakacademy.org, portal.chanakacademy.org, el Self-Study MSA NGA 2026
+(Foundation Documents, Portrait of a Learner/Educator), el repositorio del SIS Chanak y los guiones
+pedagógicos del portal EducaFe.
+
 ## Características
 
 - **Login simple** por selección de mentora (sin contraseña; app interna de 4–10 usuarias).
