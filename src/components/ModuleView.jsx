@@ -5,6 +5,8 @@ import { formatearFecha } from '../lib/calculos'
 import EstadoBadge from './ui/EstadoBadge'
 import KnowledgeCheck from './KnowledgeCheck'
 import VideoLeccion from './VideoLeccion'
+import { useIdioma } from '../i18n/idioma'
+import { traducirModulo, traducirRecursos } from '../data/curriculum.en'
 
 export default function ModuleView({
   moduloId,
@@ -14,8 +16,10 @@ export default function ModuleView({
   acciones,
   onVolver,
 }) {
-  const modulo = getModulo(moduloId)
-  const contenido = getContenido(moduloId)
+  const { t, idioma } = useIdioma()
+  const modulo = traducirModulo(getModulo(moduloId), idioma)
+  const contenido = getContenido(moduloId, idioma)
+  const recursos = traducirRecursos(RECURSOS_GENERALES, idioma)
   const estado = p?.estado || 'pendiente'
 
   const [confirmandoFecha, setConfirmandoFecha] = useState(false)
@@ -42,7 +46,7 @@ export default function ModuleView({
   return (
     <div className="space-y-4">
       <button onClick={onVolver} className="text-sm font-medium text-teal hover:underline">
-        ← Volver al bloque
+        {t('modulo.volverBloque')}
       </button>
 
       {/* ── Ficha del módulo ── */}
@@ -50,7 +54,7 @@ export default function ModuleView({
         <div className="flex items-start justify-between gap-3">
           <div>
             <div className="text-xs font-bold text-teal">
-              Módulo {modulo.id} · Bloque {modulo.bloqueId.slice(1)} — {modulo.bloqueTitulo}
+              {t('bloque.modulo', { id: modulo.id })} · {t('panel.bloque', { n: modulo.bloqueId.slice(1) })} — {modulo.bloqueTitulo}
             </div>
             <h2 className="mt-1 text-lg font-bold leading-snug text-navy">{modulo.titulo}</h2>
           </div>
@@ -60,20 +64,25 @@ export default function ModuleView({
         {contenido && (
           <p className="mt-3 text-sm leading-relaxed text-navy/70">{contenido.resumen}</p>
         )}
+        {contenido?.sinTraducir && (
+          <p className="mt-2 rounded-lg bg-gold/10 px-3 py-2 text-[12px] text-navy/65">
+            🌐 {t('modulo.traduccionPendiente')}
+          </p>
+        )}
 
         <dl className="mt-4 grid grid-cols-2 gap-3 text-sm">
-          <Dato etiqueta="Horas" valor={`${modulo.horas} h`} />
-          <Dato etiqueta="Modalidad" valor={modulo.modalidad} />
-          <Dato etiqueta="Evaluación" valor={modulo.evaluacion} />
+          <Dato etiqueta={t('modulo.horas')} valor={`${modulo.horas} h`} />
+          <Dato etiqueta={t('modulo.modalidad')} valor={modulo.modalidad} />
+          <Dato etiqueta={t('modulo.evaluacion')} valor={modulo.evaluacion} />
           <Dato
-            etiqueta="Completado"
+            etiqueta={t('modulo.completado')}
             valor={p?.fechaCompletado ? formatearFecha(p.fechaCompletado) : '—'}
           />
         </dl>
 
         <div className="mt-4">
-          <div className="text-[10px] font-semibold uppercase tracking-wide text-navy/45">
-            Indicadores MSA que cubre
+          <div className="text-[12px] font-semibold uppercase tracking-wide text-navy/45">
+            {t('modulo.indicadores')}
           </div>
           <div className="mt-1.5 flex flex-wrap gap-1.5">
             {modulo.indicadores.map((ind) => (
@@ -92,12 +101,12 @@ export default function ModuleView({
       {/* ── Objetivos ── */}
       {contenido && (
         <div className="rounded-2xl bg-white p-5 shadow-sm">
-          <h3 className="text-sm font-bold text-navy">🎯 Objetivos de aprendizaje</h3>
-          <p className="mt-1 text-xs text-navy/55">Al terminar este módulo serás capaz de:</p>
+          <h3 className="text-sm font-bold text-navy">{t('modulo.objetivos')}</h3>
+          <p className="mt-1 text-xs text-navy/55">{t('modulo.objetivosSub')}</p>
           <ul className="mt-3 space-y-2">
             {contenido.objetivos.map((o, i) => (
               <li key={i} className="flex gap-2.5 text-sm leading-relaxed text-navy/75">
-                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-teal/12 text-[10px] font-bold text-teal">
+                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-teal/12 text-[12px] font-bold text-teal">
                   {i + 1}
                 </span>
                 {o}
@@ -111,9 +120,9 @@ export default function ModuleView({
       {contenido && (
         <div className="rounded-2xl bg-white p-5 shadow-sm">
           <h3 className="text-sm font-bold text-navy">
-            📚 Contenido del módulo
+            {t('modulo.contenido')}
             <span className="ml-2 font-normal text-navy/50">
-              {contenido.lecciones.length} lecciones
+              {t('modulo.nLecciones', { n: contenido.lecciones.length })}
             </span>
           </h3>
           <div className="mt-3 space-y-2">
@@ -129,7 +138,7 @@ export default function ModuleView({
                     }`}
                   >
                     <span
-                      className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-lg text-[11px] font-bold ${
+                      className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-lg text-[13px] font-bold ${
                         abierta ? 'bg-gold text-navy' : 'bg-navy/10 text-navy/70'
                       }`}
                     >
@@ -163,8 +172,8 @@ export default function ModuleView({
 
                       {/* Guion / contenido de la lección */}
                       <div>
-                        <div className="text-[10px] font-bold uppercase tracking-wide text-navy/45">
-                          {esAdmin ? 'Guion de la lección' : 'Desarrollo de la lección'}
+                        <div className="text-[12px] font-bold uppercase tracking-wide text-navy/45">
+                          {esAdmin ? t('modulo.guionAdmin') : t('modulo.desarrollo')}
                         </div>
                         <div className="mt-2 space-y-2.5">
                           {lec.guion.map((parrafo, j) => (
@@ -178,8 +187,8 @@ export default function ModuleView({
                       {/* Indicaciones de producción: SOLO admin */}
                       {esAdmin && (
                         <div className="rounded-xl border border-gold/35 bg-gold/8 px-4 py-3">
-                          <div className="text-[10px] font-bold uppercase tracking-wide text-navy/55">
-                            🎬 Indicaciones de producción · solo administración
+                          <div className="text-[12px] font-bold uppercase tracking-wide text-navy/55">
+                            {t('modulo.produccion')}
                           </div>
                           <ul className="mt-2 space-y-1.5">
                             {lec.visuales.map((v, j) => (
@@ -214,14 +223,14 @@ export default function ModuleView({
 
       {/* ── Progreso ── */}
       <div className="rounded-2xl bg-white p-5 shadow-sm">
-        <h3 className="text-sm font-bold text-navy">📋 Tu progreso en este módulo</h3>
+        <h3 className="text-sm font-bold text-navy">{t('modulo.progreso')}</h3>
         <div className="mt-3 space-y-2">
           {estado === 'pendiente' && (
             <button
               onClick={() => acciones.setEstado(moduloId, 'en_curso')}
               className="w-full rounded-xl bg-teal py-3 text-sm font-semibold text-white transition hover:bg-teal/90"
             >
-              🔵 Marcar como En Curso
+              {t('modulo.marcarEnCurso')}
             </button>
           )}
           {estado !== 'completado' && !confirmandoFecha && (
@@ -229,13 +238,13 @@ export default function ModuleView({
               onClick={() => setConfirmandoFecha(true)}
               className="w-full rounded-xl bg-navy py-3 text-sm font-semibold text-cream transition hover:bg-navy/90"
             >
-              ✅ Marcar como Completado
+              {t('modulo.marcarCompletado')}
             </button>
           )}
           {confirmandoFecha && (
             <div className="rounded-xl border-2 border-teal bg-teal/5 p-4">
               <label className="block text-xs font-semibold text-navy">
-                Fecha de completado{esAdmin ? ' (puede ser retroactiva)' : ''}
+                {t('modulo.fechaCompletado')}{esAdmin ? t('modulo.fechaRetroactiva') : ''}
               </label>
               <input
                 type="date"
@@ -245,9 +254,8 @@ export default function ModuleView({
                 className="mt-2 w-full rounded-lg border border-navy/20 bg-white px-3 py-2 text-sm"
               />
               {p?.quiz && !p.quiz.aprobado && (
-                <p className="mt-2 rounded-lg bg-coral/8 px-3 py-2 text-[11px] leading-relaxed text-coral">
-                  Aún no has superado el Knowledge Check ({p.quiz.aciertos}/{p.quiz.total}). Puedes
-                  completar el módulo, pero se recomienda alcanzar el dominio primero.
+                <p className="mt-2 rounded-lg bg-coral/8 px-3 py-2 text-[13px] leading-relaxed text-coral">
+                  {t('modulo.avisoQuiz', { aciertos: p.quiz.aciertos, total: p.quiz.total })}
                 </p>
               )}
               <div className="mt-3 flex gap-2">
@@ -258,13 +266,13 @@ export default function ModuleView({
                   }}
                   className="flex-1 rounded-lg bg-teal py-2.5 text-sm font-semibold text-white"
                 >
-                  Confirmar ({modulo.horas}h)
+                  {t('modulo.confirmar', { horas: modulo.horas })}
                 </button>
                 <button
                   onClick={() => setConfirmandoFecha(false)}
                   className="rounded-lg bg-navy/10 px-4 py-2.5 text-sm font-medium text-navy"
                 >
-                  Cancelar
+                  {t('modulo.cancelar')}
                 </button>
               </div>
             </div>
@@ -274,7 +282,7 @@ export default function ModuleView({
               onClick={() => acciones.setEstado(moduloId, 'en_curso')}
               className="w-full rounded-xl border border-coral/40 py-2.5 text-xs font-medium text-coral transition hover:bg-coral/5"
             >
-              Reabrir módulo (volver a En Curso)
+              {t('modulo.reabrir')}
             </button>
           )}
         </div>
@@ -282,9 +290,9 @@ export default function ModuleView({
 
       {/* ── Recursos ── */}
       <div className="rounded-2xl bg-white p-5 shadow-sm">
-        <h3 className="text-sm font-bold text-navy">🔗 Recursos</h3>
+        <h3 className="text-sm font-bold text-navy">{t('modulo.recursos')}</h3>
         <ul className="mt-3 space-y-2">
-          {RECURSOS_GENERALES.map((rec) => (
+          {recursos.map((rec) => (
             <li key={rec.url}>
               <a
                 href={rec.url}
@@ -295,6 +303,27 @@ export default function ModuleView({
                 <div className="text-sm font-semibold text-teal">{rec.nombre} ↗</div>
                 <div className="text-xs text-navy/60">{rec.descripcion}</div>
               </a>
+              {rec.demo && (
+                <div className="mt-1.5 rounded-xl border border-teal/30 bg-teal/5 px-4 py-3">
+                  <div className="text-[12px] font-bold uppercase tracking-wide text-navy/55">
+                    {t('modulo.cuentasPractica')}
+                  </div>
+                  <ul className="mt-1.5 space-y-1">
+                    {rec.demo.cuentas.map((c) => (
+                      <li key={c} className="font-mono text-xs break-all text-navy/80">
+                        {c}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-1.5 text-xs text-navy/70">
+                    {t('modulo.contrasenaAmbas')}{' '}
+                    <span className="font-mono font-semibold text-navy">{rec.demo.clave}</span>
+                  </div>
+                  <p className="mt-2 text-[12px] leading-relaxed text-coral">
+                    ⚠️ {rec.demo.aviso}
+                  </p>
+                </div>
+              )}
             </li>
           ))}
         </ul>
@@ -302,19 +331,19 @@ export default function ModuleView({
 
       {/* ── Notas ── */}
       <div className="rounded-2xl bg-white p-5 shadow-sm">
-        <h3 className="text-sm font-bold text-navy">✍️ Notas y reflexión</h3>
+        <h3 className="text-sm font-bold text-navy">{t('modulo.notas')}</h3>
         <textarea
           value={notas}
           onChange={(e) => setNotas(e.target.value)}
           rows={4}
-          placeholder="Reflexiones, aprendizajes clave, dudas para el taller…"
+          placeholder={t('modulo.notasPh')}
           className="mt-3 w-full rounded-xl border border-navy/15 bg-cream/50 px-3 py-2.5 text-sm leading-relaxed placeholder:text-navy/35 focus:border-teal focus:outline-none"
         />
         <button
           onClick={guardarNotas}
           className="mt-2 rounded-lg bg-navy px-4 py-2 text-xs font-semibold text-cream transition hover:bg-navy/90"
         >
-          {notasGuardadas ? '✓ Guardado' : 'Guardar notas'}
+          {notasGuardadas ? t('modulo.guardado') : t('modulo.guardarNotas')}
         </button>
       </div>
     </div>
@@ -324,7 +353,7 @@ export default function ModuleView({
 function Dato({ etiqueta, valor }) {
   return (
     <div className="rounded-xl bg-cream px-3 py-2">
-      <dt className="text-[10px] font-semibold uppercase tracking-wide text-navy/45">
+      <dt className="text-[12px] font-semibold uppercase tracking-wide text-navy/45">
         {etiqueta}
       </dt>
       <dd className="mt-0.5 text-sm font-medium text-navy">{valor}</dd>

@@ -7,6 +7,23 @@
   --color-cream: #f5f0e8;
   --color-coral: #d45a3c;
   --font-sans: 'Avenir Next', 'Segoe UI', system-ui, -apple-system, sans-serif;
+
+  /* Escala tipográfica ampliada: las mentoras leen desde el móvil, así que
+     todos los tamaños suben ~2px respecto a los valores por defecto. */
+  --text-xs: 0.8125rem; /* 13px (por defecto 12) */
+  --text-xs--line-height: 1.15rem;
+  --text-sm: 0.9375rem; /* 15px (por defecto 14) */
+  --text-sm--line-height: 1.4rem;
+  --text-base: 1.0625rem; /* 17px (por defecto 16) */
+  --text-base--line-height: 1.6rem;
+  --text-lg: 1.1875rem; /* 19px (por defecto 18) */
+  --text-lg--line-height: 1.75rem;
+  --text-xl: 1.375rem; /* 22px (por defecto 20) */
+  --text-xl--line-height: 1.85rem;
+  --text-2xl: 1.625rem; /* 26px (por defecto 24) */
+  --text-2xl--line-height: 2.1rem;
+  --text-3xl: 2rem; /* 32px (por defecto 30) */
+  --text-3xl--line-height: 2.4rem;
 }
 
 body {

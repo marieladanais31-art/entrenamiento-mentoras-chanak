@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { actualizarPerfil } from '../lib/backend'
 import { formatearFecha, iniciales } from '../lib/calculos'
+import { useIdioma } from '../i18n/idioma'
 
 // Aprobación y gestión de cuentas. Solo visible para admin.
 export default function GestionUsuarias({ perfiles, miId, onRecargar }) {
+  const { t } = useIdioma()
   const [ocupado, setOcupado] = useState(null)
   const [error, setError] = useState('')
 
@@ -27,9 +29,9 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar }) {
   return (
     <section className="space-y-4">
       <div>
-        <h3 className="font-bold text-navy">Usuarias de la plataforma</h3>
+        <h3 className="font-bold text-navy">{t('usuarias.titulo')}</h3>
         <p className="text-xs text-navy/55">
-          Aprueba las cuentas nuevas y gestiona el acceso del equipo.
+          {t('usuarias.sub')}
         </p>
       </div>
 
@@ -43,7 +45,7 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar }) {
       {pendientes.length > 0 && (
         <div className="rounded-2xl border-2 border-gold bg-gold/8 p-4">
           <div className="text-sm font-bold text-navy">
-            ⏳ {pendientes.length} cuenta{pendientes.length > 1 ? 's' : ''} esperando aprobación
+            {t('usuarias.esperando', { n: pendientes.length })}
           </div>
           <ul className="mt-3 space-y-2">
             {pendientes.map((p) => (
@@ -54,8 +56,8 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar }) {
                 <Avatar nombre={p.nombre} />
                 <div className="min-w-0 flex-1">
                   <div className="text-sm font-semibold text-navy">{p.nombre}</div>
-                  <div className="text-[11px] text-navy/50">
-                    Solicitó acceso el {formatearFecha(p.creado_en?.slice(0, 10))}
+                  <div className="text-[13px] text-navy/50">
+                    {t('usuarias.solicito', { fecha: formatearFecha(p.creado_en?.slice(0, 10)) })}
                   </div>
                 </div>
                 <button
@@ -63,14 +65,14 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar }) {
                   disabled={ocupado === p.id}
                   className="rounded-lg bg-teal px-3 py-1.5 text-xs font-bold text-white disabled:opacity-50"
                 >
-                  {ocupado === p.id ? '…' : '✓ Aprobar'}
+                  {ocupado === p.id ? '…' : t('usuarias.aprobar')}
                 </button>
                 <button
                   onClick={() => cambiar(p.id, { estado: 'suspendida' })}
                   disabled={ocupado === p.id}
                   className="rounded-lg border border-coral/40 px-3 py-1.5 text-xs font-medium text-coral disabled:opacity-50"
                 >
-                  Rechazar
+                  {t('usuarias.rechazar')}
                 </button>
               </li>
             ))}
@@ -81,7 +83,7 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar }) {
       {/* Activas */}
       <div className="rounded-2xl bg-white p-4 shadow-sm">
         <div className="text-sm font-bold text-navy">
-          ✅ Activas <span className="font-normal text-navy/50">({activas.length})</span>
+          {t('usuarias.activas')} <span className="font-normal text-navy/50">({activas.length})</span>
         </div>
         <ul className="mt-3 space-y-2">
           {activas.map((p) => (
@@ -93,10 +95,10 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar }) {
               <div className="min-w-0 flex-1">
                 <div className="text-sm font-semibold text-navy">
                   {p.nombre}
-                  {p.id === miId && <span className="ml-1 text-[10px] text-navy/45">(tú)</span>}
+                  {p.id === miId && <span className="ml-1 text-[12px] text-navy/45">{t('usuarias.tu')}</span>}
                 </div>
-                <div className="text-[11px] text-navy/50">
-                  {p.rol === 'admin' ? '🔑 Administradora' : '👩‍🏫 Mentora'}
+                <div className="text-[13px] text-navy/50">
+                  {p.rol === 'admin' ? t('usuarias.admin') : t('usuarias.mentora')}
                 </div>
               </div>
               {p.id !== miId && (
@@ -106,16 +108,16 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar }) {
                       cambiar(p.id, { rol: p.rol === 'admin' ? 'mentora' : 'admin' })
                     }
                     disabled={ocupado === p.id}
-                    className="rounded-lg bg-navy/10 px-2.5 py-1.5 text-[11px] font-semibold text-navy disabled:opacity-50"
+                    className="rounded-lg bg-navy/10 px-2.5 py-1.5 text-[13px] font-semibold text-navy disabled:opacity-50"
                   >
-                    {p.rol === 'admin' ? 'Quitar admin' : 'Hacer admin'}
+                    {p.rol === 'admin' ? t('usuarias.quitarAdmin') : t('usuarias.hacerAdmin')}
                   </button>
                   <button
                     onClick={() => cambiar(p.id, { estado: 'suspendida' })}
                     disabled={ocupado === p.id}
-                    className="rounded-lg border border-coral/40 px-2.5 py-1.5 text-[11px] font-medium text-coral disabled:opacity-50"
+                    className="rounded-lg border border-coral/40 px-2.5 py-1.5 text-[13px] font-medium text-coral disabled:opacity-50"
                   >
-                    Suspender
+                    {t('usuarias.suspender')}
                   </button>
                 </>
               )}
@@ -123,7 +125,7 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar }) {
           ))}
           {activas.length === 0 && (
             <li className="rounded-xl bg-cream px-4 py-4 text-center text-xs text-navy/50">
-              Todavía no hay usuarias activas.
+              {t('usuarias.sinActivas')}
             </li>
           )}
         </ul>
@@ -133,7 +135,7 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar }) {
       {suspendidas.length > 0 && (
         <div className="rounded-2xl bg-white p-4 shadow-sm">
           <div className="text-sm font-bold text-navy">
-            🔒 Sin acceso <span className="font-normal text-navy/50">({suspendidas.length})</span>
+            {t('usuarias.sinAcceso')} <span className="font-normal text-navy/50">({suspendidas.length})</span>
           </div>
           <ul className="mt-3 space-y-2">
             {suspendidas.map((p) => (
@@ -148,7 +150,7 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar }) {
                   disabled={ocupado === p.id}
                   className="rounded-lg bg-teal px-3 py-1.5 text-xs font-bold text-white disabled:opacity-50"
                 >
-                  Reactivar
+                  {t('usuarias.reactivar')}
                 </button>
               </li>
             ))}
@@ -156,9 +158,8 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar }) {
         </div>
       )}
 
-      <p className="text-[11px] leading-relaxed text-navy/50">
-        Para borrar una cuenta por completo hay que eliminarla en Supabase → Authentication →
-        Users. Aquí puedes suspender el acceso, que es reversible.
+      <p className="text-[13px] leading-relaxed text-navy/50">
+        {t('usuarias.notaBorrado')}
       </p>
     </section>
   )
@@ -167,7 +168,7 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar }) {
 function Avatar({ nombre, apagado }) {
   return (
     <div
-      className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-[11px] font-bold text-white ${
+      className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-[13px] font-bold text-white ${
         apagado ? 'bg-navy/25' : 'bg-teal'
       }`}
     >

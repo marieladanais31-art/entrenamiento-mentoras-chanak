@@ -20,6 +20,18 @@ export const MSA_LEYENDA = {
 
 export const RECURSOS_GENERALES = [
   {
+    nombre: 'SIS Chanak — Entorno de práctica',
+    url: 'https://sis.chanakacademy.org/',
+    descripcion:
+      'Sistema académico oficial. Practica con las cuentas de demostración, nunca con datos reales de alumnos.',
+    demo: {
+      cuentas: ['demopadre@asociacioneducafe.org', 'demoestudiante@asociacioneducafe.org'],
+      clave: 'Chanak2026',
+      aviso:
+        'Cuentas compartidas solo para formación. No introduzcas datos reales de alumnos ni de familias.',
+    },
+  },
+  {
     nombre: 'NotebookLM — Cuadernos de formación Chanak',
     url: 'https://notebooklm.google.com/',
     descripcion: 'Cuadernos con los documentos institucionales (cubren parte de los Bloques 1 y 2).',

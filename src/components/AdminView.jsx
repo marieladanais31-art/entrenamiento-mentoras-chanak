@@ -3,8 +3,11 @@ import { BLOQUES } from '../data/curriculum'
 import * as api from '../lib/backend'
 import { resumenMentora, formatearFecha, iniciales } from '../lib/calculos'
 import GestionUsuarias from './GestionUsuarias'
+import { useIdioma } from '../i18n/idioma'
+import { traducirBloques } from '../data/curriculum.en'
 
 export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) {
+  const { t, idioma } = useIdioma()
   const [pestana, setPestana] = useState('usuarias') // 'usuarias' | 'progreso' | 'retroactivo'
   const [perfiles, setPerfiles] = useState([])
   const [progresos, setProgresos] = useState({})
@@ -34,18 +37,18 @@ export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) 
   return (
     <div className="space-y-5">
       <div className="rounded-2xl bg-navy p-5 text-cream shadow-sm">
-        <h2 className="text-lg font-bold">Panel de Administración</h2>
+        <h2 className="text-lg font-bold">{t('admin.titulo')}</h2>
         <p className="mt-1 text-xs text-cream/70">
-          {miPerfil.nombre} · Head of LSP · Usuarias, progreso del equipo y vídeos
+          {t('admin.sub', { nombre: miPerfil.nombre })}
         </p>
       </div>
 
       {/* Pestañas */}
       <div className="flex gap-1 rounded-xl bg-white p-1 shadow-sm">
         {[
-          ['usuarias', `Usuarias${pendientes ? ` (${pendientes})` : ''}`],
-          ['progreso', 'Progreso'],
-          ['retroactivo', 'Registro retroactivo'],
+          ['usuarias', `${t('admin.tabUsuarias')}${pendientes ? ` (${pendientes})` : ''}`],
+          ['progreso', t('admin.tabProgreso')],
+          ['retroactivo', t('admin.tabRetroactivo')],
         ].map(([id, texto]) => (
           <button
             key={id}
@@ -67,7 +70,7 @@ export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) 
 
       {cargando ? (
         <p className="rounded-2xl bg-white px-4 py-8 text-center text-sm text-navy/50 shadow-sm">
-          Cargando datos del equipo…
+          {t('admin.cargando')}
         </p>
       ) : (
         <>
@@ -77,9 +80,9 @@ export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) 
 
           {pestana === 'progreso' && (
             <section>
-              <h3 className="mb-1 font-bold text-navy">Progreso comparativo</h3>
+              <h3 className="mb-1 font-bold text-navy">{t('admin.progresoTitulo')}</h3>
               <p className="mb-3 text-xs text-navy/55">
-                Solo aparecen las usuarias con acceso aprobado.
+                {t('admin.progresoSub')}
               </p>
               <div className="grid gap-3 sm:grid-cols-2">
                 {activas.map((p) => {
@@ -95,12 +98,17 @@ export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) 
                           <div className="text-sm font-semibold text-navy">
                             {p.nombre}
                             {p.rol === 'admin' && (
-                              <span className="ml-1 text-[10px] text-gold">🔑</span>
+                              <span className="ml-1 text-[12px] text-gold">🔑</span>
                             )}
                           </div>
-                          <div className="text-[11px] text-navy/55">
-                            Nivel {r.nivelActual} · {r.horas}h / {r.metaHoras}h · {r.completados}{' '}
-                            {r.completados === 1 ? 'módulo' : 'módulos'} ✅
+                          <div className="text-[13px] text-navy/55">
+                            {t('admin.nivelResumen', {
+                              nivel: r.nivelActual,
+                              horas: r.horas,
+                              meta: r.metaHoras,
+                              n: r.completados,
+                              palabra: r.completados === 1 ? t('admin.modulo') : t('admin.modulos'),
+                            })}
                           </div>
                         </div>
                         <div className="text-sm font-bold text-teal">{pct}%</div>
@@ -116,24 +124,25 @@ export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) 
                           onClick={() =>
                             onVerCertificado(p.id, p.nombre, r.elegibleCoordinadora ? 2 : 1)
                           }
-                          className="mt-2 w-full rounded-lg bg-gold/15 py-2 text-[11px] font-bold text-gold transition hover:bg-gold/25"
+                          className="mt-2 w-full rounded-lg bg-gold/15 py-2 text-[13px] font-bold text-gold transition hover:bg-gold/25"
                         >
-                          🎓 Emitir certificado:{' '}
-                          {r.elegibleCoordinadora ? 'Coordinator' : 'Mentor'}
+                          {t('admin.emitirCert', {
+                            tipo: r.elegibleCoordinadora ? 'Coordinator' : 'Mentor',
+                          })}
                         </button>
                       )}
                       <button
                         onClick={() => onVerUsuaria(p.id, p.nombre)}
                         className="mt-2 w-full rounded-lg bg-navy/5 py-2 text-xs font-semibold text-navy transition hover:bg-navy/10"
                       >
-                        Abrir su panel completo →
+                        {t('admin.abrirPanel')}
                       </button>
                     </div>
                   )
                 })}
                 {activas.length === 0 && (
                   <p className="rounded-2xl bg-white px-4 py-6 text-center text-xs text-navy/50 shadow-sm">
-                    Aún no hay usuarias aprobadas. Apruébalas en la pestaña «Usuarias».
+                    {t('admin.sinAprobadas')}
                   </p>
                 )}
               </div>
@@ -142,10 +151,9 @@ export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) 
 
           {pestana === 'retroactivo' && (
             <section>
-              <h3 className="mb-1 font-bold text-navy">Registro retroactivo de módulos</h3>
+              <h3 className="mb-1 font-bold text-navy">{t('admin.retroTitulo')}</h3>
               <p className="mb-3 text-xs text-navy/55">
-                Marca módulos como completados en nombre de una mentora, con la fecha real en que
-                los estudió. Las horas se suman automáticamente.
+                {t('admin.retroSub')}
               </p>
               <div className="space-y-3">
                 {activas.map((p) => (
@@ -154,6 +162,7 @@ export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) 
                     perfil={p}
                     progreso={progresos[p.id] || { modulos: {} }}
                     onCambio={cargar}
+                    idioma={idioma}
                   />
                 ))}
               </div>
@@ -165,7 +174,9 @@ export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) 
   )
 }
 
-function TablaRetroactiva({ perfil, progreso, onCambio }) {
+function TablaRetroactiva({ perfil, progreso, onCambio, idioma }) {
+  const { t } = useIdioma()
+  const bloques = traducirBloques(BLOQUES, idioma)
   const [abierto, setAbierto] = useState(false)
   const [marcando, setMarcando] = useState(null)
   const [fecha, setFecha] = useState(() => new Date().toISOString().slice(0, 10))
@@ -190,14 +201,14 @@ function TablaRetroactiva({ perfil, progreso, onCambio }) {
         className="flex w-full items-center justify-between px-4 py-3 text-left"
       >
         <span className="text-sm font-semibold text-navy">{perfil.nombre}</span>
-        <span className="text-xs text-navy/50">{abierto ? '▲ Cerrar' : '▼ Abrir módulos'}</span>
+        <span className="text-xs text-navy/50">{abierto ? t('admin.cerrar') : t('admin.abrirModulos')}</span>
       </button>
       {abierto && (
         <div className="border-t border-navy/5 px-4 pb-4">
-          {BLOQUES.map((b) => (
+          {bloques.map((b) => (
             <div key={b.id} className="mt-3">
-              <div className="text-[11px] font-bold uppercase tracking-wide text-teal">
-                Bloque {b.numero} — {b.titulo}
+              <div className="text-[13px] font-bold uppercase tracking-wide text-teal">
+                {t('panel.bloque', { n: b.numero })} — {b.titulo}
               </div>
               <ul className="mt-1.5 space-y-1">
                 {b.modulos.map((mod) => {
@@ -226,7 +237,7 @@ function TablaRetroactiva({ perfil, progreso, onCambio }) {
                             }
                             className="text-coral hover:underline disabled:opacity-50"
                           >
-                            deshacer
+                            {t('admin.deshacer')}
                           </button>
                         </span>
                       ) : esEste ? (
@@ -236,7 +247,7 @@ function TablaRetroactiva({ perfil, progreso, onCambio }) {
                             value={fecha}
                             max={new Date().toISOString().slice(0, 10)}
                             onChange={(e) => setFecha(e.target.value)}
-                            className="rounded border border-navy/20 bg-white px-1.5 py-1 text-[11px]"
+                            className="rounded border border-navy/20 bg-white px-1.5 py-1 text-[13px]"
                           />
                           <button
                             disabled={ocupado}
@@ -261,7 +272,7 @@ function TablaRetroactiva({ perfil, progreso, onCambio }) {
                           onClick={() => setMarcando(mod.id)}
                           className="rounded bg-navy/10 px-2 py-1 font-semibold text-navy hover:bg-navy/15"
                         >
-                          Marcar ✓
+                          {t('admin.marcar')}
                         </button>
                       )}
                     </li>

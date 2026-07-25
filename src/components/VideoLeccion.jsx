@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { urlEmbed } from '../lib/calculos'
+import { useIdioma } from '../i18n/idioma'
 
 // Reproductor de la lección. Si eres admin, además puedes añadir, cambiar o
 // borrar el vídeo (enlace de Google Vids, Drive o YouTube).
 export default function VideoLeccion({ video, esAdmin, onGuardar, onBorrar }) {
+  const { t } = useIdioma()
   const [editando, setEditando] = useState(false)
   const [url, setUrl] = useState(video?.url || '')
   const [nota, setNota] = useState(video?.nota || '')
@@ -14,8 +16,8 @@ export default function VideoLeccion({ video, esAdmin, onGuardar, onBorrar }) {
 
   async function guardar() {
     setError('')
-    if (!url.trim()) return setError('Pega el enlace del vídeo.')
-    if (!/^https?:\/\//i.test(url.trim())) return setError('El enlace debe empezar por https://')
+    if (!url.trim()) return setError(t('video.errPega'))
+    if (!/^https?:\/\//i.test(url.trim())) return setError(t('video.errHttps'))
     setGuardando(true)
     try {
       await onGuardar(url, nota)
@@ -45,10 +47,10 @@ export default function VideoLeccion({ video, esAdmin, onGuardar, onBorrar }) {
   if (editando) {
     return (
       <div className="rounded-xl border-2 border-teal bg-teal/5 p-4">
-        <div className="text-xs font-bold text-navy">🎬 Vídeo de la lección</div>
+        <div className="text-xs font-bold text-navy">{t('video.titulo')}</div>
         <label className="mt-2 block">
-          <span className="text-[10px] font-semibold uppercase tracking-wide text-navy/55">
-            Enlace (Google Vids, Drive o YouTube)
+          <span className="text-[12px] font-semibold uppercase tracking-wide text-navy/55">
+            {t('video.enlace')}
           </span>
           <input
             value={url}
@@ -58,24 +60,24 @@ export default function VideoLeccion({ video, esAdmin, onGuardar, onBorrar }) {
           />
         </label>
         <label className="mt-2 block">
-          <span className="text-[10px] font-semibold uppercase tracking-wide text-navy/55">
-            Nota interna (opcional)
+          <span className="text-[12px] font-semibold uppercase tracking-wide text-navy/55">
+            {t('video.notaInterna')}
           </span>
           <input
             value={nota}
             onChange={(e) => setNota(e.target.value)}
-            placeholder="Ej. Pendiente de regrabar la intro"
+            placeholder={t('video.notaPh')}
             className="mt-1 w-full rounded-lg border border-navy/20 bg-white px-3 py-2 text-xs"
           />
         </label>
-        {error && <p className="mt-2 text-[11px] font-medium text-coral">{error}</p>}
+        {error && <p className="mt-2 text-[13px] font-medium text-coral">{error}</p>}
         <div className="mt-3 flex flex-wrap gap-2">
           <button
             onClick={guardar}
             disabled={guardando}
             className="flex-1 rounded-lg bg-teal py-2 text-xs font-bold text-white disabled:opacity-50"
           >
-            {guardando ? 'Guardando…' : 'Guardar vídeo'}
+            {guardando ? t('video.guardando') : t('video.guardar')}
           </button>
           <button
             onClick={() => {
@@ -85,7 +87,7 @@ export default function VideoLeccion({ video, esAdmin, onGuardar, onBorrar }) {
             }}
             className="rounded-lg bg-navy/10 px-3 py-2 text-xs font-medium text-navy"
           >
-            Cancelar
+            {t('video.cancelar')}
           </button>
           {video?.url && (
             <button
@@ -93,13 +95,12 @@ export default function VideoLeccion({ video, esAdmin, onGuardar, onBorrar }) {
               disabled={guardando}
               className="rounded-lg border border-coral/40 px-3 py-2 text-xs font-medium text-coral disabled:opacity-50"
             >
-              Borrar
+              {t('video.borrar')}
             </button>
           )}
         </div>
-        <p className="mt-2 text-[10px] leading-relaxed text-navy/50">
-          En Google Vids: <b>Compartir → Cualquier persona con el enlace</b> antes de pegarlo, o las
-          mentoras no podrán verlo.
+        <p className="mt-2 text-[12px] leading-relaxed text-navy/50">
+          {t('video.avisoCompartir')}
         </p>
       </div>
     )
@@ -130,8 +131,8 @@ export default function VideoLeccion({ video, esAdmin, onGuardar, onBorrar }) {
               ▶️
             </span>
             <span className="min-w-0 flex-1 text-xs">
-              <b className="block">Ver el vídeo de la lección</b>
-              <span className="text-cream/60">Se abre en una pestaña nueva</span>
+              <b className="block">{t('video.abrirNueva')}</b>
+              <span className="text-cream/60">{t('video.abrirNuevaSub')}</span>
             </span>
           </a>
         )}
@@ -139,12 +140,12 @@ export default function VideoLeccion({ video, esAdmin, onGuardar, onBorrar }) {
           <div className="mt-2 flex items-center gap-3">
             <button
               onClick={() => setEditando(true)}
-              className="text-[11px] font-semibold text-teal hover:underline"
+              className="text-[13px] font-semibold text-teal hover:underline"
             >
-              ✏️ Cambiar vídeo
+              {t('video.cambiar')}
             </button>
             {video.nota && (
-              <span className="text-[11px] text-navy/50">Nota: {video.nota}</span>
+              <span className="text-[13px] text-navy/50">{t('video.nota')}: {video.nota}</span>
             )}
           </div>
         )}
@@ -163,9 +164,9 @@ export default function VideoLeccion({ video, esAdmin, onGuardar, onBorrar }) {
           ➕
         </span>
         <span className="min-w-0 text-xs leading-relaxed text-navy/70">
-          <b className="text-navy/85">Añadir vídeo de Google Vids</b>
+          <b className="text-navy/85">{t('video.anadir')}</b>
           <br />
-          El guion de abajo está listo para grabarlo.
+          {t('video.anadirSub')}
         </span>
       </button>
     )
@@ -177,8 +178,7 @@ export default function VideoLeccion({ video, esAdmin, onGuardar, onBorrar }) {
         🎬
       </span>
       <span className="text-xs leading-relaxed text-navy/60">
-        El vídeo de esta lección estará disponible pronto. Puedes estudiar el contenido escrito más
-        abajo.
+        {t('video.proximamente')}
       </span>
     </div>
   )

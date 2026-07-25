@@ -1,6 +1,8 @@
 import { iniciales } from '../../lib/calculos'
+import { SelectorIdioma, useIdioma } from '../../i18n/idioma'
 
 export default function Header({ perfil, esAdmin, vista, onNavegar, onSalir }) {
+  const { t } = useIdioma()
   const boton = (nombre) =>
     `rounded-full px-3 py-1.5 font-medium transition ${
       vista.nombre === nombre ? 'bg-teal text-white' : 'bg-white/10 hover:bg-white/20'
@@ -15,11 +17,12 @@ export default function Header({ perfil, esAdmin, vista, onNavegar, onSalir }) {
             <span className="block text-sm font-bold leading-tight tracking-wide">
               CHANAK ACADEMY
             </span>
-            <span className="block text-[11px] text-cream/60">Formación de Mentoras</span>
+            <span className="block text-[13px] text-cream/60">{t('nav.formacion')}</span>
           </span>
         </button>
 
         <nav className="flex items-center gap-1 text-xs">
+          <SelectorIdioma />
           {esAdmin && (
             <button
               onClick={() => onNavegar({ nombre: 'admin' })}
@@ -29,19 +32,19 @@ export default function Header({ perfil, esAdmin, vista, onNavegar, onSalir }) {
                   : 'bg-white/10 hover:bg-white/20'
               }`}
             >
-              🔑 Admin
+              🔑 {t('nav.admin')}
             </button>
           )}
           <button onClick={() => onNavegar({ nombre: 'dashboard' })} className={boton('dashboard')}>
-            Panel
+            {t('nav.panel')}
           </button>
           <button onClick={() => onNavegar({ nombre: 'horas' })} className={boton('horas')}>
-            Horas
+            {t('nav.horas')}
           </button>
           <button
             onClick={onSalir}
-            title={`Cerrar sesión de ${perfil?.nombre || ''}`}
-            className="flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-[10px] font-bold transition hover:bg-coral"
+            title={t('nav.cerrarSesionDe', { nombre: perfil?.nombre || '' })}
+            className="flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-[12px] font-bold transition hover:bg-coral"
           >
             {iniciales(perfil?.nombre)}
           </button>

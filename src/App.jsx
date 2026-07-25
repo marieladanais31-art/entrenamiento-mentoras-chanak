@@ -10,8 +10,10 @@ import Certificado from './components/Certificado'
 import AdminView from './components/AdminView'
 import Header from './components/ui/Header'
 import * as api from './lib/backend'
+import { useIdioma } from './i18n/idioma'
 
 export default function App() {
+  const { t } = useIdioma()
   const [cargando, setCargando] = useState(true)
   const [sesion, setSesion] = useState(null) // sesión de Supabase
   const [perfil, setPerfil] = useState(null) // { id, nombre, rol, estado }
@@ -119,7 +121,7 @@ export default function App() {
             alt=""
             className="mx-auto mb-4 h-16 w-16 animate-pulse rounded-xl bg-white/95 p-1.5"
           />
-          <p className="text-sm">Cargando…</p>
+          <p className="text-sm">{t('gen.cargando')}</p>
         </div>
       </div>
     )
@@ -131,18 +133,17 @@ export default function App() {
     return (
       <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-navy px-4 text-center">
         <p className="max-w-sm text-sm leading-relaxed text-cream/80">
-          No se ha podido cargar tu perfil.
+          {t('gen.errorPerfil')}
           {errorCarga && <span className="mt-2 block text-xs text-coral">{errorCarga}</span>}
           <span className="mt-2 block text-xs text-cream/50">
-            Comprueba que el esquema de <code>supabase/schema.sql</code> se ha ejecutado en el
-            proyecto.
+            {t('gen.errorEsquema')}
           </span>
         </p>
         <button
           onClick={() => api.salir()}
           className="rounded-xl border border-cream/25 px-4 py-2 text-sm text-cream/80"
         >
-          Cerrar sesión
+          {t('sesion.cerrar')}
         </button>
       </div>
     )
@@ -165,12 +166,12 @@ export default function App() {
 
       {viendoOtra && (
         <div className="no-print bg-gold/20 px-4 py-2 text-center text-xs font-medium text-navy">
-          👁 Estás viendo el progreso de <b>{mentoraMostrada.nombre}</b> ·{' '}
+          {t('gen.viendoProgreso', { nombre: mentoraMostrada.nombre })} ·{' '}
           <button
             onClick={() => setVista({ nombre: 'admin' })}
             className="underline hover:no-underline"
           >
-            volver a administración
+            {t('gen.volverAdmin')}
           </button>
         </div>
       )}

@@ -28,10 +28,10 @@ export default function ProgressRing({ valor, meta, etiqueta, size = 132 }) {
       </svg>
       <div className="absolute text-center">
         <div className="text-2xl font-bold text-navy">{pct}%</div>
-        <div className="text-[11px] font-medium text-navy/60">
+        <div className="text-[13px] font-medium text-navy/60">
           {valor}h / {meta}h
         </div>
-        {etiqueta && <div className="text-[10px] text-navy/50">{etiqueta}</div>}
+        {etiqueta && <div className="text-[12px] text-navy/50">{etiqueta}</div>}
       </div>
     </div>
   )

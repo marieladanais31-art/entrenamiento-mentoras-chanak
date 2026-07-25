@@ -1,9 +1,12 @@
 import { useState } from 'react'
 import { registrar, entrar } from '../lib/backend'
+import { SelectorIdioma } from '../i18n/idioma'
+import { useIdioma } from '../i18n/idioma'
 
 // Acceso con correo y contraseña (Supabase Auth).
 // Las cuentas nuevas quedan en estado «pendiente» hasta que un admin las aprueba.
 export default function Login() {
+  const { t } = useIdioma()
   const [modo, setModo] = useState('entrar') // 'entrar' | 'registro'
   const [nombre, setNombre] = useState('')
   const [email, setEmail] = useState('')
@@ -19,11 +22,9 @@ export default function Login() {
     setCargando(true)
     try {
       if (modo === 'registro') {
-        if (nombre.trim().length < 3) throw new Error('Escribe tu nombre y apellido.')
+        if (nombre.trim().length < 3) throw new Error(t('login.errNombre'))
         await registrar(email, password, nombre)
-        setAviso(
-          'Cuenta creada. Si tu proyecto pide confirmación de correo, revisa tu bandeja. Después, la coordinación debe aprobar tu acceso.'
-        )
+        setAviso(t('login.creada'))
         setModo('entrar')
         setPassword('')
       } else {
@@ -40,6 +41,9 @@ export default function Login() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-navy px-4 py-10">
       <div className="w-full max-w-sm">
+        <div className="mb-4 flex justify-center">
+          <SelectorIdioma />
+        </div>
         <div className="mb-7 text-center text-cream">
           <img
             src="/logo-chanak.png"
@@ -47,15 +51,15 @@ export default function Login() {
             className="mx-auto mb-4 h-24 w-24 rounded-2xl bg-white/95 p-2"
           />
           <h1 className="text-2xl font-bold tracking-wide">Chanak Academy</h1>
-          <p className="mt-1 text-sm text-cream/70">Formación de Mentoras y Coordinadoras</p>
-          <p className="mt-1 text-xs text-cream/50">180h Mentora · 300h Coordinadora · MSA-CESS</p>
+          <p className="mt-1 text-sm text-cream/70">{t('login.subtitulo')}</p>
+          <p className="mt-1 text-xs text-cream/50">{t('login.claim')}</p>
         </div>
 
         {/* Pestañas */}
         <div className="mb-4 flex gap-1 rounded-xl bg-white/8 p-1">
           {[
-            ['entrar', 'Iniciar sesión'],
-            ['registro', 'Crear cuenta'],
+            ['entrar', t('login.entrar')],
+            ['registro', t('login.registro')],
           ].map(([id, texto]) => (
             <button
               key={id}
@@ -76,16 +80,16 @@ export default function Login() {
         <form onSubmit={enviar} className="space-y-3 rounded-2xl bg-cream p-5 shadow-lg">
           {modo === 'registro' && (
             <Campo
-              etiqueta="Nombre y apellido"
+              etiqueta={t('login.nombre')}
               tipo="text"
               valor={nombre}
               onChange={setNombre}
-              placeholder="Ej. Dayana Trillo"
+              placeholder={t('login.nombrePh')}
               autoComplete="name"
             />
           )}
           <Campo
-            etiqueta="Correo institucional"
+            etiqueta={t('login.correo')}
             tipo="email"
             valor={email}
             onChange={setEmail}
@@ -93,11 +97,11 @@ export default function Login() {
             autoComplete="email"
           />
           <Campo
-            etiqueta="Contraseña"
+            etiqueta={t('login.contrasena')}
             tipo="password"
             valor={password}
             onChange={setPassword}
-            placeholder={modo === 'registro' ? 'Mínimo 6 caracteres' : '••••••••'}
+            placeholder={modo === 'registro' ? t('login.contrasenaPh') : '••••••••'}
             autoComplete={modo === 'registro' ? 'new-password' : 'current-password'}
           />
 
@@ -118,24 +122,23 @@ export default function Login() {
             className="w-full rounded-xl bg-teal py-3 text-sm font-bold text-white transition hover:bg-teal/90 disabled:opacity-50"
           >
             {cargando
-              ? 'Un momento…'
+              ? t('login.esperando')
               : modo === 'registro'
-                ? 'Crear mi cuenta'
-                : 'Entrar'}
+                ? t('login.botonCrear')
+                : t('login.botonEntrar')}
           </button>
 
           {modo === 'registro' && (
-            <p className="text-[11px] leading-relaxed text-navy/55">
-              Tu cuenta quedará <b>pendiente de aprobación</b>. La coordinación la activará antes de
-              que puedas acceder a la formación.
+            <p className="text-[13px] leading-relaxed text-navy/55">
+{t('login.avisoPendiente')}
             </p>
           )}
         </form>
 
-        <p className="mt-7 text-center text-[10px] leading-relaxed text-cream/40">
+        <p className="mt-7 text-center text-[12px] leading-relaxed text-cream/40">
           Chanak International Academy · FLDOE #134620
           <br />
-          Evidencia de formación del personal · Indicador MSA T5a
+          {t('login.pie')}
         </p>
       </div>
     </div>
@@ -145,7 +148,7 @@ export default function Login() {
 function Campo({ etiqueta, tipo, valor, onChange, placeholder, autoComplete }) {
   return (
     <label className="block">
-      <span className="text-[11px] font-semibold uppercase tracking-wide text-navy/55">
+      <span className="text-[13px] font-semibold uppercase tracking-wide text-navy/55">
         {etiqueta}
       </span>
       <input

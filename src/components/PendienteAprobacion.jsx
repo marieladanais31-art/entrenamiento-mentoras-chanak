@@ -1,4 +1,6 @@
+import { useIdioma } from '../i18n/idioma'
 export default function PendienteAprobacion({ perfil, onSalir }) {
+  const { t } = useIdioma()
   const suspendida = perfil?.estado === 'suspendida'
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-navy px-4 py-10 text-center">
@@ -13,30 +15,19 @@ export default function PendienteAprobacion({ perfil, onSalir }) {
             {suspendida ? '🔒' : '⏳'}
           </div>
           <h1 className="mt-3 text-lg font-bold text-navy">
-            {suspendida ? 'Acceso suspendido' : 'Cuenta pendiente de aprobación'}
+            {suspendida ? t('suspendida.titulo') : t('pendiente.titulo')}
           </h1>
           <p className="mt-2 text-sm leading-relaxed text-navy/70">
-            {suspendida ? (
-              <>
-                Tu acceso a la plataforma está suspendido temporalmente. Ponte en contacto con la
-                coordinación de Chanak para resolverlo.
-              </>
-            ) : (
-              <>
-                Hola{perfil?.nombre ? `, ${perfil.nombre.split(' ')[0]}` : ''}. Tu cuenta se ha
-                creado correctamente y está esperando la aprobación de la coordinación.
-                <br />
-                <br />
-                Te avisaremos en cuanto esté activa para que puedas comenzar tu formación.
-              </>
-            )}
+{suspendida
+              ? t('suspendida.texto')
+              : `${perfil?.nombre ? perfil.nombre.split(' ')[0] + ': ' : ''}${t('pendiente.texto')}`}
           </p>
         </div>
         <button
           onClick={onSalir}
           className="mt-4 w-full rounded-xl border border-cream/25 py-2.5 text-sm font-medium text-cream/80 transition hover:bg-white/5"
         >
-          Cerrar sesión
+          {t('sesion.cerrar')}
         </button>
       </div>
     </div>

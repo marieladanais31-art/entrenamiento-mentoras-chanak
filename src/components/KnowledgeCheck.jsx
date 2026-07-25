@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { CURSO } from '../data/curso'
+import { useIdioma } from '../i18n/idioma'
 
 // Knowledge Check estilo formación continua: una pregunta a la vez,
 // corrección inmediata con explicación y aprobación al 80% (Mastery Learning).
 export default function KnowledgeCheck({ moduloId, quiz, resultadoPrevio, onAprobado, onGuardar }) {
+  const { t } = useIdioma()
   const [iniciado, setIniciado] = useState(false)
   const [indice, setIndice] = useState(0)
   const [elegida, setElegida] = useState(null)
@@ -45,15 +47,18 @@ export default function KnowledgeCheck({ moduloId, quiz, resultadoPrevio, onApro
       <div className="rounded-2xl bg-white p-5 shadow-sm">
         <div className="flex items-start justify-between gap-3">
           <div>
-            <h3 className="text-sm font-bold text-navy">✅ Knowledge Check</h3>
+            <h3 className="text-sm font-bold text-navy">{t('quiz.titulo')}</h3>
             <p className="mt-1 text-xs text-navy/60">
-              {total} preguntas · se aprueba con {minAciertos} de {total} (
-              {Math.round(CURSO.umbralAprobacion * 100)}%)
+              {t('quiz.intro', {
+                total,
+                min: minAciertos,
+                pct: Math.round(CURSO.umbralAprobacion * 100),
+              })}
             </p>
           </div>
           {r && (
             <span
-              className={`shrink-0 rounded-full px-2.5 py-1 text-[11px] font-bold ${
+              className={`shrink-0 rounded-full px-2.5 py-1 text-[13px] font-bold ${
                 r.aprobado ? 'bg-gold/15 text-gold' : 'bg-coral/12 text-coral'
               }`}
             >
@@ -72,14 +77,13 @@ export default function KnowledgeCheck({ moduloId, quiz, resultadoPrevio, onApro
           >
             {r.aprobado ? (
               <>
-                🎓 <b>Dominio demostrado</b> — {r.aciertos} de {r.total} correctas. Puedes marcar el
-                módulo como completado.
+                🎓 <b>{t('quiz.dominio')}</b> —{' '}
+                {t('quiz.dominioTxt', { aciertos: r.aciertos, total: r.total })}
               </>
             ) : (
               <>
-                <b>Aún no alcanzas el dominio</b> — {r.aciertos} de {r.total}. Repasa las lecciones y
-                vuelve a intentarlo: en Mastery Learning reintentar no es fracasar, es la forma de
-                aprender.
+                <b>{t('quiz.sinDominio')}</b> —{' '}
+                {t('quiz.sinDominioTxt', { aciertos: r.aciertos, total: r.total })}
               </>
             )}
           </div>
@@ -89,7 +93,7 @@ export default function KnowledgeCheck({ moduloId, quiz, resultadoPrevio, onApro
           onClick={empezar}
           className="mt-4 w-full rounded-xl bg-teal py-3 text-sm font-semibold text-white transition hover:bg-teal/90"
         >
-          {r ? 'Volver a intentarlo' : 'Comenzar el test'}
+          {r ? t('quiz.reintentar') : t('quiz.comenzar')}
         </button>
       </div>
     )
@@ -103,10 +107,8 @@ export default function KnowledgeCheck({ moduloId, quiz, resultadoPrevio, onApro
   return (
     <div className="rounded-2xl bg-white p-5 shadow-sm">
       <div className="flex items-center justify-between text-xs font-medium text-navy/55">
-        <span>
-          Pregunta {indice + 1} de {total}
-        </span>
-        <span>{respuestas.filter(Boolean).length} correctas</span>
+        <span>{t('quiz.pregunta', { n: indice + 1, total })}</span>
+        <span>{t('quiz.correctas', { n: respuestas.filter(Boolean).length })}</span>
       </div>
       <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-navy/10">
         <div
@@ -132,7 +134,7 @@ export default function KnowledgeCheck({ moduloId, quiz, resultadoPrevio, onApro
               disabled={respondida}
               className={`flex w-full items-start gap-3 rounded-xl border-2 px-4 py-3 text-left text-sm transition ${clases}`}
             >
-              <span className="mt-px flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white text-[10px] font-bold text-navy/60">
+              <span className="mt-px flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white text-[12px] font-bold text-navy/60">
                 {respondida && esCorrecta ? '✓' : respondida && esElegida ? '✕' : 'ABCD'[i]}
               </span>
               <span className="text-navy/80">{op}</span>
@@ -144,7 +146,7 @@ export default function KnowledgeCheck({ moduloId, quiz, resultadoPrevio, onApro
       {respondida && (
         <>
           <div className="mt-3 rounded-xl bg-navy/4 px-4 py-3 text-xs leading-relaxed text-navy/75">
-            <b>{elegida === correcta ? '✓ Correcto. ' : '✕ Respuesta correcta: '}</b>
+            <b>{elegida === correcta ? t('quiz.esCorrecto') : t('quiz.esIncorrecto')}</b>
             {elegida !== correcta && (
               <span className="font-medium">{preg.opciones[correcta]}. </span>
             )}
@@ -154,7 +156,7 @@ export default function KnowledgeCheck({ moduloId, quiz, resultadoPrevio, onApro
             onClick={siguiente}
             className="mt-3 w-full rounded-xl bg-navy py-3 text-sm font-semibold text-cream transition hover:bg-navy/90"
           >
-            {indice + 1 < total ? 'Siguiente pregunta →' : 'Ver resultado'}
+            {indice + 1 < total ? t('quiz.siguiente') : t('quiz.verResultado')}
           </button>
         </>
       )}
