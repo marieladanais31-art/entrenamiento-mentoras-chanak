@@ -1,5 +1,7 @@
 # Puesta en marcha
 
+**App en producción:** https://entrenamiento-mentoras-chanak-two.vercel.app
+
 Tres pasos, una sola vez. Después la app funciona sola.
 
 ## 1. Crear las tablas en Supabase

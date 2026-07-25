@@ -68,11 +68,18 @@ npm run build    # genera dist/
 
 ## Despliegue
 
-**Producción:** https://entrenamiento-mentoras-chanak.vercel.app
+**Producción:** https://entrenamiento-mentoras-chanak-two.vercel.app
 
-Proyecto Vercel: `entrenamiento-mentoras-chanak` (equipo mariela-andrades-projects).
-Para redesplegar cambios: conectar el repo de GitHub desde el dashboard de Vercel
-(recomendado, redespliega en cada push a `main`) o ejecutar `npx vercel --prod`.
+Proyecto Vercel bajo la cuenta `administration@chanakacademy.org`.
+
+La cuenta antigua (`marieladanais31@gmail.com`) agotó los **Build Minutes** del plan Hobby,
+por lo que sus deployments quedan en estado **Blocked** y nunca compilan. Si vuelve a pasar en
+cualquier cuenta, se puede desplegar sin consumir minutos compilando en local:
+
+```bash
+npx vercel build --prod    # compila en tu Mac
+npx vercel deploy --prebuilt --prod   # sube el resultado ya construido
+```
 
 ---
 
