@@ -88,8 +88,17 @@ comment on table public.progreso is 'Progreso de formación. La usuaria gestiona
 create index if not exists progreso_usuaria_idx on public.progreso (usuaria_id);
 
 -- ─────────────────────────────────────────────
--- 4. ROW LEVEL SECURITY
+-- 4. PRIVILEGIOS Y ROW LEVEL SECURITY
 -- ─────────────────────────────────────────────
+-- Privilegios de tabla para las usuarias con sesión iniciada. Quién ve qué fila
+-- lo deciden las políticas RLS de más abajo; sin estos GRANT, PostgREST
+-- responde «permission denied for table».
+grant usage on schema public to anon, authenticated;
+grant select, insert, update, delete
+  on public.perfiles, public.videos, public.progreso
+  to authenticated;
+grant usage, select on all sequences in schema public to authenticated;
+
 alter table public.perfiles enable row level security;
 alter table public.videos   enable row level security;
 alter table public.progreso enable row level security;
