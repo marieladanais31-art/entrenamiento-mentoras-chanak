@@ -1,10 +1,10 @@
 import { getBloque } from '../data/curriculum'
-import { getProgreso, formatearFecha } from '../lib/storage'
+import { formatearFecha } from '../lib/calculos'
 import EstadoBadge from './ui/EstadoBadge'
 
-export default function BlockView({ mentora, bloqueId, onAbrirModulo, onVolver }) {
+export default function BlockView({ bloqueId, progreso, onAbrirModulo, onVolver }) {
   const bloque = getBloque(bloqueId)
-  const progreso = getProgreso(mentora.id)
+  const mods = progreso?.modulos || {}
   if (!bloque) return null
 
   return (
@@ -25,7 +25,7 @@ export default function BlockView({ mentora, bloqueId, onAbrirModulo, onVolver }
 
       <div className="space-y-3">
         {bloque.modulos.map((m) => {
-          const p = progreso.modulos[m.id]
+          const p = mods[m.id]
           const estado = p?.estado || 'pendiente'
           return (
             <button

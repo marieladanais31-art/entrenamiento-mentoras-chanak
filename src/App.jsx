@@ -1,5 +1,6 @@
-import { useState, useCallback } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import Login from './components/Login'
+import PendienteAprobacion from './components/PendienteAprobacion'
 import Dashboard from './components/Dashboard'
 import CourseIntro from './components/CourseIntro'
 import BlockView from './components/BlockView'
@@ -8,108 +9,239 @@ import HoursLog from './components/HoursLog'
 import Certificado from './components/Certificado'
 import AdminView from './components/AdminView'
 import Header from './components/ui/Header'
-import { getMentoras } from './lib/storage'
+import * as api from './lib/backend'
 
-// Navegación por estados (app interna ligera, sin router):
-// 'login' | 'curso' | 'dashboard' | 'bloque' | 'modulo' | 'horas' | 'certificado' | 'admin'
 export default function App() {
-  const [sesion, setSesion] = useState(null) // { tipo: 'mentora'|'admin', mentoraId? }
-  const [vista, setVista] = useState({ nombre: 'login' })
-  const [, setTick] = useState(0)
-  const refrescar = useCallback(() => setTick((t) => t + 1), [])
+  const [cargando, setCargando] = useState(true)
+  const [sesion, setSesion] = useState(null) // sesión de Supabase
+  const [perfil, setPerfil] = useState(null) // { id, nombre, rol, estado }
+  const [vista, setVista] = useState({ nombre: 'dashboard' })
 
-  const mentoras = getMentoras()
+  // Datos de la usuaria que se está viendo (una mentora ve solo los suyos)
+  const [progreso, setProgreso] = useState({ modulos: {} })
+  const [videos, setVideos] = useState({})
+  const [errorCarga, setErrorCarga] = useState('')
 
-  function entrar(seleccion) {
-    setSesion(seleccion)
-    setVista(seleccion.tipo === 'admin' ? { nombre: 'admin' } : { nombre: 'dashboard' })
+  const esAdmin = perfil?.rol === 'admin'
+  const aprobada = perfil?.estado === 'aprobada'
+  // El admin puede abrir el panel de otra usuaria; si no, es el suyo
+  const idViendo = vista.usuariaId || perfil?.id
+  const viendoOtra = esAdmin && idViendo !== perfil?.id
+
+  // ── Sesión ──
+  useEffect(() => {
+    let vivo = true
+    api.getSesion().then((s) => {
+      if (vivo) setSesion(s)
+      if (!s && vivo) setCargando(false)
+    })
+    return api.onCambioAuth((s) => {
+      setSesion(s)
+      if (!s) {
+        setPerfil(null)
+        setProgreso({ modulos: {} })
+        setVista({ nombre: 'dashboard' })
+        setCargando(false)
+      }
+    })
+  }, [])
+
+  // ── Perfil ──
+  useEffect(() => {
+    if (!sesion?.user) return
+    let vivo = true
+    api
+      .getPerfil(sesion.user.id)
+      .then((p) => vivo && setPerfil(p))
+      .catch((e) => vivo && setErrorCarga(e.message))
+      .finally(() => vivo && setCargando(false))
+    return () => {
+      vivo = false
+    }
+  }, [sesion])
+
+  // ── Progreso y vídeos ──
+  const recargarDatos = useCallback(async () => {
+    if (!idViendo || !aprobada) return
+    try {
+      const [pr, vd] = await Promise.all([api.getProgreso(idViendo), api.getVideos()])
+      setProgreso(pr)
+      setVideos(vd)
+    } catch (e) {
+      setErrorCarga(e.message)
+    }
+  }, [idViendo, aprobada])
+
+  useEffect(() => {
+    recargarDatos()
+  }, [recargarDatos])
+
+  // ── Mutaciones (actualizan Supabase y el estado local) ──
+  const mutar = useCallback(
+    async (fn) => {
+      try {
+        await fn()
+        const pr = await api.getProgreso(idViendo)
+        setProgreso(pr)
+      } catch (e) {
+        setErrorCarga(e.message)
+      }
+    },
+    [idViendo]
+  )
+
+  const acciones = {
+    setEstado: (moduloId, estado, fecha) =>
+      mutar(() =>
+        api.setEstadoModulo(idViendo, moduloId, estado, progreso.modulos[moduloId], fecha)
+      ),
+    setNotas: (moduloId, notas) =>
+      mutar(() => api.setNotasModulo(idViendo, moduloId, notas, progreso.modulos[moduloId])),
+    setQuiz: (moduloId, resultado) =>
+      mutar(() => api.setQuizModulo(idViendo, moduloId, resultado, progreso.modulos[moduloId])),
+    guardarVideo: async (moduloId, idx, url, nota) => {
+      await api.guardarVideo(moduloId, idx, url, nota, perfil.id)
+      setVideos(await api.getVideos())
+    },
+    borrarVideo: async (moduloId, idx) => {
+      await api.borrarVideo(moduloId, idx)
+      setVideos(await api.getVideos())
+    },
   }
 
-  function salir() {
-    setSesion(null)
-    setVista({ nombre: 'login' })
+  // ── Estados de carga y acceso ──
+  if (cargando) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-navy">
+        <div className="text-center text-cream/70">
+          <img
+            src="/logo-chanak.png"
+            alt=""
+            className="mx-auto mb-4 h-16 w-16 animate-pulse rounded-xl bg-white/95 p-1.5"
+          />
+          <p className="text-sm">Cargando…</p>
+        </div>
+      </div>
+    )
   }
 
-  if (!sesion) return <Login onEntrar={entrar} />
+  if (!sesion) return <Login />
 
-  // La mentora que se está visualizando (el admin puede abrir el panel de cualquiera)
-  const mentoraActiva = mentoras.find((m) => m.id === (vista.mentoraId || sesion.mentoraId))
-  const idActiva = mentoraActiva?.id
+  if (!perfil) {
+    return (
+      <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-navy px-4 text-center">
+        <p className="max-w-sm text-sm leading-relaxed text-cream/80">
+          No se ha podido cargar tu perfil.
+          {errorCarga && <span className="mt-2 block text-xs text-coral">{errorCarga}</span>}
+          <span className="mt-2 block text-xs text-cream/50">
+            Comprueba que el esquema de <code>supabase/schema.sql</code> se ha ejecutado en el
+            proyecto.
+          </span>
+        </p>
+        <button
+          onClick={() => api.salir()}
+          className="rounded-xl border border-cream/25 px-4 py-2 text-sm text-cream/80"
+        >
+          Cerrar sesión
+        </button>
+      </div>
+    )
+  }
+
+  if (!aprobada) return <PendienteAprobacion perfil={perfil} onSalir={() => api.salir()} />
+
+  // Usuaria mostrada en el panel (admin puede ver a otra)
+  const mentoraMostrada = { id: idViendo, nombre: vista.usuariaNombre || perfil.nombre }
 
   return (
     <div className="min-h-screen bg-cream">
       <Header
-        sesion={sesion}
-        mentora={mentoraActiva}
+        perfil={perfil}
+        esAdmin={esAdmin}
         vista={vista}
         onNavegar={setVista}
-        onSalir={salir}
+        onSalir={() => api.salir()}
       />
+
+      {viendoOtra && (
+        <div className="no-print bg-gold/20 px-4 py-2 text-center text-xs font-medium text-navy">
+          👁 Estás viendo el progreso de <b>{mentoraMostrada.nombre}</b> ·{' '}
+          <button
+            onClick={() => setVista({ nombre: 'admin' })}
+            className="underline hover:no-underline"
+          >
+            volver a administración
+          </button>
+        </div>
+      )}
+
       <main className="mx-auto max-w-3xl px-4 pb-16 pt-4">
+        {errorCarga && (
+          <p className="mb-4 rounded-xl border-l-4 border-coral bg-coral/8 px-4 py-2.5 text-xs text-coral">
+            {errorCarga}
+          </p>
+        )}
+
         {vista.nombre === 'dashboard' && (
           <Dashboard
-            mentora={mentoraActiva}
-            esAdmin={sesion.tipo === 'admin'}
-            onAbrirBloque={(bloqueId) => setVista({ nombre: 'bloque', bloqueId, mentoraId: idActiva })}
-            onVerHoras={() => setVista({ nombre: 'horas', mentoraId: idActiva })}
-            onVerCurso={() => setVista({ nombre: 'curso', mentoraId: idActiva })}
-            onVerCertificado={(nivel) =>
-              setVista({ nombre: 'certificado', nivel, mentoraId: idActiva })
-            }
+            mentora={mentoraMostrada}
+            progreso={progreso}
+            esAdmin={esAdmin}
+            viendoOtra={viendoOtra}
+            onAbrirBloque={(bloqueId) => setVista({ ...vista, nombre: 'bloque', bloqueId })}
+            onVerHoras={() => setVista({ ...vista, nombre: 'horas' })}
+            onVerCurso={() => setVista({ ...vista, nombre: 'curso' })}
+            onVerCertificado={(nivel) => setVista({ ...vista, nombre: 'certificado', nivel })}
           />
         )}
         {vista.nombre === 'curso' && (
           <CourseIntro
-            onEmpezar={() => setVista({ nombre: 'bloque', bloqueId: 'B1', mentoraId: idActiva })}
-            onVolver={() => setVista({ nombre: 'dashboard', mentoraId: idActiva })}
+            onEmpezar={() => setVista({ ...vista, nombre: 'bloque', bloqueId: 'B1' })}
+            onVolver={() => setVista({ ...vista, nombre: 'dashboard' })}
           />
         )}
         {vista.nombre === 'bloque' && (
           <BlockView
-            mentora={mentoraActiva}
             bloqueId={vista.bloqueId}
-            onAbrirModulo={(moduloId) =>
-              setVista({
-                nombre: 'modulo',
-                moduloId,
-                bloqueId: vista.bloqueId,
-                mentoraId: idActiva,
-              })
-            }
-            onVolver={() => setVista({ nombre: 'dashboard', mentoraId: idActiva })}
+            progreso={progreso}
+            onAbrirModulo={(moduloId) => setVista({ ...vista, nombre: 'modulo', moduloId })}
+            onVolver={() => setVista({ ...vista, nombre: 'dashboard' })}
           />
         )}
         {vista.nombre === 'modulo' && (
           <ModuleView
-            mentora={mentoraActiva}
             moduloId={vista.moduloId}
-            esAdmin={sesion.tipo === 'admin'}
-            onCambio={refrescar}
-            onVolver={() =>
-              setVista({ nombre: 'bloque', bloqueId: vista.bloqueId, mentoraId: idActiva })
-            }
+            progresoModulo={progreso.modulos[vista.moduloId]}
+            videos={videos}
+            esAdmin={esAdmin}
+            acciones={acciones}
+            onVolver={() => setVista({ ...vista, nombre: 'bloque' })}
           />
         )}
         {vista.nombre === 'horas' && (
           <HoursLog
-            mentora={mentoraActiva}
-            onVolver={() => setVista({ nombre: 'dashboard', mentoraId: idActiva })}
+            mentora={mentoraMostrada}
+            progreso={progreso}
+            onVolver={() => setVista({ ...vista, nombre: 'dashboard' })}
           />
         )}
         {vista.nombre === 'certificado' && (
           <Certificado
-            mentora={mentoraActiva}
+            mentora={mentoraMostrada}
+            progreso={progreso}
             nivel={vista.nivel}
-            onVolver={() => setVista({ nombre: 'dashboard', mentoraId: idActiva })}
+            onVolver={() => setVista({ ...vista, nombre: 'dashboard' })}
           />
         )}
-        {vista.nombre === 'admin' && sesion.tipo === 'admin' && (
+        {vista.nombre === 'admin' && esAdmin && (
           <AdminView
-            onVerMentora={(mentoraId) => setVista({ nombre: 'dashboard', mentoraId })}
-            onVerCertificado={(mentoraId, nivel) =>
-              setVista({ nombre: 'certificado', nivel, mentoraId })
+            miPerfil={perfil}
+            onVerUsuaria={(usuariaId, usuariaNombre) =>
+              setVista({ nombre: 'dashboard', usuariaId, usuariaNombre })
             }
-            onCambio={refrescar}
+            onVerCertificado={(usuariaId, usuariaNombre, nivel) =>
+              setVista({ nombre: 'certificado', usuariaId, usuariaNombre, nivel })
+            }
           />
         )}
       </main>

@@ -1,154 +1,187 @@
-import { useState } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { BLOQUES } from '../data/curriculum'
-import {
-  getMentoras,
-  agregarMentora,
-  getProgreso,
-  setEstadoModulo,
-  resumenMentora,
-  formatearFecha,
-} from '../lib/storage'
+import * as api from '../lib/backend'
+import { resumenMentora, formatearFecha, iniciales } from '../lib/calculos'
+import GestionUsuarias from './GestionUsuarias'
 
-export default function AdminView({ onVerMentora, onVerCertificado, onCambio }) {
-  const [, setTick] = useState(0)
-  const refrescar = () => {
-    setTick((t) => t + 1)
-    onCambio()
-  }
-  const mentoras = getMentoras()
-  const [nuevoNombre, setNuevoNombre] = useState('')
-  const [marcando, setMarcando] = useState(null) // { mentoraId, moduloId }
-  const [fecha, setFecha] = useState(() => new Date().toISOString().slice(0, 10))
+export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) {
+  const [pestana, setPestana] = useState('usuarias') // 'usuarias' | 'progreso' | 'retroactivo'
+  const [perfiles, setPerfiles] = useState([])
+  const [progresos, setProgresos] = useState({})
+  const [cargando, setCargando] = useState(true)
+  const [error, setError] = useState('')
 
-  function crearMentora(e) {
-    e.preventDefault()
-    if (agregarMentora(nuevoNombre)) {
-      setNuevoNombre('')
-      refrescar()
+  const cargar = useCallback(async () => {
+    setError('')
+    try {
+      const [ps, prs] = await Promise.all([api.listarPerfiles(), api.getProgresoTodas()])
+      setPerfiles(ps)
+      setProgresos(prs)
+    } catch (e) {
+      setError(e.message)
+    } finally {
+      setCargando(false)
     }
-  }
+  }, [])
+
+  useEffect(() => {
+    cargar()
+  }, [cargar])
+
+  const activas = perfiles.filter((p) => p.estado === 'aprobada')
+  const pendientes = perfiles.filter((p) => p.estado === 'pendiente').length
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-5">
       <div className="rounded-2xl bg-navy p-5 text-cream shadow-sm">
         <h2 className="text-lg font-bold">Panel de Administración</h2>
         <p className="mt-1 text-xs text-cream/70">
-          Mariela Andrade · Head of LSP · Registro retroactivo y seguimiento del equipo
+          {miPerfil.nombre} · Head of LSP · Usuarias, progreso del equipo y vídeos
         </p>
       </div>
 
-      {/* Comparativa de mentoras */}
-      <section>
-        <h3 className="mb-3 font-bold text-navy">Progreso comparativo</h3>
-        <div className="grid gap-3 sm:grid-cols-2">
-          {mentoras.map((m) => {
-            const r = resumenMentora(m.id)
-            const pct = Math.min(100, Math.round((r.horas / r.metaHoras) * 100))
-            return (
-              <div key={m.id} className="rounded-2xl bg-white p-4 shadow-sm">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-teal text-xs font-bold text-white">
-                    {m.iniciales}
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <div className="text-sm font-semibold text-navy">{m.nombre}</div>
-                    <div className="text-[11px] text-navy/55">
-                      Nivel {r.nivelActual} · {r.horas}h / {r.metaHoras}h · {r.completados}{' '}
-                      {r.completados === 1 ? 'módulo' : 'módulos'} ✅
-                    </div>
-                  </div>
-                  <div className="text-sm font-bold text-teal">{pct}%</div>
-                </div>
-                <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-navy/10">
-                  <div
-                    className={`h-full rounded-full ${pct >= 100 ? 'bg-gold' : 'bg-teal'}`}
-                    style={{ width: `${pct}%` }}
-                  />
-                </div>
-                {(r.elegibleMentor || r.elegibleCoordinadora) && (
-                  <button
-                    onClick={() => onVerCertificado(m.id, r.elegibleCoordinadora ? 2 : 1)}
-                    className="mt-2 w-full rounded-lg bg-gold/15 py-2 text-[11px] font-bold text-gold transition hover:bg-gold/25"
-                  >
-                    🎓 Emitir certificado:{' '}
-                    {r.elegibleCoordinadora ? 'Chanak-Certified Coordinator' : 'Chanak-Certified Mentor'}
-                  </button>
-                )}
-                <button
-                  onClick={() => onVerMentora(m.id)}
-                  className="mt-2 w-full rounded-lg bg-navy/5 py-2 text-xs font-semibold text-navy transition hover:bg-navy/10"
-                >
-                  Abrir su panel completo →
-                </button>
-              </div>
-            )
-          })}
-        </div>
-      </section>
-
-      {/* Añadir mentora */}
-      <section className="rounded-2xl bg-white p-4 shadow-sm">
-        <h3 className="text-sm font-bold text-navy">➕ Añadir nueva mentora</h3>
-        <form onSubmit={crearMentora} className="mt-2 flex gap-2">
-          <input
-            value={nuevoNombre}
-            onChange={(e) => setNuevoNombre(e.target.value)}
-            placeholder="Nombre y apellido"
-            className="min-w-0 flex-1 rounded-lg border border-navy/15 bg-cream/50 px-3 py-2 text-sm focus:border-teal focus:outline-none"
-          />
+      {/* Pestañas */}
+      <div className="flex gap-1 rounded-xl bg-white p-1 shadow-sm">
+        {[
+          ['usuarias', `Usuarias${pendientes ? ` (${pendientes})` : ''}`],
+          ['progreso', 'Progreso'],
+          ['retroactivo', 'Registro retroactivo'],
+        ].map(([id, texto]) => (
           <button
-            type="submit"
-            className="rounded-lg bg-teal px-4 py-2 text-sm font-semibold text-white hover:bg-teal/90"
+            key={id}
+            onClick={() => setPestana(id)}
+            className={`flex-1 rounded-lg py-2 text-xs font-semibold transition ${
+              pestana === id ? 'bg-navy text-cream' : 'text-navy/60 hover:bg-cream'
+            }`}
           >
-            Añadir
+            {texto}
           </button>
-        </form>
-      </section>
+        ))}
+      </div>
 
-      {/* Registro retroactivo por mentora */}
-      <section>
-        <h3 className="mb-1 font-bold text-navy">Registro retroactivo de módulos</h3>
-        <p className="mb-3 text-xs text-navy/55">
-          Marca módulos como completados en nombre de una mentora, con la fecha real en que los
-          estudió. Las horas se suman automáticamente.
+      {error && (
+        <p className="rounded-xl border-l-4 border-coral bg-coral/8 px-4 py-2.5 text-xs text-coral">
+          {error}
         </p>
-        <div className="space-y-4">
-          {mentoras.map((m) => (
-            <TablaRetroactiva
-              key={m.id}
-              mentora={m}
-              marcando={marcando}
-              setMarcando={setMarcando}
-              fecha={fecha}
-              setFecha={setFecha}
-              onConfirmar={(moduloId, f) => {
-                setEstadoModulo(m.id, moduloId, 'completado', f)
-                setMarcando(null)
-                refrescar()
-              }}
-              onDeshacer={(moduloId) => {
-                setEstadoModulo(m.id, moduloId, 'pendiente')
-                refrescar()
-              }}
-            />
-          ))}
-        </div>
-      </section>
+      )}
+
+      {cargando ? (
+        <p className="rounded-2xl bg-white px-4 py-8 text-center text-sm text-navy/50 shadow-sm">
+          Cargando datos del equipo…
+        </p>
+      ) : (
+        <>
+          {pestana === 'usuarias' && (
+            <GestionUsuarias perfiles={perfiles} miId={miPerfil.id} onRecargar={cargar} />
+          )}
+
+          {pestana === 'progreso' && (
+            <section>
+              <h3 className="mb-1 font-bold text-navy">Progreso comparativo</h3>
+              <p className="mb-3 text-xs text-navy/55">
+                Solo aparecen las usuarias con acceso aprobado.
+              </p>
+              <div className="grid gap-3 sm:grid-cols-2">
+                {activas.map((p) => {
+                  const r = resumenMentora(progresos[p.id] || { modulos: {} })
+                  const pct = Math.min(100, Math.round((r.horas / r.metaHoras) * 100))
+                  return (
+                    <div key={p.id} className="rounded-2xl bg-white p-4 shadow-sm">
+                      <div className="flex items-center gap-3">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-teal text-xs font-bold text-white">
+                          {iniciales(p.nombre)}
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <div className="text-sm font-semibold text-navy">
+                            {p.nombre}
+                            {p.rol === 'admin' && (
+                              <span className="ml-1 text-[10px] text-gold">🔑</span>
+                            )}
+                          </div>
+                          <div className="text-[11px] text-navy/55">
+                            Nivel {r.nivelActual} · {r.horas}h / {r.metaHoras}h · {r.completados}{' '}
+                            {r.completados === 1 ? 'módulo' : 'módulos'} ✅
+                          </div>
+                        </div>
+                        <div className="text-sm font-bold text-teal">{pct}%</div>
+                      </div>
+                      <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-navy/10">
+                        <div
+                          className={`h-full rounded-full ${pct >= 100 ? 'bg-gold' : 'bg-teal'}`}
+                          style={{ width: `${pct}%` }}
+                        />
+                      </div>
+                      {(r.elegibleMentor || r.elegibleCoordinadora) && (
+                        <button
+                          onClick={() =>
+                            onVerCertificado(p.id, p.nombre, r.elegibleCoordinadora ? 2 : 1)
+                          }
+                          className="mt-2 w-full rounded-lg bg-gold/15 py-2 text-[11px] font-bold text-gold transition hover:bg-gold/25"
+                        >
+                          🎓 Emitir certificado:{' '}
+                          {r.elegibleCoordinadora ? 'Coordinator' : 'Mentor'}
+                        </button>
+                      )}
+                      <button
+                        onClick={() => onVerUsuaria(p.id, p.nombre)}
+                        className="mt-2 w-full rounded-lg bg-navy/5 py-2 text-xs font-semibold text-navy transition hover:bg-navy/10"
+                      >
+                        Abrir su panel completo →
+                      </button>
+                    </div>
+                  )
+                })}
+                {activas.length === 0 && (
+                  <p className="rounded-2xl bg-white px-4 py-6 text-center text-xs text-navy/50 shadow-sm">
+                    Aún no hay usuarias aprobadas. Apruébalas en la pestaña «Usuarias».
+                  </p>
+                )}
+              </div>
+            </section>
+          )}
+
+          {pestana === 'retroactivo' && (
+            <section>
+              <h3 className="mb-1 font-bold text-navy">Registro retroactivo de módulos</h3>
+              <p className="mb-3 text-xs text-navy/55">
+                Marca módulos como completados en nombre de una mentora, con la fecha real en que
+                los estudió. Las horas se suman automáticamente.
+              </p>
+              <div className="space-y-3">
+                {activas.map((p) => (
+                  <TablaRetroactiva
+                    key={p.id}
+                    perfil={p}
+                    progreso={progresos[p.id] || { modulos: {} }}
+                    onCambio={cargar}
+                  />
+                ))}
+              </div>
+            </section>
+          )}
+        </>
+      )}
     </div>
   )
 }
 
-function TablaRetroactiva({
-  mentora,
-  marcando,
-  setMarcando,
-  fecha,
-  setFecha,
-  onConfirmar,
-  onDeshacer,
-}) {
+function TablaRetroactiva({ perfil, progreso, onCambio }) {
   const [abierto, setAbierto] = useState(false)
-  const progreso = getProgreso(mentora.id)
+  const [marcando, setMarcando] = useState(null)
+  const [fecha, setFecha] = useState(() => new Date().toISOString().slice(0, 10))
+  const [ocupado, setOcupado] = useState(false)
+  const mods = progreso.modulos || {}
+
+  async function accion(fn) {
+    setOcupado(true)
+    try {
+      await fn()
+      await onCambio()
+      setMarcando(null)
+    } finally {
+      setOcupado(false)
+    }
+  }
 
   return (
     <div className="rounded-2xl bg-white shadow-sm">
@@ -156,7 +189,7 @@ function TablaRetroactiva({
         onClick={() => setAbierto(!abierto)}
         className="flex w-full items-center justify-between px-4 py-3 text-left"
       >
-        <span className="text-sm font-semibold text-navy">{mentora.nombre}</span>
+        <span className="text-sm font-semibold text-navy">{perfil.nombre}</span>
         <span className="text-xs text-navy/50">{abierto ? '▲ Cerrar' : '▼ Abrir módulos'}</span>
       </button>
       {abierto && (
@@ -168,10 +201,9 @@ function TablaRetroactiva({
               </div>
               <ul className="mt-1.5 space-y-1">
                 {b.modulos.map((mod) => {
-                  const p = progreso.modulos[mod.id]
+                  const p = mods[mod.id]
                   const completado = p?.estado === 'completado'
-                  const esEste =
-                    marcando?.mentoraId === mentora.id && marcando?.moduloId === mod.id
+                  const esEste = marcando === mod.id
                   return (
                     <li
                       key={mod.id}
@@ -186,8 +218,13 @@ function TablaRetroactiva({
                             ✅ {formatearFecha(p.fechaCompletado)}
                           </span>
                           <button
-                            onClick={() => onDeshacer(mod.id)}
-                            className="text-coral hover:underline"
+                            disabled={ocupado}
+                            onClick={() =>
+                              accion(() =>
+                                api.setEstadoModulo(perfil.id, mod.id, 'pendiente', p)
+                              )
+                            }
+                            className="text-coral hover:underline disabled:opacity-50"
                           >
                             deshacer
                           </button>
@@ -202,10 +239,15 @@ function TablaRetroactiva({
                             className="rounded border border-navy/20 bg-white px-1.5 py-1 text-[11px]"
                           />
                           <button
-                            onClick={() => onConfirmar(mod.id, fecha)}
-                            className="rounded bg-teal px-2 py-1 font-semibold text-white"
+                            disabled={ocupado}
+                            onClick={() =>
+                              accion(() =>
+                                api.setEstadoModulo(perfil.id, mod.id, 'completado', p, fecha)
+                              )
+                            }
+                            className="rounded bg-teal px-2 py-1 font-semibold text-white disabled:opacity-50"
                           >
-                            OK
+                            {ocupado ? '…' : 'OK'}
                           </button>
                           <button
                             onClick={() => setMarcando(null)}
@@ -216,7 +258,7 @@ function TablaRetroactiva({
                         </span>
                       ) : (
                         <button
-                          onClick={() => setMarcando({ mentoraId: mentora.id, moduloId: mod.id })}
+                          onClick={() => setMarcando(mod.id)}
                           className="rounded bg-navy/10 px-2 py-1 font-semibold text-navy hover:bg-navy/15"
                         >
                           Marcar ✓

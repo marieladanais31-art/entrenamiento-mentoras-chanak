@@ -1,21 +1,19 @@
 import { BLOQUES, TODOS_MODULOS } from '../data/curriculum'
-import {
-  resumenMentora,
-  estadoBloque,
-  horasBloqueCompletadas,
-} from '../lib/storage'
+import { resumenMentora, estadoBloque, horasBloqueCompletadas } from '../lib/calculos'
 import ProgressRing from './ui/ProgressRing'
 import EstadoBadge from './ui/EstadoBadge'
 
 export default function Dashboard({
   mentora,
+  progreso,
   esAdmin,
+  viendoOtra,
   onAbrirBloque,
   onVerHoras,
   onVerCurso,
   onVerCertificado,
 }) {
-  const r = resumenMentora(mentora.id)
+  const r = resumenMentora(progreso)
   const bloquesNivel1 = BLOQUES.filter((b) => b.nivel === 1)
   const bloquesNivel2 = BLOQUES.filter((b) => b.nivel === 2)
   const nivel2Desbloqueado = r.nivel1Completo
@@ -32,7 +30,7 @@ export default function Dashboard({
               {r.nivelActual === 2
                 ? 'Nivel 2 — Ruta de Coordinadora Certificada'
                 : 'Nivel 1 — Ruta de Mentora Certificada'}
-              {esAdmin && ' · (vista de administrador)'}
+              {viendoOtra && ' · (vista de administración)'}
             </p>
             <div className="mt-3 grid grid-cols-3 gap-2 text-center">
               <Stat n={r.completados} etiqueta="Completados" color="text-gold" />
@@ -91,8 +89,8 @@ export default function Dashboard({
             <TarjetaBloque
               key={b.id}
               bloque={b}
-              estado={estadoBloque(mentora.id, b)}
-              horasHechas={horasBloqueCompletadas(mentora.id, b)}
+              estado={estadoBloque(progreso, b)}
+              horasHechas={horasBloqueCompletadas(progreso, b)}
               onClick={() => onAbrirBloque(b.id)}
             />
           ))}
@@ -118,8 +116,8 @@ export default function Dashboard({
             <TarjetaBloque
               key={b.id}
               bloque={b}
-              estado={nivel2Desbloqueado ? estadoBloque(mentora.id, b) : 'bloqueado'}
-              horasHechas={horasBloqueCompletadas(mentora.id, b)}
+              estado={nivel2Desbloqueado ? estadoBloque(progreso, b) : 'bloqueado'}
+              horasHechas={horasBloqueCompletadas(progreso, b)}
               onClick={nivel2Desbloqueado || esAdmin ? () => onAbrirBloque(b.id) : undefined}
             />
           ))}

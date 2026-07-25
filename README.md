@@ -38,18 +38,25 @@ pedagógicos del portal EducaFe.
 
 ## Características
 
-- **Login simple** por selección de mentora (sin contraseña; app interna de 4–10 usuarias).
+- **Login real** con correo y contraseña (Supabase Auth). Las cuentas nuevas quedan pendientes
+  hasta que una administradora las aprueba.
+- **Dos roles**: mentora (formación) y administradora (además: indicaciones de producción,
+  gestión de vídeos, aprobación de usuarias, progreso del equipo, certificados).
 - **Dashboard** con progreso de horas, banners de elegibilidad de certificación y grid de bloques.
 - **Vista de bloque y de módulo** con horas, modalidad, evaluación, indicadores MSA, estados
   (⬜ Pendiente / 🔵 En curso / ✅ Completado con fecha) y notas de reflexión.
 - **Registro de horas** cronológico con exportación a PDF/impresión (evidencia MSA con firmas).
 - **Vista de administrador** (Mariela): comparativa de mentoras, registro retroactivo de módulos
   con fecha real, y alta de nuevas mentoras sin tocar código.
-- El progreso se guarda en `localStorage` del dispositivo (sin backend).
+- Datos en **Supabase** (Postgres + Auth + RLS): el progreso, los vídeos y las usuarias se
+  comparten entre todos los dispositivos. Ver [PUESTA_EN_MARCHA.md](PUESTA_EN_MARCHA.md).
 
 ## Stack
 
-React 18 + Vite 6 + Tailwind CSS 4. Interfaz 100% en español, mobile-first.
+React 18 + Vite 6 + Tailwind CSS 4 + Supabase (Auth, Postgres, RLS).
+Interfaz 100% en español, mobile-first.
+
+**Arranque:** ver [PUESTA_EN_MARCHA.md](PUESTA_EN_MARCHA.md) — crear tablas, cuenta admin.
 
 ## Desarrollo
 

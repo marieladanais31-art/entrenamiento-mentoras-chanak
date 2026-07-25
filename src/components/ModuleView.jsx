@@ -1,21 +1,21 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { getModulo, RECURSOS_GENERALES, MSA_LEYENDA } from '../data/curriculum'
 import { getContenido } from '../data/contenido'
-import {
-  getProgreso,
-  setEstadoModulo,
-  setNotasModulo,
-  setQuizModulo,
-  formatearFecha,
-} from '../lib/storage'
+import { formatearFecha } from '../lib/calculos'
 import EstadoBadge from './ui/EstadoBadge'
 import KnowledgeCheck from './KnowledgeCheck'
+import VideoLeccion from './VideoLeccion'
 
-export default function ModuleView({ mentora, moduloId, esAdmin, onCambio, onVolver }) {
+export default function ModuleView({
+  moduloId,
+  progresoModulo: p,
+  videos,
+  esAdmin,
+  acciones,
+  onVolver,
+}) {
   const modulo = getModulo(moduloId)
   const contenido = getContenido(moduloId)
-  const [progreso, setProgreso] = useState(() => getProgreso(mentora.id))
-  const p = progreso.modulos[moduloId]
   const estado = p?.estado || 'pendiente'
 
   const [confirmandoFecha, setConfirmandoFecha] = useState(false)
@@ -24,15 +24,17 @@ export default function ModuleView({ mentora, moduloId, esAdmin, onCambio, onVol
   const [notasGuardadas, setNotasGuardadas] = useState(false)
   const [leccionAbierta, setLeccionAbierta] = useState(0)
 
+  // Al cambiar de módulo, resincronizar las notas y cerrar el acordeón
+  useEffect(() => {
+    setNotas(p?.notas || '')
+    setLeccionAbierta(0)
+    setConfirmandoFecha(false)
+  }, [moduloId]) // eslint-disable-line react-hooks/exhaustive-deps
+
   if (!modulo) return null
 
-  function actualizar(nuevo) {
-    setProgreso({ ...nuevo })
-    onCambio()
-  }
-
-  function guardarNotas() {
-    setNotasModulo(mentora.id, moduloId, notas)
+  async function guardarNotas() {
+    await acciones.setNotas(moduloId, notas)
     setNotasGuardadas(true)
     setTimeout(() => setNotasGuardadas(false), 2000)
   }
@@ -87,7 +89,7 @@ export default function ModuleView({ mentora, moduloId, esAdmin, onCambio, onVol
         </div>
       </div>
 
-      {/* ── Objetivos de aprendizaje ── */}
+      {/* ── Objetivos ── */}
       {contenido && (
         <div className="rounded-2xl bg-white p-5 shadow-sm">
           <h3 className="text-sm font-bold text-navy">🎯 Objetivos de aprendizaje</h3>
@@ -105,7 +107,7 @@ export default function ModuleView({ mentora, moduloId, esAdmin, onCambio, onVol
         </div>
       )}
 
-      {/* ── Lecciones (píldoras formativas) ── */}
+      {/* ── Lecciones ── */}
       {contenido && (
         <div className="rounded-2xl bg-white p-5 shadow-sm">
           <h3 className="text-sm font-bold text-navy">
@@ -117,6 +119,7 @@ export default function ModuleView({ mentora, moduloId, esAdmin, onCambio, onVol
           <div className="mt-3 space-y-2">
             {contenido.lecciones.map((lec, i) => {
               const abierta = leccionAbierta === i
+              const video = videos?.[`${moduloId}:${i}`]
               return (
                 <div key={i} className="overflow-hidden rounded-xl border border-navy/10">
                   <button
@@ -135,6 +138,15 @@ export default function ModuleView({ mentora, moduloId, esAdmin, onCambio, onVol
                     <span className="min-w-0 flex-1 text-sm font-semibold leading-snug">
                       {lec.titulo}
                     </span>
+                    {video && (
+                      <span
+                        className={abierta ? 'text-gold' : 'text-teal'}
+                        title="Lección con vídeo"
+                        aria-label="Lección con vídeo"
+                      >
+                        ▶
+                      </span>
+                    )}
                     <span className={`text-xs ${abierta ? 'text-cream/60' : 'text-navy/40'}`}>
                       {abierta ? '▲' : '▼'}
                     </span>
@@ -142,22 +154,17 @@ export default function ModuleView({ mentora, moduloId, esAdmin, onCambio, onVol
 
                   {abierta && (
                     <div className="space-y-4 bg-white px-4 py-4">
-                      {/* Espacio para el vídeo de Google Vids */}
-                      <div className="flex items-center gap-3 rounded-xl border border-dashed border-teal/40 bg-teal/5 px-4 py-3">
-                        <span className="text-xl" aria-hidden>
-                          🎬
-                        </span>
-                        <div className="min-w-0 text-xs leading-relaxed text-navy/60">
-                          <b className="text-navy/80">Vídeo-lección</b> — espacio reservado para
-                          incrustar el vídeo de Google Vids de esta lección. El guion de abajo está
-                          listo para grabarlo.
-                        </div>
-                      </div>
+                      <VideoLeccion
+                        video={video}
+                        esAdmin={esAdmin}
+                        onGuardar={(url, nota) => acciones.guardarVideo(moduloId, i, url, nota)}
+                        onBorrar={() => acciones.borrarVideo(moduloId, i)}
+                      />
 
-                      {/* Guion */}
+                      {/* Guion / contenido de la lección */}
                       <div>
                         <div className="text-[10px] font-bold uppercase tracking-wide text-navy/45">
-                          Desarrollo de la lección
+                          {esAdmin ? 'Guion de la lección' : 'Desarrollo de la lección'}
                         </div>
                         <div className="mt-2 space-y-2.5">
                           {lec.guion.map((parrafo, j) => (
@@ -168,23 +175,25 @@ export default function ModuleView({ mentora, moduloId, esAdmin, onCambio, onVol
                         </div>
                       </div>
 
-                      {/* Notas visuales */}
-                      <div className="rounded-xl bg-cream px-4 py-3">
-                        <div className="text-[10px] font-bold uppercase tracking-wide text-navy/45">
-                          🖼 Recursos visuales / notas para la diapositiva
+                      {/* Indicaciones de producción: SOLO admin */}
+                      {esAdmin && (
+                        <div className="rounded-xl border border-gold/35 bg-gold/8 px-4 py-3">
+                          <div className="text-[10px] font-bold uppercase tracking-wide text-navy/55">
+                            🎬 Indicaciones de producción · solo administración
+                          </div>
+                          <ul className="mt-2 space-y-1.5">
+                            {lec.visuales.map((v, j) => (
+                              <li
+                                key={j}
+                                className="flex gap-2 text-xs leading-relaxed text-navy/70"
+                              >
+                                <span className="text-gold">▸</span>
+                                {v}
+                              </li>
+                            ))}
+                          </ul>
                         </div>
-                        <ul className="mt-2 space-y-1.5">
-                          {lec.visuales.map((v, j) => (
-                            <li
-                              key={j}
-                              className="flex gap-2 text-xs leading-relaxed text-navy/65"
-                            >
-                              <span className="text-teal">▸</span>
-                              {v}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+                      )}
                     </div>
                   )}
                 </div>
@@ -197,20 +206,19 @@ export default function ModuleView({ mentora, moduloId, esAdmin, onCambio, onVol
       {/* ── Knowledge Check ── */}
       {contenido?.quiz?.length > 0 && (
         <KnowledgeCheck
-          moduloId={moduloId}
           quiz={contenido.quiz}
           resultadoPrevio={p?.quiz}
-          onGuardar={(res) => actualizar(setQuizModulo(mentora.id, moduloId, res))}
+          onGuardar={(res) => acciones.setQuiz(moduloId, res)}
         />
       )}
 
-      {/* ── Acciones de estado ── */}
+      {/* ── Progreso ── */}
       <div className="rounded-2xl bg-white p-5 shadow-sm">
         <h3 className="text-sm font-bold text-navy">📋 Tu progreso en este módulo</h3>
         <div className="mt-3 space-y-2">
           {estado === 'pendiente' && (
             <button
-              onClick={() => actualizar(setEstadoModulo(mentora.id, moduloId, 'en_curso'))}
+              onClick={() => acciones.setEstado(moduloId, 'en_curso')}
               className="w-full rounded-xl bg-teal py-3 text-sm font-semibold text-white transition hover:bg-teal/90"
             >
               🔵 Marcar como En Curso
@@ -238,14 +246,14 @@ export default function ModuleView({ mentora, moduloId, esAdmin, onCambio, onVol
               />
               {p?.quiz && !p.quiz.aprobado && (
                 <p className="mt-2 rounded-lg bg-coral/8 px-3 py-2 text-[11px] leading-relaxed text-coral">
-                  Aún no has superado el Knowledge Check ({p.quiz.aciertos}/{p.quiz.total}).
-                  Puedes completar el módulo, pero se recomienda alcanzar el dominio primero.
+                  Aún no has superado el Knowledge Check ({p.quiz.aciertos}/{p.quiz.total}). Puedes
+                  completar el módulo, pero se recomienda alcanzar el dominio primero.
                 </p>
               )}
               <div className="mt-3 flex gap-2">
                 <button
-                  onClick={() => {
-                    actualizar(setEstadoModulo(mentora.id, moduloId, 'completado', fecha))
+                  onClick={async () => {
+                    await acciones.setEstado(moduloId, 'completado', fecha)
                     setConfirmandoFecha(false)
                   }}
                   className="flex-1 rounded-lg bg-teal py-2.5 text-sm font-semibold text-white"
@@ -263,7 +271,7 @@ export default function ModuleView({ mentora, moduloId, esAdmin, onCambio, onVol
           )}
           {estado === 'completado' && (
             <button
-              onClick={() => actualizar(setEstadoModulo(mentora.id, moduloId, 'en_curso'))}
+              onClick={() => acciones.setEstado(moduloId, 'en_curso')}
               className="w-full rounded-xl border border-coral/40 py-2.5 text-xs font-medium text-coral transition hover:bg-coral/5"
             >
               Reabrir módulo (volver a En Curso)
@@ -292,7 +300,7 @@ export default function ModuleView({ mentora, moduloId, esAdmin, onCambio, onVol
         </ul>
       </div>
 
-      {/* ── Notas de la mentora ── */}
+      {/* ── Notas ── */}
       <div className="rounded-2xl bg-white p-5 shadow-sm">
         <h3 className="text-sm font-bold text-navy">✍️ Notas y reflexión</h3>
         <textarea

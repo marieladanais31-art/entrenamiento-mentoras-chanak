@@ -1,9 +1,9 @@
-import { registroCronologico, resumenMentora, formatearFecha } from '../lib/storage'
+import { registroCronologico, resumenMentora, formatearFecha } from '../lib/calculos'
 import { NIVEL_1_HORAS, NIVEL_2_HORAS } from '../data/curriculum'
 
-export default function HoursLog({ mentora, onVolver }) {
-  const registro = registroCronologico(mentora.id)
-  const r = resumenMentora(mentora.id)
+export default function HoursLog({ mentora, progreso, onVolver }) {
+  const registro = registroCronologico(progreso)
+  const r = resumenMentora(progreso)
 
   return (
     <div className="space-y-4">

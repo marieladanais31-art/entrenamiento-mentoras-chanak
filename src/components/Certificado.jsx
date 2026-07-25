@@ -1,10 +1,10 @@
-import { resumenMentora, formatearFecha } from '../lib/storage'
+import { resumenMentora, formatearFecha } from '../lib/calculos'
 import { CURSO } from '../data/curso'
 
 // Certificado de participación imprimible (A4 horizontal) con logo Chanak
 // y espacio de firmas. nivel: 1 → 180h Mentor · 2 → 300h Coordinator
-export default function Certificado({ mentora, nivel, onVolver }) {
-  const r = resumenMentora(mentora.id)
+export default function Certificado({ mentora, progreso, nivel, onVolver }) {
+  const r = resumenMentora(progreso)
   const cert = CURSO.certificaciones[nivel - 1]
   const hoy = new Date().toISOString().slice(0, 10)
 
@@ -110,7 +110,7 @@ export default function Certificado({ mentora, nivel, onVolver }) {
               </span>
               <span>
                 Ref. CHK-{nivel === 1 ? 'MENTOR' : 'COORD'}-
-                {mentora.id.toUpperCase().slice(0, 6)}-{hoy.replace(/-/g, '')}
+                {(mentora.nombre || '').replace(/[^A-Za-zÁÉÍÓÚÑ]/g, '').toUpperCase().slice(0, 6)}-{hoy.replace(/-/g, '')}
               </span>
             </div>
           </div>
