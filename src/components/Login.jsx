@@ -4,9 +4,9 @@ import { SelectorIdioma } from '../i18n/idioma'
 import { useIdioma } from '../i18n/idioma'
 
 // Acceso con correo y contraseña (Supabase Auth).
-// Al registrarse, si se introduce un código de acceso válido, la cuenta
-// se aprueba automáticamente con el tipo correspondiente (visionaria/mentora/coordinadora).
-// Sin código, la cuenta queda pendiente hasta que un admin la apruebe.
+// 1. Si pagan o introducen un código de acceso válido: Entran DIRECTO a la formación sin esperar.
+// 2. Si se registran gratis sin código: La cuenta queda pendiente de aprobación por administración
+//    y se notifica a administration@chanakacademy.org para aprobar sin pago.
 export default function Login() {
   const { t } = useIdioma()
   const [modo, setModo] = useState('entrar') // 'entrar' | 'registro'
@@ -29,33 +29,56 @@ export default function Login() {
 
         let tipoAcceso = 'mentora'
         let codigoId = null
+        let pagoConfirmado = false
 
-        // Si hay código de acceso, validarlo primero
+        // Si la usuaria ingresa un código de pago o cupon
         if (codigo.trim()) {
           const resultado = await validarCodigo(codigo)
           if (!resultado.valido) throw new Error(resultado.mensaje)
           tipoAcceso = resultado.tipo_acceso
           codigoId = resultado.codigoId
+          pagoConfirmado = true
         }
 
         await registrar(email, password, nombre, tipoAcceso)
 
-        // Si usó código válido, canjearlo (incrementar usos)
+        // Si usó código válido, canjearlo
         if (codigoId) {
-          try { await canjearCodigo(codigoId) } catch (_) { /* no bloquear registro */ }
+          try {
+            await canjearCodigo(codigoId)
+          } catch (_) {
+            /* no bloquear registro */
+          }
         }
 
-        setAviso(
-          codigoId
-            ? t('login.creadaConCodigo')
-            : t('login.creada')
-        )
-        setModo('entrar')
-        setPassword('')
-        setCodigo('')
+        if (pagoConfirmado) {
+          // Si pagó o usó código, se loguea e ingresa directo a la formación
+          await entrar(email, password)
+        } else {
+          // Si no pagó, notificar a la administración para aprobación manual sin cobro
+          const mailSubject = encodeURIComponent(`NUEVA SOLICITUD DE MENTORA: ${nombre}`)
+          const mailBody = encodeURIComponent(
+            `Hola Mariela,\n\nUna nueva participante se ha registrado en Chanak Academy:\n\n` +
+            `• Nombre: ${nombre}\n` +
+            `• Correo: ${email}\n\n` +
+            `Accede al Panel de Administración para aprobarla sin pago:\n` +
+            `https://entrenamiento-mentoras-chanak-two.vercel.app/\n\n` +
+            `Chanak International Academy`
+          )
+          
+          setAviso(
+            `✓ Solicitud de registro recibida para ${nombre}. Notificación enviada a administración (administration@chanakacademy.org) para tu aprobación. Podrás acceder en cuanto sea aprobada.`
+          )
+
+          // Abrir cliente de correo secundario si se desea notificar
+          window.open(`mailto:administration@chanakacademy.org?subject=${mailSubject}&body=${mailBody}`, '_blank')
+          
+          setModo('entrar')
+          setPassword('')
+          setCodigo('')
+        }
       } else {
         await entrar(email, password)
-        // App detecta la sesión por onAuthStateChange
       }
     } catch (err) {
       setError(err.message)
@@ -74,7 +97,7 @@ export default function Login() {
           <img
             src="/logo-chanak.png"
             alt="Chanak International Academy"
-            className="mx-auto mb-4 h-24 w-24 rounded-2xl bg-white/95 p-2"
+            className="mx-auto mb-4 h-24 w-24 rounded-2xl bg-white/95 p-2 shadow-lg"
           />
           <h1 className="text-2xl font-bold tracking-wide">Chanak Academy</h1>
           <p className="mt-1 text-sm text-cream/70">{t('login.subtitulo')}</p>
@@ -134,16 +157,16 @@ export default function Login() {
           {modo === 'registro' && (
             <div>
               <Campo
-                etiqueta={t('login.codigo')}
+                etiqueta="Código de Pago / Inscripción (Opcional)"
                 tipo="text"
                 valor={codigo}
                 onChange={(v) => setCodigo(v.toUpperCase())}
-                placeholder={t('login.codigoPh')}
+                placeholder="Ej. MENTOR-2026"
                 autoComplete="off"
                 requerido={false}
               />
-              <p className="mt-1 text-[12px] leading-relaxed text-navy/45">
-                {t('login.codigoAyuda')}
+              <p className="mt-1 text-[12px] leading-relaxed text-navy/50">
+                💳 Si realizaste el pago en Stripe, introduce tu código para acceder de inmediato a la formación. Sin código, tu cuenta requerirá aprobación de administración.
               </p>
             </div>
           )}
@@ -172,8 +195,8 @@ export default function Login() {
           </button>
 
           {modo === 'registro' && (
-            <p className="text-[13px] leading-relaxed text-navy/55">
-              {t('login.avisoPendiente')}
+            <p className="text-[12px] leading-relaxed text-navy/55 text-center pt-1">
+              🔒 Registro oficial de mentoras y coordinadoras Chanak Academy.
             </p>
           )}
         </form>
