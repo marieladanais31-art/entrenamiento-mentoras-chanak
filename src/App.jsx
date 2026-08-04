@@ -8,6 +8,7 @@ import ModuleView from './components/ModuleView'
 import HoursLog from './components/HoursLog'
 import Certificado from './components/Certificado'
 import AdminView from './components/AdminView'
+import EducaFeView from './components/EducaFeView'
 import Header from './components/ui/Header'
 import * as api from './lib/backend'
 import { useIdioma } from './i18n/idioma'
@@ -193,7 +194,11 @@ export default function App() {
             onVerHoras={() => setVista({ ...vista, nombre: 'horas' })}
             onVerCurso={() => setVista({ ...vista, nombre: 'curso' })}
             onVerCertificado={(nivel) => setVista({ ...vista, nombre: 'certificado', nivel })}
+            onVerEducafe={() => setVista({ ...vista, nombre: 'educafe' })}
           />
+        )}
+        {vista.nombre === 'educafe' && (
+          <EducaFeView onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />
         )}
         {vista.nombre === 'curso' && (
           <CourseIntro

@@ -21,8 +21,19 @@ export default function Header({ perfil, esAdmin, vista, onNavegar, onSalir }) {
           </span>
         </button>
 
-        <nav className="flex items-center gap-1 text-xs">
+        <nav className="flex items-center gap-1.5 text-xs">
           <SelectorIdioma />
+          <button
+            onClick={() => onNavegar({ nombre: 'educafe' })}
+            className={`rounded-full px-3 py-1.5 font-bold transition flex items-center gap-1 ${
+              vista.nombre === 'educafe'
+                ? 'bg-amber-500 text-white shadow-sm'
+                : 'bg-amber-500/15 text-amber-300 hover:bg-amber-500/25 border border-amber-400/30'
+            }`}
+          >
+            <span>☕️</span>
+            <span>Miembros de EducaFe</span>
+          </button>
           {esAdmin && (
             <button
               onClick={() => onNavegar({ nombre: 'admin' })}

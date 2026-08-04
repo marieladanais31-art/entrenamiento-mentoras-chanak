@@ -14,6 +14,7 @@ export default function Dashboard({
   onVerHoras,
   onVerCurso,
   onVerCertificado,
+  onVerEducafe,
 }) {
   const { t, idioma } = useIdioma()
   const r = resumenMentora(progreso)
@@ -43,24 +44,44 @@ export default function Dashboard({
         </div>
       </section>
 
-      {/* Presentación del curso */}
-      <button
-        onClick={onVerCurso}
-        className="flex w-full items-center gap-3 rounded-2xl border-2 border-teal/25 bg-teal/6 px-4 py-3.5 text-left transition hover:bg-teal/12"
-      >
-        <span className="text-xl" aria-hidden>
-          📘
-        </span>
-        <span className="min-w-0 flex-1">
-          <span className="block text-sm font-bold text-navy">
-            {t('panel.presentacion')}
+      {/* Botones de navegación rápida */}
+      <div className="grid gap-3 sm:grid-cols-2">
+        <button
+          onClick={onVerCurso}
+          className="flex w-full items-center gap-3 rounded-2xl border-2 border-teal/25 bg-teal/6 px-4 py-3.5 text-left transition hover:bg-teal/12"
+        >
+          <span className="text-xl" aria-hidden>
+            📘
           </span>
-          <span className="block text-xs text-navy/60">
-            {t('panel.presentacionSub')}
+          <span className="min-w-0 flex-1">
+            <span className="block text-sm font-bold text-navy">
+              {t('panel.presentacion')}
+            </span>
+            <span className="block text-xs text-navy/60">
+              {t('panel.presentacionSub')}
+            </span>
           </span>
-        </span>
-        <span className="shrink-0 text-teal">→</span>
-      </button>
+          <span className="shrink-0 text-teal">→</span>
+        </button>
+
+        <button
+          onClick={onVerEducafe}
+          className="flex w-full items-center gap-3 rounded-2xl border-2 border-amber-400/40 bg-gradient-to-r from-amber-500/10 to-amber-600/10 px-4 py-3.5 text-left transition hover:bg-amber-500/20"
+        >
+          <span className="text-xl" aria-hidden>
+            ☕️
+          </span>
+          <span className="min-w-0 flex-1">
+            <span className="block text-sm font-bold text-navy">
+              Miembros de EducaFe
+            </span>
+            <span className="block text-xs text-navy/60">
+              Cuaderno NotebookLM, Hubs y Socias Visionarias
+            </span>
+          </span>
+          <span className="shrink-0 text-amber-700">→</span>
+        </button>
+      </div>
 
       {/* Banners de certificación */}
       {r.elegibleCoordinadora ? (

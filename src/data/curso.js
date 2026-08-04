@@ -1,44 +1,47 @@
 // ============================================================
-// Información general del curso (portada estilo Prospero Learning)
+// Información general del curso — 3 Niveles de Certificación Oficial
 // ============================================================
 
 export const CURSO = {
-  titulo: 'Certificación de Mentoras Chanak',
+  titulo: 'Certificación Chanak & Portal EducaFe',
   subtitulo: 'Acompañar con excelencia, proteger con criterio, servir con propósito',
-  nivel1: 'Chanak-Certified Mentor · 180 horas',
-  nivel2: 'Chanak-Certified Coordinator · 300 horas',
+  nivel1: 'Nivel 1: Mentora Off Campus y Dual Diploma · 180 horas',
+  nivel2: 'Nivel 2: Coordinadora Certificada de Hubs · 300 horas',
+  nivel3: 'Nivel 3: Socia Visionaria & Gobernanza EducaFe · Autoestudio',
   resumen:
-    'Programa oficial de formación de Chanak International Academy (FLDOE #134620, candidata a acreditación MSA-CESS) para mentoras y coordinadoras de sus Learning Implementation Sites. A través de 10 bloques temáticos aprenderás a acompañar estudiantes bajo el modelo 60/20/20 y la metodología de Mastery Learning, a proteger a los menores con protocolos verificables, a dominar el SIS y el Portal Chanak, y a comunicarte con familias con verdad y prudencia. Cada módulo combina lecciones en vídeo, lectura guiada y práctica real, y se valida con un Knowledge Check al 80% — el mismo estándar de dominio que aplicamos a nuestros estudiantes.',
+    'Programa oficial de formación de Chanak International Academy (FLDOE #134620, acreditada MSA-CESS) y la Red EducaFe. A través de 3 niveles formativos aprenderás a acompañar estudiantes en el modelo 60/20/20, supervisar el Programa Dual Diploma LMS, aplicar la educación inicial (App de Inglés) y coordinar Hubs presenciales (Modalidad A y B). Cada módulo combina lecciones en vídeo, cuadernos de NotebookLM, práctica real y validación por dominio al 80%.',
   dirigidoA:
-    'Mentoras en formación de Chanak International Academy, coordinadoras de sede en preparación y personal educativo autorizado por la oficina central.',
+    'Mentoras Off Campus, coordinadoras de Hub EducaFe, Socias Visionarias y personal educativo autorizado por Chanak Academy.',
   objetivos: [
-    'Explicar la misión, visión y valores de Chanak (el Shemá, Proverbios 22:6) y aplicar su cosmovisión bíblica al acompañamiento diario.',
-    'Aplicar la metodología de Mastery Learning: dominio mínimo del 80%, corrección formativa y avance con evidencia, nunca por calendario.',
-    'Supervisar el trabajo del estudiante en las 4 vías de material (A.C.E., LIFEPAC, CLE y Chanak Flex) con sus protocolos específicos.',
-    'Elaborar y dar seguimiento al PEI (Plan Educativo Individualizado) a partir del diagnóstico de ubicación.',
-    'Ejecutar el protocolo de protección infantil de 6 pasos, conocer el rol del DSL y mantener conducta segura en todo momento.',
-    'Registrar el progreso académico en el SIS Chanak y orientar a las familias en el Portal LMS sin exponer datos sensibles.',
-    'Comunicar con familias reportes, reuniones y orientación respetando la autoridad familiar (Family Authority).',
-    'Nivel 2: dirigir un Learning Implementation Site — gobernanza, supervisión de mentoras, calidad, datos y plan de apertura de sede.',
+    'Nivel 1 — Mentora Off Campus & Dual Diploma (180h): Filosofía Mastery Learner (A.C.E., Lifepac, CLE), PBL, Ciberseguridad, Dual Diploma LMS y Práctica.',
+    'Nivel 2 — Coordinadora Certificada (300h): Psicología infantil/adolescente, gestión de proyectos educativos, apertura de Hubs A y B, propuestas a iglesias y sostenibilidad.',
+    'Nivel 3 — Socia Visionaria (Autoestudio): Gobernanza territorial, actas, relaciones comunitarias, donaciones y articulación de Hubs sin asumir cobro de tutoría.',
   ],
   metodologia: [
-    { icono: '🎬', nombre: 'Vídeo-lección', detalle: 'Guion desarrollado listo para Google Vids' },
-    { icono: '📖', nombre: 'Lectura guiada', detalle: 'Documentos del Drive y NotebookLM' },
-    { icono: '🛠', nombre: 'Práctica real', detalle: 'Talleres, simulaciones y SIS demo' },
+    { icono: '📘', nombre: 'NotebookLM & Audios', detalle: 'Cuadernos interactivos y audios explicativos' },
+    { icono: '🎬', nombre: 'Vídeos y Clases', detalle: 'Lecciones en vídeo, Vids y Drive' },
+    { icono: '🛠', nombre: 'Práctica Real y SIS', detalle: 'Talleres, simulaciones y SIS demo' },
     { icono: '✅', nombre: 'Knowledge Check', detalle: 'Test de dominio al 80% por módulo' },
   ],
   certificaciones: [
     {
-      nombre: 'Chanak-Certified Mentor',
+      nivel: 1,
+      nombre: 'Nivel 1: Mentora Off Campus y Dual Diploma',
       horas: 180,
-      detalle: 'Bloques 1–6 · Capacita para acompañar alumnos bajo supervisión de la oficina central.',
+      detalle: 'Bloques 1–5 · Capacita para acompañar alumnos en programas regulares y Dual Diploma.',
     },
     {
-      nombre: 'Chanak-Certified Coordinator',
+      nivel: 2,
+      nombre: 'Nivel 2: Coordinadora Certificada',
       horas: 300,
-      detalle: 'Bloques 1–10 · Capacita para dirigir un Learning Implementation Site y supervisar mentoras.',
+      detalle: 'Bloques 1–7 · Capacita para dirigir un Hub EducaFe-Chanak, presentar propuestas a iglesias y supervisar mentoras.',
+    },
+    {
+      nivel: 3,
+      nombre: 'Nivel 3: Socia Visionaria & Gobernanza EducaFe',
+      horas: 45,
+      detalle: 'Autoestudio Institucional · Capacita para articulación territorial, representación de asamblea y apoyo a Hubs.',
     },
   ],
-  // Umbral de dominio para aprobar cada Knowledge Check (coherente con Mastery Learning)
   umbralAprobacion: 0.8,
 }

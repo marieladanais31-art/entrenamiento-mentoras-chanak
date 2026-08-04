@@ -1,34 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap');
 @import 'tailwindcss';
 
 @theme {
-  --color-navy: #0d1b2a;
-  --color-teal: #2a8c74;
-  --color-gold: #c9963a;
-  --color-cream: #f5f0e8;
-  --color-coral: #d45a3c;
-  --font-sans: 'Avenir Next', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --color-navy: #0f172a;       /* Slate/Navy ultra limpio */
+  --color-teal: #059669;       /* Emerald/Teal vivo */
+  --color-gold: #d97706;       /* Amber/Gold moderno */
+  --color-cream: #f8fafc;      /* Blanco limpio */
+  --color-coral: #e11d48;      /* Rose/Coral nítido */
+  --font-sans: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
 
-  /* Escala tipográfica ampliada: las mentoras leen desde el móvil, así que
-     todos los tamaños suben ~2px respecto a los valores por defecto. */
-  --text-xs: 0.8125rem; /* 13px (por defecto 12) */
-  --text-xs--line-height: 1.15rem;
-  --text-sm: 0.9375rem; /* 15px (por defecto 14) */
-  --text-sm--line-height: 1.4rem;
-  --text-base: 1.0625rem; /* 17px (por defecto 16) */
-  --text-base--line-height: 1.6rem;
-  --text-lg: 1.1875rem; /* 19px (por defecto 18) */
-  --text-lg--line-height: 1.75rem;
-  --text-xl: 1.375rem; /* 22px (por defecto 20) */
-  --text-xl--line-height: 1.85rem;
-  --text-2xl: 1.625rem; /* 26px (por defecto 24) */
-  --text-2xl--line-height: 2.1rem;
-  --text-3xl: 2rem; /* 32px (por defecto 30) */
-  --text-3xl--line-height: 2.4rem;
+  /* Escala de texto ampliada significativamente para máxima legibilidad */
+  --text-xs: 0.9375rem;   /* 16px */
+  --text-xs--line-height: 1.35rem;
+  --text-sm: 1.0625rem;   /* 18px */
+  --text-sm--line-height: 1.6rem;
+  --text-base: 1.1875rem; /* 20px */
+  --text-base--line-height: 1.8rem;
+  --text-lg: 1.375rem;    /* 23px */
+  --text-lg--line-height: 1.95rem;
+  --text-xl: 1.625rem;    /* 27px */
+  --text-xl--line-height: 2.2rem;
+  --text-2xl: 2rem;       /* 34px */
+  --text-2xl--line-height: 2.5rem;
+  --text-3xl: 2.5rem;     /* 42px */
+  --text-3xl--line-height: 2.9rem;
+}
+
+html {
+  font-size: 17px;
 }
 
 body {
   background-color: var(--color-cream);
   color: var(--color-navy);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--text-base--line-height);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -43,7 +50,6 @@ body {
     box-shadow: none !important;
     border: none !important;
   }
-  /* El certificado se imprime a página completa en horizontal */
   .print-cert {
     box-shadow: none !important;
     border-radius: 0 !important;
@@ -53,7 +59,6 @@ body {
   }
 }
 
-/* Orientación horizontal cuando se imprime un certificado */
 @page {
   margin: 12mm;
 }

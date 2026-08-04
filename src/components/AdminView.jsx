@@ -3,12 +3,13 @@ import { BLOQUES } from '../data/curriculum'
 import * as api from '../lib/backend'
 import { resumenMentora, formatearFecha, iniciales } from '../lib/calculos'
 import GestionUsuarias from './GestionUsuarias'
+import GestionCodigos from './GestionCodigos'
 import { useIdioma } from '../i18n/idioma'
 import { traducirBloques } from '../data/curriculum.en'
 
 export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) {
   const { t, idioma } = useIdioma()
-  const [pestana, setPestana] = useState('usuarias') // 'usuarias' | 'progreso' | 'retroactivo'
+  const [pestana, setPestana] = useState('usuarias') // 'usuarias' | 'codigos' | 'progreso' | 'retroactivo'
   const [perfiles, setPerfiles] = useState([])
   const [progresos, setProgresos] = useState({})
   const [cargando, setCargando] = useState(true)
@@ -47,6 +48,7 @@ export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) 
       <div className="flex gap-1 rounded-xl bg-white p-1 shadow-sm">
         {[
           ['usuarias', `${t('admin.tabUsuarias')}${pendientes ? ` (${pendientes})` : ''}`],
+          ['codigos', t('admin.tabCodigos')],
           ['progreso', t('admin.tabProgreso')],
           ['retroactivo', t('admin.tabRetroactivo')],
         ].map(([id, texto]) => (
@@ -76,6 +78,10 @@ export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) 
         <>
           {pestana === 'usuarias' && (
             <GestionUsuarias perfiles={perfiles} miId={miPerfil.id} onRecargar={cargar} />
+          )}
+
+          {pestana === 'codigos' && (
+            <GestionCodigos miId={miPerfil.id} />
           )}
 
           {pestana === 'progreso' && (

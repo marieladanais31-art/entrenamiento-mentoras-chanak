@@ -1,16 +1,19 @@
 import { useState } from 'react'
-import { registrar, entrar } from '../lib/backend'
+import { registrar, entrar, validarCodigo, canjearCodigo } from '../lib/backend'
 import { SelectorIdioma } from '../i18n/idioma'
 import { useIdioma } from '../i18n/idioma'
 
 // Acceso con correo y contraseña (Supabase Auth).
-// Las cuentas nuevas quedan en estado «pendiente» hasta que un admin las aprueba.
+// Al registrarse, si se introduce un código de acceso válido, la cuenta
+// se aprueba automáticamente con el tipo correspondiente (visionaria/mentora/coordinadora).
+// Sin código, la cuenta queda pendiente hasta que un admin la apruebe.
 export default function Login() {
   const { t } = useIdioma()
   const [modo, setModo] = useState('entrar') // 'entrar' | 'registro'
   const [nombre, setNombre] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [codigo, setCodigo] = useState('')
   const [cargando, setCargando] = useState(false)
   const [error, setError] = useState('')
   const [aviso, setAviso] = useState('')
@@ -23,10 +26,33 @@ export default function Login() {
     try {
       if (modo === 'registro') {
         if (nombre.trim().length < 3) throw new Error(t('login.errNombre'))
-        await registrar(email, password, nombre)
-        setAviso(t('login.creada'))
+
+        let tipoAcceso = 'mentora'
+        let codigoId = null
+
+        // Si hay código de acceso, validarlo primero
+        if (codigo.trim()) {
+          const resultado = await validarCodigo(codigo)
+          if (!resultado.valido) throw new Error(resultado.mensaje)
+          tipoAcceso = resultado.tipo_acceso
+          codigoId = resultado.codigoId
+        }
+
+        await registrar(email, password, nombre, tipoAcceso)
+
+        // Si usó código válido, canjearlo (incrementar usos)
+        if (codigoId) {
+          try { await canjearCodigo(codigoId) } catch (_) { /* no bloquear registro */ }
+        }
+
+        setAviso(
+          codigoId
+            ? t('login.creadaConCodigo')
+            : t('login.creada')
+        )
         setModo('entrar')
         setPassword('')
+        setCodigo('')
       } else {
         await entrar(email, password)
         // App detecta la sesión por onAuthStateChange
@@ -105,6 +131,23 @@ export default function Login() {
             autoComplete={modo === 'registro' ? 'new-password' : 'current-password'}
           />
 
+          {modo === 'registro' && (
+            <div>
+              <Campo
+                etiqueta={t('login.codigo')}
+                tipo="text"
+                valor={codigo}
+                onChange={(v) => setCodigo(v.toUpperCase())}
+                placeholder={t('login.codigoPh')}
+                autoComplete="off"
+                requerido={false}
+              />
+              <p className="mt-1 text-[12px] leading-relaxed text-navy/45">
+                {t('login.codigoAyuda')}
+              </p>
+            </div>
+          )}
+
           {error && (
             <p className="rounded-lg border-l-4 border-coral bg-coral/8 px-3 py-2 text-xs leading-relaxed text-coral">
               {error}
@@ -130,7 +173,7 @@ export default function Login() {
 
           {modo === 'registro' && (
             <p className="text-[13px] leading-relaxed text-navy/55">
-{t('login.avisoPendiente')}
+              {t('login.avisoPendiente')}
             </p>
           )}
         </form>
@@ -145,7 +188,7 @@ export default function Login() {
   )
 }
 
-function Campo({ etiqueta, tipo, valor, onChange, placeholder, autoComplete }) {
+function Campo({ etiqueta, tipo, valor, onChange, placeholder, autoComplete, requerido = true }) {
   return (
     <label className="block">
       <span className="text-[13px] font-semibold uppercase tracking-wide text-navy/55">
@@ -157,7 +200,7 @@ function Campo({ etiqueta, tipo, valor, onChange, placeholder, autoComplete }) {
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         autoComplete={autoComplete}
-        required
+        required={requerido}
         className="mt-1 w-full rounded-xl border border-navy/15 bg-white px-3 py-2.5 text-sm text-navy placeholder:text-navy/30 focus:border-teal focus:outline-none"
       />
     </label>

@@ -1,16 +1,38 @@
-import { supabase } from './supabase'
+import { supabase, SUPABASE_URL, SUPABASE_ANON_KEY } from './supabase'
+import { createClient } from '@supabase/supabase-js'
 
 // ════════════════════════════════════════════
 // AUTENTICACIÓN
 // ════════════════════════════════════════════
 
-export async function registrar(email, password, nombre) {
+export async function registrar(email, password, nombre, tipo_acceso = 'mentora') {
   const { data, error } = await supabase.auth.signUp({
     email: email.trim().toLowerCase(),
     password,
-    options: { data: { nombre: nombre.trim() } },
+    options: { data: { nombre: nombre.trim(), tipo_acceso } },
   })
   if (error) throw new Error(traducirError(error.message))
+  return data
+}
+
+// Crea una usuaria directamente desde el panel admin sin cerrar la sesión del admin.
+export async function crearUsuariaDirecta(email, password, nombre, tipo_acceso = 'mentora') {
+  const client = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+    auth: { persistSession: false },
+  })
+  const { data, error } = await client.auth.signUp({
+    email: email.trim().toLowerCase(),
+    password,
+    options: { data: { nombre: nombre.trim(), tipo_acceso } },
+  })
+  if (error) throw new Error(traducirError(error.message))
+  if (data?.user?.id) {
+    const { error: errorPerfil } = await supabase
+      .from('perfiles')
+      .update({ estado: 'aprobada', tipo_acceso })
+      .eq('id', data.user.id)
+    if (errorPerfil) console.warn('Aviso al actualizar perfil:', errorPerfil.message)
+  }
   return data
 }
 
@@ -40,7 +62,7 @@ export function onCambioAuth(callback) {
 export async function getPerfil(userId) {
   const { data, error } = await supabase
     .from('perfiles')
-    .select('id, nombre, rol, estado, creado_en')
+    .select('id, nombre, rol, estado, tipo_acceso, creado_en')
     .eq('id', userId)
     .maybeSingle()
   if (error) throw new Error(error.message)
@@ -54,7 +76,7 @@ export async function getPerfil(userId) {
 export async function listarPerfiles() {
   const { data, error } = await supabase
     .from('perfiles')
-    .select('id, nombre, rol, estado, creado_en')
+    .select('id, nombre, rol, estado, tipo_acceso, creado_en')
     .order('creado_en', { ascending: true })
   if (error) throw new Error(error.message)
   return data || []
@@ -196,6 +218,93 @@ export async function getProgresoTodas() {
 // UTILIDADES
 // ════════════════════════════════════════════
 
+// ════════════════════════════════════════════
+// CÓDIGOS DE ACCESO
+// ════════════════════════════════════════════
+
+// Valida un código de acceso durante el registro.
+// Devuelve { valido: true, tipo_acceso } o { valido: false, mensaje }.
+export async function validarCodigo(codigo) {
+  const { data, error } = await supabase
+    .from('codigos_acceso')
+    .select('id, codigo, tipo_acceso, usos_max, usos, activo, expira_en')
+    .eq('codigo', codigo.trim().toUpperCase())
+    .maybeSingle()
+  if (error) throw new Error(error.message)
+  if (!data) return { valido: false, mensaje: 'Código no encontrado.' }
+  if (!data.activo) return { valido: false, mensaje: 'Este código ya no está activo.' }
+  if (data.usos >= data.usos_max) return { valido: false, mensaje: 'Este código ya fue usado el máximo de veces.' }
+  if (data.expira_en && new Date(data.expira_en) < new Date()) {
+    return { valido: false, mensaje: 'Este código ha expirado.' }
+  }
+  return { valido: true, tipo_acceso: data.tipo_acceso, codigoId: data.id }
+}
+
+// Canjea un código (incrementa usos). Llamar DESPUÉS de registro exitoso.
+export async function canjearCodigo(codigoId) {
+  const { error } = await supabase.rpc('canjear_codigo_acceso', { p_codigo_id: codigoId })
+  // If the RPC doesn't exist yet, fall back to direct update
+  if (error && error.message.includes('function')) {
+    const { error: e2 } = await supabase
+      .from('codigos_acceso')
+      .update({ usos: supabase.sql`usos + 1` })
+      .eq('id', codigoId)
+    if (e2) throw new Error(e2.message)
+    return
+  }
+  if (error) throw new Error(error.message)
+}
+
+// ── Admin: listar códigos ──
+export async function listarCodigos() {
+  const { data, error } = await supabase
+    .from('codigos_acceso')
+    .select('*')
+    .order('creado_en', { ascending: false })
+  if (error) throw new Error(error.message)
+  return data || []
+}
+
+// ── Admin: crear código ──
+export async function crearCodigo(codigo, tipo_acceso, usos_max = 1, expira_en = null, userId) {
+  const { data, error } = await supabase
+    .from('codigos_acceso')
+    .insert({
+      codigo: codigo.trim().toUpperCase(),
+      tipo_acceso,
+      usos_max,
+      activo: true,
+      creado_por: userId,
+      expira_en,
+    })
+    .select()
+    .single()
+  if (error) {
+    if (error.message.includes('duplicate') || error.message.includes('unique'))
+      throw new Error('Ya existe un código con ese nombre.')
+    throw new Error(error.message)
+  }
+  return data
+}
+
+// ── Admin: desactivar código ──
+export async function desactivarCodigo(codigoId) {
+  const { error } = await supabase
+    .from('codigos_acceso')
+    .update({ activo: false })
+    .eq('id', codigoId)
+  if (error) throw new Error(error.message)
+}
+
+// ── Admin: activar código ──
+export async function activarCodigo(codigoId) {
+  const { error } = await supabase
+    .from('codigos_acceso')
+    .update({ activo: true })
+    .eq('id', codigoId)
+  if (error) throw new Error(error.message)
+}
+
 function traducirError(mensaje = '') {
   const m = mensaje.toLowerCase()
   if (m.includes('invalid login credentials')) return 'Correo o contraseña incorrectos.'
@@ -209,5 +318,7 @@ function traducirError(mensaje = '') {
     return 'Debes confirmar tu correo antes de entrar. Revisa tu bandeja.'
   if (m.includes('rate limit') || m.includes('too many'))
     return 'Demasiados intentos. Espera un momento y vuelve a probar.'
+  if (m.includes('duplicate') || m.includes('unique')) return 'Ya existe un registro con estos datos.'
+  if (m.includes('codigo')) return 'Error con el código de acceso. Inténtalo de nuevo.'
   return mensaje
 }

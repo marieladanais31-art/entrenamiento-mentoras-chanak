@@ -47,15 +47,15 @@ export default function VideoLeccion({ video, esAdmin, onGuardar, onBorrar }) {
   if (editando) {
     return (
       <div className="rounded-xl border-2 border-teal bg-teal/5 p-4">
-        <div className="text-xs font-bold text-navy">{t('video.titulo')}</div>
+        <div className="text-xs font-bold text-navy">🎬 Vídeo o Cuaderno NotebookLM de la lección</div>
         <label className="mt-2 block">
           <span className="text-[12px] font-semibold uppercase tracking-wide text-navy/55">
-            {t('video.enlace')}
+            Enlace (NotebookLM, Google Vids, Drive o YouTube)
           </span>
           <input
             value={url}
             onChange={(e) => setUrl(e.target.value)}
-            placeholder="https://vids.google.com/d/…"
+            placeholder="https://notebooklm.google.com/notebook/… o https://vids.google.com/…"
             className="mt-1 w-full rounded-lg border border-navy/20 bg-white px-3 py-2 text-xs"
           />
         </label>
@@ -99,21 +99,34 @@ export default function VideoLeccion({ video, esAdmin, onGuardar, onBorrar }) {
             </button>
           )}
         </div>
-        <p className="mt-2 text-[12px] leading-relaxed text-navy/50">
-          {t('video.avisoCompartir')}
-        </p>
       </div>
     )
   }
 
-  // ── Vídeo publicado ──
+  // ── Recurso publicado (Vídeo o NotebookLM) ──
   if (video?.url) {
+    const esNotebook = embed?.tipo === 'notebooklm'
     return (
-      <div>
-        {embed ? (
+      <div className="space-y-2">
+        {esNotebook ? (
+          <a
+            href={video.url}
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center gap-3.5 rounded-xl border-2 border-purple-300 bg-gradient-to-r from-purple-900 to-indigo-900 px-4 py-4 text-white shadow-md transition hover:from-purple-800 hover:to-indigo-800"
+          >
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/15 text-2xl" aria-hidden>
+              📘
+            </span>
+            <span className="min-w-0 flex-1 text-xs">
+              <b className="block text-sm text-amber-300 font-bold">Cuaderno de Formación NotebookLM</b>
+              <span className="text-purple-100/80">Haz clic para abrir las lecturas, audios y resúmenes de esta lección →</span>
+            </span>
+          </a>
+        ) : embed?.tipo === 'embed' ? (
           <div className="overflow-hidden rounded-xl bg-navy">
             <iframe
-              src={embed}
+              src={embed.url}
               title="Vídeo de la lección"
               allow="autoplay; fullscreen"
               allowFullScreen
@@ -142,7 +155,7 @@ export default function VideoLeccion({ video, esAdmin, onGuardar, onBorrar }) {
               onClick={() => setEditando(true)}
               className="text-[13px] font-semibold text-teal hover:underline"
             >
-              {t('video.cambiar')}
+              ✏️ Cambiar vídeo o NotebookLM
             </button>
             {video.nota && (
               <span className="text-[13px] text-navy/50">{t('video.nota')}: {video.nota}</span>
@@ -153,7 +166,7 @@ export default function VideoLeccion({ video, esAdmin, onGuardar, onBorrar }) {
     )
   }
 
-  // ── Sin vídeo todavía ──
+  // ── Sin recurso todavía ──
   if (esAdmin) {
     return (
       <button
@@ -164,9 +177,9 @@ export default function VideoLeccion({ video, esAdmin, onGuardar, onBorrar }) {
           ➕
         </span>
         <span className="min-w-0 text-xs leading-relaxed text-navy/70">
-          <b className="text-navy/85">{t('video.anadir')}</b>
+          <b className="text-navy/85">Añadir Vídeo o Cuaderno NotebookLM</b>
           <br />
-          {t('video.anadirSub')}
+          Pega el enlace de tu NotebookLM, Google Vids, Drive o YouTube para esta lección.
         </span>
       </button>
     )

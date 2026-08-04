@@ -1,133 +1,99 @@
-// Traducción al inglés de la estructura del curso: títulos de bloque y de
-// módulo, modalidades y tipos de evaluación. Las horas e indicadores MSA no se
-// traducen. Se aplica sobre curriculum.js mediante traducirBloques().
-
+// Traducción al inglés de la estructura del curso
 export const BLOQUES_EN = {
-  B1: 'Institutional Foundations',
-  B2: 'Academic Supervision',
-  B3: 'Supporting the Student and Family',
-  B4: 'Child Protection and Well-Being',
-  B5: 'Technology and Tools',
-  B6: 'Supervised Practice + Final Project',
-  B7: 'Governance and Site Operations',
-  B8: 'Leadership and Mentor Supervision',
-  B9: 'Quality and Continuous Improvement',
-  B10: 'Coordination Practice + Final Project',
+  B1: 'Mastery Learner Philosophy (A.C.E., Lifepac, CLE)',
+  B2: 'Project-Based Learning, Life Skills and Early Childhood Education',
+  B3: 'Online Safety and Student Cybersecurity Protocols',
+  B4: 'Remote Leadership, Mentoring, Dual Diploma and LMS',
+  B5: 'Supervised Practice + Integrative Project',
+  B6: 'Child and Adolescent Psychology',
+  B7: 'Educational Project Management, EducaFe Hubs and Partnerships',
 }
 
 export const MODULOS_EN = {
-  '1.1': 'Chanak’s Mission, Vision and Values',
-  '1.2': 'Biblical worldview applied to education',
-  '1.3': 'Portrait of a Learner and Portrait of an Educator',
-  '1.4': 'The Chanak Growth System and the 60/20/20 framework',
-  '1.5': 'Code of conduct and professional ethics',
-  '2.1': 'Mastery Learning: theory and practical application (Bloom, Carroll)',
-  '2.2': 'The 4 material tracks (A.C.E., LIFEPAC, CLE, Flex): structure and use',
-  '2.3': 'Diagnosis, placement and the ILP (Individualized Learning Plan)',
-  '2.4': 'Daily Goal Tracker, Review Station and Mastery Assessment',
-  '2.5': 'Formative and summative assessment: report cards and records',
-  '3.1': 'Differentiation and academic intervention: what to do when a student stalls',
-  '3.2': 'Communicating with families: reports, meetings, guidance',
-  '3.3': 'Opening Exercises: devotional, character and learning community',
-  '3.4': 'Life Skills & Leadership: Seedling → Launch and ChanakCoins',
-  '4.1': 'Chanak’s Child Protection and Safeguarding Policy',
-  '4.2': 'Certified external course: Minimum Standards for Child Protection (Alliance/CPMS or equivalent)',
-  '4.3': 'Reporting protocol (6 steps), the role of the DSL, whistleblowing',
-  '4.4': 'Emotional well-being and a safe environment in distance education',
-  '5.1': 'Chanak SIS: navigation, grade entry, ILP, report cards, contracts',
-  '5.2': 'LMS Portal: structure, material tracks, family resources',
-  '5.3': 'Google Workspace, NotebookLM and communication tools',
-  '6.1': 'Practice observation: accompanying 2 weeks of real learning',
-  '6.2': 'Integrative project: evidence portfolio for one student (anonymized)',
-  '6.3': 'Final assessment and feedback with the Head of LSP',
-  '7.1': 'LSP structure: central office vs. Learning Implementation Site',
-  '7.2': 'Operational policies: admissions, enrollment, contracts, payments',
-  '7.3': 'Local compliance: host-country regulation, insurance, occupancy',
-  '7.4': 'Working with churches and partners: the Shared Rental model',
-  '8.1': 'Academic supervision: how to observe, evaluate and give feedback to a mentor',
-  '8.2': 'Planning and coordinating the local team',
-  '8.3': 'Managing conflict, complaints and family communication',
-  '8.4': 'Continuous professional development: building a culture of improvement',
-  '9.1': 'Quality assurance: program review, surveys, the PDCA cycle',
-  '9.2': 'Academic data analysis: interpreting SIS results to improve',
-  '9.3': 'Institutional self-assessment: preparing a site mini Self-Study',
-  '10.1': 'Practice: coordinating a site’s operations for 4 weeks',
-  '10.2': 'Final project: Opening Plan for a Learning Implementation Site',
-  '10.3': 'Final assessment and certification with the Head of LSP + Board',
+  '1.1': 'Mastery Learning: theory and practical application (Bloom, Carroll)',
+  '1.2': 'A.C.E. Supervisor Training & Self-Instructional Methodology',
+  '1.3': 'The 4 material tracks (A.C.E., LIFEPAC, CLE, Flex): structure and use',
+  '1.4': 'Daily Goal Tracker, Review Station and Mastery Assessment',
+  '1.5': 'Mission, Vision and Biblical Worldview in Chanak Growth System (60/20/20)',
+  '2.1': 'Project-Based Learning (PBL) for local curriculum alignment',
+  '2.2': 'Life Skills & Leadership: Seedling → Launch and ChanakCoins',
+  '2.3': 'Early Childhood Education and English Learners (English App, ABC Learners)',
+  '3.1': 'Chanak’s Child Protection and Safeguarding Policy',
+  '3.2': 'Certified external course: Minimum Standards for Child Protection',
+  '3.3': 'Student cybersecurity, data privacy and online protection',
+  '3.4': 'Reporting protocol (6 steps), DSL role and whistleblowing',
+  '4.1': 'Diagnosis, placement and ILP (Individualized Learning Plan)',
+  '4.2': 'Dual Diploma Program: structure, Family LMS and academic tracking',
+  '4.3': 'Differentiation and remote academic intervention: progress strategies',
+  '4.4': 'Remote leadership, Chanak SIS and effective communication with families',
+  '5.1': 'Practice observation: accompanying 2 weeks of real learning',
+  '5.2': 'Integrative project: evidence portfolio for one student (anonymized)',
+  '5.3': 'Final assessment and feedback with Head of LSP',
+  '6.1': 'Cognitive development and developmental stages (Piaget, Vygotsky)',
+  '6.2': 'Emotional psychology and neurodiversity in the classroom',
+  '6.3': 'Behavior, motivation and crisis management in adolescence',
+  '6.4': 'Psychopedagogical guidance and family-school relationship',
+  '7.1': 'Requirements and preparation for launching an EducaFe-Chanak Hub',
+  '7.2': 'How to present proposals to Churches, Deacons and Regional Partners',
+  '7.3': 'How to start and manage a Hub study group (Track A and Track B)',
+  '7.4': 'Mentor Supervision, Financial Administration, Grants and Sustainability',
 }
 
-// Modalidades y evaluaciones se repiten mucho: se traducen por diccionario.
 export const MODALIDAD_EN = {
   'NotebookLM + lectura': 'NotebookLM + reading',
   'NotebookLM + reflexión': 'NotebookLM + reflection',
   'Lectura + discusión': 'Reading + discussion',
   'NotebookLM + vídeo': 'NotebookLM + video',
-  'Lectura + firma': 'Reading + signature',
-  'NotebookLM + taller': 'NotebookLM + workshop',
+  'A.C.E. Training + Portal': 'A.C.E. Training + Portal',
   'Lectura + portal': 'Reading + portal',
-  'Taller práctico': 'Hands-on workshop',
   'Portal + SIS demo': 'Portal + SIS demo',
-  'SIS demo + taller': 'SIS demo + workshop',
-  'Caso + taller': 'Case study + workshop',
-  'Role-play + plantillas': 'Role-play + templates',
-  'Observación + práctica': 'Observation + practice',
+  'Taller + diseño de proyecto': 'Workshop + project design',
   'Portal + guía': 'Portal + guide',
-  'Lectura + caso': 'Reading + case study',
+  'Taller + App de Inglés': 'Workshop + English App',
   'Online externo': 'External online course',
   'Taller + simulación': 'Workshop + simulation',
-  'SIS demo práctico': 'Hands-on SIS demo',
-  'Portal práctico': 'Hands-on portal',
+  'Taller práctico': 'Hands-on workshop',
+  'Portal Dual Diploma + taller': 'Dual Diploma Portal + workshop',
+  'Caso + taller': 'Case study + workshop',
+  'SIS demo + plantillas': 'SIS demo + templates',
   'Práctica supervisada': 'Supervised practice',
   'Proyecto individual': 'Individual project',
   'Reunión + rúbrica': 'Meeting + rubric',
-  'Taller + SIS': 'Workshop + SIS',
-  'Lectura + checklist': 'Reading + checklist',
-  'Caso + plantillas': 'Case study + templates',
-  'Taller + rúbrica': 'Workshop + rubric',
-  'Role-play': 'Role-play',
-  'Lectura + reflexión': 'Reading + reflection',
-  'Lectura + taller': 'Reading + workshop',
-  'SIS + taller': 'SIS + workshop',
-  'Taller guiado': 'Guided workshop',
-  'Presentación + rúbrica': 'Presentation + rubric',
+  'NotebookLM + caso': 'NotebookLM + case study',
+  'Lectura + análisis': 'Reading + analysis',
+  'Taller + casos': 'Workshop + case studies',
+  'Role-play + orientación': 'Role-play + guidance',
+  'Lectura + portal EducaFe': 'Reading + EducaFe portal',
+  'Presentación + plantillas': 'Presentation + templates',
+  'Taller práctico de Hubs': 'Hands-on Hubs workshop',
+  'Caso práctico + presupuesto': 'Case study + budget',
 }
 
 export const EVALUACION_EN = {
   Quiz: 'Quiz',
-  Ensayo: 'Essay',
-  'Quiz + caso': 'Quiz + case study',
-  Firma: 'Signature',
   'Caso práctico': 'Case study',
-  'PEI simulado': 'Simulated ILP',
+  'Quiz + Certificación A.C.E.': 'Quiz + A.C.E. Certification',
   Simulación: 'Simulation',
-  'Boletín demo': 'Demo report card',
-  'Log de intervención': 'Intervention log',
-  Planificación: 'Lesson plan',
+  'Quiz + caso': 'Quiz + case study',
+  'Proyecto PBL': 'PBL Project',
   'Proyecto LS': 'Life Skills project',
+  'Simulación de clase': 'Class simulation',
   'Quiz + protocolo': 'Quiz + protocol',
   Certificado: 'Certificate',
+  'Quiz de Ciberseguridad': 'Cybersecurity Quiz',
   Simulacro: 'Drill',
-  Reflexión: 'Reflection',
-  'Tarea en SIS': 'SIS assignment',
-  'Navegación guiada': 'Guided navigation',
-  Tarea: 'Assignment',
+  'PEI simulado': 'Simulated ILP',
+  'Caso Dual Diploma': 'Dual Diploma case study',
+  'Log de intervención': 'Intervention log',
   'Diario de observación': 'Observation journal',
   Portafolio: 'Portfolio',
   'Rúbrica final': 'Final rubric',
-  'Plan de sede': 'Site plan',
-  Checklist: 'Checklist',
-  'Observación simulada': 'Simulated observation',
-  'Plan semanal': 'Weekly plan',
-  'Plan de DPC': 'CPD plan',
-  'Plan QA': 'QA plan',
-  Informe: 'Report',
-  Borrador: 'Draft',
-  'Diario + informe': 'Journal + report',
-  'Plan completo': 'Full plan',
-  Rúbrica: 'Rubric',
+  'Checklist de Apertura de Hub': 'Hub Opening Checklist',
+  'Propuesta a Iglesia': 'Church Proposal',
+  'Plan de Grupo Hub A/B': 'Hub Group Plan A/B',
+  'Presupuesto y Memoria Social': 'Budget and Social Report',
 }
 
-// Devuelve los bloques con los textos traducidos si idioma === 'en'.
 export function traducirBloques(bloques, idioma) {
   if (idioma !== 'en') return bloques
   return bloques.map((b) => ({
@@ -153,42 +119,8 @@ export function traducirModulo(modulo, idioma) {
   }
 }
 
-export const RECURSOS_EN = {
-  'SIS Chanak — Entorno de práctica': {
-    nombre: 'Chanak SIS — Practice environment',
-    descripcion:
-      'Official academic system. Practice with the demo accounts, never with real student data.',
-    aviso:
-      'Shared accounts for training only. Do not enter real student or family data.',
-  },
-  'NotebookLM — Cuadernos de formación Chanak': {
-    nombre: 'NotebookLM — Chanak training notebooks',
-    descripcion: 'Notebooks with the institutional documents (cover part of Units 1 and 2).',
-  },
-  'Carpeta de Drive — Documentos de formación': {
-    nombre: 'Drive folder — Training documents',
-    descripcion: 'Handbook, policies, DPL and reading materials.',
-  },
-  'Portal LMS Chanak': {
-    nombre: 'Chanak LMS Portal',
-    descripcion: 'Material track structure and resources for families.',
-  },
-  'Web institucional': {
-    nombre: 'Institutional website',
-    descripcion: 'Mission, vision, programs and FLDOE registration #134620.',
-  },
-}
+export const RECURSOS_EN = {}
 
 export function traducirRecursos(recursos, idioma) {
-  if (idioma !== 'en') return recursos
-  return recursos.map((r) => {
-    const tr = RECURSOS_EN[r.nombre]
-    if (!tr) return r
-    return {
-      ...r,
-      nombre: tr.nombre,
-      descripcion: tr.descripcion,
-      demo: r.demo ? { ...r.demo, aviso: tr.aviso || r.demo.aviso } : undefined,
-    }
-  })
+  return recursos
 }

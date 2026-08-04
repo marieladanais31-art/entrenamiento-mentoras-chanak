@@ -82,21 +82,23 @@ export function iniciales(nombre = '') {
     .join('')
 }
 
-// Convierte un enlace de Google Vids / Drive / YouTube en URL incrustable.
-// Devuelve null si no reconoce el formato (entonces se ofrece abrir en pestaña).
+// Convierte un enlace de Google Vids / Drive / YouTube / NotebookLM en objeto ejecutable.
 export function urlEmbed(url = '') {
   const u = url.trim()
   if (!u) return null
+  if (u.includes('notebooklm.google.com') || u.includes('notebooklm')) {
+    return { tipo: 'notebooklm', url: u }
+  }
   // Google Vids y Google Drive: .../d/<id>/edit|view|preview
   const google = u.match(/(?:vids\.google\.com|docs\.google\.com\/videos|drive\.google\.com)\/.*?\/d\/([\w-]+)/)
   if (google) {
     const host = u.includes('drive.google.com') ? 'drive.google.com/file' : 'docs.google.com/videos'
-    return `https://${host}/d/${google[1]}/preview`
+    return { tipo: 'embed', url: `https://${host}/d/${google[1]}/preview` }
   }
   // YouTube
   const yt = u.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([\w-]{11})/)
-  if (yt) return `https://www.youtube.com/embed/${yt[1]}`
+  if (yt) return { tipo: 'embed', url: `https://www.youtube.com/embed/${yt[1]}` }
   // Ya es un embed
-  if (/\/(embed|preview)(\?|$|\/)/.test(u)) return u
-  return null
+  if (/\/(embed|preview)(\?|$|\/)/.test(u)) return { tipo: 'embed', url: u }
+  return { tipo: 'link', url: u }
 }

@@ -173,3 +173,56 @@ create policy "admin: gestionar todo el progreso" on public.progreso
 --
 -- Sin este paso nadie podrá aprobar usuarias ni gestionar vídeos.
 -- ============================================================
+
+-- ─────────────────────────────────────────────
+-- 5. CÓDIGOS DE ACCESO Y TIPOS DE ACCESO
+-- ─────────────────────────────────────────────
+ALTER TABLE public.perfiles ADD COLUMN IF NOT EXISTS tipo_acceso text NOT NULL DEFAULT 'mentora' CHECK (tipo_acceso IN ('visionaria', 'mentora', 'coordinadora'));
+
+CREATE TABLE IF NOT EXISTS public.codigos_acceso (
+  id          bigserial primary key,
+  codigo      text unique not null,
+  tipo_acceso text not null CHECK (tipo_acceso IN ('visionaria', 'mentora', 'coordinadora')),
+  usos_max    integer not null default 1,
+  usos        integer not null default 0,
+  activo      boolean not null default true,
+  creado_por  uuid references auth.users on delete set null,
+  creado_en   timestamptz not null default now(),
+  expira_en   timestamptz
+);
+
+COMMENT ON TABLE public.codigos_acceso IS 'Códigos de acceso para registro de mentoras. Admin los crea, la usuaria los introduce al registrarse.';
+
+-- Grant access
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.codigos_acceso TO authenticated;
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO authenticated;
+
+-- RLS
+ALTER TABLE public.codigos_acceso ENABLE ROW LEVEL SECURITY;
+
+-- Anyone can check if a code is valid (needed during registration)
+DROP POLICY IF EXISTS "leer codigos activos" ON public.codigos_acceso;
+CREATE POLICY "leer codigos activos" ON public.codigos_acceso
+  FOR SELECT USING (true);
+
+-- Only admin can create/modify codes
+DROP POLICY IF EXISTS "admin: gestionar codigos" ON public.codigos_acceso;
+CREATE POLICY "admin: gestionar codigos" ON public.codigos_acceso
+  FOR ALL USING (public.es_admin()) WITH CHECK (public.es_admin());
+
+-- Actualizar el trigger de nuevo usuario para aceptar tipo_acceso
+CREATE OR REPLACE FUNCTION public.crear_perfil_nuevo_usuario()
+RETURNS trigger
+LANGUAGE plpgsql
+SECURITY DEFINER SET search_path = public
+AS $$
+BEGIN
+  INSERT INTO public.perfiles (id, nombre, tipo_acceso)
+  VALUES (
+    new.id,
+    coalesce(new.raw_user_meta_data->>'nombre', split_part(new.email, '@', 1)),
+    coalesce(new.raw_user_meta_data->>'tipo_acceso', 'mentora')
+  );
+  RETURN new;
+END;
+$$;
