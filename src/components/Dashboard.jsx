@@ -21,6 +21,7 @@ export default function Dashboard({
   const bloques = traducirBloques(BLOQUES, idioma)
   const bloquesNivel1 = bloques.filter((b) => b.nivel === 1)
   const bloquesNivel2 = bloques.filter((b) => b.nivel === 2)
+  const bloquesNivel3 = bloques.filter((b) => b.nivel === 3)
   const nivel2Desbloqueado = r.nivel1Completo
 
   return (
@@ -32,7 +33,11 @@ export default function Dashboard({
           <div className="flex-1 text-center sm:text-left">
             <h2 className="text-xl font-bold text-navy">{mentora.nombre}</h2>
             <p className="text-sm text-navy/60">
-              {r.nivelActual === 2 ? t('panel.nivel2') : t('panel.nivel1')}
+              {r.nivelActual === 3
+                ? t('panel.nivel3')
+                : r.nivelActual === 2
+                ? t('panel.nivel2')
+                : t('panel.nivel1')}
               {viendoOtra && t('panel.vistaAdmin')}
             </p>
             <div className="mt-3 grid grid-cols-3 gap-2 text-center">
@@ -66,7 +71,7 @@ export default function Dashboard({
 
         <button
           onClick={onVerEducafe}
-          className="flex w-full items-center gap-3 rounded-2xl border-2 border-amber-400/40 bg-gradient-to-r from-amber-500/10 to-amber-600/10 px-4 py-3.5 text-left transition hover:bg-amber-500/20"
+          className="flex w-full items-center gap-3 rounded-2xl border-2 border-amber-600/25 bg-amber-50 px-4 py-3.5 text-left transition hover:bg-amber-100/60"
         >
           <span className="text-xl" aria-hidden>
             ☕️
@@ -142,6 +147,25 @@ export default function Dashboard({
               estado={nivel2Desbloqueado ? estadoBloque(progreso, b) : 'bloqueado'}
               horasHechas={horasBloqueCompletadas(progreso, b)}
               onClick={nivel2Desbloqueado || esAdmin ? () => onAbrirBloque(b.id) : undefined}
+            />
+          ))}
+        </div>
+      </section>
+
+      {/* Bloques Nivel 3 */}
+      <section>
+        <TituloSeccion
+          titulo={t('panel.tituloN3')}
+          subtitulo={t('panel.subN3')}
+        />
+        <div className="grid gap-3 sm:grid-cols-2">
+          {bloquesNivel3.map((b) => (
+            <TarjetaBloque
+              key={b.id}
+              bloque={b}
+              estado={estadoBloque(progreso, b)}
+              horasHechas={horasBloqueCompletadas(progreso, b)}
+              onClick={() => onAbrirBloque(b.id)}
             />
           ))}
         </div>

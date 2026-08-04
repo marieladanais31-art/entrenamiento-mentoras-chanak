@@ -1,14 +1,14 @@
 // ============================================================
 // CHANAK INTERNATIONAL ACADEMY & PORTAL EDUCAFE
-// Pathway de Formación de Mentoras, Coordinadoras y Visionarias
-// Nivel 1 → Mentora Off Campus y Dual Diploma (180h)
-// Nivel 2 → Coordinadora Certificada (300h acumuladas)
-// Nivel 3 → Socia Visionaria & Gobernanza EducaFe (Autoestudio)
+// Pathway Oficial de 3 Niveles y 3 Certificaciones
+// Nivel 1 → Mentora Off Campus & Dual Diploma (180h) · Bloques 1-5
+// Nivel 2 → Coordinadora Certificada: Gestión de Centro Chanak (300h) · Bloques 6-7
+// Nivel 3 → Socia Visionaria: Proyectos & Red EducaFe (80h) · Bloque 8
 // ============================================================
 
 export const NIVEL_1_HORAS = 180
 export const NIVEL_2_HORAS = 300 // acumuladas (180 + 120 adicionales)
-export const NIVEL_3_HORAS = 45  // autoestudio protegido
+export const NIVEL_3_HORAS = 80  // Proyectos EducaFe
 
 // Leyenda de estándares MSA NGA
 export const MSA_LEYENDA = {
@@ -64,9 +64,9 @@ export const RECURSOS_GENERALES = [
   },
 ]
 
-// Estructura oficial de bloques y módulos
+// Estructura oficial de 8 bloques divididos en los 3 niveles
 export const BLOQUES = [
-  // ─────────────── NIVEL 1 — Mentora Off Campus y Dual Diploma (180h) ───────────────
+  // ─────────────── NIVEL 1 — Mentora Off Campus & Dual Diploma (180h) ───────────────
   {
     id: 'B1',
     nivel: 1,
@@ -121,7 +121,7 @@ export const BLOQUES = [
     id: 'B2',
     nivel: 1,
     numero: 2,
-    titulo: 'Project-Based Learning, Life Skills y Educación Inicial',
+    titulo: 'Project-Based Learning, Extensión Local y Life Skills',
     horas: 30,
     modulos: [
       {
@@ -142,11 +142,11 @@ export const BLOQUES = [
       },
       {
         id: '2.3',
-        titulo: 'Educación Inicial y English Learners (App de Inglés, ABC Learners)',
+        titulo: 'Apertura del Día: devocional, carácter y comunidad de aprendizaje',
         horas: 10,
-        modalidad: 'Taller + App de Inglés',
-        evaluacion: 'Simulación de clase',
-        indicadores: ['T1c', 'T2a', 'F1e'],
+        modalidad: 'Observación + práctica',
+        evaluacion: 'Planificación',
+        indicadores: ['F1e', 'W1', 'W2', 'T2h'],
       },
     ],
   },
@@ -195,27 +195,19 @@ export const BLOQUES = [
     id: 'B4',
     nivel: 1,
     numero: 4,
-    titulo: 'Remote Leadership, Mentoring, Dual Diploma y LMS',
+    titulo: 'Remote Leadership, Mentoring and Academic Intervention Framework',
     horas: 30,
     modulos: [
       {
         id: '4.1',
         titulo: 'Diagnóstico, ubicación y PEI (Plan Educativo Individualizado)',
-        horas: 6,
+        horas: 8,
         modalidad: 'Taller práctico',
         evaluacion: 'PEI simulado',
         indicadores: ['T1c', 'T1r', 'T4b', 'T4g'],
       },
       {
         id: '4.2',
-        titulo: 'Programa Dual Diploma: estructura, LMS de Familias y seguimiento académico',
-        horas: 8,
-        modalidad: 'Portal Dual Diploma + taller',
-        evaluacion: 'Caso Dual Diploma',
-        indicadores: ['T1d', 'T2e', 'R2'],
-      },
-      {
-        id: '4.3',
         titulo: 'Diferenciación e intervención académica remota: estrategias de avance',
         horas: 8,
         modalidad: 'Caso + taller',
@@ -223,12 +215,20 @@ export const BLOQUES = [
         indicadores: ['T1c', 'T1s', 'T4e', 'T4h'],
       },
       {
-        id: '4.4',
-        titulo: 'Liderazgo remoto, SIS Chanak y comunicación eficaz con familias',
+        id: '4.3',
+        titulo: 'Liderazgo remoto y comunicación eficaz con familias',
         horas: 8,
-        modalidad: 'SIS demo + plantillas',
+        modalidad: 'Role-play + plantillas',
         evaluacion: 'Simulación',
-        indicadores: ['F2d', 'T4f', 'R2', 'W4'],
+        indicadores: ['F2d', 'T4f', 'T4j', 'W4'],
+      },
+      {
+        id: '4.4',
+        titulo: 'SIS Chanak & Google Workspace: registro de notas, boletines y herramientas',
+        horas: 6,
+        modalidad: 'SIS demo práctico',
+        evaluacion: 'Tarea en SIS',
+        indicadores: ['R2', 'R3', 'T3m'],
       },
     ],
   },
@@ -249,7 +249,7 @@ export const BLOQUES = [
       },
       {
         id: '5.2',
-        titulo: 'Proyecto integrador: portafolio de evidencias de un alumno (anonimizado)',
+        titulo: 'Proyecto integrador: portafolio de evidencias de un alumno',
         horas: 15,
         modalidad: 'Proyecto individual',
         evaluacion: 'Portafolio',
@@ -266,7 +266,7 @@ export const BLOQUES = [
     ],
   },
 
-  // ─────────── NIVEL 2 — Coordinadora Certificada (+120h = 300h) ───────────
+  // ─────────── NIVEL 2 — Coordinadora Certificada: Centro Educativo Chanak (300h) ───────────
   {
     id: 'B6',
     nivel: 2,
@@ -312,40 +312,83 @@ export const BLOQUES = [
     id: 'B7',
     nivel: 2,
     numero: 7,
-    titulo: 'Gestión de Proyectos Educativos, Hubs EducaFe y Alianzas',
+    titulo: 'Gobernanza y Operación de Centro Educativo Chanak',
     horas: 80,
     modulos: [
       {
         id: '7.1',
-        titulo: 'Requisitos y preparación para abrir un Hub EducaFe-Chanak',
+        titulo: 'Estructura del LSP: Oficina Central vs. Learning Implementation Site',
         horas: 20,
-        modalidad: 'Lectura + portal EducaFe',
-        evaluacion: 'Checklist de Apertura de Hub',
+        modalidad: 'Lectura + manual Chanak',
+        evaluacion: 'Plan operativo de Centro',
         indicadores: ['G1', 'G2', 'G14'],
       },
       {
         id: '7.2',
-        titulo: 'Cómo presentar propuestas a Iglesias, Diaconado y Alianzas Territoriales',
+        titulo: 'Políticas Operativas: Admisiones, Matrícula, Contratos y SIS',
+        horas: 20,
+        modalidad: 'Taller + SIS Chanak',
+        evaluacion: 'Simulación de admisión',
+        indicadores: ['G5', 'G8', 'R1'],
+      },
+      {
+        id: '7.3',
+        titulo: 'Supervisión Académica de Mentoras y Calidad Institucional',
+        horas: 20,
+        modalidad: 'Taller + rúbricas',
+        evaluacion: 'Observación simulada',
+        indicadores: ['T5a', 'T5b', 'G15'],
+      },
+      {
+        id: '7.4',
+        titulo: 'Cumplimiento Normativo Local, Registro FLDOE y Código de Ética',
+        horas: 20,
+        modalidad: 'Lectura + checklist',
+        evaluacion: 'Checklist normativo',
+        indicadores: ['G14', 'R1j', 'G5'],
+      },
+    ],
+  },
+
+  // ─────────── NIVEL 3 — Socia Visionaria: Proyectos Educativos & Red EducaFe ───────────
+  {
+    id: 'B8',
+    nivel: 3,
+    numero: 8,
+    titulo: 'Gestión de Proyectos Educativos y Red EducaFe',
+    horas: 80,
+    modulos: [
+      {
+        id: '8.1',
+        titulo: 'Operaciones y Gobernanza de Hubs EducaFe-Chanak',
+        horas: 20,
+        modalidad: 'Lectura + portal EducaFe',
+        evaluacion: 'Plan operativo de Hub',
+        indicadores: ['G1', 'G2', 'G14'],
+      },
+      {
+        id: '8.2',
+        titulo: 'Presentación de Propuestas a Iglesias, Diaconados y Alianzas',
         horas: 20,
         modalidad: 'Presentación + plantillas',
         evaluacion: 'Propuesta a Iglesia',
         indicadores: ['G14', 'G16', 'F2d'],
       },
       {
-        id: '7.3',
-        titulo: 'Cómo iniciar y gestionar un grupo en Hub (Modalidad A y Modalidad B)',
-        horas: 20,
-        modalidad: 'Taller práctico de Hubs',
-        evaluacion: 'Plan de Grupo Hub A/B',
-        indicadores: ['G3', 'R1', 'T5a'],
-      },
-      {
-        id: '7.4',
-        titulo: 'Supervisión de Mentoras, Administración Financiera, Grants y Sostenibilidad',
+        id: '8.3',
+        titulo: 'Administración Financiera de Hub, Grants, Becas y Sostenibilidad',
         horas: 20,
         modalidad: 'Caso práctico + presupuesto',
         evaluacion: 'Presupuesto y Memoria Social',
-        indicadores: ['R1', 'G8', 'T5b'],
+        indicadores: ['R1', 'G8'],
+      },
+      {
+        id: '8.4',
+        titulo: 'Relaciones Institucionales, Tercer Sector y Convenios Territoriales',
+        horas: 20,
+        modalidad: 'Proyecto + convenio',
+        evaluacion: 'Convenio demo',
+        indicadores: ['G14', 'G16'],
       },
     ],
   },
