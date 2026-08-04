@@ -14,20 +14,21 @@ export default function Certificado({ mentora, progreso, nivel, onVolver }) {
 
   return (
     <div className="space-y-4">
-      <div className="no-print flex flex-wrap items-center justify-between gap-2">
-        <button onClick={onVolver} className="text-sm font-medium text-teal hover:underline">
-          {t('bloque.volverPanel')}
+      <div className="no-print flex flex-wrap items-center justify-between gap-2 rounded-2xl bg-white p-4 shadow-sm">
+        <button onClick={onVolver} className="text-sm font-semibold text-teal hover:underline flex items-center gap-1">
+          ← {t('bloque.volverPanel')}
         </button>
         <button
           onClick={() => window.print()}
-          className="rounded-lg bg-navy px-4 py-2 text-xs font-semibold text-cream hover:bg-navy/90"
+          className="flex items-center gap-2 rounded-xl bg-gold px-5 py-2.5 text-xs font-bold text-navy shadow-sm transition hover:bg-gold/90"
         >
-          {t('horas.imprimir')}
+          <span>📥</span>
+          <span>Descargar Certificado (PDF / Imprimir)</span>
         </button>
       </div>
 
       <p className="no-print rounded-xl bg-gold/10 px-4 py-3 text-xs leading-relaxed text-navy/70">
-        {t('cert.consejo')}
+        💡 {t('cert.consejo')} (En el diálogo de impresión del navegador, selecciona <b>"Guardar como PDF"</b> y la orientación <b>Horizontal / Landscape</b>).
       </p>
 
       {/* ── Certificado ── */}

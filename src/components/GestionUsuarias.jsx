@@ -87,9 +87,42 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar }) {
       {/* Formulario de creación de usuaria directa */}
       {mostrandoForm && (
         <form onSubmit={handleCrear} className="rounded-2xl border-2 border-teal/30 bg-white p-5 shadow-md space-y-3">
-          <h4 className="font-bold text-navy text-sm border-b border-slate-100 pb-2">
-            👤 Registrar y Activar Nueva Usuaria
-          </h4>
+          <div className="flex items-center justify-between border-b border-slate-100 pb-2">
+            <h4 className="font-bold text-navy text-sm">
+              👤 Registrar y Activar Nueva Usuaria
+            </h4>
+            <span className="text-[11px] font-semibold text-teal uppercase tracking-wide">
+              Acceso Directo Sin Aprobación Manual
+            </span>
+          </div>
+
+          {/* Presets de 1 Clic */}
+          <div className="rounded-xl bg-amber-500/10 p-3 text-xs border border-amber-400/30">
+            <p className="font-bold text-navy mb-1.5">⚡️ Rellenar rápido para usuarias pendientes:</p>
+            <div className="flex flex-wrap gap-1.5">
+              {[
+                { name: 'Thiare Urzua', email: 'thiare@chanakacademy.org', pass: 'Chanak2026!', type: 'coordinadora' },
+                { name: 'Dayana', email: 'dayana@chanakacademy.org', pass: 'Chanak2026!', type: 'mentora' },
+                { name: 'Medalith', email: 'medalith@chanakacademy.org', pass: 'Chanak2026!', type: 'mentora' },
+                { name: 'Mary Claudia', email: 'maryclaudia@chanakacademy.org', pass: 'Chanak2026!', type: 'visionaria' },
+              ].map((p) => (
+                <button
+                  key={p.email}
+                  type="button"
+                  onClick={() => {
+                    setNombre(p.name)
+                    setEmail(p.email)
+                    setPassword(p.pass)
+                    setTipoAcceso(p.type)
+                  }}
+                  className="rounded-lg bg-white px-2.5 py-1 text-xs font-semibold text-navy shadow-sm border border-navy/15 hover:bg-amber-100 transition"
+                >
+                  ➕ {p.name}
+                </button>
+              ))}
+            </div>
+          </div>
+
           <div className="grid gap-3 sm:grid-cols-2">
             <label className="block">
               <span className="text-[12px] font-semibold uppercase tracking-wide text-navy/55">

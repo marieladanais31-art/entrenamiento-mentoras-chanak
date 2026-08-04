@@ -9,6 +9,7 @@ import HoursLog from './components/HoursLog'
 import Certificado from './components/Certificado'
 import AdminView from './components/AdminView'
 import EducaFeView from './components/EducaFeView'
+import ModalPasswordEducaFe from './components/ModalPasswordEducaFe'
 import Header from './components/ui/Header'
 import * as api from './lib/backend'
 import { useIdioma } from './i18n/idioma'
@@ -19,6 +20,7 @@ export default function App() {
   const [sesion, setSesion] = useState(null) // sesión de Supabase
   const [perfil, setPerfil] = useState(null) // { id, nombre, rol, estado }
   const [vista, setVista] = useState({ nombre: 'dashboard' })
+  const [mostrandoModalEducaFe, setMostrandoModalEducaFe] = useState(false)
 
   // Datos de la usuaria que se está viendo (una mentora ve solo los suyos)
   const [progreso, setProgreso] = useState({ modulos: {} })
@@ -119,7 +121,7 @@ export default function App() {
         <div className="text-center text-cream/70">
           <img
             src="/logo-chanak.png"
-            alt=""
+            alt="Chanak International Academy"
             className="mx-auto mb-4 h-16 w-16 animate-pulse rounded-xl bg-white/95 p-1.5"
           />
           <p className="text-sm">{t('gen.cargando')}</p>
@@ -162,8 +164,20 @@ export default function App() {
         esAdmin={esAdmin}
         vista={vista}
         onNavegar={setVista}
+        onAbrirEducafe={() => setMostrandoModalEducaFe(true)}
         onSalir={() => api.salir()}
       />
+
+      {mostrandoModalEducaFe && (
+        <ModalPasswordEducaFe
+          emailUsuario={sesion.user?.email}
+          onConfirmar={() => {
+            setMostrandoModalEducaFe(false)
+            setVista({ ...vista, nombre: 'educafe' })
+          }}
+          onCancelar={() => setMostrandoModalEducaFe(false)}
+        />
+      )}
 
       {viendoOtra && (
         <div className="no-print bg-gold/20 px-4 py-2 text-center text-xs font-medium text-navy">
@@ -194,7 +208,7 @@ export default function App() {
             onVerHoras={() => setVista({ ...vista, nombre: 'horas' })}
             onVerCurso={() => setVista({ ...vista, nombre: 'curso' })}
             onVerCertificado={(nivel) => setVista({ ...vista, nombre: 'certificado', nivel })}
-            onVerEducafe={() => setVista({ ...vista, nombre: 'educafe' })}
+            onVerEducafe={() => setMostrandoModalEducaFe(true)}
           />
         )}
         {vista.nombre === 'educafe' && (
