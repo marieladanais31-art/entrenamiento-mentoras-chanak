@@ -222,7 +222,7 @@ function TituloSeccion({ titulo, subtitulo }) {
 
 function TarjetaBloque({ bloque, estado, horasHechas, onClick }) {
   const { t } = useIdioma()
-  const pct = Math.round((horasHechas / bloque.horas) * 100)
+  const pct = bloque.horas > 0 ? Math.round((horasHechas / bloque.horas) * 100) : 0
   const bloqueado = estado === 'bloqueado'
   return (
     <button
@@ -242,15 +242,17 @@ function TarjetaBloque({ bloque, estado, horasHechas, onClick }) {
       <div className="mt-2 flex items-center justify-between text-xs text-navy/55">
         <span>{t('panel.modulos', { n: bloque.modulos.length })}</span>
         <span>
-          {horasHechas}/{bloque.horas}h
+          {bloque.horas > 0 ? `${horasHechas}/${bloque.horas}h` : 'Autoestudio Libre'}
         </span>
       </div>
-      <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-navy/10">
-        <div
-          className={`h-full rounded-full ${pct >= 100 ? 'bg-gold' : 'bg-teal'}`}
-          style={{ width: `${pct}%` }}
-        />
-      </div>
+      {bloque.horas > 0 && (
+        <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-navy/10">
+          <div
+            className={`h-full rounded-full ${pct >= 100 ? 'bg-gold' : 'bg-teal'}`}
+            style={{ width: `${pct}%` }}
+          />
+        </div>
+      )}
     </button>
   )
 }

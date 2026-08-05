@@ -350,34 +350,35 @@ export const BLOQUES = [
     ],
   },
 
-  // ─────────── NIVEL 3 — Socia Visionaria: Proyectos Educativos & Red EducaFe ───────────
+  // ─────────── NIVEL 3 — Socia Visionaria: Proyectos Educativos & Red EducaFe (Autoestudio Libre) ───────────
   {
     id: 'B8',
     nivel: 3,
     numero: 8,
     titulo: 'Gestión de Proyectos Educativos y Red EducaFe',
-    horas: 80,
+    horas: 0,
+    modoHoras: 'Autoestudio de Gobernanza',
     modulos: [
       {
         id: '8.1',
         titulo: 'Operaciones y Gobernanza de Hubs EducaFe-Chanak (Modalidades A y B)',
-        horas: 20,
-        modalidad: 'Lectura + cuaderno EducaFe',
+        horas: 0,
+        modalidad: 'Autoestudio + cuaderno EducaFe',
         evaluacion: 'Plan operativo de Hub',
         indicadores: ['G1', 'G2', 'G14'],
       },
       {
         id: '8.2',
         titulo: 'Presentación de Propuestas a Consejos de Iglesias y Diaconados',
-        horas: 20,
-        modalidad: 'Presentación + plantillas institucionales',
+        horas: 0,
+        modalidad: 'Autoestudio + plantillas institucionales',
         evaluacion: 'Propuesta formal a Iglesia',
         indicadores: ['G14', 'G16', 'F2d'],
       },
       {
         id: '8.3',
         titulo: 'Administración Financiera de Hub, Subvenciones (Grants), Becas y Sostenibilidad',
-        horas: 20,
+        horas: 0,
         modalidad: 'Caso práctico + presupuesto de Hub',
         evaluacion: 'Presupuesto y Memoria Social',
         indicadores: ['R1', 'G8'],
@@ -385,7 +386,7 @@ export const BLOQUES = [
       {
         id: '8.4',
         titulo: 'Relaciones Institucionales, Tercer Sector y Convenios Territoriales',
-        horas: 20,
+        horas: 0,
         modalidad: 'Proyecto + borrador de convenio',
         evaluacion: 'Convenio marco de colaboración',
         indicadores: ['G14', 'G16'],

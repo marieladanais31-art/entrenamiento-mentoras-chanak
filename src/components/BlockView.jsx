@@ -22,7 +22,7 @@ export default function BlockView({ bloqueId, progreso, onAbrirModulo, onVolver 
         </div>
         <h2 className="mt-1 text-lg font-bold leading-snug">{bloque.titulo}</h2>
         <p className="mt-1 text-xs text-cream/70">
-          {t('bloque.resumen', { modulos: bloque.modulos.length, horas: bloque.horas })}
+          {bloque.horas > 0 ? `${bloque.modulos.length} módulos · ${bloque.horas} horas` : `${bloque.modulos.length} módulos · Autoestudio Libre`}
         </p>
       </div>
 
@@ -46,7 +46,7 @@ export default function BlockView({ bloqueId, progreso, onAbrirModulo, onVolver 
                 <EstadoBadge estado={estado} />
               </div>
               <div className="mt-3 flex flex-wrap gap-1.5 text-[13px]">
-                <Chip>⏱ {m.horas}h</Chip>
+                <Chip>⏱ {m.horas > 0 ? `${m.horas}h` : 'Autoestudio Libre'}</Chip>
                 <Chip>📖 {m.modalidad}</Chip>
                 <Chip>📝 {m.evaluacion}</Chip>
               </div>

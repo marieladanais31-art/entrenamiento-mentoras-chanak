@@ -75,7 +75,7 @@ export const TEXTOS = {
     // ── Bloque ──
     'bloque.volverPanel': '← Volver al panel',
     'bloque.nivelBloque': 'Nivel {nivel} · Bloque {numero}',
-    'bloque.resumen': '{modulos} módulos · {horas} horas',
+    'bloque.resumen': '{modulos} módulos · {horas}',
     'bloque.modulo': 'Módulo {id}',
     'bloque.completadoEl': '✅ Completado el {fecha}',
 
