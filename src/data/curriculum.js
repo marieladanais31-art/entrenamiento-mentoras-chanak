@@ -39,7 +39,7 @@ export const RECURSOS_GENERALES = [
   },
   {
     nombre: 'NotebookLM — Cuadernos de formación Chanak',
-    url: 'https://notebooklm.google.com/',
+    url: 'https://notebook.google.com/notebook/f6fb89ec-4f28-4e64-a07a-3483b49ac35c',
     descripcion: 'Cuadernos interactivos con los documentos de autoestudio institucional.',
   },
   {
