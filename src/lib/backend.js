@@ -49,13 +49,29 @@ export async function salir() {
   await supabase.auth.signOut()
 }
 
+export async function recuperarContrasena(email) {
+  const { data, error } = await supabase.auth.resetPasswordForEmail(email.trim().toLowerCase(), {
+    redirectTo: window.location.origin,
+  })
+  if (error) throw new Error(traducirError(error.message))
+  return data
+}
+
+export async function actualizarContrasena(nuevaContrasena) {
+  const { data, error } = await supabase.auth.updateUser({
+    password: nuevaContrasena,
+  })
+  if (error) throw new Error(traducirError(error.message))
+  return data
+}
+
 export async function getSesion() {
   const { data } = await supabase.auth.getSession()
   return data.session
 }
 
 export function onCambioAuth(callback) {
-  const { data } = supabase.auth.onAuthStateChange((_evento, sesion) => callback(sesion))
+  const { data } = supabase.auth.onAuthStateChange((evento, sesion) => callback(evento, sesion))
   return () => data.subscription.unsubscribe()
 }
 

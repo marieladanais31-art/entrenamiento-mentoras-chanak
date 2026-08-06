@@ -21,6 +21,16 @@ export const TEXTOS = {
       'Cuenta creada. Si tu proyecto pide confirmación de correo, revisa tu bandeja. Después, la coordinación debe aprobar tu acceso.',
     'login.errNombre': 'Escribe tu nombre y apellido.',
     'login.pie': 'Evidencia de formación del personal · Indicador MSA T5a',
+    'login.olvidaste': '¿Olvidaste tu contraseña?',
+    'login.restablecer': 'Restablecer contraseña',
+    'login.enviadoReset': 'Se ha enviado un correo para restablecer tu contraseña. Revisa tu bandeja.',
+    'login.escribeEmail': 'Escribe tu correo institucional para recibir el enlace de recuperación.',
+    'login.cambiarContra': 'Establecer nueva contraseña',
+    'login.nuevaContra': 'Nueva contraseña',
+    'login.confirmarContra': 'Confirmar nueva contraseña',
+    'login.botonCambiar': 'Actualizar contraseña',
+    'login.contraCambiada': 'Contraseña actualizada correctamente.',
+    'login.contraNoCoincide': 'Las contraseñas no coinciden.',
 
     // ── Pendiente / suspendida ──
     'pendiente.titulo': 'Cuenta pendiente de aprobación',
@@ -324,6 +334,16 @@ export const TEXTOS = {
       'Account created. If your project requires email confirmation, check your inbox. After that, the coordination team must approve your access.',
     'login.errNombre': 'Please enter your first and last name.',
     'login.pie': 'Evidence of staff training · MSA indicator T5a',
+    'login.olvidaste': 'Forgot your password?',
+    'login.restablecer': 'Reset password',
+    'login.enviadoReset': 'A password reset email has been sent. Please check your inbox.',
+    'login.escribeEmail': 'Enter your institutional email to receive the recovery link.',
+    'login.cambiarContra': 'Set new password',
+    'login.nuevaContra': 'New password',
+    'login.confirmarContra': 'Confirm new password',
+    'login.botonCambiar': 'Update password',
+    'login.contraCambiada': 'Password updated successfully.',
+    'login.contraNoCoincide': 'Passwords do not match.',
 
     // ── Pendiente / suspendida ──
     'pendiente.titulo': 'Account pending approval',

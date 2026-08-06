@@ -11,6 +11,7 @@ import AdminView from './components/AdminView'
 import EducaFeView from './components/EducaFeView'
 import ModalPasswordEducaFe from './components/ModalPasswordEducaFe'
 import Header from './components/ui/Header'
+import CambiarContrasena from './components/CambiarContrasena'
 import * as api from './lib/backend'
 import { useIdioma } from './i18n/idioma'
 
@@ -40,8 +41,11 @@ export default function App() {
       if (vivo) setSesion(s)
       if (!s && vivo) setCargando(false)
     })
-    return api.onCambioAuth((s) => {
+    return api.onCambioAuth((evento, s) => {
       setSesion(s)
+      if (evento === 'PASSWORD_RECOVERY') {
+        setVista({ nombre: 'cambiar-contrasena' })
+      }
       if (!s) {
         setPerfil(null)
         setProgreso({ modulos: {} })
@@ -131,6 +135,17 @@ export default function App() {
   }
 
   if (!sesion) return <Login />
+
+  if (vista.nombre === 'cambiar-contrasena') {
+    return (
+      <CambiarContrasena
+        onCompletado={() => {
+          setVista({ nombre: 'dashboard' })
+        }}
+        onCancelar={() => api.salir()}
+      />
+    )
+  }
 
   if (!perfil) {
     return (

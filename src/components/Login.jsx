@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { registrar, entrar, validarCodigo, canjearCodigo } from '../lib/backend'
+import { registrar, entrar, validarCodigo, canjearCodigo, recuperarContrasena } from '../lib/backend'
 import { SelectorIdioma } from '../i18n/idioma'
 import { useIdioma } from '../i18n/idioma'
 
@@ -24,7 +24,11 @@ export default function Login() {
     setAviso('')
     setCargando(true)
     try {
-      if (modo === 'registro') {
+      if (modo === 'recuperar') {
+        if (!email.trim()) throw new Error(t('login.escribeEmail'))
+        await recuperarContrasena(email)
+        setAviso(t('login.enviadoReset'))
+      } else if (modo === 'registro') {
         if (nombre.trim().length < 3) throw new Error(t('login.errNombre'))
 
         let tipoAcceso = 'mentora'
@@ -104,27 +108,42 @@ export default function Login() {
           <p className="mt-1 text-xs text-cream/50">{t('login.claim')}</p>
         </div>
 
-        {/* Pestañas */}
-        <div className="mb-4 flex gap-1 rounded-xl bg-white/8 p-1">
-          {[
-            ['entrar', t('login.entrar')],
-            ['registro', t('login.registro')],
-          ].map(([id, texto]) => (
+        {/* Pestañas o botón de volver */}
+        {modo !== 'recuperar' ? (
+          <div className="mb-4 flex gap-1 rounded-xl bg-white/8 p-1">
+            {[
+              ['entrar', t('login.entrar')],
+              ['registro', t('login.registro')],
+            ].map(([id, texto]) => (
+              <button
+                key={id}
+                onClick={() => {
+                  setModo(id)
+                  setError('')
+                  setAviso('')
+                }}
+                className={`flex-1 rounded-lg py-2 text-xs font-semibold transition ${
+                  modo === id ? 'bg-cream text-navy' : 'text-cream/70 hover:text-cream'
+                }`}
+              >
+                {texto}
+              </button>
+            ))}
+          </div>
+        ) : (
+          <div className="mb-4 text-center">
             <button
-              key={id}
               onClick={() => {
-                setModo(id)
+                setModo('entrar')
                 setError('')
                 setAviso('')
               }}
-              className={`flex-1 rounded-lg py-2 text-xs font-semibold transition ${
-                modo === id ? 'bg-cream text-navy' : 'text-cream/70 hover:text-cream'
-              }`}
+              className="text-xs font-semibold text-cream/75 hover:text-cream transition underline bg-transparent border-none cursor-pointer"
             >
-              {texto}
+              ← Volver al inicio de sesión
             </button>
-          ))}
-        </div>
+          </div>
+        )}
 
         <form onSubmit={enviar} className="space-y-3 rounded-2xl bg-cream p-5 shadow-lg">
           {modo === 'registro' && (
@@ -145,14 +164,32 @@ export default function Login() {
             placeholder="nombre@chanakacademy.org"
             autoComplete="email"
           />
-          <Campo
-            etiqueta={t('login.contrasena')}
-            tipo="password"
-            valor={password}
-            onChange={setPassword}
-            placeholder={modo === 'registro' ? t('login.contrasenaPh') : '••••••••'}
-            autoComplete={modo === 'registro' ? 'new-password' : 'current-password'}
-          />
+          {modo !== 'recuperar' && (
+            <Campo
+              etiqueta={t('login.contrasena')}
+              tipo="password"
+              valor={password}
+              onChange={setPassword}
+              placeholder={modo === 'registro' ? t('login.contrasenaPh') : '••••••••'}
+              autoComplete={modo === 'registro' ? 'new-password' : 'current-password'}
+            />
+          )}
+
+          {modo === 'entrar' && (
+            <div className="text-right">
+              <button
+                type="button"
+                onClick={() => {
+                  setModo('recuperar')
+                  setError('')
+                  setAviso('')
+                }}
+                className="text-xs text-teal hover:underline font-medium bg-transparent border-none cursor-pointer"
+              >
+                {t('login.olvidaste')}
+              </button>
+            </div>
+          )}
 
           {modo === 'registro' && (
             <div>
@@ -165,7 +202,7 @@ export default function Login() {
                 autoComplete="off"
                 requerido={false}
               />
-              <p className="mt-1 text-[12px] leading-relaxed text-navy/50">
+              <p className="mt-1 text-[12px] leading-relaxed text-navy/55">
                 💳 Si realizaste el pago en Stripe, introduce tu código para acceder de inmediato a la formación. Sin código, tu cuenta requerirá aprobación de administración.
               </p>
             </div>
@@ -184,14 +221,16 @@ export default function Login() {
 
           <button
             type="submit"
-            disabled={cargando || !email || !password}
+            disabled={cargando || !email || (modo !== 'recuperar' && !password)}
             className="w-full rounded-xl bg-teal py-3 text-sm font-bold text-white transition hover:bg-teal/90 disabled:opacity-50"
           >
             {cargando
               ? t('login.esperando')
               : modo === 'registro'
                 ? t('login.botonCrear')
-                : t('login.botonEntrar')}
+                : modo === 'recuperar'
+                  ? t('login.restablecer')
+                  : t('login.botonEntrar')}
           </button>
 
           {modo === 'registro' && (
