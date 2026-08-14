@@ -148,7 +148,7 @@ export async function borrarVideo(moduloId, leccionIdx) {
 export async function getProgreso(usuariaId) {
   const { data, error } = await supabase
     .from('progreso')
-    .select('modulo_id, estado, fecha_inicio, fecha_completado, notas, quiz')
+    .select('modulo_id, estado, fecha_inicio, fecha_completado, notas, quiz, entregable_url, entregable_nombre')
     .eq('usuaria_id', usuariaId)
   if (error) throw new Error(error.message)
   const modulos = {}
@@ -159,6 +159,8 @@ export async function getProgreso(usuariaId) {
       fechaCompletado: f.fecha_completado,
       notas: f.notas,
       quiz: f.quiz,
+      entregableUrl: f.entregable_url,
+      entregableNombre: f.entregable_nombre,
     }
   }
   return { modulos }
@@ -214,7 +216,7 @@ export async function setQuizModulo(usuariaId, moduloId, resultado, previo) {
 export async function getProgresoTodas() {
   const { data, error } = await supabase
     .from('progreso')
-    .select('usuaria_id, modulo_id, estado, fecha_inicio, fecha_completado, notas, quiz')
+    .select('usuaria_id, modulo_id, estado, fecha_inicio, fecha_completado, notas, quiz, entregable_url, entregable_nombre')
   if (error) throw new Error(error.message)
   const porUsuaria = {}
   for (const f of data || []) {
@@ -225,9 +227,60 @@ export async function getProgresoTodas() {
       fechaCompletado: f.fecha_completado,
       notas: f.notas,
       quiz: f.quiz,
+      entregableUrl: f.entregable_url,
+      entregableNombre: f.entregable_nombre,
     }
   }
   return porUsuaria
+}
+
+// ════════════════════════════════════════════
+// ENTREGABLES (STORAGE)
+// ════════════════════════════════════════════
+
+// Sube un archivo a Supabase Storage y guarda la URL en el progreso
+export async function subirEntregable(usuariaId, moduloId, archivo) {
+  // 1. Crear ruta segura: usuariaId/moduloId/nombre-archivo
+  const ruta = `${usuariaId}/${moduloId}/${Date.now()}_${archivo.name}`
+
+  // 2. Subir al bucket 'entregables'
+  const { data: storageData, error: storageError } = await supabase.storage
+    .from('entregables')
+    .upload(ruta, archivo, {
+      cacheControl: '3600',
+      upsert: true,
+    })
+  
+  if (storageError) throw new Error(storageError.message)
+
+  // 3. Obtener la URL firmada (o pública si lo prefieres) o simplemente guardar la ruta
+  // En este caso, guardaremos la ruta interna para poder pedir URLs firmadas seguras
+  const urlInterna = storageData.path
+
+  // 4. Actualizar el progreso con la url y el nombre original
+  const { data: progresoData, error: progresoError } = await supabase
+    .from('progreso')
+    .select('*')
+    .eq('usuaria_id', usuariaId)
+    .eq('modulo_id', moduloId)
+    .maybeSingle()
+
+  await upsertProgreso(usuariaId, moduloId, {
+    estado: progresoData?.estado || 'en_curso',
+    fecha_inicio: progresoData?.fecha_inicio || hoyISO(),
+    entregable_url: urlInterna,
+    entregable_nombre: archivo.name,
+  })
+}
+
+// Obtiene una URL firmada de 1 hora para descargar/ver el archivo privado
+export async function getUrlEntregable(ruta) {
+  const { data, error } = await supabase.storage
+    .from('entregables')
+    .createSignedUrl(ruta, 3600) // 1 hora de validez
+  
+  if (error) throw new Error(error.message)
+  return data.signedUrl
 }
 
 // ════════════════════════════════════════════

@@ -108,6 +108,8 @@ export default function App() {
       mutar(() => api.setNotasModulo(idViendo, moduloId, notas, progreso.modulos[moduloId])),
     setQuiz: (moduloId, resultado) =>
       mutar(() => api.setQuizModulo(idViendo, moduloId, resultado, progreso.modulos[moduloId])),
+    subirEntregable: (moduloId, archivo) =>
+      mutar(() => api.subirEntregable(idViendo, moduloId, archivo)),
     guardarVideo: async (moduloId, idx, url, nota) => {
       await api.guardarVideo(moduloId, idx, url, nota, perfil.id)
       setVideos(await api.getVideos())

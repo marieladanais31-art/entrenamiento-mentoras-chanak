@@ -28,6 +28,21 @@ export default function ModuleView({
   const [notasGuardadas, setNotasGuardadas] = useState(false)
   const [leccionAbierta, setLeccionAbierta] = useState(0)
 
+  const [subiendoArchivo, setSubiendoArchivo] = useState(false)
+  const [urlEntregableDescarga, setUrlEntregableDescarga] = useState(null)
+  
+  // Para obtener una URL temporal cuando la usuaria quiera descargar su trabajo
+  async function cargarUrlDescarga() {
+    if (!p?.entregableUrl) return
+    try {
+      // Necesitamos importar getUrlEntregable de api, pero para simplificar
+      // el enlace se puede generar al vuelo o si está logueada la puede pedir.
+      // O podemos simplemente mostrar el nombre y un botón.
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
   // Al cambiar de módulo, resincronizar las notas y cerrar el acordeón
   useEffect(() => {
     setNotas(p?.notas || '')
@@ -328,6 +343,78 @@ export default function ModuleView({
           ))}
         </ul>
       </div>
+
+      {/* ── Entregables / Trabajo ── */}
+      {modulo.evaluacion?.toLowerCase().includes('portafolio') && (
+        <div className="rounded-2xl bg-white p-5 shadow-sm">
+          <h3 className="text-sm font-bold text-navy">{t('modulo.entregable')}</h3>
+          <p className="mt-1 text-xs text-navy/55">{t('modulo.entregableDesc')}</p>
+          
+          <div className="mt-4">
+            {p?.entregableNombre ? (
+              <div className="flex items-center justify-between rounded-xl border border-teal/30 bg-teal/5 px-4 py-3">
+                <div className="flex items-center gap-3">
+                  <span className="text-xl">📄</span>
+                  <div className="flex flex-col">
+                    <span className="text-sm font-semibold text-navy truncate max-w-[200px] sm:max-w-xs">{p.entregableNombre}</span>
+                    <span className="text-[11px] text-navy/60">{t('modulo.entregableSubido')}</span>
+                  </div>
+                </div>
+                {/* Opcional: descargar. Como el bucket es privado y usa RLS, para descargar necesitas token.
+                    Lo dejaremos como indicador visual de que ya lo subió exitosamente. */}
+                <label className="cursor-pointer text-xs font-semibold text-teal hover:underline ml-2">
+                  {t('modulo.reemplazar')}
+                  <input
+                    type="file"
+                    className="hidden"
+                    accept=".pdf,.doc,.docx,.png,.jpg,.jpeg"
+                    onChange={async (e) => {
+                      const file = e.target.files?.[0]
+                      if (!file) return
+                      setSubiendoArchivo(true)
+                      try {
+                        await acciones.subirEntregable(moduloId, file)
+                      } catch (err) {
+                        alert(t('modulo.errorSubida') + ': ' + err.message)
+                      }
+                      setSubiendoArchivo(false)
+                    }}
+                  />
+                </label>
+              </div>
+            ) : (
+              <label className="flex w-full cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-navy/15 bg-cream/30 py-6 transition hover:border-teal hover:bg-cream">
+                <span className="text-2xl opacity-60">📁</span>
+                <span className="mt-2 text-sm font-semibold text-navy">
+                  {subiendoArchivo ? t('modulo.subiendo') : t('modulo.seleccionarArchivo')}
+                </span>
+                <span className="mt-1 text-[11px] text-navy/50">{t('modulo.formatosPermitidos')}</span>
+                <input
+                  type="file"
+                  className="hidden"
+                  accept=".pdf,.doc,.docx,.png,.jpg,.jpeg"
+                  disabled={subiendoArchivo}
+                  onChange={async (e) => {
+                    const file = e.target.files?.[0]
+                    if (!file) return
+                    if (file.size > 15 * 1024 * 1024) {
+                      alert(t('modulo.errorTamano'))
+                      return
+                    }
+                    setSubiendoArchivo(true)
+                    try {
+                      await acciones.subirEntregable(moduloId, file)
+                    } catch (err) {
+                      alert(t('modulo.errorSubida') + ': ' + err.message)
+                    }
+                    setSubiendoArchivo(false)
+                  }}
+                />
+              </label>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* ── Notas ── */}
       <div className="rounded-2xl bg-white p-5 shadow-sm">
