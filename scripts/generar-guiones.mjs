@@ -1,121 +1,40 @@
-// Genera GUIONES_VIDEOS.md a partir del contenido real del curso.
+// Genera GUIONES_VIDEOS_2026-2027.md a partir de src/data/videos.js y del contenido del curso.
 // Uso:  node scripts/generar-guiones.mjs
 import { writeFileSync } from 'node:fs'
-import { BLOQUES } from '../src/data/curriculum.js'
-import { getContenido } from '../src/data/contenido/index.js'
+import { VIDEOS, CATEGORIAS_VIDEO } from '../src/data/videos.js'
+import { getModulo, numModulo } from '../src/data/curriculum.js'
 
 const L = []
-let totalVideos = 0
-let totalMin = 0
-
-// Duración estimada: ~40 s por párrafo de guion, redondeado a medio minuto.
-const estimarMin = (guion) => Math.max(2, Math.round((guion.length * 40) / 30) / 2)
-
-L.push('# Guiones de vídeo · Formación de Mentoras Chanak')
+L.push('# Guiones de vídeo · Chanak · Formación de Mentores y Coordinadores 2026–2027')
 L.push('')
-L.push(
-  'Listado completo de los vídeos por grabar en Google Vids, con su guion y sus indicaciones visuales.'
-)
-L.push('Generado automáticamente desde el contenido de la app — no editar a mano.')
+L.push('Biblioteca esencial de **28 vídeos**, uno por módulo, organizada en 8 categorías.')
+L.push('Fuente oficial: carpeta `CHANAK_DOCUMENTOS_2026-2027_FINAL`. Generado desde `src/data/videos.js` — no editar a mano: edita `videos.js` y vuelve a ejecutar `node scripts/generar-guiones.mjs`.')
 L.push('')
-L.push('> **Cómo usarlo:** copia el bloque de PROMPT de cada lección y pásalo a tu IA de vídeo,')
-L.push('> o léelo tal cual como locución. Al terminar, sube el enlace desde la propia app:')
-L.push('> abre la lección como administradora y pulsa «➕ Añadir vídeo de Google Vids».')
+L.push('Cada vídeo es independiente: para publicarlo pega su URL (MP4, YouTube, Vimeo, Google Drive o Google Vids) en `videoUrl` o desde **Admin → Vídeos**.')
+L.push('Reglas de producción: 5–9 minutos, sin datos personales de estudiantes (usar IDs), terminología oficial (MSA-CESS Candidate; Off-Campus (Homeschool Guiado); Approved Education Service Provider; servicio Matrícula aprobado).')
 L.push('')
-
-// Índice
-L.push('## Índice')
+L.push('| Vídeo | Categoría | Módulo | Título | Duración |')
+L.push('|---|---|---|---|---|')
+for (const v of VIDEOS) L.push(`| ${v.id} | ${v.bloque} | ${numModulo(v.modulo)} | ${v.titulo} | ${v.duracion} |`)
 L.push('')
-for (const b of BLOQUES) {
-  const n = b.modulos.reduce((s, m) => s + (getContenido(m.id)?.lecciones.length || 0), 0)
-  L.push(`- **Bloque ${b.numero} — ${b.titulo}** · Nivel ${b.nivel} · ${n} vídeos`)
-}
-L.push('')
-L.push('---')
-L.push('')
-
-for (const b of BLOQUES) {
-  L.push(`## Bloque ${b.numero} — ${b.titulo}`)
+for (const cat of CATEGORIAS_VIDEO) {
+  L.push(`## ${cat}`)
   L.push('')
-  L.push(`*Nivel ${b.nivel} · ${b.horas} horas · ${b.modulos.length} módulos*`)
-  L.push('')
-
-  for (const mod of b.modulos) {
-    const c = getContenido(mod.id)
-    if (!c) {
-      L.push(`### Módulo ${mod.id} — ${mod.titulo}`)
-      L.push('')
-      L.push('> ⚠️ Sin contenido desarrollado todavía.')
-      L.push('')
-      continue
-    }
-
-    L.push(`### Módulo ${mod.id} — ${mod.titulo}`)
+  for (const v of VIDEOS.filter((x) => x.bloque === cat)) {
+    const m = getModulo(v.modulo)
+    L.push(`### ${v.id} · ${v.titulo}`)
     L.push('')
-    L.push(`${mod.horas} h · ${mod.modalidad} · Evaluación: ${mod.evaluacion}`)
+    L.push(`- **Módulo:** ${numModulo(v.modulo)} · ${m?.titulo || ''}`)
+    L.push(`- **Duración objetivo:** ${v.duracion}`)
+    L.push(`- **Descripción:** ${v.descripcion}`)
     L.push('')
-    L.push(`**Indicadores MSA:** ${mod.indicadores.join(', ')}`)
+    L.push('**Guion (puntos clave, en orden):**')
     L.push('')
-    L.push(`**Resumen del módulo:** ${c.resumen}`)
+    v.guion.forEach((g, i) => L.push(`${i + 1}. ${g}`))
     L.push('')
-
-    c.lecciones.forEach((lec, i) => {
-      totalVideos++
-      const min = estimarMin(lec.guion)
-      totalMin += min
-      L.push(`#### 🎬 Vídeo ${mod.id}.${i + 1} — ${lec.titulo}`)
-      L.push('')
-      L.push(`*Duración estimada: ~${min} min · ${lec.guion.length} bloques de guion*`)
-      L.push('')
-      L.push('**Guion (locución):**')
-      L.push('')
-      lec.guion.forEach((p, j) => L.push(`${j + 1}. ${p}`))
-      L.push('')
-      L.push('**Indicaciones visuales:**')
-      L.push('')
-      lec.visuales.forEach((v) => L.push(`- ${v}`))
-      L.push('')
-      L.push('<details><summary>PROMPT listo para copiar</summary>')
-      L.push('')
-      L.push('```text')
-      L.push(
-        `Crea un vídeo formativo corto (~${min} minutos) en español para Chanak International Academy,`
-      )
-      L.push(
-        'una escuela cristiana a distancia registrada en Florida (FLDOE #134620), candidata a la'
-      )
-      L.push('acreditación MSA-CESS. El público son mentoras en formación.')
-      L.push('')
-      L.push(`TÍTULO: ${lec.titulo}`)
-      L.push(`CONTEXTO DEL MÓDULO: ${mod.titulo} (Bloque ${b.numero} — ${b.titulo})`)
-      L.push('')
-      L.push('TONO: profesional, cálido y claro. Cosmovisión cristiana, sin sermonear.')
-      L.push('Español neutro. Frases cortas. Trata a la mentora de tú.')
-      L.push('')
-      L.push('GUION (respeta el orden y el contenido):')
-      lec.guion.forEach((p, j) => L.push(`${j + 1}. ${p}`))
-      L.push('')
-      L.push('DIAPOSITIVAS / APOYO VISUAL:')
-      lec.visuales.forEach((v) => L.push(`- ${v}`))
-      L.push('')
-      L.push('MARCA: navy #0D1B2A, teal #2A8C74, dorado #C9963A, crema #F5F0E8.')
-      L.push('Cierra con el logo de Chanak International Academy.')
-      L.push('```')
-      L.push('')
-      L.push('</details>')
-      L.push('')
-    })
+    L.push('**Cierre:** invita a pasar a la Lectura y a la Práctica del módulo.')
+    L.push('')
   }
-  L.push('---')
-  L.push('')
 }
-
-L.splice(
-  4,
-  0,
-  `**${totalVideos} vídeos** · duración total estimada: **~${Math.round(totalMin / 60)} h ${Math.round(totalMin % 60)} min**`,
-  ''
-)
-
-writeFileSync(process.cwd() + '/GUIONES_VIDEOS.md', L.join('\n'))
-console.log(`✅ GUIONES_VIDEOS.md · ${totalVideos} vídeos · ~${Math.round(totalMin)} min en total`)
+writeFileSync(new URL('../GUIONES_VIDEOS_2026-2027.md', import.meta.url), L.join('\n'))
+console.log(`OK · ${VIDEOS.length} vídeos`)
