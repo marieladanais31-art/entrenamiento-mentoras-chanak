@@ -1,47 +1,53 @@
 // ============================================================
-// Información general del curso — 3 Niveles de Certificación Oficial
+// Información general de la formación 2026–2027
 // ============================================================
 
 export const CURSO = {
-  titulo: 'Programa Oficial de Certificación Chanak & Red EducaFe',
-  subtitulo: 'Acompañar con excelencia, proteger con criterio, servir con propósito',
-  nivel1: 'Nivel 1: Mentora Off Campus & Dual Diploma (Autoestudio) · 180 horas',
-  nivel2: 'Nivel 2: Coordinadora Certificada — Dirección de Centro Educativo Chanak · 300 horas',
-  nivel3: 'Nivel 3: Socia Visionaria — Gestión de Proyectos & Red EducaFe · 80 horas',
+  titulo: 'CHANAK · FORMACIÓN DE MENTORES Y COORDINADORES',
+  subtitulo: 'Comprender el modelo. Acompañar con criterio. Documentar con excelencia.',
+  nivel1: 'Nivel 1 · CHANAK CERTIFIED MENTOR · 180 h de referencia',
+  nivel2: 'Nivel 2 · CHANAK CERTIFIED COORDINATOR · 300 h acumuladas',
   resumen:
-    'Programa oficial de formación de Chanak International Academy (FLDOE #134620, acreditada MSA-CESS) y la Red EducaFe. Organizado en 3 niveles diferenciados: el Nivel 1 se enfoca en el Autoestudio Metodológico (Mastery Learner, Perfil del Estudiante, vías A.C.E., Lifepac, CLE, ciberseguridad y práctica); el Nivel 2 capacita en Psicología Infantil y la Dirección Integral de un Centro Educativo Chanak; y el Nivel 3 está dedicado a Socias Visionarias para la Gestión de Proyectos, Gobernanza de Hubs EducaFe, alianzas con iglesias y subvenciones.',
+    'Formación oficial de Chanak International Academy (Chanak TrainUp Education, Inc. · escuela privada registrada en Florida, FLDOE #134620 · MSA-CESS Candidate) para las personas que acompañan estudiantes y coordinan centros. Enseña cómo funciona y se opera Chanak realmente: el modelo 60/20/20, el marco académico orientado al dominio, los programas Off-Campus (Homeschool Guiado), Dual Diploma y Life Skills & Leadership, las vías curriculares, el Scope & Sequence K–12, la evaluación, el reconocimiento de créditos, el SIS, el Portal y el Dual Diploma Portal, el safeguarding, la Extensión Local y, cuando el rol lo requiere, los programas estatales de EE. UU. La fuente oficial es la documentación 2026–2027 (versión FINAL).',
   dirigidoA:
-    'Mentoras Off Campus, coordinadoras de Centros Educativos Chanak, Socias Visionarias y líderes territoriales de la Red EducaFe.',
+    'Mentores de Off-Campus, Dual Diploma y Life Skills, personal de apoyo académico (Nivel 1) y coordinadores de centros, Partner Learning Centers y equipos de mentores (Nivel 2).',
   objetivos: [
-    'Nivel 1 — Mentora Off Campus & Dual Diploma (180h): Autoestudio de la Filosofía Mastery Learner (A.C.E., Lifepac, CLE), Perfil del Estudiante, Aprendizaje Basado en Proyectos (PBL), Ciberseguridad, Liderazgo Remoto, SIS Chanak y Práctica Supervisada.',
-    'Nivel 2 — Coordinadora Certificada (300h): Psicología Evolutiva del Niño y del Adolescente, Neurodiversidad, Dirección de Centro Educativo Chanak, Políticas de Admisión, Supervisión de Mentoras y Registro FLDOE.',
-    'Nivel 3 — Socia Visionaria (80h): Gestión de Proyectos Educativos, Gobernanza de Hubs EducaFe (Modalidades A y B), Presentación a Consejos de Iglesias/Diaconados, Presupuestos, Subvenciones (Grants) y Convenios.',
+    'Explicar con precisión qué es Chanak, qué programas ofrece y qué decide Chanak Central.',
+    'Aplicar el modelo 60/20/20 y el marco académico orientado al dominio (umbral del 80 %) en el acompañamiento diario.',
+    'Elegir y supervisar la vía curricular adecuada (A.C.E., LIFEPAC, Christian Light Education, Chanak Flex) a partir del diagnóstico y el PEI.',
+    'Usar el Scope & Sequence K–12 como referencia de competencias, secuencia y evidencia.',
+    'Distinguir las tres categorías de evaluación y saber cuándo una prueba estandarizada es requerida y cuándo no.',
+    'Registrar, documentar, comunicar y escalar con criterio: qué resolver, qué documentar y qué escalar a Chanak Central.',
+    'Proteger a los estudiantes (safeguarding, online safety, datos) y respetar los límites profesionales del rol.',
+    'Nivel 2: supervisar mentores, revisar evidencias, operar un Partner Learning Center y reportar a Chanak Central.',
   ],
   metodologia: [
-    { icono: '📘', nombre: 'Cuadernos NotebookLM', detalle: 'Autoestudio interactivo con documentos institucionales' },
-    { icono: '🎬', nombre: 'Vídeos y Clases', detalle: 'Lecciones en vídeo, Vids y carpetas de Drive' },
-    { icono: '🛠', nombre: 'Práctica Real y Sistema SIS', detalle: 'Talleres, simulaciones y entorno SIS demo' },
-    { icono: '✅', nombre: 'Evaluación de Dominio', detalle: 'Evaluaciones de conocimiento al 80% por módulo' },
+    { icono: '🎬', nombre: 'Vídeo', detalle: 'Una cápsula por módulo (28 vídeos), actualizable por separado' },
+    { icono: '📖', nombre: 'Lectura', detalle: 'Contenido basado en la documentación oficial 2026–2027' },
+    { icono: '🛠', nombre: 'Práctica', detalle: 'Situaciones reales del mentor: resolver, documentar o escalar' },
+    { icono: '✅', nombre: 'Knowledge Check', detalle: 'Preguntas de decisión con aprobación al 80 % y reintentos' },
+    { icono: '📁', nombre: 'Evidencia', detalle: 'Reflexión o entregable que se archiva con tu progreso' },
+    { icono: '🖥', nombre: 'SIS demo', detalle: 'Práctica con cuentas de demostración, nunca con datos reales' },
   ],
   certificaciones: [
     {
       nivel: 1,
-      nombre: 'Nivel 1: Mentora Off Campus & Dual Diploma Specialist',
+      codigo: 'MENTOR',
+      nombre: 'CHANAK CERTIFIED MENTOR',
       horas: 180,
-      detalle: 'Bloques 1–5 · Autoestudio metodológico para acompañar estudiantes en programas regulares y Dual Diploma.',
+      detalle:
+        'Bloques 1–6 · 22 módulos · 180 h de referencia (autoestudio, vídeo, lecturas, práctica, SIS, observación, evaluaciones y evidencias).',
     },
     {
       nivel: 2,
-      nombre: 'Nivel 2: Coordinadora Certificada & Directora de Centro Chanak',
+      codigo: 'COORD',
+      nombre: 'CHANAK CERTIFIED COORDINATOR',
       horas: 300,
-      detalle: 'Bloques 1–7 · Capacita para dirigir la operación integral de un Centro Educativo Chanak (Learning Implementation Site).',
-    },
-    {
-      nivel: 3,
-      nombre: 'Nivel 3: Socia Visionaria & Gobernanza Red EducaFe',
-      horas: 80,
-      detalle: 'Bloque 8 · Capacita para la gestión de proyectos educativos, apertura de Hubs EducaFe, alianzas con iglesias y subvenciones.',
+      detalle:
+        'Nivel 1 + Bloque 8 (Coordinator Track) · 300 h acumuladas · supervisión, Partner Learning Centers, calidad, evidencias y comunicación con Chanak Central.',
     },
   ],
+  porRol:
+    'El Bloque 7 (USA State Programs / Compliance) es un módulo por rol: lo completan quienes atienden familias o servicios vinculados a programas estatales de EE. UU. No suma a las 180 h ni a las 300 h.',
   umbralAprobacion: 0.8,
 }

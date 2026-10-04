@@ -3,9 +3,9 @@ import * as api from '../lib/backend'
 import { useIdioma } from '../i18n/idioma'
 
 const TIPOS = [
-  { value: 'visionaria', emoji: '🌟', label: 'Visionaria (gratis · 180h)' },
-  { value: 'mentora', emoji: '👩🏫', label: 'Mentora (pago · 180h)' },
-  { value: 'coordinadora', emoji: '🎯', label: 'Coordinadora (pago · 300h)' },
+  { value: 'mentora', emoji: '👩🏫', label: 'Mentor (Chanak Certified Mentor · 180 h)' },
+  { value: 'coordinadora', emoji: '🎯', label: 'Coordinator (Chanak Certified Coordinator · 300 h)' },
+  { value: 'visionaria', emoji: '🤝', label: 'Partner (EducaFe · formación complementaria)' },
 ]
 
 export default function GestionCodigos({ miId }) {
@@ -17,7 +17,7 @@ export default function GestionCodigos({ miId }) {
 
   // Formulario de creación
   const [nuevoCodigo, setNuevoCodigo] = useState('')
-  const [nuevoTipo, setNuevoTipo] = useState('visionaria')
+  const [nuevoTipo, setNuevoTipo] = useState('mentora')
   const [nuevosUsos, setNuevosUsos] = useState(1)
   const [creando, setCreando] = useState(false)
 
@@ -70,7 +70,7 @@ export default function GestionCodigos({ miId }) {
   }
 
   function generarAleatorio() {
-    const tipo = nuevoTipo === 'visionaria' ? 'VISION' : nuevoTipo === 'mentora' ? 'MENTOR' : 'COORD'
+    const tipo = nuevoTipo === 'visionaria' ? 'PARTNER' : nuevoTipo === 'mentora' ? 'MENTOR' : 'COORD'
     const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'
     let aleatorio = ''
     for (let i = 0; i < 4; i++) aleatorio += chars[Math.floor(Math.random() * chars.length)]
@@ -211,7 +211,7 @@ export default function GestionCodigos({ miId }) {
 }
 
 function CodigoCard({ codigo: c, onToggle }) {
-  const tipo = TIPOS.find(t => t.value === c.tipo_acceso) || TIPOS[1]
+  const tipo = TIPOS.find(t => t.value === c.tipo_acceso) || TIPOS[0]
   const agotado = c.usos >= c.usos_max
   const fecha = c.creado_en ? new Date(c.creado_en).toLocaleDateString('es') : ''
 

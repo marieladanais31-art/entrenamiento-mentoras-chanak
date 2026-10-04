@@ -14,14 +14,12 @@ export default function Header({ perfil, esAdmin, vista, onNavegar, onAbrirEduca
         <button onClick={() => onNavegar({ nombre: 'dashboard' })} className="flex items-center gap-2 text-left">
           <img src="/logo-chanak.png" alt="Chanak Academy" className="h-8 w-8 rounded-lg bg-white/95 p-0.5" />
           <span>
-            <span className="block text-sm font-bold leading-tight tracking-wide">
-              CHANAK ACADEMY
-            </span>
-            <span className="block text-[13px] text-cream/60">{t('nav.formacion')}</span>
+            <span className="block text-sm font-bold leading-tight tracking-wide">CHANAK</span>
+            <span className="hidden text-[12px] leading-tight text-cream/60 sm:block">{t('nav.formacion')}</span>
           </span>
         </button>
 
-        <nav className="flex items-center gap-1.5 text-xs">
+        <nav className="flex shrink-0 items-center gap-1.5 text-xs">
           <SelectorIdioma />
 
           {/* Botón pequeño de EducaFe con icono/logo */}
@@ -50,10 +48,10 @@ export default function Header({ perfil, esAdmin, vista, onNavegar, onAbrirEduca
               🔑 {t('nav.admin')}
             </button>
           )}
-          <button onClick={() => onNavegar({ nombre: 'dashboard' })} className={boton('dashboard')}>
+          <button onClick={() => onNavegar({ nombre: 'dashboard' })} className={`hidden sm:inline-block ${boton('dashboard')}`}>
             {t('nav.panel')}
           </button>
-          <button onClick={() => onNavegar({ nombre: 'horas' })} className={boton('horas')}>
+          <button onClick={() => onNavegar({ nombre: 'horas' })} className={`hidden sm:inline-block ${boton('horas')}`}>
             {t('nav.horas')}
           </button>
           <button

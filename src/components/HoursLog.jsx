@@ -1,5 +1,5 @@
 import { registroCronologico, resumenMentora, formatearFecha } from '../lib/calculos'
-import { NIVEL_1_HORAS, NIVEL_2_HORAS } from '../data/curriculum'
+import { NIVEL_1_HORAS, NIVEL_2_HORAS, numModulo } from '../data/curriculum'
 import { useIdioma } from '../i18n/idioma'
 
 export default function HoursLog({ mentora, progreso, onVolver }) {
@@ -71,7 +71,7 @@ export default function HoursLog({ mentora, progreso, onVolver }) {
                       {formatearFecha(m.fecha)}
                     </td>
                     <td className="py-2.5 pr-2">
-                      <span className="font-semibold text-navy">{m.id}</span>{' '}
+                      <span className="font-semibold text-navy">{numModulo(m.id)}</span>{' '}
                       <span className="text-navy/70">{m.titulo}</span>
                     </td>
                     <td className="py-2.5 pr-2 text-right font-semibold text-navy">

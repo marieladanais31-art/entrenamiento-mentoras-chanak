@@ -3,6 +3,9 @@ import { actualizarPerfil, crearUsuariaDirecta } from '../lib/backend'
 import { formatearFecha, iniciales } from '../lib/calculos'
 import { useIdioma } from '../i18n/idioma'
 
+const PAISES = ['España', 'México', 'Panamá', 'Estados Unidos', 'Otro']
+const PROGRAMAS = ['Off-Campus', 'Dual Diploma', 'Life Skills', 'Partner Learning Center', 'Varios']
+
 // Aprobación y gestión de cuentas. Solo visible para admin.
 export default function GestionUsuarias({ perfiles, miId, onRecargar }) {
   const { t } = useIdioma()
@@ -29,7 +32,7 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar }) {
       await actualizarPerfil(id, cambios)
       await onRecargar()
     } catch (e) {
-      setError(e.message)
+      setError(/column|columna|schema cache/i.test(e.message) ? t('usuarias.faltaMigracion') : e.message)
     } finally {
       setOcupado(null)
     }
@@ -96,32 +99,6 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar }) {
             </span>
           </div>
 
-          {/* Presets de 1 Clic */}
-          <div className="rounded-xl bg-amber-500/10 p-3 text-xs border border-amber-400/30">
-            <p className="font-bold text-navy mb-1.5">⚡️ Rellenar rápido para usuarias pendientes:</p>
-            <div className="flex flex-wrap gap-1.5">
-              {[
-                { name: 'Thiare Urzua', email: 'thiare@chanakacademy.org', pass: 'Chanak2026!', type: 'coordinadora' },
-                { name: 'Dayana', email: 'dayana@chanakacademy.org', pass: 'Chanak2026!', type: 'mentora' },
-                { name: 'Medalith', email: 'medalith@chanakacademy.org', pass: 'Chanak2026!', type: 'mentora' },
-                { name: 'Mary Claudia', email: 'maryclaudia@chanakacademy.org', pass: 'Chanak2026!', type: 'visionaria' },
-              ].map((p) => (
-                <button
-                  key={p.email}
-                  type="button"
-                  onClick={() => {
-                    setNombre(p.name)
-                    setEmail(p.email)
-                    setPassword(p.pass)
-                    setTipoAcceso(p.type)
-                  }}
-                  className="rounded-lg bg-white px-2.5 py-1 text-xs font-semibold text-navy shadow-sm border border-navy/15 hover:bg-amber-100 transition"
-                >
-                  ➕ {p.name}
-                </button>
-              ))}
-            </div>
-          </div>
 
           <div className="grid gap-3 sm:grid-cols-2">
             <label className="block">
@@ -175,9 +152,9 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar }) {
                 onChange={(e) => setTipoAcceso(e.target.value)}
                 className="mt-1 w-full rounded-xl border border-navy/15 bg-slate-50 px-3 py-2 text-sm text-navy font-medium"
               >
-                <option value="visionaria">🌟 Socia Visionaria (Autoestudio 180h)</option>
-                <option value="mentora">👩‍🏫 Mentora Certificada (180h)</option>
-                <option value="coordinadora">🎯 Coordinadora Certificada (300h)</option>
+                <option value="mentora">👩‍🏫 Mentor · Chanak Certified Mentor (180 h)</option>
+                <option value="coordinadora">🎯 Coordinator · Chanak Certified Coordinator (300 h)</option>
+                <option value="visionaria">🤝 Partner (EducaFe) · formación complementaria</option>
               </select>
             </label>
           </div>
@@ -251,7 +228,8 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar }) {
                 <div className="text-[13px] text-navy/50">
                   {p.rol === 'admin' ? t('usuarias.admin') : (
                     <span className="capitalize font-medium text-teal">
-                      {p.tipo_acceso === 'visionaria' ? '🌟 Socia Visionaria' : p.tipo_acceso === 'coordinadora' ? '🎯 Coordinadora' : '👩‍🏫 Mentora'}
+                      {p.tipo_acceso === 'visionaria' ? '🤝 Partner (EducaFe)' : p.tipo_acceso === 'coordinadora' ? '🎯 Coordinator' : '👩‍🏫 Mentor'}
+                      {p.pais ? ` · ${p.pais}` : ''}{p.programa ? ` · ${p.programa}` : ''}{p.id_interno ? ` · ID ${p.id_interno}` : ''}
                     </span>
                   )}
                 </div>
@@ -264,9 +242,9 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar }) {
                     disabled={ocupado === p.id}
                     className="rounded-lg bg-navy/5 px-2 py-1 text-xs text-navy border-none font-medium"
                   >
-                    <option value="visionaria">🌟 Visionaria</option>
-                    <option value="mentora">👩‍🏫 Mentora</option>
-                    <option value="coordinadora">🎯 Coordinadora</option>
+                    <option value="mentora">👩‍🏫 Mentor</option>
+                    <option value="coordinadora">🎯 Coordinator</option>
+                    <option value="visionaria">🤝 Partner (EducaFe)</option>
                   </select>
                   <button
                     onClick={() =>
@@ -286,6 +264,34 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar }) {
                   </button>
                 </>
               )}
+              <div className="flex w-full flex-wrap gap-1.5 pl-11">
+                <select
+                  value={p.pais || ''}
+                  onChange={(e) => cambiar(p.id, { pais: e.target.value || null })}
+                  disabled={ocupado === p.id}
+                  className="rounded-lg bg-white px-2 py-1 text-xs text-navy"
+                  aria-label={t('usuarias.pais')}
+                >
+                  <option value="">{t('usuarias.pais')}…</option>
+                  {PAISES.map((x) => <option key={x} value={x}>{x}</option>)}
+                </select>
+                <select
+                  value={p.programa || ''}
+                  onChange={(e) => cambiar(p.id, { programa: e.target.value || null })}
+                  disabled={ocupado === p.id}
+                  className="rounded-lg bg-white px-2 py-1 text-xs text-navy"
+                  aria-label={t('usuarias.programa')}
+                >
+                  <option value="">{t('usuarias.programa')}…</option>
+                  {PROGRAMAS.map((x) => <option key={x} value={x}>{x}</option>)}
+                </select>
+                <input
+                  defaultValue={p.id_interno || ''}
+                  onBlur={(e) => e.target.value !== (p.id_interno || '') && cambiar(p.id, { id_interno: e.target.value || null })}
+                  placeholder={t('usuarias.idInterno')}
+                  className="w-28 rounded-lg bg-white px-2 py-1 text-xs text-navy"
+                />
+              </div>
             </li>
           ))}
           {activas.length === 0 && (

@@ -13,6 +13,7 @@ import ModalPasswordEducaFe from './components/ModalPasswordEducaFe'
 import Header from './components/ui/Header'
 import CambiarContrasena from './components/CambiarContrasena'
 import * as api from './lib/backend'
+import { getModulo } from './data/curriculum'
 import { useIdioma } from './i18n/idioma'
 
 export default function App() {
@@ -172,7 +173,11 @@ export default function App() {
   if (!aprobada) return <PendienteAprobacion perfil={perfil} onSalir={() => api.salir()} />
 
   // Usuaria mostrada en el panel (admin puede ver a otra)
-  const mentoraMostrada = { id: idViendo, nombre: vista.usuariaNombre || perfil.nombre }
+  const mentoraMostrada = {
+    id: idViendo,
+    nombre: vista.usuariaNombre || perfil.nombre,
+    idInterno: viendoOtra ? vista.usuariaIdInterno : perfil.id_interno,
+  }
 
   return (
     <div className="min-h-screen bg-cream">
@@ -222,6 +227,9 @@ export default function App() {
             esAdmin={esAdmin}
             viendoOtra={viendoOtra}
             onAbrirBloque={(bloqueId) => setVista({ ...vista, nombre: 'bloque', bloqueId })}
+            onAbrirModulo={(moduloId) =>
+              setVista({ ...vista, nombre: 'modulo', moduloId, bloqueId: getModulo(moduloId)?.bloqueId })
+            }
             onVerHoras={() => setVista({ ...vista, nombre: 'horas' })}
             onVerCurso={() => setVista({ ...vista, nombre: 'curso' })}
             onVerCertificado={(nivel) => setVista({ ...vista, nombre: 'certificado', nivel })}
@@ -273,11 +281,11 @@ export default function App() {
         {vista.nombre === 'admin' && esAdmin && (
           <AdminView
             miPerfil={perfil}
-            onVerUsuaria={(usuariaId, usuariaNombre) =>
-              setVista({ nombre: 'dashboard', usuariaId, usuariaNombre })
+            onVerUsuaria={(usuariaId, usuariaNombre, usuariaIdInterno) =>
+              setVista({ nombre: 'dashboard', usuariaId, usuariaNombre, usuariaIdInterno })
             }
-            onVerCertificado={(usuariaId, usuariaNombre, nivel) =>
-              setVista({ nombre: 'certificado', usuariaId, usuariaNombre, nivel })
+            onVerCertificado={(usuariaId, usuariaNombre, nivel, usuariaIdInterno) =>
+              setVista({ nombre: 'certificado', usuariaId, usuariaNombre, nivel, usuariaIdInterno })
             }
           />
         )}

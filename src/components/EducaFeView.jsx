@@ -56,13 +56,13 @@ export default function EducaFeView({ onVolver }) {
           />
           <div className="text-center sm:text-left">
             <span className="inline-block rounded-full bg-amber-400/20 px-3 py-1 text-[12px] font-bold uppercase tracking-wider text-amber-300">
-              Portal Oficial de Miembros
+              EducaFe · Formación complementaria
             </span>
             <h1 className="mt-1 text-2xl font-bold tracking-tight text-white sm:text-3xl">
-              Portal EducaFe & Red de Hubs
+              EducaFe / Partner Training
             </h1>
             <p className="mt-1 text-sm text-amber-100/80 leading-relaxed">
-              Coordinación territorial, Socias Visionarias, Junta Directiva y formación de Hubs EducaFe-Chanak.
+              Área separada de la formación oficial de Chanak. La Asociación Cristiana EducaFe es una entidad colaboradora independiente (España); no es un departamento ni un nivel de certificación de Chanak.
             </p>
           </div>
         </div>
@@ -77,7 +77,7 @@ export default function EducaFeView({ onVolver }) {
               <h2 className="text-lg font-bold text-amber-300">Cuaderno de Conocimiento EducaFe</h2>
             </div>
             <p className="text-xs text-purple-100/80 leading-relaxed max-w-xl">
-              Accede al cuaderno interactivo de NotebookLM alimentado con las actas, acuerdos, rutas de Socias Visionarias y estatutos de EducaFe.
+              Cuaderno interactivo de NotebookLM con actas, acuerdos, estatutos y materiales de gobernanza de EducaFe (uso interno de la entidad).
             </p>
           </div>
           <a
@@ -95,25 +95,25 @@ export default function EducaFeView({ onVolver }) {
       {/* Rutas Formatívas y Perfiles */}
       <section className="space-y-3">
         <h3 className="text-base font-bold text-navy flex items-center gap-2">
-          <span>🏛️</span> Perfiles e Integridad Institucional
+          <span>🏛️</span> Qué pertenece a cada entidad
         </h3>
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm space-y-2">
             <span className="rounded-lg bg-teal/10 px-2.5 py-1 text-xs font-bold text-teal">
-              Autoestudio Gratuito
+              EducaFe · Optional Partner Training
             </span>
-            <h4 className="font-bold text-navy text-base">Socias Visionarias & Junta Directiva</h4>
+            <h4 className="font-bold text-navy text-base">Gobernanza EducaFe y Socias Visionarias</h4>
             <p className="text-xs text-navy/65 leading-relaxed">
-              Ruta gratuita de articulación territorial, gobierno, acta de asamblea, relaciones con iglesias y solicitudes de grants, sin sustituir la formación pagada de mentoras.
+              Formación complementaria de la entidad: gobierno asociativo, asambleas, relaciones con iglesias y solicitudes de subvenciones. No forma parte de la ruta Mentor → Coordinator ni otorga certificación Chanak.
             </p>
           </div>
           <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm space-y-2">
             <span className="rounded-lg bg-amber-500/10 px-2.5 py-1 text-xs font-bold text-amber-700">
-              Formación Certificada
+              Chanak Training (oficial)
             </span>
-            <h4 className="font-bold text-navy text-base">Mentoras (180h) y Coordinadoras (300h)</h4>
+            <h4 className="font-bold text-navy text-base">Chanak Certified Mentor (180 h) y Chanak Certified Coordinator (300 h)</h4>
             <p className="text-xs text-navy/65 leading-relaxed">
-              Preparación para acompañar familias, gestionar Hubs presenciales (Modalidad A y B), supervisar mentoras y sostener evidencia bajo estándares Chanak/EducaFe.
+              Las certificaciones las emite Chanak International Academy según su marco académico. El personal que trabaja en centros vinculados a EducaFe completa la ruta oficial en el panel principal.
             </p>
           </div>
         </div>
@@ -122,7 +122,7 @@ export default function EducaFeView({ onVolver }) {
       {/* Red de Hubs Territorial */}
       <section className="space-y-3">
         <h3 className="text-base font-bold text-navy flex items-center gap-2">
-          <span>📍</span> Red Territorial de Hubs EducaFe
+          <span>📍</span> Red territorial de EducaFe
         </h3>
         <div className="grid gap-3 sm:grid-cols-2">
           {HUBS.map((hub, idx) => (
@@ -157,7 +157,7 @@ export default function EducaFeView({ onVolver }) {
             rel="noopener noreferrer"
             className="flex items-center justify-between rounded-2xl bg-teal px-4 py-3.5 text-xs font-bold text-white shadow-sm transition hover:bg-teal/90"
           >
-            <span>Pagar Formación Mentora 180h / Coordinadora 300h</span>
+            <span>Pago de la formación (gestionado por EducaFe)</span>
             <span>↗</span>
           </a>
           <a
