@@ -103,27 +103,11 @@ export default function VideoLeccion({ video, esAdmin, onGuardar, onBorrar }) {
     )
   }
 
-  // ── Recurso publicado (Vídeo o NotebookLM) ──
+  // ── Vídeo publicado ──
   if (video?.url) {
-    const esNotebook = embed?.tipo === 'notebooklm'
     return (
       <div className="space-y-2">
-        {esNotebook ? (
-          <a
-            href={video.url}
-            target="_blank"
-            rel="noreferrer"
-            className="flex items-center gap-3.5 rounded-xl border-2 border-purple-300 bg-gradient-to-r from-purple-900 to-indigo-900 px-4 py-4 text-white shadow-md transition hover:from-purple-800 hover:to-indigo-800"
-          >
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/15 text-2xl" aria-hidden>
-              📘
-            </span>
-            <span className="min-w-0 flex-1 text-xs">
-              <b className="block text-sm text-amber-300 font-bold">Cuaderno de Formación NotebookLM</b>
-              <span className="text-purple-100/80">Haz clic para abrir las lecturas, audios y resúmenes de esta lección →</span>
-            </span>
-          </a>
-        ) : embed?.tipo === 'mp4' ? (
+        {embed?.tipo === 'mp4' ? (
           <div className="overflow-hidden rounded-xl bg-navy">
             <video src={embed.url} controls preload="metadata" playsInline className="aspect-video w-full" />
           </div>

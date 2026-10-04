@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { getModulo, RECURSOS_GENERALES, FUENTES, numModulo } from '../data/curriculum'
+import { getModulo, RECURSOS_GENERALES, FUENTES, numModulo, urlCarpeta } from '../data/curriculum'
 import { getContenido } from '../data/contenido'
 import { getVideo } from '../data/videos'
 import { formatearFecha } from '../lib/calculos'
@@ -97,6 +97,11 @@ export default function ModuleView({ moduloId, progresoModulo: p, videos, esAdmi
           <EstadoBadge estado={estado} />
         </div>
         {contenido && <p className="mt-3 text-sm leading-relaxed text-navy/70">{contenido.resumen}</p>}
+        {estado === 'reconocido' && (
+          <p className="mt-3 rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 text-[13px] leading-relaxed text-amber-900">
+            ♻️ {t('modulo.reconocido')}
+          </p>
+        )}
         {contenido?.sinTraducir && (
           <p className="mt-2 rounded-lg bg-gold/10 px-3 py-2 text-[12px] text-navy/65">🌐 {t('modulo.traduccionPendiente')}</p>
         )}
@@ -110,12 +115,20 @@ export default function ModuleView({ moduloId, progresoModulo: p, videos, esAdmi
           <div className="mt-4">
             <div className="text-[12px] font-semibold uppercase tracking-wide text-navy/45">{t('modulo.fuentes')}</div>
             <ul className="mt-1.5 space-y-1">
-              {modulo.fuentes.map((f) => (
-                <li key={f} className="text-xs text-navy/65">📄 {FUENTES[f] || f}</li>
-              ))}
+              {modulo.fuentes.map((f) => {
+                const nombre = FUENTES[f] || f
+                return (
+                  <li key={f} className="text-xs">
+                    <a href={urlCarpeta(nombre.split(' · ')[0])} target="_blank" rel="noreferrer" className="text-teal hover:underline">
+                      📂 {nombre}
+                    </a>
+                  </li>
+                )
+              })}
             </ul>
           </div>
         )}
+        {contenido?.desglose && <Desglose d={contenido.desglose} horas={modulo.horas} t={t} />}
       </div>
 
       {/* ── Stepper ── */}
@@ -202,6 +215,18 @@ export default function ModuleView({ moduloId, progresoModulo: p, videos, esAdmi
           <div className="mt-3 rounded-xl bg-navy/5 px-4 py-3 text-xs leading-relaxed text-navy/70">
             <b>{t('modulo.regla')}</b> {t('modulo.reglaTxt')}
           </div>
+          {contenido.guia && (
+            <div className="mt-4 rounded-xl border border-teal/25 bg-teal/5 px-4 py-3">
+              <div className="text-sm font-bold text-navy">{contenido.guia.titulo}</div>
+              <ol className="mt-2 space-y-2.5">
+                {(contenido.guia.pasos || []).map((g, i) => (
+                  <li key={i} className="text-sm leading-relaxed text-navy/80">
+                    <b className="text-navy">{i + 1}. {g.titulo}.</b> {g.detalle}
+                  </li>
+                ))}
+              </ol>
+            </div>
+          )}
           <label className="mt-4 block text-xs font-semibold text-navy">{t('modulo.tuRespuesta')}</label>
           <textarea
             value={notas}
@@ -353,6 +378,49 @@ export default function ModuleView({ moduloId, progresoModulo: p, videos, esAdmi
         </ul>
       </div>
     </div>
+  )
+}
+
+function Desglose({ d, horas, t }) {
+  const fmt = (h) => `${String(h).replace('.', ',')} h`
+  const filas = [
+    { k: 'video', icono: '🎬', v: d.video },
+    { k: 'lectura', icono: '📖', v: d.lectura, extra: t('desglose.palabras', { n: d.palabras.toLocaleString('es-ES') }) },
+    { k: 'documentos', icono: '📂', v: (d.documentos || []).reduce((s, x) => s + x.horas, 0) },
+    { k: 'practica', icono: '🛠', v: d.practica },
+    { k: 'evidencia', icono: '📁', v: d.evidencia },
+    { k: 'kc', icono: '✅', v: d.kc },
+  ]
+  return (
+    <details className="mt-4 rounded-xl border border-navy/10 bg-cream/60 px-4 py-3" open>
+      <summary className="cursor-pointer text-[12px] font-bold uppercase tracking-wide text-navy/55">
+        {t('desglose.titulo', { horas })}
+      </summary>
+      <ul className="mt-2 space-y-1">
+        {filas.map((f) => (
+          <li key={f.k} className="flex items-baseline justify-between gap-3 text-xs text-navy/75">
+            <span>{f.icono} {t(`desglose.${f.k}`)}{f.extra ? <span className="text-navy/45"> · {f.extra}</span> : null}</span>
+            <span className="shrink-0 font-semibold text-navy">{fmt(f.v)}</span>
+          </li>
+        ))}
+      </ul>
+      {d.documentos?.length > 0 && (
+        <div className="mt-3 border-t border-navy/10 pt-2">
+          <div className="text-[11px] font-semibold uppercase tracking-wide text-navy/45">{t('desglose.lecturaObligatoria')}</div>
+          <ul className="mt-1.5 space-y-2">
+            {d.documentos.map((doc, i) => (
+              <li key={i} className="text-xs leading-relaxed text-navy/75">
+                <a href={urlCarpeta(doc.carpeta)} target="_blank" rel="noreferrer" className="font-semibold text-teal hover:underline">
+                  📂 {doc.carpeta} › {doc.documento}
+                </a>{' '}
+                <span className="text-navy/50">({fmt(doc.horas)})</span>
+                <div className="text-navy/60">{doc.que}</div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </details>
   )
 }
 

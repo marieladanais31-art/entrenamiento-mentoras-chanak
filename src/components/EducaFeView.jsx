@@ -29,7 +29,6 @@ const HUBS = [
 
 export default function EducaFeView({ onVolver }) {
   const { t } = useIdioma()
-  const notebookUrl = 'https://notebook.google.com/notebook/ad68652d-0ea8-402a-81db-5ae61051f125'
 
   return (
     <div className="space-y-6">
@@ -65,30 +64,6 @@ export default function EducaFeView({ onVolver }) {
               Área separada de la formación oficial de Chanak. La Asociación Cristiana EducaFe es una entidad colaboradora independiente (España); no es un departamento ni un nivel de certificación de Chanak.
             </p>
           </div>
-        </div>
-      </div>
-
-      {/* Banner Principal — NotebookLM de EducaFe */}
-      <div className="rounded-3xl border-2 border-purple-400/40 bg-gradient-to-r from-purple-950 via-indigo-900 to-purple-900 p-6 text-white shadow-lg">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div className="space-y-1">
-            <div className="flex items-center gap-2">
-              <span className="text-2xl">📘</span>
-              <h2 className="text-lg font-bold text-amber-300">Cuaderno de Conocimiento EducaFe</h2>
-            </div>
-            <p className="text-xs text-purple-100/80 leading-relaxed max-w-xl">
-              Cuaderno interactivo de NotebookLM con actas, acuerdos, estatutos y materiales de gobernanza de EducaFe (uso interno de la entidad).
-            </p>
-          </div>
-          <a
-            href={notebookUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="shrink-0 rounded-2xl bg-amber-400 px-5 py-3 text-xs font-bold text-navy shadow-md transition hover:bg-amber-300 active:scale-95 flex items-center gap-2"
-          >
-            <span>Abrir NotebookLM de EducaFe</span>
-            <span>→</span>
-          </a>
         </div>
       </div>
 
