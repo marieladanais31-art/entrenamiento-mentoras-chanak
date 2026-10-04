@@ -1,16 +1,18 @@
-import { BLOQUES, TODOS_MODULOS } from '../data/curriculum'
+import { BLOQUES, TODOS_MODULOS, NIVEL_1_HORAS, NIVEL_2_HORAS, numModulo } from '../data/curriculum'
 import { resumenMentora, estadoBloque, horasBloqueCompletadas } from '../lib/calculos'
 import ProgressRing from './ui/ProgressRing'
 import EstadoBadge from './ui/EstadoBadge'
 import { useIdioma } from '../i18n/idioma'
 import { traducirBloques } from '../data/curriculum.en'
 
+// Inicio → Mi ruta → Bloque → Módulo
 export default function Dashboard({
   mentora,
   progreso,
   esAdmin,
   viendoOtra,
   onAbrirBloque,
+  onAbrirModulo,
   onVerHoras,
   onVerCurso,
   onVerCertificado,
@@ -19,25 +21,29 @@ export default function Dashboard({
   const { t, idioma } = useIdioma()
   const r = resumenMentora(progreso)
   const bloques = traducirBloques(BLOQUES, idioma)
-  const bloquesNivel1 = bloques.filter((b) => b.nivel === 1)
-  const bloquesNivel2 = bloques.filter((b) => b.nivel === 2)
-  const bloquesNivel3 = bloques.filter((b) => b.nivel === 3)
+  const mentorBloques = bloques.filter((b) => b.nivel === 1 && !b.porRol)
+  const rolBloques = bloques.filter((b) => b.porRol)
+  const coordBloques = bloques.filter((b) => b.nivel === 2)
   const nivel2Desbloqueado = r.nivel1Completo
+  const mods = progreso?.modulos || {}
+
+  // Siguiente paso: primer módulo en curso o, si no hay, el primero pendiente de la ruta
+  const ruta = TODOS_MODULOS.filter((m) => !m.porRol && (m.nivel === 1 || nivel2Desbloqueado))
+  const siguiente =
+    ruta.find((m) => mods[m.id]?.estado === 'en_curso') ||
+    ruta.find((m) => mods[m.id]?.estado !== 'completado')
+  const pct = Math.round((r.horas / NIVEL_2_HORAS) * 100)
 
   return (
     <div className="space-y-6">
-      {/* Cabecera de mentora */}
+      {/* Cabecera */}
       <section className="rounded-2xl bg-white p-5 shadow-sm">
         <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-center">
           <ProgressRing valor={r.horas} meta={r.metaHoras} />
           <div className="flex-1 text-center sm:text-left">
             <h2 className="text-xl font-bold text-navy">{mentora.nombre}</h2>
             <p className="text-sm text-navy/60">
-              {r.nivelActual === 3
-                ? t('panel.nivel3')
-                : r.nivelActual === 2
-                ? t('panel.nivel2')
-                : t('panel.nivel1')}
+              {r.nivelActual === 2 ? t('panel.nivel2') : t('panel.nivel1')}
               {viendoOtra && t('panel.vistaAdmin')}
             </p>
             <div className="mt-3 grid grid-cols-3 gap-2 text-center">
@@ -47,100 +53,90 @@ export default function Dashboard({
             </div>
           </div>
         </div>
+        {/* Barra de ruta Mentor (180) → Coordinator (300) */}
+        <div className="mt-5">
+          <div className="flex justify-between text-[12px] font-semibold text-navy/55">
+            <span>{t('panel.ruta')}</span>
+            <span>{r.horas}h / {NIVEL_2_HORAS}h</span>
+          </div>
+          <div className="relative mt-1.5 h-2.5 overflow-hidden rounded-full bg-navy/10">
+            <div className="h-full rounded-full bg-teal transition-all" style={{ width: `${Math.min(100, pct)}%` }} />
+            <div className="absolute top-0 h-full w-0.5 bg-gold" style={{ left: `${(NIVEL_1_HORAS / NIVEL_2_HORAS) * 100}%` }} />
+          </div>
+          <div className="mt-1 flex justify-between text-[11px] text-navy/50">
+            <span>0</span>
+            <span>Mentor · {NIVEL_1_HORAS}h</span>
+            <span>Coordinator · {NIVEL_2_HORAS}h</span>
+          </div>
+        </div>
       </section>
 
-      {/* Botones de navegación rápida */}
-      <div className="grid gap-3 sm:grid-cols-2">
+      {/* Siguiente paso */}
+      {siguiente && !viendoOtra && (
         <button
-          onClick={onVerCurso}
-          className="flex w-full items-center gap-3 rounded-2xl border-2 border-teal/25 bg-teal/6 px-4 py-3.5 text-left transition hover:bg-teal/12"
+          onClick={() => onAbrirModulo(siguiente.id)}
+          className="flex w-full items-center gap-3 rounded-2xl bg-teal px-4 py-4 text-left text-white shadow-sm transition hover:bg-teal/90"
         >
-          <span className="text-xl" aria-hidden>
-            📘
-          </span>
+          <span className="text-2xl" aria-hidden>▶</span>
           <span className="min-w-0 flex-1">
-            <span className="block text-sm font-bold text-navy">
-              {t('panel.presentacion')}
+            <span className="block text-[12px] font-bold uppercase tracking-wide text-white/75">
+              {mods[siguiente.id]?.estado === 'en_curso' ? t('panel.continuar') : t('panel.siguiente')}
             </span>
-            <span className="block text-xs text-navy/60">
-              {t('panel.presentacionSub')}
+            <span className="block text-sm font-bold">
+              {numModulo(siguiente.id)} · {siguiente.titulo}
             </span>
           </span>
-          <span className="shrink-0 text-teal">→</span>
+          <span className="shrink-0">→</span>
         </button>
+      )}
 
-        <button
-          onClick={onVerEducafe}
-          className="flex w-full items-center gap-3 rounded-2xl border-2 border-amber-600/25 bg-amber-50 px-4 py-3.5 text-left transition hover:bg-amber-100/60"
-        >
-          <span className="text-xl" aria-hidden>
-            ☕️
-          </span>
-          <span className="min-w-0 flex-1">
-            <span className="block text-sm font-bold text-navy">
-              Miembros de EducaFe
-            </span>
-            <span className="block text-xs text-navy/60">
-              Cuaderno NotebookLM, Hubs y Socias Visionarias
-            </span>
-          </span>
-          <span className="shrink-0 text-amber-700">→</span>
-        </button>
+      {/* Accesos */}
+      <div className="grid gap-3 sm:grid-cols-2">
+        <Acceso icono="📘" titulo={t('panel.presentacion')} sub={t('panel.presentacionSub')} onClick={onVerCurso} tono="teal" />
+        <Acceso icono="📋" titulo={t('panel.registroHoras')} sub={t('panel.registroHorasSub', { horas: r.horas })} onClick={onVerHoras} tono="navy" />
       </div>
 
-      {/* Banners de certificación */}
+      {/* Certificación */}
       {r.elegibleCoordinadora ? (
-        <BannerCert
-          titulo={t('panel.elegibleCoord')}
-          detalle={t('panel.elegibleCoordSub')}
-          onVer={() => onVerCertificado(2)}
-        />
+        <BannerCert titulo={t('panel.elegibleCoord')} detalle={t('panel.elegibleCoordSub')} onVer={() => onVerCertificado(2)} />
       ) : r.elegibleMentor ? (
-        <BannerCert
-          titulo={t('panel.elegibleMentor')}
-          detalle={t('panel.elegibleMentorSub')}
-          onVer={() => onVerCertificado(1)}
-        />
+        <BannerCert titulo={t('panel.elegibleMentor')} detalle={t('panel.elegibleMentorSub')} onVer={() => onVerCertificado(1)} />
       ) : null}
 
-      {/* Bloques Nivel 1 */}
+      {/* Nivel 1 */}
       <section>
         <TituloSeccion
           titulo={t('panel.tituloN1')}
-          subtitulo={t('panel.subN1', {
-            bloques: bloquesNivel1.length,
-            modulos: bloquesNivel1.reduce((s, b) => s + b.modulos.length, 0),
-          })}
+          subtitulo={t('panel.subN1', { bloques: mentorBloques.length, modulos: mentorBloques.reduce((s, b) => s + b.modulos.length, 0) })}
         />
         <div className="grid gap-3 sm:grid-cols-2">
-          {bloquesNivel1.map((b) => (
-            <TarjetaBloque
-              key={b.id}
-              bloque={b}
-              estado={estadoBloque(progreso, b)}
-              horasHechas={horasBloqueCompletadas(progreso, b)}
-              onClick={() => onAbrirBloque(b.id)}
-            />
+          {mentorBloques.map((b) => (
+            <TarjetaBloque key={b.id} bloque={b} estado={estadoBloque(progreso, b)} horasHechas={horasBloqueCompletadas(progreso, b)} onClick={() => onAbrirBloque(b.id)} />
           ))}
         </div>
       </section>
 
-      {/* Bloques Nivel 2 */}
+      {/* Por rol */}
+      <section>
+        <TituloSeccion titulo={t('panel.tituloRol')} subtitulo={t('panel.porRolTxt')} />
+        <div className="grid gap-3 sm:grid-cols-2">
+          {rolBloques.map((b) => (
+            <TarjetaBloque key={b.id} bloque={b} estado={estadoBloque(progreso, b)} horasHechas={horasBloqueCompletadas(progreso, b)} onClick={() => onAbrirBloque(b.id)} />
+          ))}
+        </div>
+      </section>
+
+      {/* Nivel 2 */}
       <section>
         <TituloSeccion
           titulo={t('panel.tituloN2')}
-          subtitulo={t('panel.subN2', {
-            bloques: bloquesNivel2.length,
-            modulos: bloquesNivel2.reduce((s, b) => s + b.modulos.length, 0),
-          })}
+          subtitulo={t('panel.subN2', { bloques: coordBloques.length, modulos: coordBloques.reduce((s, b) => s + b.modulos.length, 0) })}
         />
         {!nivel2Desbloqueado && (
-          <p className="mb-3 rounded-xl bg-navy/5 px-4 py-2.5 text-xs text-navy/60">
-            {t('panel.bloqueoN2')}
-          </p>
+          <p className="mb-3 rounded-xl bg-navy/5 px-4 py-2.5 text-xs text-navy/60">{t('panel.bloqueoN2')}</p>
         )}
         <div className="grid gap-3 sm:grid-cols-2">
-          {bloquesNivel2.map((b) => (
+          {coordBloques.map((b) => (
             <TarjetaBloque
               key={b.id}
               bloque={b}
@@ -152,35 +148,29 @@ export default function Dashboard({
         </div>
       </section>
 
-      {/* Bloques Nivel 3 */}
-      <section>
-        <TituloSeccion
-          titulo={t('panel.tituloN3')}
-          subtitulo={t('panel.subN3')}
-        />
-        <div className="grid gap-3 sm:grid-cols-2">
-          {bloquesNivel3.map((b) => (
-            <TarjetaBloque
-              key={b.id}
-              bloque={b}
-              estado={estadoBloque(progreso, b)}
-              horasHechas={horasBloqueCompletadas(progreso, b)}
-              onClick={() => onAbrirBloque(b.id)}
-            />
-          ))}
-        </div>
+      {/* Formación complementaria de entidades colaboradoras (separada de la ruta Chanak) */}
+      <section className="rounded-2xl border border-amber-600/25 bg-amber-50 p-4">
+        <div className="text-[12px] font-bold uppercase tracking-wide text-amber-800">{t('panel.partnerTitulo')}</div>
+        <p className="mt-1 text-xs leading-relaxed text-navy/65">{t('panel.partnerTxt')}</p>
+        <button onClick={onVerEducafe} className="mt-3 rounded-xl bg-amber-600 px-4 py-2 text-xs font-bold text-white hover:bg-amber-700">
+          {t('panel.partnerBoton')} →
+        </button>
       </section>
-
-      <button
-        onClick={onVerHoras}
-        className="w-full rounded-2xl bg-navy py-3.5 text-sm font-semibold text-cream shadow-sm transition hover:bg-navy/90"
-      >
-        {t('panel.verHoras', {
-          horas: r.horas,
-          total: TODOS_MODULOS.reduce((s, m) => s + m.horas, 0),
-        })}
-      </button>
     </div>
+  )
+}
+
+function Acceso({ icono, titulo, sub, onClick, tono }) {
+  const c = tono === 'teal' ? 'border-teal/25 bg-teal/6 hover:bg-teal/12' : 'border-navy/15 bg-white hover:bg-cream'
+  return (
+    <button onClick={onClick} className={`flex w-full items-center gap-3 rounded-2xl border-2 px-4 py-3.5 text-left transition ${c}`}>
+      <span className="text-xl" aria-hidden>{icono}</span>
+      <span className="min-w-0 flex-1">
+        <span className="block text-sm font-bold text-navy">{titulo}</span>
+        <span className="block text-xs text-navy/60">{sub}</span>
+      </span>
+      <span className="shrink-0 text-teal">→</span>
+    </button>
   )
 }
 
@@ -201,10 +191,7 @@ function BannerCert({ titulo, detalle, onVer }) {
         🎓 <b>{titulo}</b>
         <div className="mt-0.5 text-xs text-navy/70">{detalle}</div>
       </div>
-      <button
-        onClick={onVer}
-        className="mt-3 w-full rounded-xl bg-gold py-2.5 text-sm font-bold text-navy transition hover:bg-gold/90"
-      >
+      <button onClick={onVer} className="mt-3 w-full rounded-xl bg-gold py-2.5 text-sm font-bold text-navy transition hover:bg-gold/90">
         {t('panel.verCertificado')}
       </button>
     </div>
@@ -228,31 +215,22 @@ function TarjetaBloque({ bloque, estado, horasHechas, onClick }) {
     <button
       onClick={onClick}
       disabled={!onClick}
-      className={`rounded-2xl bg-white p-4 text-left shadow-sm transition ${
-        bloqueado ? 'opacity-55' : 'hover:shadow-md active:scale-[0.99]'
-      }`}
+      className={`rounded-2xl bg-white p-4 text-left shadow-sm transition ${bloqueado ? 'opacity-55' : 'hover:shadow-md active:scale-[0.99]'}`}
     >
       <div className="flex items-start justify-between gap-2">
         <div className="text-[13px] font-bold uppercase tracking-wider text-teal">
-          {t('panel.bloque', { n: bloque.numero })}
+          {t('panel.bloque', { n: bloque.numero })} · {bloque.categoria}
         </div>
         <EstadoBadge estado={estado} />
       </div>
       <div className="mt-1 text-sm font-semibold leading-snug text-navy">{bloque.titulo}</div>
       <div className="mt-2 flex items-center justify-between text-xs text-navy/55">
         <span>{t('panel.modulos', { n: bloque.modulos.length })}</span>
-        <span>
-          {bloque.horas > 0 ? `${horasHechas}/${bloque.horas}h` : 'Autoestudio Libre'}
-        </span>
+        <span>{horasHechas}/{bloque.horas}h</span>
       </div>
-      {bloque.horas > 0 && (
-        <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-navy/10">
-          <div
-            className={`h-full rounded-full ${pct >= 100 ? 'bg-gold' : 'bg-teal'}`}
-            style={{ width: `${pct}%` }}
-          />
-        </div>
-      )}
+      <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-navy/10">
+        <div className={`h-full rounded-full ${pct >= 100 ? 'bg-gold' : 'bg-teal'}`} style={{ width: `${pct}%` }} />
+      </div>
     </button>
   )
 }

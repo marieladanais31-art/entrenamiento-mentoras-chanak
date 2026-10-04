@@ -47,15 +47,15 @@ export default function VideoLeccion({ video, esAdmin, onGuardar, onBorrar }) {
   if (editando) {
     return (
       <div className="rounded-xl border-2 border-teal bg-teal/5 p-4">
-        <div className="text-xs font-bold text-navy">🎬 Vídeo o Cuaderno NotebookLM de la lección</div>
+        <div className="text-xs font-bold text-navy">🎬 Vídeo del módulo</div>
         <label className="mt-2 block">
           <span className="text-[12px] font-semibold uppercase tracking-wide text-navy/55">
-            Enlace (NotebookLM, Google Vids, Drive o YouTube)
+            Enlace (MP4, YouTube, Vimeo, Google Drive, Google Vids o cualquier URL)
           </span>
           <input
             value={url}
             onChange={(e) => setUrl(e.target.value)}
-            placeholder="https://notebooklm.google.com/notebook/… o https://vids.google.com/…"
+            placeholder="https://…/video.mp4 · https://youtu.be/… · https://vimeo.com/…"
             className="mt-1 w-full rounded-lg border border-navy/20 bg-white px-3 py-2 text-xs"
           />
         </label>
@@ -123,11 +123,15 @@ export default function VideoLeccion({ video, esAdmin, onGuardar, onBorrar }) {
               <span className="text-purple-100/80">Haz clic para abrir las lecturas, audios y resúmenes de esta lección →</span>
             </span>
           </a>
+        ) : embed?.tipo === 'mp4' ? (
+          <div className="overflow-hidden rounded-xl bg-navy">
+            <video src={embed.url} controls preload="metadata" playsInline className="aspect-video w-full" />
+          </div>
         ) : embed?.tipo === 'embed' ? (
           <div className="overflow-hidden rounded-xl bg-navy">
             <iframe
               src={embed.url}
-              title="Vídeo de la lección"
+              title="Vídeo del módulo"
               allow="autoplay; fullscreen"
               allowFullScreen
               className="aspect-video w-full border-0"
@@ -155,7 +159,7 @@ export default function VideoLeccion({ video, esAdmin, onGuardar, onBorrar }) {
               onClick={() => setEditando(true)}
               className="text-[13px] font-semibold text-teal hover:underline"
             >
-              ✏️ Cambiar vídeo o NotebookLM
+              ✏️ Cambiar vídeo
             </button>
             {video.nota && (
               <span className="text-[13px] text-navy/50">{t('video.nota')}: {video.nota}</span>
@@ -177,9 +181,9 @@ export default function VideoLeccion({ video, esAdmin, onGuardar, onBorrar }) {
           ➕
         </span>
         <span className="min-w-0 text-xs leading-relaxed text-navy/70">
-          <b className="text-navy/85">Añadir Vídeo o Cuaderno NotebookLM</b>
+          <b className="text-navy/85">Añadir vídeo</b>
           <br />
-          Pega el enlace de tu NotebookLM, Google Vids, Drive o YouTube para esta lección.
+          Pega la URL del vídeo (MP4, YouTube, Vimeo, Drive o Google Vids). Tiene prioridad sobre src/data/videos.js.
         </span>
       </button>
     )

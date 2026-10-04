@@ -1,5 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
-import { BLOQUES } from '../data/curriculum'
+import { BLOQUES, VERSION_CURRICULO, FECHA_ACTUALIZACION, numModulo } from '../data/curriculum'
+import { VIDEOS, CATEGORIAS_VIDEO } from '../data/videos'
+import VideoLeccion from './VideoLeccion'
 import * as api from '../lib/backend'
 import { resumenMentora, formatearFecha, iniciales } from '../lib/calculos'
 import GestionUsuarias from './GestionUsuarias'
@@ -42,20 +44,24 @@ export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) 
         <p className="mt-1 text-xs text-cream/70">
           {t('admin.sub', { nombre: miPerfil.nombre })}
         </p>
+        <p className="mt-2 inline-block rounded-full bg-white/10 px-3 py-1 text-[11px] text-cream/80">
+          {t('admin.version', { version: VERSION_CURRICULO, fecha: formatearFecha(FECHA_ACTUALIZACION) })}
+        </p>
       </div>
 
       {/* Pestañas */}
-      <div className="flex gap-1 rounded-xl bg-white p-1 shadow-sm">
+      <div className="flex gap-1 overflow-x-auto rounded-xl bg-white p-1 shadow-sm">
         {[
           ['usuarias', `${t('admin.tabUsuarias')}${pendientes ? ` (${pendientes})` : ''}`],
           ['codigos', t('admin.tabCodigos')],
           ['progreso', t('admin.tabProgreso')],
+          ['videos', t('admin.tabVideos')],
           ['retroactivo', t('admin.tabRetroactivo')],
         ].map(([id, texto]) => (
           <button
             key={id}
             onClick={() => setPestana(id)}
-            className={`flex-1 rounded-lg py-2 text-xs font-semibold transition ${
+            className={`min-w-max flex-1 rounded-lg px-2 py-2 text-xs font-semibold transition ${
               pestana === id ? 'bg-navy text-cream' : 'text-navy/60 hover:bg-cream'
             }`}
           >
@@ -107,6 +113,12 @@ export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) 
                               <span className="ml-1 text-[12px] text-gold">🔑</span>
                             )}
                           </div>
+                          <div className="text-[12px] text-navy/45">
+                            {p.tipo_acceso === 'coordinadora' ? 'Coordinator' : p.tipo_acceso === 'visionaria' ? 'Partner (EducaFe)' : 'Mentor'}
+                            {p.pais ? ` · ${p.pais}` : ''}
+                            {p.programa ? ` · ${p.programa}` : ''}
+                            {p.id_interno ? ` · ID ${p.id_interno}` : ''}
+                          </div>
                           <div className="text-[13px] text-navy/55">
                             {t('admin.nivelResumen', {
                               nivel: r.nivelActual,
@@ -128,7 +140,7 @@ export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) 
                       {(r.elegibleMentor || r.elegibleCoordinadora) && (
                         <button
                           onClick={() =>
-                            onVerCertificado(p.id, p.nombre, r.elegibleCoordinadora ? 2 : 1)
+                            onVerCertificado(p.id, p.nombre, r.elegibleCoordinadora ? 2 : 1, p.id_interno)
                           }
                           className="mt-2 w-full rounded-lg bg-gold/15 py-2 text-[13px] font-bold text-gold transition hover:bg-gold/25"
                         >
@@ -138,7 +150,7 @@ export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) 
                         </button>
                       )}
                       <button
-                        onClick={() => onVerUsuaria(p.id, p.nombre)}
+                        onClick={() => onVerUsuaria(p.id, p.nombre, p.id_interno)}
                         className="mt-2 w-full rounded-lg bg-navy/5 py-2 text-xs font-semibold text-navy transition hover:bg-navy/10"
                       >
                         {t('admin.abrirPanel')}
@@ -154,6 +166,8 @@ export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) 
               </div>
             </section>
           )}
+
+          {pestana === 'videos' && <GestionVideos />}
 
           {pestana === 'retroactivo' && (
             <section>
@@ -226,7 +240,7 @@ function TablaRetroactiva({ perfil, progreso, onCambio, idioma }) {
                       key={mod.id}
                       className="flex flex-wrap items-center gap-2 rounded-lg bg-cream/60 px-3 py-2 text-xs"
                     >
-                      <span className="font-semibold text-navy">{mod.id}</span>
+                      <span className="font-semibold text-navy">{numModulo(mod.id)}</span>
                       <span className="min-w-0 flex-1 truncate text-navy/70">{mod.titulo}</span>
                       <span className="text-navy/50">{mod.horas}h</span>
                       {completado ? (
@@ -290,5 +304,62 @@ function TablaRetroactiva({ perfil, progreso, onCambio, idioma }) {
         </div>
       )}
     </div>
+  )
+}
+
+// Biblioteca de vídeos: estado de cada uno de los 28 vídeos y edición de su URL.
+// La URL guardada aquí (Supabase · tabla videos, modulo_id = id del vídeo) tiene
+// prioridad sobre la `videoUrl` de src/data/videos.js.
+function GestionVideos() {
+  const { t } = useIdioma()
+  const [guardados, setGuardados] = useState({})
+  const [abierto, setAbierto] = useState(null)
+  const cargar = useCallback(async () => setGuardados(await api.getVideos()), [])
+  useEffect(() => {
+    cargar()
+  }, [cargar])
+  const conUrl = VIDEOS.filter((v) => guardados[`${v.id}:0`]?.url || v.videoUrl).length
+  return (
+    <section>
+      <h3 className="mb-1 font-bold text-navy">{t('admin.videosTitulo')}</h3>
+      <p className="mb-3 text-xs text-navy/55">{t('admin.videosSub', { n: conUrl, total: VIDEOS.length })}</p>
+      {CATEGORIAS_VIDEO.map((cat) => (
+        <div key={cat} className="mb-4">
+          <div className="mb-1.5 text-[13px] font-bold uppercase tracking-wide text-teal">{cat}</div>
+          <ul className="space-y-1.5">
+            {VIDEOS.filter((v) => v.bloque === cat).map((v) => {
+              const g = guardados[`${v.id}:0`]
+              const url = g?.url || v.videoUrl
+              return (
+                <li key={v.id} className="rounded-xl bg-white p-3 shadow-sm">
+                  <button onClick={() => setAbierto(abierto === v.id ? null : v.id)} className="flex w-full items-center gap-2 text-left text-xs">
+                    <span className="font-mono font-bold text-navy">{v.id}</span>
+                    <span className="min-w-0 flex-1 truncate text-navy/75">{v.titulo}</span>
+                    <span className="text-navy/45">{numModulo(v.modulo)} · {v.duracion}</span>
+                    <span className={url ? 'text-teal' : 'text-coral'}>{url ? '●' : '○'}</span>
+                  </button>
+                  {abierto === v.id && (
+                    <div className="mt-3">
+                      <VideoLeccion
+                        video={url ? { url, nota: g?.nota || '' } : null}
+                        esAdmin
+                        onGuardar={async (u, n) => {
+                          await api.guardarVideo(v.id, 0, u, n)
+                          await cargar()
+                        }}
+                        onBorrar={async () => {
+                          await api.borrarVideo(v.id, 0)
+                          await cargar()
+                        }}
+                      />
+                    </div>
+                  )}
+                </li>
+              )
+            })}
+          </ul>
+        </div>
+      ))}
+    </section>
   )
 }
