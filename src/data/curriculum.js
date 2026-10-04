@@ -41,6 +41,41 @@ export const FUENTES = {
   matrix: '09_ACADEMIC_FRAMEWORK · Florida Standards Alignment Matrix',
 }
 
+
+// Carpetas de la documentación oficial en Drive (CHANAK_DOCUMENTOS_2026-2027_FINAL).
+// Sustituyen a los antiguos cuadernos de NotebookLM: cada módulo enlaza a la carpeta exacta.
+const DRIVE = (id) => `https://drive.google.com/drive/folders/${id}`
+export const CARPETA_FINAL_URL = DRIVE('1bPAuhY8-YhHBmUPpqUahXACC_bH_BqxT')
+export const CARPETAS_DRIVE = {
+  '01_INSTITUCIONAL': DRIVE('1KbhzvvpIgASo5koXhpAqPs3IsYgPoDuU'),
+  '02_FAMILIAS': DRIVE('1szjqYrhvU72RZ08giDiISA88ftuo17PI'),
+  '03_INSTITUCIONES': DRIVE('1rm_nWHq32FVyeub7cS9Cj3o7de8FWsxa'),
+  '03_INSTITUCIONES/CONTRATOS': DRIVE('1TQXRC3epFE-As6aBSJQo43fu4J_muafD'),
+  '04_PAISES': DRIVE('1KWPYNpFXzEQe-FAbLJaqTtP8jLj8-lKO'),
+  '05_PRESENTACIONES_REUNIONES': DRIVE('1RCurkbptzoA7f72Xwzv_ubf3fo6CVEcb'),
+  '06_CONTROL_DOCUMENTAL': DRIVE('14y6q-jR0oY5Y4S2TrMP89t_Ox6zQfPUl'),
+  '07_US_PROGRAMS_COMPLIANCE': DRIVE('1tZuY_YSvpPe6tKzzspFeAs0muziOMXI8'),
+  '07_US_PROGRAMS_COMPLIANCE/Alabama': DRIVE('1aSk889xW91VcLgDZmhRD566CwhCKx7vV'),
+  '07_US_PROGRAMS_COMPLIANCE/Florida': DRIVE('1b1Zyp-tPM5BtHkFXQHCs-kIWer8GV_4I'),
+  '08_ACADEMIC_POLICIES': DRIVE('1R9VnVnQLFIMmSgT5C4eSwRW-06cdbECs'),
+  '09_ACADEMIC_FRAMEWORK': DRIVE('14XPRVMO0UuiqXoNh9AxCSP2giQoPNOOd'),
+}
+export function urlCarpeta(carpeta = '') {
+  return CARPETAS_DRIVE[carpeta] || CARPETAS_DRIVE[carpeta.split('/')[0]] || CARPETA_FINAL_URL
+}
+// Biblioteca práctica: para qué usa cada carpeta el mentor y el coordinador.
+export const BIBLIOTECA = [
+  { carpeta: '01_INSTITUCIONAL', mentor: 'Presentar Chanak con exactitud: identidad, estatus, programas y qué emite Chanak.', coordinador: 'Referencia para reuniones institucionales y para corregir información pública.' },
+  { carpeta: '02_FAMILIAS', mentor: 'Dossiers de Off-Campus, Dual Diploma y Life Skills para orientar a familias.', coordinador: 'Verificar que lo que se promete a las familias coincide con el dossier oficial.' },
+  { carpeta: '03_INSTITUCIONES', mentor: 'Vías curriculares y diferencias entre programas.', coordinador: 'Partner Learning Center, alianzas, Dual Diploma institucional y contratos (subcarpeta CONTRATOS).' },
+  { carpeta: '04_PAISES', mentor: 'Programas y tarifas vigentes por país: la única fuente para responder sobre precios.', coordinador: 'Comprobar condiciones por país antes de cerrar acuerdos.' },
+  { carpeta: '05_PRESENTACIONES_REUNIONES', mentor: 'Presentaciones listas para reuniones con familias.', coordinador: 'Presentaciones para colegios, alianzas y Partner Learning Centers.' },
+  { carpeta: '06_CONTROL_DOCUMENTAL', mentor: 'Saber qué versión es la oficial (README y CHANGELOG).', coordinador: 'Control de versiones y fuentes antes de citar un documento.' },
+  { carpeta: '07_US_PROGRAMS_COMPLIANCE', mentor: 'Solo por rol: Florida EMA y Alabama CHOOSE (uso interno, no se envía a familias).', coordinador: 'Cumplimiento de programas estatales de EE. UU. (state funding ≠ curriculum).' },
+  { carpeta: '08_ACADEMIC_POLICIES', mentor: 'Las cinco políticas académicas: certificación, créditos, currículo y evaluación.', coordinador: 'Base de toda decisión académica y de las auditorías de expedientes.' },
+  { carpeta: '09_ACADEMIC_FRAMEWORK', mentor: 'Scope & Sequence K–12 y matrices de estándares y evaluación.', coordinador: 'Revisión de planes de estudio, créditos y evidencia por grado.' },
+]
+
 export const RECURSOS_GENERALES = [
   {
     nombre: 'SIS Chanak — Registro académico oficial (entorno de práctica)',
