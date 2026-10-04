@@ -78,7 +78,7 @@ export function onCambioAuth(callback) {
 export async function getPerfil(userId) {
   const { data, error } = await supabase
     .from('perfiles')
-    .select('id, nombre, rol, estado, tipo_acceso, creado_en')
+    .select('*')
     .eq('id', userId)
     .maybeSingle()
   if (error) throw new Error(error.message)
@@ -92,7 +92,7 @@ export async function getPerfil(userId) {
 export async function listarPerfiles() {
   const { data, error } = await supabase
     .from('perfiles')
-    .select('id, nombre, rol, estado, tipo_acceso, creado_en')
+    .select('*')
     .order('creado_en', { ascending: true })
   if (error) throw new Error(error.message)
   return data || []

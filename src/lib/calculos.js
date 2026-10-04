@@ -1,4 +1,4 @@
-import { TODOS_MODULOS, NIVEL_1_HORAS } from '../data/curriculum'
+import { TODOS_MODULOS, NIVEL_1_HORAS, NIVEL_2_HORAS } from '../data/curriculum'
 
 // Funciones puras de cálculo sobre un objeto de progreso { modulos: {…} }.
 // No tocan red ni almacenamiento: así los componentes se mantienen simples.
@@ -8,7 +8,9 @@ export function resumenMentora(progreso) {
   let horas = 0
   let completados = 0
   let enCurso = 0
-  for (const m of TODOS_MODULOS) {
+  // Solo cuentan para la certificación los módulos de la ruta oficial (no los "por rol").
+  const ruta = TODOS_MODULOS.filter((m) => !m.porRol)
+  for (const m of ruta) {
     const p = mods[m.id]
     if (p?.estado === 'completado') {
       horas += m.horas
@@ -17,21 +19,26 @@ export function resumenMentora(progreso) {
       enCurso++
     }
   }
-  const nivel1Completo = TODOS_MODULOS.filter((m) => m.nivel === 1).every(
+  const nivel1Completo = ruta.filter((m) => m.nivel === 1).every(
     (m) => mods[m.id]?.estado === 'completado'
   )
   const nivel2Completo =
     nivel1Completo &&
-    TODOS_MODULOS.filter((m) => m.nivel === 2).every((m) => mods[m.id]?.estado === 'completado')
+    ruta.filter((m) => m.nivel === 2).every((m) => mods[m.id]?.estado === 'completado')
+  const porRolCompletados = TODOS_MODULOS.filter(
+    (m) => m.porRol && mods[m.id]?.estado === 'completado'
+  ).length
   return {
     horas,
     completados,
     enCurso,
-    pendientes: TODOS_MODULOS.length - completados - enCurso,
+    pendientes: ruta.length - completados - enCurso,
+    totalModulos: ruta.length,
+    porRolCompletados,
     nivel1Completo,
     nivel2Completo,
     nivelActual: nivel1Completo ? 2 : 1,
-    metaHoras: nivel1Completo ? 300 : NIVEL_1_HORAS,
+    metaHoras: nivel1Completo ? NIVEL_2_HORAS : NIVEL_1_HORAS,
     elegibleMentor: horas >= NIVEL_1_HORAS && nivel1Completo,
     elegibleCoordinadora: nivel2Completo,
   }
@@ -95,6 +102,11 @@ export function urlEmbed(url = '') {
     const host = u.includes('drive.google.com') ? 'drive.google.com/file' : 'docs.google.com/videos'
     return { tipo: 'embed', url: `https://${host}/d/${google[1]}/preview` }
   }
+  // Vídeo directo (MP4 / WebM / MOV)
+  if (/\.(mp4|webm|mov|m4v)(\?|#|$)/i.test(u)) return { tipo: 'mp4', url: u }
+  // Vimeo
+  const vm = u.match(/vimeo\.com\/(?:video\/)?(\d+)/)
+  if (vm) return { tipo: 'embed', url: `https://player.vimeo.com/video/${vm[1]}` }
   // YouTube
   const yt = u.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([\w-]{11})/)
   if (yt) return { tipo: 'embed', url: `https://www.youtube.com/embed/${yt[1]}` }
