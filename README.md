@@ -1,86 +1,87 @@
-# Chanak Academy — Formación de Mentoras
+# Chanak · Formación de Mentores y Coordinadores 2026–2027
 
-Aplicación web interna de Chanak International Academy donde las mentoras completan su
-formación y se registra su progreso. Sirve como evidencia del indicador **MSA T5a**
-(formación del personal) para la acreditación MSA-CESS.
+> Comprender el modelo. Acompañar con criterio. Documentar con excelencia.
 
-**Fuente de verdad del currículo:** `Chanak_Pathway_180_300h.docx` → [src/data/curriculum.js](src/data/curriculum.js)
+Aplicación web interna de **Chanak International Academy** (Chanak TrainUp Education, Inc. ·
+escuela privada registrada en Florida, FLDOE #134620 · MSA-CESS Candidate) para formar a
+mentores y coordinadores y registrar su progreso. Enseña cómo funciona y se opera Chanak:
+no es un curso para preparar una visita de acreditación.
 
-## Niveles de certificación
+**Producción:** https://entrenamiento-mentoras-chanak-two.vercel.app
+**Versión de currículo:** `training-2026-2027` (actualizado el 2 de octubre de 2026)
+**Fuente oficial del contenido:** carpeta `CHANAK_DOCUMENTOS_2026-2027_FINAL`
+(01_INSTITUCIONAL, 02_FAMILIAS, 03_INSTITUCIONES, 07_US_PROGRAMS_COMPLIANCE,
+08_ACADEMIC_POLICIES, 09_ACADEMIC_FRAMEWORK · K–12 Scope & Sequence).
 
-| Nivel | Certificación | Horas | Bloques | Módulos |
+## Ruta de certificación
+
+| Nivel | Certificación | Bloques | Módulos | Horas de referencia |
 |---|---|---|---|---|
-| 1 | Chanak-Certified Mentor | 180h | 1–6 | 24 |
-| 2 | Chanak-Certified Coordinator | 300h (180h + 120h) | 7–10 | 14 |
+| 1 | CHANAK CERTIFIED MENTOR | 1–6 | 22 | 180 h |
+| 2 | CHANAK CERTIFIED COORDINATOR | Nivel 1 + 8 | 22 + 4 | 300 h acumuladas |
+| Por rol | USA State Programs / Compliance | 7 | 2 | 10 h (no suma a la certificación) |
 
-> Nota: el documento fuente menciona "18/12 módulos" en los encabezados, pero sus tablas
-> contienen 24 y 14 módulos respectivamente. Las horas sí cuadran exactamente (180h/120h).
-> La app carga todos los módulos de las tablas.
+Las horas son una referencia formativa (autoestudio, vídeos, lecturas, actividades, práctica,
+SIS, observación, evaluaciones y evidencias), no horas de vídeo.
 
-## Contenido pedagógico
+## Bloques
 
-Arquitectura al estilo Prospero Learning: **38 módulos · 101 lecciones · 169 preguntas**.
+1. Identidad y modelo Chanak (Fundamentos)
+2. Programas Chanak (Off-Campus (Homeschool Guiado), Dual Diploma, Life Skills, PLC y Certificación)
+3. Curriculum Pathways (A.C.E., LIFEPAC, Christian Light Education, Chanak Flex, diagnóstico y PEI)
+4. Academic Framework (Scope & Sequence, dominio y 80 %, assessment A/B/C, créditos)
+5. Sistemas y operación (SIS, Portal, Dual Diploma Portal, seguimiento, familias, escalamiento, práctica)
+6. Safeguarding y Extensión Local
+7. USA State Programs / Compliance (por rol: Florida EMA · Matrícula; Alabama CHOOSE · Approved ESP)
+8. Coordinator Track (supervisión, Partner Learning Centers, evidencias, proyecto)
 
-- **Portada del curso** ([src/data/curso.js](src/data/curso.js)): resumen ejecutivo, objetivos de
-  aprendizaje, metodología, temario y certificaciones.
-- **Lecciones** ([src/data/contenido/](src/data/contenido/)): cada una con guion desarrollado listo
-  para grabar en Google Vids, notas de recursos visuales para la diapositiva y un espacio reservado
-  para incrustar el vídeo.
-- **Knowledge Check** por módulo: 3-5 preguntas tipo test con corrección inmediata, explicación de
-  la respuesta y aprobación al **80%** (mismo estándar de Mastery Learning que aplicamos a los
-  estudiantes). Reintentos ilimitados.
-- **Certificado** imprimible 180h/300h con logo Chanak, marca de agua, referencia MSA T5a y espacio
-  para firma de Head of LSP y Board.
+**8 bloques · 28 módulos · 28 vídeos · 113 preguntas de Knowledge Check.**
 
-Fuentes del contenido: chanakacademy.org, portal.chanakacademy.org, el Self-Study MSA NGA 2026
-(Foundation Documents, Portrait of a Learner/Educator), el repositorio del SIS Chanak y los guiones
-pedagógicos del portal EducaFe.
+## Experiencia (mobile-first)
 
-## Características
+Inicio → Mi ruta → Bloque → Módulo → **Vídeo → Lectura → Práctica → Knowledge Check → Evidencia → Completado**.
+El panel muestra el progreso real (Mentor 180 h → Coordinator 300 h) y el siguiente módulo.
+Un módulo se completa tras aprobar su Knowledge Check (80 %, reintentos ilimitados).
 
-- **Login real** con correo y contraseña (Supabase Auth). Las cuentas nuevas quedan pendientes
-  hasta que una administradora las aprueba.
-- **Dos roles**: mentora (formación) y administradora (además: indicaciones de producción,
-  gestión de vídeos, aprobación de usuarias, progreso del equipo, certificados).
-- **Dashboard** con progreso de horas, banners de elegibilidad de certificación y grid de bloques.
-- **Vista de bloque y de módulo** con horas, modalidad, evaluación, indicadores MSA, estados
-  (⬜ Pendiente / 🔵 En curso / ✅ Completado con fecha) y notas de reflexión.
-- **Registro de horas** cronológico con exportación a PDF/impresión (evidencia MSA con firmas).
-- **Vista de administrador** (Mariela): comparativa de mentoras, registro retroactivo de módulos
-  con fecha real, y alta de nuevas mentoras sin tocar código.
-- Datos en **Supabase** (Postgres + Auth + RLS): el progreso, los vídeos y las usuarias se
-  comparten entre todos los dispositivos. Ver [PUESTA_EN_MARCHA.md](PUESTA_EN_MARCHA.md).
+## Dónde se edita cada cosa
 
-## Stack
+| Qué | Archivo |
+|---|---|
+| Estructura de bloques y módulos | `src/data/curriculum.js` |
+| Portada y certificaciones | `src/data/curso.js` |
+| Contenido de cada módulo (lectura, práctica, quiz, evidencia) | `src/data/contenido/*.js` |
+| Biblioteca de vídeos (id, título, bloque, descripción, videoUrl, duración, orden) | `src/data/videos.js` |
+| Guiones de vídeo | `GUIONES_VIDEOS_2026-2027.md` (se genera con `node scripts/generar-guiones.mjs`) |
+| Textos de la interfaz ES/EN | `src/i18n/textos.js` |
 
-React 18 + Vite 6 + Tailwind CSS 4 + Supabase (Auth, Postgres, RLS).
-Interfaz 100% en español, mobile-first.
+**Vídeos:** cada vídeo es independiente. Pega su URL (MP4, YouTube, Vimeo, Google Drive,
+Google Vids o cualquier URL) en `videoUrl` de `src/data/videos.js`, o desde **Admin → Vídeos**
+(la URL guardada en Supabase tiene prioridad y no requiere desplegar).
 
-**Arranque:** ver [PUESTA_EN_MARCHA.md](PUESTA_EN_MARCHA.md) — crear tablas, cuenta admin.
+## Separación Chanak / EducaFe
+
+La ruta oficial (Mentor → Coordinator) es **Chanak Training**. El área **EducaFe / Partner
+Training** es formación complementaria de una entidad colaboradora independiente; no es un nivel
+de certificación de Chanak ni un departamento de Chanak.
+
+## Administración
+
+Usuarios y aprobación · códigos de registro · progreso del equipo (rol, país, programa, ID
+interno) · registro de horas retroactivo · biblioteca de vídeos · certificados.
+Para país, programa e ID interno ejecuta una vez `supabase/migracion_2026_2027.sql`.
 
 ## Desarrollo
 
 ```bash
 npm install
-npm run dev      # http://localhost:5173
-npm run build    # genera dist/
+npm run dev
+npm run build
 ```
 
-## Despliegue
+Stack: React 18 + Vite 6 + Tailwind 4 + Supabase (auth, tablas `perfiles`, `progreso`, `videos`, `codigos`, Storage de entregables).
 
-**Producción:** https://entrenamiento-mentoras-chanak-two.vercel.app
+## Archivo histórico
 
-Proyecto Vercel bajo la cuenta `administration@chanakacademy.org`.
-
-La cuenta antigua (`marieladanais31@gmail.com`) agotó los **Build Minutes** del plan Hobby,
-por lo que sus deployments quedan en estado **Blocked** y nunca compilan. Si vuelve a pasar en
-cualquier cuenta, se puede desplegar sin consumir minutos compilando en local:
-
-```bash
-npx vercel build --prod    # compila en tu Mac
-npx vercel deploy --prebuilt --prod   # sube el resultado ya construido
-```
-
----
-
-Chanak International Academy · FLDOE #134620 · www.chanakacademy.org
+La versión anterior (orientada a evidencia MSA, 101 lecciones, 3 niveles) está en la rama
+`archive-training-msa-2026` (código y contenido completos) y los guiones antiguos en
+`archive/GUIONES_VIDEOS_MSA_2026.md`. No se importa en la app.
