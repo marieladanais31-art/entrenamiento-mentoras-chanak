@@ -36,6 +36,10 @@ Reglas de producción: 5–9 minutos, sin datos personales de estudiantes (usar 
 | V26 | Coordinación | 8.2 | Operar un Partner Learning Center | 9 min |
 | V27 | Coordinación | 8.3 | Revisar evidencias y reportar | 8 min |
 | V28 | Coordinación | 8.4 | Tu proyecto de coordinación | 7 min |
+| V29 | Desarrollo y acompañamiento | 9.1 | Cómo se desarrolla un niño | 8 min |
+| V30 | Desarrollo y acompañamiento | 9.2 | Acompañar a un adolescente | 8 min |
+| V31 | Desarrollo y acompañamiento | 9.3 | Diferencias individuales: observar sin diagnosticar | 8 min |
+| V32 | Desarrollo y acompañamiento | 9.4 | Observar, documentar, apoyar, comunicar, escalar | 9 min |
 
 ## Fundamentos
 
@@ -450,5 +454,67 @@ Reglas de producción: 5–9 minutos, sin datos personales de estudiantes (usar 
 1. Elige un ámbito real: supervisión de un equipo, apertura de un grupo, revisión de expedientes o plan de calidad.
 2. Define objetivos, acciones, indicadores y evidencias; ejecuta con supervisión.
 3. Presenta tu portafolio a Chanak Central para la revisión final.
+
+**Cierre:** invita a pasar a la Lectura y a la Práctica del módulo.
+
+## Desarrollo y acompañamiento
+
+### V29 · Cómo se desarrolla un niño
+
+- **Módulo:** 9.1 · Desarrollo infantil: mente, emociones y relaciones
+- **Duración objetivo:** 8 min
+- **Descripción:** Desarrollo cognitivo, emocional y social en la infancia y qué implica para acompañar sus estudios.
+
+**Guion (puntos clave, en orden):**
+
+1. Este bloque recupera la formación de Psicología del Niño y del Adolescente y es obligatorio para quien tiene contacto directo con menores.
+2. No es un curso para diagnosticar: se observa, se documenta, se apoya, se comunica y se escala o deriva.
+3. Antes de interpretar una conducta, comprueba si la tarea es adecuada a la etapa del estudiante y si el apoyo es el justo (andamiaje).
+4. La seguridad emocional y la corregulación son la base para aprender.
+
+**Cierre:** invita a pasar a la Lectura y a la Práctica del módulo.
+
+### V30 · Acompañar a un adolescente
+
+- **Módulo:** 9.2 · Adolescencia: identidad, pertenencia, autonomía y proyecto de vida
+- **Duración objetivo:** 8 min
+- **Descripción:** Identidad, pertenencia, autoestima, autonomía y proyecto de vida: qué es evolutivo y qué requiere escalar.
+
+**Guion (puntos clave, en orden):**
+
+1. La adolescencia es una etapa de identidad y de autonomía: expectativas altas y apoyo cálido.
+2. Las relaciones con los iguales y las redes sociales pesan mucho; las comunicaciones se hacen por canales institucionales.
+3. Ante cualquier indicio de riesgo no se investiga: se activa Safeguarding y se escala de inmediato.
+4. Conecta el estudio con el proyecto de vida del estudiante.
+
+**Cierre:** invita a pasar a la Lectura y a la Práctica del módulo.
+
+### V31 · Diferencias individuales: observar sin diagnosticar
+
+- **Módulo:** 9.3 · Diferencias individuales y neurodiversidad: observar sin diagnosticar
+- **Duración objetivo:** 8 min
+- **Descripción:** Neurodiversidad awareness: describir lo observable, adaptar dentro del rol y derivar a un profesional con licencia.
+
+**Guion (puntos clave, en orden):**
+
+1. Ritmo no es lo mismo que capacidad.
+2. Se describen conductas observables y repetidas; nunca se etiqueta ni se diagnostica.
+3. Los ajustes del mentor facilitan el acceso al contenido; si cambian lo que se evalúa, se consultan con coordinación.
+4. Cuando se necesita evaluación clínica: REFER TO LICENSED PROFESSIONAL.
+
+**Cierre:** invita a pasar a la Lectura y a la Práctica del módulo.
+
+### V32 · Observar, documentar, apoyar, comunicar, escalar
+
+- **Módulo:** 9.4 · Acompañamiento educativo: observar, documentar, apoyar, comunicar, escalar
+- **Duración objetivo:** 9 min
+- **Descripción:** La secuencia de acompañamiento educativo aplicada a casos reales y sus límites.
+
+**Guion (puntos clave, en orden):**
+
+1. OBSERVAR → DOCUMENTAR → APOYAR → COMUNICAR → ESCALAR/DERIVAR.
+2. El mentor no es psicólogo clínico: acompaña con calidez, rigor y orden.
+3. Safeguarding y desarrollo son módulos distintos y complementarios.
+4. Resuelve lo operativo, documenta con hechos y fechas, y escala lo que afecta a créditos, vías, seguridad, conducta grave, quejas o compromisos económicos.
 
 **Cierre:** invita a pasar a la Lectura y a la Práctica del módulo.
