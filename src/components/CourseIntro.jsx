@@ -79,7 +79,7 @@ export default function CourseIntro({ onEmpezar, onVolver }) {
               <span className="min-w-0 flex-1 font-medium text-navy">
                 {b.titulo}
                 <span className="block text-[11px] font-normal text-navy/50">
-                  {b.porRol ? t('panel.porRol') : b.nivel === 2 ? 'Coordinator' : 'Mentor'} · {b.categoria}
+                  {b.porRol ? t('panel.porRol') : b.transversal ? 'Transversal' : b.nivel === 2 ? 'Coordinator' : 'Mentor'} · {b.categoria}
                 </span>
               </span>
               <span className="shrink-0 text-[13px] text-navy/55">{b.modulos.length} {t('curso.mod')} · {b.horas}h</span>

@@ -8,21 +8,24 @@ import GestionUsuarias from './GestionUsuarias'
 import GestionCodigos from './GestionCodigos'
 import { useIdioma } from '../i18n/idioma'
 import { traducirBloques } from '../data/curriculum.en'
+import { ROL_POR_ID, rolesDesdeTipoAcceso } from '../data/roles'
 
 export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) {
   const { t, idioma } = useIdioma()
   const [pestana, setPestana] = useState('usuarias') // 'usuarias' | 'codigos' | 'progreso' | 'retroactivo'
   const [perfiles, setPerfiles] = useState([])
   const [progresos, setProgresos] = useState({})
+  const [rolesMapa, setRolesMapa] = useState(undefined) // null = migración de roles pendiente
   const [cargando, setCargando] = useState(true)
   const [error, setError] = useState('')
 
   const cargar = useCallback(async () => {
     setError('')
     try {
-      const [ps, prs] = await Promise.all([api.listarPerfiles(), api.getProgresoTodas()])
+      const [ps, prs, rm] = await Promise.all([api.listarPerfiles(), api.getProgresoTodas(), api.listarRoles().catch(() => null)])
       setPerfiles(ps)
       setProgresos(prs)
+      setRolesMapa(rm)
     } catch (e) {
       setError(e.message)
     } finally {
@@ -83,7 +86,7 @@ export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) 
       ) : (
         <>
           {pestana === 'usuarias' && (
-            <GestionUsuarias perfiles={perfiles} miId={miPerfil.id} onRecargar={cargar} />
+            <GestionUsuarias perfiles={perfiles} miId={miPerfil.id} onRecargar={cargar} rolesMapa={rolesMapa} />
           )}
 
           {pestana === 'codigos' && (
@@ -98,7 +101,9 @@ export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) 
               </p>
               <div className="grid gap-3 sm:grid-cols-2">
                 {activas.map((p) => {
-                  const r = resumenMentora(aplicarEquivalencias(progresos[p.id] || { modulos: {} }))
+                  const asignados = (rolesMapa?.[p.id] || []).map((x) => x.rol)
+                  const rolesP = asignados.length ? [...new Set(asignados)] : rolesDesdeTipoAcceso(p.tipo_acceso)
+                  const r = resumenMentora(aplicarEquivalencias(progresos[p.id] || { modulos: {} }), { roles: rolesP, contactoMenores: p.contacto_menores ?? null })
                   const pct = Math.min(100, Math.round((r.horas / r.metaHoras) * 100))
                   return (
                     <div key={p.id} className="rounded-2xl bg-white p-4 shadow-sm">
@@ -114,7 +119,7 @@ export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) 
                             )}
                           </div>
                           <div className="text-[12px] text-navy/45">
-                            {p.tipo_acceso === 'coordinadora' ? 'Coordinator' : p.tipo_acceso === 'visionaria' ? 'Partner (EducaFe)' : 'Mentor'}
+                            {rolesP.length ? rolesP.map((id) => ROL_POR_ID[id]?.nombre || id).join(' + ') : 'Partner (EducaFe)'}
                             {p.pais ? ` · ${p.pais}` : ''}
                             {p.programa ? ` · ${p.programa}` : ''}
                             {p.id_interno ? ` · ID ${p.id_interno}` : ''}
@@ -307,7 +312,7 @@ function TablaRetroactiva({ perfil, progreso, onCambio, idioma }) {
   )
 }
 
-// Biblioteca de vídeos: estado de cada uno de los 28 vídeos y edición de su URL.
+// Biblioteca de vídeos: estado de cada uno de los 32 vídeos y edición de su URL.
 // La URL guardada aquí (Supabase · tabla videos, modulo_id = id del vídeo) tiene
 // prioridad sobre la `videoUrl` de src/data/videos.js.
 function GestionVideos() {

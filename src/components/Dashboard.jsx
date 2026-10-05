@@ -4,6 +4,7 @@ import ProgressRing from './ui/ProgressRing'
 import EstadoBadge from './ui/EstadoBadge'
 import { useIdioma } from '../i18n/idioma'
 import { traducirBloques } from '../data/curriculum.en'
+import RutaRoles from './RutaRoles'
 
 // Inicio → Mi ruta → Bloque → Módulo
 export default function Dashboard({
@@ -17,18 +18,23 @@ export default function Dashboard({
   onVerCurso,
   onVerCertificado,
   onVerEducafe,
+  roles = ['mentor'],
+  contactoMenores = null,
+  onVerOrganigrama,
+  onVerRol,
 }) {
   const { t, idioma } = useIdioma()
-  const r = resumenMentora(progreso)
+  const r = resumenMentora(progreso, { roles, contactoMenores })
   const bloques = traducirBloques(BLOQUES, idioma)
-  const mentorBloques = bloques.filter((b) => b.nivel === 1 && !b.porRol)
+  const mentorBloques = bloques.filter((b) => b.nivel === 1 && !b.porRol && !b.transversal)
+  const transvBloques = bloques.filter((b) => b.transversal)
   const rolBloques = bloques.filter((b) => b.porRol)
   const coordBloques = bloques.filter((b) => b.nivel === 2)
   const nivel2Desbloqueado = r.nivel1Completo
   const mods = progreso?.modulos || {}
 
   // Siguiente paso: primer módulo en curso o, si no hay, el primero pendiente de la ruta
-  const ruta = TODOS_MODULOS.filter((m) => !m.porRol && (m.nivel === 1 || nivel2Desbloqueado))
+  const ruta = TODOS_MODULOS.filter((m) => !m.porRol && !m.transversal && (m.nivel === 1 || nivel2Desbloqueado))
   const siguiente =
     ruta.find((m) => mods[m.id]?.estado === 'en_curso') ||
     ruta.find((m) => mods[m.id]?.estado !== 'completado')
@@ -96,6 +102,25 @@ export default function Dashboard({
         <Acceso icono="📋" titulo={t('panel.registroHoras')} sub={t('panel.registroHorasSub', { horas: r.horas })} onClick={onVerHoras} tono="navy" />
       </div>
 
+      {/* Rol ≠ Persona + organigrama */}
+      <section className="rounded-2xl border border-gold/40 bg-gold/10 p-4">
+        <div className="text-sm font-bold text-navy">Rol ≠ Persona</div>
+        <p className="mt-1 text-xs leading-relaxed text-navy/75">
+          En Chanak un rol describe una función y un conjunto de responsabilidades; no significa necesariamente una persona diferente.
+          Una misma persona puede asumir varios roles compatibles al abrir un país, un estado, un programa o un proyecto, pero cada
+          rol debe estar formalmente asignado, con su formación completada y respetando sus límites de autoridad. A medida que crece
+          la operación, las funciones se separan progresivamente.
+        </p>
+        {onVerOrganigrama && (
+          <button onClick={onVerOrganigrama} className="mt-2 text-xs font-bold text-teal hover:underline">
+            Ver el Organigrama Funcional Chanak →
+          </button>
+        )}
+      </section>
+
+      {/* Tu ruta y tus sistemas */}
+      <RutaRoles progreso={progreso} roles={roles} contactoMenores={contactoMenores} onAbrirModulo={onAbrirModulo} onVerRol={onVerRol} />
+
       {/* Avance reconocido de la formación anterior */}
       {r.reconocidos > 0 && (
         <p className="rounded-2xl border border-amber-300 bg-amber-50 px-4 py-3 text-xs leading-relaxed text-amber-900">
@@ -128,6 +153,11 @@ export default function Dashboard({
         <BannerCert titulo={t('panel.elegibleCoord')} detalle={t('panel.elegibleCoordSub')} onVer={() => onVerCertificado(2)} />
       ) : r.elegibleMentor ? (
         <BannerCert titulo={t('panel.elegibleMentor')} detalle={t('panel.elegibleMentorSub')} onVer={() => onVerCertificado(1)} />
+      ) : r.bloqueadoPorMenores ? (
+        <p className="rounded-2xl border border-coral/40 bg-coral/8 px-4 py-3 text-xs leading-relaxed text-navy/80">
+          🔒 Para completar tu ruta y emitir el certificado falta la formación de contacto con menores (Child &amp; Adolescent
+          Development, Safeguarding, Online Safety y protección de datos). Consulta «Tu ruta».
+        </p>
       ) : null}
 
       {/* Nivel 1 */}
@@ -138,6 +168,19 @@ export default function Dashboard({
         />
         <div className="grid gap-3 sm:grid-cols-2">
           {mentorBloques.map((b) => (
+            <TarjetaBloque key={b.id} bloque={b} estado={estadoBloque(progreso, b)} horasHechas={horasBloqueCompletadas(progreso, b)} onClick={() => onAbrirBloque(b.id)} />
+          ))}
+        </div>
+      </section>
+
+      {/* Formación transversal: contacto directo con menores */}
+      <section>
+        <TituloSeccion
+          titulo="Formación transversal · contacto con menores"
+          subtitulo="Obligatoria para todo rol con contacto directo con menores. No suma a las 180 h ni a las 300 h."
+        />
+        <div className="grid gap-3 sm:grid-cols-2">
+          {transvBloques.map((b) => (
             <TarjetaBloque key={b.id} bloque={b} estado={estadoBloque(progreso, b)} horasHechas={horasBloqueCompletadas(progreso, b)} onClick={() => onAbrirBloque(b.id)} />
           ))}
         </div>
