@@ -1,6 +1,7 @@
 -- ============================================================
 -- CHANAK STAFF TRAINING & OPERATIONS SYSTEM · Migración de ROLES MÚLTIPLES (idempotente)
--- ROLE ≠ PERSON: una persona puede tener varios roles. Cada rol activa sus módulos,
+-- ROLE ≠ PERSON: tres roles de formación (Mentor, Coordinator, Estratégico); una persona puede tener varios
+-- y cada uno puede concretarse en una función (p. ej. Mentor → English Teacher). Cada rol activa sus módulos,
 -- sistemas, documentos y checklist. Esta migración es ADITIVA: no borra ni modifica
 -- datos existentes. Mientras una persona no tenga filas en perfil_roles, la app deriva
 -- sus roles de perfiles.tipo_acceso (mentora → Mentor; coordinadora → Mentor + Coordinator).
@@ -10,7 +11,10 @@
 create table if not exists public.perfil_roles (
   id           bigserial primary key,
   perfil_id    uuid not null references public.perfiles(id) on delete cascade,
-  rol          text not null check (rol in (
+  -- Los 3 roles de formación: Mentor (incluye profesores especialistas), Coordinator, Estratégico (los demás)
+  rol          text not null check (rol in ('mentor','coordinator','estrategico')),
+  -- Función dentro del rol (perfil del catálogo). Null = función por defecto (mentor / coordinator).
+  funcion      text check (funcion is null or funcion in (
     'mentor','coordinator','english_teacher','lifeskills_facilitator','local_language',
     'assessment_specialist','academic_records','country_rep','state_rep','program_rep',
     'family_enrollment','institutional_partnerships','grants_projects','lifeskills_project_coord'
@@ -22,7 +26,7 @@ create table if not exists public.perfil_roles (
 );
 
 create unique index if not exists perfil_roles_unico
-  on public.perfil_roles (perfil_id, rol, coalesce(territorio, ''), coalesce(programa, ''));
+  on public.perfil_roles (perfil_id, rol, coalesce(funcion, ''), coalesce(territorio, ''), coalesce(programa, ''));
 
 comment on table public.perfil_roles is 'Roles asignados formalmente a cada persona. Un rol describe una función; una persona puede tener varios.';
 
