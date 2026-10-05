@@ -367,6 +367,61 @@ export const VIDEOS = [
       'Resuelve lo operativo, documenta con hechos y fechas, y escala lo que afecta a créditos, vías, seguridad, conducta grave, quejas o compromisos económicos.',
     ],
   },
+  {
+    id: 'V33', orden: 33, bloque: 'Crecimiento y sistemas', modulo: 'T10.1', duracion: '8 min', videoUrl: '',
+    titulo: 'Desarrollo de mercados y Plan a 30 días',
+    descripcion: 'Tres fases, territorio y autorización, mensajes autorizados y uso responsable de contratistas.',
+    guion: [
+      'Tres fases: Preparación, Apertura y Consolidación, con revisión de Chanak Central al final de cada una.',
+      'Un Representante actúa en un territorio y programa concretos: no modifica precios, no firma, no promete acreditaciones.',
+      'Lo no confirmado se dice «en proceso» o «en revisión», nunca «aprobado».',
+      'Plan a 30 días: preparar, mapear, presentar con materiales vigentes y revisar resultados.',
+    ],
+  },
+  {
+    id: 'V34', orden: 34, bloque: 'Crecimiento y sistemas', modulo: 'T10.2', duracion: '8 min', videoUrl: '',
+    titulo: 'Grants, proyectos y el piloto de Life Skills',
+    descripcion: 'Dos entidades, narrativa transparente y el Life Skills 4-Week Community Pilot.',
+    guion: [
+      'Chanak (EE. UU.) y EducaFe (España) no se mezclan en una misma solicitud.',
+      'Las subvenciones financian expansión; las cuotas sostienen la operación diaria.',
+      'Solo se afirman datos respaldados por documentos; lo demás es objetivo o plan.',
+      'Piloto de 4 semanas: preparación, sesiones, proyecto práctico y cierre con evaluación.',
+    ],
+  },
+  {
+    id: 'V35', orden: 35, bloque: 'Crecimiento y sistemas', modulo: 'T10.3', duracion: '7 min', videoUrl: '',
+    titulo: 'Voluntario, Contratista y Socio',
+    descripcion: 'Tres modelos de colaboración, plantillas sujetas a revisión y la advertencia contratista vs empleado.',
+    guion: [
+      'Voluntario, contratista independiente y socio: relaciones distintas, documentos distintos.',
+      'Las plantillas están sujetas a revisión legal y administrativa.',
+      'W-9 y 1099-NEC: los umbrales se confirman cada año con el contable y el IRS.',
+      'Si la relación se parece a un empleo estable, se para y se consulta.',
+    ],
+  },
+  {
+    id: 'V36', orden: 36, bloque: 'Crecimiento y sistemas', modulo: 'T10.4', duracion: '8 min', videoUrl: '',
+    titulo: 'SIS, Portal y Dual Diploma Portal',
+    descripcion: 'Qué hace cada sistema, cómo se practica y se valida, y cómo se reporta una incidencia.',
+    guion: [
+      'SIS: expediente. Portal: recursos y guías. Dual Diploma Portal: Route Plan, créditos y evidencias.',
+      'Demostración, práctica con datos ficticios y validación con Chanak Central.',
+      'Solo IDs: ningún dato personal sale de los sistemas.',
+      'Ante un fallo: documenta con hechos e ID y reporta; no lo arregles por tu cuenta.',
+    ],
+  },
+  {
+    id: 'V37', orden: 37, bloque: 'Crecimiento y sistemas', modulo: 'T10.5', duracion: '8 min', videoUrl: '',
+    titulo: 'Rutas de especialista',
+    descripcion: 'English Teacher, Life Skills Facilitator, lengua local y evaluación educativa no clínica.',
+    guion: [
+      'Los especialistas son parte del rol Mentor y completan la formación de contacto con menores.',
+      'Progresión por dominio y evidencias con fecha y hechos.',
+      'El especialista en evaluación no diagnostica: REFER TO LICENSED PROFESSIONAL.',
+      'Sesiones grupales con reglas de seguridad y asistencia por ID.',
+    ],
+  },
 ]
 
 export function getVideo(id) {

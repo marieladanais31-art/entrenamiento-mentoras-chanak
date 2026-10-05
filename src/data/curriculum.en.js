@@ -8,6 +8,7 @@ export const BLOQUES_EN = {
   B6: 'Safeguarding and Local Extension',
   B7: 'USA State Programs / Compliance',
   B8: 'Coordinator Track',
+  B10: 'Growth, Markets, Partnerships & Systems',
   B9: 'Child & Adolescent Development, Psychology & Educational Accompaniment',
 }
 
@@ -44,6 +45,11 @@ export const MODULOS_EN = {
   'T9.2': 'Adolescence: identity, belonging, autonomy and life project',
   'T9.3': 'Individual differences and neurodiversity: observe without diagnosing',
   'T9.4': 'Educational accompaniment: observe, document, support, communicate, escalate',
+  'T10.1': 'Market Development & Representation and the 30-Day Market Entry Plan',
+  'T10.2': 'Grants & Project Development and the Life Skills 4-Week Community Pilot',
+  'T10.3': 'People & Partnership Models: Volunteer, Contractor and Partner',
+  'T10.4': 'Systems: SIS, Portal and Dual Diploma Portal (practice and validation)',
+  'T10.5': 'Specialist tracks: English, Life Skills, local language and educational assessment',
 }
 
 export function traducirBloques(bloques, idioma) {

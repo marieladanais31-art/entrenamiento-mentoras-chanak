@@ -236,6 +236,22 @@ export const BLOQUES = [
       { id: 'T9.4', titulo: 'Acompañamiento educativo: observar, documentar, apoyar, comunicar, escalar', horas: 5, modalidad: 'Vídeo + lectura + 8 casos prácticos + portafolio', evaluacion: 'Knowledge Check + caso completo', video: 'V32', fuentes: [], entregable: true },
     ],
   },
+  {
+    id: 'B10',
+    nivel: 1,
+    numero: 10,
+    titulo: 'Growth, Markets, Partnerships & Systems',
+    categoria: 'Crecimiento y sistemas',
+    horas: 24,
+    porRol: true, // rol Estratégico y especialistas; no cuenta para las 180/300 h
+    modulos: [
+      { id: 'T10.1', titulo: 'Market Development & Representation y Plan de Entrada al Mercado a 30 días', horas: 5, modalidad: 'Vídeo + lectura + plan escrito', evaluacion: 'Knowledge Check + plan a 30 días', video: 'V33', fuentes: [], entregable: true },
+      { id: 'T10.2', titulo: 'Grants & Project Development y Life Skills 4-Week Community Pilot', horas: 5, modalidad: 'Vídeo + lectura + caso', evaluacion: 'Knowledge Check + diseño de piloto', video: 'V34', fuentes: [], entregable: true },
+      { id: 'T10.3', titulo: 'Modelos de personas y alianzas: Voluntario, Contratista y Socio', horas: 4, modalidad: 'Vídeo + lectura + plantillas (sujetas a revisión)', evaluacion: 'Knowledge Check + caso', video: 'V35', fuentes: [] },
+      { id: 'T10.4', titulo: 'Sistemas: SIS, Portal y Dual Diploma Portal (práctica y validación)', horas: 5, modalidad: 'Vídeo + práctica con datos ficticios + validación', evaluacion: 'Knowledge Check + validación con Chanak Central', video: 'V36', fuentes: [] },
+      { id: 'T10.5', titulo: 'Rutas de especialista: English, Life Skills, lengua local y evaluación educativa', horas: 5, modalidad: 'Vídeo + lectura + caso', evaluacion: 'Knowledge Check + caso', video: 'V37', fuentes: [] },
+    ],
+  },
 ]
 
 export const TODOS_MODULOS = BLOQUES.flatMap((b) =>

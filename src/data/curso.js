@@ -22,7 +22,7 @@ export const CURSO = {
     'Nivel 2: supervisar mentores, revisar evidencias, operar un Partner Learning Center y reportar a Chanak Central.',
   ],
   metodologia: [
-    { icono: '🎬', nombre: 'Vídeo', detalle: 'Una cápsula por módulo (32 vídeos), actualizable por separado' },
+    { icono: '🎬', nombre: 'Vídeo', detalle: 'Una cápsula por módulo (37 vídeos), actualizable por separado' },
     { icono: '📖', nombre: 'Lectura', detalle: 'Lectura ampliada en la app (2.000–3.400 palabras por módulo) basada en la documentación oficial 2026–2027' },
     { icono: '📂', nombre: 'Documentos oficiales', detalle: 'Lectura obligatoria de documentos concretos de la carpeta de Drive FINAL, con enlace directo' },
     { icono: '🛠', nombre: 'Práctica', detalle: 'Situaciones reales del mentor: resolver, documentar o escalar' },
