@@ -93,3 +93,8 @@
 - T4.4: NCES (mayor visibilidad estatal; número estimado en 3–4 semanas) y DBU (solicitud enviada, reuniones para conocer propuestas).
 - T8.3: nueva lección de control de comunicación para coordinadores sobre los cuatro frentes.
 - Knowledge Check: 5 preguntas nuevas (T4.4 ×2, T7.2 ×2, T8.3 ×1).
+
+### Entrega B (ampliación, 2026-10-05): lecturas del Bloque 10 a la profundidad de los demás módulos
+- T10.1–T10.5 pasan de ~500–850 palabras a ~1.900–2.400 palabras cada una (lecciones ampliadas, ejemplos trabajados).
+- Las lecturas se dividen en `B10a.js` (T10.1–T10.3) y `B10b.js` (T10.4–T10.5); `B10.js` las combina.
+- Todo hecho no confirmado se redacta como «en proceso / confirmar con coordinación»; contenido legal sujeto a revisión.
