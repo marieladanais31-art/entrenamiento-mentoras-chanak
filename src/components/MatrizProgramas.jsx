@@ -32,7 +32,7 @@ export default function MatrizProgramas({ onVolver }) {
       {onVolver && <button onClick={onVolver} className="text-sm font-medium text-teal hover:underline">← Volver</button>}
 
       <section className="rounded-2xl bg-white p-5 shadow-sm">
-        <div className="text-[12px] font-bold uppercase tracking-[0.18em] text-teal">Uso interno · coordinación y administración</div>
+        <div className="text-[12px] font-bold uppercase tracking-[0.18em] text-teal">Uso interno · Estratégico, coordinación y administración</div>
         <h2 className="mt-1 text-xl font-bold text-navy">State Program Service Matrix</h2>
         <p className="mt-2 text-sm leading-relaxed text-navy/70">
           Qué servicio está aprobado, en qué programa y con qué estado. Regla: solo se dice «aprobado» lo que aquí figura como
@@ -100,6 +100,30 @@ export default function MatrizProgramas({ onVolver }) {
                 <ul className="mt-1 list-disc space-y-1 pl-5 leading-relaxed">
                   {f.condiciones.map((c, i) => <li key={i}>{c}</li>)}
                 </ul>
+              </div>
+            )}
+            {f.captacion && f.captacion.length > 0 && (
+              <div className="mt-3">
+                <div className="text-[11px] font-bold uppercase tracking-wide text-navy/60">Cómo captar familias</div>
+                <ul className="mt-1 list-disc space-y-1 pl-5 leading-relaxed">
+                  {f.captacion.map((c, i) => <li key={i}>{c}</li>)}
+                </ul>
+              </div>
+            )}
+            {f.facturacion && f.facturacion.length > 0 && (
+              <div className="mt-3">
+                <div className="text-[11px] font-bold uppercase tracking-wide text-navy/60">Cómo se factura y se cobra</div>
+                <ul className="mt-1 list-disc space-y-1 pl-5 leading-relaxed">
+                  {f.facturacion.map((c, i) => <li key={i}>{c}</li>)}
+                </ul>
+              </div>
+            )}
+            {f.responsableComercial && (
+              <p className="mt-2 text-[12px] text-navy/60"><span className="font-semibold">Responsables: </span>{f.responsableComercial}</p>
+            )}
+            {f.guias?.length > 0 && (
+              <div className="mt-3 flex flex-wrap gap-2">
+                {f.guias.map((g) => <a key={g.url} href={g.url} target="_blank" rel="noopener noreferrer" className="text-xs font-semibold text-teal underline">{g.titulo}</a>)}
               </div>
             )}
             {f.noVerificado && f.noVerificado.length > 0 && (

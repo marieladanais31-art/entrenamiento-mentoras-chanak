@@ -1,3 +1,10 @@
+# 6 de octubre de 2026 · Operación estatal y atención de familias
+
+- Integra la captación, facturación y responsables de la rama patch-4 tras revisión.
+- EMA y CHOOSE usan fuentes oficiales 2026–2027, con reserva, factura y cobro diferenciados. Se evita prometer sincronización entre Portal, SIS y plataformas de fondos.
+- Matriz enlaza guías Drive de EMA y CHOOSE; tarifa familiar y convenio permanecen separados. La aprobación institucional y la integración de cobro se identifican como etapas distintas.
+- No cambia permisos, horas ni Supabase. Walmart: documentación operativa fija cuatro semanas y 3.500 USD; no anuncia concesión o envío.
+
 ## Cierre de interfaz · 5 octubre 2026
 
 - Área colaboradora retirada del Header, Dashboard y navegación. Componentes obsoletos eliminados.
