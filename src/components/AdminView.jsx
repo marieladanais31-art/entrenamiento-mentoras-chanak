@@ -119,7 +119,7 @@ export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) 
                             )}
                           </div>
                           <div className="text-[12px] text-navy/45">
-                            {rolesP.length ? rolesP.map((id) => ROL_POR_ID[id]?.nombre || id).join(' + ') : 'Partner (EducaFe)'}
+                            {rolesP.length ? rolesP.map((id) => ROL_POR_ID[id]?.nombre || id).join(' + ') : 'Estratégico'}
                             {p.pais ? ` · ${p.pais}` : ''}
                             {p.programa ? ` · ${p.programa}` : ''}
                             {p.id_interno ? ` · ID ${p.id_interno}` : ''}

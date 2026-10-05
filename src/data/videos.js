@@ -1,5 +1,5 @@
 // ============================================================
-// BIBLIOTECA ESENCIAL DE VÍDEOS · 2026–2027 (32 vídeos)
+// BIBLIOTECA DE VÍDEOS · 2026–2027 · IDs legados preservados
 //
 // Configuración central: cada vídeo es independiente y puede sustituirse sin
 // reconstruir el curso. Para publicar o cambiar un vídeo:
@@ -36,7 +36,7 @@ export const VIDEOS = [
       'El nombre viene del hebreo chanak: dedicar, consagrar, instruir. La misión es una educación integral cristiana de excelencia internacional.',
       'Estatus correctos: MSA-CESS Candidate (no acreditada; decisión de la Comisión prevista para noviembre de 2026). Candid Gold es un sello de transparencia, no una acreditación.',
       'Chanak Central fija el marco académico; los centros y entidades colaboradoras lo implementan.',
-      'EducaFe y otras entidades son organizaciones colaboradoras independientes, no departamentos de Chanak.',
+      'entidad colaboradora independiente y otras entidades son organizaciones colaboradoras independientes, no departamentos de Chanak.',
     ],
   },
   {
@@ -53,9 +53,12 @@ export const VIDEOS = [
   {
     id: 'V03', orden: 3, bloque: 'Fundamentos', modulo: 'T1.3', duracion: '7 min', videoUrl: '',
     titulo: 'Un marco académico orientado al dominio',
-    descripcion: 'Avanzar cuando se demuestra dominio: el umbral del 80 % y por qué protege al estudiante.',
+    descripcion: 'Historia, feedback, corrección, intervención y reevaluación antes de progresar. El 80 % es un umbral operativo.',
     guion: [
+      'Carroll (1963) relacionó tiempo empleado y tiempo necesario para aprender. Bloom (1968) desarrolló Learning for Mastery con instrucción, apoyo y tiempo adecuados.',
       'El estudiante avanza cuando demuestra dominio, no cuando lo marca el calendario.',
+      'Historia → principio pedagógico → aplicación Chanak → evidencia → intervención → progresión. El tiempo puede variar; el estándar permanece.',
+      'El 80 % puede ser un umbral operativo y no define por sí solo el Mastery Learning. Feedback, corrección y reevaluación preceden a la progresión.',
       'En las evaluaciones de dominio Chanak trabaja con un umbral mínimo del 80 %; si no se alcanza, se refuerza y se vuelve a evaluar.',
       'El dominio protege la dignidad y el estándar a la vez: repetir no es fracasar.',
       'Cada avance se registra en el SIS con evidencia.',
@@ -383,7 +386,7 @@ export const VIDEOS = [
     titulo: 'Grants, proyectos y el piloto de Life Skills',
     descripcion: 'Dos entidades, narrativa transparente y el Life Skills 4-Week Community Pilot.',
     guion: [
-      'Chanak (EE. UU.) y EducaFe (España) no se mezclan en una misma solicitud.',
+      'Chanak (EE. UU.) y entidad colaboradora independiente (España) no se mezclan en una misma solicitud.',
       'Las subvenciones financian expansión; las cuotas sostienen la operación diaria.',
       'Solo se afirman datos respaldados por documentos; lo demás es objetivo o plan.',
       'Piloto de 4 semanas: preparación, sesiones, proyecto práctico y cierre con evaluación.',

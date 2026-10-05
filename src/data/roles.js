@@ -308,7 +308,7 @@ export const AREAS = {
 // Cuando una persona aún no tiene roles asignados en perfil_roles, se derivan de ahí.
 export function rolesDesdeTipoAcceso(tipo) {
   if (tipo === 'coordinadora') return ['mentor', 'coordinator']
-  if (tipo === 'visionaria') return [] // Partner (EducaFe): sin ruta de rol; solo Core
+  if (tipo === 'visionaria') return [] // Estratégico: sin ruta de rol; solo Core
   return ['mentor']
 }
 

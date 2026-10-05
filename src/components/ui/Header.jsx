@@ -1,7 +1,7 @@
 import { iniciales } from '../../lib/calculos'
 import { SelectorIdioma, useIdioma } from '../../i18n/idioma'
 
-export default function Header({ perfil, esAdmin, vista, onNavegar, onAbrirEducafe, onSalir }) {
+export default function Header({ perfil, esAdmin, vista, onNavegar, onSalir }) {
   const { t } = useIdioma()
   const boton = (nombre) =>
     `rounded-full px-3 py-1.5 font-medium transition ${
@@ -22,19 +22,6 @@ export default function Header({ perfil, esAdmin, vista, onNavegar, onAbrirEduca
         <nav className="flex shrink-0 items-center gap-1.5 text-xs">
           <SelectorIdioma />
 
-          {/* Botón pequeño de EducaFe con icono/logo */}
-          <button
-            onClick={onAbrirEducafe}
-            title="Área de Gobernanza EducaFe (Requiere contraseña)"
-            className={`rounded-lg px-2.5 py-1 text-[12px] font-bold transition flex items-center gap-1 shadow-sm ${
-              vista.nombre === 'educafe'
-                ? 'bg-amber-600 text-white'
-                : 'bg-amber-500/20 text-amber-300 hover:bg-amber-500/35 border border-amber-400/40'
-            }`}
-          >
-            <span>☕️</span>
-            <span>EducaFe</span>
-          </button>
 
           {esAdmin && (
             <button

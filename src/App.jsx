@@ -8,8 +8,6 @@ import ModuleView from './components/ModuleView'
 import HoursLog from './components/HoursLog'
 import Certificado from './components/Certificado'
 import AdminView from './components/AdminView'
-import EducaFeView from './components/EducaFeView'
-import ModalPasswordEducaFe from './components/ModalPasswordEducaFe'
 import Glosario from './components/Glosario'
 import Organigrama from './components/Organigrama'
 import MatrizProgramas from './components/MatrizProgramas'
@@ -28,7 +26,6 @@ export default function App() {
   const [sesion, setSesion] = useState(null) // sesión de Supabase
   const [perfil, setPerfil] = useState(null) // { id, nombre, rol, estado }
   const [vista, setVista] = useState({ nombre: 'dashboard' })
-  const [mostrandoModalEducaFe, setMostrandoModalEducaFe] = useState(false)
 
   // Datos de la usuaria que se está viendo (una mentora ve solo los suyos)
   const [progreso, setProgreso] = useState({ modulos: {} })
@@ -238,20 +235,9 @@ export default function App() {
         esAdmin={esAdmin}
         vista={vista}
         onNavegar={setVista}
-        onAbrirEducafe={() => setMostrandoModalEducaFe(true)}
         onSalir={() => api.salir()}
       />
 
-      {mostrandoModalEducaFe && (
-        <ModalPasswordEducaFe
-          emailUsuario={sesion.user?.email}
-          onConfirmar={() => {
-            setMostrandoModalEducaFe(false)
-            setVista({ ...vista, nombre: 'educafe' })
-          }}
-          onCancelar={() => setMostrandoModalEducaFe(false)}
-        />
-      )}
 
       {viendoOtra && (
         <div className="no-print bg-gold/20 px-4 py-2 text-center text-xs font-medium text-navy">
@@ -285,7 +271,6 @@ export default function App() {
             onVerHoras={() => setVista({ ...vista, nombre: 'horas' })}
             onVerCurso={() => setVista({ ...vista, nombre: 'curso' })}
             onVerCertificado={(nivel) => setVista({ ...vista, nombre: 'certificado', nivel })}
-            onVerEducafe={() => setMostrandoModalEducaFe(true)}
             roles={rolesIds}
             contactoMenores={contactoViendo}
             onVerOrganigrama={() => setVista({ ...vista, nombre: 'organigrama' })}
@@ -307,9 +292,6 @@ export default function App() {
             onVolver={() => setVista({ ...vista, nombre: 'organigrama' })}
             onAbrirModulo={(moduloId) => setVista({ ...vista, nombre: 'modulo', moduloId, bloqueId: getModulo(moduloId)?.bloqueId })}
           />
-        )}
-        {vista.nombre === 'educafe' && (
-          <EducaFeView onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />
         )}
         {vista.nombre === 'curso' && (
           <CourseIntro

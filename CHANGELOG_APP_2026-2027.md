@@ -1,3 +1,14 @@
+## Cierre de interfaz · 5 octubre 2026
+
+- Área colaboradora retirada del Header, Dashboard y navegación. Componentes obsoletos eliminados.
+- `visionaria` conservado como valor interno, etiqueta visible Estratégico. Sin cambios de base de datos ni ejecución de migraciones.
+- Referencias de lecturas, vídeos, traducciones y administración alineadas con entidades colaboradoras independientes.
+- Credenciales demo retiradas de la interfaz; coordinación debe facilitar las cuentas autorizadas.
+- Enlaces de Drive corregidos a partir del inventario real y People/Roles incorporado a la biblioteca con acceso desde la carpeta oficial existente.
+- Manifest audiovisual derivado de módulos y series solicitadas; estados PLANNED/DRAFT distinguidos de FINAL. No se han producido ni integrado MP4 finales.
+- El manifest público usa nombres y rutas documentales; los enlaces internos y editables permanecen en Drive.
+- Lint incorporado. Publicación y fusión pendientes de cierre audiovisual y verificación de Vercel.
+
 # CHANGELOG · App de formación 2026–2027
 
 **Versión:** `training-2026-2027` · 2 de octubre de 2026
@@ -53,11 +64,11 @@
 
 ## Administración
 - Banner con versión de currículo y fecha de actualización.
-- Roles visibles como Mentor / Coordinator / Partner (EducaFe); país, programa asignado e ID interno (requiere `supabase/migracion_2026_2027.sql`).
+- Roles visibles como Mentor / Coordinator / Estratégico; país, programa asignado e ID interno (requiere `supabase/migracion_2026_2027.sql`).
 - Eliminado del panel el bloque de «relleno rápido» que incluía correos y una contraseña compartida en el código cliente.
 
-## EducaFe
-- Área separada **EducaFe / Partner Training** (formación complementaria); EducaFe se presenta como entidad colaboradora independiente, no como departamento ni nivel de Chanak.
+## entidad colaboradora independiente
+- Área separada **entidad colaboradora independiente / Partner Training** (formación complementaria); entidad colaboradora independiente se presenta como entidad colaboradora independiente, no como departamento ni nivel de Chanak.
 
 ## Datos
 - Los módulos nuevos usan ids `T1.1`…`T8.4`; el progreso anterior (`1.1`…`8.4`) se conserva en Supabase y no se borra. El avance anterior se reconoce automáticamente mediante `src/data/equivalencias.js` (ver actualización del 2026-10-04).
@@ -85,7 +96,7 @@
 - `src/data/equivalencias.js`: módulos 1.1–8.4 → T1.1–T8.4. Si se completó un equivalente, el módulo nuevo aparece como «Reconocido»: sus horas cuentan y pasa a «Completado» al aprobar el nuevo Knowledge Check (80 %). El progreso antiguo no se borra; el cálculo es solo de visualización.
 
 **NotebookLM eliminado**
-- Sustituido por enlaces directos a las carpetas de `CHANAK_DOCUMENTOS_2026-2027_FINAL` en cada módulo y una «Biblioteca de documentos oficiales (Drive)» en el panel, con el uso de cada carpeta para mentor y coordinador. También retirado del área EducaFe / Partner Training.
+- Sustituido por enlaces directos a las carpetas de `CHANAK_DOCUMENTOS_2026-2027_FINAL` en cada módulo y una «Biblioteca de documentos oficiales (Drive)» en el panel, con el uso de cada carpeta para mentor y coordinador. También retirado del área entidad colaboradora independiente / Partner Training.
 
 ## 2026-10-05 · Programas y vinculaciones en proceso en EE. UU.
 - T4.4: nueva lección «Deporte universitario y vinculaciones con universidades de EE. UU. (en proceso)»: NCAA como opción para estudiantes-deportistas que aspiran a becas, registro NCES, solicitud de convenio con Dallas Baptist University (DBU) y plan de convenios con otras universidades tras la decisión de MSA-CESS (nov-2026). Todo redactado como «en proceso»/«plan», sin promesas.

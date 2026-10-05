@@ -17,7 +17,6 @@ export default function Dashboard({
   onVerHoras,
   onVerCurso,
   onVerCertificado,
-  onVerEducafe,
   roles = ['mentor'],
   contactoMenores = null,
   onVerOrganigrama,
@@ -225,14 +224,6 @@ export default function Dashboard({
         </div>
       </section>
 
-      {/* Formación complementaria de entidades colaboradoras (separada de la ruta Chanak) */}
-      <section className="rounded-2xl border border-amber-600/25 bg-amber-50 p-4">
-        <div className="text-[12px] font-bold uppercase tracking-wide text-amber-800">{t('panel.partnerTitulo')}</div>
-        <p className="mt-1 text-xs leading-relaxed text-navy/65">{t('panel.partnerTxt')}</p>
-        <button onClick={onVerEducafe} className="mt-3 rounded-xl bg-amber-600 px-4 py-2 text-xs font-bold text-white hover:bg-amber-700">
-          {t('panel.partnerBoton')} →
-        </button>
-      </section>
     </div>
   )
 }
