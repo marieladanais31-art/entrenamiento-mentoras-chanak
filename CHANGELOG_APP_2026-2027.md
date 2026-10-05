@@ -4,6 +4,14 @@
 **Rama:** `training-2026-2027` (respaldo de la versión anterior: rama `archive-training-msa-2026`)
 **Fuente oficial:** `CHANAK_DOCUMENTOS_2026-2027_FINAL`
 
+## 2026-10-06 · Entrega B (rutas y contenido)
+
+- **Bloque 10 · Growth, Markets, Partnerships & Systems** (por rol; no cuenta para las 180/300 h; 24 h; 5 módulos, 5 vídeos V33–V37, 25 preguntas):
+  T10.1 Market Development & Representation y Plan de Entrada al Mercado a 30 días (incluye uso responsable de contratistas/Fiverr); T10.2 Grants & Project Development y Life Skills 4-Week Community Pilot; T10.3 Modelos de personas y alianzas (Voluntario, Contratista, Socio; W-9; 1099-NEC sin umbral fijo; advertencia contratista vs empleado; plantillas «sujetas a revisión legal/administrativa»); T10.4 Sistemas SIS, Portal y Dual Diploma Portal (demostración, práctica con datos ficticios, validación); T10.5 Rutas de especialista (English Teacher, Life Skills Facilitator, lengua local, Educational Assessment no clínico, REFER TO LICENSED PROFESSIONAL).
+- **State Program Service Matrix** (vista interna desde el panel): columnas State, Program, Service, Status, Approved?, Marketplace, Price, Student eligibility, Documentation, Last verified, Official source. Florida EMA: solo Matrícula aprobada; Alabama CHOOSE: ESP aprobado (ClassWallet en curso); Texas, Arizona, Arkansas, Utah, West Virginia, NCAA, NCES y DBU: en proceso/en revisión. Precios «Por confirmar».
+- Roles: se asignan los módulos del Bloque 10 a cada función y se eliminan las «rutas en preparación».
+- Texas y demás estados en proceso: se prepara documentación y flujos como listos para activar, pero el estado visible y las comunicaciones a familias siguen siendo «en proceso» hasta confirmación. El plazo de NCES/Texas figura solo como información institucional.
+
 ## 2026-10-05 · Entrega A · CHANAK STAFF TRAINING & OPERATIONS SYSTEM (base)
 **Principio ROLE ≠ PERSON.** Un rol describe una función; una persona puede tener varios roles compatibles. Cada rol debe estar asignado formalmente, con su formación completada y respetando los límites de autoridad (los permisos no se mezclan).
 - **Roles múltiples:** nueva tabla `perfil_roles` (migración aditiva `supabase/migracion_roles.sql`, pendiente de ejecutar) y panel Admin → Usuarias con «Roles asignados» (**3 roles de formación: Mentor —incluye profesores especialistas—, Coordinador y Estratégico —los demás—**, cada uno con sus funciones; territorio y programa para Representantes) y `direct_child_contact` (automático por roles o fijado por administración). Sin migración, la app deriva los roles de `tipo_acceso` y no se rompe nada.
