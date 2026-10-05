@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useMemo } from 'react'
 import Login from './components/Login'
 import PendienteAprobacion from './components/PendienteAprobacion'
 import Dashboard from './components/Dashboard'
@@ -14,6 +14,7 @@ import Header from './components/ui/Header'
 import CambiarContrasena from './components/CambiarContrasena'
 import * as api from './lib/backend'
 import { getModulo } from './data/curriculum'
+import { aplicarEquivalencias } from './lib/calculos'
 import { useIdioma } from './i18n/idioma'
 
 export default function App() {
@@ -26,6 +27,8 @@ export default function App() {
 
   // Datos de la usuaria que se está viendo (una mentora ve solo los suyos)
   const [progreso, setProgreso] = useState({ modulos: {} })
+  // Vista con el avance anterior reconocido (solo para mostrar; las escrituras usan `progreso`).
+  const progresoVista = useMemo(() => aplicarEquivalencias(progreso), [progreso])
   const [videos, setVideos] = useState({})
   const [errorCarga, setErrorCarga] = useState('')
 
@@ -223,7 +226,7 @@ export default function App() {
         {vista.nombre === 'dashboard' && (
           <Dashboard
             mentora={mentoraMostrada}
-            progreso={progreso}
+            progreso={progresoVista}
             esAdmin={esAdmin}
             viendoOtra={viendoOtra}
             onAbrirBloque={(bloqueId) => setVista({ ...vista, nombre: 'bloque', bloqueId })}
@@ -248,7 +251,7 @@ export default function App() {
         {vista.nombre === 'bloque' && (
           <BlockView
             bloqueId={vista.bloqueId}
-            progreso={progreso}
+            progreso={progresoVista}
             onAbrirModulo={(moduloId) => setVista({ ...vista, nombre: 'modulo', moduloId })}
             onVolver={() => setVista({ ...vista, nombre: 'dashboard' })}
           />
@@ -256,7 +259,7 @@ export default function App() {
         {vista.nombre === 'modulo' && (
           <ModuleView
             moduloId={vista.moduloId}
-            progresoModulo={progreso.modulos[vista.moduloId]}
+            progresoModulo={progresoVista.modulos[vista.moduloId]}
             videos={videos}
             esAdmin={esAdmin}
             acciones={acciones}
@@ -266,14 +269,14 @@ export default function App() {
         {vista.nombre === 'horas' && (
           <HoursLog
             mentora={mentoraMostrada}
-            progreso={progreso}
+            progreso={progresoVista}
             onVolver={() => setVista({ ...vista, nombre: 'dashboard' })}
           />
         )}
         {vista.nombre === 'certificado' && (
           <Certificado
             mentora={mentoraMostrada}
-            progreso={progreso}
+            progreso={progresoVista}
             nivel={vista.nivel}
             onVolver={() => setVista({ ...vista, nombre: 'dashboard' })}
           />

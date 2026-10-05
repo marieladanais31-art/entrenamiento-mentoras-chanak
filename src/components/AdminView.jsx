@@ -3,7 +3,7 @@ import { BLOQUES, VERSION_CURRICULO, FECHA_ACTUALIZACION, numModulo } from '../d
 import { VIDEOS, CATEGORIAS_VIDEO } from '../data/videos'
 import VideoLeccion from './VideoLeccion'
 import * as api from '../lib/backend'
-import { resumenMentora, formatearFecha, iniciales } from '../lib/calculos'
+import { resumenMentora, formatearFecha, iniciales, aplicarEquivalencias } from '../lib/calculos'
 import GestionUsuarias from './GestionUsuarias'
 import GestionCodigos from './GestionCodigos'
 import { useIdioma } from '../i18n/idioma'
@@ -98,7 +98,7 @@ export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) 
               </p>
               <div className="grid gap-3 sm:grid-cols-2">
                 {activas.map((p) => {
-                  const r = resumenMentora(progresos[p.id] || { modulos: {} })
+                  const r = resumenMentora(aplicarEquivalencias(progresos[p.id] || { modulos: {} }))
                   const pct = Math.min(100, Math.round((r.horas / r.metaHoras) * 100))
                   return (
                     <div key={p.id} className="rounded-2xl bg-white p-4 shadow-sm">

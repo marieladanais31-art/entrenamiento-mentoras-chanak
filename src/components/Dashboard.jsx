@@ -1,4 +1,4 @@
-import { BLOQUES, TODOS_MODULOS, NIVEL_1_HORAS, NIVEL_2_HORAS, numModulo } from '../data/curriculum'
+import { BLOQUES, TODOS_MODULOS, NIVEL_1_HORAS, NIVEL_2_HORAS, numModulo, BIBLIOTECA, urlCarpeta, CARPETA_FINAL_URL } from '../data/curriculum'
 import { resumenMentora, estadoBloque, horasBloqueCompletadas } from '../lib/calculos'
 import ProgressRing from './ui/ProgressRing'
 import EstadoBadge from './ui/EstadoBadge'
@@ -95,6 +95,33 @@ export default function Dashboard({
         <Acceso icono="📘" titulo={t('panel.presentacion')} sub={t('panel.presentacionSub')} onClick={onVerCurso} tono="teal" />
         <Acceso icono="📋" titulo={t('panel.registroHoras')} sub={t('panel.registroHorasSub', { horas: r.horas })} onClick={onVerHoras} tono="navy" />
       </div>
+
+      {/* Avance reconocido de la formación anterior */}
+      {r.reconocidos > 0 && (
+        <p className="rounded-2xl border border-amber-300 bg-amber-50 px-4 py-3 text-xs leading-relaxed text-amber-900">
+          ♻️ {t('panel.reconocidos', { n: r.reconocidos })}
+        </p>
+      )}
+
+      {/* Biblioteca práctica de documentos oficiales (Drive) */}
+      <details className="rounded-2xl bg-white p-4 shadow-sm">
+        <summary className="cursor-pointer text-sm font-bold text-navy">📂 {t('panel.biblioteca')}</summary>
+        <p className="mt-2 text-xs text-navy/60">{t('panel.bibliotecaSub')}</p>
+        <ul className="mt-3 space-y-2.5">
+          {BIBLIOTECA.map((b) => (
+            <li key={b.carpeta} className="rounded-xl bg-cream px-3 py-2.5">
+              <a href={urlCarpeta(b.carpeta)} target="_blank" rel="noreferrer" className="text-xs font-bold text-teal hover:underline">
+                {b.carpeta} →
+              </a>
+              <div className="mt-1 text-xs leading-relaxed text-navy/70"><b>Mentor:</b> {b.mentor}</div>
+              <div className="text-xs leading-relaxed text-navy/70"><b>Coordinator:</b> {b.coordinador}</div>
+            </li>
+          ))}
+        </ul>
+        <a href={CARPETA_FINAL_URL} target="_blank" rel="noreferrer" className="mt-3 inline-block text-xs font-semibold text-teal hover:underline">
+          {t('panel.bibliotecaTodo')} →
+        </a>
+      </details>
 
       {/* Certificación */}
       {r.elegibleCoordinadora ? (

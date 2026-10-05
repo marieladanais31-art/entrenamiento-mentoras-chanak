@@ -1,4 +1,18 @@
 import { TODOS_MODULOS, NIVEL_1_HORAS, NIVEL_2_HORAS } from '../data/curriculum'
+import { EQUIVALENCIAS } from '../data/equivalencias'
+
+// Devuelve una copia del progreso para MOSTRAR (nunca para guardar): los módulos 2026–2027
+// no completados cuyo equivalente antiguo está completado aparecen como «reconocido».
+export function aplicarEquivalencias(progreso) {
+  const mods = progreso?.modulos || {}
+  const out = { ...mods }
+  for (const [nuevo, antiguos] of Object.entries(EQUIVALENCIAS)) {
+    if (mods[nuevo]?.estado === 'completado') continue
+    const de = antiguos.filter((a) => mods[a]?.estado === 'completado')
+    if (de.length) out[nuevo] = { ...(mods[nuevo] || {}), estado: 'reconocido', reconocidoDe: de }
+  }
+  return { ...progreso, modulos: out }
+}
 
 // Funciones puras de cálculo sobre un objeto de progreso { modulos: {…} }.
 // No tocan red ni almacenamiento: así los componentes se mantienen simples.
@@ -8,6 +22,7 @@ export function resumenMentora(progreso) {
   let horas = 0
   let completados = 0
   let enCurso = 0
+  let reconocidos = 0
   // Solo cuentan para la certificación los módulos de la ruta oficial (no los "por rol").
   const ruta = TODOS_MODULOS.filter((m) => !m.porRol)
   for (const m of ruta) {
@@ -15,6 +30,10 @@ export function resumenMentora(progreso) {
     if (p?.estado === 'completado') {
       horas += m.horas
       completados++
+    } else if (p?.estado === 'reconocido') {
+      // Horas reconocidas de la formación anterior; falta el nuevo Knowledge Check.
+      horas += m.horas
+      reconocidos++
     } else if (p?.estado === 'en_curso') {
       enCurso++
     }
@@ -32,7 +51,8 @@ export function resumenMentora(progreso) {
     horas,
     completados,
     enCurso,
-    pendientes: ruta.length - completados - enCurso,
+    reconocidos,
+    pendientes: ruta.length - completados - enCurso - reconocidos,
     totalModulos: ruta.length,
     porRolCompletados,
     nivel1Completo,
@@ -55,7 +75,7 @@ export function estadoBloque(progreso, bloque) {
 export function horasBloqueCompletadas(progreso, bloque) {
   const mods = progreso?.modulos || {}
   return bloque.modulos.reduce(
-    (sum, m) => sum + (mods[m.id]?.estado === 'completado' ? m.horas : 0),
+    (sum, m) => sum + (['completado', 'reconocido'].includes(mods[m.id]?.estado) ? m.horas : 0),
     0
   )
 }
@@ -64,7 +84,7 @@ export function registroCronologico(progreso) {
   const mods = progreso?.modulos || {}
   return TODOS_MODULOS.filter((m) => {
     const e = mods[m.id]?.estado
-    return e === 'completado' || e === 'en_curso'
+    return e === 'completado' || e === 'en_curso' || e === 'reconocido'
   })
     .map((m) => ({
       ...m,
@@ -89,13 +109,10 @@ export function iniciales(nombre = '') {
     .join('')
 }
 
-// Convierte un enlace de Google Vids / Drive / YouTube / NotebookLM en objeto ejecutable.
+// Convierte un enlace de Google Vids / Drive / YouTube / Vimeo / MP4 en objeto ejecutable.
 export function urlEmbed(url = '') {
   const u = url.trim()
   if (!u) return null
-  if (u.includes('notebooklm.google.com') || u.includes('notebooklm')) {
-    return { tipo: 'notebooklm', url: u }
-  }
   // Google Vids y Google Drive: .../d/<id>/edit|view|preview
   const google = u.match(/(?:vids\.google\.com|docs\.google\.com\/videos|drive\.google\.com)\/.*?\/d\/([\w-]+)/)
   if (google) {

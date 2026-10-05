@@ -4,6 +4,7 @@ export const ESTADO_INFO = {
   pendiente: { icono: '⬜', clases: 'bg-navy/5 text-navy/60' },
   en_curso: { icono: '🔵', clases: 'bg-teal/10 text-teal' },
   completado: { icono: '✅', clases: 'bg-gold/15 text-gold' },
+  reconocido: { icono: '♻️', clases: 'bg-amber-100 text-amber-800' },
   bloqueado: { icono: '🔒', clases: 'bg-navy/5 text-navy/40' },
 }
 

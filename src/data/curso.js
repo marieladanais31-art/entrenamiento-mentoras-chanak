@@ -23,7 +23,8 @@ export const CURSO = {
   ],
   metodologia: [
     { icono: '🎬', nombre: 'Vídeo', detalle: 'Una cápsula por módulo (28 vídeos), actualizable por separado' },
-    { icono: '📖', nombre: 'Lectura', detalle: 'Contenido basado en la documentación oficial 2026–2027' },
+    { icono: '📖', nombre: 'Lectura', detalle: 'Lectura ampliada en la app (2.000–3.400 palabras por módulo) basada en la documentación oficial 2026–2027' },
+    { icono: '📂', nombre: 'Documentos oficiales', detalle: 'Lectura obligatoria de documentos concretos de la carpeta de Drive FINAL, con enlace directo' },
     { icono: '🛠', nombre: 'Práctica', detalle: 'Situaciones reales del mentor: resolver, documentar o escalar' },
     { icono: '✅', nombre: 'Knowledge Check', detalle: 'Preguntas de decisión con aprobación al 80 % y reintentos' },
     { icono: '📁', nombre: 'Evidencia', detalle: 'Reflexión o entregable que se archiva con tu progreso' },
