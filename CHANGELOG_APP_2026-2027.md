@@ -65,3 +65,10 @@
 
 **NotebookLM eliminado**
 - Sustituido por enlaces directos a las carpetas de `CHANAK_DOCUMENTOS_2026-2027_FINAL` en cada módulo y una «Biblioteca de documentos oficiales (Drive)» en el panel, con el uso de cada carpeta para mentor y coordinador. También retirado del área EducaFe / Partner Training.
+
+## 2026-10-05 · Programas y vinculaciones en proceso en EE. UU.
+- T4.4: nueva lección «Deporte universitario y vinculaciones con universidades de EE. UU. (en proceso)»: NCAA como opción para estudiantes-deportistas que aspiran a becas, registro NCES, solicitud de convenio con Dallas Baptist University (DBU) y plan de convenios con otras universidades tras la decisión de MSA-CESS (nov-2026). Todo redactado como «en proceso»/«plan», sin promesas.
+- T7.2: nueva lección «Otros estados en proceso: Texas (TEFA), Arizona (ESA), Arkansas (EFA), Utah (Fits All) y West Virginia (Hope)»: solicitudes como proveedor de servicios, todas en proceso, con directrices generales de las webs oficiales (consultadas el 5-oct-2026).
+- T4.4: NCES (mayor visibilidad estatal; número estimado en 3–4 semanas) y DBU (solicitud enviada, reuniones para conocer propuestas).
+- T8.3: nueva lección de control de comunicación para coordinadores sobre los cuatro frentes.
+- Knowledge Check: 5 preguntas nuevas (T4.4 ×2, T7.2 ×2, T8.3 ×1).
