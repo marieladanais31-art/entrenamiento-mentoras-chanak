@@ -75,7 +75,7 @@ export default function HoursLog({ mentora, progreso, onVolver }) {
                       <span className="text-navy/70">{m.titulo}</span>
                     </td>
                     <td className="py-2.5 pr-2 text-right font-semibold text-navy">
-                      {m.estado === 'completado' ? m.horas : '—'}
+                      {m.estado === "completado" && !m.porRol && !m.transversal ? m.horas : "—"}
                     </td>
                     <td className="whitespace-nowrap py-2.5">
                       {m.estado === 'completado' ? `✅ ${t('estado.completado')}` : `🔵 ${t('estado.en_curso')}`}

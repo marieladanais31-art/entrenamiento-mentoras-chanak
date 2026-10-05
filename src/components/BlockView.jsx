@@ -21,7 +21,7 @@ export default function BlockView({ bloqueId, progreso, onAbrirModulo, onVolver 
       <div className="rounded-2xl bg-navy p-5 text-cream shadow-sm">
         <div className="text-[13px] font-bold uppercase tracking-wider text-gold">
           {t('panel.bloque', { n: bloque.numero })} · {bloque.categoria}
-          {bloque.porRol ? ` · ${t('panel.porRol')}` : bloque.nivel === 2 ? ' · Coordinator' : ' · Mentor'}
+          {bloque.porRol ? ` · ${t('panel.porRol')}` : bloque.transversal ? ' · Transversal' : bloque.nivel === 2 ? ' · Coordinator' : ' · Mentor'}
         </div>
         <h2 className="mt-1 text-lg font-bold leading-snug">{bloque.titulo}</h2>
         <p className="mt-1 text-xs text-cream/70">

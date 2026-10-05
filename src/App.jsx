@@ -10,6 +10,10 @@ import Certificado from './components/Certificado'
 import AdminView from './components/AdminView'
 import EducaFeView from './components/EducaFeView'
 import ModalPasswordEducaFe from './components/ModalPasswordEducaFe'
+import Glosario from './components/Glosario'
+import Organigrama from './components/Organigrama'
+import RolPerfil from './components/RolPerfil'
+import { rolesDesdeTipoAcceso } from './data/roles'
 import Header from './components/ui/Header'
 import CambiarContrasena from './components/CambiarContrasena'
 import * as api from './lib/backend'
@@ -30,6 +34,10 @@ export default function App() {
   // Vista con el avance anterior reconocido (solo para mostrar; las escrituras usan `progreso`).
   const progresoVista = useMemo(() => aplicarEquivalencias(progreso), [progreso])
   const [videos, setVideos] = useState({})
+  // Roles (ROLE ≠ PERSON) de la persona cuyo panel se muestra; null = migración pendiente (se deriva de tipo_acceso)
+  const [rolesViendo, setRolesViendo] = useState(null)
+  const [contactoViendo, setContactoViendo] = useState(null)
+  const [tipoAccesoViendo, setTipoAccesoViendo] = useState(null)
   const [errorCarga, setErrorCarga] = useState('')
 
   const esAdmin = perfil?.rol === 'admin'
@@ -89,6 +97,39 @@ export default function App() {
     recargarDatos()
   }, [recargarDatos])
 
+  // ── Roles de la persona mostrada ──
+  useEffect(() => {
+    if (!idViendo || !aprobada) return
+    let vivo = true
+    ;(async () => {
+      try {
+        const [filas, p] = await Promise.all([
+          api.getRolesDe(idViendo),
+          idViendo === perfil?.id ? Promise.resolve(perfil) : api.getPerfil(idViendo),
+        ])
+        if (!vivo) return
+        setRolesViendo(filas)
+        setContactoViendo(p?.contacto_menores ?? null)
+        setTipoAccesoViendo(p?.tipo_acceso || 'mentora')
+      } catch {
+        if (vivo) {
+          setRolesViendo(null)
+          setContactoViendo(null)
+          setTipoAccesoViendo(perfil?.tipo_acceso || 'mentora')
+        }
+      }
+    })()
+    return () => {
+      vivo = false
+    }
+  }, [idViendo, aprobada, perfil])
+
+  // Roles efectivos: los asignados; si aún no hay ninguno, los derivados de tipo_acceso
+  const rolesIds = useMemo(() => {
+    const asignados = (rolesViendo || []).map((r) => r.rol)
+    return asignados.length ? [...new Set(asignados)] : rolesDesdeTipoAcceso(tipoAccesoViendo || perfil?.tipo_acceso)
+  }, [rolesViendo, tipoAccesoViendo, perfil])
+
   // ── Mutaciones (actualizan Supabase y el estado local) ──
   const mutar = useCallback(
     async (fn) => {
@@ -140,7 +181,14 @@ export default function App() {
     )
   }
 
-  if (!sesion) return <Login />
+  if (!sesion) {
+    return (
+      <>
+        <Login />
+        <Glosario />
+      </>
+    )
+  }
 
   if (vista.nombre === 'cambiar-contrasena') {
     return (
@@ -237,6 +285,24 @@ export default function App() {
             onVerCurso={() => setVista({ ...vista, nombre: 'curso' })}
             onVerCertificado={(nivel) => setVista({ ...vista, nombre: 'certificado', nivel })}
             onVerEducafe={() => setMostrandoModalEducaFe(true)}
+            roles={rolesIds}
+            contactoMenores={contactoViendo}
+            onVerOrganigrama={() => setVista({ ...vista, nombre: 'organigrama' })}
+            onVerRol={(rolId) => setVista({ ...vista, nombre: 'rol', rolId })}
+          />
+        )}
+        {vista.nombre === 'organigrama' && (
+          <Organigrama
+            onVolver={() => setVista({ ...vista, nombre: 'dashboard' })}
+            onVerRol={(rolId) => setVista({ ...vista, nombre: 'rol', rolId })}
+          />
+        )}
+        {vista.nombre === 'rol' && (
+          <RolPerfil
+            rolId={vista.rolId}
+            progreso={progresoVista}
+            onVolver={() => setVista({ ...vista, nombre: 'organigrama' })}
+            onAbrirModulo={(moduloId) => setVista({ ...vista, nombre: 'modulo', moduloId, bloqueId: getModulo(moduloId)?.bloqueId })}
           />
         )}
         {vista.nombre === 'educafe' && (
@@ -293,6 +359,7 @@ export default function App() {
           />
         )}
       </main>
+      <Glosario />
     </div>
   )
 }

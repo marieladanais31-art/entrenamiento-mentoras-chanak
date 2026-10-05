@@ -29,7 +29,7 @@ export const FUENTES = {
   alianzas: '03_INSTITUCIONES · Alianzas Institucionales',
   plc: '03_INSTITUCIONES · Partner Learning Center (Sede afiliada)',
   curriculos: '03_INSTITUCIONES · Currículos y Vías Académicas',
-  contratos: '03_INSTITUCIONES/CONTRATOS · Adenda Acuerdo Marco y Anexo de Certificación',
+  contratos: 'CONTRATOS · Adenda Acuerdo Marco y Anexo de Certificación',
   ema: '07_US_PROGRAMS_COMPLIANCE · Florida EMA Approved Service Status',
   alabama: '07_US_PROGRAMS_COMPLIANCE · Alabama CHOOSE ESP Approved Status',
   certPolicy: '08_ACADEMIC_POLICIES · Academic Certification Policy',
@@ -50,7 +50,7 @@ export const CARPETAS_DRIVE = {
   '01_INSTITUCIONAL': DRIVE('1KbhzvvpIgASo5koXhpAqPs3IsYgPoDuU'),
   '02_FAMILIAS': DRIVE('1szjqYrhvU72RZ08giDiISA88ftuo17PI'),
   '03_INSTITUCIONES': DRIVE('1rm_nWHq32FVyeub7cS9Cj3o7de8FWsxa'),
-  '03_INSTITUCIONES/CONTRATOS': DRIVE('1TQXRC3epFE-As6aBSJQo43fu4J_muafD'),
+  'CONTRATOS': DRIVE('1TQXRC3epFE-As6aBSJQo43fu4J_muafD'),
   '04_PAISES': DRIVE('1KWPYNpFXzEQe-FAbLJaqTtP8jLj8-lKO'),
   '05_PRESENTACIONES_REUNIONES': DRIVE('1RCurkbptzoA7f72Xwzv_ubf3fo6CVEcb'),
   '06_CONTROL_DOCUMENTAL': DRIVE('14y6q-jR0oY5Y4S2TrMP89t_Ox6zQfPUl'),
@@ -67,11 +67,11 @@ export function urlCarpeta(carpeta = '') {
 export const BIBLIOTECA = [
   { carpeta: '01_INSTITUCIONAL', mentor: 'Presentar Chanak con exactitud: identidad, estatus, programas y qué emite Chanak.', coordinador: 'Referencia para reuniones institucionales y para corregir información pública.' },
   { carpeta: '02_FAMILIAS', mentor: 'Dossiers de Off-Campus, Dual Diploma y Life Skills para orientar a familias.', coordinador: 'Verificar que lo que se promete a las familias coincide con el dossier oficial.' },
-  { carpeta: '03_INSTITUCIONES', mentor: 'Vías curriculares y diferencias entre programas.', coordinador: 'Partner Learning Center, alianzas, Dual Diploma institucional y contratos (subcarpeta CONTRATOS).' },
+  { carpeta: '03_INSTITUCIONES', mentor: 'Vías curriculares y diferencias entre programas.', coordinador: 'Partner Learning Center, alianzas, Dual Diploma institucional y contratos (carpeta CONTRATOS en la raíz de FINAL, uso interno).' },
   { carpeta: '04_PAISES', mentor: 'Programas y tarifas vigentes por país: la única fuente para responder sobre precios.', coordinador: 'Comprobar condiciones por país antes de cerrar acuerdos.' },
   { carpeta: '05_PRESENTACIONES_REUNIONES', mentor: 'Presentaciones listas para reuniones con familias.', coordinador: 'Presentaciones para colegios, alianzas y Partner Learning Centers.' },
   { carpeta: '06_CONTROL_DOCUMENTAL', mentor: 'Saber qué versión es la oficial (README y CHANGELOG).', coordinador: 'Control de versiones y fuentes antes de citar un documento.' },
-  { carpeta: '07_US_PROGRAMS_COMPLIANCE', mentor: 'Solo por rol: Florida EMA y Alabama CHOOSE (uso interno, no se envía a familias).', coordinador: 'Cumplimiento de programas estatales de EE. UU. (state funding ≠ curriculum).' },
+  { carpeta: '07_US_PROGRAMS_COMPLIANCE', mentor: 'Uso interno de administración y coordinación (acceso restringido): Florida EMA, Alabama CHOOSE y programas en proceso. Los mentores estudian este contenido en la app (Bloque 7); no se envía a familias.', coordinador: 'Cumplimiento de programas estatales de EE. UU. (state funding ≠ curriculum).' },
   { carpeta: '08_ACADEMIC_POLICIES', mentor: 'Las cinco políticas académicas: certificación, créditos, currículo y evaluación.', coordinador: 'Base de toda decisión académica y de las auditorías de expedientes.' },
   { carpeta: '09_ACADEMIC_FRAMEWORK', mentor: 'Scope & Sequence K–12 y matrices de estándares y evaluación.', coordinador: 'Revisión de planes de estudio, créditos y evidencia por grado.' },
 ]
@@ -116,7 +116,7 @@ export const BLOQUES = [
     id: 'B1',
     nivel: 1,
     numero: 1,
-    titulo: 'Identidad y modelo Chanak',
+    titulo: 'CHANAK CORE · Identidad, estructura y funcionamiento',
     categoria: 'Fundamentos',
     horas: 20,
     modulos: [
@@ -221,6 +221,21 @@ export const BLOQUES = [
       { id: 'T8.4', titulo: 'Proyecto de coordinación supervisado', horas: 30, modalidad: 'Práctica supervisada + portafolio', evaluacion: 'Portafolio + revisión con Chanak Central', video: 'V28', fuentes: ['plc', 'master'], entregable: true },
     ],
   },
+  {
+    id: 'B9',
+    nivel: 1,
+    numero: 9,
+    titulo: 'Child & Adolescent Development, Psychology & Educational Accompaniment',
+    categoria: 'Desarrollo y acompañamiento',
+    horas: 18,
+    transversal: true,
+    modulos: [
+      { id: 'T9.1', titulo: 'Desarrollo infantil: mente, emociones y relaciones', horas: 5, modalidad: 'Vídeo + lectura + casos + observación guiada', evaluacion: 'Knowledge Check + caso', video: 'V29', fuentes: [] },
+      { id: 'T9.2', titulo: 'Adolescencia: identidad, pertenencia, autonomía y proyecto de vida', horas: 4, modalidad: 'Vídeo + lectura + casos + observación guiada', evaluacion: 'Knowledge Check + caso', video: 'V30', fuentes: [] },
+      { id: 'T9.3', titulo: 'Diferencias individuales y neurodiversidad: observar sin diagnosticar', horas: 4, modalidad: 'Vídeo + lectura + casos + observación guiada', evaluacion: 'Knowledge Check + caso', video: 'V31', fuentes: [] },
+      { id: 'T9.4', titulo: 'Acompañamiento educativo: observar, documentar, apoyar, comunicar, escalar', horas: 5, modalidad: 'Vídeo + lectura + 8 casos prácticos + portafolio', evaluacion: 'Knowledge Check + caso completo', video: 'V32', fuentes: [], entregable: true },
+    ],
+  },
 ]
 
 export const TODOS_MODULOS = BLOQUES.flatMap((b) =>
@@ -230,6 +245,7 @@ export const TODOS_MODULOS = BLOQUES.flatMap((b) =>
     bloqueTitulo: b.titulo,
     nivel: b.nivel,
     porRol: Boolean(b.porRol),
+    transversal: Boolean(b.transversal),
   }))
 )
 

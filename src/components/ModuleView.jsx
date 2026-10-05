@@ -414,6 +414,9 @@ function Desglose({ d, horas, t }) {
                   📂 {doc.carpeta} › {doc.documento}
                 </a>{' '}
                 <span className="text-navy/50">({fmt(doc.horas)})</span>
+                {/^(07_|CONTRATOS)/.test(doc.carpeta) && (
+                  <span className="ml-1.5 rounded bg-gold/25 px-1.5 py-0.5 text-[10px] font-bold uppercase text-navy">Uso interno · administración y coordinación</span>
+                )}
                 <div className="text-navy/60">{doc.que}</div>
               </li>
             ))}

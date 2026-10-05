@@ -1,5 +1,6 @@
 import { supabase, SUPABASE_URL, SUPABASE_ANON_KEY } from './supabase'
 import { createClient } from '@supabase/supabase-js'
+import { grupoDe } from '../data/roles'
 
 // ════════════════════════════════════════════
 // AUTENTICACIÓN
@@ -100,6 +101,60 @@ export async function listarPerfiles() {
 
 export async function actualizarPerfil(id, cambios) {
   const { error } = await supabase.from('perfiles').update(cambios).eq('id', id)
+  if (error) throw new Error(error.message)
+}
+
+// ════════════════════════════════════════════
+// ROLES MÚLTIPLES (ROLE ≠ PERSON)
+// Si la tabla perfil_roles aún no existe (migración pendiente), devuelve null y la app
+// deriva los roles de perfiles.tipo_acceso: nada se rompe.
+// ════════════════════════════════════════════
+
+// En BD: rol = uno de 3 grupos (mentor | coordinator | estrategico) y funcion = perfil del catálogo.
+// En la app: rol = id de la función (catálogo), grupo = rol de formación.
+function normalizarRol(r) {
+  return { ...r, grupo: r.rol, rol: r.funcion || (r.rol === 'coordinator' ? 'coordinator' : 'mentor') }
+}
+
+const tablaRolesAusente = (msg = '') => /perfil_roles|schema cache|does not exist|relation/i.test(msg)
+
+// Roles de una persona: [{ rol, territorio, programa }] o null si no hay migración.
+export async function getRolesDe(userId) {
+  const { data, error } = await supabase
+    .from('perfil_roles')
+    .select('rol, funcion, territorio, programa')
+    .eq('perfil_id', userId)
+  if (error) {
+    if (tablaRolesAusente(error.message)) return null
+    throw new Error(error.message)
+  }
+  return (data || []).map(normalizarRol)
+}
+
+// Todos los roles (admin): { [perfil_id]: [{ id, rol, territorio, programa }] } o null
+export async function listarRoles() {
+  const { data, error } = await supabase.from('perfil_roles').select('id, perfil_id, rol, funcion, territorio, programa')
+  if (error) {
+    if (tablaRolesAusente(error.message)) return null
+    throw new Error(error.message)
+  }
+  const mapa = {}
+  for (const r of data || []) (mapa[r.perfil_id] ||= []).push(normalizarRol(r))
+  return mapa
+}
+
+// `funcion` = id de función del catálogo; el rol de formación (grupo) se deduce de ella.
+export async function asignarRol(perfilId, funcion, asignadoPor, territorio = null, programa = null) {
+  const grupo = grupoDe(funcion)
+  if (!grupo) throw new Error('Función desconocida: ' + funcion)
+  const { error } = await supabase
+    .from('perfil_roles')
+    .insert({ perfil_id: perfilId, rol: grupo, funcion, territorio: territorio || null, programa: programa || null, asignado_por: asignadoPor })
+  if (error) throw new Error(error.message)
+}
+
+export async function quitarRol(idFila) {
+  const { error } = await supabase.from('perfil_roles').delete().eq('id', idFila)
   if (error) throw new Error(error.message)
 }
 

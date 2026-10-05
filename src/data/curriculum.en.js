@@ -1,6 +1,6 @@
 // English titles for the 2026–2027 training structure (content stays in Spanish).
 export const BLOQUES_EN = {
-  B1: 'Chanak identity and model',
+  B1: 'CHANAK CORE · Identity, structure and operations',
   B2: 'Chanak programs',
   B3: 'Curriculum Pathways',
   B4: 'Academic Framework',
@@ -8,6 +8,7 @@ export const BLOQUES_EN = {
   B6: 'Safeguarding and Local Extension',
   B7: 'USA State Programs / Compliance',
   B8: 'Coordinator Track',
+  B9: 'Child & Adolescent Development, Psychology & Educational Accompaniment',
 }
 
 export const MODULOS_EN = {
@@ -39,6 +40,10 @@ export const MODULOS_EN = {
   'T8.2': 'Partner Learning Centers: local operation and Chanak Central',
   'T8.3': 'Evidence review, reporting and incidents',
   'T8.4': 'Supervised coordination project',
+  'T9.1': 'Child development: mind, emotions and relationships',
+  'T9.2': 'Adolescence: identity, belonging, autonomy and life project',
+  'T9.3': 'Individual differences and neurodiversity: observe without diagnosing',
+  'T9.4': 'Educational accompaniment: observe, document, support, communicate, escalate',
 }
 
 export function traducirBloques(bloques, idioma) {

@@ -4,6 +4,19 @@
 **Rama:** `training-2026-2027` (respaldo de la versión anterior: rama `archive-training-msa-2026`)
 **Fuente oficial:** `CHANAK_DOCUMENTOS_2026-2027_FINAL`
 
+## 2026-10-05 · Entrega A · CHANAK STAFF TRAINING & OPERATIONS SYSTEM (base)
+**Principio ROLE ≠ PERSON.** Un rol describe una función; una persona puede tener varios roles compatibles. Cada rol debe estar asignado formalmente, con su formación completada y respetando los límites de autoridad (los permisos no se mezclan).
+- **Roles múltiples:** nueva tabla `perfil_roles` (migración aditiva `supabase/migracion_roles.sql`, pendiente de ejecutar) y panel Admin → Usuarias con «Roles asignados» (**3 roles de formación: Mentor —incluye profesores especialistas—, Coordinador y Estratégico —los demás—**, cada uno con sus funciones; territorio y programa para Representantes) y `direct_child_contact` (automático por roles o fijado por administración). Sin migración, la app deriva los roles de `tipo_acceso` y no se rompe nada.
+- **Catálogo de roles** (`src/data/roles.js`): Academic Mentor, Academic Coordinator, English Teacher, Life Skills & Leadership Facilitator, Local Language Extension & English Coordinator, Educational Assessment Specialist, Academic Records/SIS, Country/State/Program Representative, Family Enrollment & State Programs Advisor, Institutional Partnerships Representative, Grants & Project Development, Life Skills Project Coordinator. Cada rol: unidad, sistemas, módulos, límites, escalamiento y permissions checklist. Perfil consultable en la app (Organigrama → rol).
+- **Chanak Core (Bloque 1):** retitulado «CHANAK CORE · Identidad, estructura y funcionamiento»; T1.1 incorpora «Rol ≠ Persona» y «Organigrama funcional». **Organigrama funcional** gráfico. +2 preguntas de Knowledge Check.
+- **Chanak Operational Glossary:** 52 términos, buscable y disponible desde cualquier pantalla (botón «Glosario»).
+- **Bloque 9 · Child & Adolescent Development, Psychology & Educational Accompaniment** (transversal; 4 módulos T9.1–T9.4; **18 h** recalculadas a partir del contenido real (las 50 h de la formación original estaban sobreestimadas): 5/4/4/5 h; **fuera de las 180/300 h**; 4 vídeos V29–V32; 20 preguntas). Secuencia OBSERVAR → DOCUMENTAR → APOYAR → COMUNICAR → ESCALAR/DERIVAR; sin diagnóstico clínico; separado de Safeguarding.
+- **Gating de contacto con menores:** si `direct_child_contact` = sí, es obligatorio completar Child & Adolescent Development, Safeguarding (6.1), Online Safety y protección de datos (6.2); sin ellos no se completa la ruta ni se emite certificado. Contacto ocasional → Safeguarding Awareness (6.1).
+- **Panel:** «Tu ruta» (avance por rol; las rutas que aún no están en la app se muestran como «en preparación», nunca como 100 %) y «Tus sistemas».
+- **Documentos de uso interno:** los de `07_US_PROGRAMS_COMPLIANCE` y `CONTRATOS` se marcan «Uso interno · administración y coordinación»; la ruta CONTRATOS ahora está en la raíz de FINAL; la presentación institucional pasa a `Chanak_Institucional_6_Slides.pptx`.
+- Integra los cambios del PR #3 (programas y vinculaciones en proceso en EE. UU.).
+- **Decisiones pendientes de Chanak Central:** ver el informe de la entrega.
+
 ## Identidad
 - Nuevo título: **CHANAK · FORMACIÓN DE MENTORES Y COORDINADORES** · «Comprender el modelo. Acompañar con criterio. Documentar con excelencia.»
 - Eliminadas las afirmaciones incorrectas: «acreditada MSA-CESS» → **MSA-CESS Candidate**; la formación ya no se presenta como evidencia MSA T5a.
@@ -65,3 +78,10 @@
 
 **NotebookLM eliminado**
 - Sustituido por enlaces directos a las carpetas de `CHANAK_DOCUMENTOS_2026-2027_FINAL` en cada módulo y una «Biblioteca de documentos oficiales (Drive)» en el panel, con el uso de cada carpeta para mentor y coordinador. También retirado del área EducaFe / Partner Training.
+
+## 2026-10-05 · Programas y vinculaciones en proceso en EE. UU.
+- T4.4: nueva lección «Deporte universitario y vinculaciones con universidades de EE. UU. (en proceso)»: NCAA como opción para estudiantes-deportistas que aspiran a becas, registro NCES, solicitud de convenio con Dallas Baptist University (DBU) y plan de convenios con otras universidades tras la decisión de MSA-CESS (nov-2026). Todo redactado como «en proceso»/«plan», sin promesas.
+- T7.2: nueva lección «Otros estados en proceso: Texas (TEFA), Arizona (ESA), Arkansas (EFA), Utah (Fits All) y West Virginia (Hope)»: solicitudes como proveedor de servicios, todas en proceso, con directrices generales de las webs oficiales (consultadas el 5-oct-2026).
+- T4.4: NCES (mayor visibilidad estatal; número estimado en 3–4 semanas) y DBU (solicitud enviada, reuniones para conocer propuestas).
+- T8.3: nueva lección de control de comunicación para coordinadores sobre los cuatro frentes.
+- Knowledge Check: 5 preguntas nuevas (T4.4 ×2, T7.2 ×2, T8.3 ×1).

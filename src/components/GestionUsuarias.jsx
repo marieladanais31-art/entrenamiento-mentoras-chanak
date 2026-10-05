@@ -2,12 +2,13 @@ import { useState } from 'react'
 import { actualizarPerfil, crearUsuariaDirecta } from '../lib/backend'
 import { formatearFecha, iniciales } from '../lib/calculos'
 import { useIdioma } from '../i18n/idioma'
+import AsignarRoles from './AsignarRoles'
 
 const PAISES = ['España', 'México', 'Panamá', 'Estados Unidos', 'Otro']
 const PROGRAMAS = ['Off-Campus', 'Dual Diploma', 'Life Skills', 'Partner Learning Center', 'Varios']
 
 // Aprobación y gestión de cuentas. Solo visible para admin.
-export default function GestionUsuarias({ perfiles, miId, onRecargar }) {
+export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa }) {
   const { t } = useIdioma()
   const [ocupado, setOcupado] = useState(null)
   const [error, setError] = useState('')
@@ -292,6 +293,7 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar }) {
                   className="w-28 rounded-lg bg-white px-2 py-1 text-xs text-navy"
                 />
               </div>
+              <AsignarRoles perfil={p} filas={rolesMapa?.[p.id]} miId={miId} onRecargar={onRecargar} migrado={rolesMapa !== null && rolesMapa !== undefined} />
             </li>
           ))}
           {activas.length === 0 && (
