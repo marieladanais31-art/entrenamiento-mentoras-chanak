@@ -40,6 +40,11 @@ Reglas de producción: 5–9 minutos, sin datos personales de estudiantes (usar 
 | V30 | Desarrollo y acompañamiento | 9.2 | Acompañar a un adolescente | 8 min |
 | V31 | Desarrollo y acompañamiento | 9.3 | Diferencias individuales: observar sin diagnosticar | 8 min |
 | V32 | Desarrollo y acompañamiento | 9.4 | Observar, documentar, apoyar, comunicar, escalar | 9 min |
+| V33 | Crecimiento y sistemas | 10.1 | Desarrollo de mercados y Plan a 30 días | 8 min |
+| V34 | Crecimiento y sistemas | 10.2 | Grants, proyectos y el piloto de Life Skills | 8 min |
+| V35 | Crecimiento y sistemas | 10.3 | Voluntario, Contratista y Socio | 7 min |
+| V36 | Crecimiento y sistemas | 10.4 | SIS, Portal y Dual Diploma Portal | 8 min |
+| V37 | Crecimiento y sistemas | 10.5 | Rutas de especialista | 8 min |
 
 ## Fundamentos
 

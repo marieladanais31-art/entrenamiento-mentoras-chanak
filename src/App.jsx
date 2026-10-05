@@ -12,6 +12,7 @@ import EducaFeView from './components/EducaFeView'
 import ModalPasswordEducaFe from './components/ModalPasswordEducaFe'
 import Glosario from './components/Glosario'
 import Organigrama from './components/Organigrama'
+import MatrizProgramas from './components/MatrizProgramas'
 import RolPerfil from './components/RolPerfil'
 import { rolesDesdeTipoAcceso } from './data/roles'
 import Header from './components/ui/Header'
@@ -289,8 +290,10 @@ export default function App() {
             contactoMenores={contactoViendo}
             onVerOrganigrama={() => setVista({ ...vista, nombre: 'organigrama' })}
             onVerRol={(rolId) => setVista({ ...vista, nombre: 'rol', rolId })}
+            onVerMatriz={() => setVista({ ...vista, nombre: 'matriz' })}
           />
         )}
+        {vista.nombre === 'matriz' && <MatrizProgramas onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
         {vista.nombre === 'organigrama' && (
           <Organigrama
             onVolver={() => setVista({ ...vista, nombre: 'dashboard' })}

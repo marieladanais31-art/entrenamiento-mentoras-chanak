@@ -2,12 +2,6 @@ import { useIdioma } from '../i18n/idioma'
 
 const HUBS = [
   {
-    name: 'Salou · Costa Daurada',
-    lead: 'Thiare Urzua',
-    status: 'Activo · Modalidad A',
-    next: 'Consolidar grupo Life Skills y preparar encuentro con liderazgo local.',
-  },
-  {
     name: 'Tarragona general',
     lead: 'M. Claudia Garcia',
     status: 'Prioridad grants · Red territorial',

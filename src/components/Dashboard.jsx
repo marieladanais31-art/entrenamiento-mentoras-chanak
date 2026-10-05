@@ -22,6 +22,7 @@ export default function Dashboard({
   contactoMenores = null,
   onVerOrganigrama,
   onVerRol,
+  onVerMatriz,
 }) {
   const { t, idioma } = useIdioma()
   const r = resumenMentora(progreso, { roles, contactoMenores })
@@ -115,6 +116,11 @@ export default function Dashboard({
         {onVerOrganigrama && (
           <button onClick={onVerOrganigrama} className="mt-2 text-xs font-bold text-teal hover:underline">
             Ver el Organigrama Funcional Chanak →
+          </button>
+        )}
+        {onVerMatriz && (
+          <button onClick={onVerMatriz} className="mt-2 block text-xs font-bold text-teal hover:underline">
+            Ver la matriz de servicios por programa estatal (uso interno) →
           </button>
         )}
       </section>
