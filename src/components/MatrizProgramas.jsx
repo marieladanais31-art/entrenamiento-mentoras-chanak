@@ -94,6 +94,30 @@ export default function MatrizProgramas({ onVolver }) {
           <section className="rounded-2xl border border-gold/40 bg-gold/10 p-4 text-sm text-navy/80">
             <div className="font-bold text-navy">{f.state} · {f.program} · {f.service}</div>
             <p className="mt-1 leading-relaxed">{f.operativo}</p>
+            {f.condiciones && f.condiciones.length > 0 && (
+              <div className="mt-3">
+                <div className="text-[11px] font-bold uppercase tracking-wide text-navy/60">Condiciones del programa (resumen interno)</div>
+                <ul className="mt-1 list-disc space-y-1 pl-5 leading-relaxed">
+                  {f.condiciones.map((c, i) => <li key={i}>{c}</li>)}
+                </ul>
+              </div>
+            )}
+            {f.noVerificado && f.noVerificado.length > 0 && (
+              <div className="mt-3 rounded-lg bg-white/60 p-3">
+                <div className="text-[11px] font-bold uppercase tracking-wide text-coral">Por verificar antes de afirmarlo</div>
+                <ul className="mt-1 list-disc space-y-1 pl-5 leading-relaxed">
+                  {f.noVerificado.map((c, i) => <li key={i}>{c}</li>)}
+                </ul>
+              </div>
+            )}
+            {f.fuentesOficiales && f.fuentesOficiales.length > 0 && (
+              <div className="mt-3 text-[12px]">
+                <span className="font-semibold">Fuentes oficiales: </span>
+                {f.fuentesOficiales.map((u, i) => (
+                  <a key={i} href={u} target="_blank" rel="noreferrer" className="mr-3 break-all text-teal underline">{u.replace(/^https?:\/\//, '').slice(0, 60)}</a>
+                ))}
+              </div>
+            )}
           </section>
         ) : null
       })()}
