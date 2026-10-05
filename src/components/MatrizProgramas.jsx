@@ -102,6 +102,25 @@ export default function MatrizProgramas({ onVolver }) {
                 </ul>
               </div>
             )}
+            {f.captacion && f.captacion.length > 0 && (
+              <div className="mt-3">
+                <div className="text-[11px] font-bold uppercase tracking-wide text-navy/60">Cómo captar familias</div>
+                <ul className="mt-1 list-disc space-y-1 pl-5 leading-relaxed">
+                  {f.captacion.map((c, i) => <li key={i}>{c}</li>)}
+                </ul>
+              </div>
+            )}
+            {f.facturacion && f.facturacion.length > 0 && (
+              <div className="mt-3">
+                <div className="text-[11px] font-bold uppercase tracking-wide text-navy/60">Cómo se factura y se cobra</div>
+                <ul className="mt-1 list-disc space-y-1 pl-5 leading-relaxed">
+                  {f.facturacion.map((c, i) => <li key={i}>{c}</li>)}
+                </ul>
+              </div>
+            )}
+            {f.responsableComercial && (
+              <p className="mt-2 text-[12px] text-navy/60"><span className="font-semibold">Responsables: </span>{f.responsableComercial}</p>
+            )}
             {f.noVerificado && f.noVerificado.length > 0 && (
               <div className="mt-3 rounded-lg bg-white/60 p-3">
                 <div className="text-[11px] font-bold uppercase tracking-wide text-coral">Por verificar antes de afirmarlo</div>
