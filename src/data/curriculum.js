@@ -227,13 +227,13 @@ export const BLOQUES = [
     numero: 9,
     titulo: 'Child & Adolescent Development, Psychology & Educational Accompaniment',
     categoria: 'Desarrollo y acompañamiento',
-    horas: 50,
+    horas: 18,
     transversal: true,
     modulos: [
-      { id: 'T9.1', titulo: 'Desarrollo infantil: mente, emociones y relaciones', horas: 12, modalidad: 'Vídeo + lectura + casos + observación guiada', evaluacion: 'Knowledge Check + caso', video: 'V29', fuentes: [] },
-      { id: 'T9.2', titulo: 'Adolescencia: identidad, pertenencia, autonomía y proyecto de vida', horas: 12, modalidad: 'Vídeo + lectura + casos + observación guiada', evaluacion: 'Knowledge Check + caso', video: 'V30', fuentes: [] },
-      { id: 'T9.3', titulo: 'Diferencias individuales y neurodiversidad: observar sin diagnosticar', horas: 12, modalidad: 'Vídeo + lectura + casos + observación guiada', evaluacion: 'Knowledge Check + caso', video: 'V31', fuentes: [] },
-      { id: 'T9.4', titulo: 'Acompañamiento educativo: observar, documentar, apoyar, comunicar, escalar', horas: 14, modalidad: 'Vídeo + lectura + 8 casos prácticos + portafolio', evaluacion: 'Knowledge Check + caso completo', video: 'V32', fuentes: [], entregable: true },
+      { id: 'T9.1', titulo: 'Desarrollo infantil: mente, emociones y relaciones', horas: 5, modalidad: 'Vídeo + lectura + casos + observación guiada', evaluacion: 'Knowledge Check + caso', video: 'V29', fuentes: [] },
+      { id: 'T9.2', titulo: 'Adolescencia: identidad, pertenencia, autonomía y proyecto de vida', horas: 4, modalidad: 'Vídeo + lectura + casos + observación guiada', evaluacion: 'Knowledge Check + caso', video: 'V30', fuentes: [] },
+      { id: 'T9.3', titulo: 'Diferencias individuales y neurodiversidad: observar sin diagnosticar', horas: 4, modalidad: 'Vídeo + lectura + casos + observación guiada', evaluacion: 'Knowledge Check + caso', video: 'V31', fuentes: [] },
+      { id: 'T9.4', titulo: 'Acompañamiento educativo: observar, documentar, apoyar, comunicar, escalar', horas: 5, modalidad: 'Vídeo + lectura + 8 casos prácticos + portafolio', evaluacion: 'Knowledge Check + caso completo', video: 'V32', fuentes: [], entregable: true },
     ],
   },
 ]

@@ -283,6 +283,28 @@ export const ROLES = [
   },
 ]
 
+// ─── 3 ROLES DE FORMACIÓN ───
+// Decisión de dirección (oct 2026): la formación se organiza en solo tres roles. Los 14 perfiles
+// detallados de arriba son FUNCIONES dentro de uno de esos roles (cada función conserva sus
+// módulos, sistemas, límites y checklist). Una persona puede tener varios roles compatibles.
+//  · Mentor      → incluye a los profesores especialistas (English, Life Skills, Local Language, Assessment)
+//  · Coordinador → supervisión de mentores, hubs y calidad
+//  · Estratégico → todos los demás (representación, familias, alianzas, grants y proyectos, registros)
+export const GRUPOS = {
+  mentor: { id: 'mentor', nombre: 'Mentor', nombreEn: 'Mentor', descripcion: 'Acompaña al estudiante y a la familia. Aquí entran también los profesores especialistas.', funcionPorDefecto: 'mentor' },
+  coordinator: { id: 'coordinator', nombre: 'Coordinador', nombreEn: 'Coordinator', descripcion: 'Supervisa mentores, hubs y calidad.', funcionPorDefecto: 'coordinator' },
+  estrategico: { id: 'estrategico', nombre: 'Estratégico', nombreEn: 'Strategic', descripcion: 'Representación, familias y programas estatales, alianzas, grants y proyectos, registros.', funcionPorDefecto: null },
+}
+const GRUPO_DE_FUNCION = {
+  mentor: 'mentor', english_teacher: 'mentor', lifeskills_facilitator: 'mentor', local_language: 'mentor', assessment_specialist: 'mentor',
+  coordinator: 'coordinator',
+  academic_records: 'estrategico', country_rep: 'estrategico', state_rep: 'estrategico', program_rep: 'estrategico',
+  family_enrollment: 'estrategico', institutional_partnerships: 'estrategico', grants_projects: 'estrategico', lifeskills_project_coord: 'estrategico',
+}
+ROLES.forEach((r) => { r.grupo = GRUPO_DE_FUNCION[r.id] })
+export const grupoDe = (funcionId) => GRUPO_DE_FUNCION[funcionId] || null
+export const funcionesDe = (grupoId) => ROLES.filter((r) => r.grupo === grupoId)
+
 export const ROL_POR_ID = Object.fromEntries(ROLES.map((r) => [r.id, r]))
 
 export const AREAS = {
