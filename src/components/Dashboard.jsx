@@ -109,7 +109,8 @@ export default function Dashboard({
           En Chanak un rol describe una función y un conjunto de responsabilidades; no significa necesariamente una persona diferente.
           Una misma persona puede asumir varios roles compatibles al abrir un país, un estado, un programa o un proyecto, pero cada
           rol debe estar formalmente asignado, con su formación completada y respetando sus límites de autoridad. A medida que crece
-          la operación, las funciones se separan progresivamente.
+          la operación, las funciones se separan progresivamente. La formación se organiza en tres roles: <b>Mentor</b> (incluye a los
+          profesores especialistas), <b>Coordinador</b> y <b>Estratégico</b> (representación, familias, alianzas, grants y proyectos).
         </p>
         {onVerOrganigrama && (
           <button onClick={onVerOrganigrama} className="mt-2 text-xs font-bold text-teal hover:underline">

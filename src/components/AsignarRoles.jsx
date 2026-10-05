@@ -1,11 +1,12 @@
 import { useState } from 'react'
-import { ROLES, AREAS, ROL_POR_ID, rolesDesdeTipoAcceso, tieneContactoDirecto, modulosObligatorios } from '../data/roles'
+import { GRUPOS, funcionesDe, ROL_POR_ID, rolesDesdeTipoAcceso, tieneContactoDirecto, modulosObligatorios } from '../data/roles'
 import { asignarRol, quitarRol, actualizarPerfil } from '../lib/backend'
 
 // Asignación formal de roles (ROLE ≠ PERSON). Cada rol activa módulos, sistemas, documentos,
 // evaluaciones y permissions checklist. Los roles de representación exigen territorio (y programa).
 export default function AsignarRoles({ perfil, filas, miId, onRecargar, migrado }) {
   const [abierto, setAbierto] = useState(false)
+  const [grupo, setGrupo] = useState('')
   const [nuevo, setNuevo] = useState('')
   const [territorio, setTerritorio] = useState('')
   const [programa, setPrograma] = useState('')
@@ -40,6 +41,7 @@ export default function AsignarRoles({ perfil, filas, miId, onRecargar, migrado 
     await ejecutar(async () => {
       await asignarRol(perfil.id, nuevo, miId, territorio.trim(), programa.trim())
       setNuevo('')
+      setGrupo('')
       setTerritorio('')
       setPrograma('')
     })
@@ -65,7 +67,7 @@ export default function AsignarRoles({ perfil, filas, miId, onRecargar, migrado 
             {asignados.map((r) => (
               <li key={r.id} className="flex items-center justify-between gap-2 rounded-lg bg-cream px-3 py-1.5">
                 <span className="font-medium text-navy">
-                  {ROL_POR_ID[r.rol]?.nombre || r.rol}
+                  {GRUPOS[r.grupo]?.nombre || r.grupo} · {ROL_POR_ID[r.rol]?.nombre || r.rol}
                   {(r.territorio || r.programa) && <span className="text-navy/55"> · {[r.territorio, r.programa].filter(Boolean).join(' · ')}</span>}
                 </span>
                 <button onClick={() => ejecutar(() => quitarRol(r.id))} disabled={ocupado} className="text-coral hover:underline disabled:opacity-50">Quitar</button>
@@ -80,16 +82,23 @@ export default function AsignarRoles({ perfil, filas, miId, onRecargar, migrado 
 
           {migrado && (
             <div className="space-y-2 border-t border-navy/10 pt-3">
-              <select value={nuevo} onChange={(e) => setNuevo(e.target.value)} className="w-full rounded-lg bg-cream px-2 py-1.5 text-navy">
+              <select value={grupo} onChange={(e) => { const g = e.target.value; setGrupo(g); setNuevo(GRUPOS[g]?.funcionPorDefecto || '') }} className="w-full rounded-lg bg-cream px-2 py-1.5 text-navy">
                 <option value="">Añadir rol…</option>
-                {Object.entries(AREAS).map(([area, nombreArea]) => (
-                  <optgroup key={area} label={nombreArea}>
-                    {ROLES.filter((r) => r.area === area).map((r) => (
-                      <option key={r.id} value={r.id}>{r.nombre}</option>
-                    ))}
-                  </optgroup>
+                {Object.values(GRUPOS).map((g) => (
+                  <option key={g.id} value={g.id}>{g.nombre}</option>
                 ))}
               </select>
+              {grupo && (
+                <>
+                  <p className="text-navy/60">{GRUPOS[grupo].descripcion}</p>
+                  <select value={nuevo} onChange={(e) => setNuevo(e.target.value)} className="w-full rounded-lg bg-cream px-2 py-1.5 text-navy">
+                    {!GRUPOS[grupo].funcionPorDefecto && <option value="">Elige la función…</option>}
+                    {funcionesDe(grupo).map((r) => (
+                      <option key={r.id} value={r.id}>{r.nombre}{r.id === GRUPOS[grupo].funcionPorDefecto ? ' (general)' : ''}</option>
+                    ))}
+                  </select>
+                </>
+              )}
               {(pideTerritorio || pidePrograma) && (
                 <div className="flex flex-wrap gap-2">
                   {pideTerritorio && (
