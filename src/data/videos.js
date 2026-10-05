@@ -1,5 +1,5 @@
 // ============================================================
-// BIBLIOTECA ESENCIAL DE VÍDEOS · 2026–2027 (28 vídeos)
+// BIBLIOTECA ESENCIAL DE VÍDEOS · 2026–2027 (32 vídeos)
 //
 // Configuración central: cada vídeo es independiente y puede sustituirse sin
 // reconstruir el curso. Para publicar o cambiar un vídeo:
@@ -22,6 +22,7 @@ export const CATEGORIAS_VIDEO = [
   'Operación',
   'Compliance',
   'Coordinación',
+  'Desarrollo y acompañamiento',
 ]
 
 export const VIDEOS = [
@@ -319,6 +320,51 @@ export const VIDEOS = [
       'Elige un ámbito real: supervisión de un equipo, apertura de un grupo, revisión de expedientes o plan de calidad.',
       'Define objetivos, acciones, indicadores y evidencias; ejecuta con supervisión.',
       'Presenta tu portafolio a Chanak Central para la revisión final.',
+    ],
+  },
+  // ── Desarrollo y acompañamiento (Bloque 9 · transversal) ──
+  {
+    id: 'V29', orden: 29, bloque: 'Desarrollo y acompañamiento', modulo: 'T9.1', duracion: '8 min', videoUrl: '',
+    titulo: 'Cómo se desarrolla un niño',
+    descripcion: 'Desarrollo cognitivo, emocional y social en la infancia y qué implica para acompañar sus estudios.',
+    guion: [
+      'Este bloque recupera la formación de Psicología del Niño y del Adolescente y es obligatorio para quien tiene contacto directo con menores.',
+      'No es un curso para diagnosticar: se observa, se documenta, se apoya, se comunica y se escala o deriva.',
+      'Antes de interpretar una conducta, comprueba si la tarea es adecuada a la etapa del estudiante y si el apoyo es el justo (andamiaje).',
+      'La seguridad emocional y la corregulación son la base para aprender.',
+    ],
+  },
+  {
+    id: 'V30', orden: 30, bloque: 'Desarrollo y acompañamiento', modulo: 'T9.2', duracion: '8 min', videoUrl: '',
+    titulo: 'Acompañar a un adolescente',
+    descripcion: 'Identidad, pertenencia, autoestima, autonomía y proyecto de vida: qué es evolutivo y qué requiere escalar.',
+    guion: [
+      'La adolescencia es una etapa de identidad y de autonomía: expectativas altas y apoyo cálido.',
+      'Las relaciones con los iguales y las redes sociales pesan mucho; las comunicaciones se hacen por canales institucionales.',
+      'Ante cualquier indicio de riesgo no se investiga: se activa Safeguarding y se escala de inmediato.',
+      'Conecta el estudio con el proyecto de vida del estudiante.',
+    ],
+  },
+  {
+    id: 'V31', orden: 31, bloque: 'Desarrollo y acompañamiento', modulo: 'T9.3', duracion: '8 min', videoUrl: '',
+    titulo: 'Diferencias individuales: observar sin diagnosticar',
+    descripcion: 'Neurodiversidad awareness: describir lo observable, adaptar dentro del rol y derivar a un profesional con licencia.',
+    guion: [
+      'Ritmo no es lo mismo que capacidad.',
+      'Se describen conductas observables y repetidas; nunca se etiqueta ni se diagnostica.',
+      'Los ajustes del mentor facilitan el acceso al contenido; si cambian lo que se evalúa, se consultan con coordinación.',
+      'Cuando se necesita evaluación clínica: REFER TO LICENSED PROFESSIONAL.',
+    ],
+  },
+  {
+    id: 'V32', orden: 32, bloque: 'Desarrollo y acompañamiento', modulo: 'T9.4', duracion: '9 min', videoUrl: '',
+    titulo: 'Observar, documentar, apoyar, comunicar, escalar',
+    descripcion: 'La secuencia de acompañamiento educativo aplicada a casos reales y sus límites.',
+    guion: [
+      'OBSERVAR → DOCUMENTAR → APOYAR → COMUNICAR → ESCALAR/DERIVAR.',
+      'El mentor no es psicólogo clínico: acompaña con calidez, rigor y orden.',
+      'Safeguarding y desarrollo son módulos distintos y complementarios.',
+      'Resuelve lo operativo, documenta con hechos y fechas, y escala lo que afecta a créditos, vías, seguridad, conducta grave, quejas o compromisos económicos.',
     ],
   },
 ]

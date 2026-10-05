@@ -8,7 +8,7 @@ export const CURSO = {
   nivel1: 'Nivel 1 · CHANAK CERTIFIED MENTOR · 180 h de referencia',
   nivel2: 'Nivel 2 · CHANAK CERTIFIED COORDINATOR · 300 h acumuladas',
   resumen:
-    'Formación oficial de Chanak International Academy (Chanak TrainUp Education, Inc. · escuela privada registrada en Florida, FLDOE #134620 · MSA-CESS Candidate) para las personas que acompañan estudiantes y coordinan centros. Enseña cómo funciona y se opera Chanak realmente: el modelo 60/20/20, el marco académico orientado al dominio, los programas Off-Campus (Homeschool Guiado), Dual Diploma y Life Skills & Leadership, las vías curriculares, el Scope & Sequence K–12, la evaluación, el reconocimiento de créditos, el SIS, el Portal y el Dual Diploma Portal, el safeguarding, la Extensión Local y, cuando el rol lo requiere, los programas estatales de EE. UU. La fuente oficial es la documentación 2026–2027 (versión FINAL).',
+    'Formación oficial de Chanak International Academy (Chanak TrainUp Education, Inc. · escuela privada registrada en Florida, FLDOE #134620 · MSA-CESS Candidate) para las personas que acompañan estudiantes y coordinan centros. Enseña cómo funciona y se opera Chanak realmente (incluidos los roles —un rol describe una función, no necesariamente una persona—, el organigrama funcional y el Operational Glossary): el modelo 60/20/20, el marco académico orientado al dominio, los programas Off-Campus (Homeschool Guiado), Dual Diploma y Life Skills & Leadership, las vías curriculares, el Scope & Sequence K–12, la evaluación, el reconocimiento de créditos, el SIS, el Portal y el Dual Diploma Portal, el safeguarding, la Extensión Local y, cuando el rol lo requiere, los programas estatales de EE. UU. La fuente oficial es la documentación 2026–2027 (versión FINAL).',
   dirigidoA:
     'Mentores de Off-Campus, Dual Diploma y Life Skills, personal de apoyo académico (Nivel 1) y coordinadores de centros, Partner Learning Centers y equipos de mentores (Nivel 2).',
   objetivos: [
@@ -22,7 +22,7 @@ export const CURSO = {
     'Nivel 2: supervisar mentores, revisar evidencias, operar un Partner Learning Center y reportar a Chanak Central.',
   ],
   metodologia: [
-    { icono: '🎬', nombre: 'Vídeo', detalle: 'Una cápsula por módulo (28 vídeos), actualizable por separado' },
+    { icono: '🎬', nombre: 'Vídeo', detalle: 'Una cápsula por módulo (32 vídeos), actualizable por separado' },
     { icono: '📖', nombre: 'Lectura', detalle: 'Lectura ampliada en la app (2.000–3.400 palabras por módulo) basada en la documentación oficial 2026–2027' },
     { icono: '📂', nombre: 'Documentos oficiales', detalle: 'Lectura obligatoria de documentos concretos de la carpeta de Drive FINAL, con enlace directo' },
     { icono: '🛠', nombre: 'Práctica', detalle: 'Situaciones reales del mentor: resolver, documentar o escalar' },
@@ -49,6 +49,6 @@ export const CURSO = {
     },
   ],
   porRol:
-    'El Bloque 7 (USA State Programs / Compliance) es un módulo por rol: lo completan quienes atienden familias o servicios vinculados a programas estatales de EE. UU. No suma a las 180 h ni a las 300 h.',
+    'El Bloque 9 (Child & Adolescent Development, Psychology & Educational Accompaniment) es transversal y obligatorio para todo rol con contacto directo con menores; no suma a las 180 h ni a las 300 h, pero sin él no se completa la ruta ni se emite el certificado. El Bloque 7 (USA State Programs / Compliance) es un módulo por rol: lo completan quienes atienden familias o servicios vinculados a programas estatales de EE. UU. No suma a las 180 h ni a las 300 h.',
   umbralAprobacion: 0.8,
 }
