@@ -282,6 +282,14 @@ export const LECTURAS_B8 = {
           'La guía de práctica de este módulo es una auditoría simulada: revisarás expedientes en el SIS demo, clasificarás hallazgos, redactarás un registro de incidencia, una comunicación correcta sobre MSA-CESS y la NCAA y el informe periódico para Chanak Central. La evidencia es una revisión de expediente simulada con hallazgos y acciones. Todo con IDs y datos de demostración: en formación nunca se usan datos reales de estudiantes.',
         ],
       },
+      {
+        titulo: 'Vinculaciones en EE. UU. en proceso: NCES, DBU, Texas y futuros convenios',
+        guion: [
+          'Como coordinador, eres quien revisa que lo que se dice en tu centro sobre Estados Unidos sea cierto. Hoy hay cuatro frentes en proceso y ninguno está concluido: el registro de Chanak en el NCES (registro federal nacional de escuelas privadas; número de registro estimado en 3 a 4 semanas), la solicitud de convenio con Dallas Baptist University (DBU), ya enviada y en reuniones para conocer propuestas, las solicitudes como proveedor en programas estatales (Texas, Arizona, Arkansas, Utah y West Virginia) y la vía NCAA, que ofrece una opción adicional a los estudiantes deportistas que aspiran a becas universitarias y está en revisión ante el NCAA Eligibility Center. Además existe un plan, no un compromiso: buscar convenios con otras universidades después de noviembre, cuando se reciba la decisión de MSA-CESS.',
+          'Tu control de comunicación: revisa folletos, redes, presentaciones y mensajes para que cada frente use solo el estado real («en proceso», «en revisión», «plan»). Vigila las confusiones típicas: presentar el NCES o la NCAA como si fueran una acreditación; anunciar un convenio con DBU antes de que exista; prometer becas o admisiones; dar por hecho un programa estatal como el de Texas o fechas de convenios futuros. La acreditación es otro proceso: ante MSA-CESS, Chanak es Candidate for Accreditation. Cualquier material público sobre estos temas se envía a Chanak Central para validación antes de publicarse.',
+          'Cuando uno de estos procesos cambie de estado, la dirección lo comunicará y se actualizarán los documentos. Hasta entonces, si dudas, la respuesta correcta es «está en proceso; le informaremos cuando haya novedades confirmadas» y escalar. Registra en el SIS las consultas de las familias y los materiales corregidos.',
+        ],
+      },
     ],
     guia: {
       titulo: 'Guía de práctica supervisada · Auditoría simulada de expedientes',
