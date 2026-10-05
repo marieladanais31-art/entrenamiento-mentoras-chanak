@@ -39,4 +39,35 @@
 - Área separada **EducaFe / Partner Training** (formación complementaria); EducaFe se presenta como entidad colaboradora independiente, no como departamento ni nivel de Chanak.
 
 ## Datos
-- Los módulos nuevos usan ids `T1.1`…`T8.4`; el progreso anterior (`1.1`…`8.4`) se conserva en Supabase y no se borra. Las horas previas pueden reconocerse con el registro retroactivo.
+- Los módulos nuevos usan ids `T1.1`…`T8.4`; el progreso anterior (`1.1`…`8.4`) se conserva en Supabase y no se borra. El avance anterior se reconoce automáticamente mediante `src/data/equivalencias.js` (ver actualización del 2026-10-04).
+
+---
+
+## Actualización 2026-10-04 · Lecturas ampliadas, desglose de horas, avance reconocido, NCAA y MSA-CESS
+
+**Lecturas coherentes con las horas**
+- Lectura ampliada en los 28 módulos (`src/data/lecturas/B1.js` … `B8.js`): de ~12.000 a ~70.000 palabras (2.000–3.400 por módulo), escritas solo con la documentación FINAL 2026–2027 y fuentes oficiales.
+- Cada módulo muestra «Cómo se reparten las X h»: vídeo, lectura en la app (60 palabras/min de estudio), lectura obligatoria de documentos oficiales con enlace a su carpeta de Drive y qué leer, práctica, evidencia y Knowledge Check. La suma es exactamente la carga del módulo (`scripts/validar-desglose.mjs`).
+- Coordinator Track: guía de práctica supervisada paso a paso dentro del paso «Práctica».
+
+**Historia y manejo del Mastery Learning (recuperados)**
+- T1.3: historia (Carroll 1963, Bloom 1968, instrucción individualizada → Chanak) y Chanak Growth System.
+- T3.1: supervisión del autoestudio (A.C.E. Supervisor Training, banderas, Review Station).
+- T4.2: Daily Goal Tracker, Review Station, Mastery Assessment, corrección formativa en 4 pasos, regla de los dos fallos y alertas del SIS.
+
+**NCAA y MSA-CESS**
+- MSA-CESS: estatus Candidate (carta 17-abr-2026), frase oficial exigida por la política «Representation of Accreditation Status», lenguaje prohibido y lo que aporta la acreditación (msa-cess.org/benefits). Módulos T1.1, T5.2, T8.1, T8.3.
+- NCAA Eligibility Center: Chanak en revisión; proceso de revisión de escuela (High School Portal), Division I (16 core courses, regla 10/7, GPA 2.3) y Division II (16 core courses, GPA 2.2), roles de mentor y coordinador. Módulos T1.1, T2.2, T4.4, T8.3.
+- 13 preguntas nuevas de Knowledge Check (`src/data/lecturas/quiz_extra.js`).
+
+**Avance anterior reconocido (horas + Knowledge Check)**
+- `src/data/equivalencias.js`: módulos 1.1–8.4 → T1.1–T8.4. Si se completó un equivalente, el módulo nuevo aparece como «Reconocido»: sus horas cuentan y pasa a «Completado» al aprobar el nuevo Knowledge Check (80 %). El progreso antiguo no se borra; el cálculo es solo de visualización.
+
+**NotebookLM eliminado**
+- Sustituido por enlaces directos a las carpetas de `CHANAK_DOCUMENTOS_2026-2027_FINAL` en cada módulo y una «Biblioteca de documentos oficiales (Drive)» en el panel, con el uso de cada carpeta para mentor y coordinador. También retirado del área EducaFe / Partner Training.
+
+## 2026-10-05 · Programas y vinculaciones en proceso en EE. UU.
+- T4.4: nueva lección «Deporte universitario y vinculaciones con universidades de EE. UU. (en proceso)»: NCAA como opción para estudiantes-deportistas que aspiran a becas, registro NCES, solicitud de convenio con Dallas Baptist University (DBU) y plan de convenios con otras universidades tras la decisión de MSA-CESS (nov-2026). Todo redactado como «en proceso»/«plan», sin promesas.
+- T7.2: nueva lección «Texas: programa en proceso» (sin mecanismo, fondos ni fechas hasta que Chanak Administration los confirme).
+- T8.3: nueva lección de control de comunicación para coordinadores sobre los cuatro frentes.
+- Knowledge Check: 4 preguntas nuevas (T4.4 ×2, T7.2 ×1, T8.3 ×1).
