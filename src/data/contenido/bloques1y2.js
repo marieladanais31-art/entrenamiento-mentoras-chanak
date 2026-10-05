@@ -27,25 +27,25 @@ export const BLOQUES_1_2 = {
           'Florida DOE #134620: registro estatal como escuela privada. Es un registro, no una acreditación.',
           'MSA-CESS Candidate: Chanak es candidata a la acreditación de Middle States; la decisión de la Comisión está prevista para noviembre de 2026. Nunca digas «acreditada» hasta que exista una decisión oficial.',
           'Nonprofit 501(c)(3): estatus fiscal federal de la entidad titular. Candid Gold 2026: sello de transparencia institucional, no una acreditación educativa.',
-          'Organizaciones como la Asociación EducaFe en España son entidades colaboradoras con personalidad jurídica propia. No son departamentos de Chanak ni forman parte de su jerarquía académica.',
+          'Organizaciones como la entidad colaboradora independiente en España son entidades colaboradoras con personalidad jurídica propia. No son departamentos de Chanak ni forman parte de su jerarquía académica.',
         ],
       },
     ],
     practica: {
       situacion:
-        'Una familia te escribe: «En la web de otro colegio dicen que Chanak está acreditada por MSA y que EducaFe es su sede en España. ¿Es así?».',
+        'Una familia te escribe: «En la web de otro colegio dicen que Chanak está acreditada por MSA y que entidad colaboradora independiente es su sede en España. ¿Es así?».',
       preguntas: [
         '¿Qué le respondes sobre MSA, con qué palabras exactas?',
-        '¿Cómo explicas la relación con EducaFe sin presentarla como sede ni departamento?',
+        '¿Cómo explicas la relación con entidad colaboradora independiente sin presentarla como sede ni departamento?',
         '¿A quién avisas de que hay información pública incorrecta?',
       ],
       criterio:
-        'Respuesta correcta: «Chanak es MSA-CESS Candidate; la decisión está prevista para noviembre de 2026». EducaFe es una entidad colaboradora independiente. La información pública errónea se comunica a Chanak Central.',
+        'Respuesta correcta: «Chanak es MSA-CESS Candidate; la decisión está prevista para noviembre de 2026». entidad colaboradora independiente es una entidad colaboradora independiente. La información pública errónea se comunica a Chanak Central.',
     },
     quiz: [
       { p: '¿Cómo debe describirse hoy el estatus de Chanak ante Middle States?', opciones: ['Acreditada por MSA-CESS', 'MSA-CESS Candidate', 'Acreditación provisional', 'Miembro pleno de MSA'], correcta: 1, explica: 'Chanak es candidata; la decisión de la Comisión está prevista para noviembre de 2026.' },
       { p: 'Un colegio pregunta si el registro FLDOE #134620 es una acreditación. ¿Qué respondes?', opciones: ['Sí, es la acreditación estatal', 'No: es el registro de Chanak como escuela privada en Florida', 'Sí, equivale a MSA', 'Es un número fiscal'], correcta: 1, explica: 'El FLDOE #134620 es un registro estatal, no una acreditación.' },
-      { p: 'En una presentación alguien llama a EducaFe «el departamento de Chanak en España». ¿Qué corriges?', opciones: ['Nada, es correcto', 'Que EducaFe es una entidad colaboradora independiente', 'Que EducaFe es el campus de Chanak', 'Que EducaFe emite los diplomas'], correcta: 1, explica: 'EducaFe tiene personalidad jurídica propia; no es un departamento ni un nivel jerárquico de Chanak.' },
+      { p: 'En una presentación alguien llama a entidad colaboradora independiente «el departamento de Chanak en España». ¿Qué corriges?', opciones: ['Nada, es correcto', 'Que entidad colaboradora independiente es una entidad colaboradora independiente', 'Que entidad colaboradora independiente es el campus de Chanak', 'Que entidad colaboradora independiente emite los diplomas'], correcta: 1, explica: 'entidad colaboradora independiente tiene personalidad jurídica propia; no es un departamento ni un nivel jerárquico de Chanak.' },
       { p: '¿Qué es Candid Gold 2026?', opciones: ['Una acreditación educativa', 'Un sello de transparencia institucional', 'Una licencia del Ministerio', 'Un premio académico'], correcta: 1, explica: 'Candid Gold es transparencia institucional, no acreditación.' },
     ],
     evidencia: 'Escribe en 4–5 líneas cómo presentarías Chanak a una familia nueva, usando los estatus correctos.',

@@ -15,7 +15,7 @@
 // ============================================================
 
 export const VERSION_CURRICULO = 'training-2026-2027'
-export const FECHA_ACTUALIZACION = '2026-10-02'
+export const FECHA_ACTUALIZACION = '2026-10-05'
 
 export const NIVEL_1_HORAS = 180
 export const NIVEL_2_HORAS = 300 // acumuladas (180 + 120)
@@ -73,6 +73,7 @@ export const BIBLIOTECA = [
   { carpeta: '06_CONTROL_DOCUMENTAL', mentor: 'Saber qué versión es la oficial (README y CHANGELOG).', coordinador: 'Control de versiones y fuentes antes de citar un documento.' },
   { carpeta: '07_US_PROGRAMS_COMPLIANCE', mentor: 'Uso interno de administración y coordinación (acceso restringido): Florida EMA, Alabama CHOOSE y programas en proceso. Los mentores estudian este contenido en la app (Bloque 7); no se envía a familias.', coordinador: 'Cumplimiento de programas estatales de EE. UU. (state funding ≠ curriculum).' },
   { carpeta: '08_ACADEMIC_POLICIES', mentor: 'Las cinco políticas académicas: certificación, créditos, currículo y evaluación.', coordinador: 'Base de toda decisión académica y de las auditorías de expedientes.' },
+  { carpeta: '10_PEOPLE_ROLES_TRAINING', mentor: 'Perfiles, desarrollo infantil y safeguarding; plantillas y límites de acceso por rol.', coordinador: 'Organigrama, autoridad, modelos de personas, market entry y grants.' },
   { carpeta: '09_ACADEMIC_FRAMEWORK', mentor: 'Scope & Sequence K–12 y matrices de estándares y evaluación.', coordinador: 'Revisión de planes de estudio, créditos y evidencia por grado.' },
 ]
 
@@ -83,10 +84,10 @@ export const RECURSOS_GENERALES = [
     descripcion:
       'Registro oficial: matrículas, PEI, diagnóstico, notas de evaluación por dominio, boletines y transcripts. Practica solo con las cuentas de demostración.',
     demo: {
-      cuentas: ['demopadre@asociacioneducafe.org', 'demoestudiante@asociacioneducafe.org'],
-      clave: 'Chanak2026',
+      cuentas: [],
+      clave: '',
       aviso:
-        'Cuentas compartidas solo para formación. Nunca introduzcas datos reales de estudiantes ni de familias.',
+        'Solicita a coordinación credenciales demo autorizadas antes de practicar. Nunca introduzcas datos reales de estudiantes ni de familias.',
     },
   },
   {
@@ -109,7 +110,7 @@ export const RECURSOS_GENERALES = [
 ]
 
 // ─────────────────────────────────────────────────────────────
-// 8 bloques · 28 módulos · 28 vídeos (uno por módulo)
+// Bloques y módulos vigentes; biblioteca audiovisual derivada del manifest.
 // ─────────────────────────────────────────────────────────────
 export const BLOQUES = [
   {

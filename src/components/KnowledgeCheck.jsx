@@ -4,7 +4,7 @@ import { useIdioma } from '../i18n/idioma'
 
 // Knowledge Check estilo formación continua: una pregunta a la vez,
 // corrección inmediata con explicación y aprobación al 80% (Mastery Learning).
-export default function KnowledgeCheck({ moduloId, quiz, resultadoPrevio, onAprobado, onGuardar }) {
+export default function KnowledgeCheck({ moduloId: _moduloId, quiz, resultadoPrevio, onAprobado, onGuardar }) {
   const { t } = useIdioma()
   const [iniciado, setIniciado] = useState(false)
   const [indice, setIndice] = useState(0)

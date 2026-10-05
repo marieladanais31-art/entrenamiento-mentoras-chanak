@@ -36,7 +36,7 @@ export const BLOQUE_10 = {
 
   'T10.2': {
     resumen:
-      'Rol de Grants & Project Development: separación de entidades (Chanak y EducaFe), del proyecto a la solicitud, narrativa transparente, y el Life Skills 4-Week Community Pilot como proyecto piloto controlado.',
+      'Rol de Grants & Project Development: separación de entidades (Chanak y entidad colaboradora independiente), del proyecto a la solicitud, narrativa transparente, y el Life Skills 4-Week Community Pilot como proyecto piloto controlado.',
     objetivos: [
       'Explicar qué entidad solicita, cuál ejecuta y cómo se relacionan en una solicitud.',
       'Preparar el esquema de una solicitud con datos respaldados y estados honestos.',
@@ -55,7 +55,7 @@ export const BLOQUE_10 = {
         'Usa solo datos respaldados y los etiqueta como resultado de un piloto; lo no probado se deja fuera o se presenta como objetivo; la dirección aprueba y decide la entidad solicitante.',
     },
     quiz: [
-      { p: '¿Qué entidad usa el estatus 501(c)(3) para subvenciones de Estados Unidos?', opciones: ['Asociación EducaFe', 'Chanak (entidad de Estados Unidos)', 'Cualquiera', 'Ninguna'], correcta: 1, explica: 'El estatus 501(c)(3) corresponde a la entidad de Estados Unidos; EducaFe es la entidad en España.' },
+      { p: '¿Qué entidad usa el estatus 501(c)(3) para subvenciones de Estados Unidos?', opciones: ['entidad colaboradora independiente', 'Chanak (entidad de Estados Unidos)', 'Cualquiera', 'Ninguna'], correcta: 1, explica: 'El estatus 501(c)(3) corresponde a la entidad de Estados Unidos; entidad colaboradora independiente es la entidad en España.' },
       { p: '¿Para qué deben usarse principalmente las subvenciones según el protocolo financiero?', opciones: ['Cubrir gastos corrientes de forma indefinida', 'Financiar la expansión estratégica; las cuotas sostienen la operación diaria', 'Pagar sueldos sin presupuesto', 'Sustituir las matrículas'], correcta: 1, explica: 'Las subvenciones financian expansión; la operación diaria se sostiene con ingresos propios.' },
       { p: 'Un dato de impacto no tiene documento que lo respalde. ¿Qué haces?', opciones: ['Lo incluyes redondeado', 'Lo omites o lo presentas como objetivo', 'Lo inventas con una estimación optimista', 'Se lo pides a una familia sin más'], correcta: 1, explica: 'Nunca se afirma un dato que no se pueda probar.' },
       { p: '¿Qué condición es obligatoria para los facilitadores del piloto de Life Skills?', opciones: ['Haber completado la formación de contacto con menores', 'Tener estudios universitarios', 'Ser voluntarios', 'No necesitan formación'], correcta: 0, explica: 'Todo facilitador con contacto directo con menores completa antes la formación obligatoria.' },

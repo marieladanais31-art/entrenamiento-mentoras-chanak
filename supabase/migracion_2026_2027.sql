@@ -13,7 +13,7 @@ comment on column public.perfiles.programa is 'Programa asignado (Off-Campus, Du
 comment on column public.perfiles.id_interno is 'ID interno de la persona; se imprime en el certificado';
 
 -- Nota: tipo_acceso conserva sus valores ('mentora', 'coordinadora', 'visionaria').
--- En la interfaz 2026–2027 se muestran como Mentor, Coordinator y Partner (EducaFe).
+-- En la interfaz 2026–2027 se muestran como Mentor, Coordinator y Estratégico.
 -- Los vídeos de la biblioteca 2026–2027 se guardan en `videos` con modulo_id = 'V01'…'V28'
 -- y leccion_idx = 0. El progreso 2026–2027 usa módulos 'T1.1'…'T8.4'; el progreso
 -- anterior (módulos '1.1'…'8.4') se conserva en la tabla y no se borra.

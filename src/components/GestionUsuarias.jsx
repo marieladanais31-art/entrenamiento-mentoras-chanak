@@ -123,7 +123,7 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa 
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="thiare@educafe.org"
+                placeholder="nombre@chanakacademy.org"
                 className="mt-1 w-full rounded-xl border border-navy/15 bg-slate-50 px-3 py-2 text-sm text-navy"
                 required
               />
@@ -155,7 +155,7 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa 
               >
                 <option value="mentora">👩‍🏫 Mentor · Chanak Certified Mentor (180 h)</option>
                 <option value="coordinadora">🎯 Coordinator · Chanak Certified Coordinator (300 h)</option>
-                <option value="visionaria">🤝 Partner (EducaFe) · formación complementaria</option>
+                <option value="visionaria">🤝 Estratégico</option>
               </select>
             </label>
           </div>
@@ -229,7 +229,7 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa 
                 <div className="text-[13px] text-navy/50">
                   {p.rol === 'admin' ? t('usuarias.admin') : (
                     <span className="capitalize font-medium text-teal">
-                      {p.tipo_acceso === 'visionaria' ? '🤝 Partner (EducaFe)' : p.tipo_acceso === 'coordinadora' ? '🎯 Coordinator' : '👩‍🏫 Mentor'}
+                      {p.tipo_acceso === 'visionaria' ? '🤝 Estratégico' : p.tipo_acceso === 'coordinadora' ? '🎯 Coordinator' : '👩‍🏫 Mentor'}
                       {p.pais ? ` · ${p.pais}` : ''}{p.programa ? ` · ${p.programa}` : ''}{p.id_interno ? ` · ID ${p.id_interno}` : ''}
                     </span>
                   )}
@@ -245,7 +245,7 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa 
                   >
                     <option value="mentora">👩‍🏫 Mentor</option>
                     <option value="coordinadora">🎯 Coordinator</option>
-                    <option value="visionaria">🤝 Partner (EducaFe)</option>
+                    <option value="visionaria">🤝 Estratégico</option>
                   </select>
                   <button
                     onClick={() =>

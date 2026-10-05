@@ -36,7 +36,7 @@ export default function ModuleView({ moduloId, progresoModulo: p, videos, esAdmi
   useEffect(() => {
     setNotas(p?.notas || '')
     setPaso(0)
-  }, [moduloId]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [moduloId])
 
   if (!modulo) return null
 
@@ -367,9 +367,9 @@ export default function ModuleView({ moduloId, progresoModulo: p, videos, esAdmi
                   <ul className="mt-1.5 space-y-1">
                     {rec.demo.cuentas.map((c) => <li key={c} className="break-all font-mono text-xs text-navy/80">{c}</li>)}
                   </ul>
-                  <div className="mt-1.5 text-xs text-navy/70">
+                  {rec.demo.clave && <div className="mt-1.5 text-xs text-navy/70">
                     {t('modulo.contrasenaAmbas')} <span className="font-mono font-semibold text-navy">{rec.demo.clave}</span>
-                  </div>
+                  </div>}
                   <p className="mt-2 text-[12px] leading-relaxed text-coral">⚠️ {rec.demo.aviso}</p>
                 </div>
               )}

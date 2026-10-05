@@ -5,7 +5,7 @@ import { useIdioma } from '../i18n/idioma'
 const TIPOS = [
   { value: 'mentora', emoji: '👩🏫', label: 'Mentor (Chanak Certified Mentor · 180 h)' },
   { value: 'coordinadora', emoji: '🎯', label: 'Coordinator (Chanak Certified Coordinator · 300 h)' },
-  { value: 'visionaria', emoji: '🤝', label: 'Partner (EducaFe · formación complementaria)' },
+  { value: 'visionaria', emoji: '🤝', label: 'Estratégico' },
 ]
 
 export default function GestionCodigos({ miId }) {
@@ -70,7 +70,7 @@ export default function GestionCodigos({ miId }) {
   }
 
   function generarAleatorio() {
-    const tipo = nuevoTipo === 'visionaria' ? 'PARTNER' : nuevoTipo === 'mentora' ? 'MENTOR' : 'COORD'
+    const tipo = nuevoTipo === 'visionaria' ? 'ESTRATEGICO' : nuevoTipo === 'mentora' ? 'MENTOR' : 'COORD'
     const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'
     let aleatorio = ''
     for (let i = 0; i < 4; i++) aleatorio += chars[Math.floor(Math.random() * chars.length)]
