@@ -116,3 +116,11 @@
 - T10.1–T10.5 pasan de ~500–850 palabras a ~1.900–2.400 palabras cada una (lecciones ampliadas, ejemplos trabajados).
 - Las lecturas se dividen en `B10a.js` (T10.1–T10.3) y `B10b.js` (T10.4–T10.5); `B10.js` las combina.
 - Todo hecho no confirmado se redacta como «en proceso / confirmar con coordinación»; contenido legal sujeto a revisión.
+
+## 6 octubre · Operativa académica y tutoriales
+
+- PEI: finalidad, campos de propuesta, elaboración, responsables, registro y revisión.
+- Portal: Core, Helping inicial con guías diarias para padres, English Tonic y pasajes/rasgos de carácter.
+- Extensión Local por países, electiva en Estados Unidos según estudiante y PEI.
+- IA de apoyo de Dual Diploma con revisión humana; no aprueba notas o créditos.
+- Se conservan horas de módulos y permisos existentes; sin cambios en Supabase.
