@@ -104,6 +104,51 @@ export async function actualizarPerfil(id, cambios) {
 }
 
 // ════════════════════════════════════════════
+// ROLES MÚLTIPLES (ROLE ≠ PERSON)
+// Si la tabla perfil_roles aún no existe (migración pendiente), devuelve null y la app
+// deriva los roles de perfiles.tipo_acceso: nada se rompe.
+// ════════════════════════════════════════════
+
+const tablaRolesAusente = (msg = '') => /perfil_roles|schema cache|does not exist|relation/i.test(msg)
+
+// Roles de una persona: [{ rol, territorio, programa }] o null si no hay migración.
+export async function getRolesDe(userId) {
+  const { data, error } = await supabase
+    .from('perfil_roles')
+    .select('rol, territorio, programa')
+    .eq('perfil_id', userId)
+  if (error) {
+    if (tablaRolesAusente(error.message)) return null
+    throw new Error(error.message)
+  }
+  return data || []
+}
+
+// Todos los roles (admin): { [perfil_id]: [{ id, rol, territorio, programa }] } o null
+export async function listarRoles() {
+  const { data, error } = await supabase.from('perfil_roles').select('id, perfil_id, rol, territorio, programa')
+  if (error) {
+    if (tablaRolesAusente(error.message)) return null
+    throw new Error(error.message)
+  }
+  const mapa = {}
+  for (const r of data || []) (mapa[r.perfil_id] ||= []).push(r)
+  return mapa
+}
+
+export async function asignarRol(perfilId, rol, asignadoPor, territorio = null, programa = null) {
+  const { error } = await supabase
+    .from('perfil_roles')
+    .insert({ perfil_id: perfilId, rol, territorio: territorio || null, programa: programa || null, asignado_por: asignadoPor })
+  if (error) throw new Error(error.message)
+}
+
+export async function quitarRol(idFila) {
+  const { error } = await supabase.from('perfil_roles').delete().eq('id', idFila)
+  if (error) throw new Error(error.message)
+}
+
+// ════════════════════════════════════════════
 // VÍDEOS DE LECCIONES
 // ════════════════════════════════════════════
 

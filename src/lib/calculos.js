@@ -1,5 +1,6 @@
 import { TODOS_MODULOS, NIVEL_1_HORAS, NIVEL_2_HORAS } from '../data/curriculum'
 import { EQUIVALENCIAS } from '../data/equivalencias'
+import { ROL_POR_ID, MODULOS_CONTACTO_DIRECTO, modulosObligatorios, tieneContactoDirecto, tieneContactoOcasional, MODULOS_SAFEGUARDING_AWARENESS } from '../data/roles'
 
 // Devuelve una copia del progreso para MOSTRAR (nunca para guardar): los módulos 2026–2027
 // no completados cuyo equivalente antiguo está completado aparecen como «reconocido».
@@ -17,14 +18,54 @@ export function aplicarEquivalencias(progreso) {
 // Funciones puras de cálculo sobre un objeto de progreso { modulos: {…} }.
 // No tocan red ni almacenamiento: así los componentes se mantienen simples.
 
-export function resumenMentora(progreso) {
+const HECHO = (mods, id) => ['completado', 'reconocido'].includes(mods[id]?.estado)
+
+// Avance por rol («Tu ruta»): módulos obligatorios del rol + formación de contacto con menores.
+// Solo cuenta módulos que existen hoy en la app; las rutas que se incorporan después se
+// devuelven en `rutasPendientes` y NUNCA se muestran como 100 %.
+export function progresoPorRol(progreso, rolId, contactoMenores = null) {
+  const mods = progreso?.modulos || {}
+  const rol = ROL_POR_ID[rolId]
+  if (!rol) return null
+  const ids = modulosObligatorios([rolId], contactoMenores).filter((id) => TODOS_MODULOS.some((m) => m.id === id))
+  const hechos = ids.filter((id) => HECHO(mods, id))
+  const faltantes = ids.filter((id) => !HECHO(mods, id))
+  const pct = ids.length ? Math.round((hechos.length / ids.length) * 100) : 0
+  const rutasPendientes = rol.rutasPendientes || []
+  return {
+    rol,
+    total: ids.length,
+    hechos: hechos.length,
+    pct,
+    faltantes,
+    rutasPendientes,
+    // completo solo si no quedan módulos y no hay rutas por incorporar
+    completo: ids.length > 0 && faltantes.length === 0 && rutasPendientes.length === 0,
+    modulosCompletos: ids.length > 0 && faltantes.length === 0,
+  }
+}
+
+// Gating de contacto con menores: si la persona tiene contacto directo, DEBE completar
+// Child & Adolescent Development, Safeguarding, Online Safety y Confidentiality/Data Protection.
+export function faltantesContactoMenores(progreso, rolesIds, contactoMenores = null) {
+  const mods = progreso?.modulos || {}
+  if (tieneContactoDirecto(rolesIds, contactoMenores)) return MODULOS_CONTACTO_DIRECTO.filter((id) => !HECHO(mods, id))
+  if (tieneContactoOcasional(rolesIds)) return MODULOS_SAFEGUARDING_AWARENESS.filter((id) => !HECHO(mods, id))
+  return []
+}
+
+// `ctx` = { roles: [...ids], contactoMenores: true|false|null } — si no se pasa, se asume
+// la persona con rol Mentor (contacto directo), que es el caso de las cuentas existentes.
+export function resumenMentora(progreso, ctx = {}) {
+  const rolesCtx = ctx.roles && ctx.roles.length ? ctx.roles : ['mentor']
+  const faltantesMenores = faltantesContactoMenores(progreso, rolesCtx, ctx.contactoMenores ?? null)
   const mods = progreso?.modulos || {}
   let horas = 0
   let completados = 0
   let enCurso = 0
   let reconocidos = 0
   // Solo cuentan para la certificación los módulos de la ruta oficial (no los "por rol").
-  const ruta = TODOS_MODULOS.filter((m) => !m.porRol)
+  const ruta = TODOS_MODULOS.filter((m) => !m.porRol && !m.transversal)
   for (const m of ruta) {
     const p = mods[m.id]
     if (p?.estado === 'completado') {
@@ -59,8 +100,11 @@ export function resumenMentora(progreso) {
     nivel2Completo,
     nivelActual: nivel1Completo ? 2 : 1,
     metaHoras: nivel1Completo ? NIVEL_2_HORAS : NIVEL_1_HORAS,
-    elegibleMentor: horas >= NIVEL_1_HORAS && nivel1Completo,
-    elegibleCoordinadora: nivel2Completo,
+    // Gating: sin la formación de contacto con menores no se completa la ruta ni se emite certificado.
+    faltantesMenores,
+    bloqueadoPorMenores: faltantesMenores.length > 0,
+    elegibleMentor: horas >= NIVEL_1_HORAS && nivel1Completo && faltantesMenores.length === 0,
+    elegibleCoordinadora: nivel2Completo && faltantesMenores.length === 0,
   }
 }
 
