@@ -12,7 +12,7 @@ import { traducirModulo, traducirRecursos } from '../data/curriculum.en'
 // Recorrido del módulo: Vídeo → Lectura → Práctica → Knowledge Check → Evidencia → Completado
 const PASOS = ['video', 'lectura', 'practica', 'quiz', 'evidencia', 'completado']
 
-export default function ModuleView({ moduloId, progresoModulo: p, videos, esAdmin, acciones, onVolver, onVerCatalogo }) {
+export default function ModuleView({ moduloId, progresoModulo: p, videos, esAdmin, acciones, onVolver, onVerCatalogo, onVerOperativa }) {
   const { t, idioma } = useIdioma()
   const modulo = traducirModulo(getModulo(moduloId), idioma)
   const contenido = getContenido(moduloId, idioma)
@@ -93,6 +93,8 @@ export default function ModuleView({ moduloId, progresoModulo: p, videos, esAdmi
         </div>)}</div>
         <button className="mt-3 inline-block text-xs font-bold text-teal underline" onClick={onVerCatalogo}>Catálogo completo · 87 videos →</button>
       </details>
+
+      {moduloId === 'T10.4' && <button onClick={onVerOperativa} className="w-full rounded-2xl bg-teal p-4 text-left text-sm font-bold text-white">Abrir paso a paso SIS · Matrícula, automatizaciones y accesos demo →</button>}
 
       {/* ── Ficha ── */}
       <div className="rounded-2xl bg-white p-5 shadow-sm">
