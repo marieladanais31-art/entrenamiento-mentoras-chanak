@@ -14,6 +14,7 @@ export default function PlanFormacion() {
       </div>)}</div>
     </details>)}
     <p className="mt-4 text-xs leading-relaxed text-navy/75"><b>Cómo se acredita:</b> bitácora con fecha, actividad, fuente/versión, minutos reales, evidencia y supervisor; descontar pausas y duplicados. Dirección revisa el tiempo y la competencia demostrada. Completar módulos o alcanzar una cifra no autoriza por sí solo la certificación. Una práctica más breve no recibe horas ficticias: se programan nuevas actividades útiles.</p>
+    <div className="mt-3 flex flex-wrap gap-4 text-xs font-bold text-teal"><a href="/formacion/PLAN_FORMACION_180_300.md" download className="underline">Descargar plan completo</a><a href="/formacion/FLORIDA_PRESENCIAL_Y_EVALUACIONES.md" download className="underline">Descargar guía Florida y evaluaciones</a></div>
     <a className="mt-3 inline-block text-xs font-bold text-teal underline" href="https://drive.google.com/file/d/11l7EomB_1f3qbXIfYmTwKefUgVbiGoTv/view" target="_blank" rel="noreferrer">Plan, fuentes y protocolo de validación →</a>
     <a className="ml-4 mt-3 inline-block text-xs font-bold text-teal underline" href="https://drive.google.com/file/d/1rWXD-Or5SEL1lafPY1UZd--wmx7XL6SZ/view" target="_blank" rel="noreferrer">Florida y evaluaciones →</a>
     <a className="ml-4 mt-3 inline-block text-xs font-bold text-teal underline" href={"data:text/csv;charset=utf-8," + encodeURIComponent(csv)} download="BITACORA_FORMACION.csv">Descargar bitácora →</a>
