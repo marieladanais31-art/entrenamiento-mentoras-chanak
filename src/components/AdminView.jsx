@@ -104,7 +104,7 @@ export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) 
                   const asignados = (rolesMapa?.[p.id] || []).map((x) => x.rol)
                   const rolesP = asignados.length ? [...new Set(asignados)] : rolesDesdeTipoAcceso(p.tipo_acceso)
                   const r = resumenMentora(aplicarEquivalencias(progresos[p.id] || { modulos: {} }), { roles: rolesP, contactoMenores: p.contacto_menores ?? null })
-                  const pct = Math.min(100, Math.round((r.horas / r.metaHoras) * 100))
+                  const pct = Math.min(100, Math.round((r.horas / r.metaHorasModulos) * 100))
                   return (
                     <div key={p.id} className="rounded-2xl bg-white p-4 shadow-sm">
                       <div className="flex items-center gap-3">

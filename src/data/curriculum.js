@@ -8,8 +8,8 @@ import { horasModulo } from './tiempos'
 //   01_INSTITUCIONAL · 02_FAMILIAS · 03_INSTITUCIONES · 07_US_PROGRAMS_COMPLIANCE
 //   08_ACADEMIC_POLICIES · 09_ACADEMIC_FRAMEWORK (Scope & Sequence K–12)
 //
-// Nivel 1 → CHANAK CERTIFIED MENTOR      · Bloques 1–6 · 41.5 h estimadas
-// Nivel 2 → CHANAK CERTIFIED COORDINATOR · Nivel 1 + Bloque 8 · 52 h estimadas acumuladas
+// Nivel 1 → CHANAK CERTIFIED MENTOR      · Ruta completa · 180 h; módulos base: 41.5 h de referencia
+// Nivel 2 → CHANAK CERTIFIED COORDINATOR · Ruta completa · 300 h acumuladas; módulos base: 52 h de referencia
 // Bloque 7 (USA State Programs) es un módulo por rol: solo para quien lo necesite.
 //
 // Las horas son estimaciones de actividad formativa: incluyen autoestudio, vídeo, lecturas,
@@ -19,8 +19,10 @@ import { horasModulo } from './tiempos'
 export const VERSION_CURRICULO = 'training-2026-2027'
 export const FECHA_ACTUALIZACION = '2026-10-06'
 
-export const NIVEL_1_HORAS = 41.5 // estimación de actividad de los bloques 1–6
-export const NIVEL_2_HORAS = 52 // acumuladas: Nivel 1 + Bloque 8
+export const NIVEL_1_HORAS = 180 // meta de la ruta completa, confirmada por dirección
+export const HORAS_MODULOS_N1 = 41.5 // estimación de actividades de los bloques 1–6
+export const NIVEL_2_HORAS = 300 // ruta completa acumulada: Mentor + especialización
+export const HORAS_MODULOS_N2 = 52 // referencia de los módulos: Nivel 1 + Bloque 8
 
 export const FUENTES = {
   master: '01_INSTITUCIONAL · Dossier Institucional Master 2026–2027',
@@ -49,6 +51,7 @@ export const FUENTES = {
 const DRIVE = (id) => `https://drive.google.com/drive/folders/${id}`
 export const CARPETA_FINAL_URL = DRIVE('1bPAuhY8-YhHBmUPpqUahXACC_bH_BqxT')
 export const CARPETAS_DRIVE = {
+  '10_PEOPLE_ROLES_TRAINING/08_OPERATIVA_ACADEMICA': DRIVE('1fSscAWCQ-FFGae-ocBrc6qxzxugoTZbD'),
   '01_INSTITUCIONAL': DRIVE('1KbhzvvpIgASo5koXhpAqPs3IsYgPoDuU'),
   '02_FAMILIAS': DRIVE('1szjqYrhvU72RZ08giDiISA88ftuo17PI'),
   '03_INSTITUCIONES': DRIVE('1rm_nWHq32FVyeub7cS9Cj3o7de8FWsxa'),
@@ -245,7 +248,7 @@ export const BLOQUES = [
     numero: 10,
     titulo: 'Growth, Markets, Partnerships & Systems',
     categoria: 'Crecimiento y sistemas',
-    horas: 8,
+    horas: 8.75,
     porRol: true, // rol Estratégico y especialistas; no cuenta para las horas de la ruta base
     modulos: [
       { id: 'T10.1', titulo: 'Market Development & Representation y Plan de Entrada al Mercado a 30 días', horas: horasModulo('T10.1'), modalidad: 'Vídeo + lectura + plan escrito', evaluacion: 'Knowledge Check + plan a 30 días', video: 'V33', fuentes: [], entregable: true },

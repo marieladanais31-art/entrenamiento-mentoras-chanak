@@ -398,7 +398,7 @@ export const ESTIMACIONES_MINUTOS = {
     "horasAnteriores": 5
   },
   "T10.2": {
-    "palabras": 1911,
+    "palabras": 2073,
     "video": 5,
     "lectura": 20,
     "documentos": 0,
@@ -422,15 +422,15 @@ export const ESTIMACIONES_MINUTOS = {
     "horasAnteriores": 4
   },
   "T10.4": {
-    "palabras": 1978,
-    "video": 5,
-    "lectura": 20,
-    "documentos": 0,
-    "practica": 60,
+    "palabras": 3097,
+    "video": 15,
+    "lectura": 30,
+    "documentos": 20,
+    "practica": 65,
     "evidencia": 10,
     "kc": 10,
-    "total": 105,
-    "horas": 1.75,
+    "total": 150,
+    "horas": 2.5,
     "horasAnteriores": 5
   },
   "T10.5": {

@@ -1,3 +1,4 @@
+import PlanFormacion from './PlanFormacion'
 import { CURSO } from '../data/curso'
 import { BLOQUES, TODOS_MODULOS, VERSION_CURRICULO, FECHA_ACTUALIZACION } from '../data/curriculum'
 import { VIDEOS } from '../data/videos'
@@ -42,6 +43,7 @@ export default function CourseIntro({ onEmpezar, onVolver }) {
         </div>
       </Card>
 
+      <PlanFormacion />
       <Card titulo={t('curso.objetivos')}>
         <ul className="space-y-2.5">
           {CURSO.objetivos.map((o, i) => (

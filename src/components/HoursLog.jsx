@@ -1,5 +1,6 @@
 import { registroCronologico, resumenMentora, formatearFecha } from '../lib/calculos'
 import { NIVEL_1_HORAS, NIVEL_2_HORAS, numModulo } from '../data/curriculum'
+import PlanFormacion from './PlanFormacion'
 import { useIdioma } from '../i18n/idioma'
 
 export default function HoursLog({ mentora, progreso, onVolver }) {
@@ -35,15 +36,16 @@ export default function HoursLog({ mentora, progreso, onVolver }) {
           </p>
         </div>
 
+        <p className="mt-4 rounded-xl bg-gold/10 p-3 text-xs text-navy">Este registro suma estimaciones de los módulos, no horas acreditadas. Certificación Mentor: 180 h; Coordinator: 300 h. La bitácora de tiempo real, evidencias y validación de dirección se revisa separadamente.</p>
         {/* Totales */}
         <div className="mt-4 grid grid-cols-3 gap-2 text-center">
-          <Total valor={`${r.horas}h`} etiqueta={t('horas.acumuladas')} destacado />
+          <Total valor={`${r.horas}h`} etiqueta="Referencia de módulos" destacado />
           <Total
-            valor={`${Math.max(0, NIVEL_1_HORAS - r.horas)}h`}
+            valor={`${NIVEL_1_HORAS}h`}
             etiqueta={t('horas.paraMentora')}
           />
           <Total
-            valor={`${Math.max(0, NIVEL_2_HORAS - r.horas)}h`}
+            valor={`${NIVEL_2_HORAS}h`}
             etiqueta={t('horas.paraCoordinadora')}
           />
         </div>
@@ -98,6 +100,7 @@ export default function HoursLog({ mentora, progreso, onVolver }) {
           </div>
         )}
 
+        <PlanFormacion />
         {/* Pie para la versión impresa */}
         <div className="mt-6 border-t border-navy/10 pt-4 text-[12px] leading-relaxed text-navy/45">
           {t('horas.pieEvidencia')}
