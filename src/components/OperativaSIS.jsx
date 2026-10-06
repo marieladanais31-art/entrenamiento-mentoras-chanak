@@ -21,7 +21,7 @@ export default function OperativaSIS({ onVolver }) {
       <h2 className="font-bold text-navy">Usuarios demo · Padre y estudiante</h2>
       {demo.cuentas.map((cuenta, i) => <p key={cuenta} className="mt-2 break-all text-sm"><b>{i === 0 ? 'Padre' : 'Estudiante'}:</b> {cuenta}</p>)}
       <p className="mt-2 text-sm"><b>Contraseña demo:</b> <code>{demo.clave}</code></p>
-      <p className="mt-3 text-xs text-navy/70">{demo.aviso} Accesos históricos recuperados; inicio de sesión pendiente de verificación. Estas cuentas no permiten demostrar el panel administrativo.</p>
+      <p className="mt-3 text-xs text-navy/70">{demo.aviso} Usuarios confirmados activos en SIS: padre con un hijo vinculado y estudiante. Contraseña histórica recuperada; inicio de sesión de cada demo pendiente de prueba. No usar demopadre@chanakacademy.org. Estas cuentas no permiten demostrar el panel administrativo.</p>
     </section>
     <p className="rounded-xl border-l-4 border-gold bg-gold/10 p-4 text-sm text-navy">En el SIS: Administración → Matrículas. Aceptar una solicitud dispara sincronización; enviar bienvenida es una acción manual. Esta guía verifica el código. Las incidencias indicadas requieren corrección y prueba del SIS antes de certificar el circuito completo.</p>
     <label className="block text-sm font-bold text-navy">Buscar paso, rol o automatización
