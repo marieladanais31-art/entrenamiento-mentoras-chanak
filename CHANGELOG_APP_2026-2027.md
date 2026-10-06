@@ -1,3 +1,10 @@
+# 6 de octubre de 2026 · Catálogo completo de videos
+
+- 87 MP4 producidos, verificados y enlazados desde Drive, con subtítulos descargables. Conservan los permisos de Drive; el catálogo no concede acceso automáticamente.
+- 37 IDs históricos conservados y enlazados a su resumen; 35 microlecciones, 6 procedimientos administrativos y 9 videos de sistemas/PEI/organigrama/perfiles vinculados por módulo.
+- EMA y CHOOSE ampliados a siete pasos cada uno, distinguiendo aprobación, matrícula, servicio, factura y cobro. No se presentan gráficos como una grabación de consola privada.
+- Catálogo con búsqueda, descargas, fuentes y créditos de voz. Las URLs personalizadas guardadas por administración conservan prioridad en el video principal.
+
 # 6-oct-2026 · Equivalencia realista de dedicación
 
 - 37 módulos recalculados por actividad: lectura de estudio a 150 palabras/min más repaso, consulta dirigida, práctica, evidencia y evaluación. Eliminado el relleno de práctica para alcanzar metas antiguas.

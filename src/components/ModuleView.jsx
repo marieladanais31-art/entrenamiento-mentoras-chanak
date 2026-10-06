@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { getModulo, RECURSOS_GENERALES, FUENTES, numModulo, urlCarpeta } from '../data/curriculum'
 import { getContenido } from '../data/contenido'
-import { getVideo } from '../data/videos'
+import { getVideo, videosComplementarios } from '../data/videos'
 import { formatearFecha } from '../lib/calculos'
 import EstadoBadge from './ui/EstadoBadge'
 import KnowledgeCheck from './KnowledgeCheck'
@@ -24,7 +24,7 @@ export default function ModuleView({ moduloId, progresoModulo: p, videos, esAdmi
   const video = videoGuardado?.url
     ? videoGuardado
     : videoDef?.videoUrl
-      ? { url: videoDef.videoUrl, nota: '' }
+      ? { url: videoDef.videoUrl, subtitulos: videoDef.subtitulos, nota: '' }
       : null
 
   const [paso, setPaso] = useState(0)
@@ -83,6 +83,16 @@ export default function ModuleView({ moduloId, progresoModulo: p, videos, esAdmi
       <button onClick={onVolver} className="text-sm font-medium text-teal hover:underline">
         {t('modulo.volverBloque')}
       </button>
+
+      <details className="rounded-2xl bg-white p-4 shadow-sm">
+        <summary className="cursor-pointer text-sm font-bold text-navy">Videos de apoyo y procedimientos · {videosComplementarios(moduloId).length}</summary>
+        <p className="mt-2 text-xs text-navy/60">Resúmenes narrados y procedimientos sin avatar. Los gráficos explican el circuito; las demostraciones de sistemas se identifican por título. La lectura, práctica y evidencias completan la formación.</p>
+        <div className="mt-3 space-y-4">{videosComplementarios(moduloId).map((v) => <div key={v.id}>
+          <h3 className="mb-2 text-sm font-bold text-teal">{v.titulo} · {v.duracion}</h3>
+          <VideoLeccion video={{ url: v.videoUrl, subtitulos: v.subtitulos }} />
+        </div>)}</div>
+        <a className="mt-3 inline-block text-xs font-bold text-teal underline" href="/videos/index.html" target="_blank" rel="noreferrer">Catálogo completo · 87 videos →</a>
+      </details>
 
       {/* ── Ficha ── */}
       <div className="rounded-2xl bg-white p-5 shadow-sm">

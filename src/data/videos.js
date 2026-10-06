@@ -1,3 +1,5 @@
+import { VIDEOS_RENDERIZADOS } from './videosRenderizados'
+
 // ============================================================
 // BIBLIOTECA DE VÍDEOS · 2026–2027 · IDs legados preservados
 //
@@ -25,7 +27,7 @@ export const CATEGORIAS_VIDEO = [
   'Desarrollo y acompañamiento',
 ]
 
-export const VIDEOS = [
+const DEFINICIONES_VIDEO = [
   // ── Fundamentos ──
   {
     id: 'V01', orden: 1, bloque: 'Fundamentos', modulo: 'T1.1', duracion: '7 min', videoUrl: '',
@@ -426,6 +428,15 @@ export const VIDEOS = [
     ],
   },
 ]
+
+// IDs históricos conservados: cada definición se vincula a su MP4 y duración real.
+export const VIDEOS = DEFINICIONES_VIDEO.map((v) => {
+  const render = VIDEOS_RENDERIZADOS.find((x) => x.legacy === v.id)
+  return render ? { ...v, videoUrl: render.videoUrl, subtitulos: render.subtitulos, duracion: render.duracion } : v
+})
+export function videosComplementarios(modulo) {
+  return VIDEOS_RENDERIZADOS.filter((x) => x.modulo === modulo && !x.legacy)
+}
 
 export function getVideo(id) {
   return VIDEOS.find((v) => v.id === id) || null
