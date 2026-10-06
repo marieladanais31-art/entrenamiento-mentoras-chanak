@@ -172,6 +172,8 @@ export const BLOQUES_7_8 = {
       criterio: 'Posible registro reconstruido. Se documenta, se pide la evidencia original, no se validan sin evidencia y se reporta a Chanak Central.',
     },
     quiz: [
+      { p: 'Un coordinador no ve estudiantes. ¿Qué verifica primero?', opciones: ['Se concede acceso de administrador', 'Su hub, ámbito y carga; informa la incidencia sin ampliar permisos por rutina', 'Crea otra cuenta', 'Crea alumnos de prueba en producción'], correcta: 1, explica: 'La lista inicial depende del hub asignado y de la carga. La formación no altera permisos.' },
+      { p: 'Una evidencia está enviada. ¿Qué falta antes de validar el resultado?', opciones: ['Nada', 'Revisar identidad, contenido, acceso y criterio; registrar decisión y comprobar estado', 'Solo descargarla', 'Otorgar Coins'], correcta: 1, explica: 'Enviado y aprobado son estados distintos; la decisión debe tener sustento.' },
       { p: 'Cinco evaluaciones registradas el mismo día con fechas antiguas y sin evidencia. ¿Qué haces?', opciones: ['Validarlas', 'Documentar, pedir evidencia original y reportar a Chanak Central', 'Borrarlas', 'Cambiar las fechas'], correcta: 1, explica: 'Integridad del registro.' },
       { p: '¿Qué debe tener cada nota del SIS?', opciones: ['Solo la nota', 'Evidencia, fecha real y responsable', 'Firma de la familia', 'Nada más'], correcta: 1, explica: 'Trazabilidad.' },
       { p: 'Una posible situación de safeguarding llega al coordinador. ¿Primer paso?', opciones: ['Reporting mensual', 'Informar al DSL de inmediato', 'Esperar', 'Investigar personalmente'], correcta: 1, explica: 'Safeguarding siempre primero al DSL.' },

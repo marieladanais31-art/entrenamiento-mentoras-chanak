@@ -1,0 +1,243 @@
+{
+  "titulo": "Coordinación · Pantallas SIS",
+  "subtitulo": "Ocho vistas y práctica con datos ficticios · Referencia formativa del código actual",
+  "intro": "El coordinador trabaja con los estudiantes de su hub asignado. Sin hub, la carga inicial queda vacía. La ausencia de alumnos se consulta con Administración; no se resuelve concediendo un rol más amplio. Las pantallas ilustradas simplifican los controles para enseñar el recorrido: no son capturas de una sesión autenticada ni reproducen expedientes reales.",
+  "pantallas": [
+    {
+      "id": "notas",
+      "titulo": "Notas",
+      "objetivo": "Gestionar el registro académico del estudiante y periodo correctos.",
+      "verifica": "Hub asignado, estudiante, ciclo activo, trimestre y materia.",
+      "pasos": [
+        "Seleccione el alumno de su hub y el trimestre.",
+        "Abra la materia y sus notas parciales; revise fecha, evidencia y estado.",
+        "Cambie un dato solo con autorización y sustento; compruebe el guardado o el mensaje de error."
+      ],
+      "cierre": "Registro correcto y discrepancias documentadas.",
+      "cuidado": "Los cambios de campos pueden guardarse directamente. No practique sobre notas reales.",
+      "columnas": [
+        "Estudiante",
+        "Materia / periodo",
+        "Estado"
+      ],
+      "filas": [
+        [
+          "ID-DEMO-001",
+          "Materia asignada · Q1",
+          "Pendiente de revisión"
+        ]
+      ],
+      "caso": "La familia propone una nota sin evidencia. ¿Qué revisa antes de validarla?",
+      "respuesta": "Identidad, evaluación, condiciones y evidencia; solicitar lo que falta, sin aprobar por rutina."
+    },
+    {
+      "id": "carga-masiva",
+      "titulo": "Carga Eval. M.L.",
+      "objetivo": "Preparar y revisar la carga de evaluaciones proyectadas.",
+      "verifica": "Estudiante, año, trimestre, plan y autorización para registrar.",
+      "pasos": [
+        "Seleccione los filtros que ofrece la herramienta.",
+        "Use Cargar evaluaciones proyectadas cuando proceda.",
+        "Revise unidad, fecha y calificación de cada fila antes de guardar; confirme el resultado."
+      ],
+      "cierre": "Evaluaciones cargadas una vez y revisadas por alumno y periodo.",
+      "cuidado": "Proyectar no equivale a demostrar dominio. No rellene notas para completar un cuadro ni asuma que todo programa usa PACEs.",
+      "columnas": [
+        "Alumno / ciclo",
+        "Evaluación proyectada",
+        "Resultado"
+      ],
+      "filas": [
+        [
+          "ID-DEMO-001 · 2026–2027",
+          "Evaluación 01 · Q1",
+          "Sin registrar"
+        ]
+      ],
+      "caso": "Hay evaluaciones proyectadas sin realizar. ¿Deben llevar nota?",
+      "respuesta": "No. Verificar si fueron realizadas y conservar el estado pendiente hasta contar con evidencia."
+    },
+    {
+      "id": "revision",
+      "titulo": "Revisar Notas",
+      "objetivo": "Resolver las propuestas enviadas por familias o tutores.",
+      "verifica": "Alumno, materia, evaluación, fecha, evidencia y estado.",
+      "pasos": [
+        "Abra la bandeja y filtre los pendientes de su ámbito.",
+        "Lea cada envío y contraste su sustento.",
+        "Apruebe, solicite corrección o rechace según su autoridad; deje una observación útil y verifique el estado final."
+      ],
+      "cierre": "Decisión registrada, razón clara y siguiente acción.",
+      "cuidado": "La propuesta familiar no es una nota validada. Una corrección debe explicar qué cambiar.",
+      "columnas": [
+        "ID / evaluación",
+        "Estado",
+        "Próxima acción"
+      ],
+      "filas": [
+        [
+          "ID-DEMO-001 · Evaluación 01",
+          "En revisión",
+          "Solicitar evidencia legible"
+        ]
+      ],
+      "caso": "La imagen no permite leer las respuestas. ¿Qué decisión corresponde?",
+      "respuesta": "Pedir una evidencia legible y mantener la revisión pendiente; no inferir una calificación."
+    },
+    {
+      "id": "evidencias",
+      "titulo": "Evidencias",
+      "objetivo": "Revisar las pruebas de aprendizaje y sus enlaces.",
+      "verifica": "Alumno, propósito de la entrega, integridad, permisos y relación con el plan.",
+      "pasos": [
+        "Filtre por el estado disponible y abra el registro.",
+        "Compruebe el enlace con su cuenta institucional y la evidencia completa.",
+        "Registre la decisión pertinente y una observación; confirme que permanece asociada al alumno correcto."
+      ],
+      "cierre": "Evidencia revisada y decisión trazable.",
+      "cuidado": "Que un enlace exista no prueba que esté accesible, completo o aprobado. No haga públicas las carpetas.",
+      "columnas": [
+        "ID / evidencia",
+        "Acceso",
+        "Revisión"
+      ],
+      "filas": [
+        [
+          "ID-DEMO-001 · Proyecto A",
+          "Permiso por comprobar",
+          "Pendiente"
+        ]
+      ],
+      "caso": "Drive muestra Acceso denegado. ¿Cómo se resuelve?",
+      "respuesta": "Solicitar permisos para el equipo autorizado o el enlace correcto; no aprobar ni publicar la carpeta."
+    },
+    {
+      "id": "pei",
+      "titulo": "PEI / Eval. M.L.",
+      "objetivo": "Consultar y trabajar el plan individual del estudiante.",
+      "verifica": "Identidad, programa, año, diagnóstico, vía curricular y autoridad para editar/publicar.",
+      "pasos": [
+        "Ubique al estudiante en la tabla.",
+        "Abra Ver / Editar PEI y Eval. M.L. o Crear PEI si no existe y el alta está autorizada.",
+        "Revise objetivos, materias, apoyos y proyección; publique solo conforme al procedimiento y compruebe la versión."
+      ],
+      "cierre": "Plan revisado, estado claro y familia orientada.",
+      "cuidado": "No mezcle PEI Off-Campus y Plan de Ruta Dual. La publicación habilita contenidos, pero no valida logros futuros.",
+      "columnas": [
+        "Estudiante",
+        "PEI",
+        "Acción"
+      ],
+      "filas": [
+        [
+          "ID-DEMO-001",
+          "2026–2027 · Borrador",
+          "Ver / Editar PEI y Eval. M.L."
+        ]
+      ],
+      "caso": "No aparecen metas diarias. ¿Cuál es la comprobación?",
+      "respuesta": "Revisar publicación del PEI, año, asignaciones, vínculos y carga. No atribuir siempre el vacío a una sola causa."
+    },
+    {
+      "id": "boletines",
+      "titulo": "Boletines",
+      "objetivo": "Preparar o revisar documentos académicos del periodo.",
+      "verifica": "Alumno, año, trimestre y resultados aprobados.",
+      "pasos": [
+        "Ubique al estudiante y compruebe el periodo del documento mostrado.",
+        "Abra Crear boletín o Ver / Editar según la fila.",
+        "Contraste notas y evidencias aprobadas; revise antes de publicar o descargar conforme a su autoridad."
+      ],
+      "cierre": "Documento correcto, versión y estado de publicación comprobados.",
+      "cuidado": "Un borrador no es un documento oficial publicado. No copiar notas del periodo anterior por comodidad.",
+      "columnas": [
+        "Estudiante",
+        "Boletín",
+        "Acción"
+      ],
+      "filas": [
+        [
+          "ID-DEMO-001",
+          "2026–2027 · Q1 · Borrador",
+          "Ver / Editar"
+        ]
+      ],
+      "caso": "El boletín muestra otro trimestre. ¿Se publica?",
+      "respuesta": "No. Corregir o localizar el periodo y resultados correspondientes antes de la publicación."
+    },
+    {
+      "id": "seguimiento",
+      "titulo": "Seguimiento",
+      "objetivo": "Detectar pendientes y acordar acompañamiento.",
+      "verifica": "Programa, ciclo, tipos de reporte aplicables y fechas reales.",
+      "pasos": [
+        "Revise el cumplimiento M.L., E.L. y L.S. cuando corresponda al programa.",
+        "Distinga ausencia de reportes, retraso y evidencia pendiente de revisión.",
+        "Asigne responsable y fecha; use PDF resumen del hub y Coins solo según los controles y criterios vigentes."
+      ],
+      "cierre": "Pendiente con responsable, próxima acción y revisión.",
+      "cuidado": "Las cadencias Off-Campus no se trasladan por rutina a Dual. Coins no equivalen a nota o crédito.",
+      "columnas": [
+        "Alumno",
+        "Pendiente",
+        "Responsable / fecha"
+      ],
+      "filas": [
+        [
+          "ID-DEMO-001",
+          "Reporte por revisar",
+          "Coordinación · acordar revisión"
+        ]
+      ],
+      "caso": "Hay evidencia enviada y un aviso de atraso. ¿Qué verifica?",
+      "respuesta": "Fechas, tipo de reporte y estado de revisión, antes de pedir a la familia que duplique la entrega."
+    },
+    {
+      "id": "alertas",
+      "titulo": "Alertas",
+      "objetivo": "Registrar un aviso académico claro y con destinatario pertinente.",
+      "verifica": "Alumno, ámbito, motivo, prioridad y receptor autorizado.",
+      "pasos": [
+        "Abra Alertas y compruebe los controles disponibles.",
+        "Redacte hechos observables, fecha y la acción requerida.",
+        "Publique solo cuando proceda; revise su destinatario y seguimiento. No asuma que un aviso prueba entrega de correo."
+      ],
+      "cierre": "Alerta registrada y seguimiento definido.",
+      "cuidado": "No usar etiquetas personales ni publicar datos innecesarios. Protección del menor requiere su protocolo específico.",
+      "columnas": [
+        "Alumno",
+        "Prioridad",
+        "Acción requerida"
+      ],
+      "filas": [
+        [
+          "ID-DEMO-001",
+          "Media · ejemplo",
+          "Confirmar revisión del plan"
+        ]
+      ],
+      "caso": "Un caso afecta la seguridad del menor. ¿Basta una alerta académica?",
+      "respuesta": "No. Aplicar el protocolo institucional de protección y contactar al responsable autorizado."
+    }
+  ],
+  "dual": {
+    "titulo": "Coordinación en Dual es un entorno separado",
+    "parrafos": [
+      "El LMS Dual revisado ofrece Mis estudiantes & Tareas, Cola de revisión completa, ChanakCoins, Feedback y PEI Estudiantes, además del acceso a convalidación.",
+      "Revise los alumnos asignados, unidades/evidencias pendientes y documentos a mapear. Convalide solo dentro de su autoridad y conserve la decisión y el expediente de origen.",
+      "No suponga que rol, asignación, contraseña o resultados se sincronizan automáticamente desde SIS. Compruebe las relaciones y las discrepancias antes de comunicar progreso o créditos a la familia."
+    ]
+  },
+  "rutina": [
+    "Al comenzar: comprobar ámbito, ciclo y pendientes urgentes.",
+    "En cada revisión: identidad, evidencia, decisión, observación y estado guardado.",
+    "Al terminar: responsable, próxima acción, fecha y comprobación de lo publicado.",
+    "En el cierre de periodo: contrastar plan, resultados aprobados, boletín y documentación."
+  ],
+  "fuentes": [
+    "23_SIS_Progress_Screenshots_Manual.docx (39 imágenes, usado como referencia; imágenes privadas no reproducidas).",
+    "Guías familiares Off-Campus y Dual e instructivos de matrícula aportados por Mariela.",
+    "SIS: CoordinatorDashboard.jsx, ParentDashboard.jsx y StudentDashboard.jsx; revisión del código el 6 octubre 2026.",
+    "LMS Dual: login, familia, estudiante y coordinador; revisión del código el 6 octubre 2026."
+  ]
+}

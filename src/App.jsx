@@ -3,6 +3,8 @@ import Login from './components/Login'
 import PendienteAprobacion from './components/PendienteAprobacion'
 import Dashboard from './components/Dashboard'
 import OperativaSIS from './components/OperativaSIS'
+import GuiasFamilias from './components/GuiasFamilias'
+import CoordinacionSIS from './components/CoordinacionSIS'
 import CatalogoVideos from './components/CatalogoVideos'
 import CourseIntro from './components/CourseIntro'
 import BlockView from './components/BlockView'
@@ -270,6 +272,8 @@ export default function App() {
             onAbrirModulo={(moduloId) =>
               setVista({ ...vista, nombre: 'modulo', moduloId, bloqueId: getModulo(moduloId)?.bloqueId })
             }
+            onVerGuias={() => setVista({ ...vista, nombre: 'guias-familias' })}
+            onVerCoordinacion={() => setVista({ ...vista, nombre: 'coordinacion-sis' })}
             onVerOperativa={() => setVista({ ...vista, nombre: 'operativa-sis' })}
             onVerCatalogo={() => setVista({ ...vista, nombre: 'catalogo-videos' })}
             onVerHoras={() => setVista({ ...vista, nombre: 'horas' })}
@@ -284,6 +288,8 @@ export default function App() {
         )}
         {vista.nombre === 'catalogo-videos' && <CatalogoVideos onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
         {vista.nombre === 'operativa-sis' && <OperativaSIS onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
+        {vista.nombre === 'guias-familias' && <GuiasFamilias onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
+        {vista.nombre === 'coordinacion-sis' && <CoordinacionSIS onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
         {vista.nombre === 'matriz' && <MatrizProgramas onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
         {vista.nombre === 'organigrama' && (
           <Organigrama
@@ -320,6 +326,8 @@ export default function App() {
             videos={videos}
             esAdmin={esAdmin}
             acciones={acciones}
+            onVerGuias={() => setVista({ ...vista, nombre: 'guias-familias' })}
+            onVerCoordinacion={() => setVista({ ...vista, nombre: 'coordinacion-sis' })}
             onVerOperativa={() => setVista({ ...vista, nombre: 'operativa-sis' })}
             onVerCatalogo={() => setVista({ ...vista, nombre: 'catalogo-videos' })}
             onVolver={() => setVista({ ...vista, nombre: 'bloque' })}
