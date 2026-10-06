@@ -1,3 +1,9 @@
+# 6 de octubre de 2026 · Catálogo dentro del panel
+
+- Catálogo de 87 videos integrado en el panel aprobado del app, con búsqueda y un reproductor activo.
+- Subtítulos SRT y plantilla CSV se descargan desde su contenido; no dependen de una ruta estática que pueda devolver la portada.
+- Guías completas del plan y Florida enlazan a sus archivos verificados de Drive. No cambia permisos ni autenticación.
+
 # 6 de octubre de 2026 · Catálogo completo de videos
 
 - 87 MP4 producidos, verificados y enlazados desde Drive, con subtítulos descargables. Conservan los permisos de Drive; el catálogo no concede acceso automáticamente.
