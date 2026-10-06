@@ -1,4 +1,4 @@
-import { TODOS_MODULOS, NIVEL_1_HORAS, NIVEL_2_HORAS } from '../data/curriculum'
+import { TODOS_MODULOS, NIVEL_1_HORAS, NIVEL_2_HORAS, HORAS_MODULOS_N1, HORAS_MODULOS_N2 } from '../data/curriculum'
 import { EQUIVALENCIAS } from '../data/equivalencias'
 import { ROL_POR_ID, MODULOS_CONTACTO_DIRECTO, modulosObligatorios, tieneContactoDirecto, tieneContactoOcasional, MODULOS_SAFEGUARDING_AWARENESS } from '../data/roles'
 
@@ -100,11 +100,16 @@ export function resumenMentora(progreso, ctx = {}) {
     nivel2Completo,
     nivelActual: nivel1Completo ? 2 : 1,
     metaHoras: nivel1Completo ? NIVEL_2_HORAS : NIVEL_1_HORAS,
+    metaHorasModulos: nivel1Completo ? HORAS_MODULOS_N2 : HORAS_MODULOS_N1,
+    horasAcreditadasAutomaticas: 0,
+    requiereValidacionFormal: nivel1Completo,
+    // Las estimaciones y equivalencias no prueban horas reales ni aprobación de dirección.
+    // La bitácora y la resolución se validan fuera del contador automático del app.
     // Gating: sin la formación de contacto con menores no se completa la ruta ni se emite certificado.
     faltantesMenores,
     bloqueadoPorMenores: faltantesMenores.length > 0,
-    elegibleMentor: horas >= NIVEL_1_HORAS && nivel1Completo && faltantesMenores.length === 0,
-    elegibleCoordinadora: nivel2Completo && faltantesMenores.length === 0,
+    elegibleMentor: false,
+    elegibleCoordinadora: false,
   }
 }
 

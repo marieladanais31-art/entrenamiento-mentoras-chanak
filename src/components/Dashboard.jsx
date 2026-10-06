@@ -1,10 +1,11 @@
-import { BLOQUES, TODOS_MODULOS, NIVEL_1_HORAS, NIVEL_2_HORAS, numModulo, BIBLIOTECA, urlCarpeta, CARPETA_FINAL_URL } from '../data/curriculum'
+import { BLOQUES, TODOS_MODULOS, HORAS_MODULOS_N1, HORAS_MODULOS_N2, numModulo, BIBLIOTECA, urlCarpeta, CARPETA_FINAL_URL } from '../data/curriculum'
 import { resumenMentora, estadoBloque, horasBloqueCompletadas } from '../lib/calculos'
 import ProgressRing from './ui/ProgressRing'
 import EstadoBadge from './ui/EstadoBadge'
 import { useIdioma } from '../i18n/idioma'
 import { traducirBloques } from '../data/curriculum.en'
 import RutaRoles from './RutaRoles'
+import PlanFormacion from './PlanFormacion'
 
 // Inicio → Mi ruta → Bloque → Módulo
 export default function Dashboard({
@@ -38,14 +39,14 @@ export default function Dashboard({
   const siguiente =
     ruta.find((m) => mods[m.id]?.estado === 'en_curso') ||
     ruta.find((m) => mods[m.id]?.estado !== 'completado')
-  const pct = Math.round((r.horas / NIVEL_2_HORAS) * 100)
+  const pct = Math.round((r.horas / HORAS_MODULOS_N2) * 100)
 
   return (
     <div className="space-y-6">
       {/* Cabecera */}
       <section className="rounded-2xl bg-white p-5 shadow-sm">
         <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-center">
-          <ProgressRing valor={r.horas} meta={r.metaHoras} />
+          <ProgressRing valor={r.horas} meta={r.metaHorasModulos} />
           <div className="flex-1 text-center sm:text-left">
             <h2 className="text-xl font-bold text-navy">{mentora.nombre}</h2>
             <p className="text-sm text-navy/60">
@@ -63,19 +64,22 @@ export default function Dashboard({
         <div className="mt-5">
           <div className="flex justify-between text-[12px] font-semibold text-navy/55">
             <span>{t('panel.ruta')}</span>
-            <span>{r.horas}h / {NIVEL_2_HORAS}h</span>
+            <span>{r.horas}h / {HORAS_MODULOS_N2}h · referencia de módulos</span>
           </div>
           <div className="relative mt-1.5 h-2.5 overflow-hidden rounded-full bg-navy/10">
             <div className="h-full rounded-full bg-teal transition-all" style={{ width: `${Math.min(100, pct)}%` }} />
-            <div className="absolute top-0 h-full w-0.5 bg-gold" style={{ left: `${(NIVEL_1_HORAS / NIVEL_2_HORAS) * 100}%` }} />
+            <div className="absolute top-0 h-full w-0.5 bg-gold" style={{ left: `${(HORAS_MODULOS_N1 / HORAS_MODULOS_N2) * 100}%` }} />
           </div>
           <div className="mt-1 flex justify-between text-[11px] text-navy/50">
             <span>0</span>
-            <span>Mentor · {NIVEL_1_HORAS}h</span>
-            <span>Coordinator · {NIVEL_2_HORAS}h</span>
+            <span>Módulos Mentor · {HORAS_MODULOS_N1}h</span>
+            <span>Módulos Coordinator · {HORAS_MODULOS_N2}h</span>
           </div>
         </div>
       </section>
+
+      <PlanFormacion />
+      {r.nivel1Completo && <p className="rounded-xl bg-gold/10 p-4 text-xs text-navy">Módulos base completados. Para certificar 180/300 h, presenta la bitácora, práctica supervisada y portafolio a dirección. El app no convierte las estimaciones en horas acreditadas.</p>}
 
       {/* Siguiente paso */}
       {siguiente && !viendoOtra && (
@@ -183,7 +187,7 @@ export default function Dashboard({
       <section>
         <TituloSeccion
           titulo="Formación transversal · contacto con menores"
-          subtitulo="Obligatoria para todo rol con contacto directo con menores. No suma a las 41.5 h ni a las 52 h."
+          subtitulo="Obligatoria para todo rol con contacto directo con menores. Incluida en la formación común del plan completo; evitar doble cómputo."
         />
         <div className="grid gap-3 sm:grid-cols-2">
           {transvBloques.map((b) => (

@@ -130,3 +130,11 @@
 - Extensión Local por países, electiva en Estados Unidos según estudiante y PEI.
 - IA de apoyo de Dual Diploma con revisión humana; no aprueba notas o créditos.
 - Se conservan horas de módulos y permisos existentes; sin cambios en Supabase.
+# 6 de octubre de 2026 · Rutas completas y horas de módulos
+
+- Metas confirmadas por dirección: Mentor 180 h; Coordinator 300 h acumuladas. Se conservan las estimaciones breves por módulo (41,5/52 h de referencia base; protección de menores 6 h) sin convertirlas en certificación.
+- Plan propuesto 180 + 120 h con autoestudio aplicado, casos operativos, 50 h de currículo/práctica, portafolio, bitácora y validación de dirección. El reparto no se presenta como requisito numérico ni aprobación de MSA.
+- Diferencia documentada con el self-study: 180/300 h por experiencia frente a la distribución por rol ahora indicada. Se prepara una propuesta de actualización; no se altera el expediente MSA original.
+- El registro del app muestra estimaciones; completar módulos no acredita automáticamente horas reales ni permite imprimir un certificado como si existiera validación formal. La revisión y resolución requieren bitácora y evidencias.
+- Guía Florida: distingue antecedentes/huellas, certificación profesional/FTCE y evaluaciones del estudiante; incluye home education, PEP, requisitos externos y matriz estatal con fuentes oficiales comprobadas.
+- Ampliación de administración: matrícula Off-Campus/Dual/Life Skills, cuentas SIS, Google for Education y circuito de cierre. Youth Readiness se mantiene como propuesta provisional de 4 semanas/3.500 USD.

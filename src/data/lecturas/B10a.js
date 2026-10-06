@@ -87,6 +87,7 @@ export const LECTURAS_B10A = {
   // ───────────────────────────────────────────────────────────
   'T10.2': {
     lecciones: [
+      {"titulo": "Youth Readiness · Life Skills social independiente en desarrollo", "guion": ["La página foundation.chanakacademy.org/youth-readiness/ representa una estructura provisional que se sigue desarrollando. Life Skills independiente para la parte social de Walmart no es una matrícula Off-Campus ni una ruta Dual Diploma. Mariela confirma cuatro semanas y un presupuesto de 3.500 USD para la propuesta; eso no demuestra financiación concedida ni convocatoria abierta.", "Antes de anunciar admisión o cohorte, definir edades, requisitos, responsables, fechas, sede, consentimiento, registro, evaluación y condiciones. La página muestra CV, entrevistas, simulaciones y un panel de facilitador; se revisan como prototipo, sin afirmar sincronización en vivo, envío de reportes ni certificados emitidos. No se copia un número de grant como prueba de aprobación.", "El formulario público SIS revisado todavía no ofrece Life Skills independiente. Administración usa solo el circuito autorizado y registra el estado real; no selecciona otro programa para aparentar matrícula. La guía del piloto advierte también que la etiqueta de salario mínimo de 13 USD/h está desactualizada y debe corregirse con fuente oficial antes de usarla con familias."]},
       {
         titulo: 'Qué hace el rol de Grants & Project Development',
         guion: [
