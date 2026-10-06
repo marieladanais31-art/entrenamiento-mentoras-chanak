@@ -382,7 +382,7 @@ export default function ModuleView({ moduloId, progresoModulo: p, videos, esAdmi
 }
 
 function Desglose({ d, horas, t }) {
-  const fmt = (h) => `${String(h).replace('.', ',')} h`
+  const fmt = (h) => `${Math.round(h * 60)} min`
   const filas = [
     { k: 'video', icono: '🎬', v: d.video },
     { k: 'lectura', icono: '📖', v: d.lectura, extra: t('desglose.palabras', { n: d.palabras.toLocaleString('es-ES') }) },
@@ -404,6 +404,7 @@ function Desglose({ d, horas, t }) {
           </li>
         ))}
       </ul>
+      {d.criterio && <p className="mt-3 text-xs leading-relaxed text-navy/60">{d.criterio}</p>}
       {d.documentos?.length > 0 && (
         <div className="mt-3 border-t border-navy/10 pt-2">
           <div className="text-[11px] font-semibold uppercase tracking-wide text-navy/45">{t('desglose.lecturaObligatoria')}</div>

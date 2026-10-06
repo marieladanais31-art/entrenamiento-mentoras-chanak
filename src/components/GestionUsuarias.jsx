@@ -153,8 +153,8 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa 
                 onChange={(e) => setTipoAcceso(e.target.value)}
                 className="mt-1 w-full rounded-xl border border-navy/15 bg-slate-50 px-3 py-2 text-sm text-navy font-medium"
               >
-                <option value="mentora">👩‍🏫 Mentor · Chanak Certified Mentor (180 h)</option>
-                <option value="coordinadora">🎯 Coordinator · Chanak Certified Coordinator (300 h)</option>
+                <option value="mentora">👩‍🏫 Mentor · Chanak Certified Mentor (41.5 h)</option>
+                <option value="coordinadora">🎯 Coordinator · Chanak Certified Coordinator (52 h)</option>
                 <option value="visionaria">🤝 Estratégico</option>
               </select>
             </label>

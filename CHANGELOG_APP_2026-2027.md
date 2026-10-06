@@ -1,3 +1,9 @@
+# 6-oct-2026 · Equivalencia realista de dedicación
+
+- 37 módulos recalculados por actividad: lectura de estudio a 150 palabras/min más repaso, consulta dirigida, práctica, evidencia y evaluación. Eliminado el relleno de práctica para alcanzar metas antiguas.
+- Mentor base: 41,5 h; Coordinator: 52 h acumuladas; bloque transversal de contacto con menores: 6 h adicionales según rol. Totales, rutas, progreso, textos ES/EN y certificado interno coherentes.
+- Desglose mostrado en minutos. Estimaciones distintas de asistencia real; se conserva aprobación por dominio, portafolios y requisito de protección de menores. No se borra el progreso ni se modifica Supabase.
+
 # 6 de octubre de 2026 · Operación estatal y atención de familias
 
 - Integra la captación, facturación y responsables de la rama patch-4 tras revisión.

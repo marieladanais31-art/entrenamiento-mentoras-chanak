@@ -1,5 +1,5 @@
 // BLOQUE 9 — CHILD & ADOLESCENT DEVELOPMENT, PSYCHOLOGY & EDUCATIONAL ACCOMPANIMENT (transversal)
-// Obligatorio para todo rol con DIRECT CHILD CONTACT. Fuera de las 180/300 h.
+// Obligatorio para todo rol con DIRECT CHILD CONTACT. Fuera de las horas de la ruta base.
 // Formato: { resumen, objetivos[], lecciones[] (las sustituye la lectura ampliada), practica, quiz[], evidencia }
 
 export const BLOQUE_9 = {

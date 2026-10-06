@@ -1,6 +1,6 @@
 // Lecturas · Bloque 9 · Child & Adolescent Development, Psychology & Educational Accompaniment
 // Bloque transversal obligatorio para todo rol con DIRECT CHILD CONTACT. Recupera y mantiene la formación
-// «Psicología del Niño y del Adolescente» (50 h estimadas; recalculadas a 18 h) de la primera capacitación Chanak. Fuera de las 180/300 h.
+// «Psicología del Niño y del Adolescente» (50 h estimadas; recalculadas a 18 h) de la primera capacitación Chanak. Fuera de las horas de la ruta base.
 // Marcos conceptuales: desarrollo cognitivo (Piaget), zona de desarrollo próximo (Vygotsky), apego (Bowlby/Ainsworth),
 // etapas psicosociales (Erikson), teoría de la autodeterminación (Deci y Ryan), ecología del desarrollo (Bronfenbrenner).
 // Son referencias generales de formación; no sustituyen la valoración de un profesional con licencia.
@@ -16,7 +16,7 @@ export const LECTURAS_B9 = {
           'El motivo es práctico. Un mentor que entiende cómo se desarrolla un niño de siete años o un adolescente de quince interpreta mejor lo que ve: un estudiante que «no quiere hacer nada» puede estar frustrado, cansado, con una brecha previa que no sabe nombrar o en un momento evolutivo en el que la opinión de sus iguales pesa más que la de los adultos. Entender el desarrollo no te convierte en psicólogo, pero evita dos errores opuestos: tratar como mala conducta lo que es una necesidad, y tratar como un problema clínico lo que es un momento normal del desarrollo.',
           'Conviene fijar desde el principio qué NO es este bloque. No es un curso para diagnosticar. No te prepara para emitir etiquetas clínicas como TDAH, autismo, dislexia, depresión o trastornos de ansiedad, ni para dar terapia. Tu función es acompañar educativamente: observar, documentar, apoyar dentro de tu rol, comunicar con la familia y, cuando corresponde, escalar o derivar a un profesional con licencia. Esa secuencia, OBSERVAR → DOCUMENTAR → APOYAR → COMUNICAR → ESCALAR/DERIVAR, es el hilo de todo el bloque y se desarrolla en el módulo 9.4.',
           'Tampoco es lo mismo que Safeguarding. La psicología y el desarrollo sirven para comprender y acompañar. El safeguarding sirve para proteger al menor y actuar ante riesgos. Son módulos distintos y ambos son obligatorios: ante cualquier señal de riesgo para la seguridad de un menor no aplicas lo aprendido aquí por tu cuenta, sino el protocolo de Safeguarding (módulo 6.1) y escalas de inmediato.',
-          'Cómo se organiza el bloque: 9.1 trata el desarrollo infantil, 9.2 la adolescencia, 9.3 las diferencias individuales y la conciencia de neurodiversidad sin diagnosticar, y 9.4 el acompañamiento educativo con casos prácticos. Las horas del bloque son una referencia formativa y no se suman a las 180 h del Mentor ni a las 300 h del Coordinador.',
+          'Cómo se organiza el bloque: 9.1 trata el desarrollo infantil, 9.2 la adolescencia, 9.3 las diferencias individuales y la conciencia de neurodiversidad sin diagnosticar, y 9.4 el acompañamiento educativo con casos prácticos. Las horas del bloque son una referencia formativa y no se suman a las 41,5 h del Mentor ni a las 52 h del Coordinador.',
         ],
       },
       {

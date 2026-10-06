@@ -1,5 +1,5 @@
 // BLOQUE 10 — GROWTH, MARKETS, PARTNERSHIPS & SYSTEMS (por rol: Estratégico y especialistas)
-// No cuenta para las 180/300 h. Contenido de formación en borrador operativo; plantillas legales sujetas a revisión.
+// No cuenta para las horas de la ruta base. Contenido de formación en borrador operativo; plantillas legales sujetas a revisión.
 // Formato: { resumen, objetivos[], lecciones[] (las sustituye la lectura ampliada), practica, quiz[], evidencia }
 
 export const BLOQUE_10 = {

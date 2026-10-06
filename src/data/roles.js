@@ -255,7 +255,7 @@ export const ROLES = [
     escala: [],
     documentos: ['Grants & Project Development · Role Profile'],
     checklist: ['Rol asignado formalmente', 'Chanak Core', 'Grants & Project Development Track'],
-    nota: 'Ruta administrativa separada: no forma parte del Mentor 180 h. Safeguarding Awareness si su función puede llevarlo a eventos o contacto ocasional.',
+    nota: 'Ruta administrativa separada: no forma parte del Mentor 41.5 h. Safeguarding Awareness si su función puede llevarlo a eventos o contacto ocasional.',
   },
   {
     id: 'lifeskills_project_coord',
