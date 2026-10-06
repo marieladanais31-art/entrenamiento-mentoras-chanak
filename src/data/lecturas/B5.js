@@ -173,6 +173,7 @@ export const LECTURAS_B5 = {
 
   'T5.3': {
     lecciones: [
+      {"titulo": "Inducción familiar por programa", "guion": ["Utiliza el Manual para padres Off-Campus o el Manual para padres Dual Diploma desde Inicio o este módulo. No entregues la misma rutina a todas las familias. En Off-Campus enseña el PEI, la supervisión familiar, evaluaciones y evidencias. En Dual explica el plan de ruta, cursos asignados, estudios previos y revisión de entregas.", "Comprueba acceso familiar y propio del estudiante, vínculos correctos y próxima revisión. SIS, LMS y Google tienen altas y credenciales que deben comprobarse por separado; el login actual del LMS usa correo y contraseña. Enviar una propuesta o completar una lección no acredita por sí solo una nota, un crédito ni un documento oficial."]},
       {
         titulo: 'Comunicar con familias: principios',
         guion: [

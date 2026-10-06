@@ -12,7 +12,7 @@ import { traducirModulo, traducirRecursos } from '../data/curriculum.en'
 // Recorrido del módulo: Vídeo → Lectura → Práctica → Knowledge Check → Evidencia → Completado
 const PASOS = ['video', 'lectura', 'practica', 'quiz', 'evidencia', 'completado']
 
-export default function ModuleView({ moduloId, progresoModulo: p, videos, esAdmin, acciones, onVolver, onVerCatalogo, onVerOperativa }) {
+export default function ModuleView({ moduloId, progresoModulo: p, videos, esAdmin, acciones, onVolver, onVerCatalogo, onVerOperativa, onVerGuias, onVerCoordinacion }) {
   const { t, idioma } = useIdioma()
   const modulo = traducirModulo(getModulo(moduloId), idioma)
   const contenido = getContenido(moduloId, idioma)
@@ -95,6 +95,9 @@ export default function ModuleView({ moduloId, progresoModulo: p, videos, esAdmi
       </details>
 
       {moduloId === 'T10.4' && <button onClick={onVerOperativa} className="w-full rounded-2xl bg-teal p-4 text-left text-sm font-bold text-white">Abrir paso a paso SIS · Matrícula, automatizaciones y accesos demo →</button>}
+
+      {(moduloId.startsWith('T8.') || moduloId === 'T10.4') && <button onClick={onVerCoordinacion} className="w-full rounded-2xl bg-white p-4 text-left text-sm font-bold text-teal shadow-sm">Coordinación SIS · Ocho pantallas y práctica con datos ficticios →</button>}
+      {(moduloId.startsWith('T5.') || moduloId === 'T10.4') && <button onClick={onVerGuias} className="w-full rounded-2xl bg-white p-4 text-left text-sm font-bold text-teal shadow-sm">Abrir manuales para padres · Off-Campus y Dual Diploma →</button>}
 
       {/* ── Ficha ── */}
       <div className="rounded-2xl bg-white p-5 shadow-sm">

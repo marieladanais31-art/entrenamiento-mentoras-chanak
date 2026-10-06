@@ -18,6 +18,8 @@ export default function Dashboard({
   onVerHoras,
   onVerCatalogo,
   onVerOperativa,
+  onVerGuias,
+  onVerCoordinacion,
   onVerCurso,
   onVerCertificado,
   roles = ['mentor'],
@@ -81,6 +83,8 @@ export default function Dashboard({
       </section>
 
       <PlanFormacion />
+      <button onClick={onVerGuias} className="block w-full rounded-2xl bg-white p-4 text-left text-sm font-bold text-teal shadow-sm">Manuales para padres · Off-Campus y Dual Diploma · PDF y editable</button>
+      <button onClick={onVerCoordinacion} className="block w-full rounded-2xl bg-white p-4 text-left text-sm font-bold text-navy shadow-sm">Coordinación SIS · Ocho pantallas y práctica de revisión</button>
       <button onClick={onVerOperativa} className="block w-full rounded-2xl bg-teal p-4 text-left text-sm font-bold text-white">Operativa SIS · Paso a paso de matrícula, usuarios demo, familias y alianzas</button>
       <button onClick={onVerCatalogo} className="block w-full rounded-2xl bg-navy p-4 text-left text-sm font-bold text-cream">▶ Catálogo completo · 87 videos y subtítulos descargables</button>
       {r.nivel1Completo && <p className="rounded-xl bg-gold/10 p-4 text-xs text-navy">Módulos base completados. Para certificar 180/300 h, presenta la bitácora, práctica supervisada y portafolio a dirección. El app no convierte las estimaciones en horas acreditadas.</p>}

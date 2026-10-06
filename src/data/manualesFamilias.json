@@ -1,0 +1,376 @@
+{
+  "offcampus": {
+    "id": "offcampus",
+    "titulo": "Manual para padres · Off-Campus",
+    "subtitulo": "Homeschool guiado · Acceso, rutina y seguimiento familiar · 2026–2027",
+    "contacto": "offcampus@chanakacademy.org",
+    "paginas": [
+      {
+        "titulo": "1. Empezar con orden",
+        "parrafos": [
+          "Este manual acompaña a la familia desde la incorporación hasta el seguimiento del aprendizaje. El estudiante trabaja con su plan individual; el adulto organiza y supervisa según su delegación, y el equipo académico revisa los resultados.",
+          "Antes de comenzar, confirme con Administración la solicitud, el programa, el ciclo, el vínculo familiar y las condiciones económicas. Una solicitud recibida o un pago realizado no sustituye la autorización de matrícula.",
+          "La regla de trabajo: el Portal orienta, Drive conserva las evidencias, el SIS registra el expediente y Chanak valida. El plan aprobado indica qué debe estudiar el alumno y qué debe entregar."
+        ],
+        "lista": [
+          "Recibir acceso familiar SIS y acceso propio del estudiante.",
+          "Confirmar tutor-mentor/coordinación y canal institucional de ayuda.",
+          "Recibir PEI o conocer su estado y el responsable de publicarlo.",
+          "Comprobar materiales, cuenta Google, carpeta Drive y recursos autorizados.",
+          "Acordar inducción, primera entrega y próxima revisión."
+        ]
+      },
+      {
+        "titulo": "2. Sus accesos y primer ingreso",
+        "tabla": [
+          [
+            "Entorno",
+            "Para qué se utiliza",
+            "Quién entra"
+          ],
+          [
+            "sis.chanakacademy.org",
+            "Expediente, PEI, reportes y documentos",
+            "Padre/tutor y estudiante, con cuentas propias"
+          ],
+          [
+            "portal.chanakacademy.org",
+            "Orientación y recursos del programa",
+            "Familia y estudiante, con código vigente facilitado"
+          ],
+          [
+            "mail.google.com / Drive",
+            "Correo y evidencias institucionales",
+            "Titular de la cuenta asignada"
+          ]
+        ],
+        "parrafos": [
+          "Abra cada dirección sin añadir «www». En SIS use el correo autorizado de la familia y la contraseña entregada para ese sistema. El estudiante usa su propia cuenta. No dé por hecho que las contraseñas de Google y SIS sean iguales.",
+          "Para Google, añada la cuenta institucional si ya hay una cuenta personal abierta. Use las credenciales individuales recibidas y complete el cambio de contraseña si la pantalla lo solicita. La creación del usuario SIS no garantiza que exista su buzón Google.",
+          "En el Portal introduzca el código vigente entregado por coordinación. El código común de recursos no sustituye el acceso nominativo al expediente. No se incluyen contraseñas reales en este manual."
+        ],
+        "lista": [
+          "Compruebe que aparece su identidad.",
+          "Compruebe que los hijos visibles son los correctos.",
+          "Si falla el acceso, use recuperación o consulte a Administración; no cree otra cuenta."
+        ]
+      },
+      {
+        "titulo": "3. Pantalla Mis Hijos",
+        "pantalla": "familia",
+        "parrafos": [
+          "El Portal de Padres presenta una tarjeta por estudiante vinculado. Compruebe nombre, programa, grado y año antes de abrir documentos o enviar información.",
+          "Desde la tarjeta se ofrecen accesos a evaluaciones, pagos, PEI, boletines, carta, contrato y evidencias según su disponibilidad. Un documento aún no publicado puede no aparecer.",
+          "En la navegación actual encontrará Mis Hijos, Documentos & Boletines, Evaluaciones & Evidencias, Encuesta Familiar, Recursos y Currículo / Curriculum. Circular, Calendario y Alertas pueden abrirse desde la cabecera o accesos correspondientes; no todas las ayudas son pestañas."
+        ],
+        "lista": [
+          "Dos hermanos: dos fichas de estudiante y el vínculo familiar correcto.",
+          "Un hijo que falta: informe su ID y el ciclo a Administración.",
+          "Un estudiante ajeno: deje de consultar su ficha y comunique la incidencia de acceso inmediatamente."
+        ]
+      },
+      {
+        "titulo": "4. PEI, currículo y materiales",
+        "parrafos": [
+          "El PEI o plan educativo individualizado concreta punto de partida, materias, objetivos, apoyos y evaluaciones. Revíselo con coordinación antes de interpretar metas vacías o material pendiente.",
+          "La selección de vía curricular y el diagnóstico orientan el plan. A.C.E., LIFEPAC, CLE y Chanak Flex no se usan indistintamente: siga la vía autorizada para ese alumno. El diagnóstico no es una etiqueta personal.",
+          "En Currículo / Curriculum complete la información solicitada y, cuando corresponda, la dirección de envío. La cotización, compra y recepción de materiales son pasos separados; consulte qué incluye su programa.",
+          "Las metas diarias pueden depender de un PEI publicado, de las asignaciones y del periodo activo. Una pantalla vacía también puede deberse a vínculos, filtros, ausencia de datos o un fallo de carga: no concluyan que el PEI es la única causa."
+        ],
+        "lista": [
+          "Confirmar versión y ciclo del plan.",
+          "Entender qué se hará mientras llegan los materiales.",
+          "Acordar ritmo, supervisión, apoyos y próxima revisión.",
+          "Pedir revisión académica antes de sustituir materias o modificar objetivos."
+        ]
+      },
+      {
+        "titulo": "5. Rutina de estudio y evaluación",
+        "parrafos": [
+          "Al inicio del día revisen las metas del plan y preparen materiales. El estudiante trabaja, registra dudas y revisa errores; el adulto acompaña según su edad, autonomía y la delegación recibida.",
+          "Core, Extensión Local y Life Skills se organizan según el programa y el PEI. La arquitectura 60/20/20 orienta el recorrido escolar; no convierte automáticamente actividades en créditos ni impone el mismo horario a todas las familias.",
+          "Las evaluaciones se realizan conforme al procedimiento de la vía curricular: custodia del material, condiciones de realización, corrección y evidencias. No copien respuestas ni hagan el trabajo por el estudiante.",
+          "Al terminar, registren qué se completó, qué quedó pendiente y qué apoyo necesita. Si el alumno no demuestra dominio, sigan el refuerzo y la reevaluación indicados; no inventen calificaciones ni adelanten unidades solo por el calendario."
+        ],
+        "lista": [
+          "Diariamente: metas, estudio y cierre breve.",
+          "Semanalmente: revisar pendientes y conservar evidencias.",
+          "Según el plan: enviar reportes y participar en seguimiento.",
+          "Acordar fechas reales con coordinación; este manual no fija un horario universal."
+        ]
+      },
+      {
+        "titulo": "6. Enviar evaluaciones y evidencias",
+        "pantalla": "evidencias",
+        "parrafos": [
+          "Entre en Evaluaciones & Evidencias y seleccione el hijo, materia, ciclo y periodo correctos. Revise las unidades o evaluaciones proyectadas y use la acción habilitada de reporte o «Corregir / actualizar» cuando corresponda.",
+          "Registre fecha, evaluación, resultado propuesto y observaciones verificables según los campos disponibles. Adjunte el enlace a la evidencia de Drive autorizada para la revisión. Abra el enlace con la cuenta institucional y compruebe que el equipo asignado puede consultarlo.",
+          "Conserve una evidencia legible y completa. Nombre orientativo: ID_ESTUDIANTE_MATERIA_EVALUACION_FECHA. Evite nombres completos en carpetas de circulación amplia y no haga públicos los documentos.",
+          "Enviar no equivale a aprobar. Espere la revisión de coordinación. Si se pide corrección, responda a la observación en el mismo registro o por el mecanismo habilitado; no duplique toda la entrega.",
+          "Si el registro enviado o aprobado no permite edición, solicite revisión. No sustituya por otro una nota ya aprobada ni interprete una propuesta como resultado oficial."
+        ],
+        "tabla": [
+          [
+            "Estado",
+            "Qué debe hacer la familia"
+          ],
+          [
+            "Borrador",
+            "Completar y verificar antes de enviar"
+          ],
+          [
+            "Enviado / En revisión",
+            "Esperar revisión y atender consultas"
+          ],
+          [
+            "Corrección solicitada",
+            "Corregir lo indicado y reenviar si está habilitado"
+          ],
+          [
+            "Aprobado",
+            "Consultar el resultado validado; pedir revisión si hay discrepancia"
+          ]
+        ]
+      },
+      {
+        "titulo": "7. Documentos, pagos y comunicación",
+        "parrafos": [
+          "En Documentos & Boletines consulte los archivos disponibles por estudiante y periodo. Los botones de descarga ES/EN aparecen según el documento publicado. Compruebe alumno, año y trimestre antes de guardar o enviar una copia.",
+          "Revise el PEI, carta y contrato en sus accesos. Contrato enviado, firmado y matrícula lista son estados distintos. Solo firme después de revisar las condiciones y resolver dudas con Administración.",
+          "En Pagos compruebe concepto, importe, moneda, vencimiento y estado. Conserve comprobantes. Si un pago no coincide, informe fecha y referencia por el canal autorizado; una discrepancia no exige repetir el cobro ni enviar otra solicitud.",
+          "Consulte Circular, Calendario y Alertas desde los accesos de su panel. Atienda los avisos y confirme con su mentor si el cambio afecta su plan individual.",
+          "Los Chanak Coins son un recurso de motivación. No sustituyen evaluación, créditos ni pagos; úsense de acuerdo con el criterio institucional comunicado."
+        ]
+      },
+      {
+        "titulo": "8. Cuando algo no funciona",
+        "tabla": [
+          [
+            "Situación",
+            "Primera comprobación",
+            "A quién acudir"
+          ],
+          [
+            "No entra",
+            "Correo, sistema y recuperación",
+            "Administración"
+          ],
+          [
+            "Falta un hijo o aparece otro",
+            "Vínculo familiar y año",
+            "Administración de inmediato"
+          ],
+          [
+            "Faltan metas o materias",
+            "PEI, ciclo, asignaciones y carga",
+            "Coordinación"
+          ],
+          [
+            "Drive no abre",
+            "Cuenta y permisos del enlace",
+            "Tutor/Administración"
+          ],
+          [
+            "Nota diferente",
+            "Evaluación, fecha y estado de revisión",
+            "Coordinación"
+          ],
+          [
+            "Pago diferente",
+            "Concepto y comprobante",
+            "Administración"
+          ]
+        ],
+        "parrafos": [
+          "Para pedir ayuda indique sistema, ID del estudiante, ciclo, pantalla, fecha y mensaje de error. Envíe una captura recortada si ayuda, sin mostrar contraseñas ni información de otros estudiantes.",
+          "Si observa una situación que afecta la seguridad o bienestar del menor, siga el canal institucional de protección. Un incidente de protección no se resuelve dentro de una consulta sobre notas."
+        ],
+        "lista": [
+          "Conocer quién responde cada consulta.",
+          "Comprobar un primer acceso correcto de padre y estudiante.",
+          "Realizar una entrega de práctica solo en el entorno autorizado.",
+          "Acordar la primera revisión y guardar este manual."
+        ]
+      }
+    ]
+  },
+  "dual": {
+    "id": "dual",
+    "titulo": "Manual para padres · Dual Diploma",
+    "subtitulo": "Acceso, plan de ruta, campus y acompañamiento familiar · 2026–2027",
+    "contacto": "dualdiploma@chanakacademy.org",
+    "paginas": [
+      {
+        "titulo": "1. Qué acompaña la familia",
+        "parrafos": [
+          "Dual Diploma complementa los estudios del colegio o expediente local con la ruta académica Chanak aprobada para el estudiante. La familia acompaña la organización, facilita documentación y sigue el progreso; las decisiones de ubicación, evaluación y reconocimiento corresponden al equipo académico.",
+          "El alumno continúa atendiendo las obligaciones de su colegio. La matrícula no convalida automáticamente estudios ni garantiza graduación o admisión universitaria.",
+          "Antes de empezar, confirme el programa, ciclo, plan de ruta, responsables, condiciones económicas y accesos. El diagnóstico de inglés y otros apoyos se aplican según la ruta indicada por coordinación, no como prueba universal de aprobado/suspenso."
+        ],
+        "lista": [
+          "Enviar expediente académico por el canal autorizado.",
+          "Conocer el estado de revisión de estudios previos.",
+          "Recibir plan de ruta y cursos asignados.",
+          "Confirmar cuentas separadas SIS, LMS y Google cuando corresponda.",
+          "Acordar inducción y primera revisión."
+        ]
+      },
+      {
+        "titulo": "2. SIS, LMS y Google: accesos separados",
+        "tabla": [
+          [
+            "Entorno",
+            "Función",
+            "Acceso"
+          ],
+          [
+            "sis.chanakacademy.org",
+            "Expediente, documentación y gestión familiar",
+            "Cuenta familiar o propia del estudiante"
+          ],
+          [
+            "dualdiploma.chanakacademy.org",
+            "Campus de estudio, cursos, evidencias y seguimiento",
+            "Usuario LMS autorizado, por rol"
+          ],
+          [
+            "mail.google.com / Drive",
+            "Correo y documentación institucional",
+            "Cuenta Google asignada, si está habilitada"
+          ]
+        ],
+        "parrafos": [
+          "Entre al SIS con las credenciales recibidas para el SIS. La familia y el estudiante tienen cuentas propias. Compruebe que el panel y el estudiante sean los correctos.",
+          "El acceso actual del LMS revisado utiliza correo y contraseña. Use la cuenta autorizada para ese campus; no dé por hecho que dispone de «Iniciar sesión con Google» ni que el correo Google abre automáticamente todos los entornos.",
+          "Un mismo correo puede identificar a la persona en varios sistemas, pero las cuentas, vínculos y contraseñas pueden ser independientes. No compartan una cuenta del alumno entre familiares ni creen otra para resolver un vínculo faltante.",
+          "Si le entregan una cuenta Google, complete su primer acceso y el cambio de contraseña cuando la pantalla lo solicite. El alta SIS no prueba que Google o el LMS estén listos."
+        ]
+      },
+      {
+        "titulo": "3. Primer recorrido por el SIS",
+        "pantalla": "familia",
+        "parrafos": [
+          "En Mis Hijos compruebe programa Dual Diploma, grado y ciclo, y que aparezca el estudiante vinculado. Desde sus accesos consulte PEI o ruta, contrato, carta, pagos y documentos publicados.",
+          "Documentos & Boletines muestra lo disponible por estudiante y periodo. Si un documento no está publicado, pida su estado; no use como definitivo un borrador.",
+          "Currículo / Curriculum y Evaluaciones & Evidencias pueden contener funciones compartidas con Off-Campus. Para Dual, complete únicamente lo indicado en el plan y por coordinación. No traslade por rutina las cadencias ni las metas diarias de otro programa.",
+          "SIS y LMS pueden mostrar datos diferentes por su función o por el estado de revisión. Si un resultado discrepa, identifique materia, periodo y registro y solicite aclaración al equipo."
+        ]
+      },
+      {
+        "titulo": "4. Plan de ruta y estudios previos",
+        "parrafos": [
+          "Reúnan los documentos del colegio o expediente local que coordinación solicite. Subir un boletín inicia o alimenta una revisión; no significa que sus créditos estén ya reconocidos.",
+          "El plan de ruta distingue estudios previos propuestos, reconocimientos aprobados y cursos Chanak pendientes. Lean juntos qué debe cursar, qué evidencia se exige y quién aprueba cada parte.",
+          "Los créditos transferidos y los obtenidos en cursos Chanak son distintos. Un porcentaje de avance de lecciones tampoco equivale por sí solo a créditos obtenidos o a diploma emitido.",
+          "Comprueben la decisión individual y los requisitos que faltan. No interpreten las referencias generales de reconocimiento como una cantidad garantizada para todos; coordinación confirma la ruta de cada estudiante.",
+          "Si cambia el colegio, el expediente o la disponibilidad del alumno, informen al equipo para revisar el plan antes de modificar cursos o fechas por su cuenta."
+        ],
+        "lista": [
+          "Estado de cada documento y de su revisión.",
+          "Cursos asignados y responsables.",
+          "Apoyos de inglés y condiciones de evaluación.",
+          "Siguiente entrega y revisión del plan."
+        ]
+      },
+      {
+        "titulo": "5. Pantallas del estudiante en el campus",
+        "pantalla": "dual",
+        "parrafos": [
+          "El panel revisado del estudiante incluye Mi progreso, Mis cursos, Documentos y Evidencias. El alumno debe entrar con su propia cuenta; que consiga iniciar sesión no demuestra que todos sus cursos estén asignados.",
+          "En Mi progreso revisa el recorrido y los estados de créditos/documentos. En Mis cursos abre los cursos asignados y su trabajo. En Documentos consulta los archivos y su revisión. En Evidencias atiende las entregas habilitadas, incluyendo Life Skills cuando corresponde.",
+          "El aula y las funciones disponibles varían por curso. Siga las instrucciones de la unidad: estudiar, practicar, responder, entregar y revisar el feedback. Si falta un curso, no seleccione uno diferente para sustituirlo.",
+          "Las herramientas de IA que estén habilitadas son apoyo para comprender y practicar. El alumno conserva la autoría; la IA no aprueba notas, créditos ni reconocimientos. No introduzca documentación personal en una herramienta no autorizada."
+        ]
+      },
+      {
+        "titulo": "6. Entregas, feedback y trabajo auténtico",
+        "parrafos": [
+          "Antes de enviar, confirme estudiante, curso, unidad, periodo y archivo/enlace correcto. Guarde el trabajo en la carpeta o canal autorizado y compruebe sus permisos.",
+          "Distinga trabajo guardado, enviado, en revisión, corrección solicitada y aprobado. Consulte el feedback y corrija el mismo entregable mediante la acción disponible; no duplique archivos o solicitudes sin necesidad.",
+          "Una actividad marcada como completada puede describir progreso de estudio, no aprobación académica final. Ante la duda, consulte el estado evaluativo y al responsable.",
+          "La familia ayuda a organizar y a comprender instrucciones, sin realizar el trabajo ni suplantar al alumno. Las evaluaciones siguen las condiciones comunicadas por coordinación.",
+          "No registren otra nota en SIS para compensar una entrega pendiente del LMS. Informen la discrepancia con ID y evidencias para que el equipo determine el registro pertinente."
+        ],
+        "tabla": [
+          [
+            "Lectura de pantalla",
+            "Interpretación útil"
+          ],
+          [
+            "En progreso / Completado",
+            "Avance de trabajo; comprobar evaluación"
+          ],
+          [
+            "Enviado / En revisión",
+            "Pendiente de revisión humana"
+          ],
+          [
+            "Falta info / Corrección",
+            "Atender la observación y completar"
+          ],
+          [
+            "Aprobado",
+            "Resultado de la revisión indicada"
+          ],
+          [
+            "Documento procesado",
+            "Comprobar qué decisión contiene; no presumir convalidación total"
+          ]
+        ]
+      },
+      {
+        "titulo": "7. Seguimiento familiar y sesiones",
+        "parrafos": [
+          "Con la cuenta familiar autorizada del LMS, el panel revisado muestra progreso, créditos transferidos aprobados, cursos Chanak, evidencias y documentos del alumno vinculado. Si está vacío, consulte el vínculo familiar y la asignación, no cree una segunda cuenta.",
+          "En cada revisión familiar acuerden qué se trabajó, qué falta, qué feedback recibió y cuál es la próxima acción. La periodicidad y las sesiones se confirman con coordinación para su grupo y zona horaria.",
+          "Las referencias antiguas a martes 16:00 o jueves 18:00 no constituyen el horario vigente de todas las familias. Consulte el calendario, invitación o enlace institucional actual; confirme también la zona horaria.",
+          "Las tutorías y la mentoría complementan el trabajo asignado. No prometen automáticamente créditos ni sustituyen los requisitos del curso o del colegio local."
+        ]
+      },
+      {
+        "titulo": "8. Pagos, documentos y ayuda",
+        "parrafos": [
+          "La gestión económica de estudiantes y familias se consulta en SIS por su concepto, moneda, fecha y estado. Conserve comprobantes y resuelva discrepancias con Administración antes de repetir un pago.",
+          "Descargue los documentos académicos que estén publicados para el estudiante y ciclo correctos. Una estimación de créditos o una vista de progreso no sustituye el transcript o la decisión institucional.",
+          "Para ayuda académica contacte con coordinación Dual; para cuentas, vínculos o pagos, Administración. Indique sistema, ID, pantalla, curso/periodo, fecha y mensaje. No envíe contraseñas ni información de otros alumnos."
+        ],
+        "tabla": [
+          [
+            "Incidencia",
+            "Qué comprobar"
+          ],
+          [
+            "Entra al SIS pero no al campus",
+            "Cuenta LMS y credenciales propias"
+          ],
+          [
+            "Familia sin estudiante",
+            "Vínculo familiar del sistema correspondiente"
+          ],
+          [
+            "Falta un curso",
+            "Asignación y plan aprobado"
+          ],
+          [
+            "Crédito no coincide",
+            "Propuesto, aprobado, completado o obtenido"
+          ],
+          [
+            "Enlace no abre",
+            "Cuenta y permisos de Drive"
+          ],
+          [
+            "Horario distinto",
+            "Convocatoria vigente y zona horaria"
+          ]
+        ],
+        "lista": [
+          "Padre y estudiante identificados en sus entornos.",
+          "Plan y cursos comprendidos.",
+          "Primera entrega y feedback ubicados.",
+          "Canal y fecha de seguimiento acordados."
+        ]
+      }
+    ]
+  }
+}

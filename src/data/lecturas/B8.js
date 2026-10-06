@@ -214,6 +214,7 @@ export const LECTURAS_B8 = {
   // ───────────────────────────────────────────────────────────
   'T8.3': {
     lecciones: [
+      {"titulo": "Recorrido de las ocho pantallas del coordinador", "guion": ["Abre Coordinación SIS desde Inicio o este módulo. Las ocho vistas son Notas, Carga Eval. M.L., Revisar Notas, Evidencias, PEI / Eval. M.L., Boletines, Seguimiento y Alertas. Antes de operar comprueba hub asignado, estudiante, ciclo y periodo; una lista vacía requiere revisar asignación y carga, sin ampliar permisos por rutina.", "En cada revisión identifica el envío, abre su evidencia, decide dentro de tu autoridad, deja una observación útil y comprueba el estado guardado. En el cierre revisa responsable, próxima acción y fecha. Los esquemas de formación usan datos ficticios y no conectan con el SIS; las prácticas reales requieren el entorno autorizado. Coordinación Dual usa un panel separado con tareas, cola de revisión, feedback, PEI y convalidación."]},
       {
         titulo: 'Por qué la revisión de evidencias sostiene toda la escuela',
         guion: [
