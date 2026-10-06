@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useMemo } from 'react'
 import Login from './components/Login'
 import PendienteAprobacion from './components/PendienteAprobacion'
 import Dashboard from './components/Dashboard'
+import OperativaSIS from './components/OperativaSIS'
 import CatalogoVideos from './components/CatalogoVideos'
 import CourseIntro from './components/CourseIntro'
 import BlockView from './components/BlockView'
@@ -269,6 +270,7 @@ export default function App() {
             onAbrirModulo={(moduloId) =>
               setVista({ ...vista, nombre: 'modulo', moduloId, bloqueId: getModulo(moduloId)?.bloqueId })
             }
+            onVerOperativa={() => setVista({ ...vista, nombre: 'operativa-sis' })}
             onVerCatalogo={() => setVista({ ...vista, nombre: 'catalogo-videos' })}
             onVerHoras={() => setVista({ ...vista, nombre: 'horas' })}
             onVerCurso={() => setVista({ ...vista, nombre: 'curso' })}
@@ -281,6 +283,7 @@ export default function App() {
           />
         )}
         {vista.nombre === 'catalogo-videos' && <CatalogoVideos onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
+        {vista.nombre === 'operativa-sis' && <OperativaSIS onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
         {vista.nombre === 'matriz' && <MatrizProgramas onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
         {vista.nombre === 'organigrama' && (
           <Organigrama
@@ -317,6 +320,7 @@ export default function App() {
             videos={videos}
             esAdmin={esAdmin}
             acciones={acciones}
+            onVerOperativa={() => setVista({ ...vista, nombre: 'operativa-sis' })}
             onVerCatalogo={() => setVista({ ...vista, nombre: 'catalogo-videos' })}
             onVolver={() => setVista({ ...vista, nombre: 'bloque' })}
           />

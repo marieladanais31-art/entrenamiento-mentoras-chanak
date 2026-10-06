@@ -17,6 +17,7 @@ export default function Dashboard({
   onAbrirModulo,
   onVerHoras,
   onVerCatalogo,
+  onVerOperativa,
   onVerCurso,
   onVerCertificado,
   roles = ['mentor'],
@@ -80,6 +81,7 @@ export default function Dashboard({
       </section>
 
       <PlanFormacion />
+      <button onClick={onVerOperativa} className="block w-full rounded-2xl bg-teal p-4 text-left text-sm font-bold text-white">Operativa SIS · Paso a paso de matrícula, usuarios demo, familias y alianzas</button>
       <button onClick={onVerCatalogo} className="block w-full rounded-2xl bg-navy p-4 text-left text-sm font-bold text-cream">▶ Catálogo completo · 87 videos y subtítulos descargables</button>
       {r.nivel1Completo && <p className="rounded-xl bg-gold/10 p-4 text-xs text-navy">Módulos base completados. Para certificar 180/300 h, presenta la bitácora, práctica supervisada y portafolio a dirección. El app no convierte las estimaciones en horas acreditadas.</p>}
 

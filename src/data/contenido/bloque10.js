@@ -100,7 +100,10 @@ export const BLOQUE_10 = {
       'Demostrar las competencias mínimas con datos ficticios y validar con Chanak Central.',
       'Registrar y reportar con hechos, fecha e ID, sin datos personales.',
     ],
-    lecciones: [],
+    lecciones: [
+      { titulo: 'Matrícula real y automatizaciones', guion: ['Abrir Operativa SIS desde Inicio o este módulo. Formulario público: /matricula. Administración: Matrículas. Enviar la solicitud guarda un folio; no crea cuentas. Crear usuarios intenta también sincronizar. Aceptada y Convertida disparan sincronización; comprobar identidad, vínculo familiar, ciclo y responsables antes de repetir. La bienvenida se envía con una acción manual separada.'] },
+      { titulo: 'Familias, estudiantes y convenios', guion: ['Estudiante entra con cuenta propia; familia debe ver solamente sus hijos. El convenio necesita condiciones y asignación verificadas: referencia no asigna hub ni descuento. La facturación de familias y estudiantes permanece en SIS; el sistema comercial de alianzas está pendiente de decisión. Dual y Google requieren comprobación de accesos por separado.'] },
+    ],
     practica: {
       situacion:
         'Una familia dice que el Portal de su estudiante (ID-0452) muestra un crédito pendiente que ya creen completado. En el SIS ves que la evidencia está subida pero sin revisar.',
@@ -109,6 +112,8 @@ export const BLOQUE_10 = {
         'Comprueba estado y evidencia sin modificar el crédito; informa de que está en revisión sin prometer resultado; registra la consulta con ID y hechos y la pasa a coordinación.',
     },
     quiz: [
+      { p: '¿Qué ocurre al cambiar una solicitud a Aceptada?', opciones: ['Solo cambia una etiqueta', 'Se dispara sincronización del expediente y deben comprobarse sus vínculos', 'Se concilia automáticamente Stripe', 'Se crea Google'], correcta: 1, explica: 'Aceptada y Convertida activan la sincronización; bienvenida y verificación económica son controles separados.' },
+      { p: '¿Cómo se aplica un convenio desde referencia?', opciones: ['Descuento automático', 'El campo no resuelve hub ni condiciones: hay que verificarlos', 'Siempre el primer hub', 'No hay que comprobar nada'], correcta: 1, explica: 'Referencia es texto libre; la asignación y el acuerdo requieren control.' },
       { p: '¿Qué guarda el SIS?', opciones: ['Solo noticias', 'Expediente, PEI o Plan de Ruta, evidencias, progreso, intervenciones y alertas', 'Solo pagos', 'Solo anuncios'], correcta: 1, explica: 'El SIS es el expediente del estudiante.' },
       { p: '¿Cómo se identifica a un estudiante en correos y documentos de trabajo?', opciones: ['Con nombre completo', 'Con su ID', 'Con una foto', 'Con su teléfono'], correcta: 1, explica: 'Se usan IDs; ningún dato personal sale de los sistemas.' },
       { p: 'Un dato del Portal parece incorrecto. ¿Qué haces?', opciones: ['Lo corriges tú', 'Describes el problema con ID y hechos y lo reportas a Chanak Central', 'Lo ignoras', 'Se lo cuentas a otra familia'], correcta: 1, explica: 'No se arregla por cuenta propia: se documenta y se reporta.' },
