@@ -7,7 +7,7 @@ export const seccionesSIS = [
   {
     "id": 1,
     "title": "Accesos demo recuperados",
-    "text": "Padre: demopadre@asociacioneducafe.org\nEstudiante: demoestudiante@asociacioneducafe.org\nContraseña de ambas cuentas demo: Chanak2026\nSon identificadores históricos recuperados del repositorio de formación. Su dominio no cambia al cambiar la marca. Pendiente comprobar inicio de sesión y aislamiento de datos en vivo. No son cuentas administrativas. Practicar con datos ficticios y no guardar cambios sobre expedientes reales."
+    "text": "Padre: demopadre@asociacioneducafe.org\nEstudiante: demoestudiante@asociacioneducafe.org\nContraseña de ambas cuentas demo: Chanak2026\nSon identificadores históricos recuperados del repositorio de formación. Su dominio no cambia al cambiar la marca. Usuarios confirmados activos en el panel administrativo: padre con un hijo vinculado y estudiante con rol student. La cuenta demopadre@chanakacademy.org figura como «no usar», sin hijos vinculados; no utilizarla. Pendiente comprobar inicio de sesión de cada demo y aislamiento de datos en vivo. No son cuentas administrativas. Practicar con datos ficticios y no guardar cambios sobre expedientes reales."
   },
   {
     "id": 2,
@@ -52,6 +52,6 @@ export const seccionesSIS = [
   {
     "id": 10,
     "title": "Fuentes y alcance",
-    "text": "Inspección de rutas activas en marieladanais31-art/chanak-sis: src/App.jsx; src/pages/EnrollmentForm.jsx; api/enrollment.js; src/components/AdminEnrollmentRecords.jsx; src/lib/enrollmentSync.js; src/pages/AdminPanel.jsx; src/pages/ParentDashboard.jsx; src/pages/AdminHubs.jsx; src/components/AdminPayments.jsx; supabase/functions/admin-create-user/index.ts.\nLMS: marieladanais31-art/chanak-dual-diploma-lms, src/utils/admin/provision-user.ts.\nSe excluyeron EnrollmentWizard y componentes/páginas antiguas que no están montados en las rutas activas. Código consultado el 6 octubre 2026; describe implementación, no prueba de operaciones en vivo."
+    "text": "Inspección de rutas activas en marieladanais31-art/chanak-sis: src/App.jsx; src/pages/EnrollmentForm.jsx; api/enrollment.js; src/components/AdminEnrollmentRecords.jsx; src/lib/enrollmentSync.js; src/pages/AdminPanel.jsx; src/pages/ParentDashboard.jsx; src/pages/AdminHubs.jsx; src/components/AdminPayments.jsx; supabase/functions/admin-create-user/index.ts.\nLMS: marieladanais31-art/chanak-dual-diploma-lms, src/utils/admin/provision-user.ts.\nSe excluyeron EnrollmentWizard y componentes/páginas antiguas que no están montados en las rutas activas. Código consultado el 6 octubre 2026. Además se verificaron con acceso Super Admin las pantallas de Matrículas, Usuarios, Pagos y Hubs y la existencia/roles de los demos. No se ejecutaron altas, conciliaciones ni envíos; la prueba integral de matrícula y acceso de cada demo sigue pendiente."
   }
 ]
