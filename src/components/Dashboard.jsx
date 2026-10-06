@@ -79,6 +79,7 @@ export default function Dashboard({
       </section>
 
       <PlanFormacion />
+      <a href="/videos/index.html" target="_blank" rel="noreferrer" className="block rounded-2xl bg-navy p-4 text-sm font-bold text-cream">▶ Catálogo completo · 87 videos narrados y subtitulados</a>
       {r.nivel1Completo && <p className="rounded-xl bg-gold/10 p-4 text-xs text-navy">Módulos base completados. Para certificar 180/300 h, presenta la bitácora, práctica supervisada y portafolio a dirección. El app no convierte las estimaciones en horas acreditadas.</p>}
 
       {/* Siguiente paso */}

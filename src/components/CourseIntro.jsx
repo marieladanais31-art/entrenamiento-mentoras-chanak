@@ -1,7 +1,7 @@
 import PlanFormacion from './PlanFormacion'
 import { CURSO } from '../data/curso'
 import { BLOQUES, TODOS_MODULOS, VERSION_CURRICULO, FECHA_ACTUALIZACION } from '../data/curriculum'
-import { VIDEOS } from '../data/videos'
+import { VIDEOS_RENDERIZADOS } from '../data/videosRenderizados'
 import { formatearFecha } from '../lib/calculos'
 import { useIdioma } from '../i18n/idioma'
 import { traducirBloques } from '../data/curriculum.en'
@@ -27,7 +27,7 @@ export default function CourseIntro({ onEmpezar, onVolver }) {
           <div className="mt-5 grid grid-cols-3 gap-3 border-t border-white/10 pt-5 text-center">
             <Metric n={BLOQUES.length} l={t('curso.bloques')} />
             <Metric n={TODOS_MODULOS.length} l={t('curso.modulos')} />
-            <Metric n={VIDEOS.length} l={t('curso.videos')} />
+            <Metric n={VIDEOS_RENDERIZADOS.length} l={t('curso.videos')} />
           </div>
           <p className="mt-4 text-[11px] text-cream/50">
             {t('curso.version', { version: VERSION_CURRICULO, fecha: formatearFecha(FECHA_ACTUALIZACION) })}

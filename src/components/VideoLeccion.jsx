@@ -109,7 +109,9 @@ export default function VideoLeccion({ video, esAdmin, onGuardar, onBorrar }) {
       <div className="space-y-2">
         {embed?.tipo === 'mp4' ? (
           <div className="overflow-hidden rounded-xl bg-navy">
-            <video src={embed.url} controls preload="metadata" playsInline className="aspect-video w-full" />
+            <video src={embed.url} controls preload="metadata" playsInline className="aspect-video w-full">
+              {video.subtitulos && <track kind="captions" src={video.subtitulos} srcLang="es" label="Español" default />}
+            </video>
           </div>
         ) : embed?.tipo === 'embed' ? (
           <div className="overflow-hidden rounded-xl bg-navy">

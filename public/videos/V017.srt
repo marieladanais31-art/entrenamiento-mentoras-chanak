@@ -1,0 +1,192 @@
+1
+00:00:00,000 --> 00:00:03,827
+Tres entornos con funciones distintas.
+La información oficial vive siempre
+
+2
+00:00:03,827 --> 00:00:07,653
+en el SIS. Chanak trabaja
+con tres entornos digitales y
+
+3
+00:00:07,653 --> 00:00:11,480
+cada uno tiene una función
+distinta. El Dossier Institucional Master
+
+4
+00:00:11,480 --> 00:00:15,306
+lo resume en una frase
+que vas a repetir muchas
+
+5
+00:00:15,306 --> 00:00:19,133
+veces: El portal orienta. El
+SIS registra.. El SIS (sis.chanakacademy.org)
+
+6
+00:00:19,133 --> 00:00:22,959
+es el registro oficial; el
+Portal (portal.chanakacademy.org) es la guía
+
+7
+00:00:22,959 --> 00:00:26,786
+diaria para familias y mentores;
+y el Dual Diploma Portal
+
+8
+00:00:26,786 --> 00:00:30,612
+es la plataforma de aprendizaje
+del Dual Diploma. Confundirlos no
+
+9
+00:00:30,612 --> 00:00:34,439
+es un detalle técnico: genera
+errores de registro, duplicidades y
+
+10
+00:00:34,439 --> 00:00:38,265
+dudas en las familias. La
+información académica oficial vive siempre
+
+11
+00:00:38,265 --> 00:00:42,092
+en el SIS de Chanak,
+y todo lo que haces
+
+12
+00:00:42,092 --> 00:00:45,918
+como mentor o coordinador termina,
+de una forma u otra,
+
+13
+00:00:45,918 --> 00:00:46,684
+reflejado allí.
+
+14
+00:00:47,234 --> 00:00:51,346
+SIS: registro oficial (matrículas, PEI,
+diagnóstico, notas de dominio, boletines,
+
+15
+00:00:51,346 --> 00:00:55,458
+expediente y transcripts). Portal: orientación
+y rutina para familias y
+
+16
+00:00:55,458 --> 00:00:59,570
+mentores (Core USA, Chanak Flex,
+Life Skills, Extensión Local, guías).
+
+17
+00:00:59,570 --> 00:01:03,682
+Dual Diploma Portal: entorno de
+aprendizaje del Dual Diploma, con
+
+18
+00:01:03,682 --> 00:01:07,794
+base de datos independiente del
+SIS. El portal orienta; el
+
+19
+00:01:07,794 --> 00:01:11,905
+SIS registra. La aplicación Dual
+cuenta con IA de apoyo.
+
+20
+00:01:11,905 --> 00:01:16,017
+Sus propuestas necesitan revisión humana
+y no aprueban notas, créditos
+
+21
+00:01:16,017 --> 00:01:20,129
+ni planes. En el Portal,
+Helping English Learner ofrece inglés
+
+22
+00:01:20,129 --> 00:01:24,241
+inicial y guías diarias para
+padres; English Tonic ejercita la
+
+23
+00:01:24,241 --> 00:01:28,353
+práctica oral por niveles. Formación
+incluye pasajes del mes y
+
+24
+00:01:28,353 --> 00:01:29,587
+rasgos de carácter.
+
+25
+00:01:30,137 --> 00:01:33,506
+Situación: la familia de un
+estudiante de 10.º grado del
+
+26
+00:01:33,506 --> 00:01:36,876
+Dual Diploma te escribe preocupada.
+En la plataforma Dual Diploma
+
+27
+00:01:36,876 --> 00:01:40,246
+su hijo tiene todas las
+actividades de American History marcadas
+
+28
+00:01:40,246 --> 00:01:43,615
+como completadas, pero en el
+SIS no aparece ninguna calificación
+
+29
+00:01:43,615 --> 00:01:46,985
+nueva de esa materia desde
+hace más de tres semanas,
+
+30
+00:01:46,985 --> 00:01:50,354
+y el sistema ha generado
+una alerta. La familia pregunta
+
+31
+00:01:50,354 --> 00:01:53,724
+si se ha perdido el
+crédito. Antes de responder, consulta
+
+32
+00:01:53,724 --> 00:01:57,093
+el SIS, revisa qué evaluaciones
+constan y en qué fecha,
+
+33
+00:01:57,093 --> 00:01:59,789
+y comprueba el Plan de
+Ruta del estudiante.
+
+34
+00:02:00,339 --> 00:02:04,384
+Antes de continuar, aplica el
+caso del módulo 5.1. Explica
+
+35
+00:02:04,384 --> 00:02:08,430
+qué puede resolver tu función,
+qué evidencia debes conservar y
+
+36
+00:02:08,430 --> 00:02:12,475
+cuándo necesitas revisión. Contrasta la
+versión vigente de la lectura
+
+37
+00:02:12,475 --> 00:02:16,521
+y los documentos vinculados. Si
+una decisión cambia créditos, fondos,
+
+38
+00:02:16,521 --> 00:02:20,566
+contratos o permisos, solicita la
+aprobación correspondiente. El vídeo resume;
+
+39
+00:02:20,566 --> 00:02:23,803
+la lectura y la práctica
+desarrollan el procedimiento.
