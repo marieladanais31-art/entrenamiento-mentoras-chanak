@@ -12,7 +12,7 @@ import { traducirModulo, traducirRecursos } from '../data/curriculum.en'
 // Recorrido del módulo: Vídeo → Lectura → Práctica → Knowledge Check → Evidencia → Completado
 const PASOS = ['video', 'lectura', 'practica', 'quiz', 'evidencia', 'completado']
 
-export default function ModuleView({ moduloId, progresoModulo: p, videos, esAdmin, acciones, onVolver }) {
+export default function ModuleView({ moduloId, progresoModulo: p, videos, esAdmin, acciones, onVolver, onVerCatalogo }) {
   const { t, idioma } = useIdioma()
   const modulo = traducirModulo(getModulo(moduloId), idioma)
   const contenido = getContenido(moduloId, idioma)
@@ -91,7 +91,7 @@ export default function ModuleView({ moduloId, progresoModulo: p, videos, esAdmi
           <h3 className="mb-2 text-sm font-bold text-teal">{v.titulo} · {v.duracion}</h3>
           <VideoLeccion video={{ url: v.videoUrl, subtitulos: v.subtitulos }} />
         </div>)}</div>
-        <a className="mt-3 inline-block text-xs font-bold text-teal underline" href="/videos/index.html" target="_blank" rel="noreferrer">Catálogo completo · 87 videos →</a>
+        <button className="mt-3 inline-block text-xs font-bold text-teal underline" onClick={onVerCatalogo}>Catálogo completo · 87 videos →</button>
       </details>
 
       {/* ── Ficha ── */}

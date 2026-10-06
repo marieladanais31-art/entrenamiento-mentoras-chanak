@@ -19,7 +19,7 @@ export default function Certificado({ mentora, progreso, nivel, onVolver }) {
       <h1 className="mt-4 text-xl font-bold">Certificación pendiente de validación formal</h1>
       <p className="mt-3 text-sm">La meta de esta ruta es {cert.horas} horas. Las {r.horas} h mostradas en el app son una estimación de actividades de módulos; no son horas acreditadas ni una autorización de certificación.</p>
       <p className="mt-3 text-sm">Presenta bitácora de tiempo real, currículo y práctica supervisada, portafolio y evaluación a dirección. La resolución y firma se archivan antes de emitir el certificado oficial.</p>
-      <a className="mt-4 inline-block text-sm font-bold text-teal underline" href="/formacion/PLAN_FORMACION_180_300.md">Consultar plan y protocolo</a>
+      <a className="mt-4 inline-block text-sm font-bold text-teal underline" href="https://drive.google.com/file/d/11l7EomB_1f3qbXIfYmTwKefUgVbiGoTv/view">Consultar plan y protocolo</a>
     </section>
   )
 
