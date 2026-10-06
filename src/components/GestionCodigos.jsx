@@ -3,8 +3,8 @@ import * as api from '../lib/backend'
 import { useIdioma } from '../i18n/idioma'
 
 const TIPOS = [
-  { value: 'mentora', emoji: '👩🏫', label: 'Mentor (Chanak Certified Mentor · 180 h)' },
-  { value: 'coordinadora', emoji: '🎯', label: 'Coordinator (Chanak Certified Coordinator · 300 h)' },
+  { value: 'mentora', emoji: '👩🏫', label: 'Mentor (Chanak Certified Mentor · 41.5 h)' },
+  { value: 'coordinadora', emoji: '🎯', label: 'Coordinator (Chanak Certified Coordinator · 52 h)' },
   { value: 'visionaria', emoji: '🤝', label: 'Estratégico' },
 ]
 

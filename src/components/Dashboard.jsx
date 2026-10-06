@@ -183,7 +183,7 @@ export default function Dashboard({
       <section>
         <TituloSeccion
           titulo="Formación transversal · contacto con menores"
-          subtitulo="Obligatoria para todo rol con contacto directo con menores. No suma a las 180 h ni a las 300 h."
+          subtitulo="Obligatoria para todo rol con contacto directo con menores. No suma a las 41.5 h ni a las 52 h."
         />
         <div className="grid gap-3 sm:grid-cols-2">
           {transvBloques.map((b) => (

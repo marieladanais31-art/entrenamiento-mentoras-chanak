@@ -1,3 +1,5 @@
+import { desgloseRealista } from '../tiempos'
+export { PALABRAS_POR_MINUTO } from '../tiempos'
 import { BLOQUES_1_2 } from './bloques1y2'
 import { BLOQUES_3_4 } from './bloques3y4'
 import { BLOQUES_5_6 } from './bloques5y6'
@@ -14,7 +16,6 @@ import { LECTURAS_B5 } from '../lecturas/B5'
 import { LECTURAS_B6 } from '../lecturas/B6'
 import { LECTURAS_B7 } from '../lecturas/B7'
 import { LECTURAS_B8 } from '../lecturas/B8'
-import { getModulo } from '../curriculum'
 import { QUIZ_EXTRA } from '../lecturas/quiz_extra'
 
 // Contenido pedagógico de los 28 módulos (training-2026-2027), indexado por id ('T1.1'…).
@@ -26,25 +27,13 @@ const LECTURAS = {
   ...LECTURAS_B5, ...LECTURAS_B6, ...LECTURAS_B7, ...LECTURAS_B8, ...LECTURAS_B9, ...LECTURAS_B10,
 }
 
-// Ritmo de lectura de estudio (leer, subrayar, tomar notas y releer): 60 palabras/min.
-export const PALABRAS_POR_MINUTO = 60
-const q = (h) => Math.round(h * 4) / 4
-
 export function palabrasLectura(lecciones = []) {
   return lecciones.flatMap((l) => l.guion || []).join(' ').split(/\s+/).filter(Boolean).length
 }
 
-// Normaliza el desglose para que todos los módulos usen el mismo criterio y la suma
-// sea exactamente igual a las horas del módulo (el ajuste se aplica a la práctica).
-function normalizarDesglose(id, d, lecciones) {
-  const modulo = getModulo(id)
-  if (!d || !modulo) return d
-  const palabras = palabrasLectura(lecciones)
-  const lectura = Math.max(0.25, q(palabras / PALABRAS_POR_MINUTO / 60))
-  const docs = (d.documentos || []).reduce((s, x) => s + (x.horas || 0), 0)
-  const fijo = (d.video || 0) + lectura + docs + (d.evidencia || 0) + (d.kc || 0)
-  const practica = q(modulo.horas - fijo)
-  return { ...d, lectura, practica, palabras, total: modulo.horas }
+// El tiempo de práctica responde a tareas; nunca rellena una meta fija de horas.
+function normalizarDesglose(id, d) {
+  return desgloseRealista(id, d?.documentos || [])
 }
 
 export const CONTENIDO = Object.fromEntries(
