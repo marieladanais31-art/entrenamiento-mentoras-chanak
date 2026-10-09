@@ -48,7 +48,7 @@ export function SelectorIdioma({ variante = 'oscuro' }) {
   const oscuro = variante === 'oscuro'
   return (
     <div
-      className={`flex overflow-hidden rounded-full text-[12px] font-bold ${
+      className={`flex overflow-hidden rounded-full text-sm font-bold ${
         oscuro ? 'bg-white/10' : 'bg-navy/10'
       }`}
       role="group"
@@ -59,7 +59,7 @@ export function SelectorIdioma({ variante = 'oscuro' }) {
           key={id}
           onClick={() => setIdioma(id)}
           aria-pressed={idioma === id}
-          className={`px-2.5 py-1.5 uppercase transition ${
+          className={`min-h-11 min-w-11 px-3 py-2 uppercase transition ${
             idioma === id
               ? oscuro
                 ? 'bg-gold text-navy'
