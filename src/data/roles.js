@@ -121,6 +121,22 @@ export const ROLES = [
     nota: 'Puede ser también Mentor si se le asigna ese rol.',
   },
   {
+    id: 'academic_tutor',
+    area: 'academico',
+    nombre: 'Academic Tutor',
+    nombreEs: 'Tutor académico',
+    contacto: CONTACTO.DIRECTO,
+    unidad: 'Estudiantes y materias asignadas',
+    modalidades: ['Virtual', 'Presencial', 'Híbrido'],
+    modulos: [...CORE, 'T3.1', 'T3.2', 'T4.1', 'T4.2', 'T5.1', ...MODULOS_CONTACTO_DIRECTO],
+    sistemas: { SIS: 'estudiantes asignados, evidencia y progreso', PORTAL: 'recursos de la materia', DUAL: 'cuando corresponda', DRIVE: 'lectura' },
+    domina: ['Tutoría individual o grupal', 'Plan de apoyo', 'Práctica guiada', 'Evidencias', 'Seguimiento del progreso', 'Alertas e intervención'],
+    escala: ['Cambios de vía, créditos, diagnóstico, seguridad o acuerdos con la familia → Mentor/Coordinador'],
+    documentos: ['Academic Tutor · Role Profile'],
+    checklist: ['Rol asignado formalmente', 'Chanak Core', 'Child & Adolescent Development', 'Safeguarding', 'SIS', 'Portal', 'Dual Portal cuando corresponda'],
+    nota: 'Accede únicamente a los estudiantes y materias asignados. Puede asumir también el rol Mentor mediante asignación separada.',
+  },
+  {
     id: 'lifeskills_facilitator',
     area: 'academico',
     nombre: 'Life Skills & Leadership Facilitator',
@@ -327,7 +343,7 @@ export const GRUPOS = {
   estrategico: { id: 'estrategico', nombre: 'Estratégico', nombreEn: 'Strategic', descripcion: 'Representación, familias y programas estatales, alianzas, grants y proyectos, registros.', funcionPorDefecto: 'strategic_general' },
 }
 const GRUPO_DE_FUNCION = {
-  mentor: 'mentor', english_teacher: 'mentor', lifeskills_facilitator: 'mentor', local_language: 'mentor', assessment_specialist: 'mentor',
+  mentor: 'mentor', english_teacher: 'mentor', academic_tutor: 'mentor', lifeskills_facilitator: 'mentor', local_language: 'mentor', assessment_specialist: 'mentor',
   coordinator: 'coordinator', partner_director: 'coordinator',
   strategic_general: 'estrategico', academic_records: 'estrategico', country_rep: 'estrategico', state_rep: 'estrategico', program_rep: 'estrategico',
   family_enrollment: 'estrategico', institutional_partnerships: 'estrategico', grants_projects: 'estrategico', lifeskills_project_coord: 'estrategico',
