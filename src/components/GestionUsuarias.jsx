@@ -8,7 +8,7 @@ const PAISES = ['España', 'México', 'Panamá', 'Estados Unidos', 'Otro']
 const PROGRAMAS = ['Off-Campus', 'Dual Diploma', 'Life Skills', 'Partner Learning Center', 'Varios']
 
 // Aprobación y gestión de cuentas. Solo visible para admin.
-export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa }) {
+export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa, compromisosMapa }) {
   const { t } = useIdioma()
   const [ocupado, setOcupado] = useState(null)
   const [error, setError] = useState('')
@@ -234,6 +234,13 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa 
                     </span>
                   )}
                 </div>
+                {compromisosMapa !== undefined && (
+                  <div className={`mt-1 text-xs font-semibold ${compromisosMapa?.[p.id] ? 'text-teal' : 'text-gold'}`}>
+                    {compromisosMapa?.[p.id]
+                      ? `✓ Compromiso ${compromisosMapa[p.id].version} aceptado`
+                      : 'Compromiso inicial pendiente'}
+                  </div>
+                )}
               </div>
               {p.id !== miId && (
                 <>
