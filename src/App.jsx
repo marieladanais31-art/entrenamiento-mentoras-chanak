@@ -19,6 +19,8 @@ import RolPerfil from './components/RolPerfil'
 import { rolesDesdeTipoAcceso } from './data/roles'
 import Header from './components/ui/Header'
 import CambiarContrasena from './components/CambiarContrasena'
+import CompromisoInicial, { VERSION_COMPROMISO } from './components/CompromisoInicial'
+import EstrategiaOperativa from './components/EstrategiaOperativa'
 import * as api from './lib/backend'
 import { getModulo } from './data/curriculum'
 import { aplicarEquivalencias } from './lib/calculos'
@@ -41,6 +43,9 @@ export default function App() {
   const [contactoViendo, setContactoViendo] = useState(null)
   const [tipoAccesoViendo, setTipoAccesoViendo] = useState(null)
   const [errorCarga, setErrorCarga] = useState('')
+  const [compromiso, setCompromiso] = useState(undefined)
+  const [compromisoDisponible, setCompromisoDisponible] = useState(false)
+  const [rolesListos, setRolesListos] = useState(false)
 
   const esAdmin = perfil?.rol === 'admin'
   const aprobada = perfil?.estado === 'aprobada'
@@ -83,6 +88,19 @@ export default function App() {
     }
   }, [sesion])
 
+  useEffect(() => {
+    if (!perfil?.id || !aprobada) return
+    let vivo = true
+    api.getCompromiso(perfil.id)
+      .then(({ disponible, registro }) => {
+        if (!vivo) return
+        setCompromisoDisponible(disponible)
+        setCompromiso(registro)
+      })
+      .catch((e) => vivo && setErrorCarga(e.message))
+    return () => { vivo = false }
+  }, [perfil?.id, aprobada])
+
   // ── Progreso y vídeos ──
   const recargarDatos = useCallback(async () => {
     if (!idViendo || !aprobada) return
@@ -113,11 +131,13 @@ export default function App() {
         setRolesViendo(filas)
         setContactoViendo(p?.contacto_menores ?? null)
         setTipoAccesoViendo(p?.tipo_acceso || 'mentora')
+        setRolesListos(true)
       } catch {
         if (vivo) {
           setRolesViendo(null)
           setContactoViendo(null)
           setTipoAccesoViendo(perfil?.tipo_acceso || 'mentora')
+          setRolesListos(true)
         }
       }
     })()
@@ -225,6 +245,18 @@ export default function App() {
 
   if (!aprobada) return <PendienteAprobacion perfil={perfil} onSalir={() => api.salir()} />
 
+  const compromisoVigente = compromiso?.version === VERSION_COMPROMISO
+  if (!viendoOtra && compromisoDisponible && rolesListos && !compromisoVigente) {
+    return (
+      <CompromisoInicial
+        perfil={perfil}
+        roles={rolesIds}
+        onAceptar={async (datos) => setCompromiso(await api.guardarCompromiso(perfil.id, datos))}
+        onSalir={() => api.salir()}
+      />
+    )
+  }
+
   // Usuaria mostrada en el panel (admin puede ver a otra)
   const mentoraMostrada = {
     id: idViendo,
@@ -284,6 +316,7 @@ export default function App() {
             onVerOrganigrama={() => setVista({ ...vista, nombre: 'organigrama' })}
             onVerRol={(rolId) => setVista({ ...vista, nombre: 'rol', rolId })}
             onVerMatriz={() => setVista({ ...vista, nombre: 'matriz' })}
+            onVerEstrategia={() => setVista({ ...vista, nombre: 'estrategia' })}
           />
         )}
         {vista.nombre === 'catalogo-videos' && <CatalogoVideos onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
@@ -291,6 +324,7 @@ export default function App() {
         {vista.nombre === 'guias-familias' && <GuiasFamilias onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
         {vista.nombre === 'coordinacion-sis' && <CoordinacionSIS onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
         {vista.nombre === 'matriz' && <MatrizProgramas onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
+        {vista.nombre === 'estrategia' && <EstrategiaOperativa onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} onVerMatriz={() => setVista({ ...vista, nombre: 'matriz' })} />}
         {vista.nombre === 'organigrama' && (
           <Organigrama
             onVolver={() => setVista({ ...vista, nombre: 'dashboard' })}
