@@ -15,8 +15,8 @@ create table if not exists public.perfil_roles (
   rol          text not null check (rol in ('mentor','coordinator','estrategico')),
   -- Función dentro del rol (perfil del catálogo). Null = función por defecto (mentor / coordinator).
   funcion      text check (funcion is null or funcion in (
-    'mentor','coordinator','english_teacher','lifeskills_facilitator','local_language',
-    'assessment_specialist','academic_records','country_rep','state_rep','program_rep',
+    'mentor','coordinator','partner_director','english_teacher','lifeskills_facilitator','local_language',
+    'assessment_specialist','strategic_general','academic_records','country_rep','state_rep','program_rep',
     'family_enrollment','institutional_partnerships','grants_projects','lifeskills_project_coord'
   )),
   territorio   text,   -- Country/State/Program Representative: p. ej. 'México', 'Alabama'
