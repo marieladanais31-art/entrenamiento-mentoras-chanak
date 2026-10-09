@@ -47,7 +47,7 @@ create policy "admin: leer compromisos"
 alter table public.perfil_roles drop constraint if exists perfil_roles_funcion_check;
 alter table public.perfil_roles add constraint perfil_roles_funcion_check check (
   funcion is null or funcion in (
-    'mentor', 'coordinator', 'partner_director', 'english_teacher',
+    'mentor', 'coordinator', 'partner_director', 'english_teacher', 'academic_tutor',
     'lifeskills_facilitator', 'local_language', 'assessment_specialist',
     'strategic_general', 'academic_records', 'country_rep', 'state_rep',
     'program_rep', 'family_enrollment', 'institutional_partnerships',
