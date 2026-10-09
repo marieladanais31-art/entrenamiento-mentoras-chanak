@@ -222,7 +222,8 @@ export const MATRIZ_PROGRAMAS = [
   {
     "id": "AZ-ESA",
     "captacion": [
-      "No anunciar aprobación o cobertura por este programa mientras esté en proceso. Se puede orientar sobre servicios particulares y registrar interés consentido; no prometer cobro con fondos antes de aprobación e integración."
+      "Presentar a Chanak como proveedor aprobado. Antes de anunciar una oferta concreta, Administración confirma que el servicio y su categoría están visibles y activos en ClassWallet.",
+      "Registrar interés de las familias sin prometer que un servicio específico será cubierto hasta verificar catálogo, elegibilidad y saldo aplicable."
     ],
     "facturacion": [
       "Tras el registro: cobro vía ClassWallet. Las facturas deben llevar nombre, estudiante, servicios, fechas y total (ADE, ESA Support)."
@@ -242,15 +243,15 @@ export const MATRIZ_PROGRAMAS = [
     "state": "Arizona",
     "program": "ESA (Empowerment Scholarship Account)",
     "service": "Registro como proveedor (ADE Service Provider Registration)",
-    "status": "en_proceso",
-    "approved": false,
-    "marketplace": "Tras el registro, cobro vía ClassWallet",
+    "status": "aprobado",
+    "approved": true,
+    "marketplace": "Proveedor aprobado; confirmar activación y catálogo en ClassWallet",
     "price": "Por confirmar",
     "eligibility": "Por confirmar con el programa",
     "documentation": "Registro de proveedor ante el Departamento de Educación de Arizona",
-    "lastVerified": "2026-10-05",
+    "lastVerified": "2026-10-09 · aprobación institucional",
     "source": "Web oficial del programa (Arizona Department of Education)",
-    "operativo": "Preparar documentación y materiales internos. No comunicar como aprobado."
+    "operativo": "Proveedor aprobado. La aprobación institucional no activa automáticamente cada servicio: Administración valida categoría, catálogo y facturación antes de promocionarlo."
   },
   {
     "id": "AR-EFA",
@@ -288,7 +289,8 @@ export const MATRIZ_PROGRAMAS = [
   {
     "id": "UT-FITSALL",
     "captacion": [
-      "No anunciar aprobación o cobertura por este programa mientras esté en proceso. Se puede orientar sobre servicios particulares y registrar interés consentido; no prometer cobro con fondos antes de aprobación e integración."
+      "Presentar a Chanak como proveedor aprobado. No anunciar una oferta concreta hasta conectar Stripe y recibir la activación de ese servicio en Odyssey.",
+      "Registrar interés de las familias y explicar que Life Skills, Academic English, tutoría y diagnósticos se someten y revisan como ofertas separadas."
     ],
     "facturacion": [
       "Tras la aprobación: cobro a través de Odyssey; la mecánica concreta de pago no está verificada."
@@ -309,15 +311,15 @@ export const MATRIZ_PROGRAMAS = [
     "state": "Utah",
     "program": "Utah Fits All",
     "service": "Proveedor en Odyssey (ofertas separadas: Life Skills, Academic English, Tutoring, Diagnostics)",
-    "status": "en_proceso",
-    "approved": false,
-    "marketplace": "Cada oferta se revisa por separado",
+    "status": "aprobado",
+    "approved": true,
+    "marketplace": "Proveedor aprobado; conectar Stripe y someter cada oferta",
     "price": "Por confirmar",
     "eligibility": "Por confirmar con el programa",
     "documentation": "Solicitud como proveedor con EIN federal",
-    "lastVerified": "2026-10-05",
+    "lastVerified": "2026-10-09 · aprobación institucional",
     "source": "Web oficial del programa (Odyssey)",
-    "operativo": "Preparar las ofertas por separado. No comunicar como aprobado."
+    "operativo": "Proveedor aprobado. Falta conectar Stripe y someter/activar por separado Life Skills, Academic English, tutoría y diagnósticos antes de ofrecer cobro con fondos."
   },
   {
     "id": "WV-HOPE",
@@ -344,13 +346,73 @@ export const MATRIZ_PROGRAMAS = [
     "service": "Education Service Provider (New Provider Request Form)",
     "status": "en_proceso",
     "approved": false,
-    "marketplace": "Por confirmar",
+    "marketplace": "Solicitud enviada; activación pendiente",
     "price": "Por confirmar",
     "eligibility": "Por confirmar con el programa",
     "documentation": "Manual de proveedores del programa; New Provider Request Form",
-    "lastVerified": "2026-10-05",
+    "lastVerified": "2026-10-09 · expediente institucional",
     "source": "Web oficial del programa",
-    "operativo": "Preparar documentación. No comunicar como aprobado."
+    "operativo": "Solicitud enviada. No comunicar como aprobado hasta recibir confirmación y activar el perfil de proveedor."
+  },
+  {
+    "id": "GA-PROMISE",
+    "state": "Georgia",
+    "program": "Georgia Promise Scholarship",
+    "service": "Proveedor de servicios educativos",
+    "status": "en_proceso",
+    "approved": false,
+    "marketplace": "Solicitud pendiente",
+    "price": "Por confirmar",
+    "eligibility": "Familias elegibles del programa, sujeto a aprobación y categoría",
+    "documentation": "Pendiente constancia o exención de licencia comercial de St. Petersburg",
+    "lastVerified": "2026-10-09 · expediente institucional",
+    "source": "Expediente institucional y portal del programa",
+    "operativo": "Completar el documento comercial pendiente. No anunciar aprobación ni aceptar fondos del programa."
+  },
+  {
+    "id": "LA-GATOR",
+    "state": "Louisiana",
+    "program": "LA GATOR",
+    "service": "Education Service Provider",
+    "status": "en_proceso",
+    "approved": false,
+    "marketplace": "Solicitud pendiente",
+    "price": "Por confirmar",
+    "eligibility": "Familias elegibles del programa, sujeto a aprobación",
+    "documentation": "Completar documentos y validaciones requeridos por el programa",
+    "lastVerified": "2026-10-09 · expediente institucional",
+    "source": "Expediente institucional y portal del programa",
+    "operativo": "Reunir y someter la documentación pendiente. No comunicar como aprobado."
+  },
+  {
+    "id": "NH-EFA",
+    "state": "New Hampshire",
+    "program": "Education Freedom Account (EFA)",
+    "service": "Education Service Provider",
+    "status": "en_proceso",
+    "approved": false,
+    "marketplace": "Solicitud pendiente",
+    "price": "Por confirmar",
+    "eligibility": "Familias elegibles de EFA, sujeto a aprobación",
+    "documentation": "Antecedentes y documentación de entorno seguro pendientes",
+    "lastVerified": "2026-10-09 · expediente institucional",
+    "source": "Expediente institucional y portal del programa",
+    "operativo": "Completar antecedentes y evidencia de entorno seguro. No comunicar como aprobado."
+  },
+  {
+    "id": "SC-ESTF",
+    "state": "South Carolina",
+    "program": "Education Scholarship Trust Fund (ESTF)",
+    "service": "Education Service Provider",
+    "status": "en_revision",
+    "approved": false,
+    "marketplace": "Solicitud enviada; decisión pendiente",
+    "price": "Por confirmar",
+    "eligibility": "Familias elegibles de ESTF, sujeto a aprobación",
+    "documentation": "Solicitud sometida",
+    "lastVerified": "2026-10-09 · expediente institucional",
+    "source": "Expediente institucional y portal del programa",
+    "operativo": "Dar seguimiento a la solicitud. No anunciar aprobación ni aceptar fondos hasta la confirmación."
   },
   {
     "id": "US-NCAA",
