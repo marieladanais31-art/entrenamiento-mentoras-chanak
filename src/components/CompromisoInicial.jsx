@@ -2,27 +2,29 @@ import { useMemo, useState } from 'react'
 import { ROL_POR_ID } from '../data/roles'
 import { SelectorIdioma, useIdioma } from '../i18n/idioma'
 
-export const VERSION_COMPROMISO = '2026-10-09'
+export const VERSION_COMPROMISO = '2026-10-10-formacion'
 
 const COPIA = {
   es: {
     eyebrow: 'Paso obligatorio antes de comenzar',
-    title: 'Confidencialidad, funciones y compromiso',
-    intro: 'Lee cada punto y confirma tu compromiso. Dirección conservará la versión y la fecha aceptadas.',
-    role: 'Funciones asignadas',
-    noRole: 'Dirección todavía debe asignar tu función específica.',
-    name: 'Nombre y apellidos',
-    territory: 'País, estado o institución',
+    title: 'Acuerdo de participación en la formación',
+    intro: 'Chanak desarrolla sus programas mediante su equipo y alianzas específicas con colegios, centros de aprendizaje y organizaciones. Esta formación te prepara para una posible función. Dirección conserva la versión y la fecha aceptadas.',
+    scope: 'La formación no constituye un contrato de colaboración ni una contratación, y no autoriza a representar a Chanak, acceder a datos de estudiantes o prestar servicios. Cualquier colaboración posterior requiere su propio acuerdo, asignación y requisitos aplicables.',
+    pathways: ['Mentoría: acompañamiento del aprendizaje virtual o presencial; inglés, Life Skills y tutorías según asignación posterior.', 'Coordinación: organización de hubs, centros y alianzas con colegios; equipos, familias y procesos. Incluye directores de colegios aliados dentro de su institución.', 'Estratégico: alianzas, apertura de mercados y países, captación y financiación de proyectos. Chanak asigna este perfil.'],
+    role: 'Tu ruta de formación',
+    noRole: 'Dirección todavía debe asignar tu ruta de formación.',
+    name: 'Nombre completo',
+    territory: 'País de residencia',
     signature: 'Escribe nuevamente tu nombre como firma',
     checks: [
-      'Comprendo mis funciones, límites de autoridad y a quién debo escalar decisiones.',
-      'Mantendré confidenciales los datos de estudiantes, familias, personal, aliados y proyectos.',
-      'Cumpliré las normas de protección de menores, seguridad en línea y comunicación segura.',
-      'Registraré avances, evidencias e incidencias con información veraz y dentro de los plazos indicados.',
-      'No prometeré precios, acreditaciones, fondos, admisiones, convenios ni resultados sin autorización escrita.',
+      'Comprendo que mi perfil de formación no equivale a una función operativa asignada.',
+      'Mantendré confidencial la información interna y cualquier dato personal al que pudiera tener acceso.',
+      'Utilizaré los materiales para mi formación y respetaré las condiciones de uso de Chanak y la privacidad de otras personas.',
+      'Participaré con respeto y presentaré mis propias actividades y evidencias con información veraz.',
+      'Comprendo que cualquier colaboración posterior requiere definir funciones y alcance, formalizar el acuerdo correspondiente y obtener autorización específica.',
     ],
     confirm: 'Confirmo que la información indicada es correcta y acepto estos compromisos.',
-    button: 'Aceptar y entrar a mi formación',
+    button: 'Acepto y comienzo mi formación',
     saving: 'Guardando…',
     mismatch: 'La firma debe coincidir con el nombre indicado.',
     required: 'Completa los campos y marca todos los compromisos.',
@@ -30,19 +32,21 @@ const COPIA = {
   },
   en: {
     eyebrow: 'Required step before starting',
-    title: 'Confidentiality, duties and commitment',
-    intro: 'Read each item and confirm your commitment. Administration will retain the accepted version and date.',
-    role: 'Assigned duties',
-    noRole: 'Administration still needs to assign your specific duty.',
+    title: 'Training participation agreement',
+    intro: 'Chanak works through its team and specific partnerships with schools, learning centers and organizations. This training prepares you for a possible future function. Administration retains the accepted version and date.',
+    scope: 'Training is not a collaboration or employment agreement and does not authorize you to represent Chanak, access student data or provide services. Any later collaboration requires a separate agreement, assignment and applicable requirements.',
+    pathways: ['Mentoring: supporting virtual or in-person learning; English, Life Skills and tutoring subject to later assignment.', 'Coordination: organizing hubs, centers and school partnerships; teams, families and processes. Includes partner school directors within their institution.', 'Strategic: partnerships, market and country development, recruitment and project funding. Chanak assigns this profile.'],
+    role: 'Your training pathway',
+    noRole: 'Administration still needs to assign your training pathway.',
     name: 'Full name',
-    territory: 'Country, state or institution',
+    territory: 'Country of residence',
     signature: 'Type your full name again as your signature',
     checks: [
-      'I understand my duties, authority limits and where decisions must be escalated.',
-      'I will keep student, family, staff, partner and project information confidential.',
-      'I will follow safeguarding, online safety and safe communication requirements.',
-      'I will record progress, evidence and incidents accurately and within the required time.',
-      'I will not promise prices, accreditation, funding, admission, agreements or results without written authorization.',
+      'I understand that my training profile is not an assigned operational function.',
+      'I will keep internal information and any personal data I may access confidential.',
+      'I will use the materials for my training and respect Chanak usage conditions and other people’s privacy.',
+      'I will participate respectfully and submit my own activities and evidence accurately.',
+      'I understand that any later collaboration requires defined duties and scope, a formal agreement and specific authorization.',
     ],
     confirm: 'I confirm that the information above is correct and accept these commitments.',
     button: 'Accept and enter my training',
@@ -106,8 +110,13 @@ export default function CompromisoInicial({ perfil, roles = [], onAceptar, onSal
           <div>
             <div className="text-sm font-bold uppercase tracking-wide text-teal">{c.eyebrow}</div>
             <h1 className="mt-2 text-2xl font-extrabold">{c.title}</h1>
-            <p className="mt-3 text-sm text-navy/70">{c.intro}</p>
+            <p className="mt-3 text-base leading-relaxed text-navy/70">{c.intro}</p>
           </div>
+
+          <section className="rounded-2xl border border-teal/20 p-4 text-base leading-relaxed">
+            <ul className="space-y-3">{c.pathways.map((text) => <li key={text}>{text}</li>)}</ul>
+            <p className="mt-4 rounded-xl bg-gold/15 p-4 font-semibold">{c.scope}</p>
+          </section>
 
           <section className="rounded-2xl bg-cream p-4">
             <div className="font-bold">{c.role}</div>
@@ -121,7 +130,7 @@ export default function CompromisoInicial({ perfil, roles = [], onAceptar, onSal
 
           <fieldset className="space-y-3">
             {c.checks.map((texto, i) => (
-              <label key={texto} className="flex cursor-pointer gap-3 rounded-2xl border border-navy/10 p-4 text-sm leading-relaxed hover:bg-cream/70">
+              <label key={texto} className="flex cursor-pointer gap-3 rounded-2xl border border-navy/10 p-4 text-base leading-relaxed hover:bg-cream/70">
                 <input
                   type="checkbox"
                   checked={marcas[i]}

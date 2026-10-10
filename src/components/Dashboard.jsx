@@ -117,8 +117,8 @@ export default function Dashboard({
 
       {/* Rol ≠ Persona + organigrama */}
       <section className="rounded-2xl border border-gold/40 bg-gold/10 p-4">
-        <div className="text-sm font-bold text-navy">Rol ≠ Persona</div>
-        <p className="mt-1 text-xs leading-relaxed text-navy/75">
+        <div className="text-sm font-bold text-navy">Formación común · Organigrama y funciones</div>
+        <p className="mt-1 text-base leading-relaxed text-navy/75">
           En Chanak un rol describe una función y un conjunto de responsabilidades; no significa necesariamente una persona diferente.
           Una misma persona puede asumir varios roles compatibles al abrir un país, un estado, un programa o un proyecto, pero cada
           rol debe estar formalmente asignado, con su formación completada y respetando sus límites de autoridad. A medida que crece
@@ -127,7 +127,7 @@ export default function Dashboard({
         </p>
         {onVerOrganigrama && (
           <button onClick={onVerOrganigrama} className="mt-2 text-xs font-bold text-teal hover:underline">
-            Ver el Organigrama Funcional Chanak →
+            Ver organigrama y funciones de los tres perfiles →
           </button>
         )}
         {onVerMatriz && (
