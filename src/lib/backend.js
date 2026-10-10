@@ -86,6 +86,53 @@ export async function getPerfil(userId) {
   return data
 }
 
+const tablaCompromisosAusente = (error) => ['42P01', 'PGRST205'].includes(error?.code)
+
+export async function getCompromiso(userId) {
+  const { data, error } = await supabase
+    .from('compromisos_formacion')
+    .select('version, nombre_completo, territorio, funciones, aceptado_en')
+    .eq('perfil_id', userId)
+    .maybeSingle()
+  if (error) {
+    throw new Error(error.message)
+  }
+  return { disponible: true, registro: data || null }
+}
+
+export async function guardarCompromiso(perfilId, datos) {
+  const { data, error } = await supabase
+    .from('compromisos_formacion')
+    .upsert({
+      perfil_id: perfilId,
+      version: datos.version,
+      nombre_completo: datos.nombre_completo,
+      territorio: datos.territorio,
+      funciones: datos.funciones || [],
+      confidencialidad: true,
+      funciones_y_limites: true,
+      proteccion_menores: true,
+      evidencias_y_compromiso: true,
+      autorizacion_institucional: true,
+      aceptado_en: new Date().toISOString(),
+    }, { onConflict: 'perfil_id' })
+    .select('version, nombre_completo, territorio, funciones, aceptado_en')
+    .single()
+  if (error) throw new Error(error.message)
+  return data
+}
+
+export async function listarCompromisos() {
+  const { data, error } = await supabase
+    .from('compromisos_formacion')
+    .select('perfil_id, version, nombre_completo, territorio, funciones, aceptado_en')
+  if (error) {
+    if (tablaCompromisosAusente(error)) return null
+    throw new Error(error.message)
+  }
+  return Object.fromEntries((data || []).map((fila) => [fila.perfil_id, fila]))
+}
+
 // ════════════════════════════════════════════
 // PERFILES (gestión de admin)
 // ════════════════════════════════════════════

@@ -10,9 +10,9 @@
   --font-sans: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
 
   /* Escala de texto ampliada significativamente para máxima legibilidad */
-  --text-xs: 0.9375rem;   /* 16px */
+  --text-xs: 0.9375rem;   /* 15px before root scaling */
   --text-xs--line-height: 1.35rem;
-  --text-sm: 1.0625rem;   /* 18px */
+  --text-sm: 1.0625rem;   /* 17px before root scaling */
   --text-sm--line-height: 1.6rem;
   --text-base: 1.1875rem; /* 20px */
   --text-base--line-height: 1.8rem;
@@ -61,4 +61,10 @@ body {
 
 @page {
   margin: 12mm;
+}
+
+/* Visible keyboard focus across training screens. */
+:where(button, a, input, select, textarea):focus-visible {
+  outline: 3px solid var(--color-gold);
+  outline-offset: 3px;
 }

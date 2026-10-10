@@ -32,6 +32,7 @@ const B5 = ['T5.1', 'T5.2', 'T5.3']
 const B6 = ['T6.1', 'T6.2', 'T6.3']
 const B7 = ['T7.1', 'T7.2']
 const B8 = ['T8.1', 'T8.2', 'T8.3', 'T8.4']
+const B10_ESTRATEGICO = ['T10.1', 'T10.2', 'T10.3']
 
 // Sistemas y recursos
 export const SISTEMAS = {
@@ -69,16 +70,39 @@ export const ROLES = [
     nombre: 'Academic Coordinator',
     nombreEs: 'Coordinador Académico',
     contacto: CONTACTO.DIRECTO,
-    unidad: 'Estudiantes + mentores + calidad',
+    unidad: 'Hub, centro de aprendizaje o institución partner',
     mensaje: 'El Mentor acompaña. El Coordinador supervisa que el sistema funcione.',
     modalidades: ['Virtual Coordinator', 'On-Site Coordinator'],
     modulos: [...CORE, ...B2, ...B3, ...B4, ...B5, ...B6, ...B8],
     sistemas: { SIS: 'completo + supervisión', PORTAL: 'completo', DUAL: 'completo', DRIVE: 'lectura', ESTADO: 'según asignación' },
-    domina: ['Supervisión de mentores', 'Revisión de estudiantes y SIS', 'Verificación de PEI', 'Revisión de evidencia', 'Control de intervenciones', 'Revisión de expedientes', 'Reporting', 'Reuniones', 'Escalamiento', 'Relación con Chanak Central'],
+    domina: ['Supervisión de mentores', 'Revisión de estudiantes y SIS', 'Verificación de PEI', 'Revisión de evidencia', 'Control de intervenciones', 'Revisión de expedientes', 'Reporting', 'Reuniones', 'Seguimiento del convenio', 'Relación con el director partner', 'Escalamiento', 'Relación con Chanak Central'],
     escala: ['Incidencias y casos que afectan créditos, seguridad o cumplimiento → Chanak Central'],
     documentos: ['Academic Coordinator · Role Profile'],
     checklist: ['Rol asignado formalmente', 'Todo lo del Mentor', 'Nivel 2 (Coordinator Track)', 'SIS, Portal y Dual Diploma Portal dominados', 'People & Partnership Models'],
     nota: 'No puede supervisar una herramienta que no sabe manejar.',
+  },
+  {
+    id: 'partner_director',
+    area: 'academico',
+    nombre: 'Partner School Director',
+    nombreEs: 'Director de institución partner',
+    contacto: CONTACTO.DIRECTO,
+    unidad: 'Una escuela o institución con convenio vigente',
+    modalidades: ['Virtual', 'Presencial', 'Híbrido'],
+    requiereAlcance: ['territorio', 'programa'],
+    modulos: [...CORE, ...B2, ...B3, ...B4, ...B5, ...B6, ...B8],
+    sistemas: {
+      SIS: 'perfil Admin limitado a su institución',
+      PORTAL: 'recursos y seguimiento de su institución',
+      DUAL: 'supervisión de estudiantes y docentes de su institución cuando corresponda',
+      DRIVE: 'convenio, manuales e informes autorizados',
+    },
+    domina: ['Convenio vigente', 'Programas contratados', 'Equipo asignado', 'Incorporación de estudiantes', 'Supervisión académica', 'Indicadores e informes', 'Incidencias', 'Renovación y continuidad'],
+    escala: ['Créditos finales, transcripts, precios, cambios contractuales, seguridad o comunicación pública → Chanak Central'],
+    noPuede: ['Ver otras instituciones', 'Modificar precios o convenio', 'Emitir créditos o transcripts finales', 'Crear programas no autorizados'],
+    documentos: ['Partner School Director · Role Profile', 'Convenio institucional aplicable', 'Guía de coordinación de institución partner'],
+    checklist: ['Institución y convenio asignados', 'Todo lo del Coordinador', 'SIS Admin de institución dominado', 'Dual Diploma cuando corresponda', 'Protección de menores y datos'],
+    nota: 'El perfil Admin del SIS queda restringido a la institución asignada. Si el director delega la coordinación diaria, completa la inducción de dirección; quien ejerza como coordinador realiza la ruta completa de 300 h.',
   },
   {
     id: 'english_teacher',
@@ -95,6 +119,22 @@ export const ROLES = [
     documentos: ['English Teacher · Role Profile'],
     checklist: ['Rol asignado formalmente', 'Chanak Core', 'Child & Adolescent Development', 'Safeguarding', 'SIS', 'Portal', 'Dual Portal cuando corresponda'],
     nota: 'Puede ser también Mentor si se le asigna ese rol.',
+  },
+  {
+    id: 'academic_tutor',
+    area: 'academico',
+    nombre: 'Academic Tutor',
+    nombreEs: 'Tutor académico',
+    contacto: CONTACTO.DIRECTO,
+    unidad: 'Estudiantes y materias asignadas',
+    modalidades: ['Virtual', 'Presencial', 'Híbrido'],
+    modulos: [...CORE, 'T3.1', 'T3.2', 'T4.1', 'T4.2', 'T5.1', ...MODULOS_CONTACTO_DIRECTO],
+    sistemas: { SIS: 'estudiantes asignados, evidencia y progreso', PORTAL: 'recursos de la materia', DUAL: 'cuando corresponda', DRIVE: 'lectura' },
+    domina: ['Tutoría individual o grupal', 'Plan de apoyo', 'Práctica guiada', 'Evidencias', 'Seguimiento del progreso', 'Alertas e intervención'],
+    escala: ['Cambios de vía, créditos, diagnóstico, seguridad o acuerdos con la familia → Mentor/Coordinador'],
+    documentos: ['Academic Tutor · Role Profile'],
+    checklist: ['Rol asignado formalmente', 'Chanak Core', 'Child & Adolescent Development', 'Safeguarding', 'SIS', 'Portal', 'Dual Portal cuando corresponda'],
+    nota: 'Accede únicamente a los estudiantes y materias asignados. Puede asumir también el rol Mentor mediante asignación separada.',
   },
   {
     id: 'lifeskills_facilitator',
@@ -159,6 +199,21 @@ export const ROLES = [
   },
 
   // ─────────── GROWTH, PARTNERSHIPS & PROJECT DEVELOPMENT ───────────
+  {
+    id: 'strategic_general',
+    area: 'crecimiento',
+    nombre: 'Strategic Development',
+    nombreEs: 'Desarrollo Estratégico',
+    contacto: CONTACTO.OCASIONAL,
+    unidad: 'Mercados, fondos, alianzas y proyectos según asignación',
+    modalidades: [],
+    modulos: [...CORE, ...B2, ...B7, ...B10_ESTRATEGICO, 'T6.1'],
+    sistemas: { DRIVE: 'según asignación', ESTADO: 'según territorio o programa' },
+    domina: ['Apertura de mercado', 'Fondos estatales', 'Google Ads y difusión', 'Grants', 'Empresas y ONG', 'Iglesias y alianzas comunitarias'],
+    escala: ['Precios, contratos, publicaciones de pago, solicitudes y compromisos institucionales → Chanak Central'],
+    documentos: ['Strategic Operating Guide', '30-Day Market Entry Plan', 'Grant Opportunity Sheet'],
+    checklist: ['Rol asignado formalmente', 'Territorio o proyecto indicado', 'Chanak Core', 'Límites de autoridad', 'Guía operativa estratégica'],
+  },
   {
     id: 'country_rep',
     area: 'crecimiento',
@@ -284,13 +339,13 @@ export const ROLES = [
 //  · Estratégico → todos los demás (representación, familias, alianzas, grants y proyectos, registros)
 export const GRUPOS = {
   mentor: { id: 'mentor', nombre: 'Mentor', nombreEn: 'Mentor', descripcion: 'Acompaña al estudiante y a la familia. Aquí entran también los profesores especialistas.', funcionPorDefecto: 'mentor' },
-  coordinator: { id: 'coordinator', nombre: 'Coordinador', nombreEn: 'Coordinator', descripcion: 'Supervisa mentores, hubs y calidad.', funcionPorDefecto: 'coordinator' },
-  estrategico: { id: 'estrategico', nombre: 'Estratégico', nombreEn: 'Strategic', descripcion: 'Representación, familias y programas estatales, alianzas, grants y proyectos, registros.', funcionPorDefecto: null },
+  coordinator: { id: 'coordinator', nombre: 'Coordinador', nombreEn: 'Coordinator', descripcion: 'Supervisa mentores, hubs, instituciones partner y calidad.', funcionPorDefecto: 'coordinator' },
+  estrategico: { id: 'estrategico', nombre: 'Estratégico', nombreEn: 'Strategic', descripcion: 'Representación, familias y programas estatales, alianzas, grants y proyectos, registros.', funcionPorDefecto: 'strategic_general' },
 }
 const GRUPO_DE_FUNCION = {
-  mentor: 'mentor', english_teacher: 'mentor', lifeskills_facilitator: 'mentor', local_language: 'mentor', assessment_specialist: 'mentor',
-  coordinator: 'coordinator',
-  academic_records: 'estrategico', country_rep: 'estrategico', state_rep: 'estrategico', program_rep: 'estrategico',
+  mentor: 'mentor', english_teacher: 'mentor', academic_tutor: 'mentor', lifeskills_facilitator: 'mentor', local_language: 'mentor', assessment_specialist: 'mentor',
+  coordinator: 'coordinator', partner_director: 'coordinator',
+  strategic_general: 'estrategico', academic_records: 'estrategico', country_rep: 'estrategico', state_rep: 'estrategico', program_rep: 'estrategico',
   family_enrollment: 'estrategico', institutional_partnerships: 'estrategico', grants_projects: 'estrategico', lifeskills_project_coord: 'estrategico',
 }
 ROLES.forEach((r) => { r.grupo = GRUPO_DE_FUNCION[r.id] })
@@ -308,7 +363,7 @@ export const AREAS = {
 // Cuando una persona aún no tiene roles asignados en perfil_roles, se derivan de ahí.
 export function rolesDesdeTipoAcceso(tipo) {
   if (tipo === 'coordinadora') return ['mentor', 'coordinator']
-  if (tipo === 'visionaria') return [] // Estratégico: sin ruta de rol; solo Core
+  if (tipo === 'visionaria') return ['strategic_general']
   return ['mentor']
 }
 

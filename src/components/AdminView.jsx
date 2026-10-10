@@ -16,16 +16,18 @@ export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) 
   const [perfiles, setPerfiles] = useState([])
   const [progresos, setProgresos] = useState({})
   const [rolesMapa, setRolesMapa] = useState(undefined) // null = migración de roles pendiente
+  const [compromisosMapa, setCompromisosMapa] = useState(undefined)
   const [cargando, setCargando] = useState(true)
   const [error, setError] = useState('')
 
   const cargar = useCallback(async () => {
     setError('')
     try {
-      const [ps, prs, rm] = await Promise.all([api.listarPerfiles(), api.getProgresoTodas(), api.listarRoles().catch(() => null)])
+      const [ps, prs, rm, cm] = await Promise.all([api.listarPerfiles(), api.getProgresoTodas(), api.listarRoles().catch(() => null), api.listarCompromisos().catch(() => null)])
       setPerfiles(ps)
       setProgresos(prs)
       setRolesMapa(rm)
+      setCompromisosMapa(cm)
     } catch (e) {
       setError(e.message)
     } finally {
@@ -86,7 +88,7 @@ export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) 
       ) : (
         <>
           {pestana === 'usuarias' && (
-            <GestionUsuarias perfiles={perfiles} miId={miPerfil.id} onRecargar={cargar} rolesMapa={rolesMapa} />
+            <GestionUsuarias perfiles={perfiles} miId={miPerfil.id} onRecargar={cargar} rolesMapa={rolesMapa} compromisosMapa={compromisosMapa} />
           )}
 
           {pestana === 'codigos' && (

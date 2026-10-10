@@ -27,6 +27,7 @@ export default function Dashboard({
   onVerOrganigrama,
   onVerRol,
   onVerMatriz,
+  onVerEstrategia,
 }) {
   const { t, idioma } = useIdioma()
   const r = resumenMentora(progreso, { roles, contactoMenores })
@@ -132,6 +133,11 @@ export default function Dashboard({
         {onVerMatriz && (
           <button onClick={onVerMatriz} className="mt-2 block text-xs font-bold text-teal hover:underline">
             Ver la matriz de servicios por programa estatal (uso interno) →
+          </button>
+        )}
+        {onVerEstrategia && (
+          <button onClick={onVerEstrategia} className="mt-2 block text-xs font-bold text-teal hover:underline">
+            Abrir la guía operativa del perfil Estratégico →
           </button>
         )}
       </section>
