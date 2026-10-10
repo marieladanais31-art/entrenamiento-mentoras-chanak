@@ -27,7 +27,7 @@ import { aplicarEquivalencias } from './lib/calculos'
 import { useIdioma } from './i18n/idioma'
 
 export default function App() {
-  const { t } = useIdioma()
+  const { t, es } = useIdioma()
   const [cargando, setCargando] = useState(true)
   const [sesion, setSesion] = useState(null) // sesión de Supabase
   const [perfil, setPerfil] = useState(null) // { id, nombre, rol, estado }
@@ -45,6 +45,7 @@ export default function App() {
   const [errorCarga, setErrorCarga] = useState('')
   const [compromiso, setCompromiso] = useState(undefined)
   const [compromisoDisponible, setCompromisoDisponible] = useState(false)
+  const [errorCompromiso, setErrorCompromiso] = useState('')
   const [rolesListos, setRolesListos] = useState(false)
 
   const esAdmin = perfil?.rol === 'admin'
@@ -66,6 +67,10 @@ export default function App() {
         setVista({ nombre: 'cambiar-contrasena' })
       }
       if (!s) {
+        setCompromiso(undefined)
+        setCompromisoDisponible(false)
+        setErrorCompromiso('')
+        setRolesListos(false)
         setPerfil(null)
         setProgreso({ modulos: {} })
         setVista({ nombre: 'dashboard' })
@@ -91,13 +96,15 @@ export default function App() {
   useEffect(() => {
     if (!perfil?.id || !aprobada) return
     let vivo = true
+    setCompromisoDisponible(false)
+    setErrorCompromiso('')
     api.getCompromiso(perfil.id)
       .then(({ disponible, registro }) => {
         if (!vivo) return
         setCompromisoDisponible(disponible)
         setCompromiso(registro)
       })
-      .catch((e) => vivo && setErrorCarga(e.message))
+      .catch((e) => vivo && setErrorCompromiso(e.message))
     return () => { vivo = false }
   }, [perfil?.id, aprobada])
 
@@ -245,8 +252,22 @@ export default function App() {
 
   if (!aprobada) return <PendienteAprobacion perfil={perfil} onSalir={() => api.salir()} />
 
+  if (!compromisoDisponible || !rolesListos) {
+    return (
+      <div className="flex min-h-screen flex-col items-center justify-center gap-5 bg-cream px-6 text-center text-navy">
+        <p className="max-w-lg text-lg" role={errorCompromiso ? 'alert' : 'status'}>
+          {errorCompromiso
+            ? (es ? 'No pudimos comprobar tu compromiso inicial. Inténtalo de nuevo para continuar.' : 'We could not verify your initial commitment. Please try again to continue.')
+            : t('gen.cargando')}
+        </p>
+        {errorCompromiso && <button onClick={() => window.location.reload()} className="rounded-xl bg-navy px-6 py-3 text-lg text-white">{es ? 'Intentar de nuevo' : 'Try again'}</button>}
+        <button onClick={() => api.salir()} className="rounded-xl border border-navy/30 px-6 py-3 text-lg">{t('sesion.cerrar')}</button>
+      </div>
+    )
+  }
+
   const compromisoVigente = compromiso?.version === VERSION_COMPROMISO
-  if (!viendoOtra && compromisoDisponible && rolesListos && !compromisoVigente) {
+  if (!compromisoVigente) {
     return (
       <CompromisoInicial
         perfil={perfil}
