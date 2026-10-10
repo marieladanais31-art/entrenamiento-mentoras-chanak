@@ -20,6 +20,7 @@ export default function Dashboard({
   onVerOperativa,
   onVerGuias,
   onVerCoordinacion,
+  onVerProgramas,
   onVerCurso,
   onVerCertificado,
   roles = ['mentor'],
@@ -57,6 +58,11 @@ export default function Dashboard({
           <Acceso icono="🌎" titulo={idioma === 'es' ? 'Estados y programas' : 'States and programs'} sub={idioma === 'es' ? 'Servicios, requisitos y fuentes oficiales' : 'Services, requirements and official sources'} onClick={onVerMatriz} tono="navy" />
         </div>
       </section>
+      <button onClick={onVerProgramas} className="w-full rounded-2xl border-2 border-teal bg-white p-6 text-left shadow-sm hover:bg-teal/5">
+        <span className="block text-sm font-bold uppercase text-teal">{idioma === 'es' ? 'NUEVO · Guía operativa integrada · 10 octubre' : 'NEW · Integrated operational guide · October 10'}</span>
+        <span className="mt-2 block text-2xl font-bold text-navy">{idioma === 'es' ? 'Atender estudiantes y acompañar familias →' : 'Support students and families →'}</span>
+        <span className="mt-3 block text-base text-navy/70">Off-Campus · Dual Diploma · Inglés / English · Life Skills</span>
+      </button>
       {/* Cabecera */}
       <section className="rounded-2xl bg-white p-5 shadow-sm">
         <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-center">

@@ -4,6 +4,7 @@ import PendienteAprobacion from './components/PendienteAprobacion'
 import Dashboard from './components/Dashboard'
 import OperativaSIS from './components/OperativaSIS'
 import GuiasFamilias from './components/GuiasFamilias'
+import OperacionProgramas from './components/OperacionProgramas'
 import CoordinacionSIS from './components/CoordinacionSIS'
 import CatalogoVideos from './components/CatalogoVideos'
 import CourseIntro from './components/CourseIntro'
@@ -326,6 +327,7 @@ export default function App() {
               setVista({ ...vista, nombre: 'modulo', moduloId, bloqueId: getModulo(moduloId)?.bloqueId })
             }
             onVerGuias={() => setVista({ ...vista, nombre: 'guias-familias' })}
+            onVerProgramas={() => setVista({ ...vista, nombre: 'operacion-programas' })}
             onVerCoordinacion={() => setVista({ ...vista, nombre: 'coordinacion-sis' })}
             onVerOperativa={() => setVista({ ...vista, nombre: 'operativa-sis' })}
             onVerCatalogo={() => setVista({ ...vista, nombre: 'catalogo-videos' })}
@@ -343,6 +345,7 @@ export default function App() {
         {vista.nombre === 'catalogo-videos' && <CatalogoVideos onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
         {vista.nombre === 'operativa-sis' && <OperativaSIS onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
         {vista.nombre === 'guias-familias' && <GuiasFamilias onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
+        {vista.nombre === 'operacion-programas' && <OperacionProgramas onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} onVerSIS={() => setVista({ ...vista, nombre: 'coordinacion-sis' })} onVerFamilias={() => setVista({ ...vista, nombre: 'guias-familias' })} onVerEstados={() => setVista({ ...vista, nombre: 'matriz' })} />}
         {vista.nombre === 'coordinacion-sis' && <CoordinacionSIS onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
         {vista.nombre === 'matriz' && <MatrizProgramas onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
         {vista.nombre === 'estrategia' && <EstrategiaOperativa onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} onVerMatriz={() => setVista({ ...vista, nombre: 'matriz' })} />}
