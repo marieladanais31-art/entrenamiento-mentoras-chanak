@@ -43,11 +43,20 @@ export default function Dashboard({
   const ruta = TODOS_MODULOS.filter((m) => !m.porRol && !m.transversal && (m.nivel === 1 || nivel2Desbloqueado))
   const siguiente =
     ruta.find((m) => mods[m.id]?.estado === 'en_curso') ||
-    ruta.find((m) => mods[m.id]?.estado !== 'completado')
+    ruta.find((m) => !['completado', 'reconocido'].includes(mods[m.id]?.estado))
   const pct = Math.round((r.horas / HORAS_MODULOS_N2) * 100)
 
   return (
     <div className="space-y-6">
+      <section className="rounded-2xl bg-navy p-6 text-white shadow-sm">
+        <p className="text-sm font-semibold text-gold">{idioma === 'es' ? 'Tu espacio de formación Chanak' : 'Your Chanak training space'}</p>
+        <h1 className="mt-2 text-2xl font-bold">{esAdmin ? (idioma === 'es' ? 'Administración · Vista completa' : 'Administration · Full view') : (idioma === 'es' ? '¿Qué quieres hacer hoy?' : 'What would you like to do today?')}</h1>
+        <p className="mt-3 text-base leading-relaxed text-white/80">{idioma === 'es' ? 'Empieza por tu ruta. Consulta la organización y los programas cuando los necesites. Tus avances guardados se conservan.' : 'Start with your pathway. Consult the organization and programs whenever needed. Your saved progress is preserved.'}</p>
+        <div className="mt-5 grid gap-3 sm:grid-cols-2">
+          <Acceso icono="🧭" titulo={idioma === 'es' ? 'Organización y perfiles' : 'Organization and profiles'} sub={idioma === 'es' ? 'Formación común para todos' : 'Common training for everyone'} onClick={onVerOrganigrama} tono="navy" />
+          <Acceso icono="🌎" titulo={idioma === 'es' ? 'Estados y programas' : 'States and programs'} sub={idioma === 'es' ? 'Servicios, requisitos y fuentes oficiales' : 'Services, requirements and official sources'} onClick={onVerMatriz} tono="navy" />
+        </div>
+      </section>
       {/* Cabecera */}
       <section className="rounded-2xl bg-white p-5 shadow-sm">
         <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-center">
@@ -252,8 +261,8 @@ function Acceso({ icono, titulo, sub, onClick, tono }) {
     <button onClick={onClick} className={`flex w-full items-center gap-3 rounded-2xl border-2 px-4 py-3.5 text-left transition ${c}`}>
       <span className="text-xl" aria-hidden>{icono}</span>
       <span className="min-w-0 flex-1">
-        <span className="block text-sm font-bold text-navy">{titulo}</span>
-        <span className="block text-xs text-navy/60">{sub}</span>
+        <span className="block text-base font-bold text-navy">{titulo}</span>
+        <span className="block text-sm text-navy/60">{sub}</span>
       </span>
       <span className="shrink-0 text-teal">→</span>
     </button>

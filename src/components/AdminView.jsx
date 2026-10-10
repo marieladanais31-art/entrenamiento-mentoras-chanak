@@ -45,7 +45,7 @@ export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) 
   return (
     <div className="space-y-5">
       <div className="rounded-2xl bg-navy p-5 text-cream shadow-sm">
-        <h2 className="text-lg font-bold">{t('admin.titulo')}</h2>
+        <h2 className="text-2xl font-bold">{t('admin.titulo')}</h2>
         <p className="mt-1 text-xs text-cream/70">
           {t('admin.sub', { nombre: miPerfil.nombre })}
         </p>
@@ -66,7 +66,7 @@ export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) 
           <button
             key={id}
             onClick={() => setPestana(id)}
-            className={`min-w-max flex-1 rounded-lg px-2 py-2 text-xs font-semibold transition ${
+            className={`min-w-max flex-1 rounded-lg px-4 py-3 text-base font-semibold transition ${
               pestana === id ? 'bg-navy text-cream' : 'text-navy/60 hover:bg-cream'
             }`}
           >
