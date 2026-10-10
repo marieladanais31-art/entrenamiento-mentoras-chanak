@@ -4,6 +4,7 @@ import { getContenido } from '../data/contenido'
 import { getVideo, videosComplementarios } from '../data/videos'
 import { formatearFecha } from '../lib/calculos'
 import EstadoBadge from './ui/EstadoBadge'
+import ProcedimientoAtencion from './ProcedimientoAtencion'
 import KnowledgeCheck from './KnowledgeCheck'
 import VideoLeccion from './VideoLeccion'
 import { useIdioma } from '../i18n/idioma'
@@ -99,6 +100,8 @@ export default function ModuleView({ moduloId, progresoModulo: p, videos, esAdmi
       {(moduloId.startsWith('T8.') || moduloId === 'T10.4') && <button onClick={onVerCoordinacion} className="w-full rounded-2xl bg-white p-4 text-left text-sm font-bold text-teal shadow-sm">Coordinación SIS · Ocho pantallas y práctica con datos ficticios →</button>}
       {(moduloId.startsWith('T5.') || moduloId === 'T10.4') && <button onClick={onVerGuias} className="w-full rounded-2xl bg-white p-4 text-left text-sm font-bold text-teal shadow-sm">Abrir manuales para padres · Off-Campus y Dual Diploma →</button>}
 
+      <ProcedimientoAtencion moduloId={moduloId} />
+
       {/* ── Ficha ── */}
       <div className="rounded-2xl bg-white p-5 shadow-sm">
         <div className="flex items-start justify-between gap-3">
@@ -121,7 +124,7 @@ export default function ModuleView({ moduloId, progresoModulo: p, videos, esAdmi
           <p className="mt-2 rounded-lg bg-gold/10 px-3 py-2 text-[12px] text-navy/65">🌐 {t('modulo.traduccionPendiente')}</p>
         )}
         <dl className="mt-4 grid grid-cols-2 gap-3 text-sm">
-          <Dato etiqueta={t('modulo.horas')} valor={`${modulo.horas} h`} />
+          {esAdmin && <Dato etiqueta={t('modulo.horas')} valor={`${modulo.horas} h`} />}
           <Dato etiqueta={t('modulo.evaluacion')} valor={modulo.evaluacion} />
           <Dato etiqueta={t('modulo.modalidad')} valor={modulo.modalidad} />
           <Dato etiqueta={t('modulo.completado')} valor={p?.fechaCompletado ? formatearFecha(p.fechaCompletado) : '—'} />
@@ -143,7 +146,7 @@ export default function ModuleView({ moduloId, progresoModulo: p, videos, esAdmi
             </ul>
           </div>
         )}
-        {contenido?.desglose && <Desglose d={contenido.desglose} horas={modulo.horas} t={t} />}
+        {esAdmin && contenido?.desglose && <Desglose d={contenido.desglose} horas={modulo.horas} t={t} />}
       </div>
 
       {/* ── Stepper ── */}
@@ -359,7 +362,7 @@ export default function ModuleView({ moduloId, progresoModulo: p, videos, esAdmi
                 onClick={() => acciones.setEstado(moduloId, 'completado', fecha)}
                 className="mt-3 w-full rounded-xl bg-teal py-3 text-sm font-semibold text-white transition hover:bg-teal/90 disabled:cursor-not-allowed disabled:opacity-40"
               >
-                {t('modulo.confirmar', { horas: modulo.horas })}
+                {esAdmin ? t('modulo.confirmar', { horas: modulo.horas }) : (idioma === 'es' ? 'Confirmar módulo completado' : 'Confirm module completed')}
               </button>
             </div>
           )}

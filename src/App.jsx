@@ -369,6 +369,7 @@ export default function App() {
         {vista.nombre === 'bloque' && (
           <BlockView
             bloqueId={vista.bloqueId}
+            esAdmin={esAdmin}
             progreso={progresoVista}
             onAbrirModulo={(moduloId) => setVista({ ...vista, nombre: 'modulo', moduloId })}
             onVolver={() => setVista({ ...vista, nombre: 'dashboard' })}

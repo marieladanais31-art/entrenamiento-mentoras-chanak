@@ -5,7 +5,7 @@ import EstadoBadge from './ui/EstadoBadge'
 import { useIdioma } from '../i18n/idioma'
 import { traducirBloques } from '../data/curriculum.en'
 
-export default function BlockView({ bloqueId, progreso, onAbrirModulo, onVolver }) {
+export default function BlockView({ bloqueId, progreso, esAdmin, onAbrirModulo, onVolver }) {
   const { t, idioma } = useIdioma()
   const bloque = traducirBloques([getBloque(bloqueId)].filter(Boolean), idioma)[0]
   const mods = progreso?.modulos || {}
@@ -25,7 +25,7 @@ export default function BlockView({ bloqueId, progreso, onAbrirModulo, onVolver 
         </div>
         <h2 className="mt-1 text-lg font-bold leading-snug">{bloque.titulo}</h2>
         <p className="mt-1 text-xs text-cream/70">
-          {t('bloque.resumen', { n: bloque.modulos.length, horas: bloque.horas, hechos })}
+          {esAdmin ? t('bloque.resumen', { n: bloque.modulos.length, horas: bloque.horas, hechos }) : `${hechos}/${bloque.modulos.length} ${idioma === 'es' ? 'módulos completados' : 'modules completed'}`}
         </p>
         <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-white/15">
           <div className="h-full rounded-full bg-gold" style={{ width: `${(hechos / bloque.modulos.length) * 100}%` }} />
@@ -52,7 +52,7 @@ export default function BlockView({ bloqueId, progreso, onAbrirModulo, onVolver 
                 <EstadoBadge estado={estado} />
               </div>
               <div className="mt-3 flex flex-wrap gap-1.5 text-[13px]">
-                <Chip>⏱ {m.horas}h</Chip>
+                {esAdmin && <Chip>⏱ {m.horas}h</Chip>}
                 {v && <Chip>🎬 {v.id} · {v.duracion}</Chip>}
                 <Chip>📝 {m.evaluacion}</Chip>
                 {m.entregable && <Chip>📁 {t('bloque.conEntregable')}</Chip>}

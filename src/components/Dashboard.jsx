@@ -201,7 +201,7 @@ export default function Dashboard({
         />
         <div className="grid gap-3 sm:grid-cols-2">
           {mentorBloques.map((b) => (
-            <TarjetaBloque key={b.id} bloque={b} estado={estadoBloque(progreso, b)} horasHechas={horasBloqueCompletadas(progreso, b)} onClick={() => onAbrirBloque(b.id)} />
+            <TarjetaBloque key={b.id} esAdmin={esAdmin} bloque={b} estado={estadoBloque(progreso, b)} horasHechas={horasBloqueCompletadas(progreso, b)} onClick={() => onAbrirBloque(b.id)} />
           ))}
         </div>
       </section>
@@ -214,7 +214,7 @@ export default function Dashboard({
         />
         <div className="grid gap-3 sm:grid-cols-2">
           {transvBloques.map((b) => (
-            <TarjetaBloque key={b.id} bloque={b} estado={estadoBloque(progreso, b)} horasHechas={horasBloqueCompletadas(progreso, b)} onClick={() => onAbrirBloque(b.id)} />
+            <TarjetaBloque key={b.id} esAdmin={esAdmin} bloque={b} estado={estadoBloque(progreso, b)} horasHechas={horasBloqueCompletadas(progreso, b)} onClick={() => onAbrirBloque(b.id)} />
           ))}
         </div>
       </section>
@@ -224,7 +224,7 @@ export default function Dashboard({
         <TituloSeccion titulo={t('panel.tituloRol')} subtitulo={t('panel.porRolTxt')} />
         <div className="grid gap-3 sm:grid-cols-2">
           {rolBloques.map((b) => (
-            <TarjetaBloque key={b.id} bloque={b} estado={estadoBloque(progreso, b)} horasHechas={horasBloqueCompletadas(progreso, b)} onClick={() => onAbrirBloque(b.id)} />
+            <TarjetaBloque key={b.id} esAdmin={esAdmin} bloque={b} estado={estadoBloque(progreso, b)} horasHechas={horasBloqueCompletadas(progreso, b)} onClick={() => onAbrirBloque(b.id)} />
           ))}
         </div>
       </section>
@@ -242,6 +242,7 @@ export default function Dashboard({
           {coordBloques.map((b) => (
             <TarjetaBloque
               key={b.id}
+              esAdmin={esAdmin}
               bloque={b}
               estado={nivel2Desbloqueado ? estadoBloque(progreso, b) : 'bloqueado'}
               horasHechas={horasBloqueCompletadas(progreso, b)}
@@ -302,7 +303,7 @@ function TituloSeccion({ titulo, subtitulo }) {
   )
 }
 
-function TarjetaBloque({ bloque, estado, horasHechas, onClick }) {
+function TarjetaBloque({ esAdmin, bloque, estado, horasHechas, onClick }) {
   const { t } = useIdioma()
   const pct = bloque.horas > 0 ? Math.round((horasHechas / bloque.horas) * 100) : 0
   const bloqueado = estado === 'bloqueado'
@@ -321,7 +322,7 @@ function TarjetaBloque({ bloque, estado, horasHechas, onClick }) {
       <div className="mt-1 text-sm font-semibold leading-snug text-navy">{bloque.titulo}</div>
       <div className="mt-2 flex items-center justify-between text-xs text-navy/55">
         <span>{t('panel.modulos', { n: bloque.modulos.length })}</span>
-        <span>{horasHechas}/{bloque.horas}h</span>
+        {esAdmin && <span>{horasHechas}/{bloque.horas}h</span>}
       </div>
       <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-navy/10">
         <div className={`h-full rounded-full ${pct >= 100 ? 'bg-gold' : 'bg-teal'}`} style={{ width: `${pct}%` }} />
