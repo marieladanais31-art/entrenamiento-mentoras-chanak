@@ -7,6 +7,8 @@ import EstadoBadge from './ui/EstadoBadge'
 import ProcedimientoAtencion from './ProcedimientoAtencion'
 import KnowledgeCheck from './KnowledgeCheck'
 import VideoLeccion from './VideoLeccion'
+import VistaSistema from './VistaSistema'
+import { vistasDeModulo } from '../data/vistasSistema'
 import { useIdioma } from '../i18n/idioma'
 import { traducirModulo, traducirRecursos } from '../data/curriculum.en'
 
@@ -85,7 +87,20 @@ export default function ModuleView({ moduloId, progresoModulo: p, videos, esAdmi
         {t('modulo.volverBloque')}
       </button>
 
-      <details className="rounded-2xl bg-white p-4 shadow-sm">
+      {vistasDeModulo(moduloId).length > 0 && (
+        <details open className="rounded-2xl border-2 border-teal/40 bg-white p-4 shadow-sm">
+          <summary className="cursor-pointer text-sm font-bold text-teal">🖥 Así se ve en el sistema · {vistasDeModulo(moduloId).length} pantalla(s)</summary>
+          <p className="mt-2 text-xs text-navy/60">Recorre la pantalla real con datos ficticios y resuelve la decisión antes de pasar a la práctica.</p>
+          <div className="mt-3 space-y-3">{vistasDeModulo(moduloId).map((v, i) => (
+            <details key={v.id} open={i === 0} className="rounded-xl bg-cream/60 p-2">
+              <summary className="cursor-pointer px-1 py-1 text-sm font-semibold text-navy">{v.titulo}</summary>
+              <div className="mt-2"><VistaSistema vista={v} /></div>
+            </details>
+          ))}</div>
+        </details>
+      )}
+
+      {videosComplementarios(moduloId).length > 0 && <details className="rounded-2xl bg-white p-4 shadow-sm">
         <summary className="cursor-pointer text-sm font-bold text-navy">Videos de apoyo y procedimientos · {videosComplementarios(moduloId).length}</summary>
         <p className="mt-2 text-xs text-navy/60">Resúmenes narrados y procedimientos sin avatar. Los gráficos explican el circuito; las demostraciones de sistemas se identifican por título. La lectura, práctica y evidencias completan la formación.</p>
         <div className="mt-3 space-y-4">{videosComplementarios(moduloId).map((v) => <div key={v.id}>
@@ -93,7 +108,7 @@ export default function ModuleView({ moduloId, progresoModulo: p, videos, esAdmi
           <VideoLeccion video={{ url: v.videoUrl, subtitulos: v.subtitulos }} />
         </div>)}</div>
         <button className="mt-3 inline-block text-xs font-bold text-teal underline" onClick={onVerCatalogo}>Catálogo completo · 87 videos →</button>
-      </details>
+      </details>}
 
       {moduloId === 'T10.4' && <button onClick={onVerOperativa} className="w-full rounded-2xl bg-teal p-4 text-left text-sm font-bold text-white">Abrir paso a paso SIS · Matrícula, automatizaciones y accesos demo →</button>}
 

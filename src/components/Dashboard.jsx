@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { BLOQUES, numModulo, getModulo, BIBLIOTECA, urlCarpeta, CARPETA_FINAL_URL } from '../data/curriculum'
 import { GRUPOS, ROL_POR_ID, TRONCO_COMUN, MODULOS_DESARROLLO, grupoDe, modulosObligatorios, tieneContactoDirecto } from '../data/roles'
 import EligeRama from './EligeRama'
+import { FUNCIONES } from '../data/funciones'
 import { resumenMentora, estadoBloque, horasBloqueCompletadas } from '../lib/calculos'
 import ProgressRing from './ui/ProgressRing'
 import EstadoBadge from './ui/EstadoBadge'
@@ -37,6 +38,8 @@ export default function Dashboard({
   onVerRol,
   onVerMatriz,
   onVerEstrategia,
+  onVerFuncion,
+  onVerVistas,
 }) {
   const { t, idioma } = useIdioma()
   const [cambiandoRama, setCambiandoRama] = useState(false)
@@ -130,6 +133,22 @@ export default function Dashboard({
         </button>
       )}
 
+      {/* MI TRABAJO · guía operativa de cada función activa */}
+      {roles.some((id) => FUNCIONES[id]) && onVerFuncion && (
+        <section className="rounded-2xl border-2 border-gold bg-white p-5 shadow-sm">
+          <div className="text-[12px] font-bold uppercase tracking-[0.18em] text-gold">Mi trabajo</div>
+          <p className="mt-1 text-sm text-navy/70">Tu rutina, qué hacer en cada caso, a quién escalar y las pantallas que usas.</p>
+          <div className="mt-3 grid gap-2 sm:grid-cols-2">
+            {roles.filter((id) => FUNCIONES[id]).map((id) => (
+              <button key={id} onClick={() => onVerFuncion(id)} className="rounded-xl bg-cream px-4 py-3 text-left hover:bg-gold/15">
+                <span className="block text-sm font-bold text-navy">{FUNCIONES[id].titulo} →</span>
+                <span className="block text-xs text-navy/60">{FUNCIONES[id].rutina.length} tareas de rutina · {FUNCIONES[id].casos.length} casos</span>
+              </button>
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* PASO 1 · TRONCO COMÚN */}
       <Paso numero={1} titulo="Tronco común · para todas las personas" hechos={troncoHechos} total={troncoIds.length}
         sub="Quién es Chanak, el modelo 60/20/20, Off-Campus, Dual Diploma y Life Skills, safeguarding y protección de datos.">
@@ -219,6 +238,7 @@ export default function Dashboard({
           {esMentorOCoord && <Acceso icono="🖥" titulo="Operativa SIS" sub="Matrícula, expediente y familias paso a paso" onClick={onVerOperativa} tono="navy" />}
           {(esCoord || esAdmin) && <Acceso icono="🧾" titulo="Coordinación SIS" sub="Ocho pantallas y práctica de revisión" onClick={onVerCoordinacion} tono="navy" />}
           {(esEstrategico || esCoord || esAdmin) && <Acceso icono="🌎" titulo="ESA y fondos estatales" sub="Matriz de programas por estado (uso interno)" onClick={onVerMatriz} tono="navy" />}
+          {onVerVistas && <Acceso icono="🖥" titulo="Vistas del sistema" sub="SIS, Dual Diploma y Life Skills con datos ficticios" onClick={onVerVistas} tono="teal" />}
           <Acceso icono="🧭" titulo="Organización y perfiles" sub="Organigrama y funciones de las tres ramas" onClick={onVerOrganigrama} tono="navy" />
           <Acceso icono="▶" titulo="Catálogo de vídeos" sub="87 vídeos y subtítulos descargables" onClick={onVerCatalogo} tono="navy" />
           <Acceso icono="📘" titulo={t('panel.presentacion')} sub={t('panel.presentacionSub')} onClick={onVerCurso} tono="teal" />
