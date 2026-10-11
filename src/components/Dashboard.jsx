@@ -28,6 +28,8 @@ export default function Dashboard({
   onVerCertificado,
   roles = [],
   origenRoles = 'asignados',
+  rolesPendientes = [],
+  rolesAsignados = [],
   solicitud = null,
   onElegirRama,
   contactoMenores = null,
@@ -54,7 +56,6 @@ export default function Dashboard({
   const directo = tieneContactoDirecto(roles, contactoMenores)
   const troncoIds = [...TRONCO_COMUN, ...(directo ? MODULOS_DESARROLLO : [])].filter(existe)
   const troncoHechos = troncoIds.filter(hecho).length
-  const troncoBaseCompleto = TRONCO_COMUN.every(hecho)
 
   // ── Paso 3: módulos propios de la rama (sin repetir el tronco) ──
   const obligatorios = roles.length ? modulosObligatorios(roles, contactoMenores).filter(existe) : troncoIds
@@ -79,7 +80,7 @@ export default function Dashboard({
 
   const nombreRamas = grupos.map((g) => GRUPOS[g]?.nombre).join(' + ')
   const especialidades = roles.map((id) => ROL_POR_ID[id]?.nombreEs || ROL_POR_ID[id]?.nombre).filter(Boolean)
-  const mostrarSelector = !viendoOtra && onElegirRama && (origenRoles === 'ninguno' || cambiandoRama)
+  const mostrarSelector = !viendoOtra && onElegirRama && ((origenRoles === 'ninguno' && !rolesPendientes.length) || cambiandoRama)
 
   return (
     <div className="space-y-6">
@@ -89,8 +90,9 @@ export default function Dashboard({
           {esAdmin && !viendoOtra ? 'Administración · Vista completa' : grupos.length ? `Rama ${nombreRamas}` : 'Tronco común'}
         </h1>
         <p className="mt-3 text-base leading-relaxed text-white/80">
-          Todas las personas empiezan por el tronco común. Después eliges tu rama: <b>Mentor</b> (Off-Campus y Dual Diploma, clases de
-          inglés o de Life Skills), <b>Coordinador</b> o <b>Estratégico</b>. Tus avances guardados se conservan.
+          Todas las personas empiezan por el tronco común y pueden entrar en la rama <b>Mentor</b> (Off-Campus y Dual Diploma, inglés,
+          Life Skills, Extensión Local o evaluación educativa). <b>Coordinador</b> lo confirma Dirección Académica y <b>Estratégico</b>,
+          la Dirección de Operaciones y Alianzas. Tus avances guardados se conservan.
         </p>
       </section>
 
@@ -102,7 +104,7 @@ export default function Dashboard({
             <h2 className="text-xl font-bold text-navy">{mentora.nombre}</h2>
             <p className="text-sm text-navy/60">
               {especialidades.length ? especialidades.join(' · ') : 'Sin rama todavía'}
-              {origenRoles === 'solicitud' && ' · pendiente de validación'}
+              {rolesPendientes.length > 0 && ` · ${rolesPendientes.length} pendiente(s) de confirmación`}
               {viendoOtra && t('panel.vistaAdmin')}
             </p>
             <div className="mt-3 grid grid-cols-3 gap-2 text-center">
@@ -138,8 +140,7 @@ export default function Dashboard({
       {/* PASO 2 · RAMA */}
       {mostrarSelector ? (
         <EligeRama
-          habilitado={troncoBaseCompleto || esAdmin}
-          actual={origenRoles === 'solicitud' ? roles : []}
+          actual={solicitud?.funciones || []}
           onGuardar={async (f) => { await onElegirRama(f); setCambiandoRama(false) }}
           onCancelar={cambiandoRama ? () => setCambiandoRama(false) : undefined}
         />
@@ -150,17 +151,28 @@ export default function Dashboard({
             <>
               <p className="mt-1 text-lg font-bold text-navy">{nombreRamas}</p>
               <p className="text-sm text-navy/70">{especialidades.join(' · ')}</p>
-              <p className={`mt-2 rounded-lg px-3 py-2 text-xs ${origenRoles === 'solicitud' ? 'bg-gold/15 text-navy' : 'bg-teal/10 text-navy/80'}`}>
-                {origenRoles === 'solicitud'
-                  ? `Elegida por ti el ${(solicitud?.fecha || '').slice(0, 10)} · pendiente de validación por dirección. Ya puedes avanzar en tu ruta.`
-                  : 'Asignada formalmente por dirección.'}
-              </p>
-              {origenRoles === 'solicitud' && !viendoOtra && onElegirRama && (
-                <button onClick={() => setCambiandoRama(true)} className="mt-2 text-xs font-bold text-teal hover:underline">Cambiar mi elección →</button>
-              )}
+              <ul className="mt-2 space-y-1 text-xs">
+                {roles.map((id) => (
+                  <li key={id} className="rounded-lg bg-teal/10 px-3 py-1.5 text-navy/80">
+                    ✓ {ROL_POR_ID[id]?.nombreEs || ROL_POR_ID[id]?.nombre} · {rolesAsignados.includes(id) ? 'asignada por dirección' : 'activa (acceso libre)'}
+                  </li>
+                ))}
+              </ul>
             </>
           ) : (
-            <p className="mt-1 text-sm text-navy/70">Esta persona todavía no ha elegido rama.</p>
+            <p className="mt-1 text-sm text-navy/70">{viendoOtra ? 'Esta persona todavía no tiene rama activa.' : 'Todavía no tienes rama activa.'}</p>
+          )}
+          {rolesPendientes.length > 0 && (
+            <ul className="mt-2 space-y-1 text-xs">
+              {rolesPendientes.map((id) => (
+                <li key={id} className="rounded-lg bg-gold/15 px-3 py-1.5 text-navy">
+                  ⏳ {ROL_POR_ID[id]?.nombreEs || ROL_POR_ID[id]?.nombre} · pendiente de confirmación por {GRUPOS[grupoDe(id)]?.confirma}
+                </li>
+              ))}
+            </ul>
+          )}
+          {!viendoOtra && onElegirRama && (
+            <button onClick={() => setCambiandoRama(true)} className="mt-2 text-xs font-bold text-teal hover:underline">{solicitud ? 'Cambiar mi elección →' : 'Elegir o ampliar mi rama →'}</button>
           )}
         </section>
       )}

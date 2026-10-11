@@ -93,7 +93,7 @@ export const ROLES = [
     unidad: 'Una escuela o institución con convenio vigente',
     modalidades: ['Virtual', 'Presencial', 'Híbrido'],
     requiereAlcance: ['territorio', 'programa'],
-    modulos: [...CORE, ...B2, ...B3, ...B4, ...B5, 'T6.1', 'T6.2', 'T6.3', ...B8],
+    modulos: [...TRONCO_COMUN, 'T2.4', ...B3, ...B4, ...B5, 'T6.3', ...B8],
     sistemas: {
       SIS: 'perfil Admin limitado a su institución',
       PORTAL: 'recursos y seguimiento de su institución',
@@ -163,7 +163,7 @@ export const ROLES = [
     contacto: CONTACTO.DIRECTO,
     unidad: 'Extensión Local (20 %) y lenguas locales',
     modalidades: [],
-    modulos: [...CORE, 'T6.3', ...MODULOS_CONTACTO_DIRECTO, 'T10.5'],
+    modulos: [...TRONCO_COMUN, 'T6.3', 'T4.2', 'T5.1', 'T5.3', ...MODULOS_CONTACTO_DIRECTO, 'T10.5'],
     sistemas: { PORTAL: 'completo', SIS: 'estudiantes asignados', DRIVE: 'lectura' },
     domina: ['Extensión Local', 'Lenguas locales', 'Coordinación especializada'],
     escala: [],
@@ -178,7 +178,7 @@ export const ROLES = [
     contacto: CONTACTO.DIRECTO,
     unidad: 'Servicios educativos NO clínicos de evaluación',
     modalidades: [],
-    modulos: [...CORE, 'T3.4', 'T4.3', ...MODULOS_CONTACTO_DIRECTO, 'T10.5'],
+    modulos: [...TRONCO_COMUN, 'T3.4', 'T4.1', 'T4.2', 'T4.3', 'T5.1', ...MODULOS_CONTACTO_DIRECTO, 'T10.5'],
     sistemas: { SIS: 'resultado diagnóstico, aporte al PEI, evidencia, recomendaciones', PORTAL: 'diagnósticos', DRIVE: 'lectura' },
     domina: ['Academic Diagnostic / Achievement Assessment', 'Learning Skills / Educational Screening', 'Social-Emotional / Student Well-Being Screening (límites educativos)'],
     escala: ['Cuando se necesita evaluación clínica: REFER TO LICENSED PROFESSIONAL'],
@@ -340,19 +340,21 @@ export const ROLES = [
 // módulos, sistemas, límites y checklist). Una persona puede tener varios roles compatibles.
 //  · Mentor      → Mentor Off-Campus / Dual Diploma, Profesor de inglés, Facilitador de Life Skills
 //  · Coordinador → supervisión de mentores, clases de inglés y Life Skills; Off-Campus y Dual Diploma
-// Mentor y Coordinador SOLO cubren la operación Chanak (Off-Campus, Dual Diploma, inglés y Life Skills).
-// Las funciones academic_tutor, local_language, assessment_specialist y partner_director quedan
-// fuera de la formación 2026–2027: siguen en el catálogo (datos históricos) pero sin grupo, por lo
-// que no se pueden elegir ni asignar y no aparecen en el organigrama.
+// Mentor y Coordinador cubren la operación Chanak (Off-Campus, Dual Diploma, inglés, Life Skills,
+// Extensión Local y evaluación educativa; director de institución partner dentro de Coordinador).
+// academic_tutor queda fuera de la formación 2026–2027 (sin grupo: no se elige ni se asigna).
+//
+// ACCESO: el tronco común y la rama Mentor son libres (cualquiera puede entrar).
+// Coordinador lo confirma Dirección Académica; Estratégico, Dirección de Operaciones y Alianzas (Elías).
 //  · Estratégico → todos los demás (representación, familias, alianzas, grants y proyectos, registros)
 export const GRUPOS = {
-  mentor: { id: 'mentor', icono: '👩‍🏫', nombre: 'Mentor', nombreEn: 'Mentor', descripcion: 'Acompaña a estudiantes y familias de Off-Campus y Dual Diploma. Incluye a quienes dan clases de inglés o de Life Skills.', funcionPorDefecto: 'mentor' },
-  coordinator: { id: 'coordinator', icono: '🎯', nombre: 'Coordinador', nombreEn: 'Coordinator', descripcion: 'Supervisa a mentores, profesores de inglés y facilitadores de Life Skills: SIS, PEI, evidencias, calidad e incidencias de Off-Campus y Dual Diploma.', funcionPorDefecto: 'coordinator', requiere: 'mentor' },
-  estrategico: { id: 'estrategico', icono: '🤝', nombre: 'Estratégico', nombreEn: 'Strategic', descripcion: 'Familias y matrícula, marketing y Google Ads, ESA y fondos estatales, alianzas, grants y programas EducaFe (inactivos hasta febrero 2027).', funcionPorDefecto: 'strategic_general' },
+  mentor: { id: 'mentor', icono: '👩‍🏫', nombre: 'Mentor', nombreEn: 'Mentor', descripcion: 'Acompaña a estudiantes y familias de Off-Campus y Dual Diploma. Incluye clases de inglés y de Life Skills, Extensión Local y evaluación educativa.', funcionPorDefecto: 'mentor', acceso: 'libre' },
+  coordinator: { id: 'coordinator', icono: '🎯', nombre: 'Coordinador', nombreEn: 'Coordinator', descripcion: 'Supervisa a mentores y especialistas (SIS, PEI, evidencias, calidad e incidencias de Off-Campus y Dual Diploma). Incluye director de institución partner.', funcionPorDefecto: 'coordinator', acceso: 'confirmacion', confirma: 'Dirección Académica' },
+  estrategico: { id: 'estrategico', icono: '🤝', nombre: 'Estratégico', nombreEn: 'Strategic', descripcion: 'Familias y matrícula, marketing y Google Ads, ESA y fondos estatales, alianzas, grants y programas EducaFe (inactivos hasta febrero 2027).', funcionPorDefecto: 'strategic_general', acceso: 'confirmacion', confirma: 'Dirección de Operaciones y Alianzas (Elías Vidal)' },
 }
 const GRUPO_DE_FUNCION = {
-  mentor: 'mentor', english_teacher: 'mentor', lifeskills_facilitator: 'mentor',
-  coordinator: 'coordinator',
+  mentor: 'mentor', english_teacher: 'mentor', lifeskills_facilitator: 'mentor', local_language: 'mentor', assessment_specialist: 'mentor',
+  coordinator: 'coordinator', partner_director: 'coordinator',
   strategic_general: 'estrategico', academic_records: 'estrategico', country_rep: 'estrategico', state_rep: 'estrategico', program_rep: 'estrategico',
   family_enrollment: 'estrategico', institutional_partnerships: 'estrategico', grants_projects: 'estrategico', lifeskills_project_coord: 'estrategico',
 }
@@ -368,8 +370,13 @@ export const ESPECIALIDADES = {
     { id: 'mentor', nombre: 'Mentor Off-Campus / Dual Diploma', detalle: 'Acompaña el plan académico: diagnóstico, PEI, vía curricular, dominio, evidencias y familia.' },
     { id: 'english_teacher', nombre: 'Profesor/a de inglés', detalle: 'Clases de inglés y Academic English. Nivel B2–C1 (inglés general) o C1–C2 (Dual Diploma).' },
     { id: 'lifeskills_facilitator', nombre: 'Facilitador/a de Life Skills', detalle: 'Clases semanales de Life Skills & Leadership por grupos de edad (12–15 y 16–17).' },
+    { id: 'local_language', nombre: 'Extensión Local', detalle: 'Asignaturas del 20 % local (Lengua, Historia, Geografía con competencias LOMLOE), sobre todo en modalidad presencial.' },
+    { id: 'assessment_specialist', nombre: 'Especialista en evaluación educativa', detalle: 'Diagnóstico académico y screening educativo NO clínico; aporta al PEI y deriva a profesionales cuando corresponde.' },
   ],
-  coordinator: [{ id: 'coordinator', nombre: 'Coordinador/a Off-Campus y Dual Diploma', detalle: 'Requiere la rama Mentor. Supervisa mentores y clases de inglés y Life Skills.' }],
+  coordinator: [
+    { id: 'coordinator', nombre: 'Coordinador/a Off-Campus y Dual Diploma', detalle: 'Requiere la rama Mentor. Supervisa mentores, especialistas y clases.' },
+    { id: 'partner_director', nombre: 'Director/a de institución partner', detalle: 'Dirige una escuela o institución con convenio vigente; SIS limitado a su institución.' },
+  ],
   estrategico: [
     { id: 'strategic_general', nombre: 'Estratégico general', detalle: 'Marketing, captación, alianzas, ESA/fondos estatales y proyectos.' },
     { id: 'family_enrollment', nombre: 'Familias, matrícula y ESA', detalle: 'Leads, orientación, matrícula y facturación con fondos estatales (EMA, CHOOSE y otros).' },
@@ -408,10 +415,18 @@ export function rolesDesdeTipoAcceso(tipo) {
 //  1. los asignados formalmente por administración (perfil_roles);
 //  2. si no tiene ninguno, la rama que ella misma eligió (provisional hasta que dirección la valide);
 //  3. si tampoco eligió, ninguno: solo ve el tronco común y la pantalla «Elige tu rama».
+// ¿La función se puede activar sin confirmación? (tronco común y rama Mentor: sí)
+export const accesoLibre = (funcionId) => GRUPOS[grupoDe(funcionId)]?.acceso === 'libre'
+
+// Roles efectivos = asignados formalmente + funciones Mentor elegidas por la persona (acceso libre).
+// Coordinador y Estratégico elegidos quedan en `pendientes` hasta que la dirección correspondiente
+// los confirme (asignación en Administración → Personas).
 export function rolesEfectivos(asignados = [], solicitud = null) {
-  if (asignados.length) return { roles: [...new Set(asignados)], origen: 'asignados' }
-  if (solicitud?.funciones?.length) return { roles: solicitud.funciones, origen: 'solicitud' }
-  return { roles: [], origen: 'ninguno' }
+  const elegidas = solicitud?.funciones || []
+  const roles = [...new Set([...asignados, ...elegidas.filter(accesoLibre)])]
+  const pendientes = elegidas.filter((f) => !accesoLibre(f) && !asignados.includes(f))
+  const origen = asignados.length ? 'asignados' : roles.length ? 'solicitud' : 'ninguno'
+  return { roles, pendientes, origen }
 }
 
 // ¿La persona tiene contacto directo con menores?

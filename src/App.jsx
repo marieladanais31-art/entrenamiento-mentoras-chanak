@@ -162,7 +162,7 @@ export default function App() {
     () => solicitudDe((viendoOtra ? compromisoViendo : compromiso)?.funciones),
     [viendoOtra, compromisoViendo, compromiso]
   )
-  const { roles: rolesIds, origen: origenRoles } = useMemo(
+  const { roles: rolesIds, origen: origenRoles, pendientes: rolesPendientes } = useMemo(
     () => rolesEfectivos((rolesViendo || []).map((r) => r.rol), solicitudViendo),
     [rolesViendo, solicitudViendo]
   )
@@ -343,6 +343,8 @@ export default function App() {
             onVerCertificado={(nivel) => setVista({ ...vista, nombre: 'certificado', nivel })}
             roles={rolesIds}
             origenRoles={origenRoles}
+            rolesPendientes={rolesPendientes}
+            rolesAsignados={(rolesViendo || []).map((r) => r.rol)}
             solicitud={solicitudViendo}
             onElegirRama={viendoOtra ? undefined : async (funciones) => setCompromiso(await api.guardarSolicitudRama(perfil.id, funciones))}
             contactoMenores={contactoViendo}
