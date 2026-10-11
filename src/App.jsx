@@ -22,6 +22,8 @@ import Header from './components/ui/Header'
 import CambiarContrasena from './components/CambiarContrasena'
 import CompromisoInicial, { VERSION_COMPROMISO } from './components/CompromisoInicial'
 import EstrategiaOperativa from './components/EstrategiaOperativa'
+import MiFuncion from './components/MiFuncion'
+import VistasSistemaView from './components/VistasSistemaView'
 import * as api from './lib/backend'
 import { getModulo } from './data/curriculum'
 import { aplicarEquivalencias } from './lib/calculos'
@@ -352,8 +354,12 @@ export default function App() {
             onVerRol={(rolId) => setVista({ ...vista, nombre: 'rol', rolId })}
             onVerMatriz={() => setVista({ ...vista, nombre: 'matriz' })}
             onVerEstrategia={() => setVista({ ...vista, nombre: 'estrategia' })}
+            onVerFuncion={(funcionId) => setVista({ ...vista, nombre: 'mi-funcion', funcionId })}
+            onVerVistas={() => setVista({ ...vista, nombre: 'vistas' })}
           />
         )}
+        {vista.nombre === 'mi-funcion' && <MiFuncion funcionId={vista.funcionId} roles={rolesIds} onCambiar={(funcionId) => setVista({ ...vista, funcionId })} onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
+        {vista.nombre === 'vistas' && <VistasSistemaView roles={rolesIds} esAdmin={esAdmin} onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
         {vista.nombre === 'catalogo-videos' && <CatalogoVideos onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
         {vista.nombre === 'operativa-sis' && <OperativaSIS onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
         {vista.nombre === 'guias-familias' && <GuiasFamilias onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}

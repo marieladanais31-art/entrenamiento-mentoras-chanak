@@ -1,0 +1,393 @@
+// ============================================================
+// VISTAS DEL SISTEMA · simulaciones formativas de las pantallas reales
+//
+// Reconstruidas a partir del código de los repositorios (oct-2026):
+//  · chanak-sis (sis.chanakacademy.org): TutorDashboard, CoordinatorDashboard, ParentDashboard,
+//    GradeEntriesManager, EvidenceReviewPanel, BulkPaceGradeUpload, PEIFormFull, SisAlertsDashboard
+//  · chanak-dual-diploma-lms (Dual Diploma Portal): /es/estudiante, /es/plan-de-graduacion,
+//    /es/coordinador, CourseLessonViewer, CoordinatorReviewQueue, CoordinatorCoinsPanel
+//  · LifeSkillsInteractiveApp (Life Skills dentro del Dual Diploma Portal)
+// Nombres de pestañas, estados y campos = los del código. Los datos son FICTICIOS (IDs, nunca nombres).
+// No son capturas de una sesión autenticada: antes de operar, comprobar en el sistema real con las
+// cuentas demo. Si una pantalla real cambia, actualizar aquí (ver HANDOFF_IA.md).
+// ============================================================
+
+export const SISTEMAS_VISTA = {
+  sis: { nombre: 'SIS', url: 'https://sis.chanakacademy.org', color: 'bg-teal' },
+  dual: { nombre: 'Dual Diploma Portal', url: 'https://dualdiploma.chanakacademy.org', color: 'bg-navy' },
+  lifeskills: { nombre: 'Life Skills', url: 'https://dualdiploma.chanakacademy.org/es/life-skills', color: 'bg-gold' },
+}
+
+export const VISTAS = [
+  // ───────────── SIS · PORTAL DEL TUTOR / MENTOR ─────────────
+  {
+    id: 'sis-tutor-estudiantes',
+    sistema: 'sis',
+    ruta: '/tutor · Portal del Tutor',
+    titulo: 'Mis Estudiantes Asignados',
+    paraQuien: ['mentor', 'english_teacher', 'lifeskills_facilitator', 'local_language', 'assessment_specialist', 'coordinator'],
+    modulos: ['T5.1', 'T10.4'],
+    pestanas: ['Mis Estudiantes', 'Carga Eval. M.L.', 'Evidencias', 'PEI / Eval. M.L.', 'Alertas'],
+    activa: 'Mis Estudiantes',
+    tipo: 'tarjetas',
+    tarjetas: [
+      { titulo: 'ID-DEMO-014 · 7.º grado', lineas: ['Off-Campus · A.C.E.', 'Materias: 6 · Q1 activo'], marca: 1 },
+      { titulo: 'ID-DEMO-022 · 10.º grado', lineas: ['Dual Diploma', 'Materias: 4 · Q1 activo'], marca: 2 },
+    ],
+    puntos: [
+      { n: 1, texto: 'Solo ves a los estudiantes que administración te asignó. Si falta alguien, no pidas un rol mayor: avisa a coordinación.' },
+      { n: 2, texto: 'Al abrir la tarjeta eliges materia y trimestre (Q1–Q4). Todo lo que registras queda en ese trimestre del año activo 2026-2027.' },
+    ],
+    practica: {
+      pregunta: 'Una familia te escribe por un alumno que no aparece en tu lista. ¿Qué haces?',
+      opciones: ['Pido a un compañero su usuario para verlo', 'Aviso a coordinación para que revise la asignación', 'Le pido a la familia las notas por WhatsApp y las cargo yo'],
+      correcta: 1,
+      explicacion: 'El acceso sigue a la asignación. Coordinación/administración corrige la asignación; nunca se comparten usuarios ni se cargan datos fuera del SIS.',
+    },
+  },
+  {
+    id: 'sis-notas',
+    sistema: 'sis',
+    ruta: '/tutor · Mis Estudiantes → materia → trimestre',
+    titulo: 'Notas parciales (evaluaciones por dominio)',
+    paraQuien: ['mentor', 'english_teacher', 'lifeskills_facilitator', 'local_language'],
+    modulos: ['T4.2', 'T4.3', 'T5.2'],
+    pestanas: ['Mis Estudiantes', 'Carga Eval. M.L.', 'Evidencias', 'PEI / Eval. M.L.', 'Alertas'],
+    activa: 'Mis Estudiantes',
+    tipo: 'tabla',
+    columnas: ['Evaluación', 'Nota (0–100)', 'Observación', 'Estado'],
+    filas: [
+      ['PACE 1072 · test final', '92', 'Dominio demostrado', 'Aprobado'],
+      ['PACE 1073 · checkup 2', '74', 'Repite checkup tras refuerzo', 'Borrador'],
+      ['Writing sample Q1', '85', '—', 'En revisión'],
+    ],
+    aviso: 'Promedio bajo el nivel de dominio esperado (80).',
+    marcas: { 'PACE 1073 · checkup 2': 1, 'Writing sample Q1': 2 },
+    puntos: [
+      { n: 1, texto: 'Por debajo de 80 no se avanza: el sistema lo marca y tú registras la intervención (refuerzo y nueva evaluación), no "subes" la nota.' },
+      { n: 2, texto: 'Flujo de estados: Borrador → En revisión → Aprobado. Si coordinación pide «Corrección solicitada», corriges y vuelves a enviar.' },
+    ],
+    practica: {
+      pregunta: 'Un estudiante saca 74 en un checkup. ¿Qué registras?',
+      opciones: ['Lo redondeo a 80 para que pueda avanzar', 'Registro 74, anoto el refuerzo y programo nueva evaluación', 'No registro nada hasta que mejore'],
+      correcta: 1,
+      explicacion: 'Mastery Learning: la nota real queda registrada, se interviene y se reevalúa. El registro honesto es lo que protege al estudiante y a la acreditación.',
+    },
+  },
+  {
+    id: 'sis-carga-ml',
+    sistema: 'sis',
+    ruta: '/tutor · Carga Eval. M.L.',
+    titulo: 'Carga masiva de evaluaciones (proyección PEI)',
+    paraQuien: ['mentor', 'coordinator'],
+    modulos: ['T3.4', 'T5.2'],
+    pestanas: ['Mis Estudiantes', 'Carga Eval. M.L.', 'Evidencias', 'PEI / Eval. M.L.', 'Alertas'],
+    activa: 'Carga Eval. M.L.',
+    tipo: 'tabla',
+    columnas: ['Materia', 'Eval. M.L.', 'Nota actual', 'Nueva nota', 'Estado'],
+    filas: [
+      ['Math', 'PACE 1074', '—', '88', 'Entregado'],
+      ['English', 'PACE 1075', '—', '—', 'Atrasado'],
+      ['Science', 'PACE 1071', '90', '—', 'Evaluado'],
+    ],
+    marcas: { English: 1, Math: 2 },
+    puntos: [
+      { n: 1, texto: 'Las filas salen de la proyección del PEI para el trimestre. «Atrasado» significa que el ritmo real va por detrás del plan: es una señal para la reunión con la familia.' },
+      { n: 2, texto: 'La nueva nota entra «En revisión». Si no hay proyección PEI para el trimestre, la pantalla lo avisa: primero se completa el PEI.' },
+    ],
+    practica: {
+      pregunta: 'La pantalla dice «No hay proyección PEI para este trimestre». ¿Cuál es el paso correcto?',
+      opciones: ['Cargo las notas en otra materia cualquiera', 'Pido a coordinación que complete/apruebe el PEI y espero', 'Creo una proyección inventada'],
+      correcta: 1,
+      explicacion: 'Sin PEI aprobado no hay plan contra el que evaluar. El PEI lo elabora el mentor y lo valida coordinación.',
+    },
+  },
+  {
+    id: 'sis-evidencias',
+    sistema: 'sis',
+    ruta: '/tutor · Evidencias',
+    titulo: 'Revisión de evidencias',
+    paraQuien: ['mentor', 'english_teacher', 'lifeskills_facilitator', 'local_language', 'coordinator'],
+    modulos: ['T5.2', 'T8.3'],
+    pestanas: ['Mis Estudiantes', 'Carga Eval. M.L.', 'Evidencias', 'PEI / Eval. M.L.', 'Alertas'],
+    activa: 'Evidencias',
+    filtros: ['Pendientes', 'Aprobadas', 'Corrección', 'Rechazadas', 'Todas', '2026-2027 (Activo)'],
+    tipo: 'tabla',
+    columnas: ['Estudiante', 'Materia', 'Evidencia', 'Estado'],
+    filas: [
+      ['ID-DEMO-014', 'English', 'Audio · lectura en voz alta', 'Pendiente de revisión'],
+      ['ID-DEMO-022', 'Life Skills', 'Plan de proyecto Q1', 'Corrección solicitada'],
+    ],
+    marcas: { 'ID-DEMO-014': 1, 'ID-DEMO-022': 2 },
+    puntos: [
+      { n: 1, texto: 'Revisa que la evidencia corresponde al objetivo. Para aprobar una «Eval. M.L.» el sistema exige score: sin nota no se aprueba.' },
+      { n: 2, texto: 'Si pides corrección, escribe en el comentario interno QUÉ falta y CÓMO corregirlo. Ese comentario queda para auditoría.' },
+    ],
+    practica: {
+      pregunta: 'Recibes una foto borrosa como evidencia de un writing. ¿Qué estado eliges?',
+      opciones: ['Aprobada, para no retrasar', 'Corrección solicitada, con comentario concreto', 'Rechazada sin comentario'],
+      correcta: 1,
+      explicacion: '«Corrección» con una instrucción clara permite que la familia la reenvíe. Rechazar sin explicar no deja trazabilidad.',
+    },
+  },
+  {
+    id: 'sis-pei',
+    sistema: 'sis',
+    ruta: '/tutor · PEI / Eval. M.L.',
+    titulo: 'PEI · Plan Educativo Individual',
+    paraQuien: ['mentor', 'assessment_specialist', 'local_language', 'coordinator'],
+    modulos: ['T3.4', 'T3.3', 'T6.3'],
+    pestanas: ['Mis Estudiantes', 'Carga Eval. M.L.', 'Evidencias', 'PEI / Eval. M.L.', 'Alertas'],
+    activa: 'PEI / Eval. M.L.',
+    tipo: 'ficha',
+    secciones: [
+      ['Diagnóstico Inicial', 'Resultados por materia y nivel de entrada', 1],
+      ['Currículo Base', 'A.C.E. (vía de referencia) · Chanak Flex en Science', 2],
+      ['Adaptaciones Requeridas', 'Tiempo ampliado en tests de lectura'],
+      ['Extensión Local Obligatoria', 'Lengua Castellana, Historia y Geografía (20 %)', 3],
+      ['Estrategias de Seguimiento', 'Revisión semanal + mentoría mensual con la familia'],
+      ['Control de Versión', 'v2 · Fecha de Aprobación pendiente', 4],
+    ],
+    puntos: [
+      { n: 1, texto: 'El PEI parte del diagnóstico. Sin diagnóstico no se inventa nivel: coordinación organiza la prueba (especialista en evaluación).' },
+      { n: 2, texto: 'La vía curricular se justifica aquí. Cambiarla después es decisión de coordinación/dirección, no del mentor.' },
+      { n: 3, texto: 'La Extensión Local (20 % del 60/20/20) se define en el PEI: Lengua, Historia y Geografía con competencias LOMLOE escritas completas.' },
+      { n: 4, texto: 'Cada cambio crea versión. Sin fecha de aprobación el PEI no está vigente.' },
+    ],
+    practica: {
+      pregunta: 'La familia quiere cambiar de A.C.E. a Chanak Flex en Math a mitad de trimestre. ¿Quién decide?',
+      opciones: ['El mentor, editando el PEI', 'Coordinación/dirección, con evidencia; el mentor documenta la petición', 'La familia, porque paga'],
+      correcta: 1,
+      explicacion: 'El cambio de vía afecta créditos y plan: el mentor recoge la petición y evidencias; decide coordinación/dirección y queda una nueva versión del PEI.',
+    },
+  },
+  {
+    id: 'sis-alertas',
+    sistema: 'sis',
+    ruta: '/tutor · Alertas',
+    titulo: 'Alertas',
+    paraQuien: ['mentor', 'english_teacher', 'lifeskills_facilitator', 'coordinator'],
+    modulos: ['T4.2', 'T9.4', 'T5.3'],
+    pestanas: ['Mis Estudiantes', 'Carga Eval. M.L.', 'Evidencias', 'PEI / Eval. M.L.', 'Alertas'],
+    activa: 'Alertas',
+    filtros: ['Todas', 'Alta', 'Media', 'Baja'],
+    tipo: 'tabla',
+    columnas: ['Estudiante', 'Motivo', 'Prioridad', 'Coordinador'],
+    filas: [
+      ['ID-DEMO-014', '2 semanas sin evidencias', 'Media', 'Asignado'],
+      ['ID-DEMO-031', 'Promedio < 80 en Math', 'Alta', 'Asignado'],
+    ],
+    marcas: { 'ID-DEMO-031': 1, 'ID-DEMO-014': 2 },
+    puntos: [
+      { n: 1, texto: 'Alta = actuar esta semana: plan de intervención y aviso a la familia. Una alerta de seguridad o bienestar NO va aquí: va al DSL según safeguarding.' },
+      { n: 2, texto: 'Escribe el motivo y la acción. «Sin alertas activas» solo significa que los registros revisados están al día.' },
+    ],
+    practica: {
+      pregunta: 'En una sesión, un alumno cuenta algo que te preocupa sobre su seguridad. ¿Dónde lo registras?',
+      opciones: ['En Alertas del SIS, prioridad Alta', 'Lo comunico de inmediato al DSL siguiendo el protocolo de safeguarding', 'En el feedback de la evidencia'],
+      correcta: 1,
+      explicacion: 'Las preocupaciones de protección no son alertas académicas: van directamente al Designated Safeguarding Lead (módulo 6.1).',
+    },
+  },
+  // ───────────── SIS · COORDINADOR ─────────────
+  {
+    id: 'sis-coord-revision',
+    sistema: 'sis',
+    ruta: '/coordinator · Revisar Notas',
+    titulo: 'Coordinador · Revisar notas y evidencias',
+    paraQuien: ['coordinator', 'partner_director'],
+    modulos: ['T8.1', 'T8.3'],
+    pestanas: ['Notas', 'Carga Eval. M.L.', 'Revisar Notas', 'Evidencias', 'PEI / Eval. M.L.', 'Boletines', 'Seguimiento', 'Estatus Pagos', 'Alertas'],
+    activa: 'Revisar Notas',
+    tipo: 'tabla',
+    columnas: ['Estudiante', 'Materia · Q', 'Nota', 'Mentor', 'Acción'],
+    filas: [
+      ['ID-DEMO-014', 'English · Q1', '85', 'Mentor A', 'Aprobar / Solicitar corrección'],
+      ['ID-DEMO-031', 'Math · Q1', '96', 'Mentor B', 'Aprobar / Solicitar corrección'],
+    ],
+    marcas: { 'ID-DEMO-031': 1, 'ID-DEMO-014': 2 },
+    puntos: [
+      { n: 1, texto: 'Una nota alta sin evidencia no se aprueba: revisa que exista la evidencia y que coincida con la evaluación.' },
+      { n: 2, texto: '«Corrección solicitada» devuelve la nota al mentor con tu comentario. Tú supervisas el sistema; no reescribes las notas de otros.' },
+    ],
+    practica: {
+      pregunta: 'Un mentor sube 96 en Math sin evidencia adjunta. ¿Qué haces?',
+      opciones: ['Apruebo, confío en el mentor', 'Solicito corrección pidiendo la evidencia', 'Cambio la nota a 80'],
+      correcta: 1,
+      explicacion: 'Evidencia antes que número. La corrección deja trazabilidad y mantiene la responsabilidad del mentor.',
+    },
+  },
+  {
+    id: 'sis-coord-seguimiento',
+    sistema: 'sis',
+    ruta: '/coordinator · Seguimiento · Boletines · Estatus Pagos',
+    titulo: 'Coordinador · Seguimiento, boletines y estatus de pagos',
+    paraQuien: ['coordinator', 'partner_director'],
+    modulos: ['T8.1', 'T8.3', 'T5.2'],
+    pestanas: ['Notas', 'Carga Eval. M.L.', 'Revisar Notas', 'Evidencias', 'PEI / Eval. M.L.', 'Boletines', 'Seguimiento', 'Estatus Pagos', 'Alertas'],
+    activa: 'Estatus Pagos',
+    filtros: ['Todos (12)', 'Pagados / Al día (9)', 'Pendientes (2)', 'Beca 100% (1)'],
+    tipo: 'tabla',
+    columnas: ['Estudiante', 'Programa', 'Pago', 'Boletín Q1'],
+    filas: [
+      ['ID-DEMO-014', 'Off-Campus', 'Al día', 'Listo para emitir'],
+      ['ID-DEMO-040', 'Dual Diploma', 'Pendiente', 'Notas en revisión'],
+    ],
+    marcas: { 'ID-DEMO-040': 1, 'ID-DEMO-014': 2 },
+    puntos: [
+      { n: 1, texto: 'Estatus Pagos es de CONSULTA para coordinación: un pago pendiente se deriva a administración. Nunca se retienen notas ni se negocia con la familia.' },
+      { n: 2, texto: 'El boletín se emite cuando todas las notas del trimestre están aprobadas. Seguimiento muestra quién va atrasado respecto al PEI.' },
+    ],
+    practica: {
+      pregunta: 'Una familia con pago pendiente pide el boletín. ¿Qué haces?',
+      opciones: ['Lo retengo hasta que pague', 'Sigo el proceso académico normal y derivo el pago a administración', 'Le ofrezco un descuento'],
+      correcta: 1,
+      explicacion: 'Lo académico y lo económico van por canales separados. Precios y pagos los gestiona administración.',
+    },
+  },
+  // ───────────── SIS · FAMILIA ─────────────
+  {
+    id: 'sis-familia',
+    sistema: 'sis',
+    ruta: '/parent · Portal de familia',
+    titulo: 'Lo que ve la familia',
+    paraQuien: ['mentor', 'coordinator', 'family_enrollment', 'strategic_general', 'english_teacher', 'lifeskills_facilitator'],
+    modulos: ['T5.3', 'T2.1', 'T10.4'],
+    pestanas: ['👥 Mis Hijos', '📄 Documentos & Boletines', '📊 Evaluaciones & Evidencias', '📋 Encuesta Familiar', '🔗 Recursos', '📚 Currículo / Curriculum'],
+    activa: '📊 Evaluaciones & Evidencias',
+    tipo: 'tabla',
+    columnas: ['Materia', 'Última evaluación', 'Estado', 'Feedback'],
+    filas: [
+      ['English', 'Writing sample Q1', 'En revisión', '—'],
+      ['Life Skills', 'Plan de proyecto Q1', 'Corrección solicitada', 'Añadir el presupuesto'],
+    ],
+    marcas: { 'Life Skills': 1, English: 2 },
+    puntos: [
+      { n: 1, texto: 'La familia ve tu feedback tal como lo escribes: concreto, respetuoso y con el siguiente paso.' },
+      { n: 2, texto: '«En revisión» no es una nota final. Explícalo en la mentoría para evitar malentendidos.' },
+    ],
+    practica: {
+      pregunta: 'Una madre ve «Corrección solicitada» y se preocupa. ¿Qué le dices?',
+      opciones: ['Que su hijo suspendió', 'Qué falta, cómo corregirlo y la fecha de reenvío', 'Que no se preocupe y lo apruebo'],
+      correcta: 1,
+      explicacion: 'La corrección es parte del dominio: se explica qué falta y cuándo se revisa de nuevo.',
+    },
+  },
+  // ───────────── DUAL DIPLOMA PORTAL ─────────────
+  {
+    id: 'dual-estudiante',
+    sistema: 'dual',
+    ruta: '/es/estudiante · Mi progreso',
+    titulo: 'Dual Diploma · Panel del estudiante',
+    paraQuien: ['mentor', 'english_teacher', 'lifeskills_facilitator', 'coordinator', 'family_enrollment'],
+    modulos: ['T2.2', 'T4.4', 'T5.1'],
+    pestanas: ['Mi progreso', 'Evidencias', 'Documentos'],
+    activa: 'Mi progreso',
+    tipo: 'tarjetas',
+    tarjetas: [
+      { titulo: 'Créditos Chanak', lineas: ['3 / 6'], marca: 1 },
+      { titulo: 'Créditos transferidos', lineas: ['15 convalidados'], marca: 2 },
+      { titulo: 'Total requerido', lineas: ['24 · FLDOE #134620'] },
+      { titulo: 'English II', lineas: ['Unidad 3 · Enviado → En revisión'], marca: 3 },
+    ],
+    puntos: [
+      { n: 1, texto: 'Créditos Chanak = materias que cursa con Chanak (English, American History, Life Skills…).' },
+      { n: 2, texto: 'Créditos transferidos = convalidados desde su colegio local, validados por coordinación. Nunca prometas una convalidación.' },
+      { n: 3, texto: 'Estados de una entrega: Enviado → En revisión → evaluado. «Falta info» = el estudiante debe completar algo.' },
+    ],
+    practica: {
+      pregunta: 'Un estudiante pregunta si su Física del colegio local le cuenta como crédito. ¿Qué respondes?',
+      opciones: ['Sí, seguro', 'Lo revisa coordinación con el expediente; te aviso del resultado', 'No, nunca cuenta'],
+      correcta: 1,
+      explicacion: 'La convalidación la decide coordinación/dirección con el transcript (Credit Recognition Policy).',
+    },
+  },
+  {
+    id: 'dual-curso',
+    sistema: 'dual',
+    ruta: '/es/english-ii/[unidad]/[lección]',
+    titulo: 'Dual Diploma · Curso de inglés (vista de lección)',
+    paraQuien: ['english_teacher', 'mentor', 'coordinator'],
+    modulos: ['T10.5', 'T5.1'],
+    pestanas: ['English Foundations', 'English I', 'English II', 'English III', 'English IV'],
+    activa: 'English II',
+    tipo: 'ficha',
+    secciones: [
+      ['Unidad 3 · Lección 2', 'Objetivo: escribir un párrafo argumentativo', 1],
+      ['Actividad', 'Lectura + vocabulario + writing de 150 palabras'],
+      ['Entrega', 'Texto o audio · rúbrica visible para el estudiante', 2],
+      ['Feedback del profesor', '1 fortaleza · 1 mejora · cómo revisarlo', 3],
+    ],
+    puntos: [
+      { n: 1, texto: 'Antes de clase confirma nivel (Foundations, I–IV) según el plan autorizado; no cambies de curso por tu cuenta.' },
+      { n: 2, texto: 'Recepción ≠ evaluación: una entrega recibida aún no está evaluada.' },
+      { n: 3, texto: 'Feedback con estructura fija: qué hizo bien, qué mejorar, cómo revisarlo y fecha.' },
+    ],
+    practica: {
+      pregunta: 'Un alumno de English II escribe muy por debajo del nivel. ¿Qué haces?',
+      opciones: ['Lo paso a Foundations yo mismo', 'Aplico apoyo dentro del plan y comunico a coordinación la dificultad reiterada', 'Le pongo la nota que necesita'],
+      correcta: 1,
+      explicacion: 'El cambio de nivel es decisión de coordinación con evidencia; el profesor apoya y documenta.',
+    },
+  },
+  {
+    id: 'dual-coordinador',
+    sistema: 'dual',
+    ruta: '/es/coordinador',
+    titulo: 'Dual Diploma · Panel del coordinador',
+    paraQuien: ['coordinator', 'partner_director'],
+    modulos: ['T4.4', 'T8.1', 'T8.3'],
+    pestanas: ['Estudiantes', 'Cola de revisión', 'Feedback', 'PEI', 'Coins', 'Convalidación'],
+    activa: 'Estudiantes',
+    tipo: 'tabla',
+    columnas: ['Estudiante', 'Progreso Diploma', 'Créd. Convalidados', 'Pendientes', 'Acciones'],
+    filas: [
+      ['ID-DEMO-022', '45 %', '15', '2', 'Ver expediente'],
+      ['ID-DEMO-040', '20 %', '—', '5', 'Convalidar transcript'],
+    ],
+    marcas: { 'ID-DEMO-040': 1, 'ID-DEMO-022': 2 },
+    puntos: [
+      { n: 1, texto: 'Convalidación: abre el transcript y registra créditos con la política vigente. Lo que no puedas acreditar, déjalo pendiente y documentado.' },
+      { n: 2, texto: 'Cola de revisión + Feedback: devuelve trabajo con indicaciones. Coins: pausar exige motivo obligatorio.' },
+    ],
+    practica: {
+      pregunta: 'Quieres pausar los ChanakCoins de un estudiante. ¿Qué exige el sistema?',
+      opciones: ['Nada', 'Un motivo escrito obligatorio', 'Permiso de la familia'],
+      correcta: 1,
+      explicacion: 'El panel exige motivo (pausa y otorgamiento). Restaurar y reconocer también se documenta.',
+    },
+  },
+  // ───────────── LIFE SKILLS ─────────────
+  {
+    id: 'lifeskills-app',
+    sistema: 'lifeskills',
+    ruta: '/es/life-skills',
+    titulo: 'Life Skills & Leadership · app del estudiante',
+    paraQuien: ['lifeskills_facilitator', 'mentor', 'coordinator'],
+    modulos: ['T2.3', 'T10.5'],
+    pestanas: ['1.er Trimestre · Q1', '2.º Trimestre · Q2', '3.er Trimestre · Q3'],
+    activa: '1.er Trimestre · Q1',
+    tipo: 'tarjetas',
+    tarjetas: [
+      { titulo: '1. Fe & Principios', lineas: ['Reflexión + decisión razonada'], marca: 1 },
+      { titulo: '2. Raíces & Familia', lineas: ['Proyecto con la familia'] },
+      { titulo: '3. Talentos & Dones', lineas: ['Test de Dones / «Quién soy» (RIASEC)'], marca: 2 },
+      { titulo: '4. Sueño & Propósito', lineas: ['Plan de proyecto · ChanakCoins'], marca: 3 },
+    ],
+    puntos: [
+      { n: 1, texto: 'Cada eje pide una producción (decisión, plan, reflexión). Asistir no es evidencia de aprendizaje: registra la producción.' },
+      { n: 2, texto: 'El test vocacional orienta; no se usa para diagnosticar ni etiquetar al estudiante.' },
+      { n: 3, texto: 'ChanakCoins reconocen esfuerzo y servicio; su pausa o restauración se documenta (coordinación).' },
+    ],
+    practica: {
+      pregunta: 'En una reflexión un alumno comparte algo muy personal. ¿Cómo actúas?',
+      opciones: ['Lo leo en voz alta como ejemplo', 'Respeto la confidencialidad; si hay riesgo, sigo safeguarding', 'Le pido que lo borre'],
+      correcta: 1,
+      explicacion: 'Nunca se fuerzan ni exponen testimonios. Riesgo → protocolo de safeguarding (DSL).',
+    },
+  },
+]
+
+export const VISTA_POR_ID = Object.fromEntries(VISTAS.map((v) => [v.id, v]))
+export const vistasDeModulo = (moduloId) => VISTAS.filter((v) => v.modulos.includes(moduloId))
+export const vistasDeRoles = (roles = []) => VISTAS.filter((v) => v.paraQuien.some((r) => roles.includes(r)))

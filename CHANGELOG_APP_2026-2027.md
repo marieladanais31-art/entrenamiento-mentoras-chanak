@@ -151,3 +151,10 @@
 - El registro del app muestra estimaciones; completar módulos no acredita automáticamente horas reales ni permite imprimir un certificado como si existiera validación formal. La revisión y resolución requieren bitácora y evidencias.
 - Guía Florida: distingue antecedentes/huellas, certificación profesional/FTCE y evaluaciones del estudiante; incluye home education, PEP, requisitos externos y matriz estatal con fuentes oficiales comprobadas.
 - Ampliación de administración: matrícula Off-Campus/Dual/Life Skills, cuentas SIS, Google for Education y circuito de cierre. Youth Readiness se mantiene como propuesta provisional de 4 semanas/3.500 USD.
+
+## 11-oct-2026 · Mi trabajo, vistas del sistema y guiones v2 (Claude)
+- **Mi trabajo**: guía operativa por función (rutina, casos y a quién escalar, límites, evidencia) para las 11 funciones (`src/data/funciones.js`, `MiFuncion.jsx`).
+- **Vistas del sistema**: 14 simulaciones de pantallas reales del SIS (tutor, coordinador, familia), Dual Diploma Portal y Life Skills, con pestañas y estados tomados del código y práctica de decisión (`vistasSistema.js`, `VistaSistema.jsx`). Aparecen dentro de los módulos 2.1, 2.2, 2.3, 3.3, 3.4, 4.2, 4.3, 4.4, 5.1, 5.2, 5.3, 6.3, 8.1, 8.3, 9.4, 10.4 y 10.5.
+- Los módulos ya no muestran el bloque «Videos de apoyo · 0» vacío.
+- **Guiones v2** sin frases repetidas para re-narrar 70 vídeos sobre las mismas diapositivas (`docs/videos/GUIONES_VIDEOS_v2.md`) y 12 recorridos de pantalla (`docs/videos/RECORRIDOS_PANTALLA.md`).
+- **HANDOFF_IA.md**: reparto de trabajo entre IAs y pasos para continuar.
