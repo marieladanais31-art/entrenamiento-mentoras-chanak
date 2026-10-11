@@ -17,7 +17,7 @@ import Glosario from './components/Glosario'
 import Organigrama from './components/Organigrama'
 import MatrizProgramas from './components/MatrizProgramas'
 import RolPerfil from './components/RolPerfil'
-import { rolesDesdeTipoAcceso } from './data/roles'
+import { rolesEfectivos, solicitudDe } from './data/roles'
 import Header from './components/ui/Header'
 import CambiarContrasena from './components/CambiarContrasena'
 import CompromisoInicial, { VERSION_COMPROMISO } from './components/CompromisoInicial'
@@ -42,7 +42,7 @@ export default function App() {
   // Roles (ROLE ≠ PERSON) de la persona cuyo panel se muestra; null = migración pendiente (se deriva de tipo_acceso)
   const [rolesViendo, setRolesViendo] = useState(null)
   const [contactoViendo, setContactoViendo] = useState(null)
-  const [tipoAccesoViendo, setTipoAccesoViendo] = useState(null)
+  const [compromisoViendo, setCompromisoViendo] = useState(null) // compromiso de otra persona (vista admin)
   const [errorCarga, setErrorCarga] = useState('')
   const [compromiso, setCompromiso] = useState(undefined)
   const [compromisoDisponible, setCompromisoDisponible] = useState(false)
@@ -131,20 +131,22 @@ export default function App() {
     let vivo = true
     ;(async () => {
       try {
-        const [filas, p] = await Promise.all([
+        const propia = idViendo === perfil?.id
+        const [filas, p, comp] = await Promise.all([
           api.getRolesDe(idViendo),
-          idViendo === perfil?.id ? Promise.resolve(perfil) : api.getPerfil(idViendo),
+          propia ? Promise.resolve(perfil) : api.getPerfil(idViendo),
+          propia ? Promise.resolve(null) : api.getCompromiso(idViendo).then((c) => c.registro).catch(() => null),
         ])
         if (!vivo) return
         setRolesViendo(filas)
         setContactoViendo(p?.contacto_menores ?? null)
-        setTipoAccesoViendo(p?.tipo_acceso || 'mentora')
+        setCompromisoViendo(comp)
         setRolesListos(true)
       } catch {
         if (vivo) {
           setRolesViendo(null)
           setContactoViendo(null)
-          setTipoAccesoViendo(perfil?.tipo_acceso || 'mentora')
+          setCompromisoViendo(null)
           setRolesListos(true)
         }
       }
@@ -154,11 +156,16 @@ export default function App() {
     }
   }, [idViendo, aprobada, perfil])
 
-  // Roles efectivos: los asignados; si aún no hay ninguno, los derivados de tipo_acceso
-  const rolesIds = useMemo(() => {
-    const asignados = (rolesViendo || []).map((r) => r.rol)
-    return asignados.length ? [...new Set(asignados)] : rolesDesdeTipoAcceso(tipoAccesoViendo || perfil?.tipo_acceso)
-  }, [rolesViendo, tipoAccesoViendo, perfil])
+  // Roles efectivos: los asignados por administración; si no hay, la rama elegida por la persona
+  // (provisional); si tampoco, ninguno → solo tronco común + «Elige tu rama».
+  const solicitudViendo = useMemo(
+    () => solicitudDe((viendoOtra ? compromisoViendo : compromiso)?.funciones),
+    [viendoOtra, compromisoViendo, compromiso]
+  )
+  const { roles: rolesIds, origen: origenRoles, pendientes: rolesPendientes } = useMemo(
+    () => rolesEfectivos((rolesViendo || []).map((r) => r.rol), solicitudViendo),
+    [rolesViendo, solicitudViendo]
+  )
 
   // ── Mutaciones (actualizan Supabase y el estado local) ──
   const mutar = useCallback(
@@ -335,6 +342,11 @@ export default function App() {
             onVerCurso={() => setVista({ ...vista, nombre: 'curso' })}
             onVerCertificado={(nivel) => setVista({ ...vista, nombre: 'certificado', nivel })}
             roles={rolesIds}
+            origenRoles={origenRoles}
+            rolesPendientes={rolesPendientes}
+            rolesAsignados={(rolesViendo || []).map((r) => r.rol)}
+            solicitud={solicitudViendo}
+            onElegirRama={viendoOtra ? undefined : async (funciones) => setCompromiso(await api.guardarSolicitudRama(perfil.id, funciones))}
             contactoMenores={contactoViendo}
             onVerOrganigrama={() => setVista({ ...vista, nombre: 'organigrama' })}
             onVerRol={(rolId) => setVista({ ...vista, nombre: 'rol', rolId })}
@@ -345,7 +357,7 @@ export default function App() {
         {vista.nombre === 'catalogo-videos' && <CatalogoVideos onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
         {vista.nombre === 'operativa-sis' && <OperativaSIS onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
         {vista.nombre === 'guias-familias' && <GuiasFamilias onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
-        {vista.nombre === 'operacion-programas' && <OperacionProgramas onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} onVerSIS={() => setVista({ ...vista, nombre: 'coordinacion-sis' })} onVerFamilias={() => setVista({ ...vista, nombre: 'guias-familias' })} onVerEstados={() => setVista({ ...vista, nombre: 'matriz' })} />}
+        {vista.nombre === 'operacion-programas' && <OperacionProgramas inicial={rolesIds.includes('english_teacher') ? 'english' : rolesIds.includes('lifeskills_facilitator') ? 'lifeskills' : 'offcampus'} onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} onVerSIS={() => setVista({ ...vista, nombre: 'coordinacion-sis' })} onVerFamilias={() => setVista({ ...vista, nombre: 'guias-familias' })} onVerEstados={() => setVista({ ...vista, nombre: 'matriz' })} />}
         {vista.nombre === 'coordinacion-sis' && <CoordinacionSIS onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
         {vista.nombre === 'matriz' && <MatrizProgramas onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
         {vista.nombre === 'estrategia' && <EstrategiaOperativa onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} onVerMatriz={() => setVista({ ...vista, nombre: 'matriz' })} />}

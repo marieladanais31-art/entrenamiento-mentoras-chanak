@@ -1,4 +1,7 @@
-import { BLOQUES, TODOS_MODULOS, HORAS_MODULOS_N1, HORAS_MODULOS_N2, numModulo, BIBLIOTECA, urlCarpeta, CARPETA_FINAL_URL } from '../data/curriculum'
+import { useState } from 'react'
+import { BLOQUES, numModulo, getModulo, BIBLIOTECA, urlCarpeta, CARPETA_FINAL_URL } from '../data/curriculum'
+import { GRUPOS, ROL_POR_ID, TRONCO_COMUN, MODULOS_DESARROLLO, grupoDe, modulosObligatorios, tieneContactoDirecto } from '../data/roles'
+import EligeRama from './EligeRama'
 import { resumenMentora, estadoBloque, horasBloqueCompletadas } from '../lib/calculos'
 import ProgressRing from './ui/ProgressRing'
 import EstadoBadge from './ui/EstadoBadge'
@@ -7,7 +10,7 @@ import { traducirBloques } from '../data/curriculum.en'
 import RutaRoles from './RutaRoles'
 import PlanFormacion from './PlanFormacion'
 
-// Inicio → Mi ruta → Bloque → Módulo
+// Inicio → Paso 1 Tronco común → Paso 2 Elige tu rama → Paso 3 Tu ruta → Módulo
 export default function Dashboard({
   mentora,
   progreso,
@@ -23,7 +26,12 @@ export default function Dashboard({
   onVerProgramas,
   onVerCurso,
   onVerCertificado,
-  roles = ['mentor'],
+  roles = [],
+  origenRoles = 'asignados',
+  rolesPendientes = [],
+  rolesAsignados = [],
+  solicitud = null,
+  onElegirRama,
   contactoMenores = null,
   onVerOrganigrama,
   onVerRol,
@@ -31,140 +39,215 @@ export default function Dashboard({
   onVerEstrategia,
 }) {
   const { t, idioma } = useIdioma()
+  const [cambiandoRama, setCambiandoRama] = useState(false)
   const r = resumenMentora(progreso, { roles, contactoMenores })
   const bloques = traducirBloques(BLOQUES, idioma)
-  const mentorBloques = bloques.filter((b) => b.nivel === 1 && !b.porRol && !b.transversal)
-  const transvBloques = bloques.filter((b) => b.transversal)
-  const rolBloques = bloques.filter((b) => b.porRol)
-  const coordBloques = bloques.filter((b) => b.nivel === 2)
-  const nivel2Desbloqueado = r.nivel1Completo
   const mods = progreso?.modulos || {}
+  const hecho = (id) => ['completado', 'reconocido'].includes(mods[id]?.estado)
+  const existe = (id) => Boolean(getModulo(id))
 
-  // Siguiente paso: primer módulo en curso o, si no hay, el primero pendiente de la ruta
-  const ruta = TODOS_MODULOS.filter((m) => !m.porRol && !m.transversal && (m.nivel === 1 || nivel2Desbloqueado))
-  const siguiente =
-    ruta.find((m) => mods[m.id]?.estado === 'en_curso') ||
-    ruta.find((m) => !['completado', 'reconocido'].includes(mods[m.id]?.estado))
-  const pct = Math.round((r.horas / HORAS_MODULOS_N2) * 100)
+  // ── Ramas activas ──
+  const grupos = [...new Set(roles.map((id) => grupoDe(id)).filter(Boolean))]
+  const esMentorOCoord = grupos.includes('mentor') || grupos.includes('coordinator')
+  const esCoord = grupos.includes('coordinator')
+  const esEstrategico = grupos.includes('estrategico')
+
+  // ── Paso 1: tronco común (+ desarrollo infantil si hay contacto directo) ──
+  const directo = tieneContactoDirecto(roles, contactoMenores)
+  const troncoIds = [...TRONCO_COMUN, ...(directo ? MODULOS_DESARROLLO : [])].filter(existe)
+  const troncoHechos = troncoIds.filter(hecho).length
+
+  // ── Paso 3: módulos propios de la rama (sin repetir el tronco) ──
+  const obligatorios = roles.length ? modulosObligatorios(roles, contactoMenores).filter(existe) : troncoIds
+  const ramaIds = obligatorios.filter((id) => !troncoIds.includes(id))
+  const ramaHechos = ramaIds.filter(hecho).length
+  const ramaPorBloque = bloques
+    .map((b) => ({ ...b, propios: b.modulos.filter((m) => ramaIds.includes(m.id)) }))
+    .filter((b) => b.propios.length)
+
+  // ── Contadores y horas sobre SU ruta (no sobre el catálogo completo) ──
+  const todos = [...new Set([...troncoIds, ...ramaIds])]
+  const completados = todos.filter(hecho).length
+  const enCurso = todos.filter((id) => mods[id]?.estado === 'en_curso').length
+  const horasMeta = sumaHoras(todos)
+  const horasHechas = sumaHoras(todos.filter(hecho))
+
+  const siguienteId =
+    todos.find((id) => mods[id]?.estado === 'en_curso') ||
+    troncoIds.find((id) => !hecho(id)) ||
+    ramaIds.find((id) => !hecho(id))
+  const siguiente = siguienteId ? getModulo(siguienteId) : null
+
+  const nombreRamas = grupos.map((g) => GRUPOS[g]?.nombre).join(' + ')
+  const especialidades = roles.map((id) => ROL_POR_ID[id]?.nombreEs || ROL_POR_ID[id]?.nombre).filter(Boolean)
+  const mostrarSelector = !viendoOtra && onElegirRama && ((origenRoles === 'ninguno' && !rolesPendientes.length) || cambiandoRama)
 
   return (
     <div className="space-y-6">
       <section className="rounded-2xl bg-navy p-6 text-white shadow-sm">
         <p className="text-sm font-semibold text-gold">{idioma === 'es' ? 'Tu espacio de formación Chanak' : 'Your Chanak training space'}</p>
-        <h1 className="mt-2 text-2xl font-bold">{esAdmin ? (idioma === 'es' ? 'Administración · Vista completa' : 'Administration · Full view') : (idioma === 'es' ? '¿Qué quieres hacer hoy?' : 'What would you like to do today?')}</h1>
-        <p className="mt-3 text-base leading-relaxed text-white/80">{idioma === 'es' ? 'Empieza por tu ruta. Consulta la organización y los programas cuando los necesites. Tus avances guardados se conservan.' : 'Start with your pathway. Consult the organization and programs whenever needed. Your saved progress is preserved.'}</p>
-        <div className="mt-5 grid gap-3 sm:grid-cols-2">
-          <Acceso icono="🧭" titulo={idioma === 'es' ? 'Organización y perfiles' : 'Organization and profiles'} sub={idioma === 'es' ? 'Formación común para todos' : 'Common training for everyone'} onClick={onVerOrganigrama} tono="navy" />
-          <Acceso icono="🌎" titulo={idioma === 'es' ? 'Estados y programas' : 'States and programs'} sub={idioma === 'es' ? 'Servicios, requisitos y fuentes oficiales' : 'Services, requirements and official sources'} onClick={onVerMatriz} tono="navy" />
-        </div>
+        <h1 className="mt-2 text-2xl font-bold">
+          {esAdmin && !viendoOtra ? 'Administración · Vista completa' : grupos.length ? `Rama ${nombreRamas}` : 'Tronco común'}
+        </h1>
+        <p className="mt-3 text-base leading-relaxed text-white/80">
+          Todas las personas empiezan por el tronco común y pueden entrar en la rama <b>Mentor</b> (Off-Campus y Dual Diploma, inglés,
+          Life Skills, Extensión Local o evaluación educativa). <b>Coordinador</b> lo confirma Dirección Académica y <b>Estratégico</b>,
+          la Dirección de Operaciones y Alianzas. Tus avances guardados se conservan.
+        </p>
       </section>
-      <button onClick={onVerProgramas} className="w-full rounded-2xl border-2 border-teal bg-white p-6 text-left shadow-sm hover:bg-teal/5">
-        <span className="block text-sm font-bold uppercase text-teal">{idioma === 'es' ? 'NUEVO · Guía operativa integrada · 10 octubre' : 'NEW · Integrated operational guide · October 10'}</span>
-        <span className="mt-2 block text-2xl font-bold text-navy">{idioma === 'es' ? 'Atender estudiantes y acompañar familias →' : 'Support students and families →'}</span>
-        <span className="mt-3 block text-base text-navy/70">Off-Campus · Dual Diploma · Inglés / English · Life Skills</span>
-      </button>
-      {/* Cabecera */}
+
+      {/* Cabecera de progreso de SU ruta */}
       <section className="rounded-2xl bg-white p-5 shadow-sm">
         <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-center">
-          <ProgressRing valor={r.horas} meta={r.metaHorasModulos} />
+          <ProgressRing valor={horasHechas} meta={horasMeta || 1} />
           <div className="flex-1 text-center sm:text-left">
             <h2 className="text-xl font-bold text-navy">{mentora.nombre}</h2>
             <p className="text-sm text-navy/60">
-              {r.nivelActual === 2 ? t('panel.nivel2') : t('panel.nivel1')}
+              {especialidades.length ? especialidades.join(' · ') : 'Sin rama todavía'}
+              {rolesPendientes.length > 0 && ` · ${rolesPendientes.length} pendiente(s) de confirmación`}
               {viendoOtra && t('panel.vistaAdmin')}
             </p>
             <div className="mt-3 grid grid-cols-3 gap-2 text-center">
-              <Stat n={r.completados} etiqueta={t('panel.completados')} color="text-gold" />
-              <Stat n={r.enCurso} etiqueta={t('panel.enCurso')} color="text-teal" />
-              <Stat n={r.pendientes} etiqueta={t('panel.pendientes')} color="text-navy/50" />
+              <Stat n={completados} etiqueta={t('panel.completados')} color="text-gold" />
+              <Stat n={enCurso} etiqueta={t('panel.enCurso')} color="text-teal" />
+              <Stat n={todos.length - completados - enCurso} etiqueta={t('panel.pendientes')} color="text-navy/50" />
             </div>
-          </div>
-        </div>
-        {/* Barra de ruta Mentor (180) → Coordinator (300) */}
-        <div className="mt-5">
-          <div className="flex justify-between text-[12px] font-semibold text-navy/55">
-            <span>{t('panel.ruta')}</span>
-            <span>{r.horas}h / {HORAS_MODULOS_N2}h · referencia de módulos</span>
-          </div>
-          <div className="relative mt-1.5 h-2.5 overflow-hidden rounded-full bg-navy/10">
-            <div className="h-full rounded-full bg-teal transition-all" style={{ width: `${Math.min(100, pct)}%` }} />
-            <div className="absolute top-0 h-full w-0.5 bg-gold" style={{ left: `${(HORAS_MODULOS_N1 / HORAS_MODULOS_N2) * 100}%` }} />
-          </div>
-          <div className="mt-1 flex justify-between text-[11px] text-navy/50">
-            <span>0</span>
-            <span>Módulos Mentor · {HORAS_MODULOS_N1}h</span>
-            <span>Módulos Coordinator · {HORAS_MODULOS_N2}h</span>
+            <p className="mt-2 text-[11px] text-navy/50">{fmt(horasHechas)} h de {fmt(horasMeta)} h de referencia en módulos · {todos.length} módulos en tu ruta</p>
           </div>
         </div>
       </section>
 
-      <PlanFormacion />
-      <button onClick={onVerGuias} className="block w-full rounded-2xl bg-white p-4 text-left text-sm font-bold text-teal shadow-sm">Manuales para padres · Off-Campus y Dual Diploma · PDF y editable</button>
-      <button onClick={onVerCoordinacion} className="block w-full rounded-2xl bg-white p-4 text-left text-sm font-bold text-navy shadow-sm">Coordinación SIS · Ocho pantallas y práctica de revisión</button>
-      <button onClick={onVerOperativa} className="block w-full rounded-2xl bg-teal p-4 text-left text-sm font-bold text-white">Operativa SIS · Paso a paso de matrícula, usuarios demo, familias y alianzas</button>
-      <button onClick={onVerCatalogo} className="block w-full rounded-2xl bg-navy p-4 text-left text-sm font-bold text-cream">▶ Catálogo completo · 87 videos y subtítulos descargables</button>
-      {r.nivel1Completo && <p className="rounded-xl bg-gold/10 p-4 text-xs text-navy">Módulos base completados. Para certificar 180/300 h, presenta la bitácora, práctica supervisada y portafolio a dirección. El app no convierte las estimaciones en horas acreditadas.</p>}
-
-      {/* Siguiente paso */}
       {siguiente && !viendoOtra && (
-        <button
-          onClick={() => onAbrirModulo(siguiente.id)}
-          className="flex w-full items-center gap-3 rounded-2xl bg-teal px-4 py-4 text-left text-white shadow-sm transition hover:bg-teal/90"
-        >
+        <button onClick={() => onAbrirModulo(siguiente.id)} className="flex w-full items-center gap-3 rounded-2xl bg-teal px-4 py-4 text-left text-white shadow-sm transition hover:bg-teal/90">
           <span className="text-2xl" aria-hidden>▶</span>
           <span className="min-w-0 flex-1">
             <span className="block text-[12px] font-bold uppercase tracking-wide text-white/75">
               {mods[siguiente.id]?.estado === 'en_curso' ? t('panel.continuar') : t('panel.siguiente')}
             </span>
-            <span className="block text-sm font-bold">
-              {numModulo(siguiente.id)} · {siguiente.titulo}
-            </span>
+            <span className="block text-sm font-bold">{numModulo(siguiente.id)} · {siguiente.titulo}</span>
           </span>
           <span className="shrink-0">→</span>
         </button>
       )}
 
-      {/* Accesos */}
-      <div className="grid gap-3 sm:grid-cols-2">
-        <Acceso icono="📘" titulo={t('panel.presentacion')} sub={t('panel.presentacionSub')} onClick={onVerCurso} tono="teal" />
-        <Acceso icono="📋" titulo={t('panel.registroHoras')} sub={t('panel.registroHorasSub', { horas: r.horas })} onClick={onVerHoras} tono="navy" />
-      </div>
+      {/* PASO 1 · TRONCO COMÚN */}
+      <Paso numero={1} titulo="Tronco común · para todas las personas" hechos={troncoHechos} total={troncoIds.length}
+        sub="Quién es Chanak, el modelo 60/20/20, Off-Campus, Dual Diploma y Life Skills, safeguarding y protección de datos.">
+        <ListaModulos ids={troncoIds} mods={mods} onAbrirModulo={onAbrirModulo} />
+        {directo && <p className="mt-2 text-[11px] text-navy/55">Incluye Desarrollo infantil y adolescente (Bloque 9), obligatorio por tener contacto directo con menores.</p>}
+      </Paso>
 
-      {/* Rol ≠ Persona + organigrama */}
-      <section className="rounded-2xl border border-gold/40 bg-gold/10 p-4">
-        <div className="text-sm font-bold text-navy">Formación común · Organigrama y funciones</div>
-        <p className="mt-1 text-base leading-relaxed text-navy/75">
-          En Chanak un rol describe una función y un conjunto de responsabilidades; no significa necesariamente una persona diferente.
-          Una misma persona puede asumir varios roles compatibles al abrir un país, un estado, un programa o un proyecto, pero cada
-          rol debe estar formalmente asignado, con su formación completada y respetando sus límites de autoridad. A medida que crece
-          la operación, las funciones se separan progresivamente. La formación se organiza en tres roles: <b>Mentor</b> (incluye a los
-          profesores especialistas), <b>Coordinador</b> y <b>Estratégico</b> (representación, familias, alianzas, grants y proyectos).
-        </p>
-        {onVerOrganigrama && (
-          <button onClick={onVerOrganigrama} className="mt-2 text-xs font-bold text-teal hover:underline">
-            Ver organigrama y funciones de los tres perfiles →
+      {/* PASO 2 · RAMA */}
+      {mostrarSelector ? (
+        <EligeRama
+          actual={solicitud?.funciones || []}
+          onGuardar={async (f) => { await onElegirRama(f); setCambiandoRama(false) }}
+          onCancelar={cambiandoRama ? () => setCambiandoRama(false) : undefined}
+        />
+      ) : (
+        <section className="rounded-2xl border border-teal/30 bg-white p-5 shadow-sm">
+          <div className="text-[12px] font-bold uppercase tracking-[0.18em] text-teal">Paso 2 · Tu rama</div>
+          {grupos.length ? (
+            <>
+              <p className="mt-1 text-lg font-bold text-navy">{nombreRamas}</p>
+              <p className="text-sm text-navy/70">{especialidades.join(' · ')}</p>
+              <ul className="mt-2 space-y-1 text-xs">
+                {roles.map((id) => (
+                  <li key={id} className="rounded-lg bg-teal/10 px-3 py-1.5 text-navy/80">
+                    ✓ {ROL_POR_ID[id]?.nombreEs || ROL_POR_ID[id]?.nombre} · {rolesAsignados.includes(id) ? 'asignada por dirección' : 'activa (acceso libre)'}
+                  </li>
+                ))}
+              </ul>
+            </>
+          ) : (
+            <p className="mt-1 text-sm text-navy/70">{viendoOtra ? 'Esta persona todavía no tiene rama activa.' : 'Todavía no tienes rama activa.'}</p>
+          )}
+          {rolesPendientes.length > 0 && (
+            <ul className="mt-2 space-y-1 text-xs">
+              {rolesPendientes.map((id) => (
+                <li key={id} className="rounded-lg bg-gold/15 px-3 py-1.5 text-navy">
+                  ⏳ {ROL_POR_ID[id]?.nombreEs || ROL_POR_ID[id]?.nombre} · pendiente de confirmación por {GRUPOS[grupoDe(id)]?.confirma}
+                </li>
+              ))}
+            </ul>
+          )}
+          {!viendoOtra && onElegirRama && (
+            <button onClick={() => setCambiandoRama(true)} className="mt-2 text-xs font-bold text-teal hover:underline">{solicitud ? 'Cambiar mi elección →' : 'Elegir o ampliar mi rama →'}</button>
+          )}
+        </section>
+      )}
+
+      {/* PASO 3 · RUTA DE LA RAMA */}
+      {ramaIds.length > 0 && (
+        <Paso numero={3} titulo={`Tu ruta · ${nombreRamas}`} hechos={ramaHechos} total={ramaIds.length}
+          sub={esCoord ? 'Coordinator Track se desbloquea al completar los módulos de Mentor.' : 'Módulos propios de tu rama, sin repetir el tronco común.'}>
+          <div className="space-y-3">
+            {ramaPorBloque.map((b) => {
+              const bloqueado = b.nivel === 2 && !r.nivel1Completo && !esAdmin
+              return (
+                <div key={b.id} className={`rounded-xl bg-cream p-3 ${bloqueado ? 'opacity-55' : ''}`}>
+                  <button onClick={bloqueado ? undefined : () => onAbrirBloque(b.id)} className="text-left text-[12px] font-bold uppercase tracking-wide text-teal hover:underline">
+                    {t('panel.bloque', { n: b.numero })} · {b.titulo} {bloqueado ? '🔒' : '→'}
+                  </button>
+                  {!bloqueado && <ListaModulos ids={b.propios.map((m) => m.id)} mods={mods} onAbrirModulo={onAbrirModulo} />}
+                </div>
+              )
+            })}
+          </div>
+        </Paso>
+      )}
+
+      {/* Herramientas de la rama */}
+      <section className="space-y-3">
+        <h3 className="font-bold text-navy">Herramientas de trabajo</h3>
+        {esMentorOCoord && (
+          <button onClick={onVerProgramas} className="w-full rounded-2xl border-2 border-teal bg-white p-5 text-left shadow-sm hover:bg-teal/5">
+            <span className="block text-sm font-bold uppercase text-teal">Guía operativa · Mentor y Coordinador</span>
+            <span className="mt-1 block text-xl font-bold text-navy">Atender estudiantes y acompañar familias →</span>
+            <span className="mt-2 block text-sm text-navy/70">Off-Campus · Dual Diploma · Clases de inglés · Clases de Life Skills</span>
           </button>
         )}
-        {onVerMatriz && (
-          <button onClick={onVerMatriz} className="mt-2 block text-xs font-bold text-teal hover:underline">
-            Ver la matriz de servicios por programa estatal (uso interno) →
+        {esEstrategico && (
+          <button onClick={onVerEstrategia} className="w-full rounded-2xl border-2 border-gold bg-white p-5 text-left shadow-sm hover:bg-gold/5">
+            <span className="block text-sm font-bold uppercase text-gold">Guía operativa · Estratégico</span>
+            <span className="mt-1 block text-xl font-bold text-navy">De la oportunidad al resultado documentado →</span>
+            <span className="mt-2 block text-sm text-navy/70">Familias y matrícula · Google Ads · ESA y fondos estatales · Grants · Iglesias · EducaFe (inactiva hasta feb. 2027)</span>
           </button>
         )}
-        {onVerEstrategia && (
-          <button onClick={onVerEstrategia} className="mt-2 block text-xs font-bold text-teal hover:underline">
-            Abrir la guía operativa del perfil Estratégico →
-          </button>
-        )}
+        <div className="grid gap-3 sm:grid-cols-2">
+          {(esMentorOCoord || esEstrategico) && <Acceso icono="👪" titulo="Manuales para familias" sub="Off-Campus y Dual Diploma · PDF y editable" onClick={onVerGuias} tono="navy" />}
+          {esMentorOCoord && <Acceso icono="🖥" titulo="Operativa SIS" sub="Matrícula, expediente y familias paso a paso" onClick={onVerOperativa} tono="navy" />}
+          {(esCoord || esAdmin) && <Acceso icono="🧾" titulo="Coordinación SIS" sub="Ocho pantallas y práctica de revisión" onClick={onVerCoordinacion} tono="navy" />}
+          {(esEstrategico || esCoord || esAdmin) && <Acceso icono="🌎" titulo="ESA y fondos estatales" sub="Matriz de programas por estado (uso interno)" onClick={onVerMatriz} tono="navy" />}
+          <Acceso icono="🧭" titulo="Organización y perfiles" sub="Organigrama y funciones de las tres ramas" onClick={onVerOrganigrama} tono="navy" />
+          <Acceso icono="▶" titulo="Catálogo de vídeos" sub="87 vídeos y subtítulos descargables" onClick={onVerCatalogo} tono="navy" />
+          <Acceso icono="📘" titulo={t('panel.presentacion')} sub={t('panel.presentacionSub')} onClick={onVerCurso} tono="teal" />
+          <Acceso icono="📋" titulo={t('panel.registroHoras')} sub={t('panel.registroHorasSub', { horas: r.horas })} onClick={onVerHoras} tono="teal" />
+        </div>
       </section>
 
-      {/* Tu ruta y tus sistemas */}
-      <RutaRoles progreso={progreso} roles={roles} contactoMenores={contactoMenores} onAbrirModulo={onAbrirModulo} onVerRol={onVerRol} />
+      {/* Avance por rol y sistemas */}
+      {roles.length > 0 && (
+        <RutaRoles progreso={progreso} roles={roles} contactoMenores={contactoMenores} onAbrirModulo={onAbrirModulo} onVerRol={onVerRol} />
+      )}
 
-      {/* Avance reconocido de la formación anterior */}
       {r.reconocidos > 0 && (
         <p className="rounded-2xl border border-amber-300 bg-amber-50 px-4 py-3 text-xs leading-relaxed text-amber-900">
           ♻️ {t('panel.reconocidos', { n: r.reconocidos })}
         </p>
+      )}
+
+      {/* Certificación */}
+      {r.elegibleCoordinadora ? (
+        <BannerCert titulo={t('panel.elegibleCoord')} detalle={t('panel.elegibleCoordSub')} onVer={() => onVerCertificado(2)} />
+      ) : r.elegibleMentor ? (
+        <BannerCert titulo={t('panel.elegibleMentor')} detalle={t('panel.elegibleMentorSub')} onVer={() => onVerCertificado(1)} />
+      ) : null}
+      {esMentorOCoord && (
+        <details className="rounded-2xl bg-white p-4 shadow-sm">
+          <summary className="cursor-pointer text-sm font-bold text-navy">🎓 Certificación Mentor 180 h / Coordinator 300 h</summary>
+          <div className="mt-3"><PlanFormacion /></div>
+        </details>
       )}
 
       {/* Biblioteca práctica de documentos oficiales (Drive) */}
@@ -174,91 +257,72 @@ export default function Dashboard({
         <ul className="mt-3 space-y-2.5">
           {BIBLIOTECA.map((b) => (
             <li key={b.carpeta} className="rounded-xl bg-cream px-3 py-2.5">
-              <a href={urlCarpeta(b.carpeta)} target="_blank" rel="noreferrer" className="text-xs font-bold text-teal hover:underline">
-                {b.carpeta} →
-              </a>
+              <a href={urlCarpeta(b.carpeta)} target="_blank" rel="noreferrer" className="text-xs font-bold text-teal hover:underline">{b.carpeta} →</a>
               <div className="mt-1 text-xs leading-relaxed text-navy/70"><b>Mentor:</b> {b.mentor}</div>
               <div className="text-xs leading-relaxed text-navy/70"><b>Coordinator:</b> {b.coordinador}</div>
             </li>
           ))}
         </ul>
-        <a href={CARPETA_FINAL_URL} target="_blank" rel="noreferrer" className="mt-3 inline-block text-xs font-semibold text-teal hover:underline">
-          {t('panel.bibliotecaTodo')} →
-        </a>
+        <a href={CARPETA_FINAL_URL} target="_blank" rel="noreferrer" className="mt-3 inline-block text-xs font-semibold text-teal hover:underline">{t('panel.bibliotecaTodo')} →</a>
       </details>
 
-      {/* Certificación */}
-      {r.elegibleCoordinadora ? (
-        <BannerCert titulo={t('panel.elegibleCoord')} detalle={t('panel.elegibleCoordSub')} onVer={() => onVerCertificado(2)} />
-      ) : r.elegibleMentor ? (
-        <BannerCert titulo={t('panel.elegibleMentor')} detalle={t('panel.elegibleMentorSub')} onVer={() => onVerCertificado(1)} />
-      ) : r.bloqueadoPorMenores ? (
-        <p className="rounded-2xl border border-coral/40 bg-coral/8 px-4 py-3 text-xs leading-relaxed text-navy/80">
-          🔒 Para completar tu ruta y emitir el certificado falta la formación de contacto con menores (Child &amp; Adolescent
-          Development, Safeguarding, Online Safety y protección de datos). Consulta «Tu ruta».
-        </p>
-      ) : null}
-
-      {/* Nivel 1 */}
-      <section>
-        <TituloSeccion
-          titulo={t('panel.tituloN1')}
-          subtitulo={t('panel.subN1', { bloques: mentorBloques.length, modulos: mentorBloques.reduce((s, b) => s + b.modulos.length, 0) })}
-        />
-        <div className="grid gap-3 sm:grid-cols-2">
-          {mentorBloques.map((b) => (
-            <TarjetaBloque key={b.id} esAdmin={esAdmin} bloque={b} estado={estadoBloque(progreso, b)} horasHechas={horasBloqueCompletadas(progreso, b)} onClick={() => onAbrirBloque(b.id)} />
-          ))}
-        </div>
-      </section>
-
-      {/* Formación transversal: contacto directo con menores */}
-      <section>
-        <TituloSeccion
-          titulo="Formación transversal · contacto con menores"
-          subtitulo="Obligatoria para todo rol con contacto directo con menores. Incluida en la formación común del plan completo; evitar doble cómputo."
-        />
-        <div className="grid gap-3 sm:grid-cols-2">
-          {transvBloques.map((b) => (
-            <TarjetaBloque key={b.id} esAdmin={esAdmin} bloque={b} estado={estadoBloque(progreso, b)} horasHechas={horasBloqueCompletadas(progreso, b)} onClick={() => onAbrirBloque(b.id)} />
-          ))}
-        </div>
-      </section>
-
-      {/* Por rol */}
-      <section>
-        <TituloSeccion titulo={t('panel.tituloRol')} subtitulo={t('panel.porRolTxt')} />
-        <div className="grid gap-3 sm:grid-cols-2">
-          {rolBloques.map((b) => (
-            <TarjetaBloque key={b.id} esAdmin={esAdmin} bloque={b} estado={estadoBloque(progreso, b)} horasHechas={horasBloqueCompletadas(progreso, b)} onClick={() => onAbrirBloque(b.id)} />
-          ))}
-        </div>
-      </section>
-
-      {/* Nivel 2 */}
-      <section>
-        <TituloSeccion
-          titulo={t('panel.tituloN2')}
-          subtitulo={t('panel.subN2', { bloques: coordBloques.length, modulos: coordBloques.reduce((s, b) => s + b.modulos.length, 0) })}
-        />
-        {!nivel2Desbloqueado && (
-          <p className="mb-3 rounded-xl bg-navy/5 px-4 py-2.5 text-xs text-navy/60">{t('panel.bloqueoN2')}</p>
-        )}
-        <div className="grid gap-3 sm:grid-cols-2">
-          {coordBloques.map((b) => (
-            <TarjetaBloque
-              key={b.id}
-              esAdmin={esAdmin}
-              bloque={b}
-              estado={nivel2Desbloqueado ? estadoBloque(progreso, b) : 'bloqueado'}
-              horasHechas={horasBloqueCompletadas(progreso, b)}
-              onClick={nivel2Desbloqueado || esAdmin ? () => onAbrirBloque(b.id) : undefined}
-            />
-          ))}
-        </div>
-      </section>
-
+      {/* Administración: catálogo completo de bloques */}
+      {esAdmin && (
+        <details className="rounded-2xl bg-white p-4 shadow-sm">
+          <summary className="cursor-pointer text-sm font-bold text-navy">🗂 Catálogo completo de bloques (solo administración)</summary>
+          <div className="mt-3 grid gap-3 sm:grid-cols-2">
+            {bloques.map((b) => (
+              <TarjetaBloque key={b.id} esAdmin bloque={b} estado={estadoBloque(progreso, b)} horasHechas={horasBloqueCompletadas(progreso, b)} onClick={() => onAbrirBloque(b.id)} />
+            ))}
+          </div>
+        </details>
+      )}
     </div>
+  )
+}
+
+function sumaHoras(ids) {
+  return ids.reduce((s, id) => s + (getModulo(id)?.horas || 0), 0)
+}
+const fmt = (n) => (Math.round(n * 100) / 100).toLocaleString('es-ES')
+
+function Paso({ numero, titulo, sub, hechos, total, children }) {
+  const pct = total ? Math.round((hechos / total) * 100) : 0
+  return (
+    <section className="rounded-2xl bg-white p-5 shadow-sm">
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <div className="text-[12px] font-bold uppercase tracking-[0.18em] text-teal">Paso {numero}</div>
+          <h3 className="text-lg font-bold text-navy">{titulo}</h3>
+          <p className="text-xs text-navy/60">{sub}</p>
+        </div>
+        <span className="shrink-0 text-sm font-bold text-navy">{hechos}/{total}</span>
+      </div>
+      <div className="mt-2 h-2 overflow-hidden rounded-full bg-navy/10">
+        <div className={`h-full rounded-full ${pct >= 100 ? 'bg-gold' : 'bg-teal'}`} style={{ width: `${pct}%` }} />
+      </div>
+      <div className="mt-3">{children}</div>
+    </section>
+  )
+}
+
+function ListaModulos({ ids, mods, onAbrirModulo }) {
+  return (
+    <ul className="mt-1 space-y-1.5">
+      {ids.map((id) => {
+        const m = getModulo(id)
+        const estado = mods[id]?.estado || 'pendiente'
+        return (
+          <li key={id}>
+            <button onClick={() => onAbrirModulo(id)} className="flex w-full items-center gap-2 rounded-lg bg-white px-3 py-2 text-left text-sm shadow-sm hover:bg-teal/5">
+              <span className="w-10 shrink-0 text-xs font-bold text-teal">{numModulo(id)}</span>
+              <span className="min-w-0 flex-1 text-navy">{m?.titulo}</span>
+              <EstadoBadge estado={estado} />
+            </button>
+          </li>
+        )
+      })}
+    </ul>
   )
 }
 
@@ -296,15 +360,6 @@ function BannerCert({ titulo, detalle, onVer }) {
       <button onClick={onVer} className="mt-3 w-full rounded-xl bg-gold py-2.5 text-sm font-bold text-navy transition hover:bg-gold/90">
         {t('panel.verCertificado')}
       </button>
-    </div>
-  )
-}
-
-function TituloSeccion({ titulo, subtitulo }) {
-  return (
-    <div className="mb-3">
-      <h3 className="font-bold text-navy">{titulo}</h3>
-      <p className="text-xs text-navy/55">{subtitulo}</p>
     </div>
   )
 }

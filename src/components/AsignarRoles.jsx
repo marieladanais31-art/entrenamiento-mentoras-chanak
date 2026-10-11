@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import { GRUPOS, funcionesDe, ROL_POR_ID, rolesDesdeTipoAcceso, tieneContactoDirecto, modulosObligatorios } from '../data/roles'
+import { GRUPOS, funcionesDe, ROL_POR_ID, rolesEfectivos, solicitudDe, grupoDe, accesoLibre, tieneContactoDirecto, modulosObligatorios } from '../data/roles'
 import { asignarRol, quitarRol, actualizarPerfil } from '../lib/backend'
 
 // Asignación formal de roles (ROLE ≠ PERSON). Cada rol activa módulos, sistemas, documentos,
 // evaluaciones y permissions checklist. Los roles de representación exigen territorio (y programa).
-export default function AsignarRoles({ perfil, filas, miId, onRecargar, migrado }) {
+export default function AsignarRoles({ perfil, filas, miId, onRecargar, migrado, funcionesCompromiso }) {
   const [abierto, setAbierto] = useState(false)
   const [grupo, setGrupo] = useState('')
   const [nuevo, setNuevo] = useState('')
@@ -14,8 +14,11 @@ export default function AsignarRoles({ perfil, filas, miId, onRecargar, migrado 
   const [error, setError] = useState('')
 
   const asignados = filas || []
-  const efectivos = asignados.length ? asignados.map((r) => r.rol) : rolesDesdeTipoAcceso(perfil.tipo_acceso)
-  const derivados = asignados.length === 0
+  const solicitud = solicitudDe(funcionesCompromiso)
+  const { roles: efectivos, origen, pendientes } = rolesEfectivos(asignados.map((r) => r.rol), solicitud)
+  const derivados = origen === 'solicitud'
+  // Mentor elegido por la persona: ya activo (acceso libre); se puede formalizar.
+  const libresSinAsignar = (solicitud?.funciones || []).filter((f) => accesoLibre(f) && !asignados.some((a) => a.rol === f))
   const directo = tieneContactoDirecto(efectivos, perfil.contacto_menores ?? null)
   const def = ROL_POR_ID[nuevo]
   const pideTerritorio = def?.requiereAlcance?.includes('territorio')
@@ -50,7 +53,7 @@ export default function AsignarRoles({ perfil, filas, miId, onRecargar, migrado 
   return (
     <div className="w-full pl-11">
       <button onClick={() => setAbierto(!abierto)} className="text-xs font-semibold text-teal hover:underline">
-        {abierto ? '▾' : '▸'} Roles asignados ({efectivos.length}){derivados ? ' · derivados de tipo de acceso' : ''}
+        {abierto ? '▾' : '▸'} Roles ({efectivos.length}){derivados ? ' · Mentor por acceso libre' : origen === 'ninguno' ? ' · sin rama activa' : ''}{pendientes.length ? ` · ${pendientes.length} por confirmar` : ''}
         {directo ? ' · contacto directo con menores' : ''}
       </button>
 
@@ -75,10 +78,35 @@ export default function AsignarRoles({ perfil, filas, miId, onRecargar, migrado 
             ))}
             {asignados.length === 0 && (
               <li className="rounded-lg bg-cream px-3 py-1.5 text-navy/60">
-                Sin roles asignados formalmente. Se aplican los derivados: {efectivos.map((id) => ROL_POR_ID[id]?.nombre).join(' + ') || 'ninguno'}.
+                Sin roles asignados formalmente. {solicitud ? 'Su ruta provisional es la rama que eligió.' : 'Solo ve el tronco común hasta elegir rama.'}
               </li>
             )}
           </ul>
+
+          {pendientes.length > 0 && migrado && (
+            <div className="space-y-2 rounded-lg border border-gold/60 bg-gold/10 px-3 py-2">
+              <div className="font-semibold text-navy">Solicitudes por confirmar{solicitud?.fecha ? ` (${solicitud.fecha.slice(0, 10)})` : ''}:</div>
+              {pendientes.map((f) => (
+                <div key={f} className="flex flex-wrap items-center justify-between gap-2 rounded-lg bg-white px-3 py-1.5">
+                  <span className="text-navy/80">
+                    {GRUPOS[grupoDe(f)]?.nombre} · {ROL_POR_ID[f]?.nombre}
+                    <span className="block text-[11px] text-navy/55">Confirma: {GRUPOS[grupoDe(f)]?.confirma}</span>
+                  </span>
+                  <button onClick={() => ejecutar(() => asignarRol(perfil.id, f, miId))} disabled={ocupado} className="rounded-lg bg-teal px-3 py-1 font-bold text-white disabled:opacity-50">
+                    ✓ Confirmar
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+          {libresSinAsignar.length > 0 && migrado && (
+            <div className="rounded-lg bg-teal/8 px-3 py-2 text-navy/75">
+              Activas por acceso libre (Mentor): {libresSinAsignar.map((f) => ROL_POR_ID[f]?.nombre).join(' + ')}.
+              <button onClick={() => ejecutar(async () => { for (const f of libresSinAsignar) await asignarRol(perfil.id, f, miId) })} disabled={ocupado} className="ml-2 font-bold text-teal hover:underline disabled:opacity-50">
+                Formalizar asignación
+              </button>
+            </div>
+          )}
 
           {migrado && (
             <div className="space-y-2 border-t border-navy/10 pt-3">

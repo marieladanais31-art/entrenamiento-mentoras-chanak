@@ -3,14 +3,14 @@
 // ============================================================
 
 export const CURSO = {
-  titulo: 'CHANAK · FORMACIÓN DE MENTORES Y COORDINADORES',
+  titulo: 'CHANAK · FORMACIÓN DEL EQUIPO',
   subtitulo: 'Comprender el modelo. Acompañar con criterio. Documentar con excelencia.',
   nivel1: 'Nivel 1 · CHANAK CERTIFIED MENTOR · 180 h de ruta completa',
   nivel2: 'Nivel 2 · CHANAK CERTIFIED COORDINATOR · 300 h acumuladas',
   resumen:
     'Formación oficial de Chanak International Academy (Chanak TrainUp Education, Inc. · escuela privada registrada en Florida, FLDOE #134620 · MSA-CESS Candidate) para las personas que acompañan estudiantes y coordinan centros. Enseña cómo funciona y se opera Chanak realmente (incluidos los roles —un rol describe una función, no necesariamente una persona—, el organigrama funcional y el Operational Glossary): el modelo 60/20/20, el marco académico orientado al dominio, los programas Off-Campus (Homeschool Guiado), Dual Diploma y Life Skills & Leadership, las vías curriculares, el Scope & Sequence K–12, la evaluación, el reconocimiento de créditos, el SIS, el Portal y el Dual Diploma Portal, el safeguarding, la Extensión Local y, cuando el rol lo requiere, los programas estatales de EE. UU. La fuente oficial es la documentación 2026–2027 (versión FINAL).',
   dirigidoA:
-    'Mentores de Off-Campus, Dual Diploma y Life Skills, personal de apoyo académico (Nivel 1) y coordinadores de centros, Partner Learning Centers y equipos de mentores (Nivel 2).',
+    'Todo el equipo Chanak. Tronco común para todas las personas y, después, tres ramas: Mentor (acceso libre: Off-Campus y Dual Diploma, inglés, Life Skills, Extensión Local y evaluación educativa), Coordinador (incluye director de institución partner; lo confirma Dirección Académica) y Estratégico (lo confirma la Dirección de Operaciones y Alianzas) (familias, marketing, ESA y fondos estatales, alianzas, grants y programas EducaFe, inactivos hasta febrero de 2027).',
   objetivos: [
     'Explicar con precisión qué es Chanak, qué programas ofrece y qué decide Chanak Central.',
     'Aplicar el modelo 60/20/20 y el marco académico orientado al dominio (umbral del 80 %) en el acompañamiento diario.',
@@ -19,7 +19,8 @@ export const CURSO = {
     'Distinguir las tres categorías de evaluación y saber cuándo una prueba estandarizada es requerida y cuándo no.',
     'Registrar, documentar, comunicar y escalar con criterio: qué resolver, qué documentar y qué escalar a Chanak Central.',
     'Proteger a los estudiantes (safeguarding, online safety, datos) y respetar los límites profesionales del rol.',
-    'Nivel 2: supervisar mentores, revisar evidencias, operar un Partner Learning Center y reportar a Chanak Central.',
+    'Coordinador: supervisar mentores, profesores de inglés y facilitadores de Life Skills, revisar evidencias y reportar a Chanak Central.',
+    'Estratégico: captar y acompañar familias, operar ESA y fondos estatales, preparar grants y alianzas con autorización de dirección.',
   ],
   metodologia: [
     { icono: '🎬', nombre: 'Vídeo', detalle: 'Una cápsula por módulo (37 resúmenes y recursos operativos complementarios), actualizable por separado' },

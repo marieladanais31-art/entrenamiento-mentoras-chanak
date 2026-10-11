@@ -1,4 +1,4 @@
-import { ROLES, AREAS } from '../data/roles'
+import { ROLES_VIGENTES as ROLES, AREAS } from '../data/roles'
 
 // Organigrama Funcional Chanak (cargos; sin asignar personas a roles de representación).
 export default function Organigrama({ onVolver, onVerRol }) {
@@ -46,6 +46,7 @@ export default function Organigrama({ onVolver, onVerRol }) {
           <li><b>Apertura de país:</b> Country Representative + Family Enrollment + Institutional Representative.</li>
           <li><b>Florida:</b> State/Program Representative + Family Enrollment + Grants Support.</li>
           <li><b>Programa Life Skills:</b> Mentor + Life Skills Facilitator.</li>
+          <li><b>Clases de inglés:</b> Mentor + English Teacher.</li>
         </ul>
         <p className="mt-3 rounded-xl bg-white px-4 py-3 text-xs leading-relaxed text-navy/80">
           Esto <b>no</b> significa que los permisos se mezclen. Cada persona debe: (1) tener formalmente asignado cada rol;

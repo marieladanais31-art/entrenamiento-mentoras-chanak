@@ -1,4 +1,4 @@
-import { ROL_POR_ID, SISTEMAS, tieneContactoDirecto, tieneContactoOcasional } from '../data/roles'
+import { ROL_POR_ID, SISTEMAS, TRONCO_COMUN, tieneContactoDirecto, tieneContactoOcasional } from '../data/roles'
 import { progresoPorRol, faltantesContactoMenores } from '../lib/calculos'
 import { getModulo, numModulo } from '../data/curriculum'
 
@@ -19,7 +19,7 @@ export default function RutaRoles({ progreso, roles, contactoMenores, onAbrirMod
 
   const core = (() => {
     const mods = progreso?.modulos || {}
-    const ids = ['T1.1', 'T1.2', 'T1.3', 'T1.4']
+    const ids = TRONCO_COMUN
     const h = ids.filter((i) => ['completado', 'reconocido'].includes(mods[i]?.estado)).length
     return Math.round((h / ids.length) * 100)
   })()
@@ -30,7 +30,7 @@ export default function RutaRoles({ progreso, roles, contactoMenores, onAbrirMod
         <div className="text-[12px] font-bold uppercase tracking-[0.18em] text-teal">Tu ruta</div>
         <p className="mt-1 text-xs text-navy/55">Cada rol asignado activa sus módulos obligatorios. Los permisos de cada rol no se mezclan.</p>
         <ul className="mt-3 space-y-2.5">
-          <Fila etiqueta="Chanak Core" pct={core} sub="Identidad, estructura y funcionamiento" />
+          <Fila etiqueta="Tronco común" pct={core} sub="Chanak, programas, safeguarding y datos" />
           {lista.map((id) => {
             const r = progresoPorRol(progreso, id, contactoMenores)
             if (!r) return null
@@ -44,7 +44,7 @@ export default function RutaRoles({ progreso, roles, contactoMenores, onAbrirMod
               />
             )
           })}
-          {lista.length === 0 && <li className="text-xs text-navy/55">Aún no tienes roles asignados. Tu administración los asignará.</li>}
+          {lista.length === 0 && <li className="text-xs text-navy/55">Aún no has elegido rama.</li>}
         </ul>
         {faltan.length > 0 && (
           <div className="mt-4 rounded-xl border-l-4 border-coral bg-coral/8 px-4 py-3 text-xs leading-relaxed text-navy/80">

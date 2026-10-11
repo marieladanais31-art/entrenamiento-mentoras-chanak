@@ -32,10 +32,10 @@ const RUTAS = [
   ]},
 ]
 
-export default function OperacionProgramas({ onVolver, onVerSIS, onVerFamilias, onVerEstados }) {
+export default function OperacionProgramas({ onVolver, onVerSIS, onVerFamilias, onVerEstados, inicial = 'offcampus' }) {
   const { idioma } = useIdioma()
   const es = idioma === 'es'
-  const [ruta, setRuta] = useState('offcampus')
+  const [ruta, setRuta] = useState(inicial)
   const r = RUTAS.find(x => x.id === ruta)
   return <div className="space-y-5">
     <button onClick={onVolver} className="min-h-12 font-bold text-teal">← {es ? 'Volver a Inicio' : 'Back to Home'}</button>
