@@ -300,7 +300,7 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
                   className="w-28 rounded-lg bg-white px-2 py-1 text-xs text-navy"
                 />
               </div>
-              <AsignarRoles perfil={p} filas={rolesMapa?.[p.id]} miId={miId} onRecargar={onRecargar} migrado={rolesMapa !== null && rolesMapa !== undefined} />
+              <AsignarRoles perfil={p} filas={rolesMapa?.[p.id]} miId={miId} onRecargar={onRecargar} migrado={rolesMapa !== null && rolesMapa !== undefined} funcionesCompromiso={compromisosMapa?.[p.id]?.funciones} />
             </li>
           ))}
           {activas.length === 0 && (

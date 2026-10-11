@@ -9,7 +9,7 @@ Formación: Inicio → Operativa SIS, y módulo T10.4.
 ## Accesos demo recuperados
 Padre: demopadre@asociacioneducafe.org
 Estudiante: demoestudiante@asociacioneducafe.org
-Contraseña de ambas cuentas demo: Chanak2026
+Contraseña de ambas cuentas demo: la contraseña se entrega por coordinación (no se publica en la app)
 Son identificadores históricos recuperados del repositorio de formación. Su dominio no cambia al cambiar la marca. Usuarios confirmados activos en el panel administrativo: padre con un hijo vinculado y estudiante con rol student. La cuenta demopadre@chanakacademy.org figura como «no usar», sin hijos vinculados; no utilizarla. Pendiente comprobar inicio de sesión de cada demo y aislamiento de datos en vivo. No son cuentas administrativas. Practicar con datos ficticios y no guardar cambios sobre expedientes reales.
 
 ## Familia directa · paso a paso

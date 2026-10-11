@@ -64,7 +64,7 @@ export const TEXTOS = {
     'panel.continuar': "Continuar donde lo dejaste",
     'panel.ruta': "Mi ruta: Mentor → Coordinator",
     // ── Login ──
-    'login.subtitulo': "Formación de Mentores y Coordinadores",
+    'login.subtitulo': "Formación del Equipo Chanak",
     'login.claim': "Chanak Certified Mentor · Chanak Certified Coordinator",
     'login.entrar': 'Iniciar sesión',
     'login.registro': 'Crear cuenta',
@@ -106,7 +106,7 @@ export const TEXTOS = {
     'nav.panel': 'Panel',
     'nav.horas': 'Horas',
     'nav.admin': 'Admin',
-    'nav.formacion': "Formación de Mentores y Coordinadores",
+    'nav.formacion': "Formación del Equipo Chanak",
     'nav.cerrarSesionDe': 'Cerrar sesión de {nombre}',
 
     // ── Estados ──
@@ -235,7 +235,7 @@ export const TEXTOS = {
 
     // ── Registro de horas ──
     'horas.titulo': 'Registro de Horas de Formación',
-    'horas.subtitulo': "Formación de Mentores y Coordinadores 2026–2027 · Generado el {fecha}",
+    'horas.subtitulo': "Formación del Equipo Chanak 2026–2027 · Generado el {fecha}",
     'horas.imprimir': '🖨 Imprimir / Guardar PDF',
     'horas.acumuladas': 'Acumuladas',
     'horas.paraMentora': "Para Mentor (180 h)",

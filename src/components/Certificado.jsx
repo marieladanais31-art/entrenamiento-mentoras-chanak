@@ -54,7 +54,7 @@ export default function Certificado({ mentora, progreso, nivel, onVolver }) {
             <p className="mx-auto mt-5 max-w-xl text-sm leading-relaxed text-navy/75">
               {t('cert.haCompletado')}
               <br />
-              <b className="text-navy">Chanak · Formación de Mentores y Coordinadores 2026–2027</b>
+              <b className="text-navy">Chanak · Formación del Equipo Chanak 2026–2027</b>
               <br />
               {t('cert.cargaTotal', { horas: cert.horas })}
             </p>

@@ -90,7 +90,6 @@ export const RECURSOS_GENERALES = [
       'Registro oficial: matrículas, PEI, diagnóstico, notas de evaluación por dominio, boletines y transcripts. Practica solo con las cuentas de demostración.',
     demo: {
       cuentas: ['demopadre@asociacioneducafe.org', 'demoestudiante@asociacioneducafe.org'],
-      clave: 'Chanak2026',
       aviso:
         'Cuentas de demostración: padre y estudiante. Practica solo con datos ficticios; no modifiques expedientes reales.',
     },
