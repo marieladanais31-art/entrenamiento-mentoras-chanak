@@ -429,48 +429,10 @@ const DEFINICIONES_VIDEO = [
   },
 ]
 
-const MAPA_LOCAL_VIDEOS = {
-  V01: '/videos/01_bienvenida.mp4',
-  V02: '/videos/02_identidad_60_20_20.mp4',
-  V03: '/videos/03_marco_dominio.mp4',
-  V04: '/videos/04_autoridad_limites_mentor.mp4',
-  V05: '/videos/06_off_campus_familia.mp4',
-  V06: '/videos/07_dual_diploma.mp4',
-  V07: '/videos/08_life_skills.mp4',
-  V08: '/videos/09_plc_certificacion.mp4',
-  V09: '/videos/10_ace_curriculo.mp4',
-  V10: '/videos/11_lifepac_uso.mp4',
-  V11: '/videos/12_cle_diferencias.mp4',
-  V12: '/videos/13_chanak_flex.mp4',
-  V13: '/videos/14_diagnostico_pei.mp4',
-  V14: '/videos/15_scope_and_sequence.mp4',
-  V15: '/videos/16_evaluacion_tres_niveles.mp4',
-  V16: '/videos/17_80_porciento_dominio.mp4',
-  V17: '/videos/18_creditos_auditoria.mp4',
-  V18: '/videos/19_sis_chanak.mp4',
-  V19: '/videos/20_portal_dual_diploma.mp4',
-  V20: '/videos/21_rutina_semanal_mentor.mp4',
-  V21: '/videos/22_comunicacion_familias.mp4',
-  V22: '/videos/23_safeguarding_limites.mp4',
-  V23: '/videos/24_extension_local_lenguas.mp4',
-  V24: '/videos/25_programas_estatales_usa.mp4',
-  V25: '/videos/26_pruebas_estandarizadas.mp4',
-  V26: '/videos/27_coordinador_centro.mp4',
-  V27: '/videos/28_cierre_toma_decisiones.mp4',
-  V28: '/videos/28_cierre_toma_decisiones.mp4',
-}
-
-// IDs históricos conservados: prioriza MP4 local nativo para máxima velocidad y fiabilidad
+// IDs históricos conservados: cada definición se vincula a su MP4 y duración real.
 export const VIDEOS = DEFINICIONES_VIDEO.map((v) => {
-  const localUrl = MAPA_LOCAL_VIDEOS[v.id]
   const render = VIDEOS_RENDERIZADOS.find((x) => x.legacy === v.id)
-  const videoUrl = localUrl || (render?.videoUrl?.startsWith('http') ? render.videoUrl : v.videoUrl)
-  return {
-    ...v,
-    videoUrl,
-    subtitulos: render?.subtitulos || v.subtitulos || null,
-    duracion: localUrl ? '1–2 min' : (render?.duracion || v.duracion),
-  }
+  return render ? { ...v, videoUrl: render.videoUrl, subtitulos: render.subtitulos, duracion: render.duracion } : v
 })
 export function videosComplementarios(modulo) {
   return VIDEOS_RENDERIZADOS.filter((x) => x.modulo === modulo && !x.legacy)
