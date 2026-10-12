@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { actualizarContrasena } from '../lib/backend'
 import { useIdioma } from '../i18n/idioma'
 
-export default function CambiarContrasena({ onCompletado, onCancelar }) {
-  const { t } = useIdioma()
+export default function CambiarContrasena({ onCompletado, onCancelar, esPrimerIngreso = false }) {
+  const { t, idioma } = useIdioma()
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [cargando, setCargando] = useState(false)
@@ -20,6 +20,15 @@ export default function CambiarContrasena({ onCompletado, onCancelar }) {
       return
     }
 
+    if (password === 'Chanak2026*' || password === 'Chanak2026*Mentora') {
+      setError(
+        idioma === 'en'
+          ? 'Please choose a new, personal password different from the temporary one.'
+          : 'Por favor elige una contraseña personal diferente a la temporal.'
+      )
+      return
+    }
+
     if (password !== confirmPassword) {
       setError(t('login.contraNoCoincide'))
       return
@@ -31,7 +40,7 @@ export default function CambiarContrasena({ onCompletado, onCancelar }) {
       setExito(t('login.contraCambiada'))
       setTimeout(() => {
         onCompletado()
-      }, 2000)
+      }, 1500)
     } catch (err) {
       setError(err.message)
     } finally {
@@ -49,8 +58,21 @@ export default function CambiarContrasena({ onCompletado, onCancelar }) {
             className="mx-auto mb-4 h-24 w-24 rounded-2xl bg-white/95 p-2 shadow-lg"
           />
           <h1 className="text-2xl font-bold tracking-wide">Chanak Academy</h1>
-          <p className="mt-1 text-sm text-cream/70">{t('login.cambiarContra')}</p>
+          <p className="mt-1 text-sm text-cream/70">
+            {esPrimerIngreso
+              ? (idioma === 'en' ? 'First login: please set your personal password' : 'Primer acceso: define tu contraseña personal')
+              : t('login.cambiarContra')}
+          </p>
         </div>
+
+        {esPrimerIngreso && (
+          <div className="mb-4 rounded-xl border border-gold/40 bg-gold/15 p-3.5 text-xs text-cream leading-relaxed">
+            <span className="font-bold text-gold">🔒 Actualización obligatoria:</span>{' '}
+            {idioma === 'en'
+              ? 'For security reasons, please change your temporary password to continue to the training platform.'
+              : 'Por seguridad, debes cambiar tu contraseña temporal antes de comenzar tu formación.'}
+          </div>
+        )}
 
         <form onSubmit={handleSubmit} className="space-y-4 rounded-2xl bg-cream p-5 shadow-lg">
           <div>

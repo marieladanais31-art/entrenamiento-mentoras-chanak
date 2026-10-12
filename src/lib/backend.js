@@ -61,6 +61,7 @@ export async function recuperarContrasena(email) {
 export async function actualizarContrasena(nuevaContrasena) {
   const { data, error } = await supabase.auth.updateUser({
     password: nuevaContrasena,
+    data: { debe_cambiar_password: false },
   })
   if (error) throw new Error(traducirError(error.message))
   return data

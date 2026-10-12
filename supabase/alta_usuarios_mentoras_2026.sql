@@ -5,13 +5,17 @@
 -- Supabase Dashboard -> SQL Editor -> New Query -> Pegar y dar clic en "Run"
 --
 -- Efecto:
--- 1. Crea o actualiza las cuentas en auth.users con contraseña temporal:
---    Chanak2026*Mentora
+-- 1. Crea o actualiza las 14 cuentas en auth.users con contraseña temporal:
+--    Chanak2026*
 -- 2. Confirma sus correos automáticamente (email_confirmed_at = now()).
 -- 3. Activa sus perfiles en public.perfiles (estado = 'aprobada').
--- 4. Asigna sus roles correspondientes en public.perfil_roles.
--- 5. Es 100% idempotente: se puede ejecutar múltiples veces sin duplicar ni romper nada.
+-- 4. Marca debe_cambiar_password = true para solicitarles cambio de contraseña al entrar.
+-- 5. Asigna sus roles correspondientes en public.perfil_roles.
+-- 6. Es 100% idempotente: se puede ejecutar múltiples veces sin duplicar ni romper nada.
 -- ============================================================
+
+-- 0. Asegurar columna de cambio obligatorio de contraseña en perfiles
+ALTER TABLE public.perfiles ADD COLUMN IF NOT EXISTS debe_cambiar_password boolean DEFAULT false;
 
 DO $$
 DECLARE
@@ -150,8 +154,8 @@ DECLARE
   v_u jsonb;
   v_r jsonb;
 BEGIN
-  -- Generar el hash de la contraseña temporal: Chanak2026*Mentora
-  v_pass_hash := crypt('Chanak2026*Mentora', gen_salt('bf'));
+  -- Contraseña temporal única para todos: Chanak2026*
+  v_pass_hash := crypt('Chanak2026*', gen_salt('bf'));
 
   FOR v_u IN SELECT * FROM jsonb_array_elements(v_usuarios)
   LOOP
@@ -186,36 +190,46 @@ BEGIN
         v_pass_hash,
         now(),
         '{"provider":"email","providers":["email"]}'::jsonb,
-        jsonb_build_object('nombre', v_u->>'nombre', 'tipo_acceso', v_u->>'tipo_acceso'),
+        jsonb_build_object(
+          'nombre', v_u->>'nombre',
+          'tipo_acceso', v_u->>'tipo_acceso',
+          'debe_cambiar_password', true
+        ),
         now(),
         now(),
         '',
         ''
       );
     ELSE
-      -- Si ya existía, confirmar correo y asegurar contraseña
+      -- Si ya existía, actualizar a contraseña Chanak2026*, confirmar correo y marcar cambio obligatorio
       UPDATE auth.users
       SET
         encrypted_password = v_pass_hash,
         email_confirmed_at = coalesce(email_confirmed_at, now()),
-        raw_user_meta_data = jsonb_build_object('nombre', v_u->>'nombre', 'tipo_acceso', v_u->>'tipo_acceso'),
+        raw_user_meta_data = jsonb_build_object(
+          'nombre', v_u->>'nombre',
+          'tipo_acceso', v_u->>'tipo_acceso',
+          'debe_cambiar_password', true
+        ),
         updated_at = now()
       WHERE id = v_user_id;
     END IF;
 
-    -- 2. Asegurar registro aprobado en public.perfiles
-    INSERT INTO public.perfiles (id, nombre, rol, estado, tipo_acceso)
+    -- 2. Asegurar registro aprobado en public.perfiles con debe_cambiar_password = true
+    INSERT INTO public.perfiles (id, nombre, rol, estado, tipo_acceso, debe_cambiar_password)
     VALUES (
       v_user_id,
       v_u->>'nombre',
       'mentora',
       'aprobada',
-      v_u->>'tipo_acceso'
+      v_u->>'tipo_acceso',
+      true
     )
     ON CONFLICT (id) DO UPDATE SET
       nombre = EXCLUDED.nombre,
       estado = 'aprobada',
-      tipo_acceso = EXCLUDED.tipo_acceso;
+      tipo_acceso = EXCLUDED.tipo_acceso,
+      debe_cambiar_password = true;
 
     -- 3. Asignar roles en public.perfil_roles (si la tabla existe)
     IF EXISTS (SELECT FROM information_schema.tables WHERE table_schema = 'public' AND table_name = 'perfil_roles') THEN
@@ -235,7 +249,7 @@ BEGIN
   END LOOP;
 END $$;
 
--- 4. Crear códigos de acceso alternativos de respaldo en la app
+-- 4. Códigos de acceso alternativos de respaldo
 INSERT INTO public.codigos_acceso (codigo, tipo_acceso, usos_max, usos, activo)
 VALUES
   ('ESTRATEGIA2026', 'visionaria', 100, 0, true),

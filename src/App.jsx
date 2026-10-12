@@ -229,10 +229,20 @@ export default function App() {
     )
   }
 
-  if (vista.nombre === 'cambiar-contrasena') {
+  const debeCambiarPassword = Boolean(
+    sesion?.user?.user_metadata?.debe_cambiar_password || perfil?.debe_cambiar_password
+  )
+
+  if (vista.nombre === 'cambiar-contrasena' || (sesion?.user && debeCambiarPassword)) {
     return (
       <CambiarContrasena
-        onCompletado={() => {
+        esPrimerIngreso={debeCambiarPassword}
+        onCompletado={async () => {
+          if (perfil?.id) {
+            try { await api.actualizarPerfil(perfil.id, { debe_cambiar_password: false }) } catch (_) {}
+          }
+          const s = await api.getSesion()
+          setSesion(s)
           setVista({ nombre: 'dashboard' })
         }}
         onCancelar={() => api.salir()}
