@@ -240,7 +240,7 @@ export default function Dashboard({
           {(esEstrategico || esCoord || esAdmin) && <Acceso icono="🌎" titulo="ESA y fondos estatales" sub="Matriz de programas por estado (uso interno)" onClick={onVerMatriz} tono="navy" />}
           {onVerVistas && <Acceso icono="🖥" titulo="Vistas del sistema" sub="SIS, Dual Diploma y Life Skills con datos ficticios" onClick={onVerVistas} tono="teal" />}
           <Acceso icono="🧭" titulo="Organización y perfiles" sub="Organigrama y funciones de las tres ramas" onClick={onVerOrganigrama} tono="navy" />
-          <Acceso icono="▶" titulo="Catálogo de vídeos" sub="87 vídeos y subtítulos descargables" onClick={onVerCatalogo} tono="navy" />
+          <Acceso icono="▶" titulo="Vídeos oficiales" sub="Presentación y Mastery Learning" onClick={onVerCatalogo} tono="navy" />
           <Acceso icono="📘" titulo={t('panel.presentacion')} sub={t('panel.presentacionSub')} onClick={onVerCurso} tono="teal" />
           <Acceso icono="📋" titulo={t('panel.registroHoras')} sub={t('panel.registroHorasSub', { horas: r.horas })} onClick={onVerHoras} tono="teal" />
         </div>

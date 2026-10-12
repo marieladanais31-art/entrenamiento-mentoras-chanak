@@ -435,7 +435,7 @@ export const VIDEOS = DEFINICIONES_VIDEO.map((v) => {
   return render ? { ...v, videoUrl: render.videoUrl, subtitulos: render.subtitulos, duracion: render.duracion } : v
 })
 export function videosComplementarios(modulo) {
-  return VIDEOS_RENDERIZADOS.filter((x) => x.modulo === modulo && !x.legacy)
+  return VIDEOS_RENDERIZADOS.filter((x) => x.modulo === modulo && !x.legacy && Boolean(x.videoUrl))
 }
 
 export function getVideo(id) {

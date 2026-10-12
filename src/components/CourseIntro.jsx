@@ -27,11 +27,42 @@ export default function CourseIntro({ onEmpezar, onVolver }) {
           <div className="mt-5 grid grid-cols-3 gap-3 border-t border-white/10 pt-5 text-center">
             <Metric n={BLOQUES.length} l={t('curso.bloques')} />
             <Metric n={TODOS_MODULOS.length} l={t('curso.modulos')} />
-            <Metric n={VIDEOS_RENDERIZADOS.length} l={t('curso.videos')} />
+            <Metric n={VIDEOS_RENDERIZADOS.filter((v) => Boolean(v.videoUrl)).length + 1} l={t('curso.videos')} />
           </div>
           <p className="mt-4 text-[11px] text-cream/50">
             {t('curso.version', { version: VERSION_CURRICULO, fecha: formatearFecha(FECHA_ACTUALIZACION) })}
           </p>
+        </div>
+      </section>
+
+      {/* Vídeo Oficial de Presentación General */}
+      <section className="overflow-hidden rounded-2xl bg-white p-5 shadow-sm">
+        <div className="mb-3 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gold/15 text-2xl" aria-hidden>
+              🎬
+            </span>
+            <div>
+              <h2 className="text-base font-bold text-navy">
+                {idioma === 'en' ? 'General Orientation · Chanak Academy' : 'Presentación General · Chanak International Academy'}
+              </h2>
+              <p className="text-xs text-navy/60">
+                {idioma === 'en' ? 'Official induction & institutional welcome video' : 'Vídeo oficial de inducción y bienvenida institucional'}
+              </p>
+            </div>
+          </div>
+          <span className="rounded-full bg-teal/10 px-3 py-1 text-xs font-bold text-teal">
+            {idioma === 'en' ? 'Official Video' : 'Vídeo Oficial'}
+          </span>
+        </div>
+        <div className="overflow-hidden rounded-xl bg-black shadow-inner">
+          <video
+            src="/videos/presentacion_general.mp4"
+            controls
+            playsInline
+            preload="metadata"
+            className="aspect-video w-full"
+          />
         </div>
       </section>
 

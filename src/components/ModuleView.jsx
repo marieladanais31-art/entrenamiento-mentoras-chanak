@@ -30,6 +30,12 @@ export default function ModuleView({ moduloId, progresoModulo: p, videos, esAdmi
       ? { url: videoDef.videoUrl, subtitulos: videoDef.subtitulos, nota: '' }
       : null
 
+  // Solo los módulos con vídeo real muestran el paso de vídeo; los demás van directo a lectura
+  const tieneVideo = Boolean(video?.url)
+  const pasosActivos = tieneVideo
+    ? ['video', 'lectura', 'practica', 'quiz', 'evidencia', 'completado']
+    : ['lectura', 'practica', 'quiz', 'evidencia', 'completado']
+
   const [paso, setPaso] = useState(0)
   const [fecha, setFecha] = useState(() => new Date().toISOString().slice(0, 10))
   const [notas, setNotas] = useState(p?.notas || '')
@@ -79,7 +85,12 @@ export default function ModuleView({ moduloId, progresoModulo: p, videos, esAdmi
     setSubiendoArchivo(false)
   }
 
-  const actual = PASOS[paso]
+  async function irPaso(nombre) {
+    const idx = pasosActivos.indexOf(nombre)
+    if (idx !== -1) await irA(idx)
+  }
+
+  const actual = pasosActivos[paso] || pasosActivos[0]
 
   return (
     <div className="space-y-4">
@@ -167,7 +178,7 @@ export default function ModuleView({ moduloId, progresoModulo: p, videos, esAdmi
       {/* ── Stepper ── */}
       <nav id="pasos-modulo" className="no-print scroll-mt-20 overflow-x-auto rounded-2xl bg-white p-2 shadow-sm" aria-label={t('modulo.pasos')}>
         <ol className="flex min-w-max gap-1">
-          {PASOS.map((k, i) => (
+          {pasosActivos.map((k, i) => (
             <li key={k}>
               <button
                 onClick={() => irA(i)}
@@ -206,7 +217,7 @@ export default function ModuleView({ moduloId, progresoModulo: p, videos, esAdmi
               </ul>
             </div>
           )}
-          <Siguiente onClick={() => irA(1)} t={t} />
+          <Siguiente onClick={() => irPaso('lectura')} t={t} />
         </Seccion>
       )}
 
@@ -232,7 +243,7 @@ export default function ModuleView({ moduloId, progresoModulo: p, videos, esAdmi
               </div>
             </div>
           ))}
-          <Siguiente onClick={() => irA(2)} t={t} />
+          <Siguiente onClick={() => irPaso('practica')} t={t} />
         </Seccion>
       )}
 
@@ -275,7 +286,7 @@ export default function ModuleView({ moduloId, progresoModulo: p, videos, esAdmi
             <summary className="cursor-pointer font-semibold text-teal">{t('modulo.verCriterio')}</summary>
             <p className="mt-2 leading-relaxed">{contenido.practica.criterio}</p>
           </details>
-          <Siguiente onClick={() => irA(3)} t={t} />
+          <Siguiente onClick={() => irPaso('quiz')} t={t} />
         </Seccion>
       )}
 
@@ -287,7 +298,7 @@ export default function ModuleView({ moduloId, progresoModulo: p, videos, esAdmi
           ) : (
             <Seccion titulo={t('quiz.titulo')}><p className="text-sm text-navy/60">—</p></Seccion>
           )}
-          <Siguiente onClick={() => irA(4)} t={t} />
+          <Siguiente onClick={() => irPaso('evidencia')} t={t} />
         </>
       )}
 
@@ -334,7 +345,7 @@ export default function ModuleView({ moduloId, progresoModulo: p, videos, esAdmi
               </label>
             </div>
           )}
-          <Siguiente onClick={() => irA(5)} t={t} />
+          <Siguiente onClick={() => irPaso('completado')} t={t} />
         </Seccion>
       )}
 
@@ -342,7 +353,7 @@ export default function ModuleView({ moduloId, progresoModulo: p, videos, esAdmi
       {actual === 'completado' && (
         <Seccion titulo={`✅ ${t('paso.completado')}`}>
           <ul className="space-y-1.5 text-sm">
-            {PASOS.slice(0, 5).map((k) => (
+            {pasosActivos.filter((k) => k !== 'completado').map((k) => (
               <li key={k} className={hechos[k] ? 'text-teal' : 'text-navy/50'}>
                 {hechos[k] ? '✓' : '○'} {t(`paso.${k}`)}
               </li>
