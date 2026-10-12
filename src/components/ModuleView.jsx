@@ -192,9 +192,11 @@ export default function ModuleView({ moduloId, progresoModulo: p, videos, esAdmi
           {videoDef && <p className="mb-3 text-sm text-navy/70">{videoDef.descripcion}</p>}
           <VideoLeccion
             video={video}
+            titulo={videoDef?.titulo || modulo?.titulo}
+            guion={videoDef?.guion || (contenido?.resumen ? [contenido.resumen] : [])}
             esAdmin={esAdmin}
-            onGuardar={(url, nota) => acciones.guardarVideo(videoDef.id, 0, url, nota)}
-            onBorrar={() => acciones.borrarVideo(videoDef.id, 0)}
+            onGuardar={(url, nota) => acciones.guardarVideo(videoDef?.id || moduloId, 0, url, nota)}
+            onBorrar={() => acciones.borrarVideo(videoDef?.id || moduloId, 0)}
           />
           {videoDef?.guion && (
             <div className="mt-4 rounded-xl bg-cream px-4 py-3">

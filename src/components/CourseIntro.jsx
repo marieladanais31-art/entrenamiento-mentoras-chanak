@@ -35,6 +35,37 @@ export default function CourseIntro({ onEmpezar, onVolver }) {
         </div>
       </section>
 
+      {/* Vídeo de Presentación General Oficial */}
+      <section className="overflow-hidden rounded-2xl bg-white p-5 shadow-sm">
+        <div className="mb-3 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gold/15 text-2xl" aria-hidden>
+              🎬
+            </span>
+            <div>
+              <h2 className="text-base font-bold text-navy">
+                {idioma === 'en' ? 'General Orientation · Chanak Academy' : 'Presentación General · Chanak International Academy'}
+              </h2>
+              <p className="text-xs text-navy/60">
+                {idioma === 'en' ? 'Official induction & institutional welcome video' : 'Vídeo oficial de inducción y bienvenida institucional'}
+              </p>
+            </div>
+          </div>
+          <span className="rounded-full bg-teal/10 px-3 py-1 text-xs font-bold text-teal">
+            {idioma === 'en' ? 'Official Video' : 'Vídeo Oficial'}
+          </span>
+        </div>
+        <div className="overflow-hidden rounded-xl bg-black shadow-inner">
+          <video
+            src="/videos/presentacion_general.mp4"
+            controls
+            playsInline
+            preload="metadata"
+            className="aspect-video w-full"
+          />
+        </div>
+      </section>
+
       <Card titulo={t('curso.sobre')}>
         <p className="text-sm leading-relaxed text-navy/75">{CURSO.resumen}</p>
         <div className="mt-4 rounded-xl bg-cream px-4 py-3">
