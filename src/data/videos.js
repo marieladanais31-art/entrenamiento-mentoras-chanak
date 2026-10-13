@@ -130,70 +130,133 @@ const DEFINICIONES_VIDEO = [
     ],
   },
   // ── Currículos ──
+  // 1. A.C.E. (Reference / Preferred Pathway)
   {
     id: 'V09', orden: 9, bloque: 'Currículos', modulo: 'T3.1', duracion: '8 min', videoUrl: '',
-    titulo: 'A.C.E. · vía de referencia y formación presencial',
+    titulo: 'A.C.E. · Curriculum General (Vía de Referencia)',
     descripcion: 'PACEs, metas, Checkups, Self Tests y PACE Tests: supervisión de la vía preferente. REQUISITO: La elección de A.C.E. exige para coordinadores al menos una formación presencial de una semana.',
     guion: [
       'A.C.E. es la Reference / Preferred Curriculum Pathway de Chanak.',
       'REQUISITO OBLIGATORIO: La elección de A.C.E. requiere para coordinadores por lo menos una formación presencial de una semana para certificación oficial.',
       'Estructura: Diagnostic Test, PACEs, metas diarias, Checkups, Self Test y PACE Test, con progresión individual.',
       'El mentor supervisa metas, corrección, Self Tests y evidencias, y registra resultados en el SIS.',
-      'Enlaces oficiales A.C.E.: Curriculum (https://aceministries.com/curriculum) · Kindergarten (https://aceministries.com/kindergarten-with-ace-and-christi) · Reading ABCs (https://aceministries.com/abcs-with-ace-and-christi)',
+      'Enlace oficial: Curriculum A.C.E. (https://aceministries.com/curriculum)',
     ],
     enlaces: [
-      { titulo: 'Curriculum A.C.E. General', url: 'https://aceministries.com/curriculum' },
-      { titulo: 'A.C.E. Kindergarten with Ace and Christi', url: 'https://aceministries.com/kindergarten-with-ace-and-christi' },
-      { titulo: 'Reading · ABCs with Ace and Christi', url: 'https://aceministries.com/abcs-with-ace-and-christi' },
+      { titulo: 'A.C.E. Curriculum General', url: 'https://aceministries.com/curriculum' },
     ],
   },
   {
-    id: 'V09b', orden: 9.5, bloque: 'Currículos', modulo: 'T3.2', duracion: '8 min', videoUrl: '',
-    titulo: 'Educación Infantil y ABCs with Ace and Christi',
-    descripcion: 'Kindergarten, aprestamiento lector, fonética sistemática y transición a los PACEs de primer grado.',
+    id: 'V09b', orden: 9.3, bloque: 'Currículos', modulo: 'T3.2', duracion: '7 min', videoUrl: '',
+    titulo: 'A.C.E. · Kindergarten with Ace and Christi',
+    descripcion: 'Programa fundacional de Kindergarten: desarrollo motriz, hábitos, obediencia, atención y destrezas pre-académicas.',
     guion: [
-      'Kindergarten con Ace and Christi: desarrollo motriz, hábitos, obediencia, atención y destrezas pre-académicas.',
-      'ABCs with Ace and Christi: programa fonético intensivo de 12 a 15 semanas para dominar lectura y escritura en inglés.',
-      'Test de madurez lectora (Reading Readiness Test) para determinar si el niño entra a Kindergarten o directo a ABCs.',
-      'Transición fluida a los PACEs de Grado 1 (nivel 1001) tras superar el programa ABCs con dominio comprobado.',
+      'Kindergarten con Ace and Christi: programa formativo centrado en destrezas de coordinación ojo-mano y desarrollo socioemocional.',
+      'Animales del zoológico de Christi, canciones, rimas y conceptos bíblicos integrados.',
+      'Preparación integral del niño antes de la instrucción formal de lectoescritura.',
+      'Enlace oficial: Kindergarten with Ace and Christi (https://aceministries.com/kindergarten-with-ace-and-christi)',
+    ],
+    enlaces: [
+      { titulo: 'A.C.E. Kindergarten with Ace and Christi', url: 'https://aceministries.com/kindergarten-with-ace-and-christi' },
+    ],
+  },
+  {
+    id: 'V09c', orden: 9.6, bloque: 'Currículos', modulo: 'T3.2', duracion: '8 min', videoUrl: '',
+    titulo: 'A.C.E. · Reading (ABCs with Ace and Christi)',
+    descripcion: 'Programa fonético intensivo de lectoescritura en inglés (12–15 semanas) y transición fluida a los PACEs de primer grado.',
+    guion: [
+      'ABCs with Ace and Christi: fonética sistemática multisensorial para aprender a leer y escribir en inglés con solidez.',
+      'Reading Readiness Test: diagnóstico para determinar si el estudiante ingresa a Kindergarten o directamente a ABCs.',
+      'Post-Test fonético de dominio y graduación hacia los PACEs 1001 de primer grado.',
       'Enlace oficial: ABCs with Ace and Christi (https://aceministries.com/abcs-with-ace-and-christi)',
     ],
     enlaces: [
-      { titulo: 'A.C.E. Kindergarten', url: 'https://aceministries.com/kindergarten-with-ace-and-christi' },
       { titulo: 'Reading · ABCs with Ace and Christi', url: 'https://aceministries.com/abcs-with-ace-and-christi' },
     ],
   },
+
+  // 2. LIFEPAC (Reviewed Alternative Pathway)
   {
     id: 'V10', orden: 10, bloque: 'Currículos', modulo: 'T3.2b', duracion: '7 min', videoUrl: '',
-    titulo: 'LIFEPAC (Alpha Omega Publications)',
-    descripcion: 'Vía alternativa revisada con worktexts K–12 autodirigidos, orientación al dominio y Teacher’s Guides.',
+    titulo: 'LIFEPAC · Curriculum General (Alpha Omega Publications)',
+    descripcion: 'Vía alternativa revisada con worktexts K–12 autodirigidos, orientación al dominio, 10 unidades por materia y Teacher’s Guides.',
     guion: [
       'LIFEPAC (Alpha Omega Publications): Reviewed Alternative Curriculum Pathway con 10 worktexts consumibles por materia al año.',
       'Estructura interna: lecciones auto-dirigidas, reviews, self-tests formativos y unit tests sumativos supervisados.',
       'El rol del adulto: acompañamiento con Teacher\'s Guide, custodia de claves y verificación honesta de self-tests.',
       'Umbral mínimo del 80 % en las evaluaciones de dominio y registro puntual en el SIS.',
-      'Enlaces oficiales LIFEPAC: Curriculum (https://www.aop.com/curriculum/shop-lifepac) · Kindergarten (https://www.aop.com/curriculum/lifepac) · Reading / Language Arts (https://www.aop.com/curriculum/shop-lifepac/language-arts)',
+      'Enlace oficial: LIFEPAC Curriculum (https://www.aop.com/curriculum/shop-lifepac)',
     ],
     enlaces: [
       { titulo: 'LIFEPAC Curriculum General', url: 'https://www.aop.com/curriculum/shop-lifepac' },
-      { titulo: 'LIFEPAC Kindergarten & Elementary', url: 'https://www.aop.com/curriculum/lifepac' },
-      { titulo: 'LIFEPAC Reading / Language Arts', url: 'https://www.aop.com/curriculum/shop-lifepac/language-arts' },
     ],
   },
   {
-    id: 'V10b', orden: 10.5, bloque: 'Currículos', modulo: 'T3.2c', duracion: '7 min', videoUrl: '',
-    titulo: 'Christian Light Education (CLE)',
+    id: 'V10b', orden: 10.3, bloque: 'Currículos', modulo: 'T3.2b', duracion: '6 min', videoUrl: '',
+    titulo: 'LIFEPAC · Kindergarten & Preschool',
+    descripcion: 'Educación temprana y preescolar con cuadernos temáticos de aprestamiento, motricidad y conceptos básicos.',
+    guion: [
+      'LIFEPAC Preschool & Kindergarten: cuadernos diseñados para el desarrollo de la percepción visual, motricidad fina y comprensión básica.',
+      'Introducción progresiva a letras, números, colores y cosmovisión bíblica en el hogar.',
+      'Enlace oficial: LIFEPAC Preschool & Kindergarten (https://www.aop.com/curriculum/preschool-kindergarten)',
+    ],
+    enlaces: [
+      { titulo: 'LIFEPAC Kindergarten & Preschool', url: 'https://www.aop.com/curriculum/preschool-kindergarten' },
+    ],
+  },
+  {
+    id: 'V10c', orden: 10.6, bloque: 'Currículos', modulo: 'T3.2b', duracion: '7 min', videoUrl: '',
+    titulo: 'LIFEPAC · Reading & Language Arts',
+    descripcion: 'Programa integrado de artes del lenguaje, gramática, ortografía y comprensión lectora progresiva.',
+    guion: [
+      'LIFEPAC Language Arts: combinación de fonética, gramática, vocabulario y comprensión de lectura estructurada.',
+      'Worktexts auto-contenidos que fortalecen la expresión escrita y la lectura crítica.',
+      'Enlace oficial: LIFEPAC Language Arts & Reading (https://www.aop.com/curriculum/shop-lifepac/language-arts)',
+    ],
+    enlaces: [
+      { titulo: 'LIFEPAC Language Arts & Reading', url: 'https://www.aop.com/curriculum/shop-lifepac/language-arts' },
+    ],
+  },
+
+  // 3. Christian Light Education (CLE) (Reviewed Alternative Pathway)
+  {
+    id: 'V10d', orden: 10.7, bloque: 'Currículos', modulo: 'T3.2c', duracion: '7 min', videoUrl: '',
+    titulo: 'Christian Light Education (CLE) · Curriculum General',
     descripcion: 'Vía alternativa revisada con LightUnits, metodología incremental y repaso continuo (Sunrise Edition).',
     guion: [
       'Christian Light Education (CLE): Reviewed Alternative Curriculum Pathway con LightUnits y cuadernos integrados.',
       'Metodología incremental (Sunrise Edition): nuevos conceptos en pequeñas dosis diarias con repaso constante acumulativo.',
       'Quizzes y tests por LightUnit con Answer Keys custodiadas por el adulto.',
-      'Supervisión y registro de dominio del 80 % sin imponer la Review Station de A.C.E., respetando la estructura propia de CLE.',
-      'Enlaces oficiales CLE: Curriculum (https://christianlight.org/curriculum) · Kindergarten (https://christianlight.org/curriculum/by-grade/kindergarten-ii) · Reading / Learning to Read (https://christianlight.org/curriculum/by-subject/reading)',
+      'Supervisión y registro de dominio del 80 % respetando la estructura propia de CLE.',
+      'Enlace oficial: CLE Curriculum Overview (https://christianlight.org/curriculum)',
     ],
     enlaces: [
       { titulo: 'CLE Curriculum General', url: 'https://christianlight.org/curriculum' },
-      { titulo: 'CLE Kindergarten (Kindergarten II)', url: 'https://christianlight.org/curriculum/by-grade/kindergarten-ii' },
+    ],
+  },
+  {
+    id: 'V10e', orden: 10.8, bloque: 'Currículos', modulo: 'T3.2c', duracion: '6 min', videoUrl: '',
+    titulo: 'CLE · Kindergarten I & II',
+    descripcion: 'Programa de Kindergarten I y II: destrezas pre-lectoras, coordinación visomotora y conceptos numéricos.',
+    guion: [
+      'CLE Kindergarten I & II: desarrollo ordenado de habilidades previas a la escuela primaria.',
+      'Entrenamiento de atención, reconocimiento de sonidos iniciales y trazos básicos.',
+      'Enlace oficial: CLE Kindergarten (https://christianlight.org/curriculum/by-grade/kindergarten)',
+    ],
+    enlaces: [
+      { titulo: 'CLE Kindergarten I & II', url: 'https://christianlight.org/curriculum/by-grade/kindergarten' },
+    ],
+  },
+  {
+    id: 'V10f', orden: 10.9, bloque: 'Currículos', modulo: 'T3.2c', duracion: '7 min', videoUrl: '',
+    titulo: 'CLE · Reading (Learning to Read)',
+    descripcion: 'Programa fonético y lector de CLE: decodificación fonética intensiva y transición a la lectura de primer grado.',
+    guion: [
+      'CLE Learning to Read: 10 LightUnits centradas en fonética sistemática estricta y lectura guiada.',
+      'Dominio de vocales cortas y largas, mezclas consonánticas y lectura comprensiva bíblica.',
+      'Enlace oficial: CLE Learning to Read (https://christianlight.org/curriculum/by-subject/reading)',
+    ],
+    enlaces: [
       { titulo: 'CLE Reading · Learning to Read', url: 'https://christianlight.org/curriculum/by-subject/reading' },
     ],
   },

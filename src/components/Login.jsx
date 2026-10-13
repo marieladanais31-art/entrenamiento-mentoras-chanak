@@ -66,7 +66,7 @@ export default function Login() {
             `• Nombre: ${nombre}\n` +
             `• Correo: ${email}\n\n` +
             `Accede al Panel de Administración para aprobarla sin pago:\n` +
-            `https://entrenamiento-mentoras-chanak-two.vercel.app/\n\n` +
+            `https://training.chanakacademy.org/\n\n` +
             `Chanak International Academy`
           )
           

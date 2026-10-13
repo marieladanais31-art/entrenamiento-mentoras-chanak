@@ -338,15 +338,40 @@ function GestionVideos() {
               const g = guardados[`${v.id}:0`]
               const url = g?.url || v.videoUrl
               return (
-                <li key={v.id} className="rounded-xl bg-white p-3 shadow-sm">
+                <li key={v.id} className="rounded-xl bg-white p-3 shadow-sm border border-navy/5">
                   <button onClick={() => setAbierto(abierto === v.id ? null : v.id)} className="flex w-full items-center gap-2 text-left text-xs">
-                    <span className="font-mono font-bold text-navy">{v.id}</span>
-                    <span className="min-w-0 flex-1 truncate text-navy/75">{v.titulo}</span>
-                    <span className="text-navy/45">{numModulo(v.modulo)} · {v.duracion}</span>
-                    <span className={url ? 'text-teal' : 'text-coral'}>{url ? '●' : '○'}</span>
+                    <span className="font-mono font-bold text-navy shrink-0">{v.id}</span>
+                    <span className="min-w-0 flex-1 font-medium text-navy/85">{v.titulo}</span>
+                    <span className="text-navy/45 shrink-0">{numModulo(v.modulo)} · {v.duracion}</span>
+                    <span className={url ? 'text-teal font-bold' : 'text-coral'}>{url ? '●' : '○'}</span>
                   </button>
+
+                  {/* Enlaces directos a las secciones oficiales del currículo */}
+                  {v.enlaces && v.enlaces.length > 0 && (
+                    <div className="mt-2 flex flex-wrap items-center gap-1.5 pt-1.5 border-t border-navy/5">
+                      <span className="text-[10px] uppercase font-bold text-navy/40">Sección:</span>
+                      {v.enlaces.map((e, idx) => (
+                        <a
+                          key={idx}
+                          href={e.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="inline-flex items-center gap-1 rounded bg-teal/10 px-2 py-0.5 text-[11px] font-semibold text-teal hover:bg-teal hover:text-white transition"
+                        >
+                          🔗 {e.titulo} ↗
+                        </a>
+                      ))}
+                    </div>
+                  )}
+
                   {abierto === v.id && (
-                    <div className="mt-3">
+                    <div className="mt-3 pt-2 border-t border-navy/10">
+                      {v.id.startsWith('V09') && (
+                        <div className="mb-3 rounded-lg border border-gold/40 bg-gold/10 p-2.5 text-xs text-navy/85 font-medium">
+                          ⚠️ <b>REQUISITO OBLIGATORIO:</b> La elección de A.C.E. requiere para coordinadores por lo menos una formación presencial de una semana.
+                        </div>
+                      )}
+                      <p className="mb-2 text-xs text-navy/70">{v.descripcion}</p>
                       <VideoLeccion
                         video={url ? { url, nota: g?.nota || '' } : null}
                         esAdmin

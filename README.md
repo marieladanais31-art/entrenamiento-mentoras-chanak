@@ -7,7 +7,7 @@ escuela privada registrada en Florida, FLDOE #134620 · MSA-CESS Candidate) para
 mentores y coordinadores y registrar su progreso. Enseña cómo funciona y se opera Chanak:
 no es un curso para preparar una visita de acreditación.
 
-**Producción:** https://entrenamiento-mentoras-chanak-two.vercel.app
+**Producción:** https://training.chanakacademy.org
 **Versión de currículo:** `training-2026-2027` (actualizado el 2 de octubre de 2026)
 **Fuente oficial del contenido:** carpeta `CHANAK_DOCUMENTOS_2026-2027_FINAL`
 (01_INSTITUCIONAL, 02_FAMILIAS, 03_INSTITUCIONES, 07_US_PROGRAMS_COMPLIANCE,

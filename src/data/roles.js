@@ -620,6 +620,7 @@ export const USUARIOS_CONOCIDOS = [
   { id: 'dbe32d4d-5e55-4525-84d4-d597190d2af8', email: 'jituvane@gmail.com', nombre: 'Jitendra Dongardive' },
   { id: 'd7ff67b0-5748-49df-a879-356a27e412ec', email: 'vanejitu@gmail.com', nombre: 'Vane Jitu' },
   { id: 'f281eb9d-18b1-4816-8d7a-d23d9bbfac01', email: 'jokaneska@gmail.com', nombre: 'Joaneska Grössl' },
+  { id: '91bc61f8-ffa8-4eca-a013-0ee8d810dc46', email: 'ydita5460@gmail.com', nombre: 'Ydita' },
   { email: 'florida@chanakacademy.org', nombre: 'Karen Pujols' },
   { email: 'administration@chanakacademy.org', nombre: 'Mariela Andrade' },
 ]

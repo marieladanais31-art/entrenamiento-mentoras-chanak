@@ -1,6 +1,6 @@
 # Puesta en marcha
 
-**App en producción:** https://entrenamiento-mentoras-chanak-two.vercel.app
+**App en producción:** https://training.chanakacademy.org
 
 Tres pasos, una sola vez. Después la app funciona sola.
 

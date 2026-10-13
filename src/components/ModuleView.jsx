@@ -207,6 +207,25 @@ export default function ModuleView({ moduloId, progresoModulo: p, videos, esAdmi
             onGuardar={(url, nota) => acciones.guardarVideo(videoDef.id, 0, url, nota)}
             onBorrar={() => acciones.borrarVideo(videoDef.id, 0)}
           />
+          {videoDef?.enlaces && videoDef.enlaces.length > 0 && (
+            <div className="mt-3 rounded-xl border border-teal/20 bg-teal/5 p-3.5">
+              <div className="text-xs font-bold uppercase tracking-wide text-teal">🔗 Enlaces oficiales y recursos de esta sección:</div>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {videoDef.enlaces.map((e, idx) => (
+                  <a
+                    key={idx}
+                    href={e.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1.5 rounded-lg bg-white px-3 py-1.5 text-xs font-semibold text-navy shadow-xs border border-navy/10 hover:border-teal hover:text-teal transition"
+                  >
+                    <span>{e.titulo}</span>
+                    <span className="text-teal">↗</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
           {videoDef?.guion && (
             <div className="mt-4 rounded-xl bg-cream px-4 py-3">
               <div className="text-[12px] font-bold uppercase tracking-wide text-navy/45">{t('modulo.ideasClave')}</div>
