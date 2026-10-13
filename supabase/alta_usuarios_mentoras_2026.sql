@@ -17,6 +17,18 @@
 -- 0. Asegurar columna de cambio obligatorio de contraseña en perfiles
 ALTER TABLE public.perfiles ADD COLUMN IF NOT EXISTS debe_cambiar_password boolean DEFAULT false;
 
+-- Reparar posibles NULLs en auth.users para que GoTrue no lance error 500 al iniciar sesión
+UPDATE auth.users
+SET
+  confirmation_token = coalesce(confirmation_token, ''),
+  recovery_token = coalesce(recovery_token, ''),
+  email_change = coalesce(email_change, ''),
+  email_change_token_new = coalesce(email_change_token_new, ''),
+  email_change_token_current = coalesce(email_change_token_current, ''),
+  phone = coalesce(phone, ''),
+  phone_change = coalesce(phone_change, ''),
+  phone_change_token = coalesce(phone_change_token, '');
+
 DO $$
 DECLARE
   v_user_id uuid;
@@ -180,7 +192,13 @@ BEGIN
         created_at,
         updated_at,
         confirmation_token,
-        recovery_token
+        recovery_token,
+        email_change,
+        email_change_token_new,
+        email_change_token_current,
+        phone,
+        phone_change,
+        phone_change_token
       ) VALUES (
         v_user_id,
         '00000000-0000-0000-0000-000000000000',
@@ -198,6 +216,12 @@ BEGIN
         now(),
         now(),
         '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
         ''
       );
     ELSE
@@ -211,6 +235,14 @@ BEGIN
           'tipo_acceso', v_u->>'tipo_acceso',
           'debe_cambiar_password', true
         ),
+        confirmation_token = coalesce(confirmation_token, ''),
+        recovery_token = coalesce(recovery_token, ''),
+        email_change = coalesce(email_change, ''),
+        email_change_token_new = coalesce(email_change_token_new, ''),
+        email_change_token_current = coalesce(email_change_token_current, ''),
+        phone = coalesce(phone, ''),
+        phone_change = coalesce(phone_change, ''),
+        phone_change_token = coalesce(phone_change_token, ''),
         updated_at = now()
       WHERE id = v_user_id;
     END IF;

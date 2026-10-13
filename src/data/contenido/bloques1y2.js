@@ -40,7 +40,7 @@ export const BLOQUES_1_2 = {
     ],
     practica: {
       situacion:
-        'Una nueva familia interesada en Chanak y un colegio que desea implementar el Dual Diploma contactan simultáneamente a la escuela para solicitar información y comenzar a trabajar con nosotros.',
+        'Una nueva familia interesada en Chanak y un colegio que desea implementar el Dual Diploma contactan simultáneamente a la escuela para solicitar información y comenzar a participar con nosotros.',
       preguntas: [
         '¿Qué área institucional interviene primero para orientar a la familia y gestionar su matrícula o beca estatal?',
         '¿Qué área se encarga de estructurar el plan académico, diagnóstico y acompañamiento diario del estudiante?',
