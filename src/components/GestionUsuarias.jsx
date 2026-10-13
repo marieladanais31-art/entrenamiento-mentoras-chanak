@@ -120,24 +120,21 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
             <a
               href={`mailto:administration@chanakacademy.org?bcc=${encodeURIComponent(
                 activas.map((p) => p.email || obtenerEmailConocido(p.id) || obtenerEmailConocido(p.nombre)).filter(Boolean).join(',')
-              )}&subject=${encodeURIComponent('¡Bienvenida a tu Plataforma de Entrenamiento Chanak! 🎓✨ + Encuentro este jueves')}&body=${encodeURIComponent(
-                `¡Hola, equipo Chanak!\n\n` +
-                `Estamos muy felices y emocionados de iniciar juntos esta etapa de formación y crecimiento en Chanak International Academy. Les compartimos los datos de acceso para navegar en la plataforma:\n\n` +
+              )}&subject=${encodeURIComponent('Formación Chanak · Acceso a la plataforma y encuentro este jueves')}&body=${encodeURIComponent(
+                `Bendiciones,\n\n` +
+                `Como continuación de la invitación de ayer, te confirmamos que la plataforma de formación Chanak ya está disponible. Si todavía no has entrado, puedes comenzar a explorar la introducción y los primeros módulos del tronco común.\n\n` +
                 `🔗 Plataforma: https://training.chanakacademy.org/\n` +
-                `👤 Usuario: Tu correo electrónico registrado\n` +
+                `👤 Usuario: tu correo electrónico registrado\n` +
                 `🔑 Contraseña inicial: Chanak2026*\n\n` +
-                `(Nota: Si ya lograste ingresar previamente con éxito, por favor obvia este recordatorio).\n\n` +
-                `Al ingresar, recuerda actualizar tu contraseña y comenzar a explorar los primeros módulos del tronco común formativo.\n\n` +
-                `──────────────────────────────────\n` +
-                `🗓️ ENCUENTRO DE EQUIPO · ESTE JUEVES\n` +
-                `Training Chanak\n` +
-                `Fecha: Jueves, 15 de octubre · 8:00 – 8:45pm\n` +
-                `Zona horaria: Europe/Madrid\n` +
-                `Enlace de Google Meet: https://meet.google.com/ktt-wtgg-gep\n` +
-                `──────────────────────────────────\n\n` +
-                `¡Nos alegra muchísimo contar con cada uno de ustedes en este propósito!\n\n` +
-                `Con cariño,\n` +
-                `Equipo Chanak International Academy`
+                `En tu primer acceso, la plataforma te pedirá cambiar la contraseña. Si ya ingresaste y la cambiaste, utiliza tu contraseña actual. Si tienes dificultades para acceder, responde a este correo.\n\n` +
+                `También te compartimos el enlace de nuestro encuentro:\n` +
+                `📅 Jueves 15 de octubre a las 20:00 h, hora de España peninsular\n` +
+                `📍 Google Meet: https://meet.google.com/ktt-wtgg-gep\n\n` +
+                `Presentaremos el recorrido de formación, resolveremos dudas y conversaremos sobre las posibles áreas de colaboración. Será una oportunidad para conocer mejor la visión y valorar tu disponibilidad para continuar.\n\n` +
+                `Gracias por tu interés. Nos alegrará compartir este encuentro contigo.\n\n` +
+                `Un abrazo,\n` +
+                `Mariela Andrade\n` +
+                `Chanak International Academy`
               )}`}
               target="_blank"
               rel="noreferrer"
@@ -397,24 +394,21 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
                     </span>
                     {correoActiva && (
                       <a
-                        href={`mailto:${correoActiva}?subject=${encodeURIComponent('¡Bienvenida a tu Plataforma de Entrenamiento Chanak! 🎓✨ + Encuentro este jueves')}&body=${encodeURIComponent(
-                          `¡Hola, ${p.nombre || 'Mentora'}!\n\n` +
-                          `Estamos muy felices y emocionados de iniciar juntos esta etapa de formación y crecimiento en Chanak International Academy. Te compartimos tus datos de acceso:\n\n` +
+                        href={`mailto:${correoActiva}?subject=${encodeURIComponent('Formación Chanak · Acceso a la plataforma y encuentro este jueves')}&body=${encodeURIComponent(
+                          `Bendiciones,\n\n` +
+                          `Como continuación de la invitación de ayer, te confirmamos que la plataforma de formación Chanak ya está disponible. Si todavía no has entrado, puedes comenzar a explorar la introducción y los primeros módulos del tronco común.\n\n` +
                           `🔗 Plataforma: https://training.chanakacademy.org/\n` +
                           `👤 Usuario: ${correoActiva}\n` +
                           `🔑 Contraseña inicial: Chanak2026*\n\n` +
-                          `(Nota: Si ya lograste ingresar previamente con éxito, por favor obvia este recordatorio).\n\n` +
-                          `Al ingresar, recuerda actualizar tu contraseña y comenzar a navegar por los módulos del tronco común formativo.\n\n` +
-                          `──────────────────────────────────\n` +
-                          `🗓️ ENCUENTRO DE EQUIPO · ESTE JUEVES\n` +
-                          `Training Chanak\n` +
-                          `Fecha: Jueves, 15 de octubre · 8:00 – 8:45pm\n` +
-                          `Zona horaria: Europe/Madrid\n` +
-                          `Enlace de Google Meet: https://meet.google.com/ktt-wtgg-gep\n` +
-                          `──────────────────────────────────\n\n` +
-                          `¡Nos alegra muchísimo contar contigo en este propósito!\n\n` +
-                          `Con cariño,\n` +
-                          `Equipo Chanak International Academy`
+                          `En tu primer acceso, la plataforma te pedirá cambiar la contraseña. Si ya ingresaste y la cambiaste, utiliza tu contraseña actual. Si tienes dificultades para acceder, responde a este correo.\n\n` +
+                          `También te compartimos el enlace de nuestro encuentro:\n` +
+                          `📅 Jueves 15 de octubre a las 20:00 h, hora de España peninsular\n` +
+                          `📍 Google Meet: https://meet.google.com/ktt-wtgg-gep\n\n` +
+                          `Presentaremos el recorrido de formación, resolveremos dudas y conversaremos sobre las posibles áreas de colaboración. Será una oportunidad para conocer mejor la visión y valorar tu disponibilidad para continuar.\n\n` +
+                          `Gracias por tu interés. Nos alegrará compartir este encuentro contigo.\n\n` +
+                          `Un abrazo,\n` +
+                          `Mariela Andrade\n` +
+                          `Chanak International Academy`
                         )}`}
                         target="_blank"
                         rel="noreferrer"
