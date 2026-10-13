@@ -2,11 +2,15 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-navy: #0f172a;       /* Slate/Navy ultra limpio */
-  --color-teal: #059669;       /* Emerald/Teal vivo */
-  --color-gold: #d97706;       /* Amber/Gold moderno */
-  --color-cream: #f8fafc;      /* Blanco limpio */
-  --color-coral: #e11d48;      /* Rose/Coral nítido */
+  --color-navy: #133854;       /* Deep Chanak Navy de las diapositivas oficiales */
+  --color-navy-dark: #0d263b;  /* Fondo oscuro institucional */
+  --color-teal: #4E8A2F;       /* Verde institucional Chanak de diapositivas */
+  --color-teal-light: #6EA236; /* Verde hoja vivo de la franja superior */
+  --color-teal-soft: #EAF3DE;  /* Verde claro suave para insignias/números */
+  --color-gold: #c68a26;       /* Dorado cálido Chanak */
+  --color-cream: #f8fafc;      /* Fondo limpio y descansado */
+  --color-coral: #e11d48;      /* Coral para alertas y avisos */
+  --color-chanak-blue: #0284c7;/* Azul antorcha del logo */
   --font-sans: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
 
   /* Escala de texto ampliada significativamente para máxima legibilidad */

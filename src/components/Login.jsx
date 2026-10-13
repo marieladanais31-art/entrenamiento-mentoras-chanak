@@ -145,7 +145,7 @@ export default function Login() {
           </div>
         )}
 
-        <form onSubmit={enviar} className="space-y-3 rounded-2xl bg-cream p-5 shadow-lg">
+        <form onSubmit={enviar} className="space-y-3 rounded-2xl bg-cream p-5 shadow-xl border-t-4 border-[#6EA236]">
           {modo === 'registro' && (
             <Campo
               etiqueta={t('login.nombre')}

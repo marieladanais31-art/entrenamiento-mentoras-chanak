@@ -87,13 +87,24 @@ export default function Dashboard({
 
   return (
     <div className="space-y-6">
-      <section className="rounded-2xl bg-navy p-6 text-white shadow-sm">
-        <p className="text-sm font-semibold text-gold">{idioma === 'es' ? 'Tu espacio de formación Chanak' : 'Your Chanak training space'}</p>
-        <h1 className="mt-2 text-2xl font-bold">
-          {esAdmin && !viendoOtra ? 'Administración · Vista completa' : grupos.length ? `Rama ${nombreRamas}` : 'Tronco común'}
-        </h1>
-        <p className="mt-3 text-base leading-relaxed text-white/80">
-          Todas las personas empiezan por el tronco común y pueden entrar en la rama <b>Mentor</b> (Off-Campus y Dual Diploma, inglés,
+      <section className="relative overflow-hidden rounded-2xl border-t-4 border-[#6EA236] bg-[#133854] p-6 text-white shadow-sm">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <div className="text-xs font-bold uppercase tracking-widest text-[#88C448]">
+              {idioma === 'es' ? 'FORMACIÓN DEL EQUIPO CHANAK' : 'CHANAK TEAM TRAINING'}
+            </div>
+            <h1 className="mt-1 text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
+              {esAdmin && !viendoOtra ? 'Administración · Vista completa' : grupos.length ? `Rama ${nombreRamas}` : 'Tronco común'}
+            </h1>
+          </div>
+          <img
+            src="/logo-chanak.png"
+            alt="Chanak International Academy"
+            className="hidden h-14 w-14 rounded-xl bg-white p-1.5 shadow-sm sm:block"
+          />
+        </div>
+        <p className="mt-3 max-w-2xl text-base leading-relaxed text-white/85">
+          Todas las personas empiezan por el tronco común y pueden participar en la rama <b>Mentor</b> (Off-Campus y Dual Diploma, inglés,
           Life Skills, Extensión Local o evaluación educativa). <b>Coordinador</b> lo confirma Dirección Académica y <b>Estratégico</b>,
           la Dirección de Operaciones y Alianzas. Tus avances guardados se conservan.
         </p>
