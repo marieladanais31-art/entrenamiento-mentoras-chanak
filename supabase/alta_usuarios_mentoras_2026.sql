@@ -105,7 +105,7 @@ DECLARE
       ]
     },
     {
-      "email": "lauravpardoq@gmail.com",
+      "email": "lauravpardoq@outlook.com",
       "nombre": "Laura V. Pardo Q.",
       "tipo_acceso": "coordinadora",
       "roles": [
