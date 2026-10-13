@@ -115,12 +115,45 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
           <h3 className="font-bold text-navy text-lg">{t('usuarias.titulo')}</h3>
           <p className="text-xs text-navy/55">{t('usuarias.sub')}</p>
         </div>
-        <button
-          onClick={() => setMostrandoForm(!mostrandoForm)}
-          className="shrink-0 rounded-xl bg-teal px-4 py-2.5 text-xs font-bold text-white shadow-sm transition hover:bg-teal/90"
-        >
-          {mostrandoForm ? '✕ Cancelar' : '➕ Crear Usuaria Directamente'}
-        </button>
+        <div className="flex flex-wrap items-center gap-2">
+          {activas.length > 0 && (
+            <a
+              href={`mailto:administration@chanakacademy.org?bcc=${encodeURIComponent(
+                activas.map((p) => p.email || obtenerEmailConocido(p.id) || obtenerEmailConocido(p.nombre)).filter(Boolean).join(',')
+              )}&subject=${encodeURIComponent('¡Bienvenida a tu Plataforma de Entrenamiento Chanak! 🎓✨ + Encuentro este jueves')}&body=${encodeURIComponent(
+                `¡Hola, equipo Chanak!\n\n` +
+                `Estamos muy felices y emocionados de iniciar juntos esta etapa de formación y crecimiento en Chanak International Academy. Les compartimos los datos de acceso para navegar en la plataforma:\n\n` +
+                `🔗 Plataforma: https://training.chanakacademy.org/\n` +
+                `👤 Usuario: Tu correo electrónico registrado\n` +
+                `🔑 Contraseña inicial: Chanak2026*\n\n` +
+                `(Nota: Si ya lograste ingresar previamente con éxito, por favor obvia este recordatorio).\n\n` +
+                `Al ingresar, recuerda actualizar tu contraseña y comenzar a explorar los primeros módulos del tronco común formativo.\n\n` +
+                `──────────────────────────────────\n` +
+                `🗓️ ENCUENTRO DE EQUIPO · ESTE JUEVES\n` +
+                `Training Chanak\n` +
+                `Fecha: Jueves, 15 de octubre · 8:00 – 8:45pm\n` +
+                `Zona horaria: Europe/Madrid\n` +
+                `Enlace de Google Meet: https://meet.google.com/ktt-wtgg-gep\n` +
+                `──────────────────────────────────\n\n` +
+                `¡Nos alegra muchísimo contar con cada uno de ustedes en este propósito!\n\n` +
+                `Con cariño,\n` +
+                `Equipo Chanak International Academy`
+              )}`}
+              target="_blank"
+              rel="noreferrer"
+              className="shrink-0 rounded-xl bg-gold/20 border border-gold/40 px-3.5 py-2 text-xs font-bold text-navy shadow-xs transition hover:bg-gold/30 inline-flex items-center gap-1.5"
+              title="Abrir un correo con todas las mentoras en CCO (BCC)"
+            >
+              📢 Enviar Convocatoria a Todas (BCC)
+            </a>
+          )}
+          <button
+            onClick={() => setMostrandoForm(!mostrandoForm)}
+            className="shrink-0 rounded-xl bg-teal px-4 py-2 text-xs font-bold text-white shadow-sm transition hover:bg-teal/90"
+          >
+            {mostrandoForm ? '✕ Cancelar' : '➕ Crear Usuaria'}
+          </button>
+        </div>
       </div>
 
       {exito && (
@@ -363,6 +396,35 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
                       📧 {correoActiva || 'Sin email registrado'}
                     </span>
                     {correoActiva && (
+                      <a
+                        href={`mailto:${correoActiva}?subject=${encodeURIComponent('¡Bienvenida a tu Plataforma de Entrenamiento Chanak! 🎓✨ + Encuentro este jueves')}&body=${encodeURIComponent(
+                          `¡Hola, ${p.nombre || 'Mentora'}!\n\n` +
+                          `Estamos muy felices y emocionados de iniciar juntos esta etapa de formación y crecimiento en Chanak International Academy. Te compartimos tus datos de acceso:\n\n` +
+                          `🔗 Plataforma: https://training.chanakacademy.org/\n` +
+                          `👤 Usuario: ${correoActiva}\n` +
+                          `🔑 Contraseña inicial: Chanak2026*\n\n` +
+                          `(Nota: Si ya lograste ingresar previamente con éxito, por favor obvia este recordatorio).\n\n` +
+                          `Al ingresar, recuerda actualizar tu contraseña y comenzar a navegar por los módulos del tronco común formativo.\n\n` +
+                          `──────────────────────────────────\n` +
+                          `🗓️ ENCUENTRO DE EQUIPO · ESTE JUEVES\n` +
+                          `Training Chanak\n` +
+                          `Fecha: Jueves, 15 de octubre · 8:00 – 8:45pm\n` +
+                          `Zona horaria: Europe/Madrid\n` +
+                          `Enlace de Google Meet: https://meet.google.com/ktt-wtgg-gep\n` +
+                          `──────────────────────────────────\n\n` +
+                          `¡Nos alegra muchísimo contar contigo en este propósito!\n\n` +
+                          `Con cariño,\n` +
+                          `Equipo Chanak International Academy`
+                        )}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="rounded bg-teal px-2 py-0.5 text-[11px] font-bold text-white hover:bg-teal/80 transition shadow-xs inline-flex items-center gap-1"
+                        title="Enviar correo individual con credenciales y reunión"
+                      >
+                        ✉️ Enviar Acceso y Reunión
+                      </a>
+                    )}
+                    {correoActiva && (
                       <button
                         onClick={() => handleResetPassword(p)}
                         disabled={ocupado === p.id}
@@ -506,7 +568,19 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
             Si deseas que la base de datos guarde permanentemente la columna de email dentro de <code>public.perfiles</code>, ejecuta este comando en el <b>SQL Editor</b> de Supabase:
           </p>
           <pre className="rounded-lg bg-navy p-3 font-mono text-[11px] text-cream overflow-x-auto select-all">
-{`ALTER TABLE public.perfiles ADD COLUMN IF NOT EXISTS email text;
+{`-- 1. Confirmar email y activar contraseñas de usuarias creadas:
+UPDATE auth.users 
+SET email_confirmed_at = now(),
+    encrypted_password = crypt('Chanak2026*', gen_salt('bf'))
+WHERE email IN ('ydita5460@gmail.com', 'florida@chanakacademy.org');
+
+-- 2. Asegurar perfil aprobado en public.perfiles:
+INSERT INTO public.perfiles (id, nombre, tipo_acceso, estado, rol)
+VALUES ('91bc61f8-ffa8-4eca-a013-0ee8d810dc46', 'Ydita', 'mentora', 'aprobada', 'mentora')
+ON CONFLICT (id) DO UPDATE SET estado = 'aprobada', nombre = 'Ydita';
+
+-- 3. Sincronizar columna email (opcional):
+ALTER TABLE public.perfiles ADD COLUMN IF NOT EXISTS email text;
 UPDATE public.perfiles p
 SET email = u.email
 FROM auth.users u
