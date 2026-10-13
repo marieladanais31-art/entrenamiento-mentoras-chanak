@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { GRUPOS, ESPECIALIDADES, PROYECTOS_PRIORIDAD, REQUISITOS_MODALIDADES } from '../data/roles'
+import { GRUPOS, ESPECIALIDADES, PROYECTOS_PRIORIDAD, REQUISITOS_MODALIDADES, REPRESENTANTES_PAISES } from '../data/roles'
 
 // Paso 2 · «Elige tu rama». Mentor (y sus especialidades) se activa al guardar: acceso libre.
 // Coordinador lo confirma Dirección Académica y Estratégico la Dirección de Operaciones y Alianzas;
@@ -235,6 +235,69 @@ export default function EligeRama({ actual = [], datosPrevios = null, onGuardar,
                           placeholder="Describe tu experiencia previa, contactos, lugar físico disponible (si aplica a partner presencial) y tu nivel de compromiso con este proyecto..."
                           className="mt-1 w-full rounded-xl border border-navy/20 bg-white p-3 text-xs text-navy focus:border-teal focus:outline-none"
                         />
+                      </div>
+
+                      {/* Estructura Territorial y Representación por Países */}
+                      <div className="mt-4 pt-4 border-t border-gold/40">
+                        <div className="mb-2">
+                          <span className="text-xs font-bold uppercase tracking-wider text-navy flex items-center gap-1.5">
+                            <span>🌍</span> Representación Territorial y Red por Países
+                          </span>
+                          <p className="text-[11px] text-navy/70 mt-0.5">
+                            Consulta la presencia actual, estados y sedes en marcha para situar tu alcance o postulación:
+                          </p>
+                        </div>
+
+                        <div className="grid gap-3 sm:grid-cols-2">
+                          {REPRESENTANTES_PAISES.map((p) => {
+                            const badgeClase =
+                              p.badgeTono === 'teal'
+                                ? 'bg-teal/15 text-teal border-teal/40'
+                                : p.badgeTono === 'coral'
+                                ? 'bg-coral/15 text-coral border-coral/40'
+                                : 'bg-gold/25 text-navy border-gold/50'
+
+                            return (
+                              <div key={p.pais} className="rounded-xl border border-navy/15 bg-cream/50 p-3 space-y-2">
+                                <div className="flex items-center justify-between border-b border-navy/10 pb-1.5">
+                                  <div className="flex items-center gap-1.5">
+                                    <span className="text-base">{p.bandera}</span>
+                                    <span className="font-bold text-navy text-xs">{p.pais}</span>
+                                  </div>
+                                  {p.estado && (
+                                    <span className={`rounded-full px-2 py-0.5 text-[9px] font-bold border ${badgeClase}`}>
+                                      {p.estado}
+                                    </span>
+                                  )}
+                                </div>
+                                <div className="space-y-1.5 max-h-48 overflow-y-auto pr-0.5">
+                                  {p.territorios.map((t, idx) => (
+                                    <div
+                                      key={idx}
+                                      className={`rounded-lg p-2 border text-[11px] ${
+                                        t.inactivo
+                                          ? 'bg-coral/5 border-coral/30'
+                                          : 'bg-white border-navy/5 shadow-xs'
+                                      }`}
+                                    >
+                                      <div className="flex items-start justify-between gap-1">
+                                        <span className={`font-bold shrink-0 ${t.inactivo ? 'text-coral' : 'text-teal'}`}>
+                                          {t.territorio}
+                                        </span>
+                                        <span className={`text-[10px] text-right ${t.inactivo ? 'text-coral font-semibold' : 'text-navy/60'}`}>
+                                          {t.funcion}
+                                        </span>
+                                      </div>
+                                      <div className="mt-0.5 text-[10px] font-semibold text-navy">
+                                        👤 {t.representantes.join(', ')}
+                                      </div>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            )
+                          })}
+                        </div>
                       </div>
                     </div>
                   )}

@@ -378,12 +378,11 @@ export const ESPECIALIDADES = {
     { id: 'partner_director', nombre: 'Director/a de institución partner', detalle: 'Dirige una escuela o institución con convenio vigente; SIS limitado a su institución.' },
   ],
   estrategico: [
-    { id: 'strategic_general', nombre: 'Estratégico general', detalle: 'Marketing, captación, alianzas, ESA/fondos estatales y proyectos.' },
-    { id: 'family_enrollment', nombre: 'Familias, matrícula y ESA', detalle: 'Leads, orientación, matrícula y facturación con fondos estatales (EMA, CHOOSE, Odyssey y otros).' },
-    { id: 'grants_projects', nombre: 'Grants para Plataformas y Proyectos', detalle: 'Convocatorias públicas, fundaciones, empresas y fondos corporativos (Walmart Spark Gold).' },
-    { id: 'institutional_partnerships', nombre: 'Alianzas institucionales e iglesias', detalle: 'Colegios, iglesias, ministerios, alianzas en España y acuerdos de colaboración.' },
-    { id: 'partner_director', nombre: 'Alianza de Partner Presencial (Learning Center / Sede)', detalle: 'Requiere lugar físico para organizar reuniones presenciales y actividades con familias/estudiantes.' },
-    { id: 'country_rep', nombre: 'Representación Territorial (País / Estado / Región)', detalle: 'Representación oficial de Chanak en México, España, USA o Panamá.' },
+    {
+      id: 'strategic_general',
+      nombre: 'Estratégico',
+      detalle: 'Desarrollo institucional, fondos, alianzas, matrícula y proyectos prioritarios. Requiere completar el formulario de postulación.',
+    },
   ],
 }
 
