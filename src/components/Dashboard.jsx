@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { BLOQUES, numModulo, getModulo, BIBLIOTECA, urlCarpeta, CARPETA_FINAL_URL } from '../data/curriculum'
-import { GRUPOS, ROL_POR_ID, TRONCO_COMUN, MODULOS_DESARROLLO, grupoDe, modulosObligatorios, tieneContactoDirecto } from '../data/roles'
+import { GRUPOS, ROL_POR_ID, TRONCO_COMUN, MODULOS_DESARROLLO, grupoDe, modulosObligatorios, tieneContactoDirecto, PROYECTOS_PRIORIDAD } from '../data/roles'
 import EligeRama from './EligeRama'
 import { FUNCIONES } from '../data/funciones'
 import { resumenMentora, estadoBloque, horasBloqueCompletadas } from '../lib/calculos'
@@ -171,12 +171,24 @@ export default function Dashboard({
       {mostrarSelector ? (
         <EligeRama
           actual={solicitud?.funciones || []}
+          datosPrevios={solicitud?.datosEstrategico || null}
           onGuardar={async (f, extra) => { await onElegirRama(f, extra); setCambiandoRama(false) }}
           onCancelar={cambiandoRama ? () => setCambiandoRama(false) : undefined}
         />
       ) : (
-        <section className="rounded-2xl border border-teal/30 bg-white p-5 shadow-sm">
-          <div className="text-[12px] font-bold uppercase tracking-[0.18em] text-teal">Paso 2 · Tu rama</div>
+        <section className="rounded-2xl border border-teal/30 bg-white p-5 shadow-sm space-y-3">
+          <div className="flex items-center justify-between">
+            <div className="text-[12px] font-bold uppercase tracking-[0.18em] text-teal">Paso 2 · Tu rama</div>
+            {!viendoOtra && onElegirRama && (
+              <button
+                onClick={() => setCambiandoRama(true)}
+                className="rounded-lg bg-teal/10 px-3 py-1 text-xs font-bold text-teal hover:bg-teal hover:text-white transition"
+              >
+                {solicitud ? '✏️ Cambiar rama' : '🎯 Elegir rama'}
+              </button>
+            )}
+          </div>
+
           {grupos.length ? (
             <>
               <p className="mt-1 text-lg font-bold text-navy">{nombreRamas}</p>
@@ -192,6 +204,7 @@ export default function Dashboard({
           ) : (
             <p className="mt-1 text-sm text-navy/70">{viendoOtra ? 'Esta persona todavía no tiene rama activa.' : 'Todavía no tienes rama activa.'}</p>
           )}
+
           {rolesPendientes.length > 0 && (
             <ul className="mt-2 space-y-1 text-xs">
               {rolesPendientes.map((id) => (
@@ -201,8 +214,37 @@ export default function Dashboard({
               ))}
             </ul>
           )}
+
+          {/* Formulario Estratégico ya enviado o acceso directo */}
+          {solicitud?.datosEstrategico && (
+            <div className="rounded-xl border border-gold/40 bg-gold/10 p-3 text-xs text-navy/85 space-y-1">
+              <div className="font-bold text-navy flex items-center gap-1.5">
+                <span>📋</span> Solicitud Estratégica Registrada:
+              </div>
+              <div className="text-[11px]">
+                <b>Proyecto:</b> {PROYECTOS_PRIORIDAD.find((p) => p.id === solicitud.datosEstrategico.proyectoSel)?.titulo || solicitud.datosEstrategico.proyectoSel}
+              </div>
+              {solicitud.datosEstrategico.alcance && (
+                <div className="text-[11px]"><b>Alcance:</b> {solicitud.datosEstrategico.alcance}</div>
+              )}
+            </div>
+          )}
+
           {!viendoOtra && onElegirRama && (
-            <button onClick={() => setCambiandoRama(true)} className="mt-2 text-xs font-bold text-teal hover:underline">{solicitud ? 'Cambiar mi elección →' : 'Elegir o ampliar mi rama →'}</button>
+            <div className="pt-2 border-t border-navy/10 flex flex-wrap gap-2">
+              <button
+                onClick={() => setCambiandoRama(true)}
+                className="rounded-lg bg-teal px-3 py-1.5 text-xs font-bold text-white hover:bg-teal/90 transition shadow-xs"
+              >
+                {solicitud ? '✏️ Cambiar mi elección de rama' : '🎯 Elegir o ampliar mi rama'}
+              </button>
+              <button
+                onClick={() => setCambiandoRama(true)}
+                className="rounded-lg bg-gold/30 px-3 py-1.5 text-xs font-bold text-navy hover:bg-gold/50 transition border border-gold/40"
+              >
+                📋 Formulario y Requisitos para Rama Estratégica →
+              </button>
+            </div>
           )}
         </section>
       )}

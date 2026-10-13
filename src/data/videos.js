@@ -140,10 +140,6 @@ const DEFINICIONES_VIDEO = [
       'REQUISITO OBLIGATORIO: La elección de A.C.E. requiere para coordinadores por lo menos una formación presencial de una semana para certificación oficial.',
       'Estructura: Diagnostic Test, PACEs, metas diarias, Checkups, Self Test y PACE Test, con progresión individual.',
       'El mentor supervisa metas, corrección, Self Tests y evidencias, y registra resultados en el SIS.',
-      'Enlace oficial: Curriculum A.C.E. (https://aceministries.com/curriculum)',
-    ],
-    enlaces: [
-      { titulo: 'A.C.E. Curriculum General', url: 'https://aceministries.com/curriculum' },
     ],
   },
   {
@@ -154,10 +150,6 @@ const DEFINICIONES_VIDEO = [
       'Kindergarten con Ace and Christi: programa formativo centrado en destrezas de coordinación ojo-mano y desarrollo socioemocional.',
       'Animales del zoológico de Christi, canciones, rimas y conceptos bíblicos integrados.',
       'Preparación integral del niño antes de la instrucción formal de lectoescritura.',
-      'Enlace oficial: Kindergarten with Ace and Christi (https://aceministries.com/kindergarten-with-ace-and-christi)',
-    ],
-    enlaces: [
-      { titulo: 'A.C.E. Kindergarten with Ace and Christi', url: 'https://aceministries.com/kindergarten-with-ace-and-christi' },
     ],
   },
   {
@@ -168,10 +160,6 @@ const DEFINICIONES_VIDEO = [
       'ABCs with Ace and Christi: fonética sistemática multisensorial para aprender a leer y escribir en inglés con solidez.',
       'Reading Readiness Test: diagnóstico para determinar si el estudiante ingresa a Kindergarten o directamente a ABCs.',
       'Post-Test fonético de dominio y graduación hacia los PACEs 1001 de primer grado.',
-      'Enlace oficial: ABCs with Ace and Christi (https://aceministries.com/abcs-with-ace-and-christi)',
-    ],
-    enlaces: [
-      { titulo: 'Reading · ABCs with Ace and Christi', url: 'https://aceministries.com/abcs-with-ace-and-christi' },
     ],
   },
 
@@ -185,10 +173,6 @@ const DEFINICIONES_VIDEO = [
       'Estructura interna: lecciones auto-dirigidas, reviews, self-tests formativos y unit tests sumativos supervisados.',
       'El rol del adulto: acompañamiento con Teacher\'s Guide, custodia de claves y verificación honesta de self-tests.',
       'Umbral mínimo del 80 % en las evaluaciones de dominio y registro puntual en el SIS.',
-      'Enlace oficial: LIFEPAC Curriculum (https://www.aop.com/curriculum/shop-lifepac)',
-    ],
-    enlaces: [
-      { titulo: 'LIFEPAC Curriculum General', url: 'https://www.aop.com/curriculum/shop-lifepac' },
     ],
   },
   {
@@ -198,10 +182,6 @@ const DEFINICIONES_VIDEO = [
     guion: [
       'LIFEPAC Preschool & Kindergarten: cuadernos diseñados para el desarrollo de la percepción visual, motricidad fina y comprensión básica.',
       'Introducción progresiva a letras, números, colores y cosmovisión bíblica en el hogar.',
-      'Enlace oficial: LIFEPAC Preschool & Kindergarten (https://www.aop.com/curriculum/preschool-kindergarten)',
-    ],
-    enlaces: [
-      { titulo: 'LIFEPAC Kindergarten & Preschool', url: 'https://www.aop.com/curriculum/preschool-kindergarten' },
     ],
   },
   {
@@ -211,10 +191,6 @@ const DEFINICIONES_VIDEO = [
     guion: [
       'LIFEPAC Language Arts: combinación de fonética, gramática, vocabulario y comprensión de lectura estructurada.',
       'Worktexts auto-contenidos que fortalecen la expresión escrita y la lectura crítica.',
-      'Enlace oficial: LIFEPAC Language Arts & Reading (https://www.aop.com/curriculum/shop-lifepac/language-arts)',
-    ],
-    enlaces: [
-      { titulo: 'LIFEPAC Language Arts & Reading', url: 'https://www.aop.com/curriculum/shop-lifepac/language-arts' },
     ],
   },
 
@@ -228,10 +204,6 @@ const DEFINICIONES_VIDEO = [
       'Metodología incremental (Sunrise Edition): nuevos conceptos en pequeñas dosis diarias con repaso constante acumulativo.',
       'Quizzes y tests por LightUnit con Answer Keys custodiadas por el adulto.',
       'Supervisión y registro de dominio del 80 % respetando la estructura propia de CLE.',
-      'Enlace oficial: CLE Curriculum Overview (https://christianlight.org/curriculum)',
-    ],
-    enlaces: [
-      { titulo: 'CLE Curriculum General', url: 'https://christianlight.org/curriculum' },
     ],
   },
   {
@@ -241,10 +213,6 @@ const DEFINICIONES_VIDEO = [
     guion: [
       'CLE Kindergarten I & II: desarrollo ordenado de habilidades previas a la escuela primaria.',
       'Entrenamiento de atención, reconocimiento de sonidos iniciales y trazos básicos.',
-      'Enlace oficial: CLE Kindergarten (https://christianlight.org/curriculum/by-grade/kindergarten)',
-    ],
-    enlaces: [
-      { titulo: 'CLE Kindergarten I & II', url: 'https://christianlight.org/curriculum/by-grade/kindergarten' },
     ],
   },
   {
@@ -254,10 +222,6 @@ const DEFINICIONES_VIDEO = [
     guion: [
       'CLE Learning to Read: 10 LightUnits centradas en fonética sistemática estricta y lectura guiada.',
       'Dominio de vocales cortas y largas, mezclas consonánticas y lectura comprensiva bíblica.',
-      'Enlace oficial: CLE Learning to Read (https://christianlight.org/curriculum/by-subject/reading)',
-    ],
-    enlaces: [
-      { titulo: 'CLE Reading · Learning to Read', url: 'https://christianlight.org/curriculum/by-subject/reading' },
     ],
   },
   {

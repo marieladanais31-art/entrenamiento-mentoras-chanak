@@ -560,7 +560,28 @@ export const REQUISITOS_MODALIDADES = {
 // ════════════════════════════════════════════════════════════
 export const REPRESENTANTES_PAISES = [
   {
+    pais: 'EducaFe (España)',
+    estado: 'Inactivo hasta febrero 2027',
+    badgeTono: 'coral',
+    codigo: 'ES',
+    bandera: '🇪🇸',
+    territorios: [
+      {
+        territorio: 'Tarragona',
+        representantes: ['Thiare Urzua', 'Sonsoles Bueno', 'Laura Pardo', 'Sergio Masía'],
+        funcion: 'Partner Learning Center (Sede presencial), Alianzas Locales y Coordinación',
+      },
+      {
+        territorio: 'Madrid – Valencia',
+        representantes: ['Medalith Rosales', 'Juan Carlos', 'Jitu Dongardive'],
+        funcion: 'Desarrollo Estratégico, Expansión, Alianzas y Comunidad',
+      },
+    ],
+  },
+  {
     pais: 'México',
+    estado: 'En lanzamiento',
+    badgeTono: 'teal',
     codigo: 'MX',
     bandera: '🇲🇽',
     territorios: [
@@ -569,15 +590,9 @@ export const REPRESENTANTES_PAISES = [
     ],
   },
   {
-    pais: 'Estados Unidos',
-    codigo: 'US',
-    bandera: '🇺🇸',
-    territorios: [
-      { territorio: 'Florida', representantes: ['Karen Pujols'], funcion: 'Enlace Florida ESA · Step Up / EMA y Matriz Presencial' },
-    ],
-  },
-  {
     pais: 'Panamá',
+    estado: 'En proceso',
+    badgeTono: 'gold',
     codigo: 'PA',
     bandera: '🇵🇦',
     territorios: [
@@ -585,19 +600,66 @@ export const REPRESENTANTES_PAISES = [
     ],
   },
   {
-    pais: 'España',
-    codigo: 'ES',
-    bandera: '🇪🇸',
+    pais: 'Estados Unidos (USA)',
+    estado: 'Activo / Expansión de programas estatales',
+    badgeTono: 'teal',
+    codigo: 'US',
+    bandera: '🇺🇸',
     territorios: [
       {
-        territorio: 'Tarragona',
-        representantes: ['Thiare Urzua', 'Sonsoles Bueno', 'Laura Pardo', 'Sergio Masía'],
-        funcion: 'Desarrollo de Partner Learning Center, Alianzas Locales y Coordinación',
+        territorio: 'Florida',
+        representantes: ['Karen Pujols'],
+        funcion: 'Enlace Florida ESA · Step Up For Students / EMA (Home Education Instructional Program), FES-UA / PEP, Matriz Presencial (Aprobado)',
       },
       {
-        territorio: 'Madrid – Valencia',
-        representantes: ['Medalith Rosales', 'Juan Carlos', 'Jitu Dongardive'],
-        funcion: 'Desarrollo Estratégico, Expansión, Alianzas y Comunidad',
+        territorio: 'Alabama',
+        representantes: ['Chanak Administration'],
+        funcion: 'CHOOSE Act · ClassWallet Education Service Provider (ESP) (Aprobado)',
+      },
+      {
+        territorio: 'Texas',
+        representantes: ['Chanak Administration'],
+        funcion: 'TEFA (Texas Education Freedom Accounts) · Odyssey Vendor (Aprobado / Casi Seguro)',
+      },
+      {
+        territorio: 'Wyoming',
+        representantes: ['Chanak Administration'],
+        funcion: 'Wyoming ESA (Education Savings Accounts) · Education Service Provider (Aprobado)',
+      },
+      {
+        territorio: 'Arizona',
+        representantes: ['Chanak Administration'],
+        funcion: 'ADE ESA (Empowerment Scholarship Account) · Registro de Proveedor ADE (Aprobado)',
+      },
+      {
+        territorio: 'Utah',
+        representantes: ['Chanak Administration'],
+        funcion: 'Utah Fits All · Odyssey Provider (Aprobado; Life Skills, English, Tutoría, Diagnósticos)',
+      },
+      {
+        territorio: 'New Hampshire',
+        representantes: ['Chanak Administration'],
+        funcion: 'Education Freedom Account (EFA) · Education Service Provider (En proceso)',
+      },
+      {
+        territorio: 'West Virginia',
+        representantes: ['Chanak Administration'],
+        funcion: 'Hope Scholarship · Education Service Provider (En proceso)',
+      },
+      {
+        territorio: 'Georgia',
+        representantes: ['Chanak Administration'],
+        funcion: 'Georgia Promise Scholarship · Proveedor de Servicios Educativos (En proceso)',
+      },
+      {
+        territorio: 'Louisiana',
+        representantes: ['Chanak Administration'],
+        funcion: 'LA GATOR · Education Service Provider (En proceso)',
+      },
+      {
+        territorio: 'South Carolina',
+        representantes: ['Chanak Administration'],
+        funcion: 'Education Scholarship Trust Fund (ESTF) · Education Service Provider (En revisión)',
       },
     ],
   },

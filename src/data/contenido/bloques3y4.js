@@ -29,15 +29,11 @@ export const BLOQUES_3_4 = {
         guion: [
           'Que las metas diarias sean realistas y se cumplan; que la corrección se haga según el procedimiento; que el Self Test se haga sin ayuda; que el PACE Test cumpla el umbral de dominio.',
           'Registra cada PACE Test con fecha y resultado en el SIS. Un PACE no superado se refuerza antes de repetir.',
-          'Secciones y enlaces oficiales de A.C.E.: (1) Curriculum General (aceministries.com/curriculum), (2) Kindergarten with Ace and Christi (aceministries.com/kindergarten-with-ace-and-christi), (3) Reading · ABCs with Ace and Christi (aceministries.com/abcs-with-ace-and-christi).',
+          'Secciones del currículo A.C.E.: (1) Curriculum General, (2) Kindergarten with Ace and Christi, (3) Reading · ABCs with Ace and Christi.',
         ],
       },
     ],
-    recursos: [
-      { titulo: 'Curriculum A.C.E. General', url: 'https://aceministries.com/curriculum' },
-      { titulo: 'A.C.E. Kindergarten with Ace and Christi', url: 'https://aceministries.com/kindergarten-with-ace-and-christi' },
-      { titulo: 'Reading · ABCs with Ace and Christi', url: 'https://aceministries.com/abcs-with-ace-and-christi' },
-    ],
+    recursos: [],
     practica: {
       situacion: 'Un estudiante quiere hacer tres PACE Tests en un día para «adelantar». Además, un nuevo coordinador pregunta si puede coordinar A.C.E. sin asistir a la formación presencial.',
       preguntas: ['¿Qué riesgos ves en los PACE Tests rápidos?', '¿Qué compruebas antes de permitirlo?', '¿Qué le respondes al coordinador sobre el requisito de formación presencial?'],

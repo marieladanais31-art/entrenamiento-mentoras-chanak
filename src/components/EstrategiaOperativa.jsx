@@ -111,33 +111,48 @@ export default function EstrategiaOperativa({ onVolver, onVerMatriz }) {
       <section className="rounded-3xl border-2 border-teal bg-white p-6 shadow-sm space-y-4">
         <div>
           <span className="text-xs font-bold uppercase tracking-wider text-teal">Estructura Internacional</span>
-          <h3 className="mt-1 text-xl font-bold text-navy">🌍 Representantes Oficiales por País</h3>
+          <h3 className="mt-1 text-xl font-bold text-navy">🌍 Estructura por Países y Territorios</h3>
           <p className="text-xs text-navy/70 leading-relaxed">
-            Puntos focales de interlocución territorial para familias, iglesias, fondos estatales y colegios.
+            EducaFe (España) inactivo hasta febrero 2027 · México en lanzamiento · Panamá en proceso · Estados Unidos (todos los estados con cobertura y fondos).
           </p>
         </div>
         <div className="grid gap-3 sm:grid-cols-2">
-          {REPRESENTANTES_PAISES.map((p) => (
-            <div key={p.codigo} className="rounded-2xl border border-navy/10 bg-cream/40 p-4 space-y-2">
-              <div className="flex items-center gap-2 border-b border-navy/10 pb-2">
-                <span className="text-2xl">{p.bandera}</span>
-                <span className="font-bold text-navy text-sm">{p.pais}</span>
-              </div>
-              <div className="space-y-2">
-                {p.territorios.map((t, idx) => (
-                  <div key={idx} className="rounded-xl bg-white p-3 shadow-xs border border-navy/5">
-                    <div className="flex items-center justify-between text-xs">
-                      <span className="font-bold text-teal">{t.territorio}</span>
-                      <span className="text-[11px] text-navy/60">{t.funcion}</span>
-                    </div>
-                    <div className="mt-1 text-xs font-semibold text-navy">
-                      👤 {t.representantes.join(', ')}
-                    </div>
+          {REPRESENTANTES_PAISES.map((p) => {
+            const badgeClase =
+              p.badgeTono === 'coral'
+                ? 'bg-coral/15 text-coral border-coral/30'
+                : p.badgeTono === 'gold'
+                ? 'bg-gold/25 text-navy border-gold/40'
+                : 'bg-teal/15 text-teal border-teal/30'
+            return (
+              <div key={p.codigo} className="rounded-2xl border border-navy/10 bg-cream/40 p-4 space-y-2">
+                <div className="flex items-center justify-between border-b border-navy/10 pb-2">
+                  <div className="flex items-center gap-2">
+                    <span className="text-2xl">{p.bandera}</span>
+                    <span className="font-bold text-navy text-sm">{p.pais}</span>
                   </div>
-                ))}
+                  {p.estado && (
+                    <span className={`rounded-full px-2.5 py-0.5 text-[10px] font-bold border ${badgeClase}`}>
+                      {p.estado}
+                    </span>
+                  )}
+                </div>
+                <div className="space-y-2 max-h-96 overflow-y-auto pr-1">
+                  {p.territorios.map((t, idx) => (
+                    <div key={idx} className="rounded-xl bg-white p-3 shadow-xs border border-navy/5">
+                      <div className="flex items-start justify-between gap-1 text-xs">
+                        <span className="font-bold text-teal shrink-0">{t.territorio}</span>
+                        <span className="text-[11px] font-medium text-navy/60 text-right">{t.funcion}</span>
+                      </div>
+                      <div className="mt-1 text-xs font-semibold text-navy">
+                        👤 {t.representantes.join(', ')}
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
       </section>
     </div>

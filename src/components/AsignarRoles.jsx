@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { GRUPOS, funcionesDe, ROL_POR_ID, rolesEfectivos, solicitudDe, grupoDe, accesoLibre, tieneContactoDirecto, modulosObligatorios } from '../data/roles'
+import { GRUPOS, funcionesDe, ROL_POR_ID, rolesEfectivos, solicitudDe, grupoDe, accesoLibre, tieneContactoDirecto, modulosObligatorios, PROYECTOS_PRIORIDAD } from '../data/roles'
 import { asignarRol, quitarRol, actualizarPerfil } from '../lib/backend'
 
 // Asignación formal de roles (ROLE ≠ PERSON). Cada rol activa módulos, sistemas, documentos,
@@ -97,6 +97,16 @@ export default function AsignarRoles({ perfil, filas, miId, onRecargar, migrado,
                   </button>
                 </div>
               ))}
+
+              {solicitud?.datosEstrategico && (
+                <div className="mt-2 rounded-lg border border-gold/40 bg-white p-2.5 text-[11px] text-navy/85 space-y-1">
+                  <div className="font-bold text-navy text-xs">📋 Formulario Estratégico Presentado:</div>
+                  <div><b>Proyecto:</b> {PROYECTOS_PRIORIDAD.find((p) => p.id === solicitud.datosEstrategico.proyectoSel)?.titulo || solicitud.datosEstrategico.proyectoSel}</div>
+                  {solicitud.datosEstrategico.tiempoDisp && <div><b>Disponibilidad:</b> {solicitud.datosEstrategico.tiempoDisp}</div>}
+                  {solicitud.datosEstrategico.alcance && <div><b>Alcance:</b> {solicitud.datosEstrategico.alcance}</div>}
+                  {solicitud.datosEstrategico.aporte && <div><b>Aporte:</b> {solicitud.datosEstrategico.aporte}</div>}
+                </div>
+              )}
             </div>
           )}
           {libresSinAsignar.length > 0 && migrado && (

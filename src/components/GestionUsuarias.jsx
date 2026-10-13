@@ -18,6 +18,7 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
   const [copiado, setCopiado] = useState(false)
   const [editandoNombreId, setEditandoNombreId] = useState(null)
   const [nuevoNombre, setNuevoNombre] = useState('')
+  const [copiadoId, setCopiadoId] = useState(null)
 
   // Formulario para crear usuaria directa
   const [mostrandoForm, setMostrandoForm] = useState(false)
@@ -73,6 +74,19 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
     setTimeout(() => setCopiado(false), 3000)
   }
 
+  function copiarCorreoIndividual(correo) {
+    const texto = `Asunto: Formación Chanak · Acceso a la plataforma y encuentro este jueves\nDe: administration@chanakacademy.org\nPara: ${correo}\n\nBendiciones,\n\nComo continuación de la invitación de ayer, te confirmamos que la plataforma de formación Chanak ya está disponible. Si todavía no has entrado, puedes comenzar a explorar la introducción y los primeros módulos del tronco común.\n\n🔗 Plataforma: https://training.chanakacademy.org/\n👤 Usuario: ${correo}\n🔑 Contraseña inicial: Chanak2026*\n\nEn tu primer acceso, la plataforma te pedirá cambiar la contraseña. Si ya ingresaste y la cambiaste, utiliza tu contraseña actual. Si tienes dificultades para acceder, responde a este correo.\n\nTambién te compartimos el enlace de nuestro encuentro:\n📅 Jueves 15 de octubre a las 20:00 h, hora de España peninsular\n📍 Google Meet: https://meet.google.com/ktt-wtgg-gep\n\nPresentaremos el recorrido de formación, resolveremos dudas y conversaremos sobre las posibles áreas de colaboración. Será una oportunidad para conocer mejor la visión y valorar tu disponibilidad para continuar.\n\nGracias por tu interés. Nos alegrará compartir este encuentro contigo.\n\nUn abrazo,\nMariela Andrade\nChanak International Academy`
+    navigator.clipboard.writeText(texto)
+    setCopiadoId(correo)
+    setTimeout(() => setCopiadoId(null), 3000)
+  }
+
+  function copiarListaBcc(correos) {
+    navigator.clipboard.writeText(correos.join(', '))
+    setCopiadoId('bcc_list')
+    setTimeout(() => setCopiadoId(null), 3000)
+  }
+
   async function cambiar(id, cambios) {
     setError('')
     setOcupado(id)
@@ -108,8 +122,44 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
     }
   }
 
+  const listaBcc = activas
+    .map((p) => p.email || obtenerEmailConocido(p.id) || obtenerEmailConocido(p.nombre))
+    .filter(Boolean)
+
   return (
     <section className="space-y-4">
+      {/* Banner oficial del gestor de correo */}
+      <div className="rounded-2xl border-2 border-teal/40 bg-teal/5 p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs">
+        <div className="space-y-1">
+          <div className="flex items-center gap-2">
+            <span className="text-base">📧</span>
+            <span className="text-xs font-bold uppercase tracking-wider text-teal">
+              Gestor de Correo Oficial de Formación
+            </span>
+            <span className="rounded-full bg-teal px-2 py-0.5 text-[10px] font-bold text-white">
+              Remitente Autorizado
+            </span>
+          </div>
+          <p className="text-sm font-bold text-navy">
+            Cuenta de despacho oficial: <span className="font-mono text-teal select-all underline">administration@chanakacademy.org</span>
+          </p>
+          <p className="text-xs text-navy/70 leading-relaxed">
+            Reunión de inducción: <b>Jueves 15 de octubre a las 20:00 h (España)</b> vía Google Meet: <a href="https://meet.google.com/ktt-wtgg-gep" target="_blank" rel="noreferrer" className="text-teal font-semibold underline">meet.google.com/ktt-wtgg-gep</a>
+          </p>
+        </div>
+        <div className="flex flex-wrap items-center gap-2">
+          {listaBcc.length > 0 && (
+            <button
+              onClick={() => copiarListaBcc(listaBcc)}
+              className="rounded-xl border border-teal/40 bg-white px-3 py-2 text-xs font-bold text-teal hover:bg-teal hover:text-white transition shadow-xs"
+              title="Copiar todas las direcciones de email para pegar en CCO (BCC)"
+            >
+              {copiadoId === 'bcc_list' ? '✓ ¡Lista Copiada!' : '📋 Copiar Lista BCC'}
+            </button>
+          )}
+        </div>
+      </div>
+
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
           <h3 className="font-bold text-navy text-lg">{t('usuarias.titulo')}</h3>
@@ -119,7 +169,7 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
           {activas.length > 0 && (
             <a
               href={`mailto:administration@chanakacademy.org?bcc=${encodeURIComponent(
-                activas.map((p) => p.email || obtenerEmailConocido(p.id) || obtenerEmailConocido(p.nombre)).filter(Boolean).join(',')
+                listaBcc.join(',')
               )}&subject=${encodeURIComponent('Formación Chanak · Acceso a la plataforma y encuentro este jueves')}&body=${encodeURIComponent(
                 `Bendiciones,\n\n` +
                 `Como continuación de la invitación de ayer, te confirmamos que la plataforma de formación Chanak ya está disponible. Si todavía no has entrado, puedes comenzar a explorar la introducción y los primeros módulos del tronco común.\n\n` +
@@ -139,7 +189,7 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
               target="_blank"
               rel="noreferrer"
               className="shrink-0 rounded-xl bg-gold/20 border border-gold/40 px-3.5 py-2 text-xs font-bold text-navy shadow-xs transition hover:bg-gold/30 inline-flex items-center gap-1.5"
-              title="Abrir un correo con todas las mentoras en CCO (BCC)"
+              title="Abrir correo con todas las mentoras en CCO (BCC) desde administration@chanakacademy.org"
             >
               📢 Enviar Convocatoria a Todas (BCC)
             </a>
@@ -417,6 +467,15 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
                       >
                         ✉️ Enviar Acceso y Reunión
                       </a>
+                    )}
+                    {correoActiva && (
+                      <button
+                        onClick={() => copiarCorreoIndividual(correoActiva)}
+                        className="rounded bg-teal/15 px-2 py-0.5 text-[11px] font-bold text-teal hover:bg-teal hover:text-white transition shadow-xs inline-flex items-center gap-1"
+                        title="Copiar texto del correo oficial para enviar desde administration@chanakacademy.org"
+                      >
+                        {copiadoId === correoActiva ? '✓ ¡Copiado!' : '📋 Copiar Correo'}
+                      </button>
                     )}
                     {correoActiva && (
                       <button

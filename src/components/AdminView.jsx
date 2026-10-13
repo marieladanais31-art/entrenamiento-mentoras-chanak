@@ -346,23 +346,17 @@ function GestionVideos() {
                     <span className={url ? 'text-teal font-bold' : 'text-coral'}>{url ? '●' : '○'}</span>
                   </button>
 
-                  {/* Enlaces directos a las secciones oficiales del currículo */}
-                  {v.enlaces && v.enlaces.length > 0 && (
-                    <div className="mt-2 flex flex-wrap items-center gap-1.5 pt-1.5 border-t border-navy/5">
-                      <span className="text-[10px] uppercase font-bold text-navy/40">Sección:</span>
-                      {v.enlaces.map((e, idx) => (
-                        <a
-                          key={idx}
-                          href={e.url}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="inline-flex items-center gap-1 rounded bg-teal/10 px-2 py-0.5 text-[11px] font-semibold text-teal hover:bg-teal hover:text-white transition"
-                        >
-                          🔗 {e.titulo} ↗
-                        </a>
-                      ))}
-                    </div>
-                  )}
+                  <div className="mt-2 flex flex-wrap items-center justify-between gap-1.5 pt-1.5 border-t border-navy/5">
+                    <span className={`text-[11px] font-semibold px-2 py-0.5 rounded ${url ? 'bg-teal/10 text-teal' : 'bg-gold/20 text-navy'}`}>
+                      {url ? '✓ Vídeo activo' : '➕ Sin vídeo · Haz clic para añadir enlace de YouTube'}
+                    </span>
+                    <button
+                      onClick={() => setAbierto(abierto === v.id ? null : v.id)}
+                      className="text-[11px] font-bold text-teal hover:underline"
+                    >
+                      {abierto === v.id ? 'Cerrar edición ▲' : 'Gestionar enlace ▼'}
+                    </button>
+                  </div>
 
                   {abierto === v.id && (
                     <div className="mt-3 pt-2 border-t border-navy/10">
