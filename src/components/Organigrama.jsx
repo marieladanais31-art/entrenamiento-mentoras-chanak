@@ -120,10 +120,10 @@ export default function Organigrama({ onVolver, onVerRol }) {
                 </div>
                 <div className="space-y-2 max-h-96 overflow-y-auto pr-1">
                   {p.territorios.map((t, idx) => (
-                    <div key={idx} className="rounded-lg bg-white p-2.5 shadow-xs border border-navy/5">
+                    <div key={idx} className={`rounded-lg p-2.5 shadow-xs border ${t.inactivo ? 'bg-coral/5 border-coral/30' : 'bg-white border-navy/5'}`}>
                       <div className="flex items-start justify-between gap-1 text-xs">
-                        <span className="font-bold text-teal shrink-0">{t.territorio}</span>
-                        <span className="text-[11px] font-medium text-navy/60 text-right">{t.funcion}</span>
+                        <span className={`font-bold shrink-0 ${t.inactivo ? 'text-coral' : 'text-teal'}`}>{t.territorio}</span>
+                        <span className={`text-[11px] font-medium text-right ${t.inactivo ? 'text-coral font-semibold' : 'text-navy/60'}`}>{t.funcion}</span>
                       </div>
                       <div className="mt-1 text-xs font-semibold text-navy">
                         👤 {t.representantes.join(', ')}

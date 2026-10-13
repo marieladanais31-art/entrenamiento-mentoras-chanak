@@ -560,21 +560,27 @@ export const REQUISITOS_MODALIDADES = {
 // ════════════════════════════════════════════════════════════
 export const REPRESENTANTES_PAISES = [
   {
-    pais: 'EducaFe (España)',
-    estado: 'Inactivo hasta febrero 2027',
-    badgeTono: 'coral',
+    pais: 'España',
+    estado: 'Expansión / Educafe inactivo',
+    badgeTono: 'gold',
     codigo: 'ES',
     bandera: '🇪🇸',
     territorios: [
       {
-        territorio: 'Tarragona',
+        territorio: '1. Tarragona',
         representantes: ['Thiare Urzua', 'Sonsoles Bueno', 'Laura Pardo', 'Sergio Masía'],
         funcion: 'Partner Learning Center (Sede presencial), Alianzas Locales y Coordinación',
       },
       {
-        territorio: 'Madrid – Valencia',
+        territorio: '2. Madrid – Valencia',
         representantes: ['Medalith Rosales', 'Juan Carlos', 'Jitu Dongardive'],
         funcion: 'Desarrollo Estratégico, Expansión, Alianzas y Comunidad',
+      },
+      {
+        territorio: '3. Educafe',
+        representantes: ['Asociación EducaFe (Inactiva)'],
+        funcion: 'Inactivo hasta febrero 2027 · Programas, cuotas y convenios locales en pausa',
+        inactivo: true,
       },
     ],
   },
