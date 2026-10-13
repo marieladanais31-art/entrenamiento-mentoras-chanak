@@ -223,26 +223,42 @@ export default function ModuleView({ moduloId, progresoModulo: p, videos, esAdmi
 
       {/* ── 2 · Lectura ── */}
       {actual === 'lectura' && contenido && (
-        <Seccion titulo={`📖 ${t('paso.lectura')}`}>
-          <h4 className="text-sm font-bold text-navy">{t('modulo.objetivos')}</h4>
-          <ul className="mt-2 space-y-2">
-            {contenido.objetivos.map((o, i) => (
-              <li key={i} className="flex gap-2.5 text-sm leading-relaxed text-navy/75">
-                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-teal/12 text-[12px] font-bold text-teal">{i + 1}</span>
-                {o}
-              </li>
-            ))}
-          </ul>
-          {contenido.lecciones.map((lec, i) => (
-            <div key={i} className="mt-5">
-              <h4 className="text-sm font-bold text-navy">{lec.titulo}</h4>
-              <div className="mt-2 space-y-2.5">
-                {lec.guion.map((par, j) => (
-                  <p key={j} className="text-sm leading-relaxed text-navy/80">{par}</p>
-                ))}
-              </div>
+        <Seccion titulo={`📖 ${t('paso.lectura')}`} sub={modulo?.titulo}>
+          <div className="mb-6 rounded-2xl border border-teal/25 bg-teal/5 p-4 sm:p-5">
+            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-teal">
+              <span className="text-base">🎯</span>
+              <span>{t('modulo.objetivos')}</span>
             </div>
-          ))}
+            <ul className="mt-3 space-y-2.5">
+              {contenido.objetivos.map((o, i) => (
+                <li key={i} className="flex items-start gap-3 text-sm sm:text-[15px] leading-relaxed text-navy/85">
+                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-teal text-[11px] font-bold text-white shadow-xs">
+                    {i + 1}
+                  </span>
+                  <span className="flex-1 font-medium">{o}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="space-y-6">
+            {contenido.lecciones.map((lec, i) => (
+              <article key={i} className="rounded-2xl border border-navy/10 bg-cream/20 p-5 sm:p-6 transition hover:border-navy/20">
+                <header className="mb-4 flex items-center gap-3 border-b border-navy/10 pb-3">
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-teal text-xs font-bold text-white shadow-xs">
+                    {i + 1}
+                  </span>
+                  <h4 className="text-base sm:text-lg font-bold text-navy tracking-tight">{lec.titulo}</h4>
+                </header>
+                <div className="space-y-4 sm:space-y-4.5">
+                  {lec.guion.map((par, j) => (
+                    <ParrafoLectura key={j} texto={par} />
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
+
           <Siguiente onClick={() => irPaso('practica')} t={t} />
         </Seccion>
       )}
@@ -498,3 +514,66 @@ function Dato({ etiqueta, valor }) {
     </div>
   )
 }
+
+function ParrafoLectura({ texto }) {
+  if (!texto) return null
+
+  // Citas bíblicas o textos entrecomillados doctrinales
+  const esCitaBiblica =
+    /(?:Proverbios|Colosenses|Génesis|Salmo|Salmos|Filipenses|Efesios|Mateo|Juan|Lucas|Marcos|Romanos|Corintios|Santiago|Pedro|Hebreos|Timoteo|Josué|Deuteronomio|Isaías|Jeremías)\s+\d+:\d+/i.test(texto) ||
+    /^[«"]/.test(texto.trim())
+
+  if (esCitaBiblica) {
+    return (
+      <div className="my-3.5 rounded-xl border-l-4 border-gold bg-gold/10 px-4 py-3 font-serif text-[15px] sm:text-base italic leading-relaxed text-navy shadow-2xs">
+        {texto}
+      </div>
+    )
+  }
+
+  // Avisos o advertencias
+  const matchAviso = texto.match(/^(Atención|Aviso|Cuidado|Alerta|Advertencia):\s*(.*)/i)
+  if (matchAviso) {
+    return (
+      <div className="my-3.5 rounded-xl border border-coral/30 bg-coral/5 px-4 py-3 text-[14px] sm:text-[15px] leading-relaxed shadow-2xs">
+        <div className="mb-1 flex items-center gap-1.5 font-bold text-xs uppercase tracking-wider text-coral">
+          <span>⚠️</span>
+          <span>{matchAviso[1]}</span>
+        </div>
+        <p className="text-navy/85">{matchAviso[2]}</p>
+      </div>
+    )
+  }
+
+  // Reglas, directrices pedagógicas o conceptos destacados
+  const matchDestacado = texto.match(/^(Regla(?:\s+de\s+oro)?|Importante|Principio(?:\s+clave)?|Nota|En resumen|Procedimiento|Estatus|Diferencia clave|Fundamento|Criterio|Alianza con el hogar):\s*(.*)/i)
+  if (matchDestacado) {
+    return (
+      <div className="my-3.5 rounded-xl border border-teal/25 bg-teal/5 px-4 py-3 text-[14px] sm:text-[15px] leading-relaxed shadow-2xs">
+        <div className="mb-1 flex items-center gap-1.5 font-bold text-xs uppercase tracking-wider text-teal">
+          <span>💡</span>
+          <span>{matchDestacado[1]}</span>
+        </div>
+        <p className="text-navy/90">{matchDestacado[2]}</p>
+      </div>
+    )
+  }
+
+  // Viñetas
+  if (/^[•\-*]\s+/.test(texto)) {
+    return (
+      <div className="my-2 flex items-start gap-3 pl-1 text-[15px] sm:text-base leading-relaxed text-navy/85">
+        <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-teal" />
+        <span className="flex-1">{texto.replace(/^[•\-*]\s+/, '')}</span>
+      </div>
+    )
+  }
+
+  // Párrafo estándar con excelente legibilidad y ritmo visual
+  return (
+    <p className="text-[15px] sm:text-base leading-[1.8] sm:leading-[1.85] text-navy/85 font-normal">
+      {texto}
+    </p>
+  )
+}
+

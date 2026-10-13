@@ -30,6 +30,17 @@ export const CATEGORIAS_VIDEO = [
 const DEFINICIONES_VIDEO = [
   // ── Fundamentos ──
   {
+    id: 'V00', orden: 0, bloque: 'Fundamentos', modulo: 'T1.0', duracion: '6 min', videoUrl: '/videos/presentacion_general.mp4',
+    titulo: 'Introducción, visión y propósito institucional',
+    descripcion: 'Bienvenida oficial, visión global, vocación de servicio y propósito pedagógico de Chanak International Academy.',
+    guion: [
+      'Bienvenida al entrenamiento de mentoras y coordinadores de Chanak International Academy.',
+      'Propósito formativo: acompañar con excelencia, cosmovisión bíblica y rigor académico a cada familia y estudiante.',
+      'El modelo educativo Chanak integra formación del carácter, fe, autogobierno y preparación académica internacional.',
+      'El rol de la mentora: guía de vida, supervisora de dominio y puente de comunicación con las familias.',
+    ],
+  },
+  {
     id: 'V01', orden: 1, bloque: 'Fundamentos', modulo: 'T1.1', duracion: '7 min', videoUrl: '',
     titulo: 'Quién es Chanak',
     descripcion: 'Identidad, misión, entidad titular, registros y estatus reales de Chanak International Academy.',
@@ -130,13 +141,36 @@ const DEFINICIONES_VIDEO = [
     ],
   },
   {
-    id: 'V10', orden: 10, bloque: 'Currículos', modulo: 'T3.2', duracion: '7 min', videoUrl: '',
-    titulo: 'LIFEPAC y Christian Light Education',
-    descripcion: 'Dos vías alternativas revisadas: qué tienen en común con A.C.E. y en qué se diferencian.',
+    id: 'V09b', orden: 9.5, bloque: 'Currículos', modulo: 'T3.2', duracion: '8 min', videoUrl: '',
+    titulo: 'Educación Infantil y ABCs with Ace and Christi',
+    descripcion: 'Kindergarten, aprestamiento lector, fonética sistemática y transición a los PACEs de primer grado.',
     guion: [
-      'LIFEPAC (Alpha Omega Publications): Reviewed Alternative Curriculum Pathway con worktexts K–12, autodirigidos y orientados al dominio.',
-      'Christian Light Education: Reviewed Alternative Curriculum Pathway con LightUnits, aprendizaje incremental y repaso continuo. Su metodología no es idéntica a la de A.C.E.',
-      'La inclusión de una editorial o vía curricular no supone reconocimiento automático de todos sus cursos o créditos.',
+      'Kindergarten con Ace and Christi: desarrollo motriz, hábitos, obediencia, atención y destrezas pre-académicas.',
+      'ABCs with Ace and Christi: programa fonético intensivo de 12 a 15 semanas para dominar lectura y escritura en inglés.',
+      'Test de madurez lectora (Reading Readiness Test) para determinar si el niño entra a Kindergarten o directo a ABCs.',
+      'Transición fluida a los PACEs de Grado 1 (nivel 1001) tras superar el programa ABCs con dominio comprobado.',
+    ],
+  },
+  {
+    id: 'V10', orden: 10, bloque: 'Currículos', modulo: 'T3.2b', duracion: '7 min', videoUrl: '',
+    titulo: 'LIFEPAC (Alpha Omega Publications)',
+    descripcion: 'Vía alternativa revisada con worktexts K–12 autodirigidos, orientación al dominio y Teacher’s Guides.',
+    guion: [
+      'LIFEPAC (Alpha Omega Publications): Reviewed Alternative Curriculum Pathway con 10 worktexts consumibles por materia al año.',
+      'Estructura interna: lecciones auto-dirigidas, reviews, self-tests formativos y unit tests sumativos supervisados.',
+      'El rol del adulto: acompañamiento con Teacher\'s Guide, custodia de claves y verificación honesta de self-tests.',
+      'Umbral mínimo del 80 % en las evaluaciones de dominio y registro puntual en el SIS.',
+    ],
+  },
+  {
+    id: 'V10b', orden: 10.5, bloque: 'Currículos', modulo: 'T3.2c', duracion: '7 min', videoUrl: '',
+    titulo: 'Christian Light Education (CLE)',
+    descripcion: 'Vía alternativa revisada con LightUnits, metodología incremental y repaso continuo (Sunrise Edition).',
+    guion: [
+      'Christian Light Education (CLE): Reviewed Alternative Curriculum Pathway con LightUnits y cuadernos integrados.',
+      'Metodología incremental (Sunrise Edition): nuevos conceptos en pequeñas dosis diarias con repaso constante acumulativo.',
+      'Quizzes y tests por LightUnit con Answer Keys custodiadas por el adulto.',
+      'Supervisión y registro de dominio del 80 % sin imponer la Review Station de A.C.E., respetando la estructura propia de CLE.',
     ],
   },
   {
@@ -267,23 +301,25 @@ const DEFINICIONES_VIDEO = [
   // ── Compliance ──
   {
     id: 'V23', orden: 23, bloque: 'Compliance', modulo: 'T7.1', duracion: '7 min', videoUrl: '',
-    titulo: 'Florida · Step Up For Students / EMA',
-    descripcion: 'Qué está aprobado (servicio Matrícula) y cómo orientar a una familia sin prometer financiación.',
+    titulo: 'Florida (EMA) y Alabama (CHOOSE) · Programas Aprobados',
+    descripcion: 'Qué está aprobado en Florida (servicio Matrícula) y Alabama (Approved ESP), y la regla de oro: STATE FUNDING ≠ CURRICULUM.',
     guion: [
-      'Proveedor: Chanak TrainUp Education, Inc. Servicio aprobado en el Marketplace EMA: Matrícula.',
-      'Cualquier otro servicio requiere su propia aprobación.',
-      'STATE FUNDING ≠ CURRICULUM: el programa estatal es una capa de acceso o financiación, no el modelo académico.',
-      'La elegibilidad la determina siempre el programa estatal.',
+      'Florida EMA: Chanak TrainUp Education, Inc. tiene aprobado el servicio de Matrícula (Enrollment) en el Marketplace de Step Up For Students.',
+      'Alabama CHOOSE: Chanak es Approved Education Service Provider (ESP) con onboarding en ClassWallet en curso.',
+      'STATE FUNDING ≠ CURRICULUM: los programas estatales son capas de financiación/acceso, jamás determinan el rigor académico ni el currículo de Chanak.',
+      'La elegibilidad del estudiante y de los fondos la determina siempre el programa estatal, no el mentor.',
     ],
   },
   {
-    id: 'V24', orden: 24, bloque: 'Compliance', modulo: 'T7.2', duracion: '7 min', videoUrl: '',
-    titulo: 'Alabama CHOOSE y pruebas por estado',
-    descripcion: 'Approved Education Service Provider, onboarding en ClassWallet y pruebas exigidas por programa.',
+    id: 'V24', orden: 24, bloque: 'Compliance', modulo: 'T7.2', duracion: '8 min', videoUrl: '',
+    titulo: 'Utah, Texas, Wyoming y Arizona · Estados Aprobados y Cumplimiento',
+    descripcion: 'Estatus aprobados en Utah Fits All, Texas TEFA, Wyoming ESA y Arizona ESA, gestión de plataformas (Odyssey/ClassWallet) y evaluación estatal.',
     guion: [
-      'Alabama CHOOSE: Chanak es Approved Education Service Provider (ESP); el onboarding en ClassWallet está en curso.',
-      'No se usa «Approved Virtual School» mientras no exista confirmación.',
-      'Las pruebas estandarizadas dependen del estado, del programa y de la beca: consulta la matriz de cumplimiento.',
+      'Utah Fits All: Chanak es proveedor aprobado en la plataforma Odyssey (ofertas de servicios educativos).',
+      'Texas TEFA: Chanak es proveedor educativo aprobado en Texas (Texas Education Freedom Accounts) vía Odyssey.',
+      'Wyoming ESA: Chanak es proveedor educativo aprobado para familias del programa ESA de Wyoming.',
+      'Arizona ESA: Chanak cuenta con registro de proveedor aprobado ante el Departamento de Educación de Arizona (ADE / ClassWallet).',
+      'Matriz de pruebas estatales: las evaluaciones norm-referenced externas dependen de cada programa (nivel C) y nunca reemplazan la evaluación de dominio interna (nivel A).',
     ],
   },
   // ── Coordinación ──

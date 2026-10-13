@@ -4,6 +4,50 @@
 //   { resumen, objetivos[], lecciones[{titulo, guion[]}], practica{situacion, preguntas[], criterio}, quiz[{p, opciones[], correcta, explica}], evidencia }
 
 export const BLOQUES_1_2 = {
+  'T1.0': {
+    resumen:
+      'Introducción institucional, bienvenida a la formación de mentoras y marco fundacional de Chanak International Academy.',
+    objetivos: [
+      'Comprender la visión global y el propósito de Chanak International Academy.',
+      'Reconocer el valor formativo de la mentora como formadora integral y puente con las familias.',
+      'Identificar la cosmovisión bíblica como eje de acompañamiento en el crecimiento de cada alumno.',
+    ],
+    lecciones: [
+      {
+        titulo: 'Bienvenida y propósito institucional',
+        guion: [
+          'Bienvenida oficial al sistema de formación de mentoras y coordinadores de Chanak International Academy.',
+          'Nuestra visión: formar personas íntegras, con excelencia académica, fe sólida y autogobierno para servir con propósito.',
+          'La mentora no es una simple vigilante ni una profesora tradicional: es una mentora de vida y aprendizaje que acompaña el dominio individual.',
+        ],
+      },
+      {
+        titulo: 'El compromiso con las familias',
+        guion: [
+          'Chanak camina junto a las familias: la familia conserva su rol educador y Chanak aporta estructura, supervisión y acreditación académica.',
+          'Cada interacción, seguimiento y evaluación transmite los valores institucionales y la confianza depositada en nuestro equipo.',
+        ],
+      },
+    ],
+    practica: {
+      situacion:
+        'Una nueva mentora se incorpora al equipo y te pregunta cuál es la diferencia esencial entre enseñar en una escuela tradicional y ejercer la mentoría en Chanak.',
+      preguntas: [
+        '¿Cómo le explicarías la función de la mentora en Chanak?',
+        '¿De qué manera se integra la cosmovisión bíblica sin imponerla artificialmente?',
+        '¿Cuál es el rol de la familia en este proceso?',
+      ],
+      criterio:
+        'Respuesta clara que enfatice el acompañamiento personalizado, la orientación al dominio frente al avance por calendario y la alianza con la familia.',
+    },
+    quiz: [
+      { p: '¿Cuál es el propósito central de Chanak International Academy?', opciones: ['Vender libros de texto', 'Brindar educación integral cristiana de excelencia internacional que forme carácter, fe y pensamiento crítico', 'Sustituir a los padres en el hogar', 'Ser una plataforma de vídeos'], correcta: 1, explica: 'La misión oficial es la educación integral con propósito.' },
+      { p: '¿Cómo define Chanak la función de la mentora?', opciones: ['Vigilante de aula estricta', 'Acompañante de vida y aprendizaje que supervisa dominio y apoya a la familia', 'Profesora que da clases magistrales de 60 minutos', 'Administrativa de cobros'], correcta: 1, explica: 'La mentora acompaña, supervisa dominio y orienta con afecto y rigor.' },
+      { p: '¿Quién conserva la autoridad y el rol educativo primordial en el hogar?', opciones: ['El estado', 'La familia', 'La editorial', 'La plataforma tecnológica'], correcta: 1, explica: 'La familia es la primera educadora; Chanak aporta estructura y acompañamiento.' },
+    ],
+    evidencia: 'Escribe una breve reflexión personal (4–6 líneas) sobre tu vocación y compromiso como mentora Chanak.',
+  },
+
   'T1.1': {
     resumen:
       'Antes de acompañar a nadie necesitas describir Chanak con exactitud: quién es la entidad titular, qué registros y estatus tiene y cuáles no, y cómo se relaciona con otras organizaciones.',

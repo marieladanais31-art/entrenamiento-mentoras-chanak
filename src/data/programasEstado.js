@@ -186,38 +186,74 @@ export const MATRIZ_PROGRAMAS = [
   {
     "id": "TX-TEFA",
     "captacion": [
-      "No anunciar aprobación o cobertura por este programa mientras esté en proceso. Se puede orientar sobre servicios particulares y registrar interés consentido; no prometer cobro con fondos antes de aprobación e integración."
+      "Presentar a Chanak como proveedor aprobado en Texas TEFA (Texas Education Freedom Accounts).",
+      "Comunicar servicios según catálogo activo en Odyssey; orientar a las familias sin prometer montos antes de verificar elegibilidad y saldo del estudiante.",
+      "Registro de familias interesadas y acompañamiento en el proceso de reserva en Odyssey."
     ],
     "facturacion": [
-      "Tras la aprobación: cobro vía Odyssey (cuenta bancaria por Stripe). La mecánica de facturación se documentará con la aprobación."
+      "Cobro a través de la plataforma Odyssey (vinculada con cuenta Stripe de Chanak).",
+      "Administración concilia la reserva y factura con la prestación real del servicio."
     ],
     "responsableComercial": "Rol Estratégico (captación y seguimiento) · Administración (facturación)",
     "condiciones": [
-      "Entidad con sede en EE. UU. registrada ante la Secretaría de Estado de Texas (Certificate of Fact, Formation o Filing) y en regla con el Contralor en el impuesto de franquicia, si aplica.",
-      "Proveedores en línea o fuera de Texas: la página oficial indica que pueden solicitar y ser aceptados.",
-      "Tutores y servicios docentes: certificado o credencial específica y verificación de huellas dactilares en 30 días.",
-      "Tras la aprobación: cuenta bancaria vía Stripe y catálogo en Odyssey. Solicitud abierta sin fecha límite en el portal de proveedores."
+      "Entidad con sede en EE. UU. registrada ante la Secretaría de Estado de Texas (Certificate of Fact, Formation o Filing) y en regla con el Contralor en el impuesto de franquicia.",
+      "Proveedores en línea o fuera de Texas autorizados según normativa TEFA.",
+      "Cuenta bancaria vía Stripe y catálogo activo en Odyssey."
     ],
     "fuentesOficiales": [
       "https://educationfreedom.texas.gov/providers-vendors/",
       "https://support.withodyssey.com/hc/en-us/articles/44035042254875-Who-Can-Become-a-Vendor-and-What-are-the-Requirements"
     ],
     "noVerificado": [
-      "Comunicado del Contralor (nov-2025) menciona acreditación, 2 años de operación y pruebas estandarizadas para escuelas privadas, y que las escuelas virtuales necesitan ubicación en Texas: NO confirmado en fuente primaria completa.",
-      "No verificado si personal en el extranjero puede ofrecer servicios como «tutor» sin certificado docente de Texas."
+      "Detalle específico de montos por categoría asignada a cada servicio."
     ],
     "state": "Texas",
     "program": "TEFA (Texas Education Freedom Accounts)",
-    "service": "Vendor / Educational Service Provider",
-    "status": "en_proceso",
-    "approved": false,
-    "marketplace": "Solicitud enviada; perfil de proveedor en preparación (Odyssey)",
+    "service": "Vendor / Educational Service Provider (Aprobado en Odyssey)",
+    "status": "aprobado",
+    "approved": true,
+    "marketplace": "Proveedor aprobado en Odyssey (catálogo activo / onboarding completado)",
     "price": "Por confirmar",
-    "eligibility": "Por confirmar con el programa",
-    "documentation": "Registro como entidad extranjera ante la Secretaría de Estado de Texas; situación ante el Contralor; perfil en Odyssey",
-    "lastVerified": "2026-10-05",
+    "eligibility": "Familias participantes del programa TEFA en Texas",
+    "documentation": "Registro ante Secretaría de Estado de Texas, Contralor y Odyssey",
+    "lastVerified": "2026-10-12 · aprobación institucional",
     "source": "Web oficial del programa y Contralor de Texas (comptroller.texas.gov)",
-    "operativo": "Documentación y flujo de matrícula preparados para activarse al aprobarse. No decir «proveedor de Texas» mientras no esté aprobado."
+    "operativo": "Proveedor aprobado en Texas TEFA. Servicios tramitados mediante Odyssey."
+  },
+  {
+    "id": "WY-ESA",
+    "captacion": [
+      "Presentar a Chanak como proveedor educativo aprobado en Wyoming (ESA - Education Savings Accounts).",
+      "Orientar a las familias de Wyoming sobre los servicios aprobados de Chanak.",
+      "Acompañar a las familias elegibles en la utilización de sus fondos para programas educativos Chanak."
+    ],
+    "facturacion": [
+      "Cobro a través de la plataforma oficial del programa ESA de Wyoming.",
+      "Facturación detallada con fechas de prestación, estudiante y descripción del servicio educativo."
+    ],
+    "responsableComercial": "Rol Estratégico (captación y seguimiento) · Administración (facturación)",
+    "condiciones": [
+      "Cumplimiento de estándares de proveedor educativo aprobados por el Estado de Wyoming.",
+      "Facturación digital con evidencia del servicio educativo prestado."
+    ],
+    "fuentesOficiales": [
+      "https://edu.wyoming.gov/"
+    ],
+    "noVerificado": [
+      "Fechas de ciclo de apertura anual de solicitudes para familias."
+    ],
+    "state": "Wyoming",
+    "program": "Wyoming ESA (Education Savings Accounts)",
+    "service": "Education Service Provider (Aprobado)",
+    "status": "aprobado",
+    "approved": true,
+    "marketplace": "Proveedor aprobado",
+    "price": "Por confirmar",
+    "eligibility": "Familias participantes del programa Wyoming ESA",
+    "documentation": "07_US_PROGRAMS_COMPLIANCE/Wyoming",
+    "lastVerified": "2026-10-12 · aprobación institucional",
+    "source": "Departamento de Educación de Wyoming",
+    "operativo": "Proveedor aprobado. Las familias de Wyoming pueden cursar con fondos del programa ESA."
   },
   {
     "id": "AZ-ESA",

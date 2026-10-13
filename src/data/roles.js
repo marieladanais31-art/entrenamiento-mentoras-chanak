@@ -24,13 +24,13 @@ export const MODULOS_SAFEGUARDING = ['T6.1', 'T6.2'] // T6.1 Safeguarding · T6.
 export const MODULOS_CONTACTO_DIRECTO = [...MODULOS_DESARROLLO, ...MODULOS_SAFEGUARDING]
 export const MODULOS_SAFEGUARDING_AWARENESS = ['T6.1']
 
-export const CORE = ['T1.1', 'T1.2', 'T1.3', 'T1.4']
+export const CORE = ['T1.0', 'T1.1', 'T1.2', 'T1.3', 'T1.4']
 // TRONCO COMÚN (todas las personas, antes de elegir rama): identidad Chanak, los tres programas
 // que opera Chanak (Off-Campus, Dual Diploma, Life Skills), safeguarding y protección de datos.
 export const PROGRAMAS_CHANAK = ['T2.1', 'T2.2', 'T2.3']
 export const TRONCO_COMUN = [...CORE, ...PROGRAMAS_CHANAK, 'T6.1', 'T6.2']
 const B2 = ['T2.1', 'T2.2', 'T2.3', 'T2.4']
-const B3 = ['T3.1', 'T3.2', 'T3.3', 'T3.4']
+const B3 = ['T3.1', 'T3.2', 'T3.2b', 'T3.2c', 'T3.3', 'T3.4']
 const B4 = ['T4.1', 'T4.2', 'T4.3', 'T4.4']
 const B5 = ['T5.1', 'T5.2', 'T5.3']
 const B7 = ['T7.1', 'T7.2']

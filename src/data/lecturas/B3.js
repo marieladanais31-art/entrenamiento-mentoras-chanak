@@ -87,64 +87,27 @@ export const LECTURAS_B3 = {
   'T3.2': {
     lecciones: [
       {
-        titulo: 'Qué son las vías alternativas revisadas',
+        titulo: 'Educación Infantil: Kindergarten con Ace and Christi',
         guion: [
-          'LIFEPAC y Christian Light Education (CLE) tienen en Chanak la etiqueta Reviewed Alternative Curriculum Pathway: vías alternativas revisadas. Comparten con A.C.E. la orientación al dominio, pero no son iguales entre sí ni a A.C.E. Esta es la idea central del módulo: Chanak usa diferentes recursos curriculares dentro de un marco académico orientado al dominio; cada currículo puede utilizar una metodología distinta, y Chanak aplica estándares comunes de diagnóstico, evidencia, evaluación, seguimiento y reconocimiento académico.',
-          'Por qué importa para tu trabajo: si supervisas LIFEPAC o CLE «como si fueran A.C.E.», pedirás a la familia rutinas que el material no tiene y dejarás de mirar lo que sí tiene. Lo que se mantiene igual en todas las vías es el marco Chanak: diagnóstico según la vía, PEI, umbral mínimo del 80 % en las evaluaciones de dominio de Chanak, evidencia verificable y registro en el SIS. Lo que cambia es la forma de trabajar del material y, por tanto, lo que tú supervisas en el día a día.',
-          'En la Curriculum Approval Policy verás estas dos vías en la tabla «Clasificación vigente para comunicación» con la denominación abreviada «Alternative Reviewed Pathway (vía alternativa revisada)»: es la misma clasificación. Lo importante es que ninguna de las dos se presenta como «Approved» públicamente mientras la política no esté formalmente adoptada, y que la clasificación se hace por versión, nivel, asignatura y secuencia, no por editorial.',
-          'Por eso la frase de reconocimiento se aplica también aquí, tal cual: «La inclusión de una editorial o vía curricular no supone reconocimiento automático de todos sus cursos o créditos. Chanak evalúa versión, nivel, asignatura, secuencia, evidencia y compatibilidad con sus requisitos académicos.» Ninguna de las dos editoriales es una escuela; Chanak es la escuela. Que una familia complete worktexts o LightUnits es una buena noticia, pero lo que sostiene un registro académico es el dominio demostrado en evaluaciones con umbral mínimo, con evidencias completas, verificables y coherentes, en la secuencia y el nivel adecuados, y registrado en el SIS.',
+          'La etapa infantil en Chanak sienta las bases del carácter, el autogobierno y el amor por el aprendizaje. El programa Kindergarten with Ace and Christi está diseñado para niños de 3 a 5 años, integrando destrezas pre-académicas con una sólida formación en valores bíblicos.',
+          'Se enfoca en la motricidad fina, el reconocimiento visual y auditivo de letras y números, la coordinación ojo-mano, la capacidad de seguir instrucciones y el desarrollo de hábitos de atención y orden.',
+          'El material utiliza animales personajes (Ace, Christi, Pappy Beaver, etc.) que modelan rasgos de carácter piadoso (obediencia, amabilidad, paciencia). Cada lección introduce conceptos a través de rimas, historias y actividades motrices.',
         ],
       },
       {
-        titulo: 'LIFEPAC: estructura y supervisión paso a paso',
+        titulo: 'ABCs with Ace and Christi y Lectoescritura Fonética',
         guion: [
-          'LIFEPAC es un currículo cristiano impreso K–12 de Alpha Omega Publications (AOP). Cada asignatura se organiza en 10 worktexts consumibles por curso. AOP lo describe como un currículo self-paced, mastery-based y dirigido por el estudiante: el alumno demuestra su comprensión con self-tests y unit tests antes de avanzar, a su propio ritmo. El core incluye Bible, Language Arts, Math, Science y History & Geography, con optativas como literatura, español o matemáticas del consumidor.',
-          'Cada worktext incluye reviews, self-tests y unit tests, y la familia o el docente cuenta con Teacher\'s Guides para corrección y ampliación. Para ubicar al estudiante se usan los Assessment and Placement Tests de AOP. Un dato que debes saber explicar: la propia AOP aclara que LIFEPAC es un currículo y no una escuela, y que no está acreditado, porque la acreditación corresponde a instituciones, no a currículos. Dentro de Chanak, LIFEPAC es la herramienta y Chanak la escuela.',
-          'Cómo supervisas LIFEPAC, paso a paso. Uno: confirma en el PEI los worktexts asignados por asignatura. Dos: revisa el avance por worktext según el plan semanal acordado. Tres: comprueba que los self-tests intermedios se hacen sin ayuda y que la corrección es honesta. Cuatro: verifica que el unit test se realiza en condiciones supervisadas. Cinco: registra el resultado en el SIS con fecha real; si no alcanza el 80 %, se refuerza y se vuelve a evaluar. Seis: anota cualquier ajuste de ritmo como nota de seguimiento.',
-          'El rol del adulto en LIFEPAC no es el mismo que en A.C.E.: en la comparación de Chanak figura como «padre o docente con Teacher\'s Guide», mientras que en A.C.E. es un supervisor que autoriza la prueba. Esto significa que, con LIFEPAC, parte de tu trabajo es orientar a la familia en el uso de la guía del docente y en la custodia de las respuestas, para que la corrección siga siendo fiable.',
-          'En tu revisión semanal de un estudiante LIFEPAC, mira tres cosas en el SIS y en las evidencias que te envía la familia: si el avance por worktext coincide con lo previsto en el PEI, si hay unit tests registrados con fecha real y si los resultados alcanzan el 80 %. Si una asignatura lleva semanas sin registros, aplica el mismo protocolo que con cualquier alerta: revisa, habla con el estudiante, contacta con la familia si procede, documenta y escala si persiste.',
+          'ABCs with Ace and Christi es un programa intensivo de lectura fonética de 12 a 15 semanas que capacita al niño para leer con fluidez y precisión en inglés.',
+          'Antes de ingresar a ABCs, se administra el Reading Readiness Test (Test de Preparación para la Lectura). Esta prueba diagnóstica evalúa si el niño posee la discriminación visual y auditiva necesaria o si requiere madurar primero con el programa de Kindergarten.',
+          'Durante las 12 a 15 semanas, el niño aprende los sonidos de todas las letras del abecedario, la formación de combinaciones de dos letras (blends) y la lectura de palabras fonéticas cortas, oraciones sencillas y pasajes bíblicos adaptados.',
+          'Al finalizar con éxito el programa ABCs y demostrar dominio en la prueba final de lectura, el estudiante realiza una transición natural y segura a los PACEs de Primer Grado (nivel 1001) en Math, English, Science, Social Studies y Word Building.',
         ],
       },
       {
-        titulo: 'Christian Light Education: estructura y supervisión paso a paso',
+        titulo: 'Supervisión y Acompañamiento a Padres en Etapa Temprana',
         guion: [
-          'CLE organiza la mayoría de sus cursos en LightUnits: cuadernos que reúnen el texto de la lección, ejercicios, quizzes y test. Muchos cursos tienen 10 LightUnits por año, aunque hay excepciones según grado y materia. Su metodología no es idéntica a la de A.C.E.: en la Sunrise Edition, los nuevos conceptos se enseñan mediante aprendizaje incremental y repaso continuo, con lecciones diarias. CLE dispone de Teacher\'s Guides, Answer Keys, Diagnostic Tests de Language Arts y Math y un Scope & Sequence publicado para K–8 y 9–12.',
-          'No todos los cursos de CLE son homogéneos, y esto tiene consecuencias prácticas. La Sunrise Edition es desarrollo propio de Christian Light, mientras que la mayoría de los cursos anteriores derivan de material revisado de Alpha Omega. En High School hay cursos por LightUnits y otros basados en libro de texto. Por eso el Scope & Sequence de Chanak indica, para CLE en High School, «verificar edición (Sunrise o anterior; LightUnit o libro)». Antes de planificar, confirma qué edición tiene realmente la familia.',
-          'Cómo supervisas CLE, paso a paso. Uno: confirma la edición y el formato de cada curso. Dos: revisa que el estudiante siga las lecciones diarias en orden, porque el repaso continuo forma parte del método: saltarse lecciones rompe la lógica incremental. Tres: comprueba quizzes y tests por LightUnit. Cuatro: verifica la corrección con la Answer Key bajo custodia del adulto. Cinco: registra en el SIS los resultados con fecha real y aplica el umbral del 80 % de las evaluaciones de dominio de Chanak. Seis: documenta los ajustes.',
-          'Un matiz que evita conflictos: el trabajo independiente en CLE se describe como «creciente, con lecciones diarias», no como un autoestudio idéntico al de A.C.E. No exijas a una familia CLE metas diarias al estilo A.C.E. o una Review Station con banderas como condición para avanzar: exige lo que el marco Chanak exige a todas las vías, que es dominio demostrado, evidencia verificable y registro.',
-        ],
-      },
-      {
-        titulo: 'Comparar sin jerarquizar',
-        guion: [
-          'La tabla «Tres currículos, tres lógicas distintas» del dossier de Currículos resume las diferencias. Formato: PACEs en A.C.E., worktexts en LIFEPAC, LightUnits (y algunos libros) en CLE. Progresión: dominio individual por PACE; self-paced y mastery-based; incremental con repaso continuo. Diagnóstico: Diagnostic Test online; Assessment and Placement Tests; Diagnostic Tests de Language Arts y Math. Evaluaciones internas: Checkups, Self Test y PACE Test; self-tests y unit tests; quizzes y tests por LightUnit.',
-          'La misma tabla describe la evidencia disponible en cada vía: resultados de PACE Test y registros en A.C.E.; resultados de unit tests y worktexts en LIFEPAC; quizzes, tests y LightUnits completadas en CLE. Esa fila es la que más te interesa como mentor, porque te dice qué tienes que poder ver y registrar. Si la evidencia no existe o no es verificable, no hay base para un registro de dominio, sea cual sea el material.',
-          'El lema del dossier es claro: no hay un ganador. Chanak elige la ruta adecuada según el estudiante, su nivel, idioma, programa, país, evidencia y objetivo académico. Cuando una familia te pregunte «cuál es mejor», no hagas ranking de editoriales. Explica las diferencias con hechos, remite al diagnóstico y recuerda que la elección de vía se trabaja en el PEI y, si hay cambio, se escala. El módulo T3.3 profundiza en esa decisión.',
-          'Un ejercicio útil para tu práctica: prepara una explicación de dos minutos de las diferencias entre LIFEPAC y CLE para una familia nueva con un hijo de 10 años. Estructúrala en cuatro frases: qué formato tiene cada material, cómo progresa el estudiante, qué evaluaciones internas incluye y qué papel tiene el adulto. Cierra siempre con lo común (diagnóstico de su vía, umbral del 80 % en las evaluaciones de dominio de Chanak, evidencia y SIS) y sin recomendar tú la decisión final, que corresponde a la familia con el diagnóstico delante.',
-        ],
-      },
-      {
-        titulo: 'Dónde está en Drive',
-        guion: [
-          'Abre CHANAK_DOCUMENTOS_2026-2027_FINAL › 03_INSTITUCIONES › Chanak_Curriculos_y_Vias_Academicas.pdf. Lee las diapositivas «LIFEPAC · Alpha Omega Publications» y «Christian Light Education · LightUnits», incluidos sus recuadros laterales «Elementos de LIFEPAC» y «Elementos de CLE». Después estudia la tabla «Tres currículos, tres lógicas distintas» fila por fila, comparando las tres columnas. Termina con la diapositiva de «Estados de una vía curricular». Mientras lees, anota en una hoja dos columnas, «lo que cambia» y «lo que se mantiene», y rellénalas para cada vía: te servirá como guion cuando una familia te pida explicar las diferencias.',
-          'En 08_ACADEMIC_POLICIES › Chanak_Curriculum_Approval_Policy.pdf, localiza «Categorías internas» (Approved Curriculum Pathway, Conditionally Approved, Requires Individual Review) y la tabla «Clasificación vigente para comunicación». Fíjate en la columna «Uso público»: una categoría «Conditionally Approved» no se publica como «Approved» y «Requires Individual Review» no se publica como vía. Lee también el párrafo que sigue a la tabla de clasificación: la inclusión de una editorial en una lista no significa que todos sus cursos generen créditos automáticamente. Es la base de lo que contestarás cuando una familia te diga que «LIFEPAC está en la lista».',
-          'Por último, en 09_ACADEMIC_FRAMEWORK › Chanak_K12_Scope_and_Sequence_2026-2027.xlsx, abre la hoja «Curriculum Pathways» y compara las columnas LIFEPAC y CLE para un grado de primaria y otro de High School; observa las anotaciones «verificar curso específico» (LIFEPAC) y «verificar edición» (CLE). En la hoja «HS Courses», la columna «Curriculum pathway» te muestra qué cursos de High School admiten estas vías. Recuerda que la nota de esa hoja la presenta como correspondencia orientativa: sirve para planificar, no para prometer equivalencias.',
-        ],
-      },
-      {
-        titulo: 'Errores frecuentes y qué escalar',
-        guion: [
-          'Errores frecuentes. Uno: decir que CLE o LIFEPAC «son lo mismo que A.C.E.». Dos: aplicar reglas de A.C.E. que el material no contempla e ignorar su propia estructura de pruebas. Tres: no verificar la edición de CLE ni el curso concreto de LIFEPAC en High School. Cuatro: afirmar que LIFEPAC está «acreditado» o que una editorial «da créditos». Cinco: permitir que la Answer Key o la Teacher\'s Guide esté al alcance del estudiante durante la autoevaluación. Seis: registrar avances sin evidencia verificable.',
-          'Qué resuelves tú: orientar a la familia en el uso de la guía del docente, revisar el avance por worktext o LightUnit, comprobar la corrección y aplicar refuerzo cuando no se alcanza el 80 %. Qué documentas en el SIS: resultados de unit tests o tests por LightUnit con fecha real, notas de seguimiento y ajustes de ritmo. Qué escalas a Chanak Central: dudas sobre la edición o el curso concreto, cualquier pregunta sobre créditos de High School, discrepancias entre lo completado y lo demostrado, y cualquier solicitud de cambio de vía.',
-          'Ten presente que la regla de no duplicación también afecta a estas vías: cada estudiante hace la prueba de ubicación de su vía, no una batería de pruebas de todas las editoriales. Si una familia llega con resultados de otra prueba, documenta lo que aporta y consulta con coordinación antes de pedir nada nuevo. Y si detectas que el estudiante está ubicado en un worktext o una LightUnit que no corresponde a su dominio real, no lo muevas por tu cuenta: anótalo y llévalo a coordinación para revisar el PEI.',
-        ],
-      },
-      {
-        titulo: 'Ejemplo trabajado: una familia CLE que pide «las reglas de A.C.E.»',
-        guion: [
-          'Situación: la familia de un estudiante de 4.º grado usa CLE y te escribe: «Nos han dicho que es lo mismo que A.C.E.; aplícanos sus reglas y ponle un PACE Test cada semana». Antes de responder, revisas el PEI: la vía registrada es CLE, con LightUnits de Math y Language Arts. Compruebas además qué edición usan y confirmas que es la Sunrise Edition.',
-          'En la conversación explicas tres diferencias con hechos del dossier. Primero, CLE trabaja con lecciones diarias, aprendizaje incremental y repaso continuo, de modo que el orden de las lecciones importa. Segundo, sus evaluaciones son quizzes y tests por LightUnit, no PACE Tests. Tercero, el adulto usa la Teacher\'s Guide y la Answer Key, que deben guardarse fuera del alcance del estudiante. Luego explicas lo que sí es igual: el umbral del 80 % en las evaluaciones de dominio de Chanak, la evidencia y el registro en el SIS.',
-          'La familia pregunta si todo lo que haga con CLE «contará como crédito». Respondes con la frase de reconocimiento tal cual y añades que Chanak evalúa por evidencia y que no hay conversión automática de unidades en créditos. Registras en el SIS una nota de seguimiento con lo acordado. No cambias la vía ni introduces pruebas ajenas al material. Si la familia insistiera en cambiar a A.C.E., documentarías la petición y la escalarías, como verás en T3.3.',
+          'En educación infantil, la mentora orienta estrechamente a los padres en cómo estructurar rutinas breves (sesiones de 15 a 20 minutos), celebrar el progreso sin presionar y crear un ambiente de aprendizaje alegre y consistente.',
+          'La evidencia de aprendizaje en esta etapa incluye grabaciones cortas de lectura oral, muestras de trazado y escritura, y el registro de avance fonético en el SIS.',
         ],
       },
     ],
@@ -152,11 +115,90 @@ export const LECTURAS_B3 = {
       video: 0.25,
       lectura: 0.25,
       documentos: [
-        { carpeta: '03_INSTITUCIONES', documento: 'Chanak_Curriculos_y_Vias_Academicas.pdf', que: 'Diapositivas «LIFEPAC · Alpha Omega Publications», «Christian Light Education · LightUnits», tabla «Tres currículos, tres lógicas distintas» y «Estados de una vía curricular».', horas: 1 },
-        { carpeta: '08_ACADEMIC_POLICIES', documento: 'Chanak_Curriculum_Approval_Policy.pdf', que: '«Categorías internas» (columna «Uso público») y «Clasificación vigente para comunicación».', horas: 0.5 },
-        { carpeta: '09_ACADEMIC_FRAMEWORK', documento: 'Chanak_K12_Scope_and_Sequence_2026-2027.xlsx', que: 'Hoja «Curriculum Pathways» (columnas LIFEPAC y CLE) y columna «Curriculum pathway» de la hoja «HS Courses».', horas: 0.75 },
+        { carpeta: '03_INSTITUCIONES', documento: 'Chanak_Curriculos_y_Vias_Academicas.pdf', que: 'Programas de Educación Infantil y Lectura Fonética A.C.E. (Kindergarten y ABCs).', horas: 0.75 },
       ],
-      practica: 2.25,
+      practica: 1.5,
+      evidencia: 0.5,
+      kc: 0.5,
+    },
+  },
+
+  'T3.2b': {
+    lecciones: [
+      {
+        titulo: 'LIFEPAC: Reviewed Alternative Curriculum Pathway',
+        guion: [
+          'LIFEPAC es un currículo cristiano impreso K–12 de Alpha Omega Publications (AOP). En Chanak tiene la etiqueta Reviewed Alternative Curriculum Pathway: vía alternativa revisada.',
+          'Se organiza en 10 worktexts consumibles por asignatura al año (Bible, Language Arts, Math, Science y History & Geography). Cada worktext equivale aproximadamente a 3 o 4 semanas de trabajo auto-instruccional.',
+          'La metodología es self-paced y mastery-based: el estudiante avanza leyendo explicaciones claras, resolviendo actividades prácticas y realizando autoevaluaciones periódicas.',
+          'Aviso de reconocimiento curricular: la inclusión de LIFEPAC no supone reconocimiento automático de todos sus cursos o créditos; Chanak evalúa versión, nivel, evidencia y dominio demostrado.',
+        ],
+      },
+      {
+        titulo: 'Estructura interna de un worktext de LIFEPAC',
+        guion: [
+          'Cada worktext de LIFEPAC contiene tres secciones principales divididas por objetivos de aprendizaje.',
+          'A lo largo del cuadernillo, el estudiante encuentra Section Reviews y Self-Tests intermedios que funcionan como evaluaciones formativas.',
+          'Al final de cada worktext, tras retirar el cuadernillo de estudio, el estudiante realiza el Unit Test sumativo bajo supervisión del adulto.',
+          'El umbral de dominio exigido por Chanak en los Unit Tests de LIFEPAC es de mínimo 80 %. Si no se alcanza, se refuerzan los conceptos fallidos y se administra un test alternativo provisto en la Teacher’s Guide.',
+        ],
+      },
+      {
+        titulo: 'Supervisión de la mentora y rol de la Teacher\'s Guide',
+        guion: [
+          'En LIFEPAC, el adulto responsable en el hogar trabaja con la Teacher’s Guide, que contiene las claves de respuestas, actividades complementarias y exámenes alternativos.',
+          'La custodia de las claves es esencial: la Teacher’s Guide debe estar siempre guardada fuera del alcance del alumno para garantizar la integridad de los Self-Tests y Unit Tests.',
+          'La mentora revisa semanalmente el ritmo de avance en los worktexts, valida las evidencias remitidas por la familia y registra las calificaciones oficiales en el SIS.',
+        ],
+      },
+    ],
+    desglose: {
+      video: 0.25,
+      lectura: 0.25,
+      documentos: [
+        { carpeta: '03_INSTITUCIONES', documento: 'Chanak_Curriculos_y_Vias_Academicas.pdf', que: 'Diapositiva LIFEPAC (Alpha Omega Publications) y estructura de worktexts.', horas: 0.75 },
+      ],
+      practica: 1.5,
+      evidencia: 0.5,
+      kc: 0.5,
+    },
+  },
+
+  'T3.2c': {
+    lecciones: [
+      {
+        titulo: 'Christian Light Education (CLE): Reviewed Alternative Pathway',
+        guion: [
+          'Christian Light Education (CLE) es una vía alternativa revisada (Reviewed Alternative Curriculum Pathway) basada en LightUnits.',
+          'Su metodología destaca por el desarrollo de la Sunrise Edition: un enfoque pedagógico de aprendizaje incremental y repaso continuo acumulativo.',
+          'A diferencia de otros programas en bloque, CLE introduce conceptos matemáticos y lingüísticos en pequeñas dosis diarias y los repasa sistemáticamente a lo largo de todo el curso escolar.',
+          'Aviso de reconocimiento curricular: la inclusión de CLE no supone reconocimiento automático de todos sus cursos o créditos; Chanak evalúa versión, nivel, evidencia y compatibilidad.',
+        ],
+      },
+      {
+        titulo: 'Estructura de las LightUnits y lecciones diarias',
+        guion: [
+          'Cada curso anual de CLE consta habitualmente de 10 LightUnits (cuadernos integrados de trabajo).',
+          'Cada LightUnit se compone de lecciones numeradas de trabajo diario. Saltarse lecciones rompe la secuencia incremental y el repaso acumulativo.',
+          'Dentro de cada LightUnit hay dos Quizzes formativos intermedios y un LightUnit Test final sumativo.',
+          'Las Answer Keys son utilizadas por el adulto supervisor para corregir con precisión las tareas diarias y los quizzes.',
+        ],
+      },
+      {
+        titulo: 'Supervisión de CLE sin confundir metodologías',
+        guion: [
+          'Regla fundamental: CLE no se supervisa imponiendo las rutinas de A.C.E. No se exigen banderas de mesa ni una Review Station idéntica a A.C.E.; se respeta la dinámica de lecciones diarias y repaso continuo de CLE.',
+          'Lo que sí permanece inalterable bajo el marco Chanak: exigencia de dominio al 80 % mínimo en quizzes y tests, evidencia verificable subida a la plataforma y registro puntual en el SIS.',
+        ],
+      },
+    ],
+    desglose: {
+      video: 0.25,
+      lectura: 0.25,
+      documentos: [
+        { carpeta: '03_INSTITUCIONES', documento: 'Chanak_Curriculos_y_Vias_Academicas.pdf', que: 'Diapositiva Christian Light Education y comparación de metodologías.', horas: 0.75 },
+      ],
+      practica: 1.5,
       evidencia: 0.5,
       kc: 0.5,
     },

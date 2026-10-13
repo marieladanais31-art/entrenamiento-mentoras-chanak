@@ -1,6 +1,18 @@
 // Estimaciones de actividad, no tiempo de asistencia ni crédito acreditado.
 export const PALABRAS_POR_MINUTO = 150
 export const ESTIMACIONES_MINUTOS = {
+  "T1.0": {
+    "palabras": 1850,
+    "video": 6,
+    "lectura": 20,
+    "documentos": 10,
+    "practica": 20,
+    "evidencia": 10,
+    "kc": 10,
+    "total": 75,
+    "horas": 1.25,
+    "horasAnteriores": 3
+  },
   "T1.1": {
     "palabras": 2717,
     "video": 5,
@@ -111,6 +123,30 @@ export const ESTIMACIONES_MINUTOS = {
   },
   "T3.2": {
     "palabras": 2108,
+    "video": 5,
+    "lectura": 20,
+    "documentos": 15,
+    "practica": 30,
+    "evidencia": 10,
+    "kc": 10,
+    "total": 90,
+    "horas": 1.5,
+    "horasAnteriores": 6
+  },
+  "T3.2b": {
+    "palabras": 2050,
+    "video": 5,
+    "lectura": 20,
+    "documentos": 15,
+    "practica": 30,
+    "evidencia": 10,
+    "kc": 10,
+    "total": 90,
+    "horas": 1.5,
+    "horasAnteriores": 6
+  },
+  "T3.2c": {
+    "palabras": 2050,
     "video": 5,
     "lectura": 20,
     "documentos": 15,

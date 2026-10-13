@@ -123,8 +123,9 @@ export const BLOQUES = [
     numero: 1,
     titulo: 'CHANAK CORE · Identidad, estructura y funcionamiento',
     categoria: 'Fundamentos',
-    horas: 6.5,
+    horas: 7.75,
     modulos: [
+      { id: 'T1.0', titulo: 'Introducción, visión y propósito institucional', horas: horasModulo('T1.0'), modalidad: 'Vídeo + inducción oficial', evaluacion: 'Knowledge Check', video: 'V00', fuentes: ['master'] },
       { id: 'T1.1', titulo: 'Identidad, misión y estructura institucional', horas: horasModulo('T1.1'), modalidad: 'Vídeo + lectura del Master', evaluacion: 'Knowledge Check', video: 'V01', fuentes: ['master'] },
       { id: 'T1.2', titulo: 'El modelo 60 / 20 / 20', horas: horasModulo('T1.2'), modalidad: 'Vídeo + lectura + práctica', evaluacion: 'Knowledge Check + caso', video: 'V02', fuentes: ['master', 'ss'] },
       { id: 'T1.3', titulo: 'Marco académico orientado al dominio', horas: horasModulo('T1.3'), modalidad: 'Vídeo + lectura + caso', evaluacion: 'Knowledge Check + caso', video: 'V03', fuentes: ['master', 'ss'] },
@@ -151,10 +152,12 @@ export const BLOQUES = [
     numero: 3,
     titulo: 'Curriculum Pathways',
     categoria: 'Currículos',
-    horas: 6.75,
+    horas: 9.75,
     modulos: [
       { id: 'T3.1', titulo: 'A.C.E. · Reference / Preferred Curriculum Pathway', horas: horasModulo('T3.1'), modalidad: 'Vídeo + lectura + práctica', evaluacion: 'Knowledge Check + caso', video: 'V09', fuentes: ['curriculos', 'currPolicy'] },
-      { id: 'T3.2', titulo: 'LIFEPAC y Christian Light Education · Reviewed Alternative Pathways', horas: horasModulo('T3.2'), modalidad: 'Vídeo + lectura comparada', evaluacion: 'Knowledge Check + caso', video: 'V10', fuentes: ['curriculos', 'currPolicy'] },
+      { id: 'T3.2', titulo: 'Educación Infantil y Lectoescritura Fonética · Kindergarten y ABCs with Ace and Christi', horas: horasModulo('T3.2'), modalidad: 'Vídeo + lectura + práctica fonética', evaluacion: 'Knowledge Check + caso', video: 'V09b', fuentes: ['curriculos', 'currPolicy'] },
+      { id: 'T3.2b', titulo: 'LIFEPAC (Alpha Omega Publications) · Reviewed Alternative Pathway', horas: horasModulo('T3.2b'), modalidad: 'Vídeo + lectura de worktexts', evaluacion: 'Knowledge Check + caso', video: 'V10', fuentes: ['curriculos', 'currPolicy'] },
+      { id: 'T3.2c', titulo: 'Christian Light Education (CLE) · Reviewed Alternative Pathway', horas: horasModulo('T3.2c'), modalidad: 'Vídeo + lectura incremental', evaluacion: 'Knowledge Check + caso', video: 'V10b', fuentes: ['curriculos', 'currPolicy'] },
       { id: 'T3.3', titulo: 'Chanak Flex y selección de vía curricular', horas: horasModulo('T3.3'), modalidad: 'Vídeo + caso de decisión', evaluacion: 'Knowledge Check + caso', video: 'V11', fuentes: ['curriculos', 'currPolicy'] },
       { id: 'T3.4', titulo: 'Diagnóstico y PEI', horas: horasModulo('T3.4'), modalidad: 'Vídeo + SIS demo', evaluacion: 'Knowledge Check + PEI simulado', video: 'V12', fuentes: ['offcampus', 'curriculos'], entregable: true },
     ],
@@ -208,8 +211,8 @@ export const BLOQUES = [
     horas: 3.75,
     porRol: true, // solo para quien su rol lo requiera; no cuenta para las horas de la ruta base
     modulos: [
-      { id: 'T7.1', titulo: 'Florida · Step Up For Students / EMA (servicio Matrícula aprobado)', horas: horasModulo('T7.1'), modalidad: 'Vídeo + estado de servicio', evaluacion: 'Knowledge Check + caso', video: 'V23', fuentes: ['ema', 'statePolicy'] },
-      { id: 'T7.2', titulo: 'Alabama CHOOSE (Approved ESP · ClassWallet) y pruebas por estado', horas: horasModulo('T7.2'), modalidad: 'Vídeo + matriz de cumplimiento', evaluacion: 'Knowledge Check + caso', video: 'V24', fuentes: ['alabama', 'statePolicy'] },
+      { id: 'T7.1', titulo: 'Florida (EMA Matrícula) y Alabama CHOOSE (ESP ClassWallet) · Programas aprobados', horas: horasModulo('T7.1'), modalidad: 'Vídeo + estado de servicio', evaluacion: 'Knowledge Check + caso', video: 'V23', fuentes: ['ema', 'alabama', 'statePolicy'] },
+      { id: 'T7.2', titulo: 'Utah (Fits All), Texas (TEFA), Wyoming (ESA) y Arizona (ESA) · Estados aprobados y cumplimiento', horas: horasModulo('T7.2'), modalidad: 'Vídeo + matriz de cumplimiento', evaluacion: 'Knowledge Check + caso', video: 'V24', fuentes: ['statePolicy'] },
     ],
   },
   {

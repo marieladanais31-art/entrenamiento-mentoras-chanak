@@ -4,15 +4,15 @@
 export const BLOQUES_7_8 = {
   'T7.1': {
     resumen:
-      'Solo para quienes atienden familias de Florida con becas. Step Up For Students gestiona el Education Market Assistant (EMA). Chanak tiene aprobado un servicio concreto: Matrícula.',
-    objetivos: ['Describir el estado aprobado en EMA.', 'Explicar STATE FUNDING ≠ CURRICULUM.', 'Orientar a familias sin prometer financiación.'],
+      'Programas estatales aprobados: Florida EMA (servicio Matrícula de Chanak TrainUp Education, Inc.) y Alabama CHOOSE (Approved ESP en ClassWallet).',
+    objetivos: ['Describir el estado aprobado en Florida EMA.', 'Explicar Alabama CHOOSE (ESP aprobado).', 'Aplicar la regla de oro: STATE FUNDING ≠ CURRICULUM.'],
     lecciones: [
       {
-        titulo: 'Qué está aprobado',
+        titulo: 'Florida EMA y Alabama CHOOSE',
         guion: [
-          'Proveedor: Chanak TrainUp Education, Inc. Servicio aprobado en el Marketplace EMA: Matrícula.',
-          'Cualquier servicio adicional requiere su propia revisión y aprobación por EMA. No se presenta como aprobado lo que no lo está.',
-          'Los servicios disponibles y los gastos elegibles dependen de la beca del estudiante, de las reglas de EMA y de las ofertas aprobadas en el Marketplace.',
+          'Florida: Chanak TrainUp Education, Inc. tiene aprobado el servicio de Matrícula (Enrollment) en el Marketplace EMA de Step Up For Students.',
+          'Alabama: Chanak es Approved Education Service Provider (ESP) en el CHOOSE Act, con alta y vinculación en ClassWallet en curso.',
+          'Cualquier servicio adicional requiere su propia revisión y aprobación. No se presenta como aprobado lo que no lo está.',
         ],
       },
       {
@@ -32,7 +32,7 @@ export const BLOQUES_7_8 = {
     quiz: [
       { p: '¿Qué servicio de Chanak está aprobado en EMA?', opciones: ['Todos los servicios', 'Matrícula', 'Materiales', 'Tutorías'], correcta: 1, explica: 'Solo el servicio Matrícula está aprobado.' },
       { p: '¿Qué significa STATE FUNDING ≠ CURRICULUM?', opciones: ['Que el estado decide el currículo', 'Que el programa estatal es acceso/financiación, no el modelo académico', 'Que no hay becas', 'Que el currículo cambia según la beca'], correcta: 1, explica: 'La financiación no define el currículo.' },
-      { p: '¿Quién determina la elegibilidad de un gasto?', opciones: ['El mentor', 'El programa estatal', 'La familia', 'Chanak sin consultar'], correcta: 1, explica: 'Siempre el programa estatal.' },
+      { p: '¿Cuál es el estatus oficial de Chanak en Alabama CHOOSE?', opciones: ['Approved Virtual School', 'Approved Education Service Provider (ESP)', 'Solicitud rechazada', 'Solo colegio presencial'], correcta: 1, explica: 'Chanak es Approved ESP con onboarding ClassWallet en curso.' },
       { p: 'Una familia quiere confirmación de que la beca cubre todo. ¿Qué haces?', opciones: ['Confirmar', 'Explicar el estado aprobado y derivar a Chanak Administration', 'Decir que no cubre nada', 'Cambiar el contrato'], correcta: 1, explica: 'Sin promesas; derivar.' },
     ],
     evidencia: 'Redacta tu respuesta a la familia del caso práctico (máx. 6 líneas).',
@@ -40,37 +40,41 @@ export const BLOQUES_7_8 = {
 
   'T7.2': {
     resumen:
-      'Solo para quienes atienden familias de Alabama o gestionan pruebas exigidas por programas estatales. Chanak es Approved Education Service Provider en Alabama CHOOSE.',
-    objetivos: ['Describir el estado en Alabama CHOOSE.', 'Usar la terminología correcta.', 'Consultar requisitos de pruebas por estado.'],
+      'Estados aprobados adicionales: Utah (Fits All), Texas (TEFA), Wyoming (ESA) y Arizona (ESA), junto con la matriz de evaluación y pruebas estandarizadas por estado.',
+    objetivos: [
+      'Identificar los programas aprobados en Utah, Texas, Wyoming y Arizona.',
+      'Operar con las plataformas asociadas (Odyssey y ClassWallet).',
+      'Consultar y aplicar los requisitos de pruebas estandarizadas por estado (Categoría C).',
+    ],
     lecciones: [
       {
-        titulo: 'Alabama CHOOSE',
+        titulo: 'Utah, Texas, Wyoming y Arizona aprobados',
         guion: [
-          'Chanak es Approved Education Service Provider (ESP) en Alabama CHOOSE. El onboarding en ClassWallet (banco y perfil) está en curso.',
-          'No se usa «Approved Virtual School» mientras ClassWallet o ALDOR no confirmen esa clasificación.',
-          'Los servicios elegibles, la participación de las familias y la financiación dependen de las reglas de CHOOSE y de la elegibilidad del estudiante.',
+          'Utah Fits All: Chanak es proveedor educativo aprobado en Odyssey (servicios formativos y académicos).',
+          'Texas TEFA (Texas Education Freedom Accounts): Chanak cuenta con estatus de proveedor aprobado en la plataforma Odyssey.',
+          'Wyoming ESA: Chanak es proveedor educativo aprobado para familias participantes de Education Savings Accounts en Wyoming.',
+          'Arizona ESA: Chanak cuenta con registro de proveedor aprobado ante el Departamento de Educación de Arizona (ADE / ClassWallet).',
         ],
       },
       {
-        titulo: 'Pruebas estandarizadas por estado',
+        titulo: 'Pruebas estandarizadas y cumplimiento por estado',
         guion: [
-          'Algunos programas estatales exigen pruebas propias (categoría C). No son un requisito universal de Chanak: dependen del estado, la beca y el programa.',
-          'Consulta la política State-Specific Standardized Assessment Requirements y la US State Assessment Compliance Matrix antes de responder.',
+          'Algunos programas estatales exigen pruebas anuales norm-referenced (Categoría C). No son un requisito universal de Chanak: dependen de la ley y del programa de cada estado.',
+          'Las pruebas estatales nunca reemplazan la evaluación interna de dominio de Chanak (Nivel A, umbral 80 %). Consulta la matriz State-Specific antes de responder.',
         ],
       },
     ],
     practica: {
-      situacion: 'En un folleto local alguien escribe «Chanak, Approved Virtual School de Alabama, con examen estatal obligatorio para todos sus alumnos».',
-      preguntas: ['¿Qué dos errores hay?', '¿Cómo debe decirse?', '¿Dónde lo verificas?'],
-      criterio: 'Correcto: Approved Education Service Provider (ESP), ClassWallet onboarding en curso; pruebas según programa y estudiante, no universales.',
+      situacion: 'Una familia de Texas o Utah pregunta si puede pagar la colegiatura de Chanak con su cuenta estatal de Odyssey y si su hijo debe tomar un examen estatal.',
+      preguntas: ['¿Está aprobado Chanak en Texas y Utah?', '¿A través de qué plataforma se procesa?', '¿Quién fija los requisitos de examen estatal?'],
+      criterio: 'Chanak está aprobado en Texas TEFA y Utah Fits All vía Odyssey. Las pruebas externas dependen de la normativa del programa del estado y se derivan a la matriz oficial.',
     },
     quiz: [
-      { p: '¿Cuál es el estado correcto de Chanak en Alabama CHOOSE?', opciones: ['Approved Virtual School', 'Approved Education Service Provider (ESP)', 'En solicitud', 'No participa'], correcta: 1, explica: 'Approved ESP, onboarding ClassWallet en curso.' },
-      { p: '¿Se puede usar «Approved Virtual School»?', opciones: ['Sí', 'No, hasta que exista confirmación de ClassWallet o ALDOR', 'Solo en folletos', 'Solo en inglés'], correcta: 1, explica: 'No hasta confirmación.' },
-      { p: '¿Las pruebas estatales son obligatorias para todos los alumnos Chanak?', opciones: ['Sí', 'No: dependen del estado, la beca y el programa', 'Solo en Alabama', 'Solo en primaria'], correcta: 1, explica: 'Categoría C, no universal.' },
-      { p: '¿Dónde verificas los requisitos de pruebas de un estado?', opciones: ['En redes', 'En la política State-Specific y la matriz de cumplimiento', 'En el Portal de familias', 'Preguntando a otra familia'], correcta: 1, explica: 'Documentos 08 y 09.' },
+      { p: '¿A través de qué plataforma se gestionan los pagos de Texas TEFA y Utah Fits All?', opciones: ['PayPal', 'Odyssey', 'Western Union', 'Cheque escolar manual'], correcta: 1, explica: 'Tanto Texas TEFA como Utah Fits All operan con Odyssey.' },
+      { p: '¿Están aprobados Wyoming ESA y Arizona ESA para Chanak?', opciones: ['No, están rechazados', 'Sí, Chanak figura como proveedor aprobado en ambos estados', 'Solo para universidades', 'Solo presencial'], correcta: 1, explica: 'Chanak cuenta con aprobación en Wyoming ESA y Arizona ESA.' },
+      { p: '¿Las pruebas estatales externas (Nivel C) sustituyen la evaluación de dominio al 80 % de Chanak?', opciones: ['Sí, totalmente', 'No: la evaluación interna de dominio permanece invariable', 'Solo en primaria', 'Solo si saca sobresaliente'], correcta: 1, explica: 'STATE FUNDING ≠ CURRICULUM: la evaluación de dominio es la constante de Chanak.' },
     ],
-    evidencia: 'Corrige el texto del folleto del caso práctico.',
+    evidencia: 'Resume en una tabla de 4 filas los estados aprobados de este módulo, su programa y plataforma.',
   },
 
   'T8.1': {

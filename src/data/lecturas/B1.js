@@ -5,6 +5,38 @@
 // y hechos verificados del brief (MSA-CESS, NCAA Eligibility Center) consultados el 4-oct-2026.
 
 export const LECTURAS_B1 = {
+  'T1.0': {
+    lecciones: [
+      {
+        titulo: 'Introducción, vocación y propósito de la formación',
+        guion: [
+          'Bienvenida al programa de certificación y entrenamiento de mentoras de Chanak International Academy. Esta formación ha sido diseñada para prepararte integralmente no solo en procesos académicos y sistemas, sino en el corazón y la filosofía que distinguen a nuestra comunidad escolar.',
+          'Nuestra visión institucional une tres pilares innegociables: excelencia académica rigurosa con estándares internacionales, cosmovisión bíblica transformadora y formación del carácter para el autogobierno.',
+          'En Chanak entendemos que cada estudiante es un diseño único de Dios con dones específicos y ritmos individuales. Por eso, el avance no está dictado por el calendario escolar ni por la presión de grupo, sino por la demostración real de dominio.',
+          'Como mentora, eres la presencia cercana, el modelo de perseverancia y el canal de bendición que acompaña tanto al estudiante en su trabajo diario como a los padres en su labor educativa primordial.',
+        ],
+      },
+      {
+        titulo: 'El rol de la mentora Chanak',
+        guion: [
+          'La mentora no es una profesora tradicional que imparte conferencias magistrales, ni una mera cuidadora de aula. Tu función es observar con agudeza pedagógica, formular preguntas de indagación que despierten el pensamiento crítico, supervisar que los controles se cumplan con honestidad y sostener altas expectativas con profunda empatía.',
+          'Regla de oro de la mentoría: nunca resuelvas por el estudiante lo que él puede descubrir por sí mismo. Nuestro objetivo es forjar aprendices autorregulados, capaces de fijar metas, gestionar su tiempo y amar el aprendizaje para toda la vida.',
+          'La alianza con el hogar: en Chanak creemos firmemente que los padres son los primeros y principales educadores de sus hijos. Nosotros no los reemplazamos; somos sus colaboradores estratégicos y su respaldo institucional.',
+        ],
+      },
+    ],
+    desglose: {
+      video: 0.15,
+      lectura: 0.25,
+      documentos: [
+        { carpeta: '01_INSTITUCIONAL', documento: 'Chanak_Dossier_Institucional_Master_2026-2027.pdf', que: 'Visión, misión, propósito y perfil de egreso Chanak.', horas: 0.5 },
+      ],
+      practica: 0.5,
+      evidencia: 0.25,
+      kc: 0.25,
+    },
+  },
+
   'T1.1': {
     lecciones: [
       {

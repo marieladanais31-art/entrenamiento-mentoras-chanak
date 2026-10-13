@@ -13,6 +13,7 @@ export const BLOQUES_EN = {
 }
 
 export const MODULOS_EN = {
+  'T1.0': 'Introduction, vision and institutional purpose',
   'T1.1': 'Identity, mission and institutional structure',
   'T1.2': 'The 60 / 20 / 20 model',
   'T1.3': 'A mastery-oriented academic framework',
@@ -22,7 +23,9 @@ export const MODULOS_EN = {
   'T2.3': 'Life Skills & Leadership',
   'T2.4': 'Partner Learning Center, Institutional Certification and program differences',
   'T3.1': 'A.C.E. · Reference / Preferred Curriculum Pathway',
-  'T3.2': 'LIFEPAC and Christian Light Education · Reviewed Alternative Pathways',
+  'T3.2': 'Early Childhood & Phonics Literacy · Kindergarten & ABCs with Ace and Christi',
+  'T3.2b': 'LIFEPAC (Alpha Omega Publications) · Reviewed Alternative Pathway',
+  'T3.2c': 'Christian Light Education (CLE) · Reviewed Alternative Pathway',
   'T3.3': 'Chanak Flex and choosing a curriculum pathway',
   'T3.4': 'Diagnostic and ILP',
   'T4.1': 'K–12 Scope & Sequence: competencies and evidence',
@@ -35,8 +38,8 @@ export const MODULOS_EN = {
   'T6.1': 'Safeguarding and professional boundaries',
   'T6.2': 'Online safety and data protection',
   'T6.3': 'Local Extension, local languages and specialized coordination',
-  'T7.1': 'Florida · Step Up For Students / EMA (approved Enrollment service)',
-  'T7.2': 'Alabama CHOOSE (Approved ESP · ClassWallet) and state testing',
+  'T7.1': 'Florida (EMA Enrollment) and Alabama CHOOSE (ESP ClassWallet) · Approved Programs',
+  'T7.2': 'Utah (Fits All), Texas (TEFA), Wyoming (ESA) and Arizona (ESA) · Approved States & Compliance',
   'T8.1': 'Mentor supervision and academic quality',
   'T8.2': 'Partner Learning Centers: local operation and Chanak Central',
   'T8.3': 'Evidence review, reporting and incidents',

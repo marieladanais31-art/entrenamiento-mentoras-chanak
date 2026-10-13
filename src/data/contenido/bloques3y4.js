@@ -42,37 +42,115 @@ export const BLOQUES_3_4 = {
 
   'T3.2': {
     resumen:
-      'LIFEPAC y Christian Light Education son vías alternativas revisadas por Chanak. Comparten la orientación al dominio con A.C.E., pero no son iguales entre sí ni a A.C.E.',
-    objetivos: ['Describir LIFEPAC y CLE.', 'Explicar en qué se diferencian de A.C.E.', 'Aplicar el aviso sobre reconocimiento de créditos.'],
+      'Educación Infantil y Lectoescritura Fonética: Kindergarten con Ace and Christi y el programa intensivo ABCs with Ace and Christi para aprender a leer y escribir en inglés.',
+    objetivos: [
+      'Dominar la estructura y metodología de Kindergarten y ABCs with Ace and Christi.',
+      'Aplicar el Reading Readiness Test para determinar la ubicación adecuada del niño.',
+      'Supervisar las 12-15 semanas de fonética intensiva y la transición a los PACEs de Grado 1.',
+    ],
     lecciones: [
       {
-        titulo: 'LIFEPAC',
+        titulo: 'Kindergarten con Ace and Christi',
         guion: [
-          'LIFEPAC (Alpha Omega Publications) es una Reviewed Alternative Curriculum Pathway: worktexts K–12 autodirigidos y orientados al dominio, con evaluaciones por unidad.',
-          'El mentor supervisa el avance por worktext, las autoevaluaciones y las pruebas de unidad, y registra resultados en el SIS.',
+          'Programa diseñado para niños de 3 a 5 años: enfatiza desarrollo motriz fino, coordinación visual, obediencia, atención y carácter cristiano.',
+          'Usa cuadernillos coloridos y canciones para despertar la curiosidad y preparar al niño antes del entrenamiento fonético formal.',
         ],
       },
       {
-        titulo: 'Christian Light Education',
+        titulo: 'ABCs with Ace and Christi y lectura fonética',
         guion: [
-          'Christian Light Education es también una Reviewed Alternative Curriculum Pathway: LightUnits con aprendizaje incremental y repaso continuo.',
-          'Su metodología no es idéntica a la de A.C.E.: en la Sunrise Edition, los nuevos conceptos se trabajan con lecciones diarias y repaso continuo. No se supervisa como si fuera A.C.E.',
-          AVISO_VIAS,
+          'Programa intensivo de lectoescritura fonética en inglés de 12 a 15 semanas: enseña sonidos de letras, combinaciones consonante-vocal y palabras sencillas.',
+          'Antes de iniciar, se administra el Reading Readiness Test. Al completar el programa ABCs con dominio comprobado, el alumno pasa a los PACEs de Grado 1 (nivel 1001).',
         ],
       },
     ],
     practica: {
-      situacion: 'Una familia que usa CLE te pide que apliques «las mismas reglas de A.C.E.» porque «es lo mismo».',
-      preguntas: ['¿Es lo mismo? ¿Qué diferencias explicas?', '¿Qué parte del marco sí se mantiene igual?', '¿Qué dices sobre créditos?'],
-      criterio: 'CLE no es idéntica a A.C.E.; se respeta su estructura. Se mantienen el dominio, la evidencia y el registro. Los créditos no son automáticos.',
+      situacion: 'Una familia con un niño de 5 años y medio quiere matricularlo directamente en PACEs de primer grado sin saber si sabe leer en inglés.',
+      preguntas: ['¿Qué evaluación aplicas primero?', '¿Qué itinerario recomiendas si no está listo?', '¿Cómo explicas el valor de ABCs?'],
+      criterio: 'Aplicar el Reading Readiness Test; si no domina la pre-lectura, cursar Kindergarten o ABCs with Ace and Christi antes de dar PACEs de primer grado.',
     },
     quiz: [
-      { p: '¿Qué etiqueta tienen LIFEPAC y CLE?', opciones: ['Reference / Preferred', 'Reviewed Alternative Curriculum Pathway', 'No revisadas', 'Individualized'], correcta: 1, explica: 'Ambas son vías alternativas revisadas.' },
-      { p: '¿Es la metodología de CLE idéntica a la de A.C.E.?', opciones: ['Sí', 'No: trabaja con aprendizaje incremental y repaso continuo', 'Sí, solo cambia el idioma', 'Depende del grado'], correcta: 1, explica: 'CLE tiene su propia metodología.' },
-      { p: '¿Qué editorial publica LIFEPAC?', opciones: ['Christian Light', 'Alpha Omega Publications', 'A.C.E.', 'Chanak'], correcta: 1, explica: 'LIFEPAC es de Alpha Omega Publications.' },
-      { p: 'Una familia afirma que todo lo que haga con LIFEPAC «cuenta como crédito». ¿Qué respondes?', opciones: ['Correcto', 'La inclusión de una vía no supone reconocimiento automático: Chanak evalúa evidencia y compatibilidad', 'Solo cuenta lo de Matemáticas', 'Nada cuenta'], correcta: 1, explica: AVISO_VIAS },
+      { p: '¿Qué prueba determina si un niño está listo para ABCs o para primer grado?', opciones: ['Diagnostic Test de High School', 'Reading Readiness Test', 'SAT', 'Examen estatal'], correcta: 1, explica: 'El Reading Readiness Test mide la madurez lectora.' },
+      { p: '¿Cuánto dura típicamente el programa intensivo ABCs with Ace and Christi?', opciones: ['4 años', '12 a 15 semanas', '1 semana', 'Todo el High School'], correcta: 1, explica: 'Es un programa fonético intensivo de 12 a 15 semanas.' },
+      { p: '¿A qué nivel de PACEs accede el alumno tras superar con éxito ABCs?', opciones: ['Grado 6', 'PACEs de Grado 1 (serie 1001)', 'Solo a vídeos', 'No accede a PACEs'], correcta: 1, explica: 'Pasa a los PACEs de Grado 1 (nivel 1001).' },
     ],
-    evidencia: 'Escribe tres diferencias prácticas de supervisión entre A.C.E. y CLE.',
+    evidencia: 'Describe cómo aplicarías el Reading Readiness Test a una familia con un niño en edad infantil.',
+  },
+
+  'T3.2b': {
+    resumen:
+      'LIFEPAC (Alpha Omega Publications) es una vía alternativa revisada (Reviewed Alternative Curriculum Pathway): 10 worktexts consumibles K–12 autodirigidos por materia con Teacher\'s Guides.',
+    objetivos: [
+      'Comprender la estructura de 10 worktexts por materia y las Teacher\'s Guides.',
+      'Supervisar self-tests y unit tests con custodia adecuada de claves.',
+      'Aplicar la evaluación de dominio al 80 % y el registro en el SIS.',
+    ],
+    lecciones: [
+      {
+        titulo: 'Estructura de LIFEPAC',
+        guion: [
+          'LIFEPAC se divide en 10 worktexts anuales por asignatura (Bible, Language Arts, Math, Science, History & Geography).',
+          'Metodología self-paced y mastery-based: integra secciones de lección, reviews intermedias, self-tests y un unit test final por cuadernillo.',
+          AVISO_VIAS,
+        ],
+      },
+      {
+        titulo: 'Supervisión del adulto y Teacher\'s Guide',
+        guion: [
+          'El adulto supervisa con la Teacher\'s Guide y custodia las claves de respuestas para asegurar que los self-tests se hagan con honestidad.',
+          'El unit test se autoriza y supervisa; se requiere el 80 % de dominio antes de pasar al siguiente worktext.',
+        ],
+      },
+    ],
+    practica: {
+      situacion: 'Una familia con LIFEPAC deja las claves de la Teacher\'s Guide al alcance del alumno y los unit tests aparecen con 100 % en minutos.',
+      preguntas: ['¿Qué problema de integridad detectas?', '¿Cómo orientas al padre en la custodia de claves?', '¿Qué medidas tomas en el SIS?'],
+      criterio: 'Revisar la honestidad de la corrección, solicitar una reevaluación supervisada y acordar la custodia de la Teacher\'s Guide fuera del alcance del alumno.',
+    },
+    quiz: [
+      { p: '¿Cómo se divide un curso anual de LIFEPAC por asignatura?', opciones: ['En 12 PACEs', 'En 10 worktexts consumibles', 'En un solo libro de 800 páginas', 'Solo en vídeos'], correcta: 1, explica: 'LIFEPAC se organiza en 10 worktexts anuales por materia.' },
+      { p: '¿Quién custodia las claves de respuestas y la Teacher\'s Guide en LIFEPAC?', opciones: ['El estudiante en su mesa', 'El adulto / supervisor', 'Nadie', 'La editorial directamente'], correcta: 1, explica: 'El adulto debe custodiar la Teacher\'s Guide y las claves.' },
+      { p: '¿Cuál es el umbral de dominio exigido en los unit tests de LIFEPAC?', opciones: ['50 %', '80 %', '100 % obligatorio siempre', 'No hay nota'], correcta: 1, explica: 'Chanak exige un mínimo del 80 % en las evaluaciones de dominio.' },
+    ],
+    evidencia: 'Redacta un protocolo de 4 puntos para una familia que supervisa worktexts de LIFEPAC en casa.',
+  },
+
+  'T3.2c': {
+    resumen:
+      'Christian Light Education (CLE) es una vía alternativa revisada (Reviewed Alternative Curriculum Pathway): LightUnits con aprendizaje incremental y repaso continuo (Sunrise Edition).',
+    objetivos: [
+      'Entender la metodología incremental y el repaso continuo de CLE.',
+      'Diferenciar la supervisión de CLE de la rutina de A.C.E. sin imponer banderas ni Review Station.',
+      'Supervisar quizzes y tests por LightUnit con registro en el SIS.',
+    ],
+    lecciones: [
+      {
+        titulo: 'Metodología incremental de CLE',
+        guion: [
+          'En la Sunrise Edition de Christian Light Education, los conceptos se enseñan de forma incremental: dosis diarias con repaso constante acumulativo.',
+          'Saltarse lecciones rompe la secuencia pedagógica: el estudiante debe seguir el orden diario establecido en cada LightUnit.',
+          AVISO_VIAS,
+        ],
+      },
+      {
+        titulo: 'Supervisión respetando la metodología de CLE',
+        guion: [
+          'No se imponen las reglas de A.C.E. (banderas o Review Station) a familias que usan CLE; se respeta el diseño de sus lecciones diarias y quizzes periódicos.',
+          'Lo que sí se mantiene universal en Chanak: dominio demostrado con mínimo del 80 %, evidencias verificables y registro riguroso en el SIS.',
+        ],
+      },
+    ],
+    practica: {
+      situacion: 'Una familia CLE pide «hacer solo los exámenes de fin de LightUnit saltándose las lecciones diarias».',
+      preguntas: ['¿Por qué esa práctica arruina el método de CLE?', '¿Qué explicas sobre el aprendizaje incremental?', '¿Qué condiciones fijas para validar el progreso?'],
+      criterio: 'Explicar que CLE requiere práctica diaria y repaso acumulativo; sin completar las lecciones y quizzes no se valida el dominio.',
+    },
+    quiz: [
+      { p: '¿Cuál es la característica pedagógica principal de la Sunrise Edition de CLE?', opciones: ['Exámenes sin lecciones', 'Aprendizaje incremental con repaso diario continuo', 'Clases magistrales de 2 horas', 'Vídeos de YouTube'], correcta: 1, explica: 'CLE destaca por su enfoque incremental y repaso continuo.' },
+      { p: '¿Deben aplicarse banderas y Review Station de A.C.E. a una familia de CLE?', opciones: ['Sí, obligatoriamente', 'No: se respeta la metodología de CLE mientras se garantice dominio y evidencia', 'Solo en High School', 'Solo si no hay internet'], correcta: 1, explica: 'Se respeta la estructura propia de CLE.' },
+      { p: '¿Qué se evalúa dentro de cada LightUnit?', opciones: ['Quizzes periódicos y test final de LightUnit', 'Solo asistencia', 'Opinión del alumno', 'Nada'], correcta: 0, explica: 'Las LightUnits contienen quizzes y tests de dominio.' },
+    ],
+    evidencia: 'Explica en un párrafo cómo orientarías a una familia CLE sobre la importancia del repaso continuo.',
   },
 
   'T3.3': {
