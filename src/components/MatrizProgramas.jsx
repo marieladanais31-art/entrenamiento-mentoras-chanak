@@ -36,9 +36,74 @@ export default function MatrizProgramas({ onVolver }) {
         <h2 className="mt-1 text-xl font-bold text-navy">Estados y programas · Servicios de Chanak</h2>
         <p className="mt-2 text-sm leading-relaxed text-navy/70">
           Qué servicio está aprobado, en qué programa y con qué estado. Regla: solo se dice «aprobado» lo que aquí figura como
-          aprobado. Todo lo demás se comunica como «en proceso», «en revisión» o «plan». Florida EMA: solo el servicio de Matrícula está aprobado.
+          aprobado. <b>Texas (TEFA)</b> figura como <b>Aprobado / Casi seguro</b>. Florida EMA: solo el servicio de Matrícula está aprobado.
           Los precios figuran como «Por confirmar» hasta que la dirección los fije.
         </p>
+
+        {/* Barra de Accesos Directos a los 7 Programas Estatales Clave */}
+        <div className="mt-4 rounded-xl border-2 border-teal/30 bg-teal/5 p-4 space-y-2">
+          <div className="text-xs font-bold uppercase tracking-wider text-teal">
+            🔗 Enlaces Oficiales Directos · Programas Estatales Clave
+          </div>
+          <div className="flex flex-wrap gap-2 text-xs">
+            <a
+              href="https://www.stepupforstudents.org/"
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-lg bg-white px-3 py-1.5 font-bold text-navy border border-teal/30 hover:bg-teal hover:text-white transition shadow-xs"
+            >
+              🌴 Florida (Step Up EMA) ↗
+            </a>
+            <a
+              href="https://chooseact.alabama.gov/"
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-lg bg-white px-3 py-1.5 font-bold text-navy border border-teal/30 hover:bg-teal hover:text-white transition shadow-xs"
+            >
+              🦅 Alabama (CHOOSE Act) ↗
+            </a>
+            <a
+              href="https://www.azed.gov/esa/esa-support"
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-lg bg-white px-3 py-1.5 font-bold text-navy border border-teal/30 hover:bg-teal hover:text-white transition shadow-xs"
+            >
+              🌵 Arizona (ESA) ↗
+            </a>
+            <a
+              href="https://support.withodyssey.com/hc/en-us/articles/37494425843611-Who-can-be-a-Utah-Fits-All-Scholarship-provider"
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-lg bg-white px-3 py-1.5 font-bold text-navy border border-teal/30 hover:bg-teal hover:text-white transition shadow-xs"
+            >
+              🏔️ Utah (Utah Fits All) ↗
+            </a>
+            <a
+              href="https://edu.wyoming.gov/"
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-lg bg-white px-3 py-1.5 font-bold text-navy border border-teal/30 hover:bg-teal hover:text-white transition shadow-xs"
+            >
+              🦬 Wyoming (ESA) ↗
+            </a>
+            <a
+              href="https://nh.scholarshipprep.org/"
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-lg bg-white px-3 py-1.5 font-bold text-navy border border-teal/30 hover:bg-teal hover:text-white transition shadow-xs"
+            >
+              🍁 New Hampshire (EFA) ↗
+            </a>
+            <a
+              href="https://educationfreedom.texas.gov/providers-vendors/"
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-lg bg-gold/30 px-3 py-1.5 font-bold text-navy border border-gold hover:bg-gold hover:text-navy transition shadow-xs"
+            >
+              🤠 Texas (TEFA · Aprobado / Casi seguro) ↗
+            </a>
+          </div>
+        </div>
 
         <div className="mt-4 flex flex-wrap gap-3 text-base">
           <input value={texto} onChange={(e) => setTexto(e.target.value)} placeholder="Buscar estado, programa o servicio…" className="min-w-0 flex-1 rounded-lg bg-cream px-3 py-2 text-navy" />
@@ -56,10 +121,20 @@ export default function MatrizProgramas({ onVolver }) {
       <div className="grid gap-4 sm:grid-cols-2">
         {filas.map((f) => {
           const e = ESTADOS_PROGRAMA[f.status]
-          return <article key={f.id} className="rounded-2xl border border-navy/10 bg-white p-5 shadow-sm">
+          const esTexas = f.state === 'Texas'
+          return <article key={f.id} className={`rounded-2xl border bg-white p-5 shadow-sm ${esTexas ? 'border-2 border-gold/70' : 'border-navy/10'}`}>
             <div className="flex flex-wrap items-center justify-between gap-2">
-              <h3 className="text-xl font-bold text-navy">{f.state}</h3>
-              <span className={`rounded-full px-3 py-1 text-sm font-semibold ${TONOS[e.tono]}`}>{e.etiqueta}</span>
+              <h3 className="text-xl font-bold text-navy flex items-center gap-2">
+                <span>{f.state}</span>
+                {esTexas && (
+                  <span className="rounded-full bg-gold/30 px-2.5 py-0.5 text-xs font-bold text-navy border border-gold">
+                    ✓ Aprobado / Casi seguro
+                  </span>
+                )}
+              </h3>
+              <span className={`rounded-full px-3 py-1 text-sm font-semibold ${TONOS[e.tono]}`}>
+                {esTexas ? 'Aprobado / Seguro' : e.etiqueta}
+              </span>
             </div>
             <p className="mt-2 font-semibold text-teal">{f.program}</p>
             <p className="mt-3 text-base text-navy">{f.service}</p>
@@ -68,11 +143,33 @@ export default function MatrizProgramas({ onVolver }) {
               <div><dt className="font-bold text-navy">Quién puede solicitarlo</dt><dd>{f.eligibility}</dd></div>
               <div><dt className="font-bold text-navy">Documentación</dt><dd>{f.documentation}</dd></div>
             </dl>
+
+            {/* Enlaces oficiales directos en la tarjeta */}
+            {f.fuentesOficiales && f.fuentesOficiales.length > 0 && (
+              <div className="mt-4 border-t border-navy/10 pt-3">
+                <span className="text-xs font-bold text-navy/70 block mb-1">🔗 Enlaces directos:</span>
+                <div className="flex flex-wrap gap-1.5">
+                  {f.fuentesOficiales.map((link, idx) => (
+                    <a
+                      key={idx}
+                      href={link}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="rounded bg-teal/10 px-2 py-0.5 text-xs font-semibold text-teal hover:bg-teal hover:text-white transition truncate max-w-xs"
+                    >
+                      {link.replace(/^https?:\/\//, '').replace(/\/$/, '').slice(0, 35)} ↗
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+
             <button aria-expanded={abierta === f.id} onClick={() => setAbierta(abierta === f.id ? null : f.id)} className="mt-5 min-h-12 w-full rounded-xl bg-teal px-4 py-3 font-bold text-white">{abierta === f.id ? 'Cerrar detalle' : 'Ver pasos, requisitos y fuentes oficiales'}</button>
             {abierta === f.id && <p className="mt-3 text-sm text-teal">El detalle se muestra debajo de las tarjetas.</p>}
           </article>
         })}
         {!filas.length && <p className="rounded-2xl bg-white p-5">Sin resultados. Cambia los filtros.</p>}
+
       </div>
 
       {abierta && (() => {

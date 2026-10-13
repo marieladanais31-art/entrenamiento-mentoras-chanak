@@ -379,9 +379,11 @@ export const ESPECIALIDADES = {
   ],
   estrategico: [
     { id: 'strategic_general', nombre: 'Estratégico general', detalle: 'Marketing, captación, alianzas, ESA/fondos estatales y proyectos.' },
-    { id: 'family_enrollment', nombre: 'Familias, matrícula y ESA', detalle: 'Leads, orientación, matrícula y facturación con fondos estatales (EMA, CHOOSE y otros).' },
-    { id: 'grants_projects', nombre: 'Grants y proyectos', detalle: 'Convocatorias, fundaciones, empresas y programas EducaFe (inactivos hasta febrero 2027).' },
-    { id: 'institutional_partnerships', nombre: 'Alianzas institucionales e iglesias', detalle: 'Colegios, iglesias, ministerios y organizaciones.' },
+    { id: 'family_enrollment', nombre: 'Familias, matrícula y ESA', detalle: 'Leads, orientación, matrícula y facturación con fondos estatales (EMA, CHOOSE, Odyssey y otros).' },
+    { id: 'grants_projects', nombre: 'Grants para Plataformas y Proyectos', detalle: 'Convocatorias públicas, fundaciones, empresas y fondos corporativos (Walmart Spark Gold).' },
+    { id: 'institutional_partnerships', nombre: 'Alianzas institucionales e iglesias', detalle: 'Colegios, iglesias, ministerios, alianzas en España y acuerdos de colaboración.' },
+    { id: 'partner_director', nombre: 'Alianza de Partner Presencial (Learning Center / Sede)', detalle: 'Requiere lugar físico para organizar reuniones presenciales y actividades con familias/estudiantes.' },
+    { id: 'country_rep', nombre: 'Representación Territorial (País / Estado / Región)', detalle: 'Representación oficial de Chanak en México, España, USA o Panamá.' },
   ],
 }
 
@@ -461,4 +463,176 @@ export function sistemasDe(rolesIds = []) {
     }
   }
   return out
+}
+
+// ════════════════════════════════════════════════════════════
+// PROYECTOS EN PRIORIDAD (ÁREA ESTRATÉGICA)
+// ════════════════════════════════════════════════════════════
+export const PROYECTOS_PRIORIDAD = [
+  {
+    id: 'grants_plataformas',
+    titulo: 'Grants para Plataformas',
+    area: 'Financiamiento y Tecnología',
+    descripcion: 'Convocatorias públicas, fundaciones y fondos tecnológicos para financiar infraestructura y plataformas educativas.',
+    requisitos: ['Experiencia en redacción de subvenciones (Grant Writing)', 'Comprensión de presupuestos y justificación de impacto'],
+  },
+  {
+    id: 'sitio_tarragona',
+    titulo: 'Sitio / Financiamiento de Partner en Tarragona',
+    area: 'Expansión España (Cataluña)',
+    descripcion: 'Desarrollo de sede o Learning Center presencial en Tarragona y captación de fondos y acuerdos de colaboración.',
+    requisitos: ['Disponibilidad en Cataluña / Tarragona', 'Gestión de acuerdos de cesión/alquiler compartido y entidades locales'],
+  },
+  {
+    id: 'matriz_estudiantes_florida',
+    titulo: 'Matriz con Estudiantes Presenciales en Florida',
+    area: 'Operaciones EE. UU.',
+    descripcion: 'Consolidación de la cartera presencial de estudiantes en Florida bajo registro FLDOE #134620 y becas Step Up / EMA.',
+    requisitos: ['Residencia o contacto operativo en Florida', 'Dominio de procesos EMA Marketplace y atención a familias'],
+  },
+  {
+    id: 'lifeskills_walmart',
+    titulo: 'Life Skills · Walmart Spark Gold',
+    area: 'Proyecto Social y Empleabilidad',
+    descripcion: 'Proyecto de habilidades para la vida y liderazgo juvenil presentado a convocatorias y fondos corporativos (Walmart Spark / Candid Gold).',
+    requisitos: ['Facilitación de jóvenes (12-17 años)', 'Medición de indicadores pre/post de empleabilidad y carácter'],
+  },
+  {
+    id: 'curriculum_propio',
+    titulo: 'Diseño y Desarrollo de Currículum Físico Propio',
+    area: 'Desarrollo Académico Editorial',
+    descripcion: 'Creación de unidades didácticas y materiales físicos impresos con identidad pedagógica y cosmovisión propia de Chanak.',
+    requisitos: ['Diseño curricular e instruccional K–12', 'Alineación de estándares y elaboración de cuadernillos/worktexts'],
+  },
+  {
+    id: 'alianzas_espana',
+    titulo: 'Establecimiento de Alianzas en España',
+    area: 'Expansión Institucional',
+    descripcion: 'Acuerdos de colaboración con iglesias, colegios, asociaciones de familias y entidades comunitarias en todo el territorio español.',
+    requisitos: ['Capacidad de interlocución institucional', 'Residencia o red activa de contactos en España'],
+  },
+]
+
+// ════════════════════════════════════════════════════════════
+// REQUISITOS POR MODALIDAD DE COLABORACIÓN ESTRATÉGICA
+// ════════════════════════════════════════════════════════════
+export const REQUISITOS_MODALIDADES = {
+  partner_presencial: {
+    titulo: 'Alianza de Partner Presencial (Learning Center / Hub)',
+    requisitos: [
+      'Disponer de o gestionar un lugar físico adecuado para organizar reuniones y actividades con estudiantes y familias.',
+      'Cumplir normas básicas de seguridad, protección de menores y seguros aplicables.',
+      'Capacidad de coordinación operativa local y liderazgo de equipo.',
+    ],
+  },
+  alianzas_institucionales: {
+    titulo: 'Alianzas Institucionales, Colegios e Iglesias',
+    requisitos: [
+      'Red de contactos activa o capacidad de vinculación con colegios, iglesias y directivas.',
+      'Habilidades de presentación institucional y respeto a los límites de autoridad Chanak.',
+    ],
+  },
+  fondos_esa: {
+    titulo: 'Expansión de Fondos Estatales y Becas (EE. UU.)',
+    requisitos: [
+      'Dominio de plataformas de fondos (ClassWallet, Odyssey, EMA) o capacidad de aprendizaje ágil.',
+      'Orientación precisa a familias sin realizar promesas de cobertura no verificadas.',
+    ],
+  },
+  grants_proyectos: {
+    titulo: 'Grants, Subvenciones y Fondos Corporativos',
+    requisitos: [
+      'Capacidad de redacción formal, análisis de elegibilidad y estructuración presupuestaria.',
+      'Seguimiento sistemático de plazos, evidencias e informes de impacto.',
+    ],
+  },
+  desarrollo_curricular: {
+    titulo: 'Desarrollo Curricular y Editorial Propio',
+    requisitos: [
+      'Formación pedagógica o experiencia docente en redacción de contenidos y lecciones.',
+      'Comprensión del marco de dominio (Mastery Learning) y cosmovisión bíblica.',
+    ],
+  },
+}
+
+// ════════════════════════════════════════════════════════════
+// REPRESENTANTES POR PAÍSES Y TERRITORIOS
+// ════════════════════════════════════════════════════════════
+export const REPRESENTANTES_PAISES = [
+  {
+    pais: 'México',
+    codigo: 'MX',
+    bandera: '🇲🇽',
+    territorios: [
+      { territorio: 'Puebla', representantes: ['Karen Vidal'], funcion: 'Representación, Alianzas y Coordinación Local' },
+      { territorio: 'El Carmen', representantes: ['M. Claudia Jimenez'], funcion: 'Representación, Alianzas y Familia' },
+    ],
+  },
+  {
+    pais: 'Estados Unidos',
+    codigo: 'US',
+    bandera: '🇺🇸',
+    territorios: [
+      { territorio: 'Florida', representantes: ['Karen Pujols'], funcion: 'Enlace Florida ESA · Step Up / EMA y Matriz Presencial' },
+    ],
+  },
+  {
+    pais: 'Panamá',
+    codigo: 'PA',
+    bandera: '🇵🇦',
+    territorios: [
+      { territorio: 'Panamá (Nacional)', representantes: ['Mariela Andrade'], funcion: 'Dirección General / Representación Institucional' },
+    ],
+  },
+  {
+    pais: 'España',
+    codigo: 'ES',
+    bandera: '🇪🇸',
+    territorios: [
+      {
+        territorio: 'Tarragona',
+        representantes: ['Thiare Urzua', 'Sonsoles Bueno', 'Laura Pardo', 'Sergio Masía'],
+        funcion: 'Desarrollo de Partner Learning Center, Alianzas Locales y Coordinación',
+      },
+      {
+        territorio: 'Madrid – Valencia',
+        representantes: ['Medalith Rosales', 'Juan Carlos', 'Jitu Dongardive'],
+        funcion: 'Desarrollo Estratégico, Expansión, Alianzas y Comunidad',
+      },
+    ],
+  },
+]
+
+// ════════════════════════════════════════════════════════════
+// USUARIOS CONOCIDOS (MAPA DE EMAILS Y NOMBRES OFICIALES)
+// ════════════════════════════════════════════════════════════
+export const USUARIOS_CONOCIDOS = [
+  { id: 'c29dd182-e1a0-46cc-a05b-02734b4e676a', email: 'net.amyclau@gmail.com', nombre: 'M. Claudia Jimenez' },
+  { id: '78c8c17c-ec0e-4396-bc1e-6482b09b85a9', email: 'puebla@chanakacademy.org', nombre: 'Karen Vidal' },
+  { id: '6ba7b1a4-19d7-47ea-8c64-74eb73a19c59', email: 'lauravpardoq@outlook.com', nombre: 'Laura V. Pardo Q.' },
+  { id: 'a3daf3a9-4047-460e-9546-259e0d42de77', email: 'carmen.logos@gmail.com', nombre: 'Carmen Logos' },
+  { id: 'fff687d3-32bd-4aa9-813b-cedfdc495df6', email: 'sonsolesbuenoroige@gmail.com', nombre: 'Sonsoles Bueno Roige' },
+  { id: 'fb02af52-d03c-45dd-ad66-f354a44befe5', email: 'thiareurzua7@gmail.com', nombre: 'Thiare Urzua' },
+  { email: 'florida@chanakacademy.org', nombre: 'Karen Pujols' },
+  { email: 'medalithrosales@jcum.com', nombre: 'Medalith Rosales' },
+  { email: 'dayanatrillo81@gmail.com', nombre: 'Dayana Trillo' },
+  { email: 'leo0pierre@gmail.com', nombre: 'Leo Pierre' },
+  { email: 'lucy.dbr@gmail.com', nombre: 'Lucy DBR' },
+  { email: 'jituvane@gmail.com', nombre: 'Jitu Vane' },
+  { email: 'vanejitu@gmail.com', nombre: 'Vane Jitu' },
+  { email: 'jokaneska@gmail.com', nombre: 'Jokaneska' },
+  { email: 'administration@chanakacademy.org', nombre: 'Mariela Andrade' },
+]
+
+export function obtenerEmailConocido(idOEmailONombre) {
+  if (!idOEmailONombre) return ''
+  const query = String(idOEmailONombre).trim().toLowerCase()
+  const u = USUARIOS_CONOCIDOS.find(
+    (x) =>
+      (x.id && x.id.toLowerCase() === query) ||
+      (x.email && x.email.toLowerCase() === query) ||
+      (x.nombre && x.nombre.toLowerCase() === query) ||
+      query.includes(x.nombre.toLowerCase())
+  )
+  return u?.email || ''
 }

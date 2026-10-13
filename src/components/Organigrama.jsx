@@ -1,6 +1,6 @@
-import { ROLES_VIGENTES as ROLES, AREAS } from '../data/roles'
+import { ROLES_VIGENTES as ROLES, AREAS, PROYECTOS_PRIORIDAD, REPRESENTANTES_PAISES } from '../data/roles'
 
-// Organigrama Funcional Chanak (cargos; sin asignar personas a roles de representación).
+// Organigrama Funcional Chanak (cargos; con representantes territoriales y proyectos prioritarios).
 export default function Organigrama({ onVolver, onVerRol }) {
   const porArea = (a) => ROLES.filter((r) => r.area === a)
   const academico = porArea('academico')
@@ -52,6 +52,74 @@ export default function Organigrama({ onVolver, onVerRol }) {
           Esto <b>no</b> significa que los permisos se mezclen. Cada persona debe: (1) tener formalmente asignado cada rol;
           (2) haber completado la formación correspondiente; (3) respetar los límites de autoridad de cada función.
         </p>
+      </section>
+
+      {/* REPRESENTANTES POR PAÍSES Y TERRITORIOS */}
+      <section className="rounded-2xl border-2 border-teal/40 bg-white p-5 shadow-sm space-y-4">
+        <div>
+          <span className="text-[11px] font-bold uppercase tracking-wider text-teal">Estructura Territorial Oficial</span>
+          <h3 className="mt-1 text-lg font-bold text-navy">🌍 Representantes por Países y Territorios</h3>
+          <p className="text-xs text-navy/70 leading-relaxed">
+            Representación de Chanak ante familias, autoridades, comunidades cristianas y entidades asociadas.
+          </p>
+        </div>
+
+        <div className="grid gap-3 sm:grid-cols-2">
+          {REPRESENTANTES_PAISES.map((p) => (
+            <div key={p.codigo} className="rounded-xl border border-navy/10 bg-cream/50 p-4 space-y-2">
+              <div className="flex items-center gap-2 border-b border-navy/10 pb-2">
+                <span className="text-xl">{p.bandera}</span>
+                <span className="font-bold text-navy text-sm">{p.pais}</span>
+              </div>
+              <div className="space-y-2.5">
+                {p.territorios.map((t, idx) => (
+                  <div key={idx} className="rounded-lg bg-white p-2.5 shadow-xs border border-navy/5">
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="font-bold text-teal">{t.territorio}</span>
+                      <span className="text-[11px] font-medium text-navy/60">{t.funcion}</span>
+                    </div>
+                    <div className="mt-1 text-xs font-semibold text-navy">
+                      👤 {t.representantes.join(', ')}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* PROYECTOS EN PRIORIDAD (ÁREA ESTRATÉGICA) */}
+      <section className="rounded-2xl border-2 border-gold/50 bg-gold/10 p-5 shadow-sm space-y-4">
+        <div>
+          <span className="text-[11px] font-bold uppercase tracking-wider text-navy">Dirección de Operaciones y Alianzas</span>
+          <h3 className="mt-1 text-lg font-bold text-navy">🚀 Proyectos en Prioridad · Área Estratégica</h3>
+          <p className="text-xs text-navy/75 leading-relaxed">
+            Cartera de iniciativas institucionales activas con postulación de mentores y coordinadores estratégicos.
+          </p>
+        </div>
+
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {PROYECTOS_PRIORIDAD.map((pr) => (
+            <div key={pr.id} className="rounded-xl bg-white p-4 shadow-xs border border-gold/30 flex flex-col justify-between">
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-teal bg-teal/10 px-2 py-0.5 rounded">
+                  {pr.area}
+                </span>
+                <h4 className="mt-2 text-sm font-bold text-navy">{pr.titulo}</h4>
+                <p className="mt-1 text-xs text-navy/70 leading-relaxed">{pr.descripcion}</p>
+              </div>
+              <div className="mt-3 pt-2 border-t border-navy/10 text-[11px] text-navy/80">
+                <span className="font-bold text-navy">Requisitos:</span>
+                <ul className="mt-1 list-disc pl-4 space-y-0.5 text-navy/65">
+                  {pr.requisitos.map((req, i) => (
+                    <li key={i}>{req}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))}
+        </div>
       </section>
     </div>
   )

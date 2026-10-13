@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useIdioma } from '../i18n/idioma'
+import { PROYECTOS_PRIORIDAD, REPRESENTANTES_PAISES } from '../data/roles'
 
 const RUTAS = {
   es: [
@@ -75,6 +76,70 @@ export default function EstrategiaOperativa({ onVolver, onVerMatriz }) {
           </section>
         ))}
       </div>
+
+      {/* Proyectos en Prioridad */}
+      <section className="rounded-3xl border-2 border-gold bg-gold/10 p-6 space-y-4">
+        <div>
+          <span className="text-xs font-bold uppercase tracking-wider text-navy">Cartera Operativa 2026–2027</span>
+          <h3 className="mt-1 text-xl font-bold text-navy">🚀 Proyectos en Prioridad · Área Estratégica</h3>
+          <p className="text-xs text-navy/75 leading-relaxed">
+            Iniciativas que requieren coordinación, interlocución institucional, gestión de fondos o montaje de sedes.
+          </p>
+        </div>
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {PROYECTOS_PRIORIDAD.map((pr) => (
+            <div key={pr.id} className="rounded-2xl bg-white p-4 shadow-sm border border-gold/30 flex flex-col justify-between">
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-teal bg-teal/10 px-2 py-0.5 rounded">
+                  {pr.area}
+                </span>
+                <h4 className="mt-2 text-sm font-bold text-navy">{pr.titulo}</h4>
+                <p className="mt-1 text-xs text-navy/70 leading-relaxed">{pr.descripcion}</p>
+              </div>
+              <div className="mt-3 pt-2 border-t border-navy/10 text-[11px] text-navy/80">
+                <span className="font-bold text-navy">Requisitos clave:</span>
+                <ul className="mt-1 list-disc pl-4 space-y-0.5 text-navy/65">
+                  {pr.requisitos.map((req, i) => <li key={i}>{req}</li>)}
+                </ul>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Representantes por Países */}
+      <section className="rounded-3xl border-2 border-teal bg-white p-6 shadow-sm space-y-4">
+        <div>
+          <span className="text-xs font-bold uppercase tracking-wider text-teal">Estructura Internacional</span>
+          <h3 className="mt-1 text-xl font-bold text-navy">🌍 Representantes Oficiales por País</h3>
+          <p className="text-xs text-navy/70 leading-relaxed">
+            Puntos focales de interlocución territorial para familias, iglesias, fondos estatales y colegios.
+          </p>
+        </div>
+        <div className="grid gap-3 sm:grid-cols-2">
+          {REPRESENTANTES_PAISES.map((p) => (
+            <div key={p.codigo} className="rounded-2xl border border-navy/10 bg-cream/40 p-4 space-y-2">
+              <div className="flex items-center gap-2 border-b border-navy/10 pb-2">
+                <span className="text-2xl">{p.bandera}</span>
+                <span className="font-bold text-navy text-sm">{p.pais}</span>
+              </div>
+              <div className="space-y-2">
+                {p.territorios.map((t, idx) => (
+                  <div key={idx} className="rounded-xl bg-white p-3 shadow-xs border border-navy/5">
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="font-bold text-teal">{t.territorio}</span>
+                      <span className="text-[11px] text-navy/60">{t.funcion}</span>
+                    </div>
+                    <div className="mt-1 text-xs font-semibold text-navy">
+                      👤 {t.representantes.join(', ')}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   )
 }

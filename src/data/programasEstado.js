@@ -209,16 +209,16 @@ export const MATRIZ_PROGRAMAS = [
     ],
     "state": "Texas",
     "program": "TEFA (Texas Education Freedom Accounts)",
-    "service": "Vendor / Educational Service Provider (Aprobado en Odyssey)",
+    "service": "Vendor / Educational Service Provider (Aprobado / Casi Seguro)",
     "status": "aprobado",
     "approved": true,
-    "marketplace": "Proveedor aprobado en Odyssey (catálogo activo / onboarding completado)",
+    "marketplace": "Proveedor aprobado / casi seguro en Odyssey (onboarding y vinculación bancaria listos)",
     "price": "Por confirmar",
     "eligibility": "Familias participantes del programa TEFA en Texas",
     "documentation": "Registro ante Secretaría de Estado de Texas, Contralor y Odyssey",
-    "lastVerified": "2026-10-12 · aprobación institucional",
+    "lastVerified": "2026-10-13 · confirmación institucional (aprobado / casi seguro)",
     "source": "Web oficial del programa y Contralor de Texas (comptroller.texas.gov)",
-    "operativo": "Proveedor aprobado en Texas TEFA. Servicios tramitados mediante Odyssey."
+    "operativo": "Proveedor aprobado (casi seguro / en implementación activa). Servicios tramitados mediante la plataforma oficial Odyssey."
   },
   {
     "id": "WY-ESA",
@@ -433,6 +433,10 @@ export const MATRIZ_PROGRAMAS = [
     "documentation": "Antecedentes y documentación de entorno seguro pendientes",
     "lastVerified": "2026-10-09 · expediente institucional",
     "source": "Expediente institucional y portal del programa",
+    "fuentesOficiales": [
+      "https://nh.scholarshipprep.org/",
+      "https://www.education.nh.gov/pathways-education/education-freedom-accounts"
+    ],
     "operativo": "Completar antecedentes y evidencia de entorno seguro. No comunicar como aprobado."
   },
   {

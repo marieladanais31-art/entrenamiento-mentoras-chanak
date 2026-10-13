@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { GRUPOS, ESPECIALIDADES } from '../data/roles'
+import { GRUPOS, ESPECIALIDADES, PROYECTOS_PRIORIDAD, REQUISITOS_MODALIDADES } from '../data/roles'
 
 // Paso 2 · «Elige tu rama». Mentor (y sus especialidades) se activa al guardar: acceso libre.
 // Coordinador lo confirma Dirección Académica y Estratégico la Dirección de Operaciones y Alianzas;
@@ -7,10 +7,15 @@ import { GRUPOS, ESPECIALIDADES } from '../data/roles'
 export default function EligeRama({ actual = [], onGuardar, onCancelar }) {
   const habilitado = true
   const [sel, setSel] = useState(() => new Set(actual))
+  const [proyectoSel, setProyectoSel] = useState('')
+  const [tiempoDisp, setTiempoDisp] = useState('')
+  const [alcance, setAlcance] = useState('')
+  const [aporte, setAporte] = useState('')
   const [guardando, setGuardando] = useState(false)
   const [error, setError] = useState('')
 
   const tieneMentor = ESPECIALIDADES.mentor.some((e) => sel.has(e.id))
+  const tieneEstrategico = ESPECIALIDADES.estrategico.some((e) => sel.has(e.id))
 
   function alternar(id) {
     const n = new Set(sel)
@@ -25,9 +30,15 @@ export default function EligeRama({ actual = [], onGuardar, onCancelar }) {
     setError('')
     if (sel.size === 0) return setError('Elige al menos una opción.')
     if (sel.has('coordinator') && !tieneMentor) return setError('Coordinador/a Off-Campus y Dual Diploma requiere también una especialidad de Mentor.')
+    if (tieneEstrategico && !proyectoSel) {
+      return setError('Por favor, selecciona en qué área o proyecto prioritario puedes involucrarte.')
+    }
     setGuardando(true)
     try {
-      await onGuardar([...sel])
+      const datosEstrategico = tieneEstrategico
+        ? { proyectoSel, tiempoDisp, alcance, aporte }
+        : null
+      await onGuardar([...sel], datosEstrategico)
     } catch (e) {
       setError(e.message)
     } finally {
@@ -66,6 +77,134 @@ export default function EligeRama({ actual = [], onGuardar, onCancelar }) {
           </fieldset>
         ))}
       </div>
+
+      {/* Formulario de Postulación y Requisitos para el Área Estratégica */}
+      {tieneEstrategico && (
+        <div className="mt-5 rounded-2xl border-2 border-gold/60 bg-gold/10 p-5 space-y-4">
+          <div className="border-b border-gold/30 pb-3">
+            <span className="inline-block rounded-full bg-gold/30 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-navy">
+              Formulario Requerido · Área Estratégica
+            </span>
+            <h3 className="mt-2 text-base font-bold text-navy">
+              📋 Requisitos Básicos y Postulación de Proyecto
+            </h3>
+            <p className="mt-1 text-xs text-navy/75 leading-relaxed">
+              Para participar en el Área Estratégica es indispensable indicar en qué área o proyecto prioritario puedes involucrarte, revisar los requisitos básicos de tu modalidad y describir cómo puedes aportar.
+            </p>
+          </div>
+
+          {/* Requisitos según especialidad seleccionada */}
+          <div className="rounded-xl bg-white p-4 shadow-sm border border-gold/30 space-y-2">
+            <h4 className="text-xs font-bold uppercase tracking-wide text-teal">
+              📌 Requisitos Básicos de tu Modalidad
+            </h4>
+            <div className="space-y-2 text-xs text-navy/80">
+              {sel.has('partner_director') && (
+                <div className="rounded-lg bg-slate-50 p-3 border-l-4 border-gold">
+                  <b className="text-navy">{REQUISITOS_MODALIDADES.partner_presencial.titulo}:</b>
+                  <ul className="mt-1.5 list-disc pl-4 space-y-1">
+                    {REQUISITOS_MODALIDADES.partner_presencial.requisitos.map((r, i) => <li key={i}>{r}</li>)}
+                  </ul>
+                </div>
+              )}
+              {sel.has('grants_projects') && (
+                <div className="rounded-lg bg-slate-50 p-3 border-l-4 border-teal">
+                  <b className="text-navy">{REQUISITOS_MODALIDADES.grants_proyectos.titulo}:</b>
+                  <ul className="mt-1.5 list-disc pl-4 space-y-1">
+                    {REQUISITOS_MODALIDADES.grants_proyectos.requisitos.map((r, i) => <li key={i}>{r}</li>)}
+                  </ul>
+                </div>
+              )}
+              {sel.has('family_enrollment') && (
+                <div className="rounded-lg bg-slate-50 p-3 border-l-4 border-teal">
+                  <b className="text-navy">{REQUISITOS_MODALIDADES.fondos_esa.titulo}:</b>
+                  <ul className="mt-1.5 list-disc pl-4 space-y-1">
+                    {REQUISITOS_MODALIDADES.fondos_esa.requisitos.map((r, i) => <li key={i}>{r}</li>)}
+                  </ul>
+                </div>
+              )}
+              {sel.has('institutional_partnerships') && (
+                <div className="rounded-lg bg-slate-50 p-3 border-l-4 border-gold">
+                  <b className="text-navy">{REQUISITOS_MODALIDADES.alianzas_institucionales.titulo}:</b>
+                  <ul className="mt-1.5 list-disc pl-4 space-y-1">
+                    {REQUISITOS_MODALIDADES.alianzas_institucionales.requisitos.map((r, i) => <li key={i}>{r}</li>)}
+                  </ul>
+                </div>
+              )}
+              {!sel.has('partner_director') && !sel.has('grants_projects') && !sel.has('family_enrollment') && !sel.has('institutional_partnerships') && (
+                <p className="text-navy/70 italic">
+                  Selecciona una especialidad estratégica específica para ver sus requisitos operativos clave.
+                </p>
+              )}
+            </div>
+          </div>
+
+          {/* Selección de Proyecto en Prioridad */}
+          <div>
+            <label className="block text-xs font-bold text-navy uppercase tracking-wide">
+              Área o Proyecto en Prioridad en el que puedes entrar:
+            </label>
+            <select
+              value={proyectoSel}
+              onChange={(e) => setProyectoSel(e.target.value)}
+              className="mt-1 w-full rounded-xl border border-navy/20 bg-white px-3 py-2.5 text-xs font-medium text-navy shadow-sm"
+            >
+              <option value="">-- Selecciona un proyecto en prioridad --</option>
+              {PROYECTOS_PRIORIDAD.map((p) => (
+                <option key={p.id} value={p.id}>
+                  {p.titulo} · ({p.area})
+                </option>
+              ))}
+            </select>
+            {proyectoSel && (
+              <p className="mt-1.5 text-[11px] text-navy/70 bg-white/70 p-2.5 rounded-lg border border-gold/30">
+                🎯 <b>Enfoque:</b> {PROYECTOS_PRIORIDAD.find((p) => p.id === proyectoSel)?.descripcion}
+              </p>
+            )}
+          </div>
+
+          {/* Formulario de Aporte y Compromiso */}
+          <div className="grid gap-3 sm:grid-cols-2">
+            <div>
+              <label className="block text-xs font-bold text-navy uppercase tracking-wide">
+                Disponibilidad de Tiempo:
+              </label>
+              <input
+                type="text"
+                value={tiempoDisp}
+                onChange={(e) => setTiempoDisp(e.target.value)}
+                placeholder="Ej. 10 horas semanales / Tardes y fines de semana"
+                className="mt-1 w-full rounded-xl border border-navy/20 bg-white px-3 py-2 text-xs text-navy"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-bold text-navy uppercase tracking-wide">
+                Alcance Geográfico / Operativo:
+              </label>
+              <input
+                type="text"
+                value={alcance}
+                onChange={(e) => setAlcance(e.target.value)}
+                placeholder="Ej. Tarragona (presencial) / Online España / Florida"
+                className="mt-1 w-full rounded-xl border border-navy/20 bg-white px-3 py-2 text-xs text-navy"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-xs font-bold text-navy uppercase tracking-wide">
+              Resumen de cómo puedes aportar en esta área:
+            </label>
+            <textarea
+              value={aporte}
+              onChange={(e) => setAporte(e.target.value)}
+              rows={3}
+              placeholder="Describe tu experiencia previa, contactos, lugar físico disponible (si aplica a partner presencial) y tu nivel de compromiso con este proyecto..."
+              className="mt-1 w-full rounded-xl border border-navy/20 bg-white p-3 text-xs text-navy"
+            />
+          </div>
+        </div>
+      )}
 
       {error && <p className="mt-3 rounded-lg bg-coral/10 px-3 py-2 text-sm text-coral">{error}</p>}
       <div className="mt-4 flex flex-wrap gap-2">

@@ -171,7 +171,7 @@ export default function Dashboard({
       {mostrarSelector ? (
         <EligeRama
           actual={solicitud?.funciones || []}
-          onGuardar={async (f) => { await onElegirRama(f); setCambiandoRama(false) }}
+          onGuardar={async (f, extra) => { await onElegirRama(f, extra); setCambiandoRama(false) }}
           onCancelar={cambiandoRama ? () => setCambiandoRama(false) : undefined}
         />
       ) : (

@@ -126,7 +126,7 @@ export async function guardarCompromiso(perfilId, datos) {
 // Rama elegida por la persona tras el tronco común. Se guarda dentro de
 // compromisos_formacion.funciones (jsonb, editable por la propia persona según RLS), sin
 // tocar el resto del compromiso. No asigna roles: administración la valida y los asigna.
-export async function guardarSolicitudRama(perfilId, funcionesElegidas = []) {
+export async function guardarSolicitudRama(perfilId, funcionesElegidas = [], datosEstrategico = null) {
   const { data: actual, error: e1 } = await supabase
     .from('compromisos_formacion')
     .select('funciones')
@@ -136,7 +136,7 @@ export async function guardarSolicitudRama(perfilId, funcionesElegidas = []) {
   if (!actual) throw new Error('Primero acepta el acuerdo de participación.')
   const previas = Array.isArray(actual.funciones) ? actual.funciones.filter((f) => !(f && typeof f === 'object' && f.tipo === 'solicitud_rama')) : []
   const funciones = funcionesElegidas.length
-    ? [...previas, { tipo: 'solicitud_rama', funciones: funcionesElegidas, fecha: new Date().toISOString() }]
+    ? [...previas, { tipo: 'solicitud_rama', funciones: funcionesElegidas, datosEstrategico, fecha: new Date().toISOString() }]
     : previas
   const { data, error } = await supabase
     .from('compromisos_formacion')

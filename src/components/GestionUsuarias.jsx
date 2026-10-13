@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import { actualizarPerfil, crearUsuariaDirecta } from '../lib/backend'
+import { actualizarPerfil, crearUsuariaDirecta, recuperarContrasena } from '../lib/backend'
 import { formatearFecha, iniciales } from '../lib/calculos'
 import { useIdioma } from '../i18n/idioma'
+import { obtenerEmailConocido } from '../data/roles'
 import AsignarRoles from './AsignarRoles'
 
 const PAISES = ['España', 'México', 'Panamá', 'Estados Unidos', 'Otro']
@@ -13,6 +14,10 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
   const [ocupado, setOcupado] = useState(null)
   const [error, setError] = useState('')
   const [exito, setExito] = useState('')
+  const [infoReset, setInfoReset] = useState(null)
+  const [copiado, setCopiado] = useState(false)
+  const [editandoNombreId, setEditandoNombreId] = useState(null)
+  const [nuevoNombre, setNuevoNombre] = useState('')
 
   // Formulario para crear usuaria directa
   const [mostrandoForm, setMostrandoForm] = useState(false)
@@ -25,6 +30,48 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
   const pendientes = perfiles.filter((p) => p.estado === 'pendiente')
   const activas = perfiles.filter((p) => p.estado === 'aprobada')
   const suspendidas = perfiles.filter((p) => p.estado === 'suspendida')
+
+  async function handleResetPassword(perfil) {
+    const correo = perfil.email || obtenerEmailConocido(perfil.id) || obtenerEmailConocido(perfil.nombre)
+    if (!correo) {
+      setError(`No se encontró un correo electrónico asociado a ${perfil.nombre}.`)
+      return
+    }
+    setOcupado(perfil.id)
+    setError('')
+    try {
+      await recuperarContrasena(correo)
+      setInfoReset({
+        nombre: perfil.nombre,
+        email: correo,
+        pass: 'Chanak2026*',
+        enviado: true,
+      })
+    } catch (err) {
+      setInfoReset({
+        nombre: perfil.nombre,
+        email: correo,
+        pass: 'Chanak2026*',
+        enviado: false,
+        error: err.message,
+      })
+    } finally {
+      setOcupado(null)
+    }
+  }
+
+  async function handleGuardarNombre(id) {
+    if (!nuevoNombre.trim()) return
+    await cambiar(id, { nombre: nuevoNombre.trim() })
+    setEditandoNombreId(null)
+  }
+
+  function copiarCredenciales(info) {
+    const texto = `Hola ${info.nombre},\n\nTus credenciales para ingresar a la plataforma de entrenamiento Chanak Academy son:\n\n📧 Email: ${info.email}\n🔑 Contraseña de acceso / temporal: ${info.pass}\n🔗 Plataforma: ${window.location.origin}\n\n(Al ingresar por primera vez, el sistema te solicitará cambiar tu contraseña si así lo deseas).`
+    navigator.clipboard.writeText(texto)
+    setCopiado(true)
+    setTimeout(() => setCopiado(false), 3000)
+  }
 
   async function cambiar(id, cambios) {
     setError('')
@@ -170,6 +217,45 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
         </form>
       )}
 
+      {/* Modal / Banner de reseteo de contraseña */}
+      {infoReset && (
+        <div className="rounded-2xl border-2 border-gold bg-gold/15 p-4 shadow-sm space-y-2">
+          <div className="flex items-center justify-between">
+            <h4 className="font-bold text-navy text-sm">
+              🔑 Restablecimiento de Acceso · {infoReset.nombre}
+            </h4>
+            <button
+              onClick={() => setInfoReset(null)}
+              className="text-xs text-navy/60 hover:text-navy font-bold"
+            >
+              ✕ Cerrar
+            </button>
+          </div>
+          <p className="text-xs text-navy/80">
+            {infoReset.enviado
+              ? `✓ Se ha enviado el enlace oficial de restablecimiento a ${infoReset.email}.`
+              : `Aviso del servidor de correos: ${infoReset.error || 'Envío por email pendiente'}.`}
+            {' '}Puedes compartirle directamente sus credenciales y la contraseña temporal de bienvenida:
+          </p>
+          <div className="flex flex-wrap items-center gap-3 bg-white p-3 rounded-xl border border-gold/40">
+            <div className="text-xs">
+              <span className="text-navy/60 font-medium">Email: </span>
+              <b className="text-navy">{infoReset.email}</b>
+            </div>
+            <div className="text-xs">
+              <span className="text-navy/60 font-medium">Contraseña temporal: </span>
+              <code className="bg-navy/5 px-2 py-0.5 rounded font-mono font-bold text-teal">{infoReset.pass}</code>
+            </div>
+            <button
+              onClick={() => copiarCredenciales(infoReset)}
+              className="ml-auto rounded-lg bg-teal px-3 py-1.5 text-xs font-bold text-white shadow-sm hover:bg-teal/90"
+            >
+              {copiado ? '✓ ¡Copiado!' : '📋 Copiar Datos de Acceso'}
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Pendientes de aprobación */}
       {pendientes.length > 0 && (
         <div className="rounded-2xl border-2 border-gold bg-gold/8 p-4">
@@ -177,132 +263,198 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
             {t('usuarias.esperando', { n: pendientes.length })}
           </div>
           <ul className="mt-3 space-y-2">
-            {pendientes.map((p) => (
-              <li
-                key={p.id}
-                className="flex flex-wrap items-center gap-2 rounded-xl bg-white px-3 py-2.5"
-              >
-                <Avatar nombre={p.nombre} />
-                <div className="min-w-0 flex-1">
-                  <div className="text-sm font-semibold text-navy">{p.nombre}</div>
-                  <div className="text-[13px] text-navy/50">
-                    {t('usuarias.solicito', { fecha: formatearFecha(p.creado_en?.slice(0, 10)) })}
+            {pendientes.map((p) => {
+              const correoP = p.email || obtenerEmailConocido(p.id) || obtenerEmailConocido(p.nombre)
+              return (
+                <li
+                  key={p.id}
+                  className="flex flex-wrap items-center gap-2 rounded-xl bg-white px-3 py-2.5"
+                >
+                  <Avatar nombre={p.nombre} />
+                  <div className="min-w-0 flex-1">
+                    <div className="text-sm font-semibold text-navy">{p.nombre}</div>
+                    <div className="text-xs text-teal font-medium">📧 {correoP || 'Sin email registrado'}</div>
+                    <div className="text-[12px] text-navy/50">
+                      {t('usuarias.solicito', { fecha: formatearFecha(p.creado_en?.slice(0, 10)) })}
+                    </div>
                   </div>
-                </div>
-                <button
-                  onClick={() => cambiar(p.id, { estado: 'aprobada' })}
-                  disabled={ocupado === p.id}
-                  className="rounded-lg bg-teal px-3 py-1.5 text-xs font-bold text-white disabled:opacity-50"
-                >
-                  {ocupado === p.id ? '…' : t('usuarias.aprobar')}
-                </button>
-                <button
-                  onClick={() => cambiar(p.id, { estado: 'suspendida' })}
-                  disabled={ocupado === p.id}
-                  className="rounded-lg border border-coral/40 px-3 py-1.5 text-xs font-medium text-coral disabled:opacity-50"
-                >
-                  {t('usuarias.rechazar')}
-                </button>
-              </li>
-            ))}
+                  <button
+                    onClick={() => cambiar(p.id, { estado: 'aprobada' })}
+                    disabled={ocupado === p.id}
+                    className="rounded-lg bg-teal px-3 py-1.5 text-xs font-bold text-white disabled:opacity-50"
+                  >
+                    {ocupado === p.id ? '…' : t('usuarias.aprobar')}
+                  </button>
+                  <button
+                    onClick={() => cambiar(p.id, { estado: 'suspendida' })}
+                    disabled={ocupado === p.id}
+                    className="rounded-lg border border-coral/40 px-3 py-1.5 text-xs font-medium text-coral disabled:opacity-50"
+                  >
+                    {t('usuarias.rechazar')}
+                  </button>
+                </li>
+              )
+            })}
           </ul>
         </div>
       )}
 
       {/* Activas */}
       <div className="rounded-2xl bg-white p-4 shadow-sm">
-        <div className="text-sm font-bold text-navy">
-          {t('usuarias.activas')} <span className="font-normal text-navy/50">({activas.length})</span>
+        <div className="flex items-center justify-between">
+          <div className="text-sm font-bold text-navy">
+            {t('usuarias.activas')} <span className="font-normal text-navy/50">({activas.length})</span>
+          </div>
+          <span className="text-[11px] text-navy/50">
+            Nombres e emails de mentoras y coordinadoras
+          </span>
         </div>
-        <ul className="mt-3 space-y-2">
-          {activas.map((p) => (
-            <li
-              key={p.id}
-              className="flex flex-wrap items-center gap-2 rounded-xl bg-cream/60 px-3 py-2.5"
-            >
-              <Avatar nombre={p.nombre} />
-              <div className="min-w-0 flex-1">
-                <div className="text-sm font-semibold text-navy">
-                  {p.nombre}
-                  {p.id === miId && <span className="ml-1 text-[12px] text-navy/45">{t('usuarias.tu')}</span>}
-                </div>
-                <div className="text-[13px] text-navy/50">
-                  {p.rol === 'admin' ? t('usuarias.admin') : (
-                    <span className="capitalize font-medium text-teal">
-                      {p.tipo_acceso === 'visionaria' ? '🤝 Estratégico' : p.tipo_acceso === 'coordinadora' ? '🎯 Coordinator' : '👩‍🏫 Mentor'}
-                      {p.pais ? ` · ${p.pais}` : ''}{p.programa ? ` · ${p.programa}` : ''}{p.id_interno ? ` · ID ${p.id_interno}` : ''}
+        <ul className="mt-3 space-y-3">
+          {activas.map((p) => {
+            const correoActiva = p.email || obtenerEmailConocido(p.id) || obtenerEmailConocido(p.nombre)
+            return (
+              <li
+                key={p.id}
+                className="flex flex-wrap items-center gap-2 rounded-xl bg-cream/60 px-3 py-3 border border-navy/5"
+              >
+                <Avatar nombre={p.nombre} />
+                <div className="min-w-0 flex-1">
+                  {editandoNombreId === p.id ? (
+                    <div className="flex items-center gap-1.5 my-1">
+                      <input
+                        type="text"
+                        value={nuevoNombre}
+                        onChange={(e) => setNuevoNombre(e.target.value)}
+                        className="rounded-lg border border-teal bg-white px-2.5 py-1 text-xs text-navy font-semibold focus:outline-none"
+                        autoFocus
+                      />
+                      <button
+                        onClick={() => handleGuardarNombre(p.id)}
+                        disabled={ocupado === p.id}
+                        className="rounded-lg bg-teal px-2.5 py-1 text-xs font-bold text-white"
+                        title="Guardar nombre"
+                      >
+                        ✓ Guardar
+                      </button>
+                      <button
+                        onClick={() => setEditandoNombreId(null)}
+                        className="rounded-lg bg-slate-200 px-2 py-1 text-xs text-navy"
+                      >
+                        ✕
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="text-sm font-semibold text-navy flex items-center gap-1.5">
+                      <span>{p.nombre}</span>
+                      <button
+                        onClick={() => { setEditandoNombreId(p.id); setNuevoNombre(p.nombre) }}
+                        className="text-[11px] text-navy/40 hover:text-teal transition"
+                        title="Editar nombre para certificado"
+                      >
+                        ✏️
+                      </button>
+                      {p.id === miId && <span className="ml-1 text-[11px] font-bold text-teal/80">({t('usuarias.tu')})</span>}
+                    </div>
+                  )}
+
+                  {/* Correo y botón de resetear contraseña */}
+                  <div className="flex flex-wrap items-center gap-2 mt-0.5">
+                    <span className="text-xs font-semibold text-teal bg-teal/10 px-2 py-0.5 rounded-md">
+                      📧 {correoActiva || 'Sin email registrado'}
                     </span>
+                    {correoActiva && (
+                      <button
+                        onClick={() => handleResetPassword(p)}
+                        disabled={ocupado === p.id}
+                        className="rounded bg-gold/25 px-2 py-0.5 text-[11px] font-bold text-navy hover:bg-gold/45 transition shadow-xs"
+                        title="Enviar enlace de recuperación o ver contraseña temporal"
+                      >
+                        {ocupado === p.id ? '…' : '🔑 Resetear Contraseña'}
+                      </button>
+                    )}
+                  </div>
+
+                  <div className="text-[12px] text-navy/55 mt-1">
+                    {p.rol === 'admin' ? (
+                      <span className="font-bold text-gold uppercase tracking-wider">👑 {t('usuarias.admin')}</span>
+                    ) : (
+                      <span className="capitalize font-medium text-navy/70">
+                        {p.tipo_acceso === 'visionaria' ? '🤝 Estratégico' : p.tipo_acceso === 'coordinadora' ? '🎯 Coordinator' : '👩‍🏫 Mentor'}
+                        {p.pais ? ` · ${p.pais}` : ''}{p.programa ? ` · ${p.programa}` : ''}{p.id_interno ? ` · ID ${p.id_interno}` : ''}
+                      </span>
+                    )}
+                  </div>
+                  {compromisosMapa !== undefined && (
+                    <div className={`mt-1 text-xs font-semibold ${compromisosMapa?.[p.id] ? 'text-teal' : 'text-gold'}`}>
+                      {compromisosMapa?.[p.id]
+                        ? `✓ Compromiso ${compromisosMapa[p.id].version} aceptado`
+                        : 'Compromiso inicial pendiente'}
+                    </div>
                   )}
                 </div>
-                {compromisosMapa !== undefined && (
-                  <div className={`mt-1 text-xs font-semibold ${compromisosMapa?.[p.id] ? 'text-teal' : 'text-gold'}`}>
-                    {compromisosMapa?.[p.id]
-                      ? `✓ Compromiso ${compromisosMapa[p.id].version} aceptado`
-                      : 'Compromiso inicial pendiente'}
+
+                {p.id !== miId && (
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    <select
+                      value={p.tipo_acceso || 'mentora'}
+                      onChange={(e) => cambiar(p.id, { tipo_acceso: e.target.value })}
+                      disabled={ocupado === p.id}
+                      className="rounded-lg bg-navy/5 px-2 py-1 text-xs text-navy border-none font-medium"
+                    >
+                      <option value="mentora">👩‍🏫 Mentor</option>
+                      <option value="coordinadora">🎯 Coordinator</option>
+                      <option value="visionaria">🤝 Estratégico</option>
+                    </select>
+                    <button
+                      onClick={() =>
+                        cambiar(p.id, { rol: p.rol === 'admin' ? 'mentora' : 'admin' })
+                      }
+                      disabled={ocupado === p.id}
+                      className="rounded-lg bg-navy/10 px-2.5 py-1 text-xs font-semibold text-navy disabled:opacity-50"
+                    >
+                      {p.rol === 'admin' ? t('usuarias.quitarAdmin') : t('usuarias.hacerAdmin')}
+                    </button>
+                    <button
+                      onClick={() => cambiar(p.id, { estado: 'suspendida' })}
+                      disabled={ocupado === p.id}
+                      className="rounded-lg border border-coral/40 px-2.5 py-1 text-xs font-medium text-coral disabled:opacity-50"
+                    >
+                      {t('usuarias.suspender')}
+                    </button>
                   </div>
                 )}
-              </div>
-              {p.id !== miId && (
-                <>
+                <div className="flex w-full flex-wrap gap-1.5 pl-11">
                   <select
-                    value={p.tipo_acceso || 'mentora'}
-                    onChange={(e) => cambiar(p.id, { tipo_acceso: e.target.value })}
+                    value={p.pais || ''}
+                    onChange={(e) => cambiar(p.id, { pais: e.target.value || null })}
                     disabled={ocupado === p.id}
-                    className="rounded-lg bg-navy/5 px-2 py-1 text-xs text-navy border-none font-medium"
+                    className="rounded-lg bg-white px-2 py-1 text-xs text-navy"
+                    aria-label={t('usuarias.pais')}
                   >
-                    <option value="mentora">👩‍🏫 Mentor</option>
-                    <option value="coordinadora">🎯 Coordinator</option>
-                    <option value="visionaria">🤝 Estratégico</option>
+                    <option value="">{t('usuarias.pais')}…</option>
+                    {PAISES.map((x) => <option key={x} value={x}>{x}</option>)}
                   </select>
-                  <button
-                    onClick={() =>
-                      cambiar(p.id, { rol: p.rol === 'admin' ? 'mentora' : 'admin' })
-                    }
+                  <select
+                    value={p.programa || ''}
+                    onChange={(e) => cambiar(p.id, { programa: e.target.value || null })}
                     disabled={ocupado === p.id}
-                    className="rounded-lg bg-navy/10 px-2.5 py-1.5 text-[13px] font-semibold text-navy disabled:opacity-50"
+                    className="rounded-lg bg-white px-2 py-1 text-xs text-navy"
+                    aria-label={t('usuarias.programa')}
                   >
-                    {p.rol === 'admin' ? t('usuarias.quitarAdmin') : t('usuarias.hacerAdmin')}
-                  </button>
-                  <button
-                    onClick={() => cambiar(p.id, { estado: 'suspendida' })}
-                    disabled={ocupado === p.id}
-                    className="rounded-lg border border-coral/40 px-2.5 py-1.5 text-[13px] font-medium text-coral disabled:opacity-50"
-                  >
-                    {t('usuarias.suspender')}
-                  </button>
-                </>
-              )}
-              <div className="flex w-full flex-wrap gap-1.5 pl-11">
-                <select
-                  value={p.pais || ''}
-                  onChange={(e) => cambiar(p.id, { pais: e.target.value || null })}
-                  disabled={ocupado === p.id}
-                  className="rounded-lg bg-white px-2 py-1 text-xs text-navy"
-                  aria-label={t('usuarias.pais')}
-                >
-                  <option value="">{t('usuarias.pais')}…</option>
-                  {PAISES.map((x) => <option key={x} value={x}>{x}</option>)}
-                </select>
-                <select
-                  value={p.programa || ''}
-                  onChange={(e) => cambiar(p.id, { programa: e.target.value || null })}
-                  disabled={ocupado === p.id}
-                  className="rounded-lg bg-white px-2 py-1 text-xs text-navy"
-                  aria-label={t('usuarias.programa')}
-                >
-                  <option value="">{t('usuarias.programa')}…</option>
-                  {PROGRAMAS.map((x) => <option key={x} value={x}>{x}</option>)}
-                </select>
-                <input
-                  defaultValue={p.id_interno || ''}
-                  onBlur={(e) => e.target.value !== (p.id_interno || '') && cambiar(p.id, { id_interno: e.target.value || null })}
-                  placeholder={t('usuarias.idInterno')}
-                  className="w-28 rounded-lg bg-white px-2 py-1 text-xs text-navy"
-                />
-              </div>
-              <AsignarRoles perfil={p} filas={rolesMapa?.[p.id]} miId={miId} onRecargar={onRecargar} migrado={rolesMapa !== null && rolesMapa !== undefined} funcionesCompromiso={compromisosMapa?.[p.id]?.funciones} />
-            </li>
-          ))}
+                    <option value="">{t('usuarias.programa')}…</option>
+                    {PROGRAMAS.map((x) => <option key={x} value={x}>{x}</option>)}
+                  </select>
+                  <input
+                    defaultValue={p.id_interno || ''}
+                    onBlur={(e) => e.target.value !== (p.id_interno || '') && cambiar(p.id, { id_interno: e.target.value || null })}
+                    placeholder={t('usuarias.idInterno')}
+                    className="w-28 rounded-lg bg-white px-2 py-1 text-xs text-navy"
+                  />
+                </div>
+                <AsignarRoles perfil={p} filas={rolesMapa?.[p.id]} miId={miId} onRecargar={onRecargar} migrado={rolesMapa !== null && rolesMapa !== undefined} funcionesCompromiso={compromisosMapa?.[p.id]?.funciones} />
+              </li>
+            )
+          })}
           {activas.length === 0 && (
             <li className="rounded-xl bg-cream px-4 py-4 text-center text-xs text-navy/50">
               {t('usuarias.sinActivas')}
@@ -318,25 +470,50 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
             {t('usuarias.sinAcceso')} <span className="font-normal text-navy/50">({suspendidas.length})</span>
           </div>
           <ul className="mt-3 space-y-2">
-            {suspendidas.map((p) => (
-              <li
-                key={p.id}
-                className="flex flex-wrap items-center gap-2 rounded-xl bg-cream/60 px-3 py-2.5"
-              >
-                <Avatar nombre={p.nombre} apagado />
-                <div className="min-w-0 flex-1 text-sm text-navy/60">{p.nombre}</div>
-                <button
-                  onClick={() => cambiar(p.id, { estado: 'aprobada' })}
-                  disabled={ocupado === p.id}
-                  className="rounded-lg bg-teal px-3 py-1.5 text-xs font-bold text-white disabled:opacity-50"
+            {suspendidas.map((p) => {
+              const correoSusp = p.email || obtenerEmailConocido(p.id) || obtenerEmailConocido(p.nombre)
+              return (
+                <li
+                  key={p.id}
+                  className="flex flex-wrap items-center gap-2 rounded-xl bg-cream/60 px-3 py-2.5"
                 >
-                  {t('usuarias.reactivar')}
-                </button>
-              </li>
-            ))}
+                  <Avatar nombre={p.nombre} apagado />
+                  <div className="min-w-0 flex-1">
+                    <div className="text-sm text-navy/70 font-semibold">{p.nombre}</div>
+                    {correoSusp && <div className="text-xs text-navy/50">📧 {correoSusp}</div>}
+                  </div>
+                  <button
+                    onClick={() => cambiar(p.id, { estado: 'aprobada' })}
+                    disabled={ocupado === p.id}
+                    className="rounded-lg bg-teal px-3 py-1.5 text-xs font-bold text-white disabled:opacity-50"
+                  >
+                    {t('usuarias.reactivar')}
+                  </button>
+                </li>
+              )
+            })}
           </ul>
         </div>
       )}
+
+      {/* Herramienta SQL para administradores */}
+      <details className="rounded-xl border border-navy/15 bg-slate-50 p-3.5 text-xs text-navy/70">
+        <summary className="cursor-pointer font-bold text-navy hover:text-teal select-none">
+          🛠️ Comando SQL de Sincronización de Correos en Supabase (Opcional)
+        </summary>
+        <div className="mt-2 space-y-2">
+          <p>
+            Si deseas que la base de datos guarde permanentemente la columna de email dentro de <code>public.perfiles</code>, ejecuta este comando en el <b>SQL Editor</b> de Supabase:
+          </p>
+          <pre className="rounded-lg bg-navy p-3 font-mono text-[11px] text-cream overflow-x-auto select-all">
+{`ALTER TABLE public.perfiles ADD COLUMN IF NOT EXISTS email text;
+UPDATE public.perfiles p
+SET email = u.email
+FROM auth.users u
+WHERE p.id = u.id;`}
+          </pre>
+        </div>
+      </details>
 
       <p className="text-[13px] leading-relaxed text-navy/50">
         {t('usuarias.notaBorrado')}

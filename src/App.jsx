@@ -358,7 +358,7 @@ export default function App() {
             rolesPendientes={rolesPendientes}
             rolesAsignados={(rolesViendo || []).map((r) => r.rol)}
             solicitud={solicitudViendo}
-            onElegirRama={viendoOtra ? undefined : async (funciones) => setCompromiso(await api.guardarSolicitudRama(perfil.id, funciones))}
+            onElegirRama={viendoOtra ? undefined : async (funciones, extra) => setCompromiso(await api.guardarSolicitudRama(perfil.id, funciones, extra))}
             contactoMenores={contactoViendo}
             onVerOrganigrama={() => setVista({ ...vista, nombre: 'organigrama' })}
             onVerRol={(rolId) => setVista({ ...vista, nombre: 'rol', rolId })}

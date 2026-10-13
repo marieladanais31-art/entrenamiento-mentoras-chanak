@@ -7,37 +7,50 @@ const AVISO_VIAS =
 export const BLOQUES_3_4 = {
   'T3.1': {
     resumen:
-      'A.C.E. es la vía curricular de referencia y preferente de Chanak (Reference / Preferred Curriculum Pathway). Conocer su estructura permite supervisarla con rigor.',
-    objetivos: ['Describir la estructura de PACEs y sus controles.', 'Supervisar metas diarias y Self Tests.', 'Registrar resultados A.C.E. en el SIS.'],
+      'A.C.E. es la vía curricular de referencia y preferente de Chanak (Reference / Preferred Curriculum Pathway). IMPORTANTE: La elección de A.C.E. requiere para coordinadores por lo menos una formación presencial de una semana.',
+    objetivos: [
+      'Describir la estructura de PACEs y sus controles.',
+      'Supervisar metas diarias y Self Tests.',
+      'Registrar resultados A.C.E. en el SIS.',
+      'Conocer el requisito de formación presencial obligatoria de una semana para coordinadores de A.C.E.',
+    ],
     lecciones: [
       {
-        titulo: 'Estructura de la vía A.C.E.',
+        titulo: 'Estructura de la vía A.C.E. y Requisito Presencial',
         guion: [
           'Diagnostic Test para ubicar al estudiante; PACEs por asignatura con progresión individual; metas diarias; Checkups; Self Test y PACE Test al final de cada PACE.',
           'Es la vía de referencia de Chanak porque su lógica de unidades pequeñas, corrección supervisada y dominio coincide con el marco académico de Chanak.',
+          'REQUISITO OBLIGATORIO DE COORDINACIÓN: La elección de la vía A.C.E. requiere para los coordinadores por lo menos una formación presencial de una semana (Official A.C.E. Training) para asegurar la fidelidad al método pedagógico y de supervisión.',
           AVISO_VIAS,
         ],
       },
       {
-        titulo: 'Qué supervisa el mentor',
+        titulo: 'Qué supervisa el mentor y secciones clave de A.C.E.',
         guion: [
           'Que las metas diarias sean realistas y se cumplan; que la corrección se haga según el procedimiento; que el Self Test se haga sin ayuda; que el PACE Test cumpla el umbral de dominio.',
           'Registra cada PACE Test con fecha y resultado en el SIS. Un PACE no superado se refuerza antes de repetir.',
+          'Secciones y enlaces oficiales de A.C.E.: (1) Curriculum General (aceministries.com/curriculum), (2) Kindergarten with Ace and Christi (aceministries.com/kindergarten-with-ace-and-christi), (3) Reading · ABCs with Ace and Christi (aceministries.com/abcs-with-ace-and-christi).',
         ],
       },
     ],
+    recursos: [
+      { titulo: 'Curriculum A.C.E. General', url: 'https://aceministries.com/curriculum' },
+      { titulo: 'A.C.E. Kindergarten with Ace and Christi', url: 'https://aceministries.com/kindergarten-with-ace-and-christi' },
+      { titulo: 'Reading · ABCs with Ace and Christi', url: 'https://aceministries.com/abcs-with-ace-and-christi' },
+    ],
     practica: {
-      situacion: 'Un estudiante quiere hacer tres PACE Tests en un día para «adelantar».',
-      preguntas: ['¿Qué riesgos ves?', '¿Qué compruebas antes de permitirlo?', '¿Qué registras?'],
-      criterio: 'Se comprueba que las metas, Checkups y Self Tests están completos y con dominio; se evita la prisa sin evidencia; todo se registra con fecha real.',
+      situacion: 'Un estudiante quiere hacer tres PACE Tests en un día para «adelantar». Además, un nuevo coordinador pregunta si puede coordinar A.C.E. sin asistir a la formación presencial.',
+      preguntas: ['¿Qué riesgos ves en los PACE Tests rápidos?', '¿Qué compruebas antes de permitirlo?', '¿Qué le respondes al coordinador sobre el requisito de formación presencial?'],
+      criterio: 'Se comprueba que las metas y Self Tests están completos con dominio antes del test; se recalca que para coordinar A.C.E. es obligatorio completar al menos una semana de formación presencial.',
     },
     quiz: [
       { p: '¿Qué etiqueta tiene A.C.E. en Chanak?', opciones: ['Reviewed Alternative', 'Reference / Preferred Curriculum Pathway', 'Individualized', 'No aprobada'], correcta: 1, explica: 'A.C.E. es la vía de referencia / preferente.' },
+      { p: '¿Qué requisito presencial exige la elección de A.C.E. para los coordinadores?', opciones: ['Ninguno, todo es 100 % online', 'Por lo menos una formación presencial de una semana', 'Un máster de 2 años', 'Solo un examen test'], correcta: 1, explica: 'La elección de A.C.E. requiere para coordinadores por lo menos una formación presencial de una semana.' },
       { p: '¿Qué viene al final de cada PACE?', opciones: ['Solo un resumen', 'Self Test y PACE Test', 'Un examen estatal', 'Nada'], correcta: 1, explica: 'Self Test y PACE Test cierran el PACE.' },
       { p: '¿Usar A.C.E. garantiza que se reconozcan todos sus cursos como créditos?', opciones: ['Sí', 'No: la inclusión de una vía no supone reconocimiento automático', 'Solo en High School', 'Solo con apostilla'], correcta: 1, explica: AVISO_VIAS },
       { p: 'Un estudiante suspende un PACE Test. ¿Qué haces?', opciones: ['Pasa al siguiente PACE', 'Refuerzo y nuevo intento cuando haya dominio', 'Lo apruebas por esfuerzo', 'Cambias de vía'], correcta: 1, explica: 'Se refuerza antes de repetir.' },
     ],
-    evidencia: 'Describe cómo revisarías una semana de metas A.C.E. de un estudiante.',
+    evidencia: 'Describe cómo revisarías una semana de metas A.C.E. y cómo verificarías que el coordinador cumple el requisito de formación presencial.',
   },
 
   'T3.2': {
@@ -102,6 +115,11 @@ export const BLOQUES_3_4 = {
         ],
       },
     ],
+    recursos: [
+      { titulo: 'LIFEPAC Curriculum General', url: 'https://www.aop.com/curriculum/shop-lifepac' },
+      { titulo: 'LIFEPAC Kindergarten & Elementary', url: 'https://www.aop.com/curriculum/lifepac' },
+      { titulo: 'LIFEPAC Reading / Language Arts', url: 'https://www.aop.com/curriculum/shop-lifepac/language-arts' },
+    ],
     practica: {
       situacion: 'Una familia con LIFEPAC deja las claves de la Teacher\'s Guide al alcance del alumno y los unit tests aparecen con 100 % en minutos.',
       preguntas: ['¿Qué problema de integridad detectas?', '¿Cómo orientas al padre en la custodia de claves?', '¿Qué medidas tomas en el SIS?'],
@@ -139,6 +157,11 @@ export const BLOQUES_3_4 = {
           'Lo que sí se mantiene universal en Chanak: dominio demostrado con mínimo del 80 %, evidencias verificables y registro riguroso en el SIS.',
         ],
       },
+    ],
+    recursos: [
+      { titulo: 'CLE Curriculum General', url: 'https://christianlight.org/curriculum' },
+      { titulo: 'CLE Kindergarten (Kindergarten II)', url: 'https://christianlight.org/curriculum/by-grade/kindergarten-ii' },
+      { titulo: 'CLE Reading · Learning to Read', url: 'https://christianlight.org/curriculum/by-subject/reading' },
     ],
     practica: {
       situacion: 'Una familia CLE pide «hacer solo los exámenes de fin de LightUnit saltándose las lecciones diarias».',

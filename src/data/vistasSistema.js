@@ -13,8 +13,9 @@
 // ============================================================
 
 export const SISTEMAS_VISTA = {
-  sis: { nombre: 'SIS', url: 'https://sis.chanakacademy.org', color: 'bg-teal' },
-  dual: { nombre: 'Dual Diploma Portal', url: 'https://dualdiploma.chanakacademy.org', color: 'bg-navy' },
+  portal: { nombre: 'Portal Chanak', url: 'https://portal.chanakacademy.org', color: 'bg-teal' },
+  sis: { nombre: 'SIS', url: 'https://sis.chanakacademy.org', color: 'bg-navy' },
+  dual: { nombre: 'Dual Diploma Portal', url: 'https://dualdiploma.chanakacademy.org', color: 'bg-emerald-700' },
   lifeskills: { nombre: 'Life Skills', url: 'https://dualdiploma.chanakacademy.org/es/life-skills', color: 'bg-gold' },
 }
 
@@ -384,6 +385,218 @@ export const VISTAS = [
       opciones: ['Lo leo en voz alta como ejemplo', 'Respeto la confidencialidad; si hay riesgo, sigo safeguarding', 'Le pido que lo borre'],
       correcta: 1,
       explicacion: 'Nunca se fuerzan ni exponen testimonios. Riesgo → protocolo de safeguarding (DSL).',
+    },
+  },
+
+  // ───────────── PORTAL CHANAK ─────────────
+  {
+    id: 'portal-extension-local',
+    sistema: 'portal',
+    ruta: '/extension-local · Portal Chanak',
+    titulo: 'Portal · Extensión Local (Lengua, Historia y Geografía)',
+    paraQuien: ['mentor', 'local_language', 'coordinator'],
+    modulos: ['T5.1', 'T6.3'],
+    pestanas: ['Lengua Materna', 'Historia & Geografía', 'Cultura Nacional', 'Evidencias'],
+    activa: 'Lengua Materna',
+    tipo: 'tarjetas',
+    tarjetas: [
+      { titulo: 'Español / Lengua Local · Nivel Intermedio', lineas: ['Unidad 3: Comprensión Lectora y Expresión', 'Evidencias subidas: 4/5'], marca: 1 },
+      { titulo: 'Historia & Geografía Nacional', lineas: ['Unidad 2: Constitución e Identidad Territorial', 'Proyecto de investigación en curso'], marca: 2 },
+    ],
+    puntos: [
+      { n: 1, texto: 'Extensión Local garantiza que el estudiante preserve y domine la lengua, geografía e historia de su país de residencia.' },
+      { n: 2, texto: 'Las unidades y evidencias subidas al Portal orientan la mentoría; las evaluaciones acreditadas finales se registran formalmente en el SIS.' },
+    ],
+    practica: {
+      pregunta: 'Una familia pregunta si la nota de Lengua Española del Portal se imprime directamente en el diploma estadounidense.',
+      opciones: ['Sí, el Portal emite notas oficiales', 'No, el Portal organiza los recursos y actividades; las calificaciones y créditos oficiales residen en el SIS', 'No se califica nunca'],
+      correcta: 1,
+      explicacion: 'El portal orienta y organiza; el SIS es el único registro oficial donde se consolidan las actas y expedientes.',
+    },
+  },
+  {
+    id: 'portal-lifeskills',
+    sistema: 'portal',
+    ruta: '/life-skills · Portal Chanak',
+    titulo: 'Portal · Life Skills & Leadership (Proyecto de Vida)',
+    paraQuien: ['mentor', 'lifeskills_facilitator', 'coordinator'],
+    modulos: ['T2.3', 'T5.1', 'T10.5'],
+    pestanas: ['Carácter & Autogobierno', 'Liderazgo & Servicio', 'Vocación & RIASEC', 'Finanzas Prácticas'],
+    activa: 'Carácter & Autogobierno',
+    tipo: 'tarjetas',
+    tarjetas: [
+      { titulo: 'Módulo 1: Hábitos de Autogobierno', lineas: ['Plan de metas semanales', 'Evidencia: diario de reflexión'], marca: 1 },
+      { titulo: 'Módulo 2: Servicio Comunitario', lineas: ['Iniciativa comunitaria o de iglesia', 'ChanakCoins acumuladas: 85'], marca: 2 },
+    ],
+    puntos: [
+      { n: 1, texto: 'Life Skills forma carácter, vocación y liderazgo con cosmovisión bíblica.' },
+      { n: 2, texto: 'Cada semana el estudiante registra acciones prácticas y proyectos de servicio, supervisados por su facilitador.' },
+    ],
+    practica: {
+      pregunta: '¿Cuál es el objetivo principal del módulo Life Skills en el Portal?',
+      opciones: ['Aprender gramática', 'Desarrollar carácter, autogobierno, visión vocacional y habilidades para la vida', 'Sustituir las matemáticas'],
+      correcta: 1,
+      explicacion: 'Life Skills equivale al 20 % del modelo Chanak enfocado en formación para la vida.',
+    },
+  },
+  {
+    id: 'portal-helping-english',
+    sistema: 'portal',
+    ruta: '/helping-english · Portal Chanak',
+    titulo: 'Portal · Helping English (Refuerzo y Nivelación Lingüística)',
+    paraQuien: ['mentor', 'english_teacher', 'coordinator'],
+    modulos: ['T5.1', 'T10.4'],
+    pestanas: ['Diagnóstico de Nivel', 'Phonics & Grammar', 'Reading Comprehension', 'Tutoría Sincrónica'],
+    activa: 'Phonics & Grammar',
+    tipo: 'tarjetas',
+    tarjetas: [
+      { titulo: 'Grammar Foundations B1', lineas: ['Tiempos verbales y estructuras sintácticas', 'Ejercicios interactivos con feedback inmediato'], marca: 1 },
+      { titulo: 'Reading Comprehension Lab', lineas: ['Lecturas graduadas con vocabulario académico', 'Comprensión auditiva integrada'], marca: 2 },
+    ],
+    puntos: [
+      { n: 1, texto: 'Helping English brinda nivelación a estudiantes no nativos que necesitan acelerar su fluidez en inglés para sus PACEs o cursos de High School.' },
+      { n: 2, texto: 'Incluye material complementario para el tutor y guías de conversación.' },
+    ],
+    practica: {
+      pregunta: '¿Cuándo se recomienda asignar Helping English a un estudiante?',
+      opciones: ['Solo si suspende el curso completo', 'Cuando el diagnóstico o la observación inicial indican que requiere soporte adicional en comprensión o redacción en inglés', 'Nunca en Chanak'],
+      correcta: 1,
+      explicacion: 'Helping English funciona como palanca de nivelación para asegurar el éxito en las materias Core USA.',
+    },
+  },
+  {
+    id: 'portal-english-tonic',
+    sistema: 'portal',
+    ruta: '/english-tonic · Portal Chanak',
+    titulo: 'Portal · English Tonic (Inmersión y Fluidez Oral Dinámica)',
+    paraQuien: ['mentor', 'english_teacher', 'coordinator'],
+    modulos: ['T5.1', 'T10.4'],
+    pestanas: ['Speaking Circles', 'Debates & Drama', 'Listening Capsules', 'Registro de Fluidez'],
+    activa: 'Speaking Circles',
+    tipo: 'tarjetas',
+    tarjetas: [
+      { titulo: 'Club de Conversación Semanal', lineas: ['Temas de actualidad, ciencia y valores', 'Grupos reducidos de 4-6 alumnos'], marca: 1 },
+      { titulo: 'Oral Presentation Challenge', lineas: ['Presentación breve de 3 minutos', 'Feedback en pronunciación y entonación'], marca: 2 },
+    ],
+    puntos: [
+      { n: 1, texto: 'English Tonic desinhibe la comunicación oral mediante dinámicas lúdicas, role-play y debates.' },
+      { n: 2, texto: 'Fomenta el habla activa sin penalizar el error inicial, estimulando la confianza.' },
+    ],
+    practica: {
+      pregunta: '¿Cuál es la diferencia de enfoque entre Helping English y English Tonic?',
+      opciones: ['Son exactamente lo mismo', 'Helping English es refuerzo estructurado y nivelación académica; English Tonic es inmersión dinámica, práctica oral y fluidez conversacional', 'Uno es para padres y otro para niños'],
+      correcta: 1,
+      explicacion: 'Ambos se complementan: uno fortalece la base académica y el otro activa la comunicación oral.',
+    },
+  },
+
+  // ───────────── SIS · VISTAS DE ADMIN Y ESTUDIANTE ─────────────
+  {
+    id: 'sis-admin',
+    sistema: 'sis',
+    ruta: '/admin · Student Information System',
+    titulo: 'SIS · Vista de Administrador (Gestión Institucional)',
+    paraQuien: ['coordinator', 'country_rep', 'director'],
+    modulos: ['T5.1', 'T10.1'],
+    pestanas: ['Usuarios & Permisos', 'Ciclos Escolares', 'Auditoría de Actas', 'Emisión Transcripts', 'Configuración'],
+    activa: 'Usuarios & Permisos',
+    tipo: 'tabla',
+    columnas: ['Usuario', 'Rol SIS', 'Cartera Alumnos', 'Estado', 'Último Acceso'],
+    filas: [
+      ['Coordinación Académica', 'Coordinator', '42 estudiantes', 'Activo', 'Hoy, 09:15'],
+      ['Mentoría Primaria A.C.E.', 'Tutor', '12 estudiantes', 'Activo', 'Ayer, 18:30'],
+      ['Mentoría Dual Diploma', 'Tutor Dual', '18 estudiantes', 'Activo', 'Hoy, 10:45'],
+    ],
+    puntos: [
+      { n: 1, texto: 'La vista de administrador gestiona usuarios, altas de ciclos escolares y custodia el libro de actas oficial.' },
+      { n: 2, texto: 'Emite oficialmente los Report Cards, diplomas y transcripts con sello institucional FLDOE.' },
+    ],
+    practica: {
+      pregunta: '¿Quién tiene potestad para emitir un Official Transcript con valor legal en Florida?',
+      opciones: ['Cualquier mentor', 'La dirección / administración de Chanak a través del SIS', 'La familia en casa'],
+      correcta: 1,
+      explicacion: 'La documentación oficial legal solo es emitida por administración desde el SIS verificado.',
+    },
+  },
+  {
+    id: 'sis-estudiante',
+    sistema: 'sis',
+    ruta: '/estudiante · Student Information System',
+    titulo: 'SIS · Vista de Estudiante (Metas, Notas y Progreso)',
+    paraQuien: ['mentor', 'coordinator'],
+    modulos: ['T5.1', 'T4.2'],
+    pestanas: ['Mi Tablero', 'Mis Calificaciones', 'Boletines Trimestrales', 'Plan de Graduación'],
+    activa: 'Mis Calificaciones',
+    tipo: 'tabla',
+    columnas: ['Asignatura', 'PACEs / Unidades', 'Evaluación Reciente', 'Promedio', 'Estado'],
+    filas: [
+      ['English Language Arts', '1071, 1072, 1073', 'PACE Test: 94 %', '91 %', 'En Dominio (A)'],
+      ['Mathematics', '1071, 1072', 'PACE Test: 88 %', '85 %', 'En Dominio (B)'],
+      ['Science', '1071, 1072', 'PACE Test: 78 %', '78 %', 'En Refuerzo (< 80 %)'],
+    ],
+    puntos: [
+      { n: 1, texto: 'El estudiante visualiza con transparencia su progreso real hacia el dominio (Mastery).' },
+      { n: 2, texto: 'Identifica de inmediato qué materias están en verde (>= 80 %) y cuáles requieren refuerzo antes de avanzar.' },
+    ],
+    practica: {
+      pregunta: 'Si el estudiante ve una nota en amarillo (78 %), ¿qué debe hacer?',
+      opciones: ['Avanzar al siguiente cuadernillo', 'Coordinar con su mentor una sesión de refuerzo y nueva evaluación de dominio', 'Ignorarla si el promedio da 80'],
+      correcta: 1,
+      explicacion: 'Cada unidad individual exige el 80 % de dominio antes de progresar.',
+    },
+  },
+
+  // ───────────── DUAL DIPLOMA · VISTAS ESPECIALIZADAS ─────────────
+  {
+    id: 'dual-mentor-lifeskills',
+    sistema: 'dual',
+    ruta: '/es/mentor-lifeskills · Dual Diploma Portal',
+    titulo: 'Dual Diploma · Vista Mentor Life Skills',
+    paraQuien: ['lifeskills_facilitator', 'mentor', 'coordinator'],
+    modulos: ['T2.3', 'T5.1'],
+    pestanas: ['Mis Grupos', 'Proyectos Entregados', 'Feedback & Rúbricas', 'ChanakCoins'],
+    activa: 'Proyectos Entregados',
+    tipo: 'tabla',
+    columnas: ['Estudiante', 'Módulo', 'Entrega', 'Evaluación', 'Acción'],
+    filas: [
+      ['Estudiante D-101', 'Vocación & RIASEC', 'Plan de Carrera Vocacional', 'Pendiente revisión', 'Revisar rúbrica'],
+      ['Estudiante D-104', 'Liderazgo & Servicio', 'Informe de Servicio Comunitario', 'Aprobado (95 %)', 'Feedback enviado'],
+    ],
+    puntos: [
+      { n: 1, texto: 'El mentor de Life Skills en Dual Diploma orienta la dimensión vocacional y de autogobierno del bachillerato internacional.' },
+      { n: 2, texto: 'Evalúa entregas mediante rúbricas formativas orientadas a la excelencia y valores.' },
+    ],
+    practica: {
+      pregunta: '¿Qué revisa el Mentor de Life Skills en el Dual Diploma Portal?',
+      opciones: ['Solo la asistencia a reuniones', 'La calidad de las producciones personales, planes vocacionales y evidencias de servicio', 'Los exámenes de química'],
+      correcta: 1,
+      explicacion: 'El acompañamiento se basa en evidencias verificables y proyectos personales.',
+    },
+  },
+  {
+    id: 'dual-mentor-ingles',
+    sistema: 'dual',
+    ruta: '/es/mentor-ingles · Dual Diploma Portal',
+    titulo: 'Dual Diploma · Vista Mentor de Inglés',
+    paraQuien: ['english_teacher', 'mentor', 'coordinator'],
+    modulos: ['T5.1', 'T10.4'],
+    pestanas: ['Alumnos Asignados', 'Speaking Sessions', 'Writing Portfolio', 'Alertas Lingüísticas'],
+    activa: 'Writing Portfolio',
+    tipo: 'tabla',
+    columnas: ['Estudiante', 'Nivel Dual', 'Tarea Escrita', 'Rúbrica ELA', 'Feedback'],
+    filas: [
+      ['Estudiante D-202 · Grade 10', 'US English II', 'Essay: Constitutional Rights', 'Dominio (88 %)', 'Devuelto con notas'],
+      ['Estudiante D-205 · Grade 9', 'US English I', 'Short Story Analysis', 'Revisión (72 %)', 'Reescribir párrafo 3'],
+    ],
+    puntos: [
+      { n: 1, texto: 'El mentor de inglés acompaña al estudiante internacional en las materias de literatura, redacción y expresión académica en inglés.' },
+      { n: 2, texto: 'Proporciona retroalimentación detallada y sesiones sincrónicas de práctica oral.' },
+    ],
+    practica: {
+      pregunta: 'Un alumno del Dual Diploma entrega un ensayo con 72 % en su primera versión. ¿Qué hace el mentor de inglés?',
+      opciones: ['Le pone suspenso definitivo en el acta', 'Le devuelve correcciones específicas para que reelabore el ensayo y demuestre dominio (>= 80 %)', 'Le traduce el texto al español'],
+      correcta: 1,
+      explicacion: 'El aprendizaje orientado al dominio exige feedback, corrección y reevaluación.',
     },
   },
 ]

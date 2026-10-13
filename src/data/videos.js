@@ -132,12 +132,19 @@ const DEFINICIONES_VIDEO = [
   // ── Currículos ──
   {
     id: 'V09', orden: 9, bloque: 'Currículos', modulo: 'T3.1', duracion: '8 min', videoUrl: '',
-    titulo: 'A.C.E. · vía de referencia',
-    descripcion: 'PACEs, metas, Checkups, Self Tests y PACE Tests: cómo se supervisa la vía preferente.',
+    titulo: 'A.C.E. · vía de referencia y formación presencial',
+    descripcion: 'PACEs, metas, Checkups, Self Tests y PACE Tests: supervisión de la vía preferente. REQUISITO: La elección de A.C.E. exige para coordinadores al menos una formación presencial de una semana.',
     guion: [
       'A.C.E. es la Reference / Preferred Curriculum Pathway de Chanak.',
+      'REQUISITO OBLIGATORIO: La elección de A.C.E. requiere para coordinadores por lo menos una formación presencial de una semana para certificación oficial.',
       'Estructura: Diagnostic Test, PACEs, metas diarias, Checkups, Self Test y PACE Test, con progresión individual.',
       'El mentor supervisa metas, corrección, Self Tests y evidencias, y registra resultados en el SIS.',
+      'Enlaces oficiales A.C.E.: Curriculum (https://aceministries.com/curriculum) · Kindergarten (https://aceministries.com/kindergarten-with-ace-and-christi) · Reading ABCs (https://aceministries.com/abcs-with-ace-and-christi)',
+    ],
+    enlaces: [
+      { titulo: 'Curriculum A.C.E. General', url: 'https://aceministries.com/curriculum' },
+      { titulo: 'A.C.E. Kindergarten with Ace and Christi', url: 'https://aceministries.com/kindergarten-with-ace-and-christi' },
+      { titulo: 'Reading · ABCs with Ace and Christi', url: 'https://aceministries.com/abcs-with-ace-and-christi' },
     ],
   },
   {
@@ -149,6 +156,11 @@ const DEFINICIONES_VIDEO = [
       'ABCs with Ace and Christi: programa fonético intensivo de 12 a 15 semanas para dominar lectura y escritura en inglés.',
       'Test de madurez lectora (Reading Readiness Test) para determinar si el niño entra a Kindergarten o directo a ABCs.',
       'Transición fluida a los PACEs de Grado 1 (nivel 1001) tras superar el programa ABCs con dominio comprobado.',
+      'Enlace oficial: ABCs with Ace and Christi (https://aceministries.com/abcs-with-ace-and-christi)',
+    ],
+    enlaces: [
+      { titulo: 'A.C.E. Kindergarten', url: 'https://aceministries.com/kindergarten-with-ace-and-christi' },
+      { titulo: 'Reading · ABCs with Ace and Christi', url: 'https://aceministries.com/abcs-with-ace-and-christi' },
     ],
   },
   {
@@ -160,6 +172,12 @@ const DEFINICIONES_VIDEO = [
       'Estructura interna: lecciones auto-dirigidas, reviews, self-tests formativos y unit tests sumativos supervisados.',
       'El rol del adulto: acompañamiento con Teacher\'s Guide, custodia de claves y verificación honesta de self-tests.',
       'Umbral mínimo del 80 % en las evaluaciones de dominio y registro puntual en el SIS.',
+      'Enlaces oficiales LIFEPAC: Curriculum (https://www.aop.com/curriculum/shop-lifepac) · Kindergarten (https://www.aop.com/curriculum/lifepac) · Reading / Language Arts (https://www.aop.com/curriculum/shop-lifepac/language-arts)',
+    ],
+    enlaces: [
+      { titulo: 'LIFEPAC Curriculum General', url: 'https://www.aop.com/curriculum/shop-lifepac' },
+      { titulo: 'LIFEPAC Kindergarten & Elementary', url: 'https://www.aop.com/curriculum/lifepac' },
+      { titulo: 'LIFEPAC Reading / Language Arts', url: 'https://www.aop.com/curriculum/shop-lifepac/language-arts' },
     ],
   },
   {
@@ -171,6 +189,12 @@ const DEFINICIONES_VIDEO = [
       'Metodología incremental (Sunrise Edition): nuevos conceptos en pequeñas dosis diarias con repaso constante acumulativo.',
       'Quizzes y tests por LightUnit con Answer Keys custodiadas por el adulto.',
       'Supervisión y registro de dominio del 80 % sin imponer la Review Station de A.C.E., respetando la estructura propia de CLE.',
+      'Enlaces oficiales CLE: Curriculum (https://christianlight.org/curriculum) · Kindergarten (https://christianlight.org/curriculum/by-grade/kindergarten-ii) · Reading / Learning to Read (https://christianlight.org/curriculum/by-subject/reading)',
+    ],
+    enlaces: [
+      { titulo: 'CLE Curriculum General', url: 'https://christianlight.org/curriculum' },
+      { titulo: 'CLE Kindergarten (Kindergarten II)', url: 'https://christianlight.org/curriculum/by-grade/kindergarten-ii' },
+      { titulo: 'CLE Reading · Learning to Read', url: 'https://christianlight.org/curriculum/by-subject/reading' },
     ],
   },
   {
@@ -238,13 +262,53 @@ const DEFINICIONES_VIDEO = [
   // ── Sistemas ──
   {
     id: 'V17', orden: 17, bloque: 'Sistemas', modulo: 'T5.1', duracion: '9 min', videoUrl: '',
-    titulo: 'SIS, Portal y Dual Diploma Portal',
-    descripcion: 'Tres entornos con funciones distintas. La información oficial vive siempre en el SIS.',
+    titulo: 'Los Tres Entornos del Ecosistema Chanak (Visión General)',
+    descripcion: 'Distinción fundamental entre SIS, Portal y Dual Diploma Portal. La información oficial siempre vive en el SIS.',
     guion: [
       'SIS: registro oficial (matrículas, PEI, diagnóstico, notas de dominio, boletines, expediente y transcripts).',
       'Portal: orientación y rutina para familias y mentores (Core USA, Chanak Flex, Life Skills, Extensión Local, guías).',
       'Dual Diploma Portal: entorno de aprendizaje del Dual Diploma, con base de datos independiente del SIS.',
       'El portal orienta; el SIS registra.',
+    ],
+  },
+  {
+    id: 'V17a', orden: 17.1, bloque: 'Sistemas', modulo: 'T5.1', duracion: '8 min', videoUrl: '',
+    titulo: 'Portal Chanak: Extensión Local, Life Skills, Helping English y English Tonic',
+    descripcion: 'Acceso y navegación por los 4 entornos clave del Portal: Extensión Local, Life Skills, Helping English y English Tonic.',
+    guion: [
+      'Portal Chanak (portal.chanakacademy.org): la plataforma de orientación y recursos para familias y mentores.',
+      'Extensión Local: lengua materna, historia, geografía y contenidos contextuales del país del alumno.',
+      'Life Skills: programa formativo de carácter, liderazgo, proyecto de vida y autogobierno.',
+      'Helping English: recursos de apoyo lingüístico, nivelación y refuerzo de inglés.',
+      'English Tonic: programa de inmersión dinámica, interacción oral y desarrollo de fluidez.',
+      'Diferenciación clave: los recursos del Portal guían la semana escolar pero no sustituyen el registro formal de notas en el SIS.',
+    ],
+  },
+  {
+    id: 'V17b', orden: 17.2, bloque: 'Sistemas', modulo: 'T5.1', duracion: '10 min', videoUrl: '',
+    titulo: 'SIS: Vistas de Admin, Coordinador, Mentor, Padres y Estudiante',
+    descripcion: 'Recorrido exhaustivo por las 5 vistas operativas del Student Information System (sis.chanakacademy.org).',
+    guion: [
+      'SIS como única fuente de verdad académica, de expedientes y documental oficial.',
+      'Vista de Administrador: altas, asignaciones de roles, configuración institucional y auditoría.',
+      'Vista de Coordinador: supervisión de carteras de mentores, aprobación de PEIs, semáforo de alertas y validación de expedientes.',
+      'Vista de Mentor: seguimiento semanal, registro de notas de dominio (PACE Tests, unit tests) e incidencias.',
+      'Vista de Padres: consulta de boletines (Report Cards), progreso en tiempo real y asistencia.',
+      'Vista de Estudiante: visualización de metas activas, progreso curricular y avance hacia la graduación.',
+      'Reglas de oro: registros con fechas reales, evidencias contrastables y confidencialidad estricta.',
+    ],
+  },
+  {
+    id: 'V17c', orden: 17.3, bloque: 'Sistemas', modulo: 'T5.1', duracion: '9 min', videoUrl: '',
+    titulo: 'Dual Diploma Portal: Vistas de Estudiante, Coordinador, Mentor Life Skills y Mentor de Inglés',
+    descripcion: 'Plataforma del programa de doble titulación: roles, responsabilidades y navegación en sus 4 vistas especializadas.',
+    guion: [
+      'Dual Diploma Portal (dualdiploma.chanakacademy.org): entorno de aprendizaje del US High School Diploma.',
+      'Vista de Estudiante: acceso a cursos estadounidenses, entregas de lecciones y proyectos con feedback continuo.',
+      'Vista de Coordinador del Dual Diploma: auditoría de créditos locales y estadounidenses, planes de graduación y seguimiento.',
+      'Vista de Mentor Life Skills: facilitación de módulos de autogobierno, liderazgo y proyecto vocacional.',
+      'Vista de Mentor de Inglés: apoyo lingüístico sincrónico, corrección y desarrollo de competencias bilingües.',
+      'Conexión institucional: las calificaciones finales acreditadas se transfieren formalmente al SIS para emisión de transcripts.',
     ],
   },
   {
