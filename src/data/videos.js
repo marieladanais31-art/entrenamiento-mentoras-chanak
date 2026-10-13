@@ -31,13 +31,13 @@ const DEFINICIONES_VIDEO = [
   // ── Fundamentos ──
   {
     id: 'V00', orden: 0, bloque: 'Fundamentos', modulo: 'T1.0', duracion: '6 min', videoUrl: '/videos/presentacion_general.mp4',
-    titulo: 'Introducción, visión y propósito institucional',
-    descripcion: 'Bienvenida oficial, visión global, vocación de servicio y propósito pedagógico de Chanak International Academy.',
+    titulo: 'Introducción general: visión de Chanak y las tres áreas de involucramiento',
+    descripcion: 'Bienvenida institucional, visión de Chanak International Academy y panorama de las tres áreas de involucramiento: Académica y Mentoría, Coordinación y Desarrollo Estratégico.',
     guion: [
-      'Bienvenida al entrenamiento de mentoras y coordinadores de Chanak International Academy.',
-      'Propósito formativo: acompañar con excelencia, cosmovisión bíblica y rigor académico a cada familia y estudiante.',
-      'El modelo educativo Chanak integra formación del carácter, fe, autogobierno y preparación académica internacional.',
-      'El rol de la mentora: guía de vida, supervisora de dominio y puente de comunicación con las familias.',
+      'Bienvenida oficial a Chanak International Academy: escuela privada cristiana K–12 registrada en Florida.',
+      'Visión y propósito formativo: excelencia académica internacional, cosmovisión bíblica y carácter para el autogobierno.',
+      'Las tres grandes áreas de involucramiento: Académica y Mentoría, Coordinación Académica, y Desarrollo Estratégico y Crecimiento.',
+      'El Tronco Común formativo: identidad, programas y protección institucional antes de la especialización.',
     ],
   },
   {

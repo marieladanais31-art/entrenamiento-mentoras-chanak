@@ -125,7 +125,7 @@ export const BLOQUES = [
     categoria: 'Fundamentos',
     horas: 7.75,
     modulos: [
-      { id: 'T1.0', titulo: 'Introducción, visión y propósito institucional', horas: horasModulo('T1.0'), modalidad: 'Vídeo + inducción oficial', evaluacion: 'Knowledge Check', video: 'V00', fuentes: ['master'] },
+      { id: 'T1.0', titulo: 'Introducción general: visión de Chanak y las tres áreas de involucramiento', horas: horasModulo('T1.0'), modalidad: 'Vídeo + inducción oficial', evaluacion: 'Knowledge Check', video: 'V00', fuentes: ['master'] },
       { id: 'T1.1', titulo: 'Identidad, misión y estructura institucional', horas: horasModulo('T1.1'), modalidad: 'Vídeo + lectura del Master', evaluacion: 'Knowledge Check', video: 'V01', fuentes: ['master'] },
       { id: 'T1.2', titulo: 'El modelo 60 / 20 / 20', horas: horasModulo('T1.2'), modalidad: 'Vídeo + lectura + práctica', evaluacion: 'Knowledge Check + caso', video: 'V02', fuentes: ['master', 'ss'] },
       { id: 'T1.3', titulo: 'Marco académico orientado al dominio', horas: horasModulo('T1.3'), modalidad: 'Vídeo + lectura + caso', evaluacion: 'Knowledge Check + caso', video: 'V03', fuentes: ['master', 'ss'] },

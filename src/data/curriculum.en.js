@@ -13,7 +13,7 @@ export const BLOQUES_EN = {
 }
 
 export const MODULOS_EN = {
-  'T1.0': 'Introduction, vision and institutional purpose',
+  'T1.0': 'General Introduction: Chanak Vision and the Three Areas of Involvement',
   'T1.1': 'Identity, mission and institutional structure',
   'T1.2': 'The 60 / 20 / 20 model',
   'T1.3': 'A mastery-oriented academic framework',

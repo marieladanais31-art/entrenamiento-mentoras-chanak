@@ -6,46 +6,56 @@
 export const BLOQUES_1_2 = {
   'T1.0': {
     resumen:
-      'Introducción institucional, bienvenida a la formación de mentoras y marco fundacional de Chanak International Academy.',
+      'Introducción institucional y visión global de Chanak International Academy: propósito formativo, cosmovisión y recorrido general por las tres grandes áreas de involucramiento (Académica y Mentoría, Coordinación, y Desarrollo Estratégico).',
     objetivos: [
-      'Comprender la visión global y el propósito de Chanak International Academy.',
-      'Reconocer el valor formativo de la mentora como formadora integral y puente con las familias.',
-      'Identificar la cosmovisión bíblica como eje de acompañamiento en el crecimiento de cada alumno.',
+      'Comprender la visión global, la identidad y el propósito formativo de Chanak International Academy.',
+      'Identificar las tres áreas de involucramiento institucional: Académica y Mentoría, Coordinación, y Desarrollo Estratégico.',
+      'Entender la estructura del Tronco Común formativo y cómo se articulan los diferentes roles para servir a las familias.',
     ],
     lecciones: [
       {
-        titulo: 'Bienvenida y propósito institucional',
+        titulo: 'Visión, propósito y comunidad Chanak',
         guion: [
-          'Bienvenida oficial al sistema de formación de mentoras y coordinadores de Chanak International Academy.',
-          'Nuestra visión: formar personas íntegras, con excelencia académica, fe sólida y autogobierno para servir con propósito.',
-          'La mentora no es una simple vigilante ni una profesora tradicional: es una mentora de vida y aprendizaje que acompaña el dominio individual.',
+          'Bienvenida oficial a Chanak International Academy: escuela privada cristiana estadounidense K–12 registrada en Florida (FLDOE #134620).',
+          'Nuestra misión: brindar una educación integral cristiana de excelencia internacional que forme el carácter, fortalezca la fe y desarrolle el pensamiento crítico para servir con propósito.',
+          'La alianza con el hogar: en Chanak creemos firmemente que los padres son los primeros y principales educadores de sus hijos; la escuela es su colaboradora estratégica y respaldo académico oficial.',
         ],
       },
       {
-        titulo: 'El compromiso con las familias',
+        titulo: 'Las tres áreas de involucramiento',
         guion: [
-          'Chanak camina junto a las familias: la familia conserva su rol educador y Chanak aporta estructura, supervisión y acreditación académica.',
-          'Cada interacción, seguimiento y evaluación transmite los valores institucionales y la confianza depositada en nuestro equipo.',
+          '1. Área Académica y de Mentoría: acompañamiento cercano a estudiantes y familias (Off-Campus y Dual Diploma), enseñanza de inglés académico, facilitación de Life Skills, Extensión Local y evaluación diagnóstica educativa.',
+          '2. Área de Coordinación Académica: supervisión del equipo docente y de mentores, control de calidad del proceso pedagógico, verificación de planes PEI y evidencias en el SIS, gestión de incidencias y enlace con instituciones aliadas.',
+          '3. Área de Desarrollo Estratégico y Crecimiento: atención, orientación y matrícula familiar (Family Enrollment), gestión de becas y fondos estatales de EE. UU. (ESA: Florida EMA, Alabama CHOOSE, Utah Fits All, Texas TEFA, Wyoming ESA, Arizona ESA), alianzas institucionales (colegios e iglesias), grants y proyectos comunitarios.',
+        ],
+      },
+      {
+        titulo: 'El Tronco Común formativo',
+        guion: [
+          'Principio institucional: Role ≠ Person. Cada rol describe funciones y responsabilidades específicas con límites de autoridad claros; una persona puede asumir funciones compatibles, pero sus permisos y responsabilidades nunca se mezclan.',
+          'Todas las personas, antes de profundizar en su especialización, completan el Tronco Común: identidad Chanak (Bloque 1), programas (Bloque 2), y salvaguarda y protección de datos (Bloque 6).',
+          'Esta base compartida garantiza que todo el equipo hable el mismo lenguaje, proteja la misión de la escuela y brinde una experiencia armónica y profesional a familias y centros colaboradores.',
         ],
       },
     ],
     practica: {
       situacion:
-        'Una nueva mentora se incorpora al equipo y te pregunta cuál es la diferencia esencial entre enseñar en una escuela tradicional y ejercer la mentoría en Chanak.',
+        'Una nueva familia interesada en Chanak y un colegio que desea implementar el Dual Diploma contactan simultáneamente a la escuela para solicitar información y comenzar a trabajar con nosotros.',
       preguntas: [
-        '¿Cómo le explicarías la función de la mentora en Chanak?',
-        '¿De qué manera se integra la cosmovisión bíblica sin imponerla artificialmente?',
-        '¿Cuál es el rol de la familia en este proceso?',
+        '¿Qué área institucional interviene primero para orientar a la familia y gestionar su matrícula o beca estatal?',
+        '¿Qué área se encarga de estructurar el plan académico, diagnóstico y acompañamiento diario del estudiante?',
+        '¿Qué papel cumple la coordinación académica para supervisar que ambos procesos se desarrollen con calidad?',
       ],
       criterio:
-        'Respuesta clara que enfatice el acompañamiento personalizado, la orientación al dominio frente al avance por calendario y la alianza con la familia.',
+        'Identificación precisa de las 3 áreas: Desarrollo Estratégico (matrícula, fondos ESA y alianzas), Académica (mentoría, planes PEI y clases) y Coordinación (supervisión, calidad y gestión en el SIS).',
     },
     quiz: [
       { p: '¿Cuál es el propósito central de Chanak International Academy?', opciones: ['Vender libros de texto', 'Brindar educación integral cristiana de excelencia internacional que forme carácter, fe y pensamiento crítico', 'Sustituir a los padres en el hogar', 'Ser una plataforma de vídeos'], correcta: 1, explica: 'La misión oficial es la educación integral con propósito.' },
-      { p: '¿Cómo define Chanak la función de la mentora?', opciones: ['Vigilante de aula estricta', 'Acompañante de vida y aprendizaje que supervisa dominio y apoya a la familia', 'Profesora que da clases magistrales de 60 minutos', 'Administrativa de cobros'], correcta: 1, explica: 'La mentora acompaña, supervisa dominio y orienta con afecto y rigor.' },
-      { p: '¿Quién conserva la autoridad y el rol educativo primordial en el hogar?', opciones: ['El estado', 'La familia', 'La editorial', 'La plataforma tecnológica'], correcta: 1, explica: 'La familia es la primera educadora; Chanak aporta estructura y acompañamiento.' },
+      { p: '¿Cuáles son las tres grandes áreas de involucramiento en Chanak?', opciones: ['Contabilidad, Mantenimiento y Cocina', 'Académica y Mentoría, Coordinación Académica, y Desarrollo Estratégico y Crecimiento', 'Sólo profesores de aula tradicional', 'Venta minorista, publicidad y logística'], correcta: 1, explica: 'Las tres áreas organizan la operación académica, la supervisión de calidad y la expansión estratégica.' },
+      { p: '¿Cuál es la función del Tronco Común formativo?', opciones: ['Un examen eliminatorio', 'Una base compartida de identidad, programas y protección que realizan todos antes de su especialización', 'Un trámite burocrático opcional', 'Un curso sólo para personal administrativo'], correcta: 1, explica: 'El Tronco Común asegura identidad, comprensión de programas y salvaguarda transversal.' },
+      { p: '¿Qué principio rige la asignación de responsabilidades en Chanak?', opciones: ['Cualquiera puede prometer créditos y cambiar notas', 'Role ≠ Person: los roles describen funciones con límites de autoridad y permisos claros', 'No existen roles definidos', 'Los roles dependen de la edad'], correcta: 1, explica: 'Role ≠ Person: funciones formalmente asignadas con límites de autoridad protegidos.' },
     ],
-    evidencia: 'Escribe una breve reflexión personal (4–6 líneas) sobre tu vocación y compromiso como mentora Chanak.',
+    evidencia: 'Identifica en cuál de las tres áreas te involucrarás principalmente (Académica, Coordinación o Estratégico) y explica brevemente (4–6 líneas) cómo tu función colabora con las otras dos áreas para servir a las familias.',
   },
 
   'T1.1': {
@@ -178,13 +188,22 @@ export const BLOQUES_1_2 = {
 
   'T1.4': {
     resumen:
-      'El mentor tiene un rol esencial y también límites claros. Saber qué decide el mentor, qué decide la coordinación y qué decide Chanak Central evita errores graves con familias y expedientes.',
+      'El mentor tiene un rol pedagógico esencial y también límites claros de autoridad. Saber qué decide el mentor, qué decide la coordinación y qué decide Chanak Central evita errores graves con familias y expedientes.',
     objetivos: [
-      'Distinguir las decisiones del mentor de las de Chanak Central.',
+      'Comprender la identidad, la función y la regla de oro de la mentoría en Chanak.',
+      'Distinguir las decisiones del mentor de las de la coordinación y de Chanak Central.',
       'Aplicar la regla resolver · documentar · escalar.',
       'Evitar promesas fuera de la autoridad del rol.',
     ],
     lecciones: [
+      {
+        titulo: 'El rol y la función de la mentora Chanak',
+        guion: [
+          'La mentora no es una profesora tradicional que imparte conferencias magistrales ni una vigilante de aula: acompaña de cerca el dominio individual y la autorregulación.',
+          'Regla de oro de la mentoría: nunca resuelvas por el estudiante lo que él puede descubrir por sí mismo. El objetivo es formar aprendices autorregulados capaces de pensar críticamente y perseverar.',
+          'Tu labor consiste en observar con agudeza pedagógica, formular preguntas de indagación, supervisar que los controles se cumplan con honestidad y sostener altas expectativas con profunda empatía.',
+        ],
+      },
       {
         titulo: 'Quién decide qué',
         guion: [

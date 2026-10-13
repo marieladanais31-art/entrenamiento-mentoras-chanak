@@ -8,20 +8,30 @@ export const LECTURAS_B1 = {
   'T1.0': {
     lecciones: [
       {
-        titulo: 'Introducción, vocación y propósito de la formación',
+        titulo: 'Visión, propósito y comunidad Chanak',
         guion: [
-          'Bienvenida al programa de certificación y entrenamiento de mentoras de Chanak International Academy. Esta formación ha sido diseñada para prepararte integralmente no solo en procesos académicos y sistemas, sino en el corazón y la filosofía que distinguen a nuestra comunidad escolar.',
+          'Bienvenida oficial a Chanak International Academy. Somos una escuela privada cristiana estadounidense K–12 registrada en el Departamento de Educación de Florida (FLDOE #134620), que acompaña a familias y a instituciones educativas en varios países: Estados Unidos, México, Panamá, España y Latinoamérica.',
           'Nuestra visión institucional une tres pilares innegociables: excelencia académica rigurosa con estándares internacionales, cosmovisión bíblica transformadora y formación del carácter para el autogobierno.',
-          'En Chanak entendemos que cada estudiante es un diseño único de Dios con dones específicos y ritmos individuales. Por eso, el avance no está dictado por el calendario escolar ni por la presión de grupo, sino por la demostración real de dominio.',
-          'Como mentora, eres la presencia cercana, el modelo de perseverancia y el canal de bendición que acompaña tanto al estudiante en su trabajo diario como a los padres en su labor educativa primordial.',
+          'La alianza con el hogar: en Chanak creemos firmemente que los padres son los primeros y principales educadores de sus hijos. Nosotros no los reemplazamos ni suplantamos la autoridad familiar; somos sus colaboradores estratégicos y su respaldo académico e institucional.',
+          'En Chanak el aprendizaje es la constante y el tiempo es la variable. Dos estudiantes del mismo grado pueden trabajar a ritmos distintos respetando que cada uno es un diseño único de Dios; el avance no está dictado por el calendario escolar ni por la presión de grupo, sino por la demostración real de dominio.',
         ],
       },
       {
-        titulo: 'El rol de la mentora Chanak',
+        titulo: 'Las tres áreas de involucramiento en Chanak',
         guion: [
-          'La mentora no es una profesora tradicional que imparte conferencias magistrales, ni una mera cuidadora de aula. Tu función es observar con agudeza pedagógica, formular preguntas de indagación que despierten el pensamiento crítico, supervisar que los controles se cumplan con honestidad y sostener altas expectativas con profunda empatía.',
-          'Regla de oro de la mentoría: nunca resuelvas por el estudiante lo que él puede descubrir por sí mismo. Nuestro objetivo es forjar aprendices autorregulados, capaces de fijar metas, gestionar su tiempo y amar el aprendizaje para toda la vida.',
-          'La alianza con el hogar: en Chanak creemos firmemente que los padres son los primeros y principales educadores de sus hijos. Nosotros no los reemplazamos; somos sus colaboradores estratégicos y su respaldo institucional.',
+          'En Chanak puedes involucrarte y servir a través de tres grandes áreas operativas y formativas: 1) Área Académica y de Mentoría, 2) Área de Coordinación Académica, y 3) Área de Desarrollo Estratégico y Crecimiento. Cada una cumple una función irremplazable en el ecosistema escolar.',
+          '1. Área Académica y de Mentoría (Mentor): es el corazón del acompañamiento diario. Acompaña directamente a los estudiantes y a sus familias en los programas Off-Campus (Homeschool Guiado) y Dual Diploma. Incluye funciones como mentor académico, profesor de inglés académico (Academic English), facilitador de Life Skills & Leadership por grupos de edad (12–15 y 16–17), asignaturas de Extensión Local (el 20 % lingüístico/cultural) y especialista en evaluación diagnóstica educativa no clínica.',
+          '2. Área de Coordinación Académica (Coordinador): vela por que el sistema funcione con orden y rigor pedagógico. Supervisa y apoya al equipo de mentores y profesores, audita la calidad y el cumplimiento de los Planes Educativos Individualizados (PEI), revisa evidencias en el Student Information System (SIS), atiende incidencias y es el punto de enlace con colegios aliados y directores de Partner Learning Centers (Sedes afiliadas).',
+          '3. Área de Desarrollo Estratégico y Crecimiento (Estratégico): impulsa el alcance y la sostenibilidad de la misión institucional. Acompaña a las familias desde el primer contacto, orientándolas en el proceso de admisión y matrícula (Family Enrollment); gestiona el cumplimiento de programas de becas y fondos estatales de EE. UU. (Education Savings Accounts como Florida EMA, Alabama CHOOSE, Utah Fits All, Texas TEFA, Wyoming ESA y Arizona ESA); desarrolla alianzas institucionales con colegios, iglesias y ministerios; y gestiona convocatorias de subvenciones (grants), difusión y proyectos comunitarios.',
+        ],
+      },
+      {
+        titulo: 'El Tronco Común formativo y la sinergia entre roles',
+        guion: [
+          'Principio institucional: Role ≠ Person. Un rol describe una función y un conjunto definido de responsabilidades y permisos; una persona puede asumir varios roles compatibles según su perfil y asignación formal, pero los permisos y la autoridad nunca se mezclan.',
+          'El Tronco Común formativo: todas las personas que se integran a Chanak, con independencia del área en la que sirvan o se especialicen posteriormente, inician completando juntos el Tronco Común. Este comprende la Identidad y modelo Chanak (Bloque 1), los Programas oficiales (Bloque 2), y la Salvaguarda de menores y Protección de datos (Bloque 6).',
+          'Por qué un Tronco Común: garantiza que mentores, coordinadores y equipos estratégicos compartan el mismo vocabulario, conozcan a fondo qué ofrece la escuela, defiendan la misma cosmovisión y protejan siempre la seguridad física, emocional y legal de cada estudiante y familia.',
+          'A partir del Tronco Común, cada persona profundiza en los módulos de su ruta específica: el mentor en el acompañamiento pedagógico y vías curriculares; el coordinador en la supervisión de calidad y reportería en el SIS; y el equipo estratégico en la normativa de fondos estatales, planes de entrada a mercados y alianzas institucionales.',
         ],
       },
     ],
@@ -303,6 +313,14 @@ export const LECTURAS_B1 = {
 
   'T1.4': {
     lecciones: [
+      {
+        titulo: 'El rol de la mentora Chanak y la regla de oro',
+        guion: [
+          'La mentora no es una profesora tradicional que imparte conferencias magistrales, ni una mera cuidadora o vigilante de aula. Tu función es observar con agudeza pedagógica, formular preguntas de indagación que despierten el pensamiento crítico, supervisar que los controles se cumplan con honestidad y sostener altas expectativas con profunda empatía.',
+          'Regla de oro de la mentoría: nunca resuelvas por el estudiante lo que él puede descubrir por sí mismo. Nuestro objetivo es forjar aprendices autorregulados, capaces de fijar metas, gestionar su tiempo y amar el aprendizaje para toda la vida.',
+          'El acompañamiento se basa en el modelaje y la confianza: acompañas el dominio individual de cada unidad, guías al alumno en el uso honesto de las estaciones de control y sirves de puente cercano, constante y respetuoso con la familia.',
+        ],
+      },
       {
         titulo: 'Por qué la autoridad académica tiene límites claros',
         guion: [
