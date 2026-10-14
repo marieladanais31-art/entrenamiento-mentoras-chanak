@@ -342,8 +342,8 @@ export default function App() {
             esAdmin={esAdmin}
             viendoOtra={viendoOtra}
             onAbrirBloque={(bloqueId) => setVista({ ...vista, nombre: 'bloque', bloqueId })}
-            onAbrirModulo={(moduloId) =>
-              setVista({ ...vista, nombre: 'modulo', moduloId, bloqueId: getModulo(moduloId)?.bloqueId })
+            onAbrirModulo={(moduloId, contexto) =>
+              setVista({ ...vista, nombre: 'modulo', moduloId, bloqueId: getModulo(moduloId)?.bloqueId, contexto })
             }
             onVerGuias={() => setVista({ ...vista, nombre: 'guias-familias' })}
             onVerProgramas={() => setVista({ ...vista, nombre: 'operacion-programas' })}
@@ -388,7 +388,7 @@ export default function App() {
             rolId={vista.rolId}
             progreso={progresoVista}
             onVolver={() => setVista({ ...vista, nombre: 'organigrama' })}
-            onAbrirModulo={(moduloId) => setVista({ ...vista, nombre: 'modulo', moduloId, bloqueId: getModulo(moduloId)?.bloqueId })}
+            onAbrirModulo={(moduloId) => setVista({ ...vista, nombre: 'modulo', moduloId, bloqueId: getModulo(moduloId)?.bloqueId, contexto: { origen: 'rol', rolId: vista.rolId } })}
           />
         )}
         {vista.nombre === 'curso' && (
@@ -402,22 +402,36 @@ export default function App() {
             bloqueId={vista.bloqueId}
             esAdmin={esAdmin}
             progreso={progresoVista}
-            onAbrirModulo={(moduloId) => setVista({ ...vista, nombre: 'modulo', moduloId })}
+            onAbrirModulo={(moduloId) => setVista({ ...vista, nombre: 'modulo', moduloId, bloqueId: vista.bloqueId, contexto: { origen: 'bloque', bloqueId: vista.bloqueId } })}
             onVolver={() => setVista({ ...vista, nombre: 'dashboard' })}
           />
         )}
         {vista.nombre === 'modulo' && (
           <ModuleView
             moduloId={vista.moduloId}
+            contexto={vista.contexto}
             progresoModulo={progresoVista.modulos[vista.moduloId]}
             videos={videos}
             esAdmin={esAdmin}
             acciones={acciones}
+            onNavegarModulo={(nuevoModuloId, nuevoCtx) =>
+              setVista({
+                ...vista,
+                moduloId: nuevoModuloId,
+                bloqueId: getModulo(nuevoModuloId)?.bloqueId,
+                contexto: nuevoCtx !== undefined ? nuevoCtx : vista.contexto,
+              })
+            }
             onVerGuias={() => setVista({ ...vista, nombre: 'guias-familias' })}
             onVerCoordinacion={() => setVista({ ...vista, nombre: 'coordinacion-sis' })}
             onVerOperativa={() => setVista({ ...vista, nombre: 'operativa-sis' })}
             onVerCatalogo={() => setVista({ ...vista, nombre: 'catalogo-videos' })}
-            onVolver={() => setVista({ ...vista, nombre: 'bloque' })}
+            onVolver={() =>
+              setVista({
+                ...vista,
+                nombre: vista.contexto?.origen === 'bloque' ? 'bloque' : 'dashboard',
+              })
+            }
           />
         )}
         {vista.nombre === 'horas' && (

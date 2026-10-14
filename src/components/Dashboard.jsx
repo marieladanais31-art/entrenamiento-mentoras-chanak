@@ -132,11 +132,22 @@ export default function Dashboard({
       </section>
 
       {siguiente && !viendoOtra && (
-        <button onClick={() => onAbrirModulo(siguiente.id)} className="flex w-full items-center gap-3 rounded-2xl bg-teal px-4 py-4 text-left text-white shadow-sm transition hover:bg-teal/90">
+        <button
+          onClick={() =>
+            onAbrirModulo(
+              siguiente.id,
+              troncoIds.includes(siguiente.id)
+                ? { origen: 'tronco', listaIds: troncoIds, indice: troncoIds.indexOf(siguiente.id) }
+                : { origen: 'rama', listaIds: ramaIds, indice: ramaIds.indexOf(siguiente.id) }
+            )
+          }
+          className="flex w-full items-center gap-3 rounded-2xl bg-teal px-4 py-4 text-left text-white shadow-sm transition hover:bg-teal/90"
+        >
           <span className="text-2xl" aria-hidden>▶</span>
           <span className="min-w-0 flex-1">
             <span className="block text-[12px] font-bold uppercase tracking-wide text-white/75">
               {mods[siguiente.id]?.estado === 'en_curso' ? t('panel.continuar') : t('panel.siguiente')}
+              {troncoIds.includes(siguiente.id) && ` · Tronco común (${troncoIds.indexOf(siguiente.id) + 1} de ${troncoIds.length})`}
             </span>
             <span className="block text-sm font-bold">{numModulo(siguiente.id)} · {siguiente.titulo}</span>
           </span>
@@ -163,7 +174,7 @@ export default function Dashboard({
       {/* PASO 1 · TRONCO COMÚN */}
       <Paso numero={1} titulo="Tronco común · para todas las personas" hechos={troncoHechos} total={troncoIds.length}
         sub="Quién es Chanak, el modelo 60/20/20, Off-Campus, Dual Diploma y Life Skills, safeguarding y protección de datos.">
-        <ListaModulos ids={troncoIds} mods={mods} onAbrirModulo={onAbrirModulo} />
+        <ListaModulos ids={troncoIds} mods={mods} esTronco onAbrirModulo={onAbrirModulo} />
         {directo && <p className="mt-2 text-[11px] text-navy/55">Incluye Desarrollo infantil y adolescente (Bloque 9), obligatorio por tener contacto directo con menores.</p>}
       </Paso>
 
@@ -261,7 +272,14 @@ export default function Dashboard({
                   <button onClick={bloqueado ? undefined : () => onAbrirBloque(b.id)} className="text-left text-[12px] font-bold uppercase tracking-wide text-teal hover:underline">
                     {t('panel.bloque', { n: b.numero })} · {b.titulo} {bloqueado ? '🔒' : '→'}
                   </button>
-                  {!bloqueado && <ListaModulos ids={b.propios.map((m) => m.id)} mods={mods} onAbrirModulo={onAbrirModulo} />}
+                  {!bloqueado && (
+                    <ListaModulos
+                      ids={b.propios.map((m) => m.id)}
+                      mods={mods}
+                      onAbrirModulo={onAbrirModulo}
+                      contexto={{ origen: 'rama', listaIds: ramaIds }}
+                    />
+                  )}
                 </div>
               )
             })}
@@ -379,17 +397,33 @@ function Paso({ numero, titulo, sub, hechos, total, children }) {
   )
 }
 
-function ListaModulos({ ids, mods, onAbrirModulo }) {
+function ListaModulos({ ids, mods, onAbrirModulo, esTronco = false, contexto = null }) {
   return (
     <ul className="mt-1 space-y-1.5">
-      {ids.map((id) => {
+      {ids.map((id, idx) => {
         const m = getModulo(id)
         const estado = mods[id]?.estado || 'pendiente'
+        const numConsecutivo = idx + 1
         return (
           <li key={id}>
-            <button onClick={() => onAbrirModulo(id)} className="flex w-full items-center gap-2 rounded-lg bg-white px-3 py-2 text-left text-sm shadow-sm hover:bg-teal/5">
-              <span className="w-10 shrink-0 text-xs font-bold text-teal">{numModulo(id)}</span>
-              <span className="min-w-0 flex-1 text-navy">{m?.titulo}</span>
+            <button
+              onClick={() =>
+                onAbrirModulo(
+                  id,
+                  contexto || (esTronco ? { origen: 'tronco', listaIds: ids, indice: idx } : undefined)
+                )
+              }
+              className="flex w-full items-center gap-2.5 rounded-xl bg-white px-3 py-2.5 text-left text-sm shadow-xs transition hover:bg-teal/5 hover:shadow-sm"
+            >
+              {esTronco ? (
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-teal/15 text-[11px] font-extrabold text-teal">
+                  {numConsecutivo}
+                </span>
+              ) : null}
+              <span className={`shrink-0 text-xs font-bold ${esTronco ? 'w-10 text-navy/55' : 'w-10 text-teal'}`}>
+                {numModulo(id)}
+              </span>
+              <span className="min-w-0 flex-1 text-navy font-medium leading-snug">{m?.titulo}</span>
               <EstadoBadge estado={estado} />
             </button>
           </li>

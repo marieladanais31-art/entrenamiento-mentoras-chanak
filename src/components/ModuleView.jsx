@@ -11,16 +11,48 @@ import VistaSistema from './VistaSistema'
 import { vistasDeModulo } from '../data/vistasSistema'
 import { useIdioma } from '../i18n/idioma'
 import { traducirModulo, traducirRecursos } from '../data/curriculum.en'
+import { TRONCO_COMUN } from '../data/roles'
 
 // Recorrido del módulo: Vídeo → Lectura → Práctica → Knowledge Check → Evidencia → Completado
 const PASOS = ['video', 'lectura', 'practica', 'quiz', 'evidencia', 'completado']
 
-export default function ModuleView({ moduloId, progresoModulo: p, videos, esAdmin, acciones, onVolver, onVerCatalogo, onVerOperativa, onVerGuias, onVerCoordinacion }) {
+export default function ModuleView({
+  moduloId,
+  contexto,
+  progresoModulo: p,
+  videos,
+  esAdmin,
+  acciones,
+  onVolver,
+  onNavegarModulo,
+  onVerCatalogo,
+  onVerOperativa,
+  onVerGuias,
+  onVerCoordinacion,
+}) {
   const { t, idioma } = useIdioma()
   const modulo = traducirModulo(getModulo(moduloId), idioma)
   const contenido = getContenido(moduloId, idioma)
   const recursos = traducirRecursos(RECURSOS_GENERALES, idioma)
   const estado = p?.estado || 'pendiente'
+
+  // Consecutivo del Tronco Común o lista de contexto
+  const listaIds =
+    contexto?.listaIds?.length
+      ? contexto.listaIds
+      : contexto?.origen !== 'bloque' && TRONCO_COMUN.includes(moduloId)
+        ? TRONCO_COMUN
+        : null
+
+  const indice = listaIds ? listaIds.indexOf(moduloId) : -1
+  const esTronco =
+    contexto?.origen === 'tronco' ||
+    (contexto?.origen !== 'bloque' && indice !== -1 && TRONCO_COMUN.includes(moduloId))
+
+  const anteriorId = indice > 0 ? listaIds[indice - 1] : null
+  const siguienteId = indice >= 0 && indice < listaIds.length - 1 ? listaIds[indice + 1] : null
+  const anteriorModulo = anteriorId ? traducirModulo(getModulo(anteriorId), idioma) : null
+  const siguienteModulo = siguienteId ? traducirModulo(getModulo(siguienteId), idioma) : null
   const videoDef = getVideo(modulo?.video)
   // La URL guardada por la administración (Supabase) tiene prioridad sobre videos.js
   const videoGuardado = videoDef ? videos?.[`${videoDef.id}:0`] : null
@@ -94,9 +126,23 @@ export default function ModuleView({ moduloId, progresoModulo: p, videos, esAdmi
 
   return (
     <div className="space-y-4">
-      <button onClick={onVolver} className="text-sm font-medium text-teal hover:underline">
-        {t('modulo.volverBloque')}
-      </button>
+      <div className="flex items-center justify-between gap-3">
+        <button onClick={onVolver} className="inline-flex items-center gap-1.5 text-sm font-semibold text-teal hover:underline">
+          <span>←</span>
+          <span>
+            {esTronco
+              ? (idioma === 'es' ? 'Volver al Tronco Común' : 'Back to Core Track')
+              : contexto?.origen === 'bloque'
+                ? t('modulo.volverBloque')
+                : (idioma === 'es' ? 'Volver al panel' : 'Back to Dashboard')}
+          </span>
+        </button>
+        {esTronco && indice !== -1 && (
+          <div className="rounded-full bg-teal/10 px-3 py-1 text-xs font-bold text-teal">
+            {idioma === 'es' ? `Módulo ${indice + 1} de ${listaIds.length}` : `Module ${indice + 1} of ${listaIds.length}`}
+          </div>
+        )}
+      </div>
 
       {vistasDeModulo(moduloId).length > 0 && (
         <details open className="rounded-2xl border-2 border-teal/40 bg-white p-4 shadow-sm">
@@ -131,12 +177,25 @@ export default function ModuleView({ moduloId, progresoModulo: p, videos, esAdmi
       {/* ── Ficha ── */}
       <div className="rounded-2xl bg-white p-5 shadow-sm">
         <div className="flex items-start justify-between gap-3">
-          <div>
-            <div className="text-xs font-bold text-teal">
-              {t('bloque.modulo', { id: numModulo(modulo.id) })} · {modulo.bloqueTitulo}
-              {modulo.porRol && <span className="ml-1 text-gold">· {t('panel.porRol')}</span>}
-            </div>
-            <h2 className="mt-1 text-lg font-bold leading-snug text-navy">{modulo.titulo}</h2>
+          <div className="min-w-0">
+            {esTronco && indice !== -1 ? (
+              <div className="mb-2 flex flex-wrap items-center gap-2">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-teal px-3 py-1 text-xs font-extrabold uppercase tracking-wide text-white shadow-xs">
+                  <span>🌳</span>
+                  <span>{idioma === 'es' ? `Tronco Común · Módulo ${indice + 1} de ${listaIds.length}` : `Core Track · Module ${indice + 1} of ${listaIds.length}`}</span>
+                </span>
+                <span className="text-xs font-semibold text-navy/60">
+                  (Ref. {numModulo(modulo.id)} · {modulo.bloqueTitulo})
+                </span>
+                {modulo.porRol && <span className="text-xs text-gold">· {t('panel.porRol')}</span>}
+              </div>
+            ) : (
+              <div className="text-xs font-bold text-teal">
+                {t('bloque.modulo', { id: numModulo(modulo.id) })} · {modulo.bloqueTitulo}
+                {modulo.porRol && <span className="ml-1 text-gold">· {t('panel.porRol')}</span>}
+              </div>
+            )}
+            <h2 className="mt-1 text-xl font-bold leading-snug text-navy">{modulo.titulo}</h2>
           </div>
           <EstadoBadge estado={estado} />
         </div>
@@ -399,6 +458,24 @@ export default function ModuleView({ moduloId, progresoModulo: p, videos, esAdmi
               <p className="rounded-xl bg-gold/12 px-4 py-3 text-sm font-semibold text-navy">
                 🎓 {t('bloque.completadoEl', { fecha: formatearFecha(p?.fechaCompletado) })}
               </p>
+              {siguienteId && onNavegarModulo && (
+                <button
+                  onClick={() => onNavegarModulo(siguienteId)}
+                  className="flex w-full items-center justify-between gap-3 rounded-xl bg-teal px-4 py-3 text-left font-bold text-white shadow-sm hover:bg-teal/90 transition"
+                >
+                  <div className="min-w-0">
+                    <span className="block text-[11px] font-semibold uppercase tracking-wider text-white/75">
+                      {esTronco
+                        ? (idioma === 'es' ? `Siguiente en Tronco Común · Módulo ${indice + 2} de ${listaIds.length}` : `Next in Core Track · Module ${indice + 2} of ${listaIds.length}`)
+                        : (idioma === 'es' ? 'Siguiente módulo' : 'Next module')}
+                    </span>
+                    <span className="block truncate text-sm">
+                      {numModulo(siguienteId)} · {siguienteModulo?.titulo}
+                    </span>
+                  </div>
+                  <span className="text-xl shrink-0">→</span>
+                </button>
+              )}
               <button onClick={() => acciones.setEstado(moduloId, 'en_curso')} className="w-full rounded-xl border border-coral/40 py-2.5 text-xs font-medium text-coral hover:bg-coral/5">
                 {t('modulo.reabrir')}
               </button>
@@ -456,6 +533,50 @@ export default function ModuleView({ moduloId, progresoModulo: p, videos, esAdmi
           ))}
         </ul>
       </div>
+
+      {/* ── Navegación consecutiva entre módulos ── */}
+      {(anteriorId || siguienteId) && (
+        <nav aria-label="Navegación consecutiva" className="rounded-2xl border border-navy/10 bg-white p-4 shadow-sm">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+            {anteriorId && onNavegarModulo ? (
+              <button
+                onClick={() => onNavegarModulo(anteriorId)}
+                className="flex items-center gap-2.5 rounded-xl bg-cream px-3.5 py-2.5 text-left text-xs font-bold text-navy hover:bg-teal/10 hover:text-teal transition sm:max-w-[45%]"
+              >
+                <span className="text-base shrink-0">←</span>
+                <div className="min-w-0">
+                  <span className="block text-[10px] font-semibold uppercase tracking-wider text-navy/50">
+                    {esTronco ? `Módulo ${indice} de ${listaIds.length}` : (idioma === 'es' ? 'Anterior' : 'Previous')}
+                  </span>
+                  <span className="block truncate text-navy">{numModulo(anteriorId)} · {anteriorModulo?.titulo}</span>
+                </div>
+              </button>
+            ) : <div className="hidden sm:block" />}
+
+            <button
+              onClick={onVolver}
+              className="rounded-xl border border-navy/15 px-3 py-2 text-center text-xs font-semibold text-navy/70 hover:bg-cream hover:text-navy transition"
+            >
+              {esTronco ? (idioma === 'es' ? 'Volver al Tronco Común' : 'Back to Core Track') : (idioma === 'es' ? 'Volver al panel' : 'Back to Dashboard')}
+            </button>
+
+            {siguienteId && onNavegarModulo ? (
+              <button
+                onClick={() => onNavegarModulo(siguienteId)}
+                className="flex items-center justify-end gap-2.5 rounded-xl bg-teal px-4 py-2.5 text-right text-xs font-bold text-white hover:bg-teal/90 transition sm:max-w-[45%]"
+              >
+                <div className="min-w-0">
+                  <span className="block text-[10px] font-semibold uppercase tracking-wider text-white/75">
+                    {esTronco ? `Módulo ${indice + 2} de ${listaIds.length}` : (idioma === 'es' ? 'Siguiente' : 'Next')}
+                  </span>
+                  <span className="block truncate text-white">{numModulo(siguienteId)} · {siguienteModulo?.titulo}</span>
+                </div>
+                <span className="text-base shrink-0">→</span>
+              </button>
+            ) : <div className="hidden sm:block" />}
+          </div>
+        </nav>
+      )}
     </div>
   )
 }

@@ -477,17 +477,17 @@ export const PROYECTOS_PRIORIDAD = [
   },
   {
     id: 'sitio_tarragona',
-    titulo: 'Sitio / Financiamiento de Partner en Tarragona',
+    titulo: 'Atención de Familias y Visión de Partner Presencial (Tarragona)',
     area: 'Expansión España (Cataluña)',
-    descripcion: 'Desarrollo de sede o Learning Center presencial en Tarragona y captación de fondos y acuerdos de colaboración.',
+    descripcion: 'Atención de familias, visión de partner y desarrollo de sede o Learning Center presencial en Tarragona.',
     requisitos: ['Disponibilidad en Cataluña / Tarragona', 'Gestión de acuerdos de cesión/alquiler compartido y entidades locales'],
   },
   {
     id: 'matriz_estudiantes_florida',
-    titulo: 'Matriz con Estudiantes Presenciales en Florida',
-    area: 'Operaciones EE. UU.',
-    descripcion: 'Consolidación de la cartera presencial de estudiantes en Florida bajo registro FLDOE #134620 y becas Step Up / EMA.',
-    requisitos: ['Residencia o contacto operativo en Florida', 'Dominio de procesos EMA Marketplace y atención a familias'],
+    titulo: 'Matriz con Estudiantes Presenciales en Florida y Programas ESA (Karen Pujols)',
+    area: 'Operaciones EE. UU. (Encargada de todos los ESA)',
+    descripcion: 'Consolidación de la cartera presencial de estudiantes en Florida bajo registro FLDOE #134620 y gestión integral de becas y programas ESA en EE. UU.',
+    requisitos: ['Residencia o contacto operativo en Florida / EE. UU.', 'Dominio de plataformas ESA (EMA, ClassWallet, Odyssey) y atención a familias'],
   },
   {
     id: 'lifeskills_walmart',
@@ -568,12 +568,12 @@ export const REPRESENTANTES_PAISES = [
       {
         territorio: '1. Tarragona',
         representantes: ['Thiare Urzua', 'Sonsoles Bueno', 'Laura Pardo', 'Sergio Masía'],
-        funcion: 'Partner Learning Center (Sede presencial), Alianzas Locales y Coordinación',
+        funcion: 'Atención de Familias y Visión de Partner Presencial',
       },
       {
         territorio: '2. Madrid – Valencia',
-        representantes: ['Medalith Rosales', 'Juan Carlos', 'Jitu Dongardive'],
-        funcion: 'Desarrollo Estratégico, Expansión, Alianzas y Comunidad',
+        representantes: ['Medalith Rosales', 'Jitu Dongardive', 'Juan Carlos'],
+        funcion: 'Representantes JCUM España y Alianzas Institucionales',
       },
       {
         territorio: '3. Educafe',
@@ -613,57 +613,57 @@ export const REPRESENTANTES_PAISES = [
     territorios: [
       {
         territorio: 'Florida',
-        representantes: ['Karen Pujols'],
+        representantes: ['Karen Pujols (Encargada de todos los ESA)'],
         funcion: 'Enlace Florida ESA · Step Up For Students / EMA (Home Education Instructional Program), FES-UA / PEP, Matriz Presencial (Aprobado)',
       },
       {
         territorio: 'Alabama',
-        representantes: ['Chanak Administration'],
+        representantes: ['Karen Pujols (Encargada de todos los ESA)'],
         funcion: 'CHOOSE Act · ClassWallet Education Service Provider (ESP) (Aprobado)',
       },
       {
         territorio: 'Texas',
-        representantes: ['Chanak Administration'],
+        representantes: ['Karen Pujols (Encargada de todos los ESA)'],
         funcion: 'TEFA (Texas Education Freedom Accounts) · Odyssey Vendor (Aprobado / Casi Seguro)',
       },
       {
         territorio: 'Wyoming',
-        representantes: ['Chanak Administration'],
+        representantes: ['Karen Pujols (Encargada de todos los ESA)'],
         funcion: 'Wyoming ESA (Education Savings Accounts) · Education Service Provider (Aprobado)',
       },
       {
         territorio: 'Arizona',
-        representantes: ['Chanak Administration'],
+        representantes: ['Karen Pujols (Encargada de todos los ESA)'],
         funcion: 'ADE ESA (Empowerment Scholarship Account) · Registro de Proveedor ADE (Aprobado)',
       },
       {
         territorio: 'Utah',
-        representantes: ['Chanak Administration'],
+        representantes: ['Karen Pujols (Encargada de todos los ESA)'],
         funcion: 'Utah Fits All · Odyssey Provider (Aprobado; Life Skills, English, Tutoría, Diagnósticos)',
       },
       {
         territorio: 'New Hampshire',
-        representantes: ['Chanak Administration'],
+        representantes: ['Karen Pujols (Encargada de todos los ESA)'],
         funcion: 'Education Freedom Account (EFA) · Education Service Provider (En proceso)',
       },
       {
         territorio: 'West Virginia',
-        representantes: ['Chanak Administration'],
+        representantes: ['Karen Pujols (Encargada de todos los ESA)'],
         funcion: 'Hope Scholarship · Education Service Provider (En proceso)',
       },
       {
         territorio: 'Georgia',
-        representantes: ['Chanak Administration'],
+        representantes: ['Karen Pujols (Encargada de todos los ESA)'],
         funcion: 'Georgia Promise Scholarship · Proveedor de Servicios Educativos (En proceso)',
       },
       {
         territorio: 'Louisiana',
-        representantes: ['Chanak Administration'],
+        representantes: ['Karen Pujols (Encargada de todos los ESA)'],
         funcion: 'LA GATOR · Education Service Provider (En proceso)',
       },
       {
         territorio: 'South Carolina',
-        representantes: ['Chanak Administration'],
+        representantes: ['Karen Pujols (Encargada de todos los ESA)'],
         funcion: 'Education Scholarship Trust Fund (ESTF) · Education Service Provider (En revisión)',
       },
     ],
