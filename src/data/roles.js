@@ -560,8 +560,8 @@ export const REQUISITOS_MODALIDADES = {
 export const REPRESENTANTES_PAISES = [
   {
     pais: 'España',
-    estado: 'Expansión / Educafe inactivo',
-    badgeTono: 'gold',
+    estado: 'En Expansión',
+    badgeTono: 'teal',
     codigo: 'ES',
     bandera: '🇪🇸',
     territorios: [
