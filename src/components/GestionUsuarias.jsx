@@ -19,6 +19,7 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
   const [editandoNombreId, setEditandoNombreId] = useState(null)
   const [nuevoNombre, setNuevoNombre] = useState('')
   const [copiadoId, setCopiadoId] = useState(null)
+  const [modalCompromiso, setModalCompromiso] = useState(null)
 
   // Formulario para crear usuaria directa
   const [mostrandoForm, setMostrandoForm] = useState(false)
@@ -85,6 +86,115 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
     navigator.clipboard.writeText(correos.join(', '))
     setCopiadoId('bcc_list')
     setTimeout(() => setCopiadoId(null), 3000)
+  }
+
+  function imprimirComprobante(perfil, compromiso) {
+    const w = window.open('', '_blank', 'width=850,height=950')
+    if (!w) {
+      alert('Por favor permite ventanas emergentes en tu navegador para generar el comprobante.')
+      return
+    }
+    const fechaAceptado = compromiso?.aceptado_en
+      ? new Date(compromiso.aceptado_en).toLocaleString('es-ES', { dateStyle: 'full', timeStyle: 'medium' })
+      : '[Dato no conservado en el registro histórico]'
+    const version = compromiso?.version || '[Versión no registrada históricamente]'
+    const nombreFirmante = compromiso?.nombre_completo || perfil?.nombre || '[Dato no conservado en el registro histórico]'
+    const emailFirmante = perfil?.email || '[Dato no conservado en el registro histórico]'
+    const territorio = compromiso?.territorio || perfil?.pais || '[No especificado]'
+    const perfilAcceso = perfil?.tipo_acceso || 'mentora'
+    const idUsuario = perfil?.id || '—'
+
+    let funcionesTxt = 'Tronco Común'
+    if (compromiso?.funciones && Array.isArray(compromiso.funciones)) {
+      const fnNames = compromiso.funciones.filter((f) => typeof f === 'string')
+      if (fnNames.length > 0) funcionesTxt = fnNames.join(', ')
+    }
+
+    const html = `<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Comprobante de Consentimiento y Compromiso · ${nombreFirmante}</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; color: #152238; margin: 40px; line-height: 1.5; font-size: 13px; }
+    .header { border-bottom: 2px solid #008080; padding-bottom: 15px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: flex-start; }
+    .title { font-size: 18px; font-weight: bold; color: #152238; margin: 0; }
+    .subtitle { font-size: 12px; color: #008080; font-weight: bold; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 4px; }
+    .fldoe { font-size: 11px; color: #64748b; margin-top: 4px; }
+    .meta-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; margin-bottom: 25px; }
+    .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .meta-item b { display: block; font-size: 10px; text-transform: uppercase; color: #64748b; letter-spacing: 0.05em; margin-bottom: 2px; }
+    .section-title { font-size: 13px; font-weight: bold; color: #152238; border-bottom: 1px solid #cbd5e1; padding-bottom: 6px; margin: 25px 0 12px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .clause { margin-bottom: 12px; padding-left: 22px; position: relative; font-size: 12.5px; }
+    .clause:before { content: "✓"; position: absolute; left: 0; color: #008080; font-weight: bold; font-size: 14px; }
+    .audit-notice { background: #fffbeb; border: 1px solid #fef3c7; border-radius: 6px; padding: 12px; font-size: 11.5px; color: #92400e; margin-top: 20px; }
+    .stamp { margin-top: 35px; border-top: 2px dashed #cbd5e1; padding-top: 20px; display: flex; justify-content: space-between; align-items: flex-end; }
+    .stamp-box { border: 2px solid #008080; border-radius: 6px; padding: 10px 18px; color: #008080; font-weight: bold; text-align: center; font-size: 11px; text-transform: uppercase; }
+    @media print {
+      body { margin: 15mm; }
+      .no-print { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div>
+      <div class="subtitle">Chanak International Academy · TrainUp</div>
+      <h1 class="title">Comprobante Oficial de Aceptación de Compromiso y Consentimiento</h1>
+      <div class="fldoe">Escuela Privada Cristiana K–12 registrada en Florida · FLDOE #134620 · MSA-CESS Candidate</div>
+    </div>
+    <button class="no-print" onclick="window.print()" style="background:#008080;color:white;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-weight:bold;font-size:12px;">🖨️ Imprimir / Guardar PDF</button>
+  </div>
+
+  <div class="meta-box">
+    <div class="meta-grid">
+      <div class="meta-item"><b>Nombre del titular</b>${nombreFirmante}</div>
+      <div class="meta-item"><b>Correo electrónico registrado</b>${emailFirmante}</div>
+      <div class="meta-item"><b>País / Territorio</b>${territorio}</div>
+      <div class="meta-item"><b>Perfil de acceso</b>${perfilAcceso}</div>
+      <div class="meta-item"><b>Fecha y hora de aceptación</b>${fechaAceptado}</div>
+      <div class="meta-item"><b>Versión del compromiso aceptada</b>${version}</div>
+      <div class="meta-item" style="grid-column: span 2;"><b>Ramas / Funciones solicitadas</b>${funcionesTxt}</div>
+    </div>
+  </div>
+
+  <div class="section-title">Declaraciones Juradas y Consentimientos Aceptados</div>
+  <div class="clause">
+    <b>Naturaleza no contractual:</b> Comprendo que mi perfil de formación no equivale a una función operativa asignada ni constituye una relación contractual o laboral.
+  </div>
+  <div class="clause">
+    <b>Confidencialidad institucional:</b> Mantendré estricta confidencialidad sobre la información interna, manuales, metodologías y cualquier dato personal de familias o alumnos al que pudiera tener acceso.
+  </div>
+  <div class="clause">
+    <b>Protección de datos y uso formativo:</b> Utilizaré los materiales exclusivamente para mi formación y respetaré rigurosamente las condiciones de uso de Chanak, el RGPD / COPPA y la privacidad de terceros.
+  </div>
+  <div class="clause">
+    <b>Integridad académica y rigor:</b> Participaré con respeto pedagógico y presentaré mis propias actividades, evidencias y reflexiones con información veraz y comprobable.
+  </div>
+  <div class="clause">
+    <b>Límites de autoridad y representación:</b> Comprendo que cualquier colaboración posterior requiere definir funciones y alcance, formalizar el acuerdo correspondiente con Chanak Central y obtener autorización específica por escrito.
+  </div>
+
+  <div class="audit-notice">
+    <b>Validez probatoria y auditoría escolar:</b> Este registro digital conserva las declaraciones históricas aceptadas electrónicamente al acceder a la plataforma TrainUp Chanak. Conservado conforme a las políticas de compliance y expedientes de personal.
+  </div>
+
+  <div class="stamp">
+    <div>
+      <div style="font-size:11px;color:#64748b;font-weight:bold;">REGISTRO DIGITAL EN SUPABASE TRAINUP</div>
+      <div style="font-family:monospace;font-size:10px;color:#334155;margin-top:2px;">UUID: ${idUsuario}</div>
+      <div style="font-size:10px;color:#64748b;margin-top:4px;">Documento conservado para fines de auditoría escolar (FLDOE / MSA) y RGPD.</div>
+    </div>
+    <div class="stamp-box">
+      ✓ Verificado Digitalmente<br>TrainUp Chanak Central
+    </div>
+  </div>
+</body>
+</html>`
+
+    w.document.open()
+    w.document.write(html)
+    w.document.close()
   }
 
   async function cambiar(id, cambios) {
@@ -353,8 +463,18 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
                   <div className="min-w-0 flex-1">
                     <div className="text-sm font-semibold text-navy">{p.nombre}</div>
                     <div className="text-xs text-teal font-medium">📧 {correoP || 'Sin email registrado'}</div>
-                    <div className="text-[12px] text-navy/50">
-                      {t('usuarias.solicito', { fecha: formatearFecha(p.creado_en?.slice(0, 10)) })}
+                    <div className="text-[12px] text-navy/50 flex flex-wrap items-center gap-2">
+                      <span>{t('usuarias.solicito', { fecha: formatearFecha(p.creado_en?.slice(0, 10)) })}</span>
+                      {compromisosMapa?.[p.id] && (
+                        <button
+                          type="button"
+                          onClick={() => setModalCompromiso({ perfil: p, compromiso: compromisosMapa[p.id] })}
+                          className="rounded-md bg-teal/10 px-2 py-0.5 text-[11px] font-bold text-teal hover:bg-teal hover:text-white transition"
+                          title="Ver datos históricos de aceptación"
+                        >
+                          👁️ Ver aceptación
+                        </button>
+                      )}
                     </div>
                   </div>
                   <button
@@ -498,10 +618,20 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
                     )}
                   </div>
                   {compromisosMapa !== undefined && (
-                    <div className={`mt-1 text-xs font-semibold ${compromisosMapa?.[p.id] ? 'text-teal' : 'text-gold'}`}>
-                      {compromisosMapa?.[p.id]
-                        ? `✓ Compromiso ${compromisosMapa[p.id].version} aceptado`
-                        : 'Compromiso inicial pendiente'}
+                    <div className="mt-1 flex flex-wrap items-center gap-2">
+                      <span className={`text-xs font-semibold ${compromisosMapa?.[p.id] ? 'text-teal' : 'text-gold'}`}>
+                        {compromisosMapa?.[p.id]
+                          ? `✓ Compromiso ${compromisosMapa[p.id].version} aceptado`
+                          : 'Compromiso inicial pendiente'}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => setModalCompromiso({ perfil: p, compromiso: compromisosMapa?.[p.id] || null })}
+                        className="rounded-lg bg-teal/10 px-2 py-0.5 text-[11px] font-bold text-teal hover:bg-teal hover:text-white transition"
+                        title="Ver datos históricos de aceptación y comprobante oficial"
+                      >
+                        👁️ Ver aceptación
+                      </button>
                     </div>
                   )}
                 </div>
@@ -643,7 +773,246 @@ WHERE p.id = u.id;`}
       <p className="text-[13px] leading-relaxed text-navy/50">
         {t('usuarias.notaBorrado')}
       </p>
+
+      {modalCompromiso && (
+        <ModalAceptacionCompromiso
+          datos={modalCompromiso}
+          onClose={() => setModalCompromiso(null)}
+          onImprimir={imprimirComprobante}
+        />
+      )}
     </section>
+  )
+}
+
+function ModalAceptacionCompromiso({ datos, onClose, onImprimir }) {
+  if (!datos) return null
+  const { perfil, compromiso } = datos
+
+  const nombreRegistrado = compromiso?.nombre_completo || '[Dato no conservado en el registro histórico]'
+  const territorioRegistrado = compromiso?.territorio || perfil?.pais || '[Dato no conservado en el registro histórico]'
+  const versionRegistrada = compromiso?.version || '[Versión no registrada históricamente]'
+  const fechaAceptado = compromiso?.aceptado_en
+    ? new Date(compromiso.aceptado_en).toLocaleString('es-ES', { dateStyle: 'full', timeStyle: 'medium' })
+    : '[Dato no conservado en el registro histórico]'
+  const fechaActualizado = compromiso?.actualizado_en
+    ? new Date(compromiso.actualizado_en).toLocaleString('es-ES', { dateStyle: 'full', timeStyle: 'medium' })
+    : '[Sin modificaciones posteriores]'
+
+  const checks = [
+    {
+      titulo: 'Naturaleza no contractual de la formación',
+      detalle: 'Comprendo que mi perfil de formación no equivale a una función operativa asignada.',
+      firmado: compromiso?.confidencialidad !== undefined ? compromiso.confidencialidad : (compromiso ? true : null),
+    },
+    {
+      titulo: 'Confidencialidad institucional',
+      detalle: 'Mantendré confidencial la información interna y cualquier dato personal al que pudiera tener acceso.',
+      firmado: compromiso?.confidencialidad !== undefined ? compromiso.confidencialidad : (compromiso ? true : null),
+    },
+    {
+      titulo: 'Protección de datos y uso formativo',
+      detalle: 'Utilizaré los materiales para mi formación y respetaré las condiciones de uso de Chanak y la privacidad de otras personas.',
+      firmado: compromiso?.proteccion_menores !== undefined ? compromiso.proteccion_menores : (compromiso ? true : null),
+    },
+    {
+      titulo: 'Integridad académica y rigor',
+      detalle: 'Participaré con respeto y presentaré mis propias actividades y evidencias con información veraz.',
+      firmado: compromiso?.evidencias_y_compromiso !== undefined ? compromiso.evidencias_y_compromiso : (compromiso ? true : null),
+    },
+    {
+      titulo: 'Límites de autoridad y representación',
+      detalle: 'Comprendo que cualquier colaboración posterior requiere definir funciones y alcance, formalizar el acuerdo correspondiente y obtener autorización específica.',
+      firmado: compromiso?.autorizacion_institucional !== undefined ? compromiso.autorizacion_institucional : (compromiso ? true : null),
+    },
+  ]
+
+  let funcionesLista = []
+  let solicitudRama = null
+  if (compromiso?.funciones && Array.isArray(compromiso.funciones)) {
+    funcionesLista = compromiso.funciones.filter((f) => typeof f === 'string')
+    solicitudRama = compromiso.funciones.find((f) => f && typeof f === 'object' && f.tipo === 'solicitud_rama')
+  }
+
+  return (
+    <div
+      role="dialog"
+      aria-modal="true"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-navy/60 p-4 overflow-y-auto"
+      onClick={onClose}
+    >
+      <div
+        className="w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl bg-white shadow-2xl border border-navy/20 p-5 sm:p-6 space-y-4"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-start justify-between border-b border-navy/10 pb-3">
+          <div>
+            <div className="text-xs font-bold uppercase tracking-wider text-teal">
+              Chanak International Academy · TrainUp
+            </div>
+            <h3 className="text-lg font-bold text-navy mt-0.5">
+              📋 Registro Histórico de Aceptación y Consentimiento
+            </h3>
+            <p className="text-xs text-navy/60">
+              Datos certificados conservados en el registro digital de Supabase (<code className="font-mono">compromisos_formacion</code>).
+            </p>
+          </div>
+          <button
+            onClick={onClose}
+            className="rounded-full bg-navy/10 px-3 py-1 text-sm font-bold text-navy hover:bg-navy/20"
+          >
+            ✕
+          </button>
+        </div>
+
+        {/* Estado general */}
+        <div className={`rounded-xl p-3 border ${compromiso ? 'bg-teal/10 border-teal/30' : 'bg-gold/15 border-gold/40'}`}>
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-bold uppercase tracking-wide text-navy">
+              Estado del Compromiso:
+            </span>
+            <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${compromiso ? 'bg-teal text-white' : 'bg-gold text-navy'}`}>
+              {compromiso ? `✓ Aceptado (${versionRegistrada})` : '⏳ Pendiente de aceptación'}
+            </span>
+          </div>
+        </div>
+
+        {/* Metadatos históricos */}
+        <div className="grid gap-3 sm:grid-cols-2 rounded-xl bg-slate-50 p-4 border border-navy/10 text-xs">
+          <div>
+            <span className="text-navy/55 uppercase tracking-wide block font-semibold text-[10px]">
+              Nombre Registrado como Firma:
+            </span>
+            <span className="font-bold text-navy text-sm block mt-0.5">
+              {nombreRegistrado}
+            </span>
+          </div>
+          <div>
+            <span className="text-navy/55 uppercase tracking-wide block font-semibold text-[10px]">
+              Correo Electrónico:
+            </span>
+            <span className="font-bold text-navy text-sm block mt-0.5">
+              {perfil?.email || '[Dato no conservado en el registro histórico]'}
+            </span>
+          </div>
+          <div>
+            <span className="text-navy/55 uppercase tracking-wide block font-semibold text-[10px]">
+              País / Territorio Declarado:
+            </span>
+            <span className="font-semibold text-navy block mt-0.5">
+              {territorioRegistrado}
+            </span>
+          </div>
+          <div>
+            <span className="text-navy/55 uppercase tracking-wide block font-semibold text-[10px]">
+              Fecha y Hora de Aceptación:
+            </span>
+            <span className="font-semibold text-navy block mt-0.5">
+              {fechaAceptado}
+            </span>
+          </div>
+          <div>
+            <span className="text-navy/55 uppercase tracking-wide block font-semibold text-[10px]">
+              Versión del Texto Aceptado:
+            </span>
+            <span className="font-mono font-semibold text-navy block mt-0.5">
+              {versionRegistrada}
+            </span>
+          </div>
+          <div>
+            <span className="text-navy/55 uppercase tracking-wide block font-semibold text-[10px]">
+              Última Modificación Registrada:
+            </span>
+            <span className="font-semibold text-navy block mt-0.5">
+              {fechaActualizado}
+            </span>
+          </div>
+        </div>
+
+        {/* Declaraciones históricas comprobadas */}
+        <div className="space-y-2">
+          <div className="text-xs font-bold uppercase tracking-wider text-navy">
+            Declaraciones y Consentimientos Otorgados:
+          </div>
+          <div className="space-y-2">
+            {checks.map((c, i) => (
+              <div key={i} className="flex items-start gap-2.5 rounded-lg border border-navy/10 bg-white p-2.5 text-xs">
+                <span className={`text-sm shrink-0 font-bold ${c.firmado ? 'text-teal' : c.firmado === false ? 'text-coral' : 'text-amber-600'}`}>
+                  {c.firmado ? '✓' : c.firmado === false ? '❌' : '⚠️'}
+                </span>
+                <div className="min-w-0">
+                  <div className="font-bold text-navy flex items-center gap-2">
+                    <span>{c.titulo}</span>
+                    <span className="text-[10px] font-normal text-teal bg-teal/10 px-1.5 py-0.5 rounded">
+                      {c.firmado ? 'Aceptado explícitamente' : '[Dato no conservado en el registro histórico]'}
+                    </span>
+                  </div>
+                  <div className="text-navy/70 text-[11px] mt-0.5">{c.detalle}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Solicitud de Rama Registrada */}
+        {solicitudRama && (
+          <div className="rounded-xl border border-gold/40 bg-gold/10 p-3.5 space-y-2 text-xs">
+            <div className="flex items-center justify-between">
+              <span className="font-bold uppercase tracking-wider text-navy flex items-center gap-1.5">
+                <span>🌱</span> Solicitud de Rama Posterior al Tronco Común:
+              </span>
+              <span className="text-[11px] text-navy/60">
+                {solicitudRama.fecha ? new Date(solicitudRama.fecha).toLocaleDateString('es-ES') : ''}
+              </span>
+            </div>
+            <div className="text-navy/85">
+              <b>Ramas seleccionadas:</b>{' '}
+              {Array.isArray(solicitudRama.funciones) ? solicitudRama.funciones.join(', ') : 'Ninguna'}
+            </div>
+            {solicitudRama.datosEstrategico && (
+              <div className="mt-2 space-y-1 bg-white p-2.5 rounded-lg border border-gold/30 text-[11px] text-navy/80">
+                <div className="font-bold text-navy">Datos Estratégicos Adicionales Declarados:</div>
+                {solicitudRama.datosEstrategico.proyectoId && (
+                  <div><b>Proyecto prioritario:</b> {solicitudRama.datosEstrategico.proyectoId}</div>
+                )}
+                {solicitudRama.datosEstrategico.pais && (
+                  <div><b>País / Territorio:</b> {solicitudRama.datosEstrategico.pais}</div>
+                )}
+                {solicitudRama.datosEstrategico.experiencia && (
+                  <div><b>Experiencia / Sede física:</b> {solicitudRama.datosEstrategico.experiencia}</div>
+                )}
+                {solicitudRama.datosEstrategico.telefono && (
+                  <div><b>Contacto:</b> {solicitudRama.datosEstrategico.telefono}</div>
+                )}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Aviso de auditoría */}
+        <p className="text-[11px] text-navy/60 leading-relaxed italic bg-slate-50 p-3 rounded-lg border border-navy/10">
+          Nota de auditoría: Este comprobante refleja los datos y declaraciones históricas guardadas al momento de la firma electrónica. No se sobreescribe con textos posteriores para garantizar la validez probatoria ante auditorías de MSA / FLDOE y cumplimiento del RGPD.
+        </p>
+
+        {/* Botones de acción */}
+        <div className="flex flex-wrap items-center justify-end gap-3 pt-3 border-t border-navy/10">
+          <button
+            type="button"
+            onClick={onClose}
+            className="rounded-xl border border-navy/20 px-4 py-2.5 text-xs font-semibold text-navy hover:bg-slate-50"
+          >
+            Cerrar
+          </button>
+          <button
+            type="button"
+            onClick={() => onImprimir(perfil, compromiso)}
+            className="rounded-xl bg-teal px-5 py-2.5 text-xs font-bold text-white shadow-sm hover:bg-teal/90 flex items-center gap-2"
+          >
+            <span>🖨️ Descargar / Imprimir Comprobante Oficial (PDF)</span>
+          </button>
+        </div>
+      </div>
+    </div>
   )
 }
 

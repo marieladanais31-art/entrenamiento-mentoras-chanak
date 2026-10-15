@@ -71,27 +71,33 @@ export default function EligeRama({ actual = [], datosPrevios = null, onGuardar,
         </p>
       </div>
 
-      {/* Banner Transversal: Requisitos Obligatorios del Expediente Digital Único de Personal */}
+      {/* Banner Transversal: Requisitos del Expediente Digital Único de Personal */}
       {REQUISITOS_RAMAS?.comunes && (
-        <div className="rounded-2xl border-2 border-teal/40 bg-teal/5 p-4 shadow-xs space-y-2.5">
-          <div className="flex items-start gap-2.5">
-            <span className="text-2xl shrink-0">🛡️</span>
+        <div className="rounded-2xl border-2 border-teal/40 bg-teal/5 p-5 shadow-xs space-y-3.5">
+          <div className="flex items-start gap-3">
+            <span className="text-3xl shrink-0">🛡️</span>
             <div className="min-w-0 flex-1">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-teal">
+              <h3 className="text-sm sm:text-base font-bold uppercase tracking-wider text-teal">
                 {REQUISITOS_RAMAS.comunes.titulo}
               </h3>
-              <p className="text-[11px] font-semibold text-navy/80 mt-0.5">
-                {REQUISITOS_RAMAS.comunes.subtitulo}. <span className="text-coral font-bold">Está estrictamente prohibido iniciar funciones o acompañamientos sin este registro digital 100% verificado y aprobado por RRHH.</span>
+              <p className="text-xs sm:text-sm font-medium text-navy/75 mt-0.5">
+                {REQUISITOS_RAMAS.comunes.subtitulo}
               </p>
             </div>
           </div>
-          <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3 pt-1">
+
+          <div className="rounded-xl border border-teal/30 bg-white p-3.5 text-xs sm:text-sm leading-relaxed text-navy/85">
+            <span className="font-bold text-teal">ℹ️ Nota importante de acceso:</span>{' '}
+            {REQUISITOS_RAMAS.comunes.avisoFormacion}
+          </div>
+
+          <div className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3 pt-1">
             {REQUISITOS_RAMAS.comunes.requisitos.map((r, i) => (
-              <div key={i} className="flex items-start gap-2 rounded-xl bg-white p-2.5 border border-teal/20 shadow-xs">
-                <span className="text-base shrink-0">{r.icono}</span>
-                <div className="min-w-0 text-[11px]">
-                  <div className="font-bold text-navy">{r.titulo}</div>
-                  <div className="text-navy/70 leading-snug mt-0.5">{r.detalle}</div>
+              <div key={i} className="flex items-start gap-2.5 rounded-xl bg-white p-3.5 border border-teal/20 shadow-xs">
+                <span className="text-xl shrink-0">{r.icono}</span>
+                <div className="min-w-0">
+                  <div className="text-xs sm:text-sm font-bold text-navy">{r.titulo}</div>
+                  <div className="text-xs sm:text-sm text-navy/70 leading-relaxed mt-1">{r.detalle}</div>
                 </div>
               </div>
             ))}
@@ -102,19 +108,20 @@ export default function EligeRama({ actual = [], datosPrevios = null, onGuardar,
       <div className={`space-y-4 ${habilitado ? '' : 'pointer-events-none opacity-50'}`}>
         {Object.values(GRUPOS).map((g) => {
           const esEstrategico = g.id === 'estrategico'
+          const reqRama = REQUISITOS_RAMAS?.[g.id]
           return (
             <fieldset
               key={g.id}
-              className={`rounded-2xl p-4 border-2 transition ${
+              className={`rounded-2xl p-4 sm:p-5 border-2 transition ${
                 esEstrategico ? 'bg-gold/10 border-gold/60' : 'bg-cream border-navy/10'
               }`}
             >
-              <legend className="px-2 text-sm font-bold text-navy flex items-center gap-1.5">
+              <legend className="px-2 text-sm sm:text-base font-bold text-navy flex items-center gap-1.5">
                 <span>{g.icono}</span>
                 <span>{g.nombre}</span>
               </legend>
-              <p className="mb-1 text-xs leading-relaxed text-navy/70">{g.descripcion}</p>
-              <p className={`mb-3 text-[11px] font-semibold ${g.acceso === 'libre' ? 'text-teal' : 'text-navy/80'}`}>
+              <p className="mb-1 text-xs sm:text-sm leading-relaxed text-navy/70">{g.descripcion}</p>
+              <p className={`mb-3 text-xs sm:text-sm font-semibold ${g.acceso === 'libre' ? 'text-teal' : 'text-navy/80'}`}>
                 {g.acceso === 'libre' ? '✓ Acceso libre: se activa al guardar' : `⏳ Requiere confirmación de: ${g.confirma}`}
               </p>
 
@@ -123,7 +130,7 @@ export default function EligeRama({ actual = [], datosPrevios = null, onGuardar,
                 {ESPECIALIDADES[g.id].map((e) => (
                   <label
                     key={e.id}
-                    className={`flex cursor-pointer gap-3 rounded-xl border-2 bg-white px-3.5 py-2.5 transition ${
+                    className={`flex cursor-pointer gap-3 rounded-xl border-2 bg-white px-4 py-3 transition ${
                       sel.has(e.id) ? (esEstrategico ? 'border-gold shadow-xs' : 'border-teal shadow-xs') : 'border-transparent hover:border-navy/20'
                     }`}
                   >
@@ -135,44 +142,80 @@ export default function EligeRama({ actual = [], datosPrevios = null, onGuardar,
                       disabled={!habilitado}
                     />
                     <span className="min-w-0 flex-1">
-                      <span className="block text-sm font-semibold text-navy">{e.nombre}</span>
-                      <span className="block text-xs leading-relaxed text-navy/60">{e.detalle}</span>
+                      <span className="block text-sm sm:text-base font-semibold text-navy">{e.nombre}</span>
+                      <span className="block text-xs sm:text-sm leading-relaxed text-navy/65 mt-0.5">{e.detalle}</span>
                     </span>
                   </label>
                 ))}
               </div>
 
-              {/* REQUISITOS ESPECÍFICOS DE ESTA RAMA - SIEMPRE VISIBLES */}
-              {REQUISITOS_RAMAS?.[g.id] && (
+              {/* REQUISITOS ESPECÍFICOS DE ESTA RAMA - SEPARADOS EN COMUNES Y POR ESPECIALIDAD */}
+              {reqRama && (
                 <div
-                  className={`mt-3.5 rounded-xl border-2 p-3.5 ${
+                  className={`mt-4 rounded-xl border-2 p-4 space-y-4 ${
                     esEstrategico ? 'border-gold/60 bg-white/95' : 'border-teal/30 bg-white'
                   }`}
                 >
-                  <div className="flex items-center gap-1.5 mb-2.5">
-                    <span className="text-sm">📌</span>
-                    <span className="text-xs font-bold uppercase tracking-wider text-navy">
-                      {REQUISITOS_RAMAS[g.id].titulo}:
-                    </span>
+                  <div className="flex items-center gap-2 border-b border-navy/10 pb-2">
+                    <span className="text-base">📌</span>
+                    <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-navy">
+                      {reqRama.titulo}
+                    </h4>
                   </div>
-                  <div className="grid gap-2 sm:grid-cols-2">
-                    {REQUISITOS_RAMAS[g.id].requisitos.map((r, idx) => (
-                      <div
-                        key={idx}
-                        className={`rounded-lg border p-2.5 text-xs ${
-                          esEstrategico ? 'border-gold/30 bg-gold/5' : 'border-teal/20 bg-teal/5'
-                        } ${idx === REQUISITOS_RAMAS[g.id].requisitos.length - 1 && REQUISITOS_RAMAS[g.id].requisitos.length % 2 !== 0 ? 'sm:col-span-2' : ''}`}
-                      >
-                        <div className="flex items-start gap-2">
-                          <span className="text-base shrink-0">{r.icono}</span>
-                          <div className="min-w-0">
-                            <span className="font-bold text-navy block">{r.titulo}</span>
-                            <span className="text-[11px] leading-relaxed text-navy/75 block mt-0.5">{r.detalle}</span>
-                          </div>
-                        </div>
+
+                  {/* 1. Requisitos Comunes de la Rama */}
+                  {reqRama.comunes?.length > 0 && (
+                    <div className="space-y-2">
+                      <div className="text-xs sm:text-sm font-bold text-teal flex items-center gap-1.5">
+                        <span>✓</span>
+                        <span>Requisitos Comunes de la Rama (aplican a todos los perfiles de {g.nombre}):</span>
                       </div>
-                    ))}
-                  </div>
+                      <div className="grid gap-2.5 sm:grid-cols-2">
+                        {reqRama.comunes.map((r, idx) => (
+                          <div
+                            key={idx}
+                            className={`rounded-xl border p-3 ${
+                              esEstrategico ? 'border-gold/30 bg-gold/5' : 'border-teal/20 bg-teal/5'
+                            }`}
+                          >
+                            <div className="flex items-start gap-2.5">
+                              <span className="text-lg shrink-0">{r.icono}</span>
+                              <div className="min-w-0">
+                                <span className="text-xs sm:text-sm font-bold text-navy block">{r.titulo}</span>
+                                <span className="text-xs sm:text-sm leading-relaxed text-navy/75 block mt-1">{r.detalle}</span>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* 2. Requisitos por Especialidad */}
+                  {reqRama.especialidades?.length > 0 && (
+                    <div className="space-y-2 pt-2 border-t border-navy/10">
+                      <div className="text-xs sm:text-sm font-bold text-navy/80 flex items-center gap-1.5">
+                        <span>🎯</span>
+                        <span>Requisitos por Especialidad o Función Específica (solo aplican a quien ejerza dicha función):</span>
+                      </div>
+                      <div className="grid gap-2.5 sm:grid-cols-2">
+                        {reqRama.especialidades.map((r, idx) => (
+                          <div
+                            key={idx}
+                            className="rounded-xl border border-navy/10 bg-slate-50/80 p-3"
+                          >
+                            <div className="flex items-start gap-2.5">
+                              <span className="text-lg shrink-0">{r.icono}</span>
+                              <div className="min-w-0">
+                                <span className="text-xs sm:text-sm font-bold text-navy block">{r.titulo}</span>
+                                <span className="text-xs sm:text-sm leading-relaxed text-navy/75 block mt-1">{r.detalle}</span>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
 
@@ -195,25 +238,24 @@ export default function EligeRama({ actual = [], datosPrevios = null, onGuardar,
                   {(formEstrategicoAbierto || tieneEstrategico) && (
                     <div className="rounded-xl bg-white p-4 shadow-sm border border-gold/40 space-y-4">
                       {/* Enfoque Estratégico Exclusivo */}
-                      <div className="rounded-lg bg-gold/15 p-3 border border-gold/40 space-y-1">
-                        <div className="text-xs font-bold text-navy uppercase tracking-wide flex items-center gap-1">
+                      <div className="rounded-lg bg-gold/15 p-3.5 border border-gold/40 space-y-1.5">
+                        <div className="text-xs sm:text-sm font-bold text-navy uppercase tracking-wide flex items-center gap-1.5">
                           <span>🎯</span> Áreas Clave de Colaboración Estratégica:
                         </div>
-                        <p className="text-[11px] text-navy/80 leading-relaxed">
-                          La rama Estratégica se enfoca exclusivamente en <b>Grants y financiamiento filantrópico</b>, <b>Fondos estatales ESA (EE. UU.)</b>, <b>Expansión territorial por país</b> y desarrollo de <b>Partners Presenciales con sede física</b>. (El acompañamiento a familias y alumnos corresponde a la rama de Mentoría).
+                        <p className="text-xs sm:text-sm text-navy/80 leading-relaxed">
+                          La rama Estratégica se enfoca estrictamente en <b>Grants y financiamiento filantrópico</b>, <b>Fondos estatales ESA (EE. UU.)</b>, <b>Expansión territorial por país</b> y desarrollo de <b>Partners Presenciales con sede física</b>. (El acompañamiento pedagógico a familias y alumnos corresponde a la rama de Mentoría).
                         </p>
                       </div>
 
-
                       {/* Selector de Proyecto en Prioridad */}
                       <div>
-                        <label className="block text-xs font-bold text-navy uppercase tracking-wide">
+                        <label className="block text-xs sm:text-sm font-bold text-navy uppercase tracking-wide">
                           1. Área o Proyecto en Prioridad en el que puedes entrar: <span className="text-coral">*</span>
                         </label>
                         <select
                           value={proyectoSel}
                           onChange={(e) => setProyectoSel(e.target.value)}
-                          className="mt-1 w-full rounded-xl border border-navy/20 bg-white px-3 py-2.5 text-xs font-semibold text-navy shadow-xs focus:border-teal focus:outline-none"
+                          className="mt-1 w-full rounded-xl border border-navy/20 bg-white px-3 py-2.5 text-xs sm:text-sm font-semibold text-navy shadow-xs focus:border-teal focus:outline-none"
                         >
                           <option value="">-- Selecciona el proyecto prioritario --</option>
                           {PROYECTOS_PRIORIDAD.map((p) => (
@@ -223,7 +265,7 @@ export default function EligeRama({ actual = [], datosPrevios = null, onGuardar,
                           ))}
                         </select>
                         {proyectoSel && (
-                          <div className="mt-2 rounded-lg bg-gold/15 p-2.5 text-[11px] text-navy/85 border border-gold/30">
+                          <div className="mt-2 rounded-lg bg-gold/15 p-3 text-xs sm:text-sm text-navy/85 border border-gold/30">
                             🎯 <b>Objetivo del proyecto:</b> {PROYECTOS_PRIORIDAD.find((p) => p.id === proyectoSel)?.descripcion}
                           </div>
                         )}

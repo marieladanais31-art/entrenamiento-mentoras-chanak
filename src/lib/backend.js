@@ -92,7 +92,7 @@ const tablaCompromisosAusente = (error) => ['42P01', 'PGRST205'].includes(error?
 export async function getCompromiso(userId) {
   const { data, error } = await supabase
     .from('compromisos_formacion')
-    .select('version, nombre_completo, territorio, funciones, aceptado_en')
+    .select('*')
     .eq('perfil_id', userId)
     .maybeSingle()
   if (error) {
@@ -117,7 +117,7 @@ export async function guardarCompromiso(perfilId, datos) {
       autorizacion_institucional: true,
       aceptado_en: new Date().toISOString(),
     }, { onConflict: 'perfil_id' })
-    .select('version, nombre_completo, territorio, funciones, aceptado_en')
+    .select('*')
     .single()
   if (error) throw new Error(error.message)
   return data
@@ -142,7 +142,7 @@ export async function guardarSolicitudRama(perfilId, funcionesElegidas = [], dat
     .from('compromisos_formacion')
     .update({ funciones, actualizado_en: new Date().toISOString() })
     .eq('perfil_id', perfilId)
-    .select('version, nombre_completo, territorio, funciones, aceptado_en')
+    .select('*')
     .single()
   if (error) throw new Error(error.message)
   return data
@@ -151,7 +151,7 @@ export async function guardarSolicitudRama(perfilId, funcionesElegidas = [], dat
 export async function listarCompromisos() {
   const { data, error } = await supabase
     .from('compromisos_formacion')
-    .select('perfil_id, version, nombre_completo, territorio, funciones, aceptado_en')
+    .select('*')
   if (error) {
     if (tablaCompromisosAusente(error)) return null
     throw new Error(error.message)

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { getModulo, RECURSOS_GENERALES, FUENTES, numModulo, urlCarpeta } from '../data/curriculum'
+import { getModulo, RECURSOS_GENERALES, FUENTES, numModulo, urlCarpeta, resolverUrlDocumento, clasificarDocumento } from '../data/curriculum'
 import { getContenido } from '../data/contenido'
 import { getVideo, videosComplementarios } from '../data/videos'
 import { formatearFecha } from '../lib/calculos'
@@ -345,6 +345,13 @@ export default function ModuleView({
             </ul>
           </div>
 
+          {/* Documentación y lecturas oficiales del módulo */}
+          {contenido.desglose?.documentos?.length > 0 && (
+            <div className="mb-6">
+              <BloqueDocumentos documentos={contenido.desglose.documentos} t={t} />
+            </div>
+          )}
+
           <div className="space-y-6">
             {contenido.lecciones.map((lec, i) => (
               <article key={i} className="rounded-2xl border border-navy/10 bg-cream/20 p-5 sm:p-6 transition hover:border-navy/20">
@@ -632,25 +639,178 @@ function Desglose({ d, horas, t }) {
       </ul>
       {d.criterio && <p className="mt-3 text-xs leading-relaxed text-navy/60">{d.criterio}</p>}
       {d.documentos?.length > 0 && (
-        <div className="mt-3 border-t border-navy/10 pt-2">
-          <div className="text-[11px] font-semibold uppercase tracking-wide text-navy/45">{t('desglose.lecturaObligatoria')}</div>
-          <ul className="mt-1.5 space-y-2">
-            {d.documentos.map((doc, i) => (
-              <li key={i} className="text-xs leading-relaxed text-navy/75">
-                <a href={urlCarpeta(doc.carpeta)} target="_blank" rel="noreferrer" className="font-semibold text-teal hover:underline">
-                  📂 {doc.carpeta} › {doc.documento}
-                </a>{' '}
-                <span className="text-navy/50">({fmt(doc.horas)})</span>
-                {/^(07_|CONTRATOS)/.test(doc.carpeta) && (
-                  <span className="ml-1.5 rounded bg-gold/25 px-1.5 py-0.5 text-[10px] font-bold uppercase text-navy">Uso interno · administración y coordinación</span>
-                )}
-                <div className="text-navy/60">{doc.que}</div>
-              </li>
-            ))}
-          </ul>
+        <div className="mt-3 border-t border-navy/10 pt-3">
+          <BloqueDocumentos documentos={d.documentos} t={t} />
         </div>
       )}
     </details>
+  )
+}
+
+function TarjetaDocumento({ doc, tipo, t }) {
+  const urlExacta = resolverUrlDocumento(doc)
+  const urlFolder = urlCarpeta(doc.carpeta)
+  const tituloLimpio = (doc.documento || '')
+    .replace(/\.[a-zA-Z0-9]+$/, '')
+    .replace(/_/g, ' ')
+  const extension = (doc.documento || '').split('.').pop().toUpperCase()
+
+  return (
+    <div
+      className={`rounded-xl border p-4 transition ${
+        tipo === 'interno'
+          ? 'border-gold/50 bg-gold/10'
+          : tipo === 'complementario'
+          ? 'border-navy/15 bg-slate-50'
+          : 'border-teal/30 bg-teal/5'
+      }`}
+    >
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <div className="flex items-center gap-2">
+          <span className="text-xl">
+            {tipo === 'interno' ? '🔒' : tipo === 'complementario' ? '💡' : '📄'}
+          </span>
+          <span className="font-bold text-sm sm:text-base text-navy">
+            {tituloLimpio}
+          </span>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <span className="rounded bg-navy/10 px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider text-navy">
+            {extension}
+          </span>
+          {doc.horas ? (
+            <span className="rounded bg-teal/15 px-2 py-0.5 text-xs font-semibold text-teal">
+              ⏱️ {doc.horas} h
+            </span>
+          ) : null}
+        </div>
+      </div>
+
+      <div className="mt-2 text-xs sm:text-sm text-navy/80 leading-relaxed">
+        <b className="text-navy">📖 Qué sección leer:</b> {doc.que}
+      </div>
+
+      <div className="mt-1 text-[11px] text-navy/55 font-mono">
+        Archivo oficial: {doc.carpeta} › {doc.documento}
+      </div>
+
+      {tipo === 'interno' && (
+        <div className="mt-2.5 rounded-lg bg-gold/25 px-3 py-1.5 text-xs font-medium text-navy/90 border border-gold/40">
+          🔒 <b>Documentación interna:</b> Acceso restringido para administración y coordinación. Sujeto a permisos de Google Drive; no compartir públicamente con familias ni externos.
+        </div>
+      )}
+
+      <div className="mt-3.5 flex flex-wrap items-center gap-3 pt-2 border-t border-navy/10">
+        {urlExacta ? (
+          <a
+            href={urlExacta}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-1.5 rounded-xl bg-teal px-4 py-2 text-xs sm:text-sm font-bold text-white shadow-xs hover:bg-teal/90 transition"
+          >
+            <span>📄 Abrir documento</span>
+            <span>↗</span>
+          </a>
+        ) : (
+          <div className="flex flex-wrap items-center gap-2">
+            <button
+              type="button"
+              onClick={() =>
+                alert(
+                  `El archivo "${doc.documento}" está en Google Drive. El enlace directo a su ID exacto está en proceso de asignación por la administración.\n\nPulsa en "Consultar carpeta en Drive" para abrirlo en la carpeta "${doc.carpeta}".`
+                )
+              }
+              className="inline-flex items-center gap-1.5 rounded-xl bg-navy/15 px-3.5 py-2 text-xs sm:text-sm font-semibold text-navy/80 hover:bg-navy/20 transition"
+            >
+              <span>📄 Abrir documento</span>
+              <span className="text-[11px] font-normal text-amber-800">(ID directo pendiente)</span>
+            </button>
+            <span className="text-xs text-amber-900 bg-amber-100/70 border border-amber-300/60 rounded-lg px-2.5 py-1">
+              ⚠️ Localizar como <b>{doc.documento}</b>
+            </span>
+          </div>
+        )}
+
+        <a
+          href={urlFolder}
+          target="_blank"
+          rel="noreferrer"
+          className="text-xs sm:text-sm font-semibold text-teal hover:underline flex items-center gap-1 ml-auto"
+        >
+          <span>📂 Consultar carpeta en Drive ({doc.carpeta})</span>
+          <span>→</span>
+        </a>
+      </div>
+    </div>
+  )
+}
+
+function BloqueDocumentos({ documentos = [], t }) {
+  if (!documentos || documentos.length === 0) return null
+
+  const necesarios = documentos.filter((d) => clasificarDocumento(d) === 'necesario')
+  const complementarios = documentos.filter((d) => clasificarDocumento(d) === 'complementario')
+  const internos = documentos.filter((d) => clasificarDocumento(d) === 'interno')
+
+  return (
+    <div className="space-y-4 rounded-2xl bg-white p-5 shadow-sm border border-navy/10">
+      <div className="flex items-center justify-between border-b border-navy/10 pb-3">
+        <div>
+          <h3 className="text-base sm:text-lg font-bold text-navy flex items-center gap-2">
+            <span>📚</span>
+            <span>Documentos y Lecturas del Módulo</span>
+          </h3>
+          <p className="text-xs sm:text-sm text-navy/60 mt-0.5">
+            Consulta los documentos oficiales de la carpeta FINAL. Los enlaces secundarios abren la carpeta correspondiente.
+          </p>
+        </div>
+      </div>
+
+      {/* 1. Lectura necesaria para este módulo */}
+      {necesarios.length > 0 && (
+        <div className="space-y-2.5">
+          <div className="flex items-center gap-2 text-xs sm:text-sm font-bold uppercase tracking-wider text-teal">
+            <span>📌</span>
+            <span>Lectura necesaria para este módulo</span>
+          </div>
+          <div className="space-y-2.5">
+            {necesarios.map((doc, idx) => (
+              <TarjetaDocumento key={idx} doc={doc} tipo="necesario" t={t} />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* 2. Material complementario */}
+      {complementarios.length > 0 && (
+        <div className="space-y-2.5 pt-2 border-t border-navy/10">
+          <div className="flex items-center gap-2 text-xs sm:text-sm font-bold uppercase tracking-wider text-navy/70">
+            <span>💡</span>
+            <span>Material complementario</span>
+          </div>
+          <div className="space-y-2.5">
+            {complementarios.map((doc, idx) => (
+              <TarjetaDocumento key={idx} doc={doc} tipo="complementario" t={t} />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* 3. Documentación interna */}
+      {internos.length > 0 && (
+        <div className="space-y-2.5 pt-2 border-t border-navy/10">
+          <div className="flex items-center gap-2 text-xs sm:text-sm font-bold uppercase tracking-wider text-amber-800">
+            <span>🔒</span>
+            <span>Documentación interna (uso restringido)</span>
+          </div>
+          <div className="space-y-2.5">
+            {internos.map((doc, idx) => (
+              <TarjetaDocumento key={idx} doc={doc} tipo="interno" t={t} />
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
   )
 }
 

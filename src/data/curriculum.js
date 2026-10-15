@@ -68,6 +68,37 @@ export const CARPETAS_DRIVE = {
 export function urlCarpeta(carpeta = '') {
   return CARPETAS_DRIVE[carpeta] || CARPETAS_DRIVE[carpeta.split('/')[0]] || CARPETA_FINAL_URL
 }
+
+// Mapeo de documentos con copia local exacta o ID verificado (sin inventar IDs)
+export const DOCUMENTOS_EXACTOS = {
+  'MANUAL_PADRES_OFFCAMPUS_2026-2027.pdf': '/formacion/MANUAL_PADRES_OFFCAMPUS_2026-2027.pdf',
+  'MANUAL_PADRES_DUAL_DIPLOMA_2026-2027.pdf': '/formacion/MANUAL_PADRES_DUAL_DIPLOMA_2026-2027.pdf',
+  'GUIA_COORDINADOR_PANTALLAS_SIS_2026-2027.pdf': '/formacion/GUIA_COORDINADOR_PANTALLAS_SIS_2026-2027.pdf',
+  'PLAN_FORMACION_180_300.md': '/formacion/PLAN_FORMACION_180_300.md',
+  'FLORIDA_PRESENCIAL_Y_EVALUACIONES.md': '/formacion/FLORIDA_PRESENCIAL_Y_EVALUACIONES.md',
+}
+
+export function resolverUrlDocumento(doc) {
+  if (!doc) return null
+  if (doc.url) return doc.url
+  if (DOCUMENTOS_EXACTOS[doc.documento]) return DOCUMENTOS_EXACTOS[doc.documento]
+  return null
+}
+
+export function clasificarDocumento(doc) {
+  const c = doc?.carpeta || ''
+  const d = doc?.documento || ''
+  // 1. Documentación interna
+  if (/^(07_|CONTRATOS)/.test(c) || c.includes('CONTRATOS') || /Adenda|Anexo_Economico|Acuerdo_Marco/.test(d)) {
+    return 'interno'
+  }
+  // 2. Material complementario
+  if (c.includes('05_PRESENTACIONES') || /\.pptx|\.xlsx/.test(d) || /Reunion_Familias|Slides|Scope_and_Sequence.*xlsx/.test(d)) {
+    return 'complementario'
+  }
+  // 3. Lectura necesaria para el módulo
+  return 'necesario'
+}
 // Biblioteca práctica: para qué usa cada carpeta el mentor y el coordinador.
 export const BIBLIOTECA = [
   { carpeta: '01_INSTITUCIONAL', mentor: 'Presentar Chanak con exactitud: identidad, estatus, programas y qué emite Chanak.', coordinador: 'Referencia para reuniones institucionales y para corregir información pública.' },

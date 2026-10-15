@@ -517,45 +517,55 @@ export const PROYECTOS_PRIORIDAD = [
 // ════════════════════════════════════════════════════════════
 export const REQUISITOS_RAMAS = {
   comunes: {
-    titulo: 'Requisitos Obligatorios del Expediente Digital Único de Personal (Employee Compliance File)',
-    subtitulo: 'Obligatorio antes de iniciar cualquier función o contacto con estudiantes y familias',
+    titulo: 'Expediente Digital Único de Personal (Employee Compliance File)',
+    subtitulo: 'Gestionado por la Dirección de Operaciones y Administración / RRHH de Chanak',
+    avisoFormacion: 'La verificación y aprobación del Expediente de Personal es obligatoria antes de iniciar funciones operativas y acompañamiento a estudiantes o familias, pero NO impide iniciar, cursar ni avanzar en tu formación TrainUp desde hoy mismo.',
     requisitos: [
       { icono: '🪪', titulo: 'Documento de Identificación Oficial', detalle: 'Copia legible del Pasaporte vigente o DNI/cédula del país de residencia.' },
       { icono: '🎓', titulo: 'Hoja de Vida y Titulación', detalle: 'CV actualizado con títulos universitarios o certificaciones profesionales traducidas/homologadas.' },
       { icono: '📞', titulo: 'Referencias Verificadas', detalle: 'Comprobación de experiencia previa y referencias personales y profesionales directas.' },
-      { icono: '🛡️', titulo: 'Certificado de Antecedentes y Salvaguarda', detalle: 'Certificado negativo de delitos sexuales/penales y aprobación del módulo de Safeguarding.' },
+      { icono: '🛡️', titulo: 'Certificado de Antecedentes y Salvaguarda', detalle: 'Certificado negativo de delitos sexuales/penales y superación del módulo de Safeguarding.' },
       { icono: '📜', titulo: 'Certificado TrainUp Chanak', detalle: 'Superación del Tronco Común (60/20/20, Mastery Learning y cosmovisión bíblica).' },
     ],
   },
   mentor: {
-    titulo: 'Requisitos de la Rama Mentor (Acompañamiento a Estudiantes y Familias)',
-    requisitos: [
+    titulo: 'Rama Mentor (Acompañamiento a Estudiantes y Familias)',
+    comunes: [
       { icono: '👪', titulo: 'Acompañamiento Integral a Familias', detalle: 'Capacidad de acogida, orientación familiar inicial, tutoría pedagógica y seguimiento continuo en Off-Campus y Dual Diploma.' },
-      { icono: '🖥️', titulo: 'Manejo de Sistemas (SIS, Portal y Dual Diploma)', detalle: 'Manejo obligatorio del SIS (Student Information System) y del Portal Educativo Chanak. Si acompaña o atiende a estudiantes de Dual Diploma, es obligatorio el dominio de la plataforma de Dual Diploma.' },
-      { icono: '🎯', titulo: 'Facilitador de Life Skills & Leadership', detalle: 'Formación en Administración, Biblia (cosmovisión bíblica sólida) y experiencia comprobada en discipulado de jóvenes (12–15 y 16–17 años).' },
+      { icono: '🖥️', titulo: 'Manejo de Sistemas Chanak (SIS y Portal)', detalle: 'Manejo obligatorio del SIS (Student Information System) y del Portal Educativo Chanak. El portal orienta; el SIS registra.' },
+      { icono: '✝️', titulo: 'Cosmovisión Bíblica y Carácter', detalle: 'Integración natural de la cosmovisión bíblica en el acompañamiento y modelaje del autogobierno cristiano.' },
       { icono: '📚', titulo: 'Formación Docente o Especialidad', detalle: 'Titulación en educación o dominio acreditado de la materia o nivel curricular asignado.' },
-      { icono: '🗣️', titulo: 'Docentes de Inglés (Academic English)', detalle: 'Nivel certificado mínimo B2–C1 para inglés general o C1–C2 para Dual Diploma / Academic English.' },
-      { icono: '📝', titulo: 'Evaluación Diagnóstica No Clínica', detalle: 'Formación pedagógica para aplicar screening y diagnósticos académicos, con derivación externa ante sospechas clínicas.' },
+    ],
+    especialidades: [
+      { icono: '🗣️', titulo: 'Profesorado de Inglés (Academic English)', detalle: 'Nivel certificado mínimo B2–C1 para inglés general o C1–C2 para Dual Diploma / Academic English. (Aplica exclusivamente al profesorado de inglés).' },
+      { icono: '🎯', titulo: 'Facilitador de Life Skills & Leadership', detalle: 'Formación en Administración, Biblia (cosmovisión bíblica sólida) y experiencia comprobada en discipulado de jóvenes (12–15 y 16–17 años). (Aplica a facilitadores de Life Skills).' },
+      { icono: '🎓', titulo: 'Acompañamiento en Dual Diploma', detalle: 'Dominio específico de la plataforma y procedimientos del Dual Diploma. (Aplica a mentores con estudiantes en Dual Diploma).' },
+      { icono: '📝', titulo: 'Evaluación Diagnóstica No Clínica', detalle: 'Formación pedagógica para screening y diagnósticos académicos, con derivación externa si se detectan necesidades clínicas. (Aplica a evaluadores diagnósticos).' },
     ],
   },
   coordinator: {
-    titulo: 'Requisitos de la Rama Coordinador (Supervisión y Calidad Académica)',
-    requisitos: [
+    titulo: 'Rama Coordinador (Supervisión y Calidad Académica)',
+    comunes: [
       { icono: '👩‍🏫', titulo: 'Formación Previa de Mentor', detalle: 'Haber completado o estar cursando la formación de Mentor (nadie supervisa lo que no sabe operar).' },
       { icono: '🖥️', titulo: 'Dominio de los 3 Sistemas Chanak', detalle: 'Manejo solvente del Student Information System (SIS), Portal Educativo y Dual Diploma Portal.' },
       { icono: '🔍', titulo: 'Supervisión de PEI y Evidencias', detalle: 'Auditoría rigurosa de Planes Educativos Individualizados y verificación del umbral de dominio (≥80%).' },
+    ],
+    especialidades: [
       { icono: '🏫', titulo: 'Coordinación Presencial A.C.E.', detalle: 'Para sedes con currículo A.C.E., exige por lo menos 1 semana de formación presencial oficial.' },
       { icono: '🤝', titulo: 'Directores de Institución Partner', detalle: 'Convenio institucional formal vigente firmado por Chanak Central y liderazgo de sede.' },
     ],
   },
   estrategico: {
-    titulo: 'Requisitos de la Rama Estratégico (Grants, ESA y Expansión por País)',
-    requisitos: [
-      { icono: '💰', titulo: 'Grants y Convocatorias Filantrópicas', detalle: 'Capacidad de redacción formal de propuestas, análisis de elegibilidad y estructuración presupuestaria.' },
-      { icono: '🏛️', titulo: 'ESA y Fondos Estatales de EE. UU.', detalle: 'Normativa de plataformas estatales (ClassWallet, Odyssey, EMA, etc.), postulación y catálogo autorizado.' },
-      { icono: '🌍', titulo: 'Expansión Territorial y Alianzas por País', detalle: 'Presencia o red activa en el país o estado asignado (España, México, Panamá, USA) y alianzas con colegios e iglesias.' },
-      { icono: '📍', titulo: 'Partner Presencial (Learning Hub / Sede Física)', detalle: 'Disponer de o gestionar un lugar físico adecuado para actividades y reuniones presenciales.' },
-      { icono: '⚖️', titulo: 'Límites de Autoridad Institucional', detalle: 'Prohibición estricta de alterar precios, prometer acreditaciones o firmar convenios sin Chanak Central.' },
+    titulo: 'Rama Estratégico (Grants, ESA y Expansión por País)',
+    comunes: [
+      { icono: '⚖️', titulo: 'Límites de Autoridad y Representación', detalle: 'Prohibición estricta de alterar precios, prometer acreditaciones o firmar convenios sin autorización formal de Chanak Central.' },
+      { icono: '🌐', titulo: 'Defensa del Modelo Institucional', detalle: 'Capacidad de exponer con exactitud el modelo 60/20/20, la naturaleza de escuela estadounidense y los estándares de Chanak.' },
+    ],
+    especialidades: [
+      { icono: '💰', titulo: 'Track Grants y Convocatorias Filantrópicas', detalle: 'Capacidad de redacción formal de propuestas, análisis de elegibilidad y estructuración presupuestaria. (No exigido a otros perfiles).' },
+      { icono: '🏛️', titulo: 'Track ESA y Fondos Estatales de EE. UU.', detalle: 'Normativa de plataformas estatales (ClassWallet, Odyssey, EMA, etc.), postulación y catálogo autorizado. (No exigido a otros perfiles).' },
+      { icono: '🌍', titulo: 'Track Expansión Territorial y Alianzas por País', detalle: 'Presencia o red activa en el país o estado asignado (España, México, Panamá, USA) y alianzas con colegios e iglesias. (No exigido a otros perfiles).' },
+      { icono: '📍', titulo: 'Track Partner Presencial (Sede Física)', detalle: 'Disponer de o gestionar un lugar físico adecuado que cumpla normas de seguridad y salvaguarda. (Aplica exclusivamente al Partner Presencial).' },
     ],
   },
 }
