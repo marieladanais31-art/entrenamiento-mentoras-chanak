@@ -348,9 +348,9 @@ export const ROLES = [
 // Coordinador lo confirma Dirección Académica; Estratégico, Dirección de Operaciones y Alianzas (Elías).
 //  · Estratégico → todos los demás (representación, familias, alianzas, grants y proyectos, registros)
 export const GRUPOS = {
-  mentor: { id: 'mentor', icono: '👩‍🏫', nombre: 'Mentor', nombreEn: 'Mentor', descripcion: 'Acompaña a estudiantes y familias de Off-Campus y Dual Diploma. Incluye clases de inglés y de Life Skills, Extensión Local y evaluación educativa.', funcionPorDefecto: 'mentor', acceso: 'libre' },
+  mentor: { id: 'mentor', icono: '👩‍🏫', nombre: 'Mentor', nombreEn: 'Mentor', descripcion: 'Acompañamiento integral a familias y estudiantes de Off-Campus y Dual Diploma desde su inicio. Incluye tutoría pedagógica, clases de inglés y de Life Skills, Extensión Local y evaluación educativa.', funcionPorDefecto: 'mentor', acceso: 'libre' },
   coordinator: { id: 'coordinator', icono: '🎯', nombre: 'Coordinador', nombreEn: 'Coordinator', descripcion: 'Supervisa a mentores y especialistas (SIS, PEI, evidencias, calidad e incidencias de Off-Campus y Dual Diploma). Incluye director de institución partner.', funcionPorDefecto: 'coordinator', acceso: 'confirmacion', confirma: 'Dirección Académica' },
-  estrategico: { id: 'estrategico', icono: '🤝', nombre: 'Estratégico', nombreEn: 'Strategic', descripcion: 'Familias y matrícula, marketing y Google Ads, ESA y fondos estatales, alianzas, grants y programas EducaFe (inactivos hasta febrero 2027).', funcionPorDefecto: 'strategic_general', acceso: 'confirmacion', confirma: 'Dirección de Operaciones y Alianzas (Elías Vidal)' },
+  estrategico: { id: 'estrategico', icono: '🤝', nombre: 'Estratégico', nombreEn: 'Strategic', descripcion: 'Grants (subvenciones), programas de becas y fondos estatales de EE. UU. (ESA), alianzas institucionales y representación territorial por país (España, México, Panamá, USA; EducaFe inactivo hasta feb. 2027).', funcionPorDefecto: 'strategic_general', acceso: 'confirmacion', confirma: 'Dirección de Operaciones y Alianzas (Elías Vidal)' },
 }
 const GRUPO_DE_FUNCION = {
   mentor: 'mentor', english_teacher: 'mentor', lifeskills_facilitator: 'mentor', local_language: 'mentor', assessment_specialist: 'mentor',
@@ -381,7 +381,7 @@ export const ESPECIALIDADES = {
     {
       id: 'strategic_general',
       nombre: 'Estratégico',
-      detalle: 'Desarrollo institucional, fondos, alianzas, matrícula y proyectos prioritarios. Requiere completar el formulario de postulación.',
+      detalle: 'Grants (subvenciones), programas de becas y fondos estatales (ESA), alianzas institucionales y representación oficial por país. Requiere completar el formulario de postulación.',
     },
   ],
 }

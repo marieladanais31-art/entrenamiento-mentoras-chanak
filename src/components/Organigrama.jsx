@@ -43,8 +43,8 @@ export default function Organigrama({ onVolver, onVerRol }) {
         </p>
         <ul className="mt-3 space-y-1.5 text-sm text-navy/80">
           <li><b>Grupo pequeño:</b> Mentor + Coordinator, si el número de estudiantes no justifica separar ambas funciones.</li>
-          <li><b>Apertura de país:</b> Country Representative + Family Enrollment + Institutional Representative.</li>
-          <li><b>Florida:</b> State/Program Representative + Family Enrollment + Grants Support.</li>
+          <li><b>Apertura de país:</b> Country Representative + Institutional Representative (Alianzas institucionales).</li>
+          <li><b>USA / Fondos Estatales:</b> State/Program Representative (ESA) + Grants Support.</li>
           <li><b>Programa Life Skills:</b> Mentor + Life Skills Facilitator.</li>
           <li><b>Clases de inglés:</b> Mentor + English Teacher.</li>
         </ul>

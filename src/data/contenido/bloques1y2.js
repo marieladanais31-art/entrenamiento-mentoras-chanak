@@ -24,9 +24,9 @@ export const BLOQUES_1_2 = {
       {
         titulo: 'Las tres áreas de involucramiento',
         guion: [
-          '1. Área Académica y de Mentoría: acompañamiento cercano a estudiantes y familias (Off-Campus y Dual Diploma), enseñanza de inglés académico, facilitación de Life Skills, Extensión Local y evaluación diagnóstica educativa.',
+          '1. Área Académica y de Mentoría: acompañamiento integral y cercano a familias y estudiantes (Off-Campus y Dual Diploma) desde el ingreso y durante todo su recorrido formativo, acogida, tutoría pedagógica, enseñanza de inglés académico, facilitación de Life Skills, Extensión Local y evaluación diagnóstica educativa.',
           '2. Área de Coordinación Académica: supervisión del equipo docente y de mentores, control de calidad del proceso pedagógico, verificación de planes PEI y evidencias en el SIS, gestión de incidencias y enlace con instituciones aliadas.',
-          '3. Área de Desarrollo Estratégico y Crecimiento: atención, orientación y matrícula familiar (Family Enrollment), gestión de becas y fondos estatales de EE. UU. (ESA: Florida EMA, Alabama CHOOSE, Utah Fits All, Texas TEFA, Wyoming ESA, Arizona ESA), alianzas institucionales (colegios e iglesias), grants y proyectos comunitarios.',
+          '3. Área de Desarrollo Estratégico y Crecimiento: gestión de subvenciones y fondos filantrópicos (Grants), administración de programas de becas y fondos estatales de EE. UU. (ESA: Florida EMA, Alabama CHOOSE, Utah Fits All, Texas TEFA, Wyoming ESA, Arizona ESA), y expansión territorial, alianzas institucionales y representación oficial por País (España, México, Panamá, USA).',
         ],
       },
       {
@@ -40,14 +40,14 @@ export const BLOQUES_1_2 = {
     ],
     practica: {
       situacion:
-        'Una nueva familia interesada en Chanak y un colegio que desea implementar el Dual Diploma contactan simultáneamente a la escuela para solicitar información y comenzar a participar con nosotros.',
+        'Una nueva familia interesada en Chanak y un colegio o iglesia que desea establecer una alianza institucional en un nuevo país o estado contactan simultáneamente a la escuela para solicitar información y comenzar a participar con nosotros.',
       preguntas: [
-        '¿Qué área institucional interviene primero para orientar a la familia y gestionar su matrícula o beca estatal?',
-        '¿Qué área se encarga de estructurar el plan académico, diagnóstico y acompañamiento diario del estudiante?',
-        '¿Qué papel cumple la coordinación académica para supervisar que ambos procesos se desarrollen con calidad?',
+        '¿Qué área institucional interviene para gestionar convocatorias de subvenciones (Grants), fondos estatales de becas (ESA) o expansión territorial por país?',
+        '¿Qué área se encarga del acompañamiento integral a las familias, acogida, estructuración del plan académico, diagnóstico y tutoría continua del estudiante?',
+        '¿Qué papel cumple la coordinación académica para supervisar que ambos procesos se desarrollen con calidad y rigor pedagógico en el SIS?',
       ],
       criterio:
-        'Identificación precisa de las 3 áreas: Desarrollo Estratégico (matrícula, fondos ESA y alianzas), Académica (mentoría, planes PEI y clases) y Coordinación (supervisión, calidad y gestión en el SIS).',
+        'Identificación precisa de las 3 áreas: Desarrollo Estratégico (Grants, fondos estatales ESA, alianzas y representación por país), Académica y Mentoría (acompañamiento integral a familias, tutoría, planes PEI y clases) y Coordinación (supervisión docente, calidad y gestión en el SIS).',
     },
     quiz: [
       { p: '¿Cuál es el propósito central de Chanak International Academy?', opciones: ['Vender libros de texto', 'Brindar educación integral cristiana de excelencia internacional que forme carácter, fe y pensamiento crítico', 'Sustituir a los padres en el hogar', 'Ser una plataforma de vídeos'], correcta: 1, explica: 'La misión oficial es la educación integral con propósito.' },
