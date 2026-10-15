@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { GRUPOS, ESPECIALIDADES, PROYECTOS_PRIORIDAD, REQUISITOS_MODALIDADES, REPRESENTANTES_PAISES } from '../data/roles'
+import { GRUPOS, ESPECIALIDADES, PROYECTOS_PRIORIDAD, REQUISITOS_RAMAS, REPRESENTANTES_PAISES } from '../data/roles'
 
 // Paso 2 · «Elige tu rama». Mentor (y sus especialidades) se activa al guardar: acceso libre.
 // Coordinador lo confirma Dirección Académica y Estratégico la Dirección de Operaciones y Alianzas;
@@ -71,6 +71,34 @@ export default function EligeRama({ actual = [], datosPrevios = null, onGuardar,
         </p>
       </div>
 
+      {/* Banner Transversal: Requisitos Obligatorios del Expediente Digital Único de Personal */}
+      {REQUISITOS_RAMAS?.comunes && (
+        <div className="rounded-2xl border-2 border-teal/40 bg-teal/5 p-4 shadow-xs space-y-2.5">
+          <div className="flex items-start gap-2.5">
+            <span className="text-2xl shrink-0">🛡️</span>
+            <div className="min-w-0 flex-1">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-teal">
+                {REQUISITOS_RAMAS.comunes.titulo}
+              </h3>
+              <p className="text-[11px] font-semibold text-navy/80 mt-0.5">
+                {REQUISITOS_RAMAS.comunes.subtitulo}. <span className="text-coral font-bold">Está estrictamente prohibido iniciar funciones o acompañamientos sin este registro digital 100% verificado y aprobado por RRHH.</span>
+              </p>
+            </div>
+          </div>
+          <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3 pt-1">
+            {REQUISITOS_RAMAS.comunes.requisitos.map((r, i) => (
+              <div key={i} className="flex items-start gap-2 rounded-xl bg-white p-2.5 border border-teal/20 shadow-xs">
+                <span className="text-base shrink-0">{r.icono}</span>
+                <div className="min-w-0 text-[11px]">
+                  <div className="font-bold text-navy">{r.titulo}</div>
+                  <div className="text-navy/70 leading-snug mt-0.5">{r.detalle}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       <div className={`space-y-4 ${habilitado ? '' : 'pointer-events-none opacity-50'}`}>
         {Object.values(GRUPOS).map((g) => {
           const esEstrategico = g.id === 'estrategico'
@@ -114,12 +142,46 @@ export default function EligeRama({ actual = [], datosPrevios = null, onGuardar,
                 ))}
               </div>
 
+              {/* REQUISITOS ESPECÍFICOS DE ESTA RAMA - SIEMPRE VISIBLES */}
+              {REQUISITOS_RAMAS?.[g.id] && (
+                <div
+                  className={`mt-3.5 rounded-xl border-2 p-3.5 ${
+                    esEstrategico ? 'border-gold/60 bg-white/95' : 'border-teal/30 bg-white'
+                  }`}
+                >
+                  <div className="flex items-center gap-1.5 mb-2.5">
+                    <span className="text-sm">📌</span>
+                    <span className="text-xs font-bold uppercase tracking-wider text-navy">
+                      {REQUISITOS_RAMAS[g.id].titulo}:
+                    </span>
+                  </div>
+                  <div className="grid gap-2 sm:grid-cols-2">
+                    {REQUISITOS_RAMAS[g.id].requisitos.map((r, idx) => (
+                      <div
+                        key={idx}
+                        className={`rounded-lg border p-2.5 text-xs ${
+                          esEstrategico ? 'border-gold/30 bg-gold/5' : 'border-teal/20 bg-teal/5'
+                        } ${idx === REQUISITOS_RAMAS[g.id].requisitos.length - 1 && REQUISITOS_RAMAS[g.id].requisitos.length % 2 !== 0 ? 'sm:col-span-2' : ''}`}
+                      >
+                        <div className="flex items-start gap-2">
+                          <span className="text-base shrink-0">{r.icono}</span>
+                          <div className="min-w-0">
+                            <span className="font-bold text-navy block">{r.titulo}</span>
+                            <span className="text-[11px] leading-relaxed text-navy/75 block mt-0.5">{r.detalle}</span>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
               {/* SECCIÓN INLINE DEL FORMULARIO Y REQUISITOS ESTRATÉGICOS */}
               {esEstrategico && (
                 <div className="mt-4 pt-3 border-t border-gold/40 space-y-3">
                   <div className="flex flex-wrap items-center justify-between gap-2">
                     <span className="text-xs font-bold uppercase tracking-wider text-navy flex items-center gap-1.5">
-                      <span>📋</span> Formulario de Postulación y Requisitos Básicos
+                      <span>📋</span> Formulario de Postulación Estratégica
                     </span>
                     <button
                       type="button"
@@ -132,44 +194,16 @@ export default function EligeRama({ actual = [], datosPrevios = null, onGuardar,
 
                   {(formEstrategicoAbierto || tieneEstrategico) && (
                     <div className="rounded-xl bg-white p-4 shadow-sm border border-gold/40 space-y-4">
-                      {/* Cuadro de Requisitos Básicos por Modalidad */}
-                      <div className="rounded-lg bg-cream/70 p-3 border border-navy/10 space-y-2">
+                      {/* Enfoque Estratégico Exclusivo */}
+                      <div className="rounded-lg bg-gold/15 p-3 border border-gold/40 space-y-1">
                         <div className="text-xs font-bold text-navy uppercase tracking-wide flex items-center gap-1">
-                          <span>📌</span> Requisitos Básicos para Colaborar en Estratégico:
+                          <span>🎯</span> Áreas Clave de Colaboración Estratégica:
                         </div>
-                        <div className="grid gap-2 text-xs text-navy/85 sm:grid-cols-2">
-                          <div className="rounded-lg bg-white p-2.5 border border-gold/50 shadow-xs">
-                            <b className="text-navy block">📍 Partner Presencial (Learning Center / Sede):</b>
-                            <span className="text-[11px] text-navy/75 block mt-0.5">
-                              <b>Requisito indispensable:</b> Disponer de o gestionar un <b>lugar físico</b> para organizar reuniones presenciales y actividades con estudiantes y familias.
-                            </span>
-                          </div>
-                          <div className="rounded-lg bg-white p-2.5 border border-teal/40 shadow-xs">
-                            <b className="text-navy block">🤝 Alianzas Institucionales e Iglesias:</b>
-                            <span className="text-[11px] text-navy/75 block mt-0.5">
-                              Red de contactos activa con colegios, iglesias o comunidades, y respeto a los límites de autoridad Chanak.
-                            </span>
-                          </div>
-                          <div className="rounded-lg bg-white p-2.5 border border-teal/40 shadow-xs">
-                            <b className="text-navy block">💰 Grants y Proyectos (Walmart Spark / Plataformas):</b>
-                            <span className="text-[11px] text-navy/75 block mt-0.5">
-                              Capacidad de redacción formal de propuestas, justificación presupuestaria y medición de impacto social.
-                            </span>
-                          </div>
-                          <div className="rounded-lg bg-white p-2.5 border border-teal/40 shadow-xs">
-                            <b className="text-navy block">🏛️ Familias, Matrícula y Fondos Estatales (ESA):</b>
-                            <span className="text-[11px] text-navy/75 block mt-0.5">
-                              Manejo de plataformas (ClassWallet, Odyssey, EMA) y orientación familiar sin promesas de cobertura no verificadas.
-                            </span>
-                          </div>
-                          <div className="rounded-lg bg-white p-2.5 border border-gold/40 shadow-xs sm:col-span-2">
-                            <b className="text-navy block">📚 Diseño y Desarrollo de Currículum Físico Propio:</b>
-                            <span className="text-[11px] text-navy/75 block mt-0.5">
-                              Formación pedagógica K–12, diseño de unidades didácticas y alineación con cosmovisión bíblica y dominio.
-                            </span>
-                          </div>
-                        </div>
+                        <p className="text-[11px] text-navy/80 leading-relaxed">
+                          La rama Estratégica se enfoca exclusivamente en <b>Grants y financiamiento filantrópico</b>, <b>Fondos estatales ESA (EE. UU.)</b>, <b>Expansión territorial por país</b> y desarrollo de <b>Partners Presenciales con sede física</b>. (El acompañamiento a familias y alumnos corresponde a la rama de Mentoría).
+                        </p>
                       </div>
+
 
                       {/* Selector de Proyecto en Prioridad */}
                       <div>

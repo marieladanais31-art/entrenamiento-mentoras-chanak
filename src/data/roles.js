@@ -513,11 +513,55 @@ export const PROYECTOS_PRIORIDAD = [
 ]
 
 // ════════════════════════════════════════════════════════════
-// REQUISITOS POR MODALIDAD DE COLABORACIÓN ESTRATÉGICA
+// REQUISITOS OBLIGATORIOS POR RAMA Y EXPEDIENTE DE PERSONAL
 // ════════════════════════════════════════════════════════════
+export const REQUISITOS_RAMAS = {
+  comunes: {
+    titulo: 'Requisitos Obligatorios del Expediente Digital Único de Personal (Employee Compliance File)',
+    subtitulo: 'Obligatorio antes de iniciar cualquier función o contacto con estudiantes y familias',
+    requisitos: [
+      { icono: '🪪', titulo: 'Documento de Identificación Oficial', detalle: 'Copia legible del Pasaporte vigente o DNI/cédula del país de residencia.' },
+      { icono: '🎓', titulo: 'Hoja de Vida y Titulación', detalle: 'CV actualizado con títulos universitarios o certificaciones profesionales traducidas/homologadas.' },
+      { icono: '📞', titulo: 'Referencias Verificadas', detalle: 'Comprobación de experiencia previa y referencias personales y profesionales directas.' },
+      { icono: '🛡️', titulo: 'Certificado de Antecedentes y Salvaguarda', detalle: 'Certificado negativo de delitos sexuales/penales y aprobación del módulo de Safeguarding.' },
+      { icono: '📜', titulo: 'Certificado TrainUp Chanak', detalle: 'Superación del Tronco Común (60/20/20, Mastery Learning y cosmovisión bíblica).' },
+    ],
+  },
+  mentor: {
+    titulo: 'Requisitos de la Rama Mentor (Acompañamiento a Estudiantes y Familias)',
+    requisitos: [
+      { icono: '👪', titulo: 'Acompañamiento Integral a Familias', detalle: 'Capacidad de acogida, orientación familiar inicial, tutoría pedagógica y seguimiento continuo en Off-Campus y Dual Diploma.' },
+      { icono: '📚', titulo: 'Formación Docente o Especialidad', detalle: 'Titulación en educación o dominio acreditado de la materia o nivel curricular asignado.' },
+      { icono: '🗣️', titulo: 'Docentes de Inglés (Academic English)', detalle: 'Nivel certificado mínimo B2–C1 para inglés general o C1–C2 para Dual Diploma / Academic English.' },
+      { icono: '🎯', titulo: 'Facilitador de Life Skills & Leadership', detalle: 'Experiencia en dinamización grupal de jóvenes (12–15 y 16–17) con enfoque bíblico y práctico.' },
+      { icono: '📝', titulo: 'Evaluación Diagnóstica No Clínica', detalle: 'Formación pedagógica para aplicar screening y diagnósticos académicos, con derivación externa ante sospechas clínicas.' },
+    ],
+  },
+  coordinator: {
+    titulo: 'Requisitos de la Rama Coordinador (Supervisión y Calidad Académica)',
+    requisitos: [
+      { icono: '👩‍🏫', titulo: 'Formación Previa de Mentor', detalle: 'Haber completado o estar cursando la formación de Mentor (nadie supervisa lo que no sabe operar).' },
+      { icono: '🖥️', titulo: 'Dominio de los 3 Sistemas Chanak', detalle: 'Manejo solvente del Student Information System (SIS), Portal Educativo y Dual Diploma Portal.' },
+      { icono: '🔍', titulo: 'Supervisión de PEI y Evidencias', detalle: 'Auditoría rigurosa de Planes Educativos Individualizados y verificación del umbral de dominio (≥80%).' },
+      { icono: '🏫', titulo: 'Coordinación Presencial A.C.E.', detalle: 'Para sedes con currículo A.C.E., exige por lo menos 1 semana de formación presencial oficial.' },
+      { icono: '🤝', titulo: 'Directores de Institución Partner', detalle: 'Convenio institucional formal vigente firmado por Chanak Central y liderazgo de sede.' },
+    ],
+  },
+  estrategico: {
+    titulo: 'Requisitos de la Rama Estratégico (Grants, ESA y Expansión por País)',
+    requisitos: [
+      { icono: '💰', titulo: 'Grants y Convocatorias Filantrópicas', detalle: 'Capacidad de redacción formal de propuestas, análisis de elegibilidad y estructuración presupuestaria.' },
+      { icono: '🏛️', titulo: 'ESA y Fondos Estatales de EE. UU.', detalle: 'Normativa de plataformas estatales (ClassWallet, Odyssey, EMA, etc.), postulación y catálogo autorizado.' },
+      { icono: '🌍', titulo: 'Expansión Territorial y Alianzas por País', detalle: 'Presencia o red activa en el país o estado asignado (España, México, Panamá, USA) y alianzas con colegios e iglesias.' },
+      { icono: '📍', titulo: 'Partner Presencial (Learning Hub / Sede Física)', detalle: 'Disponer de o gestionar un lugar físico adecuado para actividades y reuniones presenciales.' },
+      { icono: '⚖️', titulo: 'Límites de Autoridad Institucional', detalle: 'Prohibición estricta de alterar precios, prometer acreditaciones o firmar convenios sin Chanak Central.' },
+    ],
+  },
+}
+
 export const REQUISITOS_MODALIDADES = {
   partner_presencial: {
-    titulo: 'Alianza de Partner Presencial (Learning Center / Hub)',
+    titulo: 'Alianza de Partner Presencial (Learning Center / Sede Física)',
     requisitos: [
       'Disponer de o gestionar un lugar físico adecuado para organizar reuniones y actividades con estudiantes y familias.',
       'Cumplir normas básicas de seguridad, protección de menores y seguros aplicables.',
@@ -535,21 +579,14 @@ export const REQUISITOS_MODALIDADES = {
     titulo: 'Expansión de Fondos Estatales y Becas (EE. UU.)',
     requisitos: [
       'Dominio de plataformas de fondos (ClassWallet, Odyssey, EMA) o capacidad de aprendizaje ágil.',
-      'Orientación precisa a familias sin realizar promesas de cobertura no verificadas.',
+      'Apego estricto a servicios autorizados sin realizar promesas de cobertura no verificadas.',
     ],
   },
   grants_proyectos: {
-    titulo: 'Grants, Subvenciones y Fondos Corporativos',
+    titulo: 'Grants, Subvenciones y Fondos Filantrópicos',
     requisitos: [
       'Capacidad de redacción formal, análisis de elegibilidad y estructuración presupuestaria.',
-      'Seguimiento sistemático de plazos, evidencias e informes de impacto.',
-    ],
-  },
-  desarrollo_curricular: {
-    titulo: 'Desarrollo Curricular y Editorial Propio',
-    requisitos: [
-      'Formación pedagógica o experiencia docente en redacción de contenidos y lecciones.',
-      'Comprensión del marco de dominio (Mastery Learning) y cosmovisión bíblica.',
+      'Seguimiento sistemático de plazos, evidencias e informes de impacto a fundaciones.',
     ],
   },
 }
