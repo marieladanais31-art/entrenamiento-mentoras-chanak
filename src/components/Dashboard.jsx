@@ -40,6 +40,7 @@ export default function Dashboard({
   onVerEstrategia,
   onVerFuncion,
   onVerVistas,
+  onVerComparativaCurriculos,
 }) {
   const { t, idioma } = useIdioma()
   const [cambiandoRama, setCambiandoRama] = useState(false)
@@ -310,6 +311,7 @@ export default function Dashboard({
           {(esCoord || esAdmin) && <Acceso icono="🧾" titulo="Coordinación SIS" sub="Ocho pantallas y práctica de revisión" onClick={onVerCoordinacion} tono="navy" />}
           {(esEstrategico || esCoord || esAdmin) && <Acceso icono="🌎" titulo="ESA y fondos estatales" sub="Matriz de programas por estado (uso interno)" onClick={onVerMatriz} tono="navy" />}
           {onVerVistas && <Acceso icono="🖥" titulo="Vistas del sistema" sub="SIS, Dual Diploma y Life Skills con datos ficticios" onClick={onVerVistas} tono="teal" />}
+          <Acceso icono="⚖️" titulo="Comparativa y Costos de Currículos" sub="Simulador de presupuestos, ventajas y análisis A.C.E., LIFEPAC, CLE y Flex" onClick={onVerComparativaCurriculos} tono="teal" />
           <Acceso icono="🧭" titulo="Organización y perfiles" sub="Organigrama y funciones de las tres ramas" onClick={onVerOrganigrama} tono="navy" />
           <Acceso icono="▶" titulo="Vídeos oficiales" sub="Presentación y Mastery Learning" onClick={onVerCatalogo} tono="navy" />
           <Acceso icono="📘" titulo={t('panel.presentacion')} sub={t('panel.presentacionSub')} onClick={onVerCurso} tono="teal" />

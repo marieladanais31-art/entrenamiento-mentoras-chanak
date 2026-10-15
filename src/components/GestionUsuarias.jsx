@@ -45,14 +45,14 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
       setInfoReset({
         nombre: perfil.nombre,
         email: correo,
-        pass: 'Chanak2026*',
+        pass: 'Enlace de acceso enviado al correo',
         enviado: true,
       })
     } catch (err) {
       setInfoReset({
         nombre: perfil.nombre,
         email: correo,
-        pass: 'Chanak2026*',
+        pass: 'Enlace no enviado',
         enviado: false,
         error: err.message,
       })
@@ -68,14 +68,14 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
   }
 
   function copiarCredenciales(info) {
-    const texto = `Hola ${info.nombre},\n\nTus credenciales para ingresar a la plataforma de entrenamiento Chanak Academy son:\n\n📧 Email: ${info.email}\n🔑 Contraseña de acceso / temporal: ${info.pass}\n🔗 Plataforma: ${window.location.origin}\n\n(Al ingresar por primera vez, el sistema te solicitará cambiar tu contraseña si así lo deseas).`
+    const texto = `Hola ${info.nombre},\n\nTus credenciales para ingresar a la plataforma de entrenamiento Chanak Academy son:\n\n📧 Email: ${info.email}\n🔑 Acceso: ${info.pass}\n🔗 Plataforma: ${window.location.origin}\n\n(Puedes ingresar o restablecer tu contraseña desde la pantalla de inicio con "¿Olvidaste tu contraseña?").`
     navigator.clipboard.writeText(texto)
     setCopiado(true)
     setTimeout(() => setCopiado(false), 3000)
   }
 
   function copiarCorreoIndividual(correo) {
-    const texto = `Asunto: Formación Chanak · Acceso a la plataforma y encuentro este jueves\nDe: administration@chanakacademy.org\nPara: ${correo}\n\nBendiciones,\n\nComo continuación de la invitación de ayer, te confirmamos que la plataforma de formación Chanak ya está disponible. Si todavía no has entrado, puedes comenzar a explorar la introducción y los primeros módulos del tronco común.\n\n🔗 Plataforma: https://training.chanakacademy.org/\n👤 Usuario: ${correo}\n🔑 Contraseña inicial: Chanak2026*\n\nEn tu primer acceso, la plataforma te pedirá cambiar la contraseña. Si ya ingresaste y la cambiaste, utiliza tu contraseña actual. Si tienes dificultades para acceder, responde a este correo.\n\nTambién te compartimos el enlace de nuestro encuentro:\n📅 Jueves 15 de octubre a las 20:00 h, hora de España peninsular\n📍 Google Meet: https://meet.google.com/ktt-wtgg-gep\n\nPresentaremos el recorrido de formación, resolveremos dudas y conversaremos sobre las posibles áreas de colaboración. Será una oportunidad para conocer mejor la visión y valorar tu disponibilidad para continuar.\n\nGracias por tu interés. Nos alegrará compartir este encuentro contigo.\n\nUn abrazo,\nMariela Andrade\nChanak International Academy`
+    const texto = `Asunto: Formación Chanak · Acceso a la plataforma y encuentro este jueves\nDe: administration@chanakacademy.org\nPara: ${correo}\n\nBendiciones,\n\nComo continuación de la invitación de ayer, te confirmamos que la plataforma de formación Chanak ya está disponible. Si todavía no has entrado, puedes comenzar a explorar la introducción y los primeros módulos del tronco común.\n\n🔗 Plataforma: https://training.chanakacademy.org/\n👤 Usuario: ${correo}\n🔑 Acceso: Ingresa con tu contraseña segura registrada. Si es tu primer ingreso o deseas definir una nueva contraseña, pulsa "¿Olvidaste tu contraseña?" en la pantalla de inicio.\n\nTambién te compartimos el enlace de nuestro encuentro:\n📅 Jueves 15 de octubre a las 20:00 h, hora de España peninsular\n📍 Google Meet: https://meet.google.com/ktt-wtgg-gep\n\nPresentaremos el recorrido de formación, resolveremos dudas y conversaremos sobre las posibles áreas de colaboración. Será una oportunidad para conocer mejor la visión y valorar tu disponibilidad para continuar.\n\nGracias por tu interés. Nos alegrará compartir este encuentro contigo.\n\nUn abrazo,\nMariela Andrade\nChanak International Academy`
     navigator.clipboard.writeText(texto)
     setCopiadoId(correo)
     setTimeout(() => setCopiadoId(null), 3000)
@@ -175,8 +175,7 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
                 `Como continuación de la invitación de ayer, te confirmamos que la plataforma de formación Chanak ya está disponible. Si todavía no has entrado, puedes comenzar a explorar la introducción y los primeros módulos del tronco común.\n\n` +
                 `🔗 Plataforma: https://training.chanakacademy.org/\n` +
                 `👤 Usuario: tu correo electrónico registrado\n` +
-                `🔑 Contraseña inicial: Chanak2026*\n\n` +
-                `En tu primer acceso, la plataforma te pedirá cambiar la contraseña. Si ya ingresaste y la cambiaste, utiliza tu contraseña actual. Si tienes dificultades para acceder, responde a este correo.\n\n` +
+                `🔑 Acceso: Ingresa con tu contraseña registrada. Si necesitas definir o recuperar tu contraseña, pulsa "¿Olvidaste tu contraseña?" en la pantalla de inicio.\n\n` +
                 `También te compartimos el enlace de nuestro encuentro:\n` +
                 `📅 Jueves 15 de octubre a las 20:00 h, hora de España peninsular\n` +
                 `📍 Google Meet: https://meet.google.com/ktt-wtgg-gep\n\n` +
@@ -449,8 +448,7 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
                           `Como continuación de la invitación de ayer, te confirmamos que la plataforma de formación Chanak ya está disponible. Si todavía no has entrado, puedes comenzar a explorar la introducción y los primeros módulos del tronco común.\n\n` +
                           `🔗 Plataforma: https://training.chanakacademy.org/\n` +
                           `👤 Usuario: ${correoActiva}\n` +
-                          `🔑 Contraseña inicial: Chanak2026*\n\n` +
-                          `En tu primer acceso, la plataforma te pedirá cambiar la contraseña. Si ya ingresaste y la cambiaste, utiliza tu contraseña actual. Si tienes dificultades para acceder, responde a este correo.\n\n` +
+                          `🔑 Acceso: Ingresa con tu contraseña registrada. Si necesitas definir o recuperar tu contraseña, pulsa "¿Olvidaste tu contraseña?" en la pantalla de inicio.\n\n` +
                           `También te compartimos el enlace de nuestro encuentro:\n` +
                           `📅 Jueves 15 de octubre a las 20:00 h, hora de España peninsular\n` +
                           `📍 Google Meet: https://meet.google.com/ktt-wtgg-gep\n\n` +
@@ -624,13 +622,13 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
 {`-- 1. Confirmar email y activar contraseñas de usuarias creadas:
 UPDATE auth.users 
 SET email_confirmed_at = now(),
-    encrypted_password = crypt('Chanak2026*', gen_salt('bf'))
-WHERE email IN ('ydita5460@gmail.com', 'florida@chanakacademy.org');
+    encrypted_password = crypt('<TU_CONTRASENA_SEGURA>', gen_salt('bf'))
+WHERE email IN ('mentora1@chanakacademy.org', 'mentora2@chanakacademy.org');
 
 -- 2. Asegurar perfil aprobado en public.perfiles:
 INSERT INTO public.perfiles (id, nombre, tipo_acceso, estado, rol)
-VALUES ('91bc61f8-ffa8-4eca-a013-0ee8d810dc46', 'Ydita', 'mentora', 'aprobada', 'mentora')
-ON CONFLICT (id) DO UPDATE SET estado = 'aprobada', nombre = 'Ydita';
+VALUES ('<USER_UUID>', 'Nombre Mentora', 'mentora', 'aprobada', 'mentora')
+ON CONFLICT (id) DO UPDATE SET estado = 'aprobada', nombre = EXCLUDED.nombre;
 
 -- 3. Sincronizar columna email (opcional):
 ALTER TABLE public.perfiles ADD COLUMN IF NOT EXISTS email text;

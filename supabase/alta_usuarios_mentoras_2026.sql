@@ -36,138 +36,28 @@ DECLARE
   r RECORD;
   v_usuarios jsonb := '[
     {
-      "email": "carmen.logos@gmail.com",
-      "nombre": "Carmen Logos",
-      "tipo_acceso": "visionaria",
+      "email": "mentora1@chanakacademy.org",
+      "nombre": "Mentora Ejemplo 1",
+      "tipo_acceso": "mentora",
       "roles": [
-        {"rol": "estrategico", "funcion": "strategic_general"}
-      ]
-    },
-    {
-      "email": "sonsolesbuenoroige@gmail.com",
-      "nombre": "Sonsoles Bueno Roige",
-      "tipo_acceso": "coordinadora",
-      "roles": [
-        {"rol": "coordinator", "funcion": "coordinator"},
-        {"rol": "mentor", "funcion": "english_teacher"}
-      ]
-    },
-    {
-      "email": "medalithrosales@jcum.com",
-      "nombre": "Medalith Rosales",
-      "tipo_acceso": "visionaria",
-      "roles": [
-        {"rol": "estrategico", "funcion": "strategic_general"}
-      ]
-    },
-    {
-      "email": "thiareurzua7@gmail.com",
-      "nombre": "Thiare Urzua",
-      "tipo_acceso": "coordinadora",
-      "roles": [
-        {"rol": "coordinator", "funcion": "coordinator"},
         {"rol": "mentor", "funcion": "mentor"}
       ]
     },
     {
-      "email": "net.amyclau@gmail.com",
-      "nombre": "Amy Clau",
-      "tipo_acceso": "visionaria",
-      "roles": [
-        {"rol": "estrategico", "funcion": "strategic_general"}
-      ]
-    },
-    {
-      "email": "dayanatrillo81@gmail.com",
-      "nombre": "Dayana Trillo",
-      "tipo_acceso": "mentora",
-      "roles": [
-        {"rol": "mentor", "funcion": "mentor"},
-        {"rol": "mentor", "funcion": "english_teacher"}
-      ]
-    },
-    {
-      "email": "florida@chanakacademy.org",
-      "nombre": "Karen Pujols",
-      "tipo_acceso": "visionaria",
-      "roles": [
-        {"rol": "estrategico", "funcion": "strategic_general"}
-      ]
-    },
-    {
-      "email": "puebla@chanakacademy.org",
-      "nombre": "Puebla Chanak",
+      "email": "coordinadora1@chanakacademy.org",
+      "nombre": "Coordinadora Ejemplo 1",
       "tipo_acceso": "coordinadora",
       "roles": [
         {"rol": "coordinator", "funcion": "coordinator"},
-        {"rol": "mentor", "funcion": "mentor"},
-        {"rol": "estrategico", "funcion": "strategic_general"}
-      ]
-    },
-    {
-      "email": "lauravpardoq@outlook.com",
-      "nombre": "Laura V. Pardo Q.",
-      "tipo_acceso": "coordinadora",
-      "roles": [
-        {"rol": "coordinator", "funcion": "coordinator"},
-        {"rol": "mentor", "funcion": "mentor"},
-        {"rol": "estrategico", "funcion": "strategic_general"}
-      ]
-    },
-    {
-      "email": "leo0pierre@gmail.com",
-      "nombre": "Leo Pierre",
-      "tipo_acceso": "visionaria",
-      "roles": [
-        {"rol": "estrategico", "funcion": "strategic_general"}
-      ]
-    },
-    {
-      "email": "lucy.dbr@gmail.com",
-      "nombre": "Lucy DBR",
-      "tipo_acceso": "coordinadora",
-      "roles": [
-        {"rol": "coordinator", "funcion": "coordinator"},
-        {"rol": "mentor", "funcion": "english_teacher"},
-        {"rol": "estrategico", "funcion": "strategic_general"}
-      ]
-    },
-    {
-      "email": "jituvane@gmail.com",
-      "nombre": "Jitu Vane",
-      "tipo_acceso": "coordinadora",
-      "roles": [
-        {"rol": "mentor", "funcion": "mentor"},
-        {"rol": "mentor", "funcion": "english_teacher"},
-        {"rol": "estrategico", "funcion": "strategic_general"}
-      ]
-    },
-    {
-      "email": "vanejitu@gmail.com",
-      "nombre": "Vane Jitu",
-      "tipo_acceso": "coordinadora",
-      "roles": [
-        {"rol": "coordinator", "funcion": "coordinator"},
-        {"rol": "mentor", "funcion": "mentor"},
-        {"rol": "estrategico", "funcion": "strategic_general"}
-      ]
-    },
-    {
-      "email": "jokaneska@gmail.com",
-      "nombre": "Jokaneska",
-      "tipo_acceso": "coordinadora",
-      "roles": [
-        {"rol": "mentor", "funcion": "mentor"},
-        {"rol": "mentor", "funcion": "english_teacher"},
-        {"rol": "estrategico", "funcion": "strategic_general"}
+        {"rol": "mentor", "funcion": "mentor"}
       ]
     }
   ]'::jsonb;
   v_u jsonb;
   v_r jsonb;
 BEGIN
-  -- Contraseña temporal única para todos: Chanak2026*
-  v_pass_hash := crypt('Chanak2026*', gen_salt('bf'));
+  -- Contraseña temporal (definir contraseña segura):
+  v_pass_hash := crypt(coalesce(current_setting('app.settings.default_pass', true), '<CONTRASENA_TEMPORAL>'), gen_salt('bf'));
 
   FOR v_u IN SELECT * FROM jsonb_array_elements(v_usuarios)
   LOOP

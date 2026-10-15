@@ -671,36 +671,13 @@ export const REPRESENTANTES_PAISES = [
 ]
 
 // ════════════════════════════════════════════════════════════
-// USUARIOS CONOCIDOS (MAPA DE EMAILS Y NOMBRES OFICIALES)
+// USUARIOS (GESTIÓN DINÁMICA VÍA SUPABASE / RGPD COMPLIANT)
 // ════════════════════════════════════════════════════════════
-export const USUARIOS_CONOCIDOS = [
-  { id: 'c29dd182-e1a0-46cc-a05b-02734b4e676a', email: 'net.amyclau@gmail.com', nombre: 'M. Claudia Jimenez' },
-  { id: '78c8c17c-ec0e-4396-bc1e-6482b09b85a9', email: 'puebla@chanakacademy.org', nombre: 'Karen Vidal' },
-  { id: '6ba7b1a4-19d7-47ea-8c64-74eb73a19c59', email: 'lauravpardoq@outlook.com', nombre: 'Laura V. Pardo Q.' },
-  { id: 'a3daf3a9-4047-460e-9546-259e0d42de77', email: 'carmen.logos@gmail.com', nombre: 'Carmen Logos' },
-  { id: 'fff687d3-32bd-4aa9-813b-cedfdc495df6', email: 'sonsolesbuenoroige@gmail.com', nombre: 'Sonsoles Bueno Roige' },
-  { id: 'fb02af52-d03c-45dd-ad66-f354a44befe5', email: 'thiareurzua7@gmail.com', nombre: 'Thiare Urzua' },
-  { id: 'cd2d2f03-7688-4331-9341-bfeb31cb3e25', email: 'medalithrosales@jcum.com', nombre: 'Medalith Rosales' },
-  { id: '29858f2e-5762-4adf-9ce6-0f3569c8ead4', email: 'dayanatrillo81@gmail.com', nombre: 'Dayana Trillo' },
-  { id: '2728dba3-1176-4db0-8a79-2e3b646e1e58', email: 'leo0pierre@gmail.com', nombre: 'Leo Pierre' },
-  { id: '5d6c342a-f488-47d4-a7e4-e36c093478ca', email: 'lucy.dbr@gmail.com', nombre: 'Lucy DBR' },
-  { id: 'dbe32d4d-5e55-4525-84d4-d597190d2af8', email: 'jituvane@gmail.com', nombre: 'Jitendra Dongardive' },
-  { id: 'd7ff67b0-5748-49df-a879-356a27e412ec', email: 'vanejitu@gmail.com', nombre: 'Vane Jitu' },
-  { id: 'f281eb9d-18b1-4816-8d7a-d23d9bbfac01', email: 'jokaneska@gmail.com', nombre: 'Joaneska Grössl' },
-  { id: '91bc61f8-ffa8-4eca-a013-0ee8d810dc46', email: 'ydita5460@gmail.com', nombre: 'Ydita' },
-  { email: 'florida@chanakacademy.org', nombre: 'Karen Pujols' },
-  { email: 'administration@chanakacademy.org', nombre: 'Mariela Andrade' },
-]
+// Los correos y accesos se consultan dinámicamente desde la base de datos
+// (tabla auth.users / public.perfiles) y no se almacenan en el repositorio.
+export const USUARIOS_CONOCIDOS = []
 
 export function obtenerEmailConocido(idOEmailONombre) {
   if (!idOEmailONombre) return ''
-  const query = String(idOEmailONombre).trim().toLowerCase()
-  const u = USUARIOS_CONOCIDOS.find(
-    (x) =>
-      (x.id && x.id.toLowerCase() === query) ||
-      (x.email && x.email.toLowerCase() === query) ||
-      (x.nombre && x.nombre.toLowerCase() === query) ||
-      query.includes(x.nombre.toLowerCase())
-  )
-  return u?.email || ''
+  return ''
 }

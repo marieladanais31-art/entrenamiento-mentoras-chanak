@@ -29,6 +29,7 @@ export default function ModuleView({
   onVerOperativa,
   onVerGuias,
   onVerCoordinacion,
+  onVerComparativaCurriculos,
 }) {
   const { t, idioma } = useIdioma()
   const modulo = traducirModulo(getModulo(moduloId), idioma)
@@ -164,8 +165,24 @@ export default function ModuleView({
           <h3 className="mb-2 text-sm font-bold text-teal">{v.titulo} · {v.duracion}</h3>
           <VideoLeccion video={{ url: v.videoUrl, subtitulos: v.subtitulos }} />
         </div>)}</div>
-        <button className="mt-3 inline-block text-xs font-bold text-teal underline" onClick={onVerCatalogo}>Catálogo completo · 87 videos →</button>
+        <button className="mt-3 inline-block text-xs font-bold text-teal underline" onClick={onVerCatalogo}>Videoteca y tutoriales oficiales →</button>
       </details>}
+
+      {(moduloId.startsWith('T3.') || moduloId === 'T2.2') && onVerComparativaCurriculos && (
+        <button
+          onClick={onVerComparativaCurriculos}
+          className="w-full rounded-2xl bg-gradient-to-r from-teal to-navy p-4 text-left text-sm font-bold text-white shadow-sm flex items-center justify-between transition hover:opacity-95"
+        >
+          <div className="flex items-center gap-2.5">
+            <span className="text-xl">⚖️</span>
+            <div>
+              <div className="text-[11px] uppercase tracking-wider text-gold font-bold">Herramienta para Coordinadores y Mentores</div>
+              <div className="text-sm font-bold text-white">Simulador de Costos y Comparativa: A.C.E., LIFEPAC, CLE y Chanak Flex</div>
+            </div>
+          </div>
+          <span className="shrink-0 text-gold font-bold text-xs">Abrir evaluador →</span>
+        </button>
+      )}
 
       {moduloId === 'T10.4' && <button onClick={onVerOperativa} className="w-full rounded-2xl bg-teal p-4 text-left text-sm font-bold text-white">Abrir paso a paso SIS · Matrícula, automatizaciones y accesos demo →</button>}
 
@@ -200,6 +217,15 @@ export default function ModuleView({
           <EstadoBadge estado={estado} />
         </div>
         {contenido && <p className="mt-3 text-sm leading-relaxed text-navy/70">{contenido.resumen}</p>}
+        {modulo.evaluacion && (
+          <div className="mt-3 rounded-xl border border-gold/40 bg-gold/10 p-3 flex items-start gap-2.5">
+            <span className="text-base shrink-0">🎯</span>
+            <div className="text-xs">
+              <span className="font-bold uppercase tracking-wider text-navy block">Entregable Requerido:</span>
+              <span className="text-navy/85 font-medium leading-relaxed block mt-0.5">{modulo.evaluacion}</span>
+            </div>
+          </div>
+        )}
         {estado === 'reconocido' && (
           <p className="mt-3 rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 text-[13px] leading-relaxed text-amber-900">
             ♻️ {t('modulo.reconocido')}

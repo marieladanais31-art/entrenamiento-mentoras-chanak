@@ -24,6 +24,7 @@ import CompromisoInicial, { VERSION_COMPROMISO } from './components/CompromisoIn
 import EstrategiaOperativa from './components/EstrategiaOperativa'
 import MiFuncion from './components/MiFuncion'
 import VistasSistemaView from './components/VistasSistemaView'
+import ComparativaCurriculos from './components/ComparativaCurriculos'
 import * as api from './lib/backend'
 import { getModulo } from './data/curriculum'
 import { aplicarEquivalencias } from './lib/calculos'
@@ -366,6 +367,13 @@ export default function App() {
             onVerEstrategia={() => setVista({ ...vista, nombre: 'estrategia' })}
             onVerFuncion={(funcionId) => setVista({ ...vista, nombre: 'mi-funcion', funcionId })}
             onVerVistas={() => setVista({ ...vista, nombre: 'vistas' })}
+            onVerComparativaCurriculos={() => setVista({ ...vista, nombre: 'comparativa-curriculos' })}
+          />
+        )}
+        {vista.nombre === 'comparativa-curriculos' && (
+          <ComparativaCurriculos
+            onVolver={() => setVista({ ...vista, nombre: 'dashboard' })}
+            onVerCoordinacion={() => setVista({ ...vista, nombre: 'coordinacion-sis' })}
           />
         )}
         {vista.nombre === 'mi-funcion' && <MiFuncion funcionId={vista.funcionId} roles={rolesIds} onCambiar={(funcionId) => setVista({ ...vista, funcionId })} onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
@@ -426,6 +434,7 @@ export default function App() {
             onVerCoordinacion={() => setVista({ ...vista, nombre: 'coordinacion-sis' })}
             onVerOperativa={() => setVista({ ...vista, nombre: 'operativa-sis' })}
             onVerCatalogo={() => setVista({ ...vista, nombre: 'catalogo-videos' })}
+            onVerComparativaCurriculos={() => setVista({ ...vista, nombre: 'comparativa-curriculos' })}
             onVolver={() =>
               setVista({
                 ...vista,
