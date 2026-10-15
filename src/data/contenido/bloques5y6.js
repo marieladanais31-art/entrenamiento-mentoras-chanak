@@ -111,8 +111,13 @@ export const BLOQUES_5_6 = {
 
   'T6.1': {
     resumen:
-      'La seguridad y el bienestar de los estudiantes son una obligación esencial. Saber reconocer señales, responder bien y mantener límites profesionales protege al estudiante, a la familia y a ti.',
-    objetivos: ['Reconocer señales de posible riesgo.', 'Aplicar la respuesta inmediata correcta.', 'Mantener límites profesionales.'],
+      'La seguridad y el bienestar de los estudiantes son una obligación esencial. Incluye los requisitos obligatorios del Expediente Digital Único de Personal (Employee Compliance File), protocolo de custodia de RRHH, reconocimiento de señales, respuesta inmediata y límites profesionales.',
+    objetivos: [
+      'Reconocer señales de posible riesgo y aplicar la respuesta inmediata correcta.',
+      'Mantener límites profesionales y canales institucionales en entornos presenciales y virtuales.',
+      'Conocer los requisitos obligatorios del Expediente Digital Único de Personal (Employee Compliance File).',
+      'Cumplir el protocolo de custodia, control de RRHH, renovación anual y justificación de fingerprinting.',
+    ],
     lecciones: [
       {
         titulo: 'Responder bien',
@@ -141,6 +146,28 @@ export const BLOQUES_5_6 = {
       { p: '¿Cuándo informas al DSL de una sospecha?', opciones: ['A final de mes', 'El mismo día', 'Solo si tienes pruebas', 'Nunca'], correcta: 1, explica: 'Sin demora.' },
       { p: '¿Qué registras?', opciones: ['Tu interpretación', 'Hechos, fecha, hora y palabras textuales', 'Nada, para proteger la privacidad', 'Un diagnóstico'], correcta: 1, explica: 'Registro objetivo.' },
       { p: '¿Qué canal es adecuado para comunicarte con un estudiante?', opciones: ['Tu Instagram personal', 'Los canales institucionales del programa', 'Tu WhatsApp personal', 'Cualquiera'], correcta: 1, explica: 'Límites profesionales.' },
+      {
+        p: '¿Cuándo puede un profesional o mentor iniciar acompañamientos o contacto con estudiantes y familias?',
+        opciones: [
+          'En cuanto firme su intención o acuerdo verbal',
+          'Únicamente cuando RRHH haya verificado y aprobado al 100% su Expediente Digital de Personal (Employee Compliance File)',
+          'Al cabo de la primera semana de prueba',
+          'Cuando el estudiante o su familia lo solicite',
+        ],
+        correcta: 1,
+        explica: 'Está estrictamente prohibido iniciar contacto o acompañamientos sin el expediente digital 100% verificado y aprobado por RRHH.',
+      },
+      {
+        p: '¿Con qué frecuencia deben renovarse obligatoriamente los certificados de antecedentes penales y protección infantil en Chanak?',
+        opciones: [
+          'Solo se entregan una vez al ingresar',
+          'Cada 5 años',
+          'Obligatoriamente cada 12 meses antes del inicio de cada ciclo escolar K-12',
+          'Solo si hay una auditoría estatal anunciada',
+        ],
+        correcta: 2,
+        explica: 'Los certificados de antecedentes penales y de protección infantil deben renovarse obligatoriamente cada 12 meses para auditoría continua y cumplimiento MSA-CESS.',
+      },
     ],
     evidencia: 'Escribe, paso a paso, tu respuesta al caso práctico (sin datos reales).',
   },

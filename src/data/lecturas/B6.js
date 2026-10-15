@@ -52,6 +52,32 @@ export const LECTURAS_B6 = {
         ],
       },
       {
+        titulo: 'Requisitos obligatorios del expediente de personal (Employee Compliance File)',
+        guion: [
+          'Aviso: Antes de iniciar cualquier función o asumir contacto con estudiantes y familias, el profesional debe tener su expediente digital 100% verificado y aprobado por RRHH. Está estrictamente prohibido iniciar acompañamientos sin haber completado este registro previo.',
+          'En Chanak, la salvaguarda de menores comienza en los procesos de selección y acreditación del equipo. El Expediente Digital Único de Personal (Employee Compliance File) centraliza toda la documentación de idoneidad legal, formativa y ética de mentores, coordinadores y docentes. Debe incluir de forma obligatoria los siguientes elementos antes del alta operativa:',
+          '• Documento de Identificación Oficial: Copia legible del Pasaporte vigente o Documento de Identidad del país de residencia.',
+          '• Hoja de Vida y Titulación: Currículum Vitae actualizado, junto con los títulos universitarios o certificaciones profesionales traducidas u homologadas en la materia o área a impartir.',
+          '• Referencias Verificadas: Comprobación documentada de experiencia previa y referencias profesionales y personales.',
+          '• Certificado de Entrenamiento Chanak (TrainUp): Constancia oficial de haber completado y aprobado la capacitación obligatoria en el modelo pedagógico 60/20/20, Mastery Learning, manejo operativo del SIS y políticas institucionales.',
+          '• Certificados de Antecedentes Penales y Delitos Sexuales: Documento oficial reciente (emitido con menos de 3 meses de antigüedad al momento del ingreso) procedente del organismo oficial del país de residencia (ej. Certificado de Delitos de Naturaleza Sexual y Antecedentes Penales del Ministerio de Justicia en España, Ministerio de Gobierno o Interior en Latinoamérica) o reporte favorable (Clearance Report) emitido por plataformas internacionales autorizadas de verificación.',
+          'Importante: Acuerdos de Protección y Confidencialidad firmados. Ningún expediente está completo sin los dos instrumentos institucionales:',
+          '• Compromiso de Protección al Menor (Safeguarding) y Código de Conducta institucional firmado.',
+          '• Acuerdo de Confidencialidad y Cumplimiento de Privacidad de Datos bajo normativas COPPA, FERPA y RGPD.',
+          '• Documentación Fiscal: Formulario W-9 para proveedores independientes basados en Estados Unidos o el instrumento equivalente para contratación de servicios profesionales y emisión legal de facturas en su respectiva jurisdicción.',
+        ],
+      },
+      {
+        titulo: 'Protocolo de custodia y control en RRHH (Auditoría Continua)',
+        guion: [
+          'El departamento de Recursos Humanos (RRHH) de Chanak gestiona y supervisa los expedientes de personal conforme a estrictos lineamientos de gobernanza, confidencialidad y auditoría continua:',
+          '• Custodia en Archivo Restringido: Toda la documentación del personal se almacena en un archivo digital seguro y estrictamente restringido, independiente de los canales de comunicación generales y de la base de datos de los estudiantes. Se garantiza que la información fiscal e identificadores sensibles no sean compartidos en grupos de trabajo, chats ni repositorios públicos.',
+          '• Disponibilidad para Auditorías Permanentes: Al estar Chanak en proceso de acreditación (MSA-CESS) y operar en diversos programas estatales en EE. UU. (ej. Florida Step Up / EMA, Alabama CHOOSE, Utah Fits All, Texas TEFA), los expedientes están permanentemente estructurados para superar sin observaciones cualquier inspección administrativa, estatal o institucional.',
+          '• Control de Vencimientos y Renovación Anual: Los certificados de antecedentes penales y de protección infantil deben renovarse obligatoriamente cada 12 meses antes del inicio de cada ciclo escolar K–12. Ningún profesional puede continuar activo con certificaciones vencidas.',
+          '• Justificación de Exención de Huellas Dactilares (Fingerprinting): En el caso de docentes y mentores que prestan instrucción exclusivamente virtual a distancia, el expediente incluye la ficha formal que justifica su categoría bajo Service Provider / Online Courses. Para cualquier rol, sede o actividad que implique interacción o contacto presencial en Estados Unidos, el registro de huellas digitales es un requisito legal previo y obligatorio.',
+        ],
+      },
+      {
         titulo: 'Dónde está en Drive y quién responde de qué',
         guion: [
           'La carpeta CHANAK_DOCUMENTOS_2026-2027_FINAL no contiene un manual de safeguarding independiente; el protocolo operativo es el que trabajas en este módulo y las indicaciones del DSL. Lo que sí encontrarás en Drive es quién asume cada responsabilidad de protección en cada modalidad. Abre 03_INSTITUCIONES › Chanak_Partner_Learning_Center.pdf y localiza las diapositivas de responsabilidades de la entidad local: en «Protección» figura la seguridad de los estudiantes, la protección de menores, los datos y los seguros; en «Personal», las políticas de selección de personal y protección de menores, y la formación y certificación de Chanak antes de atender a estudiantes.',
