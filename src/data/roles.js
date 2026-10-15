@@ -682,7 +682,7 @@ export const REPRESENTANTES_PAISES = [
       {
         territorio: 'New Hampshire',
         representantes: ['Karen Pujols (Encargada de todos los ESA)'],
-        funcion: 'Education Freedom Account (EFA) · Education Service Provider (En proceso)',
+        funcion: 'Education Freedom Account (EFA) · ClassWallet Direct Pay (Aprobado)',
       },
       {
         territorio: 'West Virginia',
@@ -702,7 +702,7 @@ export const REPRESENTANTES_PAISES = [
       {
         territorio: 'South Carolina',
         representantes: ['Karen Pujols (Encargada de todos los ESA)'],
-        funcion: 'Education Scholarship Trust Fund (ESTF) · Education Service Provider (En revisión)',
+        funcion: 'Education Scholarship Trust Fund (ESTF) · ClassWallet Direct Pay (Aprobado)',
       },
     ],
   },

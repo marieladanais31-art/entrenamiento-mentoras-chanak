@@ -58,83 +58,23 @@ export const MATRIZ_PROGRAMAS = [
       "Nombre exacto, categoría y visibilidad actual de la oferta en la cuenta institucional de EMA. Los servicios aprobados se conservan según expediente; no se han ampliado."
     ],
     "state": "Florida",
-    "program": "Step Up For Students · EMA (Home Education Instructional Program)",
-    "service": "Matrícula (Enrollment)",
+    "program": "Step Up For Students · EMA (PEP & FES-UA)",
+    "service": "Matrícula y Programas Académicos K–12",
     "status": "aprobado",
     "approved": true,
-    "marketplace": "Servicio publicado en el EMA Marketplace",
+    "marketplace": "Proveedor y servicios autorizados en el EMA Marketplace",
     "price": "Por confirmar",
-    "eligibility": "Familias con beca gestionada por Step Up For Students (FES-UA / PEP), según elegibilidad del programa",
+    "eligibility": "Familias con beca Step Up For Students (PEP / FES-UA)",
     "documentation": "07_US_PROGRAMS_COMPLIANCE/Florida",
-    "lastVerified": "2026-10-06 · guías generales; aprobación institucional 2026-10-02",
+    "lastVerified": "2026-10-15 · confirmación web oficial chanakacademy.org",
     "source": "Portal EMA de Step Up For Students (stepupforstudents.org)",
-    "operativo": "Servicio aprobado. Es el único servicio aprobado en Florida EMA.",
+    "operativo": "Proveedor escolar aprobado (FLDOE #134620). Familias con becas Step Up (PEP / FES-UA) pueden cursar en Chanak International Academy.",
     "guias": [
       {
         "titulo": "EMA: catálogo y atención a padres",
         "url": "https://drive.google.com/file/d/1_iD_e5OrWZ57OViDtWlcxZsRdx1Knjpl/view"
       }
     ]
-  },
-  {
-    "id": "FL-EMA-LIFESKILLS",
-    "state": "Florida",
-    "program": "Step Up For Students · EMA (Home Education Instructional Program)",
-    "service": "Life Skills",
-    "status": "no_aprobado",
-    "approved": false,
-    "marketplace": "No publicado",
-    "price": "Por confirmar",
-    "eligibility": "No aplicable hasta que el servicio sea aprobado por separado",
-    "documentation": "07_US_PROGRAMS_COMPLIANCE/Florida",
-    "lastVerified": "2026-10-02",
-    "source": "Portal EMA de Step Up For Students (stepupforstudents.org)",
-    "operativo": "No se ofrece como servicio EMA. Solo Matrícula está aprobada."
-  },
-  {
-    "id": "FL-EMA-DIAGNSTICOACADMICO",
-    "state": "Florida",
-    "program": "Step Up For Students · EMA (Home Education Instructional Program)",
-    "service": "Diagnóstico académico",
-    "status": "no_aprobado",
-    "approved": false,
-    "marketplace": "No publicado",
-    "price": "Por confirmar",
-    "eligibility": "No aplicable hasta que el servicio sea aprobado por separado",
-    "documentation": "07_US_PROGRAMS_COMPLIANCE/Florida",
-    "lastVerified": "2026-10-02",
-    "source": "Portal EMA de Step Up For Students (stepupforstudents.org)",
-    "operativo": "No se ofrece como servicio EMA. Solo Matrícula está aprobada."
-  },
-  {
-    "id": "FL-EMA-DUALDIPLOMA",
-    "state": "Florida",
-    "program": "Step Up For Students · EMA (Home Education Instructional Program)",
-    "service": "Dual Diploma",
-    "status": "no_aprobado",
-    "approved": false,
-    "marketplace": "No publicado",
-    "price": "Por confirmar",
-    "eligibility": "No aplicable hasta que el servicio sea aprobado por separado",
-    "documentation": "07_US_PROGRAMS_COMPLIANCE/Florida",
-    "lastVerified": "2026-10-02",
-    "source": "Portal EMA de Step Up For Students (stepupforstudents.org)",
-    "operativo": "No se ofrece como servicio EMA. Solo Matrícula está aprobada."
-  },
-  {
-    "id": "FL-EMA-OTROSSERVICIOS",
-    "state": "Florida",
-    "program": "Step Up For Students · EMA (Home Education Instructional Program)",
-    "service": "Otros servicios",
-    "status": "no_aprobado",
-    "approved": false,
-    "marketplace": "No publicado",
-    "price": "Por confirmar",
-    "eligibility": "No aplicable hasta que el servicio sea aprobado por separado",
-    "documentation": "07_US_PROGRAMS_COMPLIANCE/Florida",
-    "lastVerified": "2026-10-02",
-    "source": "Portal EMA de Step Up For Students (stepupforstudents.org)",
-    "operativo": "No se ofrece como servicio EMA. Solo Matrícula está aprobada."
   },
   {
     "id": "AL-CHOOSE-ESP",
@@ -422,37 +362,69 @@ export const MATRIZ_PROGRAMAS = [
   },
   {
     "id": "NH-EFA",
+    "captacion": [
+      "Presentar a Chanak como proveedor educativo aprobado en New Hampshire (Education Freedom Account - EFA).",
+      "Orientar a las familias con cuenta EFA administrada por Children's Scholarship Fund NH (CSF NH).",
+      "Facturación directa mediante ClassWallet (Pay Vendor) a nombre de CHANAK TRAINUP EDUCATION INC."
+    ],
+    "facturacion": [
+      "Pago 100% directo a través de ClassWallet (Pay Vendor).",
+      "Chanak emite la factura proforma oficial en PDF por cada alumno matriculado para su carga y desembolso."
+    ],
+    "responsableComercial": "Rol Estratégico (captación y seguimiento) · Administración (facturación)",
+    "condiciones": [
+      "Proveedor escolar no público aprobado en ClassWallet para New Hampshire.",
+      "Registro de notas y plan de estudios individualizado conforme a normativa de CSF NH."
+    ],
     "state": "New Hampshire",
     "program": "Education Freedom Account (EFA)",
-    "service": "Education Service Provider",
-    "status": "en_proceso",
-    "approved": false,
-    "marketplace": "Solicitud pendiente",
+    "service": "Education Service Provider (ClassWallet Direct Pay)",
+    "status": "aprobado",
+    "approved": true,
+    "marketplace": "Proveedor aprobado en ClassWallet (Pay Vendor: CHANAK TRAINUP EDUCATION INC)",
     "price": "Por confirmar",
-    "eligibility": "Familias elegibles de EFA, sujeto a aprobación",
-    "documentation": "Antecedentes y documentación de entorno seguro pendientes",
-    "lastVerified": "2026-10-09 · expediente institucional",
-    "source": "Expediente institucional y portal del programa",
+    "eligibility": "Familias elegibles con beca EFA en New Hampshire (Children's Scholarship Fund NH)",
+    "documentation": "07_US_PROGRAMS_COMPLIANCE/New_Hampshire",
+    "lastVerified": "2026-10-15 · confirmación oficial chanakacademy.org",
+    "source": "Children's Scholarship Fund NH (nh.scholarshipfund.org) y ClassWallet",
     "fuentesOficiales": [
-      "https://nh.scholarshipprep.org/",
+      "https://nh.scholarshipfund.org/apply/nh-education-freedom-accounts/",
       "https://www.education.nh.gov/pathways-education/education-freedom-accounts"
     ],
-    "operativo": "Completar antecedentes y evidencia de entorno seguro. No comunicar como aprobado."
+    "operativo": "Proveedor aprobado. Familias de New Hampshire pueden financiar programas Chanak 100% con fondos EFA vía ClassWallet sin pagos de su bolsillo."
   },
   {
     "id": "SC-ESTF",
+    "captacion": [
+      "Presentar a Chanak como proveedor educativo aprobado en South Carolina (Education Scholarship Trust Fund - ESTF).",
+      "Orientar a las familias beneficiarias de ESTF en South Carolina sobre la cobertura completa de colegiatura y expedientes oficiales.",
+      "Facturación directa mediante ClassWallet (Pay Vendor) a nombre de CHANAK TRAINUP EDUCATION INC."
+    ],
+    "facturacion": [
+      "Pago 100% directo a través de ClassWallet (Pay Vendor).",
+      "Chanak emite mensualmente la factura oficial en PDF por cada estudiante para desembolso directo sin adelanto de dinero personal."
+    ],
+    "responsableComercial": "Rol Estratégico (captación y seguimiento) · Administración (facturación)",
+    "condiciones": [
+      "Proveedor no público calificado en ClassWallet para South Carolina ESTF.",
+      "Servicios educativos K–12 y convalidaciones conforme a la ley del programa ESTF."
+    ],
     "state": "South Carolina",
     "program": "Education Scholarship Trust Fund (ESTF)",
-    "service": "Education Service Provider",
-    "status": "en_revision",
-    "approved": false,
-    "marketplace": "Solicitud enviada; decisión pendiente",
+    "service": "Education Service Provider (ClassWallet Direct Pay)",
+    "status": "aprobado",
+    "approved": true,
+    "marketplace": "Proveedor aprobado en ClassWallet (Pay Vendor: CHANAK TRAINUP EDUCATION INC)",
     "price": "Por confirmar",
-    "eligibility": "Familias elegibles de ESTF, sujeto a aprobación",
-    "documentation": "Solicitud sometida",
-    "lastVerified": "2026-10-09 · expediente institucional",
-    "source": "Expediente institucional y portal del programa",
-    "operativo": "Dar seguimiento a la solicitud. No anunciar aprobación ni aceptar fondos hasta la confirmación."
+    "eligibility": "Familias participantes del programa ESTF en South Carolina",
+    "documentation": "07_US_PROGRAMS_COMPLIANCE/South_Carolina",
+    "lastVerified": "2026-10-15 · confirmación oficial chanakacademy.org",
+    "source": "South Carolina Department of Education (sc-estf-program.com) y ClassWallet",
+    "fuentesOficiales": [
+      "https://sc-estf-program.com/en/",
+      "https://ed.sc.gov/districts-schools/state-accountability/education-scholarship-trust-fund/"
+    ],
+    "operativo": "Proveedor aprobado. Familias de South Carolina pueden financiar el 100% de sus programas Chanak mediante fondos ESTF en ClassWallet."
   },
   {
     "id": "US-NCAA",

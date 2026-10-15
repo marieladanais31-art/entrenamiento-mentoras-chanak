@@ -35,15 +35,14 @@ export default function MatrizProgramas({ onVolver }) {
         <div className="text-[12px] font-bold uppercase tracking-[0.18em] text-teal">Uso interno · Estratégico, coordinación y administración</div>
         <h2 className="mt-1 text-xl font-bold text-navy">Estados y programas · Servicios de Chanak</h2>
         <p className="mt-2 text-sm leading-relaxed text-navy/70">
-          Qué servicio está aprobado, en qué programa y con qué estado. Regla: solo se dice «aprobado» lo que aquí figura como
-          aprobado. <b>Texas (TEFA)</b> figura como <b>Aprobado / Casi seguro</b>. Florida EMA: solo el servicio de Matrícula está aprobado.
-          Los precios figuran como «Por confirmar» hasta que la dirección los fije.
+          Catálogo oficial de fondos educativos estatales y becas de elección escolar (School Choice) aprobados para Chanak International Academy.
+          Estados aprobados activos: <b>Florida</b> (Step Up EMA / PEP & FES-UA), <b>Utah</b> (Odyssey UFA), <b>Wyoming</b> (Odyssey ESA), <b>Arizona</b> (ClassWallet ESA), <b>Alabama</b> (ClassWallet CHOOSE Act), <b>South Carolina</b> (ClassWallet ESTF), <b>New Hampshire</b> (ClassWallet EFA) y <b>Texas</b> (Odyssey TEFA · Aprobado / Casi seguro).
         </p>
 
-        {/* Barra de Accesos Directos a los 7 Programas Estatales Clave */}
+        {/* Barra de Accesos Directos a los 8 Programas Estatales Clave */}
         <div className="mt-4 rounded-xl border-2 border-teal/30 bg-teal/5 p-4 space-y-2">
           <div className="text-xs font-bold uppercase tracking-wider text-teal">
-            🔗 Enlaces Oficiales Directos · Programas Estatales Clave
+            🔗 Enlaces Oficiales Directos · Programas Estatales Clave (Direct Pay)
           </div>
           <div className="flex flex-wrap gap-2 text-xs">
             <a
@@ -87,7 +86,15 @@ export default function MatrizProgramas({ onVolver }) {
               🦬 Wyoming (ESA) ↗
             </a>
             <a
-              href="https://nh.scholarshipprep.org/"
+              href="https://sc-estf-program.com/en/"
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-lg bg-white px-3 py-1.5 font-bold text-navy border border-teal/30 hover:bg-teal hover:text-white transition shadow-xs"
+            >
+              🌴 South Carolina (ESTF) ↗
+            </a>
+            <a
+              href="https://nh.scholarshipfund.org/apply/nh-education-freedom-accounts/"
               target="_blank"
               rel="noreferrer"
               className="rounded-lg bg-white px-3 py-1.5 font-bold text-navy border border-teal/30 hover:bg-teal hover:text-white transition shadow-xs"
