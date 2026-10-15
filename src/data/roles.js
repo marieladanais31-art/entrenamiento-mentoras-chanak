@@ -65,7 +65,7 @@ export const ROLES = [
     domina: ['Diagnóstico', 'PEI', 'Vía curricular', 'Scope & Sequence', 'Mastery', 'Evidencias', 'Progreso', 'Intervención', 'Comunicación', 'Off-Campus (Homeschool Guiado)', 'Dual Diploma'],
     escala: ['Créditos, cambios de vía, seguridad, conducta grave, quejas o compromisos económicos → Chanak Central'],
     documentos: ['Academic Mentor · Role Profile'],
-    checklist: ['Rol asignado formalmente', 'Core completado', 'Child & Adolescent Development', 'Safeguarding', 'Online Safety y protección de datos', 'SIS Competency', 'Portal Competency'],
+    checklist: ['Rol asignado formalmente', 'Core completado', 'Child & Adolescent Development', 'Safeguarding', 'Online Safety y protección de datos', 'Dominio de SIS', 'Dominio de Portal', 'Plataforma Dual Diploma (si aplica)'],
   },
   {
     id: 'coordinator',
@@ -153,7 +153,7 @@ export const ROLES = [
     domina: ['Identidad', 'Comunicación', 'Liderazgo', 'Teamwork', 'Decisiones', 'Hábitos', 'Gestión del tiempo', 'Finanzas personales', 'Empleabilidad, CV y entrevistas', 'Emprendimiento', 'Ciudadanía digital', 'Vocación y proyecto de vida'],
     escala: [],
     documentos: ['Life Skills & Leadership Facilitator · Role Profile'],
-    checklist: ['Rol asignado formalmente', 'Chanak Core', 'Psychology/Development', 'Safeguarding', 'Portal', 'SIS cuando corresponda'],
+    checklist: ['Rol asignado formalmente', 'Chanak Core', 'Psychology/Development', 'Safeguarding', 'Portal', 'SIS cuando corresponda', 'Formación en Administración', 'Biblia', 'Discipulado de jóvenes'],
   },
   {
     id: 'local_language',
@@ -367,9 +367,9 @@ export const ROLES_VIGENTES = ROLES.filter((r) => r.grupo)
 // Especialidades que una persona puede elegir dentro de cada rama (pantalla «Elige tu rama»)
 export const ESPECIALIDADES = {
   mentor: [
-    { id: 'mentor', nombre: 'Mentor Off-Campus / Dual Diploma', detalle: 'Acompaña el plan académico: diagnóstico, PEI, vía curricular, dominio, evidencias y familia.' },
+    { id: 'mentor', nombre: 'Mentor Off-Campus / Dual Diploma', detalle: 'Acompaña el plan académico: diagnóstico, PEI, vía curricular, dominio, evidencias y familia. Manejo obligatorio de SIS, Portal y plataforma Dual Diploma si aplica.' },
     { id: 'english_teacher', nombre: 'Profesor/a de inglés', detalle: 'Clases de inglés y Academic English. Nivel B2–C1 (inglés general) o C1–C2 (Dual Diploma).' },
-    { id: 'lifeskills_facilitator', nombre: 'Facilitador/a de Life Skills', detalle: 'Clases semanales de Life Skills & Leadership por grupos de edad (12–15 y 16–17).' },
+    { id: 'lifeskills_facilitator', nombre: 'Facilitador/a de Life Skills', detalle: 'Clases semanales de Life Skills & Leadership (12–15 y 16–17). Requiere formación en Administración, Biblia y experiencia con discipulado de jóvenes.' },
     { id: 'local_language', nombre: 'Extensión Local', detalle: 'Asignaturas del 20 % local (Lengua, Historia, Geografía con competencias LOMLOE), sobre todo en modalidad presencial.' },
     { id: 'assessment_specialist', nombre: 'Especialista en evaluación educativa', detalle: 'Diagnóstico académico y screening educativo NO clínico; aporta al PEI y deriva a profesionales cuando corresponde.' },
   ],
@@ -531,9 +531,10 @@ export const REQUISITOS_RAMAS = {
     titulo: 'Requisitos de la Rama Mentor (Acompañamiento a Estudiantes y Familias)',
     requisitos: [
       { icono: '👪', titulo: 'Acompañamiento Integral a Familias', detalle: 'Capacidad de acogida, orientación familiar inicial, tutoría pedagógica y seguimiento continuo en Off-Campus y Dual Diploma.' },
+      { icono: '🖥️', titulo: 'Manejo de Sistemas (SIS, Portal y Dual Diploma)', detalle: 'Manejo obligatorio del SIS (Student Information System) y del Portal Educativo Chanak. Si acompaña o atiende a estudiantes de Dual Diploma, es obligatorio el dominio de la plataforma de Dual Diploma.' },
+      { icono: '🎯', titulo: 'Facilitador de Life Skills & Leadership', detalle: 'Formación en Administración, Biblia (cosmovisión bíblica sólida) y experiencia comprobada en discipulado de jóvenes (12–15 y 16–17 años).' },
       { icono: '📚', titulo: 'Formación Docente o Especialidad', detalle: 'Titulación en educación o dominio acreditado de la materia o nivel curricular asignado.' },
       { icono: '🗣️', titulo: 'Docentes de Inglés (Academic English)', detalle: 'Nivel certificado mínimo B2–C1 para inglés general o C1–C2 para Dual Diploma / Academic English.' },
-      { icono: '🎯', titulo: 'Facilitador de Life Skills & Leadership', detalle: 'Experiencia en dinamización grupal de jóvenes (12–15 y 16–17) con enfoque bíblico y práctico.' },
       { icono: '📝', titulo: 'Evaluación Diagnóstica No Clínica', detalle: 'Formación pedagógica para aplicar screening y diagnósticos académicos, con derivación externa ante sospechas clínicas.' },
     ],
   },
