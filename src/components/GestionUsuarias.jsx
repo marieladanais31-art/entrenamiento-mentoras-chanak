@@ -16,9 +16,34 @@ const PAISES = ['España', 'México', 'Panamá', 'Estados Unidos', 'Otro']
 const PROGRAMAS = ['Off-Campus', 'Dual Diploma', 'Life Skills', 'Partner Learning Center', 'Varios']
 
 const ASUNTO_CORREO_BIENVENIDA = 'Formación Chanak · Acceso a la plataforma, bienvenida y próximos pasos'
+const REMITENTE_OFICIAL = 'administration@chanakacademy.org'
+
+function generarUrlGmail({ para = '', bcc = '', asunto = '', cuerpo = '' }) {
+  const p = new URLSearchParams()
+  p.set('view', 'cm')
+  p.set('fs', '1')
+  p.set('authuser', REMITENTE_OFICIAL)
+  if (para) p.set('to', para)
+  if (bcc) p.set('bcc', bcc)
+  if (asunto) p.set('su', asunto)
+  if (cuerpo) p.set('body', cuerpo)
+  return `https://mail.google.com/mail/?${p.toString()}`
+}
+
+function generarUrlMailto({ para = '', bcc = '', asunto = '', cuerpo = '' }) {
+  const params = []
+  params.push(`from=${encodeURIComponent(REMITENTE_OFICIAL)}`)
+  if (bcc) params.push(`bcc=${encodeURIComponent(bcc)}`)
+  if (asunto) params.push(`subject=${encodeURIComponent(asunto)}`)
+  if (cuerpo) params.push(`body=${encodeURIComponent(cuerpo)}`)
+  const dest = para ? encodeURIComponent(para) : REMITENTE_OFICIAL
+  return `mailto:${dest}?${params.join('&')}`
+}
 
 function getCuerpoCorreoGeneral() {
   return (
+    `De: ${REMITENTE_OFICIAL} (Chanak International Academy)\n` +
+    `Para: Equipo de Mentoras y Coordinación\n\n` +
     `Bendiciones a todas:\n\n` +
     `Qué alegría y bendición haber compartido juntas en nuestro encuentro de ayer. Agradecemos de corazón su tiempo, su disposición y el interés de acercarse a conocer la visión educativa y espiritual de Chanak International Academy.\n\n` +
     `La plataforma de formación ya está lista para que cada una pueda comenzar a explorar el Tronco Común a su propio ritmo:\n\n` +
@@ -38,7 +63,7 @@ function getCuerpoCorreoGeneral() {
     `Dirección y Coordinación General\n` +
     `Chanak International Academy\n` +
     `FLDOE Private School #134620 · MSA-CESS Candidate\n` +
-    `administration@chanakacademy.org\n` +
+    `${REMITENTE_OFICIAL}\n` +
     `https://www.chanakacademy.org/`
   )
 }
@@ -50,6 +75,8 @@ function getCuerpoCorreoIndividual(nombre, correo) {
   const claveSugerida = esClaudia ? 'Chanak2026' : 'Chanak2026*'
 
   return (
+    `De: ${REMITENTE_OFICIAL} (Chanak International Academy)\n` +
+    `Para: ${correo}\n\n` +
     `${saludo}\n\n` +
     `Qué alegría y bendición haber compartido contigo en nuestro encuentro de ayer. Agradecemos de corazón tu tiempo, tu disposición y el interés de acercarte a conocer la visión educativa y espiritual de Chanak International Academy.\n\n` +
     `La plataforma de formación ya está lista para que puedas comenzar a explorar el Tronco Común a tu propio ritmo:\n\n` +
@@ -69,7 +96,7 @@ function getCuerpoCorreoIndividual(nombre, correo) {
     `Dirección y Coordinación General\n` +
     `Chanak International Academy\n` +
     `FLDOE Private School #134620 · MSA-CESS Candidate\n` +
-    `administration@chanakacademy.org\n` +
+    `${REMITENTE_OFICIAL}\n` +
     `https://www.chanakacademy.org/`
   )
 }
@@ -371,19 +398,36 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
         </div>
         <div className="flex flex-wrap items-center gap-2">
           {activas.length > 0 && (
-            <a
-              href={`mailto:administration@chanakacademy.org?bcc=${encodeURIComponent(
-                listaBcc.join(',')
-              )}&subject=${encodeURIComponent(ASUNTO_CORREO_BIENVENIDA)}&body=${encodeURIComponent(
-                getCuerpoCorreoGeneral()
-              )}`}
-              target="_blank"
-              rel="noreferrer"
-              className="shrink-0 rounded-xl bg-gold/20 border border-gold/40 px-3.5 py-2 text-xs font-bold text-navy shadow-xs transition hover:bg-gold/30 inline-flex items-center gap-1.5"
-              title="Abrir correo con todas las mentoras en CCO (BCC) desde administration@chanakacademy.org"
-            >
-              ✉️ Enviar Correo a Todas (BCC)
-            </a>
+            <div className="flex flex-wrap items-center gap-1.5 bg-gold/15 p-1 rounded-xl border border-gold/40">
+              <a
+                href={generarUrlGmail({
+                  para: REMITENTE_OFICIAL,
+                  bcc: listaBcc.join(','),
+                  asunto: ASUNTO_CORREO_BIENVENIDA,
+                  cuerpo: getCuerpoCorreoGeneral(),
+                })}
+                target="_blank"
+                rel="noreferrer"
+                className="shrink-0 rounded-lg bg-teal px-3 py-1.5 text-xs font-bold text-white shadow-xs transition hover:bg-teal/90 inline-flex items-center gap-1.5"
+                title="Abrir en Gmail seleccionando automáticamente administration@chanakacademy.org como remitente"
+              >
+                🔴 Enviar en Gmail (Desde administration@)
+              </a>
+              <a
+                href={generarUrlMailto({
+                  para: REMITENTE_OFICIAL,
+                  bcc: listaBcc.join(','),
+                  asunto: ASUNTO_CORREO_BIENVENIDA,
+                  cuerpo: getCuerpoCorreoGeneral(),
+                })}
+                target="_blank"
+                rel="noreferrer"
+                className="shrink-0 rounded-lg bg-white px-2.5 py-1.5 text-xs font-bold text-navy border border-navy/15 shadow-xs transition hover:bg-slate-100 inline-flex items-center gap-1"
+                title="Abrir en Apple Mail o cliente del sistema configurando From: administration@chanakacademy.org"
+              >
+                ✉️ App de Correo
+              </a>
+            </div>
           )}
           <button
             onClick={() => setMostrandoBuscadorReset(!mostrandoBuscadorReset)}
@@ -737,17 +781,34 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
                       📧 {correoActiva || 'Sin email registrado'}
                     </span>
                     {correoActiva && (
-                      <a
-                        href={`mailto:${correoActiva}?subject=${encodeURIComponent(ASUNTO_CORREO_BIENVENIDA)}&body=${encodeURIComponent(
-                          getCuerpoCorreoIndividual(p.nombre, correoActiva)
-                        )}`}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="rounded bg-teal px-2 py-0.5 text-[11px] font-bold text-white hover:bg-teal/80 transition shadow-xs inline-flex items-center gap-1"
-                        title="Enviar correo individual con credenciales y mensaje de discernimiento"
-                      >
-                        ✉️ Enviar Correo de Acceso
-                      </a>
+                      <div className="inline-flex items-center gap-1 bg-white px-1.5 py-0.5 rounded-lg border border-navy/15 shadow-xs">
+                        <a
+                          href={generarUrlGmail({
+                            para: correoActiva,
+                            asunto: ASUNTO_CORREO_BIENVENIDA,
+                            cuerpo: getCuerpoCorreoIndividual(p.nombre, correoActiva),
+                          })}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="rounded bg-teal px-2 py-0.5 text-[11px] font-bold text-white hover:bg-teal/90 transition inline-flex items-center gap-1"
+                          title="Enviar correo individual desde administration@chanakacademy.org en Gmail"
+                        >
+                          🔴 Gmail (Desde administration@)
+                        </a>
+                        <a
+                          href={generarUrlMailto({
+                            para: correoActiva,
+                            asunto: ASUNTO_CORREO_BIENVENIDA,
+                            cuerpo: getCuerpoCorreoIndividual(p.nombre, correoActiva),
+                          })}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="rounded bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-navy hover:bg-slate-200 transition inline-flex items-center gap-1"
+                          title="Abrir en cliente de correo local configurando From: administration@chanakacademy.org"
+                        >
+                          ✉️ App
+                        </a>
+                      </div>
                     )}
                     {correoActiva && (
                       <button
