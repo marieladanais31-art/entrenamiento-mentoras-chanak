@@ -177,6 +177,21 @@ export async function actualizarPerfil(id, cambios) {
   if (error) throw new Error(error.message)
 }
 
+export async function forzarCambioPassword(perfilId) {
+  const { error } = await supabase.from('perfiles').update({ debe_cambiar_password: true }).eq('id', perfilId)
+  if (error) throw new Error(error.message)
+}
+
+export async function resetearProgresoUsuaria(usuariaId) {
+  const { error: errProg } = await supabase.from('progreso').delete().eq('usuaria_id', usuariaId)
+  if (errProg) console.warn('Aviso al limpiar progreso:', errProg.message)
+}
+
+export async function resetearCompromisoUsuaria(perfilId) {
+  const { error } = await supabase.from('compromisos_formacion').delete().eq('perfil_id', perfilId)
+  if (error) throw new Error(error.message)
+}
+
 // ════════════════════════════════════════════
 // ROLES MÚLTIPLES (ROLE ≠ PERSON)
 // Si la tabla perfil_roles aún no existe (migración pendiente), devuelve null y la app

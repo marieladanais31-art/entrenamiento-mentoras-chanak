@@ -1,5 +1,12 @@
 import { useState } from 'react'
-import { actualizarPerfil, crearUsuariaDirecta, recuperarContrasena } from '../lib/backend'
+import {
+  actualizarPerfil,
+  crearUsuariaDirecta,
+  recuperarContrasena,
+  forzarCambioPassword,
+  resetearProgresoUsuaria,
+  resetearCompromisoUsuaria,
+} from '../lib/backend'
 import { formatearFecha, iniciales } from '../lib/calculos'
 import { useIdioma } from '../i18n/idioma'
 import { obtenerEmailConocido } from '../data/roles'
@@ -20,6 +27,9 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
   const [nuevoNombre, setNuevoNombre] = useState('')
   const [copiadoId, setCopiadoId] = useState(null)
   const [modalCompromiso, setModalCompromiso] = useState(null)
+  const [modalReset, setModalReset] = useState(null)
+  const [mostrandoBuscadorReset, setMostrandoBuscadorReset] = useState(false)
+  const [emailManualReset, setEmailManualReset] = useState('')
 
   // Formulario para crear usuaria directa
   const [mostrandoForm, setMostrandoForm] = useState(false)
@@ -32,6 +42,15 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
   const pendientes = perfiles.filter((p) => p.estado === 'pendiente')
   const activas = perfiles.filter((p) => p.estado === 'aprobada')
   const suspendidas = perfiles.filter((p) => p.estado === 'suspendida')
+
+  function abrirModalReset(perfil, correoOpcional = null) {
+    const correo = correoOpcional || perfil?.email || obtenerEmailConocido(perfil?.id) || obtenerEmailConocido(perfil?.nombre) || ''
+    setModalReset({
+      perfil,
+      correo: (correo || '').trim().toLowerCase(),
+      nombre: perfil?.nombre || (correo ? correo.split('@')[0] : 'Usuaria'),
+    })
+  }
 
   async function handleResetPassword(perfil) {
     const correo = perfil.email || obtenerEmailConocido(perfil.id) || obtenerEmailConocido(perfil.nombre)
@@ -304,6 +323,13 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
             </a>
           )}
           <button
+            onClick={() => setMostrandoBuscadorReset(!mostrandoBuscadorReset)}
+            className="shrink-0 rounded-xl bg-gold/25 border border-gold/45 px-3.5 py-2 text-xs font-bold text-navy shadow-xs transition hover:bg-gold/40 inline-flex items-center gap-1.5"
+            title="Panel de reseteo, credenciales de acceso y recuperación para cualquier cuenta"
+          >
+            {mostrandoBuscadorReset ? '✕ Cerrar Reseteo' : '🔄 Resetear Cuentas'}
+          </button>
+          <button
             onClick={() => setMostrandoForm(!mostrandoForm)}
             className="shrink-0 rounded-xl bg-teal px-4 py-2 text-xs font-bold text-white shadow-sm transition hover:bg-teal/90"
           >
@@ -311,6 +337,84 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
           </button>
         </div>
       </div>
+
+      {mostrandoBuscadorReset && (
+        <div className="rounded-2xl border-2 border-gold/50 bg-gold/10 p-4 shadow-sm space-y-3">
+          <div className="flex items-center justify-between border-b border-gold/30 pb-2">
+            <div>
+              <h4 className="font-bold text-navy text-sm flex items-center gap-2">
+                <span>🔄</span> Centro de Reseteo y Recuperación de Cuentas
+              </h4>
+              <p className="text-xs text-navy/70">
+                Selecciona una usuaria registrada o introduce un correo directamente para ver sus credenciales, enviar enlace de recuperación o generar el comando SQL.
+              </p>
+            </div>
+            <button
+              onClick={() => setMostrandoBuscadorReset(false)}
+              className="text-xs text-navy/60 hover:text-navy font-bold"
+            >
+              ✕
+            </button>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2">
+            <div>
+              <span className="text-[11px] font-bold uppercase tracking-wider text-navy/60 block mb-1">
+                Elegir usuaria registrada ({perfiles.length})
+              </span>
+              <select
+                onChange={(e) => {
+                  const p = perfiles.find((x) => x.id === e.target.value)
+                  if (p) abrirModalReset(p)
+                }}
+                defaultValue=""
+                className="w-full rounded-xl border border-navy/20 bg-white px-3 py-2 text-xs font-medium text-navy"
+              >
+                <option value="" disabled>Seleccionar usuaria…</option>
+                {perfiles.map((p) => {
+                  const c = p.email || obtenerEmailConocido(p.id) || obtenerEmailConocido(p.nombre)
+                  return (
+                    <option key={p.id} value={p.id}>
+                      {p.nombre} ({c || 'Sin email'}) · {p.estado}
+                    </option>
+                  )
+                })}
+              </select>
+            </div>
+            <div>
+              <span className="text-[11px] font-bold uppercase tracking-wider text-navy/60 block mb-1">
+                O buscar / resetear por correo directo
+              </span>
+              <div className="flex gap-2">
+                <input
+                  type="email"
+                  value={emailManualReset}
+                  onChange={(e) => setEmailManualReset(e.target.value)}
+                  placeholder="ejemplo@gmail.com"
+                  className="flex-1 rounded-xl border border-navy/20 bg-white px-3 py-2 text-xs font-medium text-navy"
+                />
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (!emailManualReset.trim()) return
+                    const cleanEmail = emailManualReset.trim().toLowerCase()
+                    const perfilEncontrado = perfiles.find(
+                      (p) =>
+                        (p.email && p.email.toLowerCase() === cleanEmail) ||
+                        (obtenerEmailConocido(p.id) && obtenerEmailConocido(p.id).toLowerCase() === cleanEmail) ||
+                        (obtenerEmailConocido(p.nombre) && obtenerEmailConocido(p.nombre).toLowerCase() === cleanEmail)
+                    )
+                    abrirModalReset(perfilEncontrado || { id: null, nombre: cleanEmail.split('@')[0] }, cleanEmail)
+                  }}
+                  disabled={!emailManualReset.trim()}
+                  className="rounded-xl bg-teal px-3 py-2 text-xs font-bold text-white shadow-xs hover:bg-teal/90 disabled:opacity-50"
+                >
+                  Abrir Reseteo
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {exito && (
         <p className="rounded-xl border-l-4 border-teal bg-teal/10 px-4 py-3 text-xs font-semibold text-teal">
@@ -478,6 +582,14 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
                     </div>
                   </div>
                   <button
+                    onClick={() => abrirModalReset(p, correoP)}
+                    disabled={ocupado === p.id}
+                    className="rounded-lg bg-gold/25 border border-gold/45 px-2.5 py-1.5 text-xs font-bold text-navy hover:bg-gold/40 transition shadow-xs inline-flex items-center gap-1"
+                    title="Opciones de reseteo y credenciales"
+                  >
+                    🔄 Resetear
+                  </button>
+                  <button
                     onClick={() => cambiar(p.id, { estado: 'aprobada' })}
                     disabled={ocupado === p.id}
                     className="rounded-lg bg-teal px-3 py-1.5 text-xs font-bold text-white disabled:opacity-50"
@@ -595,16 +707,14 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
                         {copiadoId === correoActiva ? '✓ ¡Copiado!' : '📋 Copiar Correo'}
                       </button>
                     )}
-                    {correoActiva && (
-                      <button
-                        onClick={() => handleResetPassword(p)}
-                        disabled={ocupado === p.id}
-                        className="rounded bg-gold/25 px-2 py-0.5 text-[11px] font-bold text-navy hover:bg-gold/45 transition shadow-xs"
-                        title="Enviar enlace de recuperación o ver contraseña temporal"
-                      >
-                        {ocupado === p.id ? '…' : '🔑 Resetear Contraseña'}
-                      </button>
-                    )}
+                    <button
+                      onClick={() => abrirModalReset(p, correoActiva)}
+                      disabled={ocupado === p.id}
+                      className="rounded bg-gold/25 border border-gold/45 px-2 py-0.5 text-[11px] font-bold text-navy hover:bg-gold/45 transition shadow-xs inline-flex items-center gap-1"
+                      title="Opciones de reseteo, credenciales, contraseña y progreso"
+                    >
+                      {ocupado === p.id ? '…' : '🔄 Resetear Cuenta'}
+                    </button>
                   </div>
 
                   <div className="text-[12px] text-navy/55 mt-1">
@@ -726,6 +836,14 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
                     {correoSusp && <div className="text-xs text-navy/50">📧 {correoSusp}</div>}
                   </div>
                   <button
+                    onClick={() => abrirModalReset(p, correoSusp)}
+                    disabled={ocupado === p.id}
+                    className="rounded-lg bg-gold/25 border border-gold/45 px-2.5 py-1.5 text-xs font-bold text-navy hover:bg-gold/40 transition shadow-xs inline-flex items-center gap-1"
+                    title="Opciones de reseteo y credenciales"
+                  >
+                    🔄 Resetear
+                  </button>
+                  <button
                     onClick={() => cambiar(p.id, { estado: 'aprobada' })}
                     disabled={ocupado === p.id}
                     className="rounded-lg bg-teal px-3 py-1.5 text-xs font-bold text-white disabled:opacity-50"
@@ -781,7 +899,338 @@ WHERE p.id = u.id;`}
           onImprimir={imprimirComprobante}
         />
       )}
+
+      {modalReset && (
+        <ModalResetCuenta
+          datos={modalReset}
+          onClose={() => setModalReset(null)}
+          onRecargar={onRecargar}
+        />
+      )}
     </section>
+  )
+}
+
+function ModalResetCuenta({ datos, onClose, onRecargar }) {
+  if (!datos) return null
+  const { perfil, correo, nombre } = datos
+  const [enviandoEmail, setEnviandoEmail] = useState(false)
+  const [copiadoMsg, setCopiadoMsg] = useState(false)
+  const [copiadoSql, setCopiadoSql] = useState(false)
+  const [notificacion, setNotificacion] = useState(null)
+  const [ocupadoModal, setOcupadoModal] = useState(false)
+
+  const esClaudia = (correo || '').toLowerCase() === 'net.amyclau@gmail.com'
+  const contrasenaSugerida = esClaudia ? 'Chanak2026' : 'Chanak2026*'
+
+  const mensajeBienvenida = `Hola ${nombre},\n\nTus credenciales para ingresar a la plataforma de entrenamiento Chanak Academy son:\n\n🔗 Plataforma: https://training.chanakacademy.org/\n📧 Usuario: ${correo || '[Tu correo electrónico]'}\n🔑 Contraseña inicial: ${contrasenaSugerida}\n\nRecomendación de seguridad: Al ingresar por primera vez, podrás actualizar tu contraseña desde tu perfil. Si en cualquier momento deseas restablecerla tú misma, puedes pulsar en "¿Olvidaste tu contraseña?" en la pantalla inicial.\n\n¡Bienvenida a la formación de Chanak International Academy!`
+
+  const sqlReseteo = `-- Reseteo y activación directa en Supabase SQL Editor para: ${correo || nombre}
+UPDATE auth.users
+SET 
+  email_confirmed_at = coalesce(email_confirmed_at, now()),
+  encrypted_password = crypt('${contrasenaSugerida}', gen_salt('bf')),
+  updated_at = now()
+WHERE lower(email) = lower('${correo || ''}');
+
+UPDATE public.perfiles
+SET 
+  debe_cambiar_password = true, 
+  estado = 'aprobada'
+WHERE id = (SELECT id FROM auth.users WHERE lower(email) = lower('${correo || ''}'));`
+
+  async function handleEnviarEnlace() {
+    if (!correo) {
+      setNotificacion({ tipo: 'error', texto: 'No hay un correo electrónico registrado para esta usuaria.' })
+      return
+    }
+    setEnviandoEmail(true)
+    setNotificacion(null)
+    try {
+      await recuperarContrasena(correo)
+      setNotificacion({
+        tipo: 'exito',
+        texto: `✓ Enlace oficial de restablecimiento enviado exitosamente a ${correo}. La usuaria lo recibirá en su bandeja de entrada (o spam).`,
+      })
+    } catch (err) {
+      setNotificacion({
+        tipo: 'error',
+        texto: `Aviso del servidor de correos: ${err.message}. Si el límite por hora de Supabase se ha superado, comparte la contraseña inicial o usa el comando SQL directo a continuación.`,
+      })
+    } finally {
+      setEnviandoEmail(false)
+    }
+  }
+
+  function handleCopiarMensaje() {
+    navigator.clipboard.writeText(mensajeBienvenida)
+    setCopiadoMsg(true)
+    setTimeout(() => setCopiadoMsg(false), 3000)
+  }
+
+  function handleCopiarSql() {
+    navigator.clipboard.writeText(sqlReseteo)
+    setCopiadoSql(true)
+    setTimeout(() => setCopiadoSql(false), 3000)
+  }
+
+  async function handleForzarCambioClave() {
+    if (!perfil?.id) {
+      setNotificacion({ tipo: 'error', texto: 'No se puede modificar sin el identificador de perfil en base de datos.' })
+      return
+    }
+    setOcupadoModal(true)
+    try {
+      await forzarCambioPassword(perfil.id)
+      await onRecargar()
+      setNotificacion({ tipo: 'exito', texto: '✓ Se ha marcado la cuenta: se exigirá cambio obligatorio de contraseña en el próximo inicio de sesión.' })
+    } catch (err) {
+      setNotificacion({ tipo: 'error', texto: err.message })
+    } finally {
+      setOcupadoModal(false)
+    }
+  }
+
+  async function handleResetearProgreso() {
+    if (!perfil?.id) return
+    const confirma = window.confirm(`¿Estás segura de reiniciar TODO el progreso de formación para ${nombre}? Se restablecerán a 0% sus módulos y test completados.`)
+    if (!confirma) return
+    setOcupadoModal(true)
+    try {
+      await resetearProgresoUsuaria(perfil.id)
+      setNotificacion({ tipo: 'exito', texto: '✓ Progreso de módulos y actividades reiniciado a 0% correctamente.' })
+    } catch (err) {
+      setNotificacion({ tipo: 'error', texto: err.message })
+    } finally {
+      setOcupadoModal(false)
+    }
+  }
+
+  async function handleResetearCompromiso() {
+    if (!perfil?.id) return
+    const confirma = window.confirm(`¿Estás segura de reiniciar el compromiso/acuerdo institucional para ${nombre}? La mentora deberá volver a leer y aceptar el acuerdo electrónico al ingresar.`)
+    if (!confirma) return
+    setOcupadoModal(true)
+    try {
+      await resetearCompromisoUsuaria(perfil.id)
+      await onRecargar()
+      setNotificacion({ tipo: 'exito', texto: '✓ Acuerdo de formación reiniciado. Se solicitará nueva firma electrónica.' })
+    } catch (err) {
+      setNotificacion({ tipo: 'error', texto: err.message })
+    } finally {
+      setOcupadoModal(false)
+    }
+  }
+
+  return (
+    <div
+      role="dialog"
+      aria-modal="true"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-navy/60 p-4 overflow-y-auto"
+      onClick={onClose}
+    >
+      <div
+        className="w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl bg-white shadow-2xl border border-navy/20 p-5 sm:p-6 space-y-4"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-start justify-between border-b border-navy/10 pb-3">
+          <div>
+            <div className="text-xs font-bold uppercase tracking-wider text-teal">
+              Chanak International Academy · TrainUp
+            </div>
+            <h3 className="text-lg font-bold text-navy mt-0.5 flex items-center gap-2">
+              <span>🔄</span> Centro de Control y Reseteo de Cuenta
+            </h3>
+            <p className="text-xs text-navy/60">
+              Opciones de acceso, credenciales, contraseña y mantenimiento para <b className="text-navy">{nombre}</b>.
+            </p>
+          </div>
+          <button
+            onClick={onClose}
+            className="rounded-full bg-navy/10 px-3 py-1 text-sm font-bold text-navy hover:bg-navy/20"
+          >
+            ✕
+          </button>
+        </div>
+
+        {/* Notificación / Feedback */}
+        {notificacion && (
+          <div
+            className={`rounded-xl p-3 text-xs font-medium border ${
+              notificacion.tipo === 'exito'
+                ? 'bg-teal/10 border-teal/40 text-teal'
+                : 'bg-coral/10 border-coral/40 text-coral'
+            }`}
+          >
+            {notificacion.texto}
+          </div>
+        )}
+
+        {/* Ficha resumen de la usuaria */}
+        <div className="rounded-xl bg-slate-50 border border-navy/10 p-3.5 flex flex-wrap items-center justify-between gap-3 text-xs">
+          <div>
+            <span className="text-navy/50 uppercase font-semibold text-[10px] block">Titular:</span>
+            <span className="font-bold text-navy text-sm">{nombre}</span>
+          </div>
+          <div>
+            <span className="text-navy/50 uppercase font-semibold text-[10px] block">Correo:</span>
+            <span className="font-mono font-semibold text-teal">{correo || 'Sin correo asociado'}</span>
+          </div>
+          <div>
+            <span className="text-navy/50 uppercase font-semibold text-[10px] block">Estado en plataforma:</span>
+            <span className={`font-bold px-2 py-0.5 rounded-full text-[11px] ${
+              perfil?.estado === 'aprobada' ? 'bg-teal text-white' : perfil?.estado === 'suspendida' ? 'bg-coral text-white' : 'bg-gold text-navy'
+            }`}>
+              {perfil?.estado || 'Sin registrar en perfiles'}
+            </span>
+          </div>
+          <div>
+            <span className="text-navy/50 uppercase font-semibold text-[10px] block">Cambio obligatorio de clave:</span>
+            <span className="font-semibold text-navy">
+              {perfil?.debe_cambiar_password ? '🔒 Requerido' : 'Normal'}
+            </span>
+          </div>
+        </div>
+
+        {/* 1. Restablecimiento oficial por correo */}
+        <div className="rounded-xl border border-navy/10 bg-white p-3.5 space-y-2">
+          <div className="flex items-center justify-between">
+            <span className="font-bold text-navy text-xs uppercase tracking-wide flex items-center gap-1.5">
+              <span>✉️</span> 1. Enviar Enlace Oficial por Correo Electrónico
+            </span>
+            <span className="text-[10px] text-teal font-bold bg-teal/10 px-2 py-0.5 rounded-full">
+              Método Recomendado
+            </span>
+          </div>
+          <p className="text-xs text-navy/70 leading-relaxed">
+            Genera un enlace temporal directo desde Supabase Auth para que la mentora ingrese y establezca su propia contraseña de forma segura y confidencial.
+          </p>
+          <button
+            type="button"
+            onClick={handleEnviarEnlace}
+            disabled={enviandoEmail || !correo}
+            className="rounded-xl bg-teal px-4 py-2 text-xs font-bold text-white shadow-xs hover:bg-teal/90 disabled:opacity-50 transition"
+          >
+            {enviandoEmail ? 'Enviando enlace...' : '✉️ Enviar Enlace de Acceso a su Bandeja'}
+          </button>
+        </div>
+
+        {/* 2. Credenciales estándar de bienvenida */}
+        <div className="rounded-xl border border-gold/40 bg-gold/5 p-3.5 space-y-2.5">
+          <div className="flex items-center justify-between">
+            <span className="font-bold text-navy text-xs uppercase tracking-wide flex items-center gap-1.5">
+              <span>🔑</span> 2. Credenciales Iniciales de Inducción
+            </span>
+            <span className="text-[10px] font-bold text-navy/60 bg-gold/20 px-2 py-0.5 rounded-full">
+              {esClaudia ? 'Clave Especial Claudia' : 'Clave Estándar 2026-2027'}
+            </span>
+          </div>
+          <p className="text-xs text-navy/70 leading-relaxed">
+            Si la mentora no localiza el correo o necesitas darle acceso inmediato durante la inducción, puedes enviarle el mensaje preformateado con su clave de inicio:
+          </p>
+          <div className="flex flex-wrap items-center gap-3 bg-white p-3 rounded-lg border border-gold/30 text-xs">
+            <div>
+              <span className="text-navy/55 font-medium">Usuario:</span>{' '}
+              <b className="text-navy">{correo || '[email]'}</b>
+            </div>
+            <div>
+              <span className="text-navy/55 font-medium">Contraseña inicial:</span>{' '}
+              <code className="bg-navy/5 px-2 py-0.5 rounded font-mono font-bold text-teal">{contrasenaSugerida}</code>
+            </div>
+            <button
+              type="button"
+              onClick={handleCopiarMensaje}
+              className="ml-auto rounded-lg bg-teal px-3 py-1.5 text-xs font-bold text-white shadow-xs hover:bg-teal/90 transition"
+            >
+              {copiadoMsg ? '✓ ¡Mensaje Copiado!' : '📋 Copiar Mensaje de Acceso'}
+            </button>
+          </div>
+        </div>
+
+        {/* 3. Seguridad: Forzar cambio de clave */}
+        <div className="rounded-xl border border-navy/10 bg-slate-50 p-3.5 space-y-2">
+          <div className="flex items-center justify-between">
+            <span className="font-bold text-navy text-xs uppercase tracking-wide flex items-center gap-1.5">
+              <span>🔒</span> 3. Seguridad y Política de Contraseñas
+            </span>
+          </div>
+          <p className="text-xs text-navy/70 leading-relaxed">
+            Marca la cuenta para que la usuaria esté obligada a definir una nueva clave personal en cuanto inicie sesión en la plataforma.
+          </p>
+          <button
+            type="button"
+            onClick={handleForzarCambioClave}
+            disabled={ocupadoModal || !perfil?.id}
+            className="rounded-xl bg-navy/10 border border-navy/20 px-3.5 py-1.5 text-xs font-bold text-navy hover:bg-navy/20 disabled:opacity-50 transition"
+          >
+            🔒 Exigir Cambio Obligatorio de Contraseña al Entrar
+          </button>
+        </div>
+
+        {/* 4. Comando SQL instantáneo para Supabase */}
+        <div className="rounded-xl border border-navy/15 bg-navy/5 p-3.5 space-y-2">
+          <div className="flex items-center justify-between">
+            <span className="font-bold text-navy text-xs uppercase tracking-wide flex items-center gap-1.5">
+              <span>🛠️</span> 4. Comando SQL de Activación Directa en Supabase
+            </span>
+            <button
+              type="button"
+              onClick={handleCopiarSql}
+              className="rounded bg-teal px-2.5 py-1 text-[11px] font-bold text-white hover:bg-teal/90 transition"
+            >
+              {copiadoSql ? '✓ ¡SQL Copiado!' : '📋 Copiar SQL'}
+            </button>
+          </div>
+          <p className="text-xs text-navy/70 leading-relaxed">
+            Ejecuta este comando en el <b>SQL Editor de Supabase</b> si deseas confirmar su correo y fijar su contraseña instantáneamente sin esperar envíos por email:
+          </p>
+          <pre className="rounded-lg bg-navy p-3 font-mono text-[11px] text-cream overflow-x-auto select-all leading-relaxed">
+            {sqlReseteo}
+          </pre>
+        </div>
+
+        {/* 5. Zona de Mantenimiento / Reinicio de Formación */}
+        {perfil?.id && (
+          <div className="rounded-xl border border-coral/30 bg-coral/5 p-3.5 space-y-2">
+            <div className="text-xs font-bold uppercase tracking-wider text-coral flex items-center gap-1.5">
+              <span>⚠️</span> Zona de Mantenimiento · Reinicio de Formación
+            </div>
+            <p className="text-xs text-navy/70 leading-relaxed">
+              Utiliza estas opciones solo si la mentora necesita recomenzar el recorrido formativo o volver a firmar el acuerdo institucional:
+            </p>
+            <div className="flex flex-wrap items-center gap-2 pt-1">
+              <button
+                type="button"
+                onClick={handleResetearProgreso}
+                disabled={ocupadoModal}
+                className="rounded-lg border border-coral/40 bg-white px-3 py-1.5 text-xs font-bold text-coral hover:bg-coral hover:text-white transition shadow-xs"
+              >
+                ⚠️ Reiniciar Progreso de Cursos (0%)
+              </button>
+              <button
+                type="button"
+                onClick={handleResetearCompromiso}
+                disabled={ocupadoModal}
+                className="rounded-lg border border-coral/40 bg-white px-3 py-1.5 text-xs font-bold text-coral hover:bg-coral hover:text-white transition shadow-xs"
+              >
+                📝 Reiniciar Acuerdo / Compromiso de Formación
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Footer */}
+        <div className="flex justify-end pt-3 border-t border-navy/10">
+          <button
+            type="button"
+            onClick={onClose}
+            className="rounded-xl bg-navy px-5 py-2 text-xs font-bold text-white hover:bg-navy/90"
+          >
+            Cerrar Panel
+          </button>
+        </div>
+      </div>
+    </div>
   )
 }
 
