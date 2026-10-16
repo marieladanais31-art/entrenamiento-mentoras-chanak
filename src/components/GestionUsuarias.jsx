@@ -15,6 +15,65 @@ import AsignarRoles from './AsignarRoles'
 const PAISES = ['España', 'México', 'Panamá', 'Estados Unidos', 'Otro']
 const PROGRAMAS = ['Off-Campus', 'Dual Diploma', 'Life Skills', 'Partner Learning Center', 'Varios']
 
+const ASUNTO_CORREO_BIENVENIDA = 'Formación Chanak · Acceso a la plataforma, bienvenida y próximos pasos'
+
+function getCuerpoCorreoGeneral() {
+  return (
+    `Bendiciones a todas:\n\n` +
+    `Qué alegría y bendición haber compartido juntas en nuestro encuentro de ayer. Agradecemos de corazón su tiempo, su disposición y el interés de acercarse a conocer la visión educativa y espiritual de Chanak International Academy.\n\n` +
+    `La plataforma de formación ya está lista para que cada una pueda comenzar a explorar el Tronco Común a su propio ritmo:\n\n` +
+    `🔗 Plataforma: https://training.chanakacademy.org/\n` +
+    `👤 Usuario: Tu correo electrónico registrado\n` +
+    `🔑 Contraseña inicial: Chanak2026* (si ya ingresaste y personalizaste tu clave, utiliza tu contraseña actual)\n\n` +
+    `El Tronco Común está diseñado para darles a conocer nuestra identidad, los programas que operamos y las bases del acompañamiento y cuidado a los estudiantes y familias.\n\n` +
+    `Queremos que este tiempo sea formativo, enriquecedor y sin ninguna presión: al completar el tronco común, cada una podrá tomar su tiempo en tranquilidad para orar, evaluar y ver si el Señor la dirige —sea ahora o más adelante— a formar parte activa de este ministerio.\n\n` +
+    `Primeros pasos al ingresar:\n` +
+    `1. Al entrar por primera vez, verás el Acuerdo de Participación y Compromiso Institucional para su lectura y aceptación digital.\n` +
+    `2. Te sugerimos actualizar tu contraseña desde tu perfil personal para tu comodidad.\n` +
+    `3. Comienza con los primeros módulos del Tronco Común cuando mejor se adapte a tu horario.\n\n` +
+    `Si en algún momento necesitas restablecer tu contraseña o tienes alguna dificultad de acceso, puedes pulsar en "¿Olvidaste tu contraseña?" en la pantalla de inicio o responder directamente a este correo.\n\n` +
+    `Oramos para que este tiempo de preparación sea de edificación mutua.\n\n` +
+    `Con aprecio y bendiciones,\n\n` +
+    `Mariela Andrade\n` +
+    `Dirección y Coordinación General\n` +
+    `Chanak International Academy\n` +
+    `FLDOE Private School #134620 · MSA-CESS Candidate\n` +
+    `administration@chanakacademy.org\n` +
+    `https://www.chanakacademy.org/`
+  )
+}
+
+function getCuerpoCorreoIndividual(nombre, correo) {
+  const nombreTxt = (nombre || '').trim()
+  const saludo = nombreTxt ? `Bendiciones, ${nombreTxt}:` : `Bendiciones:`
+  const esClaudia = (correo || '').toLowerCase() === 'net.amyclau@gmail.com'
+  const claveSugerida = esClaudia ? 'Chanak2026' : 'Chanak2026*'
+
+  return (
+    `${saludo}\n\n` +
+    `Qué alegría y bendición haber compartido contigo en nuestro encuentro de ayer. Agradecemos de corazón tu tiempo, tu disposición y el interés de acercarte a conocer la visión educativa y espiritual de Chanak International Academy.\n\n` +
+    `La plataforma de formación ya está lista para que puedas comenzar a explorar el Tronco Común a tu propio ritmo:\n\n` +
+    `🔗 Plataforma: https://training.chanakacademy.org/\n` +
+    `👤 Usuario: ${correo}\n` +
+    `🔑 Contraseña inicial: ${claveSugerida} (si ya ingresaste y personalizaste tu clave, utiliza tu contraseña actual)\n\n` +
+    `El Tronco Común está diseñado para darte a conocer nuestra identidad, los programas que operamos y las bases del acompañamiento y cuidado a los estudiantes y familias.\n\n` +
+    `Queremos que este tiempo sea formativo, enriquecedor y sin ninguna presión: al completar el tronco común, podrás tomar tu tiempo en tranquilidad para orar, evaluar y ver si el Señor te dirige —sea ahora o más adelante— a formar parte activa de este ministerio.\n\n` +
+    `Primeros pasos al ingresar:\n` +
+    `1. Al entrar por primera vez, verás el Acuerdo de Participación y Compromiso Institucional para su lectura y aceptación digital.\n` +
+    `2. Te sugerimos actualizar tu contraseña desde tu perfil personal para tu comodidad.\n` +
+    `3. Comienza con los primeros módulos del Tronco Común cuando mejor se adapte a tu horario.\n\n` +
+    `Si en algún momento necesitas restablecer tu contraseña o tienes alguna dificultad de acceso, puedes pulsar en "¿Olvidaste tu contraseña?" en la pantalla de inicio o responder directamente a este correo.\n\n` +
+    `Oramos para que este tiempo de preparación sea de edificación mutua.\n\n` +
+    `Con aprecio y bendiciones,\n\n` +
+    `Mariela Andrade\n` +
+    `Dirección y Coordinación General\n` +
+    `Chanak International Academy\n` +
+    `FLDOE Private School #134620 · MSA-CESS Candidate\n` +
+    `administration@chanakacademy.org\n` +
+    `https://www.chanakacademy.org/`
+  )
+}
+
 // Aprobación y gestión de cuentas. Solo visible para admin.
 export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa, compromisosMapa }) {
   const { t } = useIdioma()
@@ -94,10 +153,17 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
     setTimeout(() => setCopiado(false), 3000)
   }
 
-  function copiarCorreoIndividual(correo) {
-    const texto = `Asunto: Formación Chanak · Acceso a la plataforma y encuentro este jueves\nDe: administration@chanakacademy.org\nPara: ${correo}\n\nBendiciones,\n\nComo continuación de la invitación de ayer, te confirmamos que la plataforma de formación Chanak ya está disponible. Si todavía no has entrado, puedes comenzar a explorar la introducción y los primeros módulos del tronco común.\n\n🔗 Plataforma: https://training.chanakacademy.org/\n👤 Usuario: ${correo}\n🔑 Acceso: Ingresa con tu contraseña segura registrada. Si es tu primer ingreso o deseas definir una nueva contraseña, pulsa "¿Olvidaste tu contraseña?" en la pantalla de inicio.\n\nTambién te compartimos el enlace de nuestro encuentro:\n📅 Jueves 15 de octubre a las 20:00 h, hora de España peninsular\n📍 Google Meet: https://meet.google.com/ktt-wtgg-gep\n\nPresentaremos el recorrido de formación, resolveremos dudas y conversaremos sobre las posibles áreas de colaboración. Será una oportunidad para conocer mejor la visión y valorar tu disponibilidad para continuar.\n\nGracias por tu interés. Nos alegrará compartir este encuentro contigo.\n\nUn abrazo,\nMariela Andrade\nChanak International Academy`
+  function copiarCorreoIndividual(nombre, correo) {
+    const texto = `Asunto: ${ASUNTO_CORREO_BIENVENIDA}\nDe: administration@chanakacademy.org\nPara: ${correo}\n\n${getCuerpoCorreoIndividual(nombre, correo)}`
     navigator.clipboard.writeText(texto)
     setCopiadoId(correo)
+    setTimeout(() => setCopiadoId(null), 3000)
+  }
+
+  function copiarCorreoGeneral() {
+    const texto = `Asunto: ${ASUNTO_CORREO_BIENVENIDA}\nDe: administration@chanakacademy.org\nCCO: ${listaBcc.join(', ')}\n\n${getCuerpoCorreoGeneral()}`
+    navigator.clipboard.writeText(texto)
+    setCopiadoId('general_email')
     setTimeout(() => setCopiadoId(null), 3000)
   }
 
@@ -273,18 +339,27 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
             Cuenta de despacho oficial: <span className="font-mono text-teal select-all underline">administration@chanakacademy.org</span>
           </p>
           <p className="text-xs text-navy/70 leading-relaxed">
-            Reunión de inducción: <b>Jueves 15 de octubre a las 20:00 h (España)</b> vía Google Meet: <a href="https://meet.google.com/ktt-wtgg-gep" target="_blank" rel="noreferrer" className="text-teal font-semibold underline">meet.google.com/ktt-wtgg-gep</a>
+            Encuentro realizado el <b>jueves 15 de octubre</b>. Envío oficial de accesos al Tronco Común y mensaje de discernimiento vocacional.
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
           {listaBcc.length > 0 && (
-            <button
-              onClick={() => copiarListaBcc(listaBcc)}
-              className="rounded-xl border border-teal/40 bg-white px-3 py-2 text-xs font-bold text-teal hover:bg-teal hover:text-white transition shadow-xs"
-              title="Copiar todas las direcciones de email para pegar en CCO (BCC)"
-            >
-              {copiadoId === 'bcc_list' ? '✓ ¡Lista Copiada!' : '📋 Copiar Lista BCC'}
-            </button>
+            <>
+              <button
+                onClick={() => copiarCorreoGeneral()}
+                className="rounded-xl border border-teal/40 bg-white px-3 py-2 text-xs font-bold text-teal hover:bg-teal hover:text-white transition shadow-xs"
+                title="Copiar texto del correo general para enviar desde administration@chanakacademy.org"
+              >
+                {copiadoId === 'general_email' ? '✓ ¡Correo Copiado!' : '📋 Copiar Texto del Correo'}
+              </button>
+              <button
+                onClick={() => copiarListaBcc(listaBcc)}
+                className="rounded-xl border border-teal/40 bg-white px-3 py-2 text-xs font-bold text-teal hover:bg-teal hover:text-white transition shadow-xs"
+                title="Copiar todas las direcciones de email para pegar en CCO (BCC)"
+              >
+                {copiadoId === 'bcc_list' ? '✓ ¡Lista Copiada!' : '📋 Copiar Lista BCC'}
+              </button>
+            </>
           )}
         </div>
       </div>
@@ -299,27 +374,15 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
             <a
               href={`mailto:administration@chanakacademy.org?bcc=${encodeURIComponent(
                 listaBcc.join(',')
-              )}&subject=${encodeURIComponent('Formación Chanak · Acceso a la plataforma y encuentro este jueves')}&body=${encodeURIComponent(
-                `Bendiciones,\n\n` +
-                `Como continuación de la invitación de ayer, te confirmamos que la plataforma de formación Chanak ya está disponible. Si todavía no has entrado, puedes comenzar a explorar la introducción y los primeros módulos del tronco común.\n\n` +
-                `🔗 Plataforma: https://training.chanakacademy.org/\n` +
-                `👤 Usuario: tu correo electrónico registrado\n` +
-                `🔑 Acceso: Ingresa con tu contraseña registrada. Si necesitas definir o recuperar tu contraseña, pulsa "¿Olvidaste tu contraseña?" en la pantalla de inicio.\n\n` +
-                `También te compartimos el enlace de nuestro encuentro:\n` +
-                `📅 Jueves 15 de octubre a las 20:00 h, hora de España peninsular\n` +
-                `📍 Google Meet: https://meet.google.com/ktt-wtgg-gep\n\n` +
-                `Presentaremos el recorrido de formación, resolveremos dudas y conversaremos sobre las posibles áreas de colaboración. Será una oportunidad para conocer mejor la visión y valorar tu disponibilidad para continuar.\n\n` +
-                `Gracias por tu interés. Nos alegrará compartir este encuentro contigo.\n\n` +
-                `Un abrazo,\n` +
-                `Mariela Andrade\n` +
-                `Chanak International Academy`
+              )}&subject=${encodeURIComponent(ASUNTO_CORREO_BIENVENIDA)}&body=${encodeURIComponent(
+                getCuerpoCorreoGeneral()
               )}`}
               target="_blank"
               rel="noreferrer"
               className="shrink-0 rounded-xl bg-gold/20 border border-gold/40 px-3.5 py-2 text-xs font-bold text-navy shadow-xs transition hover:bg-gold/30 inline-flex items-center gap-1.5"
               title="Abrir correo con todas las mentoras en CCO (BCC) desde administration@chanakacademy.org"
             >
-              📢 Enviar Convocatoria a Todas (BCC)
+              ✉️ Enviar Correo a Todas (BCC)
             </a>
           )}
           <button
@@ -675,32 +738,20 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
                     </span>
                     {correoActiva && (
                       <a
-                        href={`mailto:${correoActiva}?subject=${encodeURIComponent('Formación Chanak · Acceso a la plataforma y encuentro este jueves')}&body=${encodeURIComponent(
-                          `Bendiciones,\n\n` +
-                          `Como continuación de la invitación de ayer, te confirmamos que la plataforma de formación Chanak ya está disponible. Si todavía no has entrado, puedes comenzar a explorar la introducción y los primeros módulos del tronco común.\n\n` +
-                          `🔗 Plataforma: https://training.chanakacademy.org/\n` +
-                          `👤 Usuario: ${correoActiva}\n` +
-                          `🔑 Acceso: Ingresa con tu contraseña registrada. Si necesitas definir o recuperar tu contraseña, pulsa "¿Olvidaste tu contraseña?" en la pantalla de inicio.\n\n` +
-                          `También te compartimos el enlace de nuestro encuentro:\n` +
-                          `📅 Jueves 15 de octubre a las 20:00 h, hora de España peninsular\n` +
-                          `📍 Google Meet: https://meet.google.com/ktt-wtgg-gep\n\n` +
-                          `Presentaremos el recorrido de formación, resolveremos dudas y conversaremos sobre las posibles áreas de colaboración. Será una oportunidad para conocer mejor la visión y valorar tu disponibilidad para continuar.\n\n` +
-                          `Gracias por tu interés. Nos alegrará compartir este encuentro contigo.\n\n` +
-                          `Un abrazo,\n` +
-                          `Mariela Andrade\n` +
-                          `Chanak International Academy`
+                        href={`mailto:${correoActiva}?subject=${encodeURIComponent(ASUNTO_CORREO_BIENVENIDA)}&body=${encodeURIComponent(
+                          getCuerpoCorreoIndividual(p.nombre, correoActiva)
                         )}`}
                         target="_blank"
                         rel="noreferrer"
                         className="rounded bg-teal px-2 py-0.5 text-[11px] font-bold text-white hover:bg-teal/80 transition shadow-xs inline-flex items-center gap-1"
-                        title="Enviar correo individual con credenciales y reunión"
+                        title="Enviar correo individual con credenciales y mensaje de discernimiento"
                       >
-                        ✉️ Enviar Acceso y Reunión
+                        ✉️ Enviar Correo de Acceso
                       </a>
                     )}
                     {correoActiva && (
                       <button
-                        onClick={() => copiarCorreoIndividual(correoActiva)}
+                        onClick={() => copiarCorreoIndividual(p.nombre, correoActiva)}
                         className="rounded bg-teal/15 px-2 py-0.5 text-[11px] font-bold text-teal hover:bg-teal hover:text-white transition shadow-xs inline-flex items-center gap-1"
                         title="Copiar texto del correo oficial para enviar desde administration@chanakacademy.org"
                       >
