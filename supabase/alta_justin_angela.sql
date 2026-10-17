@@ -1,6 +1,6 @@
 -- ============================================================
 -- CHANAK ACADEMY · ALTA Y ACTIVACIÓN DIRECTA EN SUPABASE
--- Usuarias: jastin@ywamct.com y angela@ywamct.com (YWAM)
+-- Usuarias: justin@ywamct.com y angela@ywamct.com (YWAM)
 --
 -- Ejecutar en:
 -- Supabase Dashboard -> SQL Editor -> New Query -> Pegar y dar clic en "Run"
@@ -11,19 +11,30 @@
 DO $$
 DECLARE
   v_pass text := crypt('Chanak2026*', gen_salt('bf'));
-  v_users text[] := ARRAY['jastin@ywamct.com', 'angela@ywamct.com'];
+  v_users text[] := ARRAY['justin@ywamct.com', 'angela@ywamct.com'];
   v_email text;
   v_id uuid;
   v_nombre text;
 BEGIN
-  -- Limpiar el dominio anterior erróneo si existiera
-  DELETE FROM public.perfiles WHERE id IN (SELECT id FROM auth.users WHERE lower(email) IN ('jastin@wamct.com', 'angela@wamct.com'));
-  DELETE FROM auth.users WHERE lower(email) IN ('jastin@wamct.com', 'angela@wamct.com');
+  -- Limpiar variantes previas o erróneas si existieran
+  DELETE FROM public.perfiles 
+  WHERE id IN (
+    SELECT id FROM auth.users 
+    WHERE lower(email) IN ('jastin@wamct.com', 'angela@wamct.com', 'jastin@ywamct.com')
+  );
+  
+  DELETE FROM auth.users 
+  WHERE lower(email) IN ('jastin@wamct.com', 'angela@wamct.com', 'jastin@ywamct.com');
 
+  -- Registrar y activar Justin y Angela
   FOREACH v_email IN ARRAY v_users
   LOOP
     SELECT id INTO v_id FROM auth.users WHERE lower(email) = lower(v_email);
-    v_nombre := initcap(split_part(v_email, '@', 1));
+    v_nombre := CASE 
+      WHEN lower(v_email) = 'justin@ywamct.com' THEN 'Justin'
+      WHEN lower(v_email) = 'angela@ywamct.com' THEN 'Angela'
+      ELSE initcap(split_part(v_email, '@', 1))
+    END;
     
     IF v_id IS NULL THEN
       v_id := gen_random_uuid();
@@ -66,11 +77,12 @@ BEGIN
       UPDATE auth.users
       SET encrypted_password = v_pass,
           email_confirmed_at = coalesce(email_confirmed_at, now()),
+          raw_user_meta_data = jsonb_build_object('nombre', v_nombre, 'tipo_acceso', 'mentora'),
           updated_at = now()
       WHERE id = v_id;
     END IF;
 
-    -- Asegurar perfil en public.perfiles
+    -- Asegurar perfil aprobado en public.perfiles
     INSERT INTO public.perfiles (id, nombre, rol, estado, tipo_acceso, debe_cambiar_password)
     VALUES (v_id, v_nombre, 'mentora', 'aprobada', 'mentora', false)
     ON CONFLICT (id) DO UPDATE SET
