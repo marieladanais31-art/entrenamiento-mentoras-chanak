@@ -1,6 +1,6 @@
 -- ============================================================
 -- CHANAK ACADEMY · ALTA Y ACTIVACIÓN DIRECTA EN SUPABASE
--- Usuarias: jastin@wamct.com y angela@wamct.com
+-- Usuarias: jastin@ywamct.com y angela@ywamct.com (YWAM)
 --
 -- Ejecutar en:
 -- Supabase Dashboard -> SQL Editor -> New Query -> Pegar y dar clic en "Run"
@@ -11,11 +11,15 @@
 DO $$
 DECLARE
   v_pass text := crypt('Chanak2026*', gen_salt('bf'));
-  v_users text[] := ARRAY['jastin@wamct.com', 'angela@wamct.com'];
+  v_users text[] := ARRAY['jastin@ywamct.com', 'angela@ywamct.com'];
   v_email text;
   v_id uuid;
   v_nombre text;
 BEGIN
+  -- Limpiar el dominio anterior erróneo si existiera
+  DELETE FROM public.perfiles WHERE id IN (SELECT id FROM auth.users WHERE lower(email) IN ('jastin@wamct.com', 'angela@wamct.com'));
+  DELETE FROM auth.users WHERE lower(email) IN ('jastin@wamct.com', 'angela@wamct.com');
+
   FOREACH v_email IN ARRAY v_users
   LOOP
     SELECT id INTO v_id FROM auth.users WHERE lower(email) = lower(v_email);
