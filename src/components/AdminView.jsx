@@ -3,12 +3,13 @@ import { BLOQUES, VERSION_CURRICULO, FECHA_ACTUALIZACION, numModulo } from '../d
 import { VIDEOS, CATEGORIAS_VIDEO } from '../data/videos'
 import VideoLeccion from './VideoLeccion'
 import * as api from '../lib/backend'
-import { resumenMentora, formatearFecha, iniciales, aplicarEquivalencias } from '../lib/calculos'
+import { resumenMentora, formatearFecha, iniciales, aplicarEquivalencias, calcularUltimaActividad, formatearUltimaActividad } from '../lib/calculos'
 import GestionUsuarias from './GestionUsuarias'
 import GestionCodigos from './GestionCodigos'
 import { useIdioma } from '../i18n/idioma'
 import { traducirBloques } from '../data/curriculum.en'
-import { ROL_POR_ID, rolesDesdeTipoAcceso } from '../data/roles'
+import { ROL_POR_ID, rolesDesdeTipoAcceso, obtenerEmailConocido, solicitudDe } from '../data/roles'
+import ModalRespuestasUsuaria from './ModalRespuestasUsuaria'
 
 export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) {
   const { t, idioma } = useIdioma()
@@ -17,6 +18,7 @@ export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) 
   const [progresos, setProgresos] = useState({})
   const [rolesMapa, setRolesMapa] = useState(undefined) // null = migración de roles pendiente
   const [compromisosMapa, setCompromisosMapa] = useState(undefined)
+  const [modalRespuestas, setModalRespuestas] = useState(null)
   const [cargando, setCargando] = useState(true)
   const [error, setError] = useState('')
 
@@ -88,7 +90,15 @@ export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) 
       ) : (
         <>
           {pestana === 'usuarias' && (
-            <GestionUsuarias perfiles={perfiles} miId={miPerfil.id} onRecargar={cargar} rolesMapa={rolesMapa} compromisosMapa={compromisosMapa} />
+            <GestionUsuarias
+              perfiles={perfiles}
+              miId={miPerfil.id}
+              onRecargar={cargar}
+              rolesMapa={rolesMapa}
+              compromisosMapa={compromisosMapa}
+              progresos={progresos}
+              onVerUsuaria={onVerUsuaria}
+            />
           )}
 
           {pestana === 'codigos' && (
@@ -107,10 +117,17 @@ export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) 
                   const rolesP = asignados.length ? [...new Set(asignados)] : rolesDesdeTipoAcceso(p.tipo_acceso)
                   const r = resumenMentora(aplicarEquivalencias(progresos[p.id] || { modulos: {} }), { roles: rolesP, contactoMenores: p.contacto_menores ?? null })
                   const pct = Math.min(100, Math.round((r.horas / r.metaHorasModulos) * 100))
+                  const correo = p.email || obtenerEmailConocido(p.id) || obtenerEmailConocido(p.nombre)
+                  const ultActIso = calcularUltimaActividad(p, progresos[p.id], compromisosMapa?.[p.id])
+                  const sol = solicitudDe(compromisosMapa?.[p.id]?.funciones)
+                  const pMods = progresos[p.id]?.modulos || {}
+                  const nNotas = Object.values(pMods).filter((m) => m && m.notas?.trim()).length
+                  const nRespuestas = Object.values(pMods).filter((m) => m && (m.notas?.trim() || m.quiz || m.entregableUrl)).length
+
                   return (
-                    <div key={p.id} className="rounded-2xl bg-white p-4 shadow-sm">
+                    <div key={p.id} className="rounded-2xl bg-white p-4 shadow-sm border border-navy/5 space-y-2">
                       <div className="flex items-center gap-3">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-teal text-xs font-bold text-white">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-teal text-xs font-bold text-white shrink-0">
                           {iniciales(p.nombre)}
                         </div>
                         <div className="min-w-0 flex-1">
@@ -120,36 +137,79 @@ export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) 
                               <span className="ml-1 text-[12px] text-gold">🔑</span>
                             )}
                           </div>
-                          <div className="text-[12px] text-navy/45">
+                          <div className="text-xs font-medium text-teal">
+                            📧 {correo || 'Sin email registrado'}
+                          </div>
+                          <div className="text-[12px] text-navy/45 mt-0.5">
                             {rolesP.length ? rolesP.map((id) => ROL_POR_ID[id]?.nombre || id).join(' + ') : 'Estratégico'}
                             {p.pais ? ` · ${p.pais}` : ''}
                             {p.programa ? ` · ${p.programa}` : ''}
                             {p.id_interno ? ` · ID ${p.id_interno}` : ''}
                           </div>
-                          <div className="text-[13px] text-navy/55">
-                            {t('admin.nivelResumen', {
-                              nivel: r.nivelActual,
-                              horas: r.horas,
-                              meta: r.metaHoras,
-                              n: r.completados,
-                              palabra: r.completados === 1 ? t('admin.modulo') : t('admin.modulos'),
-                            })}
-                          </div>
                         </div>
                         <div className="text-sm font-bold text-teal">{pct}%</div>
                       </div>
-                      <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-navy/10">
+
+                      {/* Última actividad / conexión */}
+                      <div className="text-[11px] text-navy/60 flex items-center gap-1.5" title={ultActIso ? new Date(ultActIso).toLocaleString('es-ES') : ''}>
+                        <span>🕐</span>
+                        <span>Última actividad:</span>
+                        <b className="text-navy">{formatearUltimaActividad(ultActIso)}</b>
+                      </div>
+
+                      {/* Rama elegida tras Tronco Común */}
+                      {sol ? (
+                        <div className="text-[11px] font-semibold text-teal bg-teal/5 p-2 rounded-xl border border-teal/20">
+                          <span className="block text-[10px] uppercase font-bold text-navy/60">🎯 Rama elegida tras Tronco Común</span>
+                          <span className="text-navy font-bold">
+                            {(sol.funciones || []).map((f) => ROL_POR_ID[f]?.nombreEs || ROL_POR_ID[f]?.nombre || f).join(' + ') || 'Rama registrada'}
+                          </span>
+                          {sol.fecha && <span className="text-[10px] text-navy/55 ml-1">({formatearFecha(sol.fecha.slice(0, 10))})</span>}
+                        </div>
+                      ) : (
+                        <div className="text-[11px] text-navy/50 bg-slate-50 px-2 py-1 rounded-lg border border-slate-200">
+                          <span>⏳ Tronco Común en curso · Pendiente de elegir rama</span>
+                        </div>
+                      )}
+
+                      <div className="text-[13px] text-navy/55 pt-1">
+                        {t('admin.nivelResumen', {
+                          nivel: r.nivelActual,
+                          horas: r.horas,
+                          meta: r.metaHoras,
+                          n: r.completados,
+                          palabra: r.completados === 1 ? t('admin.modulo') : t('admin.modulos'),
+                        })}
+                      </div>
+
+                      <div className="h-1.5 overflow-hidden rounded-full bg-navy/10">
                         <div
                           className={`h-full rounded-full ${pct >= 100 ? 'bg-gold' : 'bg-teal'}`}
                           style={{ width: `${pct}%` }}
                         />
                       </div>
+
+                      {/* Botón para ver respuestas escritas */}
+                      <button
+                        type="button"
+                        onClick={() => setModalRespuestas({ perfil: p, correo, compromiso: compromisosMapa?.[p.id], progreso: progresos[p.id] })}
+                        className={`w-full rounded-lg py-2 text-xs font-bold transition shadow-xs flex items-center justify-center gap-1.5 ${
+                          nNotas > 0
+                            ? 'bg-teal text-white hover:bg-teal/90'
+                            : 'bg-navy/5 text-navy hover:bg-navy/10 border border-navy/10'
+                        }`}
+                        title="Ver y auditar respuestas escritas y reflexiones de esta usuaria"
+                      >
+                        <span>📝</span>
+                        {nNotas > 0 ? `Ver Respuestas y Notas (${nNotas})` : `Expediente de Respuestas (${nRespuestas})`}
+                      </button>
+
                       {(r.elegibleMentor || r.elegibleCoordinadora) && (
                         <button
                           onClick={() =>
                             onVerCertificado(p.id, p.nombre, r.elegibleCoordinadora ? 2 : 1, p.id_interno)
                           }
-                          className="mt-2 w-full rounded-lg bg-gold/15 py-2 text-[13px] font-bold text-gold transition hover:bg-gold/25"
+                          className="w-full rounded-lg bg-gold/15 py-2 text-[13px] font-bold text-gold transition hover:bg-gold/25"
                         >
                           {t('admin.emitirCert', {
                             tipo: r.elegibleCoordinadora ? 'Coordinator' : 'Mentor',
@@ -158,7 +218,7 @@ export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) 
                       )}
                       <button
                         onClick={() => onVerUsuaria(p.id, p.nombre, p.id_interno)}
-                        className="mt-2 w-full rounded-lg bg-navy/5 py-2 text-xs font-semibold text-navy transition hover:bg-navy/10"
+                        className="w-full rounded-lg bg-navy/5 py-2 text-xs font-semibold text-navy transition hover:bg-navy/10"
                       >
                         {t('admin.abrirPanel')}
                       </button>
@@ -196,6 +256,16 @@ export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) 
             </section>
           )}
         </>
+      )}
+
+      {modalRespuestas && (
+        <ModalRespuestasUsuaria
+          perfil={modalRespuestas.perfil}
+          correo={modalRespuestas.correo}
+          progreso={modalRespuestas.progreso || progresos[modalRespuestas.perfil?.id]}
+          compromiso={modalRespuestas.compromiso || compromisosMapa?.[modalRespuestas.perfil?.id]}
+          onCerrar={() => setModalRespuestas(null)}
+        />
       )}
     </div>
   )

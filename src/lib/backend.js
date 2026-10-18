@@ -291,7 +291,7 @@ export async function borrarVideo(moduloId, leccionIdx) {
 export async function getProgreso(usuariaId) {
   const { data, error } = await supabase
     .from('progreso')
-    .select('modulo_id, estado, fecha_inicio, fecha_completado, notas, quiz, entregable_url, entregable_nombre')
+    .select('modulo_id, estado, fecha_inicio, fecha_completado, notas, quiz, entregable_url, entregable_nombre, actualizado_en')
     .eq('usuaria_id', usuariaId)
   if (error) throw new Error(error.message)
   const modulos = {}
@@ -304,6 +304,7 @@ export async function getProgreso(usuariaId) {
       quiz: f.quiz,
       entregableUrl: f.entregable_url,
       entregableNombre: f.entregable_nombre,
+      actualizadoEn: f.actualizado_en,
     }
   }
   return { modulos }
@@ -359,7 +360,7 @@ export async function setQuizModulo(usuariaId, moduloId, resultado, previo) {
 export async function getProgresoTodas() {
   const { data, error } = await supabase
     .from('progreso')
-    .select('usuaria_id, modulo_id, estado, fecha_inicio, fecha_completado, notas, quiz, entregable_url, entregable_nombre')
+    .select('usuaria_id, modulo_id, estado, fecha_inicio, fecha_completado, notas, quiz, entregable_url, entregable_nombre, actualizado_en')
   if (error) throw new Error(error.message)
   const porUsuaria = {}
   for (const f of data || []) {
@@ -372,6 +373,7 @@ export async function getProgresoTodas() {
       quiz: f.quiz,
       entregableUrl: f.entregable_url,
       entregableNombre: f.entregable_nombre,
+      actualizadoEn: f.actualizado_en,
     }
   }
   return porUsuaria
