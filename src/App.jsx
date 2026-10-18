@@ -25,6 +25,7 @@ import EstrategiaOperativa from './components/EstrategiaOperativa'
 import MiFuncion from './components/MiFuncion'
 import VistasSistemaView from './components/VistasSistemaView'
 import ComparativaCurriculos from './components/ComparativaCurriculos'
+import CitaAdminModal from './components/CitaAdminModal'
 import * as api from './lib/backend'
 import { getModulo } from './data/curriculum'
 import { aplicarEquivalencias } from './lib/calculos'
@@ -36,6 +37,7 @@ export default function App() {
   const [sesion, setSesion] = useState(null) // sesión de Supabase
   const [perfil, setPerfil] = useState(null) // { id, nombre, rol, estado }
   const [vista, setVista] = useState({ nombre: 'dashboard' })
+  const [citaAbierta, setCitaAbierta] = useState(false)
 
   // Datos de la usuaria que se está viendo (una mentora ve solo los suyos)
   const [progreso, setProgreso] = useState({ modulos: {} })
@@ -314,6 +316,7 @@ export default function App() {
         vista={vista}
         onNavegar={setVista}
         onSalir={() => api.salir()}
+        onAbrirCita={() => setCitaAbierta(true)}
       />
 
 
@@ -368,6 +371,7 @@ export default function App() {
             onVerFuncion={(funcionId) => setVista({ ...vista, nombre: 'mi-funcion', funcionId })}
             onVerVistas={() => setVista({ ...vista, nombre: 'vistas' })}
             onVerComparativaCurriculos={() => setVista({ ...vista, nombre: 'comparativa-curriculos' })}
+            onAbrirCita={() => setCitaAbierta(true)}
           />
         )}
         {vista.nombre === 'comparativa-curriculos' && (
@@ -477,6 +481,11 @@ export default function App() {
         )}
       </main>
       <Glosario />
+      <CitaAdminModal
+        abierto={citaAbierta}
+        onClose={() => setCitaAbierta(false)}
+        esAdmin={esAdmin}
+      />
     </div>
   )
 }

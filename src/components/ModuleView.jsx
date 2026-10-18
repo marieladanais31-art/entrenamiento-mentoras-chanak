@@ -234,6 +234,31 @@ export default function ModuleView({
         {contenido?.sinTraducir && (
           <p className="mt-2 rounded-lg bg-gold/10 px-3 py-2 text-[12px] text-navy/65">🌐 {t('modulo.traduccionPendiente')}</p>
         )}
+        {moduloId === 'T1.0' && (
+          <div className="mt-4 rounded-2xl border-2 border-teal/40 bg-teal/5 p-4 sm:p-5 text-xs leading-relaxed text-navy shadow-sm space-y-2">
+            <div className="flex items-center gap-2 font-bold uppercase tracking-wider text-teal">
+              <span>🏛️</span>
+              <span>Aviso Institucional de Dirección · 18 de octubre de 2026</span>
+            </div>
+            <p>
+              <b>Programas estatales aprobados (7 estados):</b> Florida (Step Up / EMA · FES-UA / PEP), Alabama (CHOOSE Act · ESP), Arizona (ESA), Utah (Utah Fits All), Wyoming (Education Savings Program), New Hampshire (EFA) y South Carolina (ESTF).
+            </p>
+            <div className="rounded-xl border border-teal/20 bg-white/90 p-3 font-serif italic text-navy/90 text-xs shadow-xs">
+              «Las familias elegibles pueden solicitar el pago de servicios autorizados con los fondos disponibles de su programa. La aprobación depende del servicio, del estudiante y de las reglas aplicables».
+            </div>
+            <ul className="list-disc pl-4 space-y-1 text-navy/80">
+              <li><b>Límites de cobertura:</b> Estar aprobado como proveedor no significa que el programa financie cualquier servicio de manera automática.</li>
+              <li><b>Paquete de apoyo ESA:</b> El acompañamiento ESA (mentoría 2h/mes por estudiante y 4 sesiones de 60 min de Life Skills grupales en cohortes de máx. 7) no equivale a la matrícula escolar completa, ni acredita por sí mismo diploma ni créditos de secundaria estadounidenses.</li>
+              <li><b>Estatus de acreditación:</b> Chanak International Academy es <b>Candidate for Accreditation con MSA-CESS</b> (decisión de la Comisión programada para noviembre de 2026). No debe presentarse como escuela acreditada hasta la resolución formal.</li>
+            </ul>
+          </div>
+        )}
+        {!tieneVideo && (
+          <div className="mt-3 rounded-xl border border-navy/10 bg-navy/5 px-3.5 py-2 text-xs text-navy/70 flex items-center gap-2">
+            <span>🎬</span>
+            <span>Material audiovisual en preparación por Dirección. Consulta las lecturas, documentos oficiales y actividades del módulo.</span>
+          </div>
+        )}
         <dl className="mt-4 grid grid-cols-2 gap-3 text-sm">
           {esAdmin && <Dato etiqueta={t('modulo.horas')} valor={`${modulo.horas} h`} />}
           <Dato etiqueta={t('modulo.evaluacion')} valor={modulo.evaluacion} />
@@ -348,7 +373,7 @@ export default function ModuleView({
           {/* Documentación y lecturas oficiales del módulo */}
           {contenido.desglose?.documentos?.length > 0 && (
             <div className="mb-6">
-              <BloqueDocumentos documentos={contenido.desglose.documentos} t={t} />
+              <BloqueDocumentos documentos={contenido.desglose.documentos} t={t} esAdmin={esAdmin} />
             </div>
           )}
 
@@ -640,14 +665,14 @@ function Desglose({ d, horas, t }) {
       {d.criterio && <p className="mt-3 text-xs leading-relaxed text-navy/60">{d.criterio}</p>}
       {d.documentos?.length > 0 && (
         <div className="mt-3 border-t border-navy/10 pt-3">
-          <BloqueDocumentos documentos={d.documentos} t={t} />
+          <BloqueDocumentos documentos={d.documentos} t={t} esAdmin={esAdmin} />
         </div>
       )}
     </details>
   )
 }
 
-function TarjetaDocumento({ doc, tipo, t }) {
+function TarjetaDocumento({ doc, tipo, t, esAdmin }) {
   const urlExacta = resolverUrlDocumento(doc)
   const urlFolder = urlCarpeta(doc.carpeta)
   const tituloLimpio = (doc.documento || '')
@@ -678,7 +703,7 @@ function TarjetaDocumento({ doc, tipo, t }) {
           <span className="rounded bg-navy/10 px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider text-navy">
             {extension}
           </span>
-          {doc.horas ? (
+          {esAdmin && doc.horas ? (
             <span className="rounded bg-teal/15 px-2 py-0.5 text-xs font-semibold text-teal">
               ⏱️ {doc.horas} h
             </span>
@@ -745,7 +770,7 @@ function TarjetaDocumento({ doc, tipo, t }) {
   )
 }
 
-function BloqueDocumentos({ documentos = [], t }) {
+function BloqueDocumentos({ documentos = [], t, esAdmin }) {
   if (!documentos || documentos.length === 0) return null
 
   const necesarios = documentos.filter((d) => clasificarDocumento(d) === 'necesario')
@@ -775,7 +800,7 @@ function BloqueDocumentos({ documentos = [], t }) {
           </div>
           <div className="space-y-2.5">
             {necesarios.map((doc, idx) => (
-              <TarjetaDocumento key={idx} doc={doc} tipo="necesario" t={t} />
+              <TarjetaDocumento key={idx} doc={doc} tipo="necesario" t={t} esAdmin={esAdmin} />
             ))}
           </div>
         </div>
@@ -790,7 +815,7 @@ function BloqueDocumentos({ documentos = [], t }) {
           </div>
           <div className="space-y-2.5">
             {complementarios.map((doc, idx) => (
-              <TarjetaDocumento key={idx} doc={doc} tipo="complementario" t={t} />
+              <TarjetaDocumento key={idx} doc={doc} tipo="complementario" t={t} esAdmin={esAdmin} />
             ))}
           </div>
         </div>
@@ -805,7 +830,7 @@ function BloqueDocumentos({ documentos = [], t }) {
           </div>
           <div className="space-y-2.5">
             {internos.map((doc, idx) => (
-              <TarjetaDocumento key={idx} doc={doc} tipo="interno" t={t} />
+              <TarjetaDocumento key={idx} doc={doc} tipo="interno" t={t} esAdmin={esAdmin} />
             ))}
           </div>
         </div>

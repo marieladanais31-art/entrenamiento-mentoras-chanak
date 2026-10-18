@@ -49,7 +49,7 @@ export const FUENTES = {
 // Carpetas de la documentación oficial en Drive (CHANAK_DOCUMENTOS_2026-2027_FINAL).
 // Sustituyen a los antiguos cuadernos de NotebookLM: cada módulo enlaza a la carpeta exacta.
 const DRIVE = (id) => `https://drive.google.com/drive/folders/${id}`
-export const CARPETA_FINAL_URL = DRIVE('1bPAuhY8-YhHBmUPpqUahXACC_bH_BqxT')
+export const CARPETA_FINAL_URL = DRIVE('19LMxrzIkHtBwJlQt3nKFQQGFIblwT2EZ')
 export const CARPETAS_DRIVE = {
   '10_PEOPLE_ROLES_TRAINING/08_OPERATIVA_ACADEMICA': DRIVE('1fSscAWCQ-FFGae-ocBrc6qxzxugoTZbD'),
   '01_INSTITUCIONAL': DRIVE('1KbhzvvpIgASo5koXhpAqPs3IsYgPoDuU'),
@@ -69,19 +69,82 @@ export function urlCarpeta(carpeta = '') {
   return CARPETAS_DRIVE[carpeta] || CARPETAS_DRIVE[carpeta.split('/')[0]] || CARPETA_FINAL_URL
 }
 
-// Mapeo de documentos con copia local exacta o ID verificado (sin inventar IDs)
+// Mapeo oficial de documentos exactos (Google Drive / Docs / Slides verificados y copias locales)
 export const DOCUMENTOS_EXACTOS = {
-  'MANUAL_PADRES_OFFCAMPUS_2026-2027.pdf': '/formacion/MANUAL_PADRES_OFFCAMPUS_2026-2027.pdf',
-  'MANUAL_PADRES_DUAL_DIPLOMA_2026-2027.pdf': '/formacion/MANUAL_PADRES_DUAL_DIPLOMA_2026-2027.pdf',
-  'GUIA_COORDINADOR_PANTALLAS_SIS_2026-2027.pdf': '/formacion/GUIA_COORDINADOR_PANTALLAS_SIS_2026-2027.pdf',
-  'PLAN_FORMACION_180_300.md': '/formacion/PLAN_FORMACION_180_300.md',
-  'FLORIDA_PRESENCIAL_Y_EVALUACIONES.md': '/formacion/FLORIDA_PRESENCIAL_Y_EVALUACIONES.md',
+  // 1. Tronco común / Inducción
+  'tronco_comun_induccion': 'https://drive.google.com/file/d/16Eg72GFGN4jc_2wubQerYjQ8FzVAQinm/view?usp=drivesdk',
+  'tronco_comun_induccion.pdf': 'https://drive.google.com/file/d/16Eg72GFGN4jc_2wubQerYjQ8FzVAQinm/view?usp=drivesdk',
+  'guia_tronco_comun.pdf': 'https://drive.google.com/file/d/16Eg72GFGN4jc_2wubQerYjQ8FzVAQinm/view?usp=drivesdk',
+
+  // 2. Mentoría y docencia
+  'mentoria_docencia_guia': 'https://drive.google.com/file/d/1ao5n5mkBsZy0ibjTsVHpjP40XhrM6sc9/view?usp=drivesdk',
+  'mentoria_docencia_guia.pdf': 'https://drive.google.com/file/d/1ao5n5mkBsZy0ibjTsVHpjP40XhrM6sc9/view?usp=drivesdk',
+  'guia_mentoria_y_docencia.pdf': 'https://drive.google.com/file/d/1ao5n5mkBsZy0ibjTsVHpjP40XhrM6sc9/view?usp=drivesdk',
+
+  // 3. Coordinación y partners
+  'coordinacion_partners_guia': 'https://drive.google.com/file/d/14dGoEOpqeZ2emapis4sCkHZ1zzYJAVng/view?usp=drivesdk',
+  'coordinacion_partners_guia.pdf': 'https://drive.google.com/file/d/14dGoEOpqeZ2emapis4sCkHZ1zzYJAVng/view?usp=drivesdk',
+  'guia_coordinacion_y_partners.pdf': 'https://drive.google.com/file/d/14dGoEOpqeZ2emapis4sCkHZ1zzYJAVng/view?usp=drivesdk',
+
+  // 4. Estrategia y marketing
+  'estrategia_marketing_guia': 'https://drive.google.com/file/d/1uKjMdIDUqECDtpdKsUwopx8IhM3jnF9P/view?usp=drivesdk',
+  'estrategia_marketing_guia.pdf': 'https://drive.google.com/file/d/1uKjMdIDUqECDtpdKsUwopx8IhM3jnF9P/view?usp=drivesdk',
+  'guia_estrategia_y_marketing.pdf': 'https://drive.google.com/file/d/1uKjMdIDUqECDtpdKsUwopx8IhM3jnF9P/view?usp=drivesdk',
+
+  // 5. Google Ad Grants (Chanak Foundation)
+  'google_ad_grants_guia': 'https://drive.google.com/file/d/1YW4MFIdUjawCgv8I_tjtJgDMsrI9db5f/view?usp=drivesdk',
+  'google_ad_grants_guia.pdf': 'https://drive.google.com/file/d/1YW4MFIdUjawCgv8I_tjtJgDMsrI9db5f/view?usp=drivesdk',
+  'guia_google_ad_grants.pdf': 'https://drive.google.com/file/d/1YW4MFIdUjawCgv8I_tjtJgDMsrI9db5f/view?usp=drivesdk',
+
+  // 6. Administración operativa
+  'administracion_guia': 'https://drive.google.com/file/d/1buWuXmIdHQ73vNmRAb4foN7ICB-DmKiT/view?usp=drivesdk',
+  'administracion_guia.pdf': 'https://drive.google.com/file/d/1buWuXmIdHQ73vNmRAb4foN7ICB-DmKiT/view?usp=drivesdk',
+  'guia_administracion_operativa.pdf': 'https://drive.google.com/file/d/1buWuXmIdHQ73vNmRAb4foN7ICB-DmKiT/view?usp=drivesdk',
+
+  // 7. Master Dossier Institucional (PDF)
+  'chanak_dossier_institucional_master_2026-2027.pdf': 'https://drive.google.com/file/d/1a9G4R_ZsUmbrkHwMCAZJCyUTM3HtIs7J/view',
+  'dossier_institucional_master_2026-2027.pdf': 'https://drive.google.com/file/d/1a9G4R_ZsUmbrkHwMCAZJCyUTM3HtIs7J/view',
+
+  // 8. Master Dossier Institucional (Presentación Google Slides / PPTX)
+  'chanak_dossier_institucional_master_2026-2027.pptx': 'https://docs.google.com/presentation/d/18jYjzGe5SzwGqtmEHhYf6LztRUPjI2_n/edit',
+  'dossier_institucional_master_2026-2027.pptx': 'https://docs.google.com/presentation/d/18jYjzGe5SzwGqtmEHhYf6LztRUPjI2_n/edit',
+
+  // 9. 6 Slides Ejecutivas (Google Slides / PPTX)
+  'chanak_6_slides_ejecutivas_2026-2027.pptx': 'https://docs.google.com/presentation/d/1n-6i3A6omWKZoart8Wthl6u_Pgm9AAAc/edit',
+  '6_slides_ejecutivas_2026-2027.pptx': 'https://docs.google.com/presentation/d/1n-6i3A6omWKZoart8Wthl6u_Pgm9AAAc/edit',
+
+  // 10. Estado Institucional y Programas 2026-2027 (PDF)
+  'estado_institucional_y_programas_2026-2027.pdf': 'https://drive.google.com/file/d/1IyJ64SZ2CVRcM3AeDI8rPOtJhF9m_7sl/view',
+  'estado_institucional_2026-2027.pdf': 'https://drive.google.com/file/d/1IyJ64SZ2CVRcM3AeDI8rPOtJhF9m_7sl/view',
+
+  // 11. README y Control Documental
+  'readme_documentacion_chanak.pdf': 'https://drive.google.com/file/d/15m76LjzPlvY_DPBZODQXmJ5vIC-zH-C6/view',
+  'readme.md': 'https://drive.google.com/file/d/15m76LjzPlvY_DPBZODQXmJ5vIC-zH-C6/view',
+  'readme.pdf': 'https://drive.google.com/file/d/15m76LjzPlvY_DPBZODQXmJ5vIC-zH-C6/view',
+
+  // 12. Manifiesto Chanak
+  'manifiesto_chanak_2026-2027.pdf': 'https://drive.google.com/file/d/1LWQMWmto0fBYMB5rkzq1hF5bJ_KzGx_J/view',
+  'manifiesto_educativo.pdf': 'https://drive.google.com/file/d/1LWQMWmto0fBYMB5rkzq1hF5bJ_KzGx_J/view',
+
+  // Copias locales en /formacion/
+  'manual_padres_offcampus_2026-2027.pdf': '/formacion/MANUAL_PADRES_OFFCAMPUS_2026-2027.pdf',
+  'manual_padres_dual_diploma_2026-2027.pdf': '/formacion/MANUAL_PADRES_DUAL_DIPLOMA_2026-2027.pdf',
+  'guia_coordinador_pantallas_sis_2026-2027.pdf': '/formacion/GUIA_COORDINADOR_PANTALLAS_SIS_2026-2027.pdf',
+  'plan_formacion_180_300.md': '/formacion/PLAN_FORMACION_180_300.md',
+  'florida_presencial_y_evaluaciones.md': '/formacion/FLORIDA_PRESENCIAL_Y_EVALUACIONES.md',
 }
 
 export function resolverUrlDocumento(doc) {
   if (!doc) return null
   if (doc.url) return doc.url
-  if (DOCUMENTOS_EXACTOS[doc.documento]) return DOCUMENTOS_EXACTOS[doc.documento]
+  const raw = (doc.documento || '').trim().toLowerCase()
+  if (DOCUMENTOS_EXACTOS[raw]) return DOCUMENTOS_EXACTOS[raw]
+  const clean = raw.replace(/[_-]/g, ' ')
+  for (const [k, url] of Object.entries(DOCUMENTOS_EXACTOS)) {
+    if (k.length > 5 && (raw.includes(k) || clean.includes(k.replace(/[_-]/g, ' ')))) {
+      return url
+    }
+  }
   return null
 }
 
@@ -138,7 +201,7 @@ export const RECURSOS_GENERALES = [
   },
   {
     nombre: 'Carpeta de Drive — Documentación oficial 2026–2027 (FINAL)',
-    url: 'https://drive.google.com/drive/folders/1bPAuhY8-YhHBmUPpqUahXACC_bH_BqxT',
+    url: 'https://drive.google.com/drive/folders/19LMxrzIkHtBwJlQt3nKFQQGFIblwT2EZ',
     descripcion:
       'Dossiers, políticas académicas, Scope & Sequence, compliance y contratos. Es la fuente oficial de esta formación (acceso interno).',
   },
@@ -239,11 +302,14 @@ export const BLOQUES = [
     numero: 7,
     titulo: 'USA State Programs / Compliance',
     categoria: 'Compliance',
-    horas: 3.75,
+    horas: 8.75,
     porRol: true, // solo para quien su rol lo requiera; no cuenta para las horas de la ruta base
     modulos: [
       { id: 'T7.1', titulo: 'Florida (EMA Matrícula) y Alabama CHOOSE (ESP ClassWallet) · Programas aprobados', horas: horasModulo('T7.1'), modalidad: 'Vídeo + estado de servicio', evaluacion: 'Knowledge Check + caso', video: 'V23', fuentes: ['ema', 'alabama', 'statePolicy'] },
-      { id: 'T7.2', titulo: 'Utah (Fits All), Texas (TEFA), Wyoming (ESA) y Arizona (ESA) · Estados aprobados y cumplimiento', horas: horasModulo('T7.2'), modalidad: 'Vídeo + matriz de cumplimiento', evaluacion: 'Knowledge Check + caso', video: 'V24', fuentes: ['statePolicy'] },
+      { id: 'T7.2', titulo: 'Utah, Arizona, Wyoming, New Hampshire y South Carolina · Programas aprobados y cumplimiento', horas: horasModulo('T7.2'), modalidad: 'Vídeo + matriz de cumplimiento', evaluacion: 'Knowledge Check + caso', video: 'V24', fuentes: ['statePolicy'] },
+      { id: 'T7.3', titulo: 'Matriz de cumplimiento y responsabilidades por estado (FL, AL, AZ, UT, WY, NH, SC)', horas: horasModulo('T7.3'), modalidad: 'Lectura + matriz analítica', evaluacion: 'Knowledge Check + matriz de responsabilidades', video: null, fuentes: ['statePolicy'] },
+      { id: 'T7.4', titulo: 'Procedimiento de facturación, reservas y conciliación con ClassWallet, Odyssey y EMA', horas: horasModulo('T7.4'), modalidad: 'Lectura + simulación operativa de facturación', evaluacion: 'Knowledge Check + caso de conciliación', video: null, fuentes: ['statePolicy'] },
+      { id: 'T7.5', titulo: 'Casos de decisión y escalamiento ante programas estatales', horas: horasModulo('T7.5'), modalidad: 'Lectura + análisis de 4 casos reales', evaluacion: 'Knowledge Check + resolución de casos', video: null, fuentes: ['statePolicy'] },
     ],
   },
   {
@@ -281,7 +347,7 @@ export const BLOQUES = [
     numero: 10,
     titulo: 'Growth, Markets, Partnerships & Systems',
     categoria: 'Crecimiento y sistemas',
-    horas: 10.75,
+    horas: 14.25,
     porRol: true, // rol Estratégico y especialistas; no cuenta para las horas de la ruta base
     modulos: [
       { id: 'T10.1', titulo: 'Market Development & Representation y Plan de Entrada al Mercado a 30 días', horas: horasModulo('T10.1'), modalidad: 'Vídeo + lectura + plan escrito', evaluacion: 'Knowledge Check + plan a 30 días', video: 'V33', fuentes: [], entregable: true },
@@ -289,7 +355,9 @@ export const BLOQUES = [
       { id: 'T10.3', titulo: 'Modelos de personas y alianzas: Voluntario, Contratista y Socio', horas: horasModulo('T10.3'), modalidad: 'Vídeo + lectura + plantillas (sujetas a revisión)', evaluacion: 'Knowledge Check + caso', video: 'V35', fuentes: [] },
       { id: 'T10.4', titulo: 'Sistemas: SIS, Portal y Dual Diploma Portal (práctica y validación)', horas: horasModulo('T10.4'), modalidad: 'Vídeo + práctica con datos ficticios + validación', evaluacion: 'Knowledge Check + validación con Chanak Central', video: 'V36', fuentes: [] },
       { id: 'T10.5', titulo: 'Rutas de especialista: English, Life Skills, lengua local y evaluación educativa', horas: horasModulo('T10.5'), modalidad: 'Vídeo + lectura + caso', evaluacion: 'Knowledge Check + caso', video: 'V37', fuentes: [] },
-      { id: 'T10.6', titulo: 'Evaluador de Costos y Viabilidad Curricular · Simulador A.C.E., LIFEPAC, CLE y Flex', horas: horasModulo('T10.6'), modalidad: 'Lectura + herramienta interactiva de simulación de costos + caso de viabilidad', evaluacion: 'Knowledge Check + caso de presupuestos', video: 'V35', fuentes: ['curriculos', 'currPolicy'] },
+      { id: 'T10.6', titulo: 'Evaluador de Costos y Viabilidad Curricular · Simulador A.C.E., LIFEPAC, CLE y Flex', horas: horasModulo('T10.6'), modalidad: 'Lectura + herramienta interactiva de simulación de costos + caso de viabilidad', evaluacion: 'Knowledge Check + caso de presupuestos', video: null, fuentes: ['curriculos', 'currPolicy'] },
+      { id: 'T10.7', titulo: 'Marketing institucional, redes sociales y captación familiar ética', horas: horasModulo('T10.7'), modalidad: 'Lectura + guía de marketing institucional', evaluacion: 'Knowledge Check + caso ético de difusión', video: null, fuentes: ['master'] },
+      { id: 'T10.8', titulo: 'Google Ad Grants para Chanak Foundation y captación de fondos', horas: horasModulo('T10.8'), modalidad: 'Lectura + guía de Google Ad Grants', evaluacion: 'Knowledge Check + auditoría de campaña', video: null, fuentes: ['master'] },
     ],
   },
 ]

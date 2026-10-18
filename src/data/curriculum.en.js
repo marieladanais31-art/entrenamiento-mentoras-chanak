@@ -39,7 +39,10 @@ export const MODULOS_EN = {
   'T6.2': 'Online safety and data protection',
   'T6.3': 'Local Extension, local languages and specialized coordination',
   'T7.1': 'Florida (EMA Enrollment) and Alabama CHOOSE (ESP ClassWallet) · Approved Programs',
-  'T7.2': 'Utah (Fits All), Texas (TEFA), Wyoming (ESA) and Arizona (ESA) · Approved States & Compliance',
+  'T7.2': 'Utah, Arizona, Wyoming, New Hampshire and South Carolina · Approved States & Compliance',
+  'T7.3': 'Compliance Matrix and State-Specific Responsibilities (FL, AL, AZ, UT, WY, NH, SC)',
+  'T7.4': 'Billing, Reservations and Reconciliation Procedures with ClassWallet, Odyssey and EMA',
+  'T7.5': 'Decision Scenarios and Escalation Protocols for State Programs',
   'T8.1': 'Mentor supervision and academic quality',
   'T8.2': 'Partner Learning Centers: local operation and Chanak Central',
   'T8.3': 'Evidence review, reporting and incidents',
@@ -54,6 +57,8 @@ export const MODULOS_EN = {
   'T10.4': 'Systems: SIS, Portal and Dual Diploma Portal (practice and validation)',
   'T10.5': 'Specialist tracks: English, Life Skills, local language and educational assessment',
   'T10.6': 'Cost Evaluator & Curriculum Feasibility · A.C.E., LIFEPAC, CLE and Flex Simulator',
+  'T10.7': 'Institutional Marketing, Social Media and Ethical Family Recruitment',
+  'T10.8': 'Google Ad Grants for Chanak Foundation and Nonprofit Fundraising',
 }
 
 export function traducirBloques(bloques, idioma) {

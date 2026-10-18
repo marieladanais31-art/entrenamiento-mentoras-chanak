@@ -35,34 +35,44 @@ export default function CourseIntro({ onEmpezar, onVolver }) {
         </div>
       </section>
 
-      {/* Vídeo Oficial de Presentación General */}
-      <section className="overflow-hidden rounded-2xl bg-white p-5 shadow-sm">
-        <div className="mb-3 flex items-center justify-between">
+      {/* Inducción Oficial y Nota Institucional */}
+      <section className="overflow-hidden rounded-2xl bg-white p-5 shadow-sm space-y-4">
+        <div className="flex items-center justify-between border-b border-navy/10 pb-3">
           <div className="flex items-center gap-3">
             <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gold/15 text-2xl" aria-hidden>
-              🎬
+              🏛️
             </span>
             <div>
               <h2 className="text-base font-bold text-navy">
-                {idioma === 'en' ? 'General Orientation · Chanak Academy' : 'Presentación General · Chanak International Academy'}
+                {idioma === 'en' ? 'General Orientation · Chanak International Academy' : 'Presentación General · Chanak International Academy'}
               </h2>
               <p className="text-xs text-navy/60">
-                {idioma === 'en' ? 'Official induction & institutional welcome video' : 'Vídeo oficial de inducción y bienvenida institucional'}
+                {idioma === 'en' ? 'Official induction & institutional governance' : 'Inducción oficial y gobernanza institucional'}
               </p>
             </div>
           </div>
           <span className="rounded-full bg-teal/10 px-3 py-1 text-xs font-bold text-teal">
-            {idioma === 'en' ? 'Official Video' : 'Vídeo Oficial'}
+            18-Oct-2026
           </span>
         </div>
-        <div className="overflow-hidden rounded-xl bg-black shadow-inner">
-          <video
-            src="/videos/presentacion_general.mp4"
-            controls
-            playsInline
-            preload="metadata"
-            className="aspect-video w-full"
-          />
+
+        <div className="rounded-xl border-2 border-teal/30 bg-teal/5 p-4 sm:p-5 text-xs sm:text-sm leading-relaxed text-navy space-y-3">
+          <div className="flex items-center gap-2 font-bold uppercase tracking-wider text-teal text-xs">
+            <span>📋</span>
+            <span>Aviso de Dirección: Programas Estatales Aprobados y Límites de Servicio</span>
+          </div>
+          <p>
+            Chanak International Academy cuenta con aprobación como proveedor educativo en <b>7 programas estatales de EE. UU.</b>:
+            Florida (Step Up / EMA · FES-UA / PEP), Alabama (CHOOSE Act · ESP), Arizona (ESA), Utah (Utah Fits All), Wyoming (Education Savings Program), New Hampshire (EFA) y South Carolina (ESTF).
+          </p>
+          <div className="rounded-xl border border-teal/20 bg-white p-3 font-serif italic text-navy/90 text-xs sm:text-sm shadow-xs">
+            «Las familias elegibles pueden solicitar el pago de servicios autorizados con los fondos disponibles de su programa. La aprobación depende del servicio, del estudiante y de las reglas aplicables».
+          </div>
+          <ul className="list-disc pl-4 space-y-1.5 text-xs text-navy/80">
+            <li><b>Aprobación como proveedor:</b> Estar aprobado como proveedor no significa que el programa financie cualquier servicio de manera automática ni universal.</li>
+            <li><b>Límites del Paquete de Apoyo ESA:</b> Los servicios de apoyo (mentoría de 2h/mes y 4 sesiones de 60 min de Life Skills grupales en cohortes de máx. 7 alumnos) no equivalen a la matrícula escolar completa K–12, ni acreditan por sí mismos un diploma ni créditos de High School.</li>
+            <li><b>Estatus de Acreditación:</b> Chanak International Academy es <b>Candidate for Accreditation con MSA-CESS</b> (Middle States Association), con decisión de la Comisión programada para noviembre de 2026. No debe presentarse públicamente como escuela acreditada en este momento.</li>
+          </ul>
         </div>
       </section>
 
@@ -115,7 +125,7 @@ export default function CourseIntro({ onEmpezar, onVolver }) {
                   {b.porRol ? t('panel.porRol') : b.transversal ? 'Transversal' : b.nivel === 2 ? 'Coordinator' : 'Mentor'} · {b.categoria}
                 </span>
               </span>
-              <span className="shrink-0 text-[13px] text-navy/55">{b.modulos.length} {t('curso.mod')} · {b.horas}h</span>
+              <span className="shrink-0 text-[13px] text-navy/55">{b.modulos.length} {t('curso.mod')}</span>
             </li>
           ))}
         </ol>

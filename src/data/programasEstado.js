@@ -126,39 +126,39 @@ export const MATRIZ_PROGRAMAS = [
   {
     "id": "TX-TEFA",
     "captacion": [
-      "Presentar a Chanak como proveedor aprobado en Texas TEFA (Texas Education Freedom Accounts).",
-      "Comunicar servicios según catálogo activo en Odyssey; orientar a las familias sin prometer montos antes de verificar elegibilidad y saldo del estudiante.",
-      "Registro de familias interesadas y acompañamiento en el proceso de reserva en Odyssey."
+      "Orientar a familias de Texas informando que la aprobación como proveedor formal está en tramitación.",
+      "No prometer montos ni cobro con fondos TEFA hasta que la aprobación formal y el catálogo estén activos en Odyssey.",
+      "Registro de familias interesadas para seguimiento prioritario una vez resuelta la tramitación."
     ],
     "facturacion": [
-      "Cobro a través de la plataforma Odyssey (vinculada con cuenta Stripe de Chanak).",
-      "Administración concilia la reserva y factura con la prestación real del servicio."
+      "En preparación técnica a través de la plataforma Odyssey (vinculada con cuenta Stripe de Chanak).",
+      "Administración conciliará la reserva y factura con la prestación real del servicio tras la resolución."
     ],
     "responsableComercial": "Rol Estratégico (captación y seguimiento) · Administración (facturación)",
     "condiciones": [
       "Entidad con sede en EE. UU. registrada ante la Secretaría de Estado de Texas (Certificate of Fact, Formation o Filing) y en regla con el Contralor en el impuesto de franquicia.",
       "Proveedores en línea o fuera de Texas autorizados según normativa TEFA.",
-      "Cuenta bancaria vía Stripe y catálogo activo en Odyssey."
+      "Cuenta bancaria vía Stripe y catálogo activo en Odyssey en tramitación."
     ],
     "fuentesOficiales": [
       "https://educationfreedom.texas.gov/providers-vendors/",
       "https://support.withodyssey.com/hc/en-us/articles/44035042254875-Who-Can-Become-a-Vendor-and-What-are-the-Requirements"
     ],
     "noVerificado": [
-      "Detalle específico de montos por categoría asignada a cada servicio."
+      "Aprobación formal definitiva pendiente de emisión por las autoridades de Texas."
     ],
     "state": "Texas",
     "program": "TEFA (Texas Education Freedom Accounts)",
-    "service": "Vendor / Educational Service Provider (Aprobado / Casi Seguro)",
-    "status": "aprobado",
-    "approved": true,
-    "marketplace": "Proveedor aprobado / casi seguro en Odyssey (onboarding y vinculación bancaria listos)",
+    "service": "Vendor / Educational Service Provider (En tramitación)",
+    "status": "en_proceso",
+    "approved": false,
+    "marketplace": "En proceso de tramitación en Odyssey",
     "price": "Por confirmar",
-    "eligibility": "Familias participantes del programa TEFA en Texas",
+    "eligibility": "Familias participantes del programa TEFA en Texas (tras resolución)",
     "documentation": "Registro ante Secretaría de Estado de Texas, Contralor y Odyssey",
-    "lastVerified": "2026-10-13 · confirmación institucional (aprobado / casi seguro)",
+    "lastVerified": "2026-10-18 · en tramitación (no aprobado formalmente todavía)",
     "source": "Web oficial del programa y Contralor de Texas (comptroller.texas.gov)",
-    "operativo": "Proveedor aprobado (casi seguro / en implementación activa). Servicios tramitados mediante la plataforma oficial Odyssey."
+    "operativo": "En tramitación activa. Texas TEFA NO está aprobado todavía. Se orienta a las familias particulares sin prometer cobro con fondos públicos."
   },
   {
     "id": "WY-ESA",
