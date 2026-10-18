@@ -480,6 +480,18 @@ export const ESTIMACIONES_MINUTOS = {
     "total": 75,
     "horas": 1.25,
     "horasAnteriores": 5
+  },
+  "T10.6": {
+    "palabras": 2200,
+    "video": 10,
+    "lectura": 20,
+    "documentos": 15,
+    "practica": 45,
+    "evidencia": 15,
+    "kc": 15,
+    "total": 120,
+    "horas": 2,
+    "horasAnteriores": 4
   }
 }
 

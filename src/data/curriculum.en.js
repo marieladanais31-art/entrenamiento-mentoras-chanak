@@ -53,6 +53,7 @@ export const MODULOS_EN = {
   'T10.3': 'People & Partnership Models: Volunteer, Contractor and Partner',
   'T10.4': 'Systems: SIS, Portal and Dual Diploma Portal (practice and validation)',
   'T10.5': 'Specialist tracks: English, Life Skills, local language and educational assessment',
+  'T10.6': 'Cost Evaluator & Curriculum Feasibility · A.C.E., LIFEPAC, CLE and Flex Simulator',
 }
 
 export function traducirBloques(bloques, idioma) {

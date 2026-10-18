@@ -35,7 +35,7 @@ const B4 = ['T4.1', 'T4.2', 'T4.3', 'T4.4']
 const B5 = ['T5.1', 'T5.2', 'T5.3']
 const B7 = ['T7.1', 'T7.2']
 const B8 = ['T8.1', 'T8.2', 'T8.3', 'T8.4']
-const B10_ESTRATEGICO = ['T10.1', 'T10.2', 'T10.3']
+const B10_ESTRATEGICO = ['T10.1', 'T10.2', 'T10.3', 'T10.6']
 
 // Sistemas y recursos
 export const SISTEMAS = {

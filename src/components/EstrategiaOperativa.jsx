@@ -45,7 +45,7 @@ const RUTAS = {
   ],
 }
 
-export default function EstrategiaOperativa({ onVolver, onVerMatriz }) {
+export default function EstrategiaOperativa({ onVolver, onVerMatriz, onVerComparativa }) {
   const { idioma } = useIdioma()
   const rutas = RUTAS[idioma] || RUTAS.es
   const [abierta, setAbierta] = useState(rutas[0].id)
@@ -58,7 +58,10 @@ export default function EstrategiaOperativa({ onVolver, onVerMatriz }) {
         <h2 className="mt-2 text-2xl font-extrabold">{es ? 'De la oportunidad al resultado documentado' : 'From opportunity to documented result'}</h2>
         <p className="mt-3 text-sm text-cream/75">{es ? 'Usa la ruta que corresponda a tu asignación. Cada paso deja una evidencia y las decisiones institucionales se escalan a Chanak Central.' : 'Use the route assigned to you. Every step produces evidence and institutional decisions are escalated to Chanak Central.'}</p>
       </section>
-      {onVerMatriz && <button onClick={onVerMatriz} className="min-h-12 w-full rounded-xl bg-teal px-4 py-3 font-bold text-white">{es ? 'Abrir matriz de fondos estatales' : 'Open state funding matrix'}</button>}
+      <div className="grid gap-3 sm:grid-cols-2">
+        {onVerMatriz && <button onClick={onVerMatriz} className="min-h-12 w-full rounded-xl bg-teal px-4 py-3 font-bold text-white shadow-sm hover:opacity-95">{es ? 'Abrir matriz de fondos estatales →' : 'Open state funding matrix →'}</button>}
+        {onVerComparativa && <button onClick={onVerComparativa} className="min-h-12 w-full rounded-xl bg-navy px-4 py-3 font-bold text-white shadow-sm hover:opacity-95 flex items-center justify-center gap-2"><span>⚖️</span> {es ? 'Evaluador de Costos y Viabilidad →' : 'Cost Evaluator & Feasibility →'}</button>}
+      </div>
       <div className="space-y-3">
         {rutas.map((ruta) => (
           <section key={ruta.id} className="overflow-hidden rounded-2xl bg-white shadow-sm">

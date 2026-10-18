@@ -208,7 +208,7 @@ Regla Institucional Chanak:
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <span className="inline-block rounded-full bg-gold/20 px-3 py-1 text-xs font-bold uppercase tracking-widest text-gold border border-gold/30">
-              Herramienta de Coordinación y Dirección
+              Herramienta de Rama Estratégica y Dirección
             </span>
             <h1 className="mt-2 text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
               Evaluador de Costos y Ventajas Curriculares

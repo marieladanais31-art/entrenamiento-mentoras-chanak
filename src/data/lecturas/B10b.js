@@ -154,4 +154,56 @@ export const LECTURAS_B10B = {
     ],
     desglose: { video: 0.5, lectura: 0.75, documentos: [], practica: 2.25, evidencia: 1, kc: 0.5 },
   },
+
+  // ───────────────────────────────────────────────────────────
+  'T10.6': {
+    lecciones: [
+      {
+        titulo: 'Por qué el Evaluador de Costos pertenece a la Rama Estratégica y Dirección',
+        guion: [
+          'En Chanak rige el principio operativo de separación de funciones: ROLE ≠ PERSON y ACADEMICS ≠ COMMERCE. Los mentores y coordinadores académicos acompañan al estudiante, diagnostican brechas y supervisan el aprendizaje de dominio; no negocian tarifas ni fijan precios con familias ni sedes.',
+          'El análisis financiero de las vías curriculares, los presupuestos por estudiante, el cálculo de márgenes y la viabilidad de sedes presenciales (Partner Learning Centers o Hubs) es una competencia exclusiva de la Rama Estratégica y la Dirección General. Esta herramienta fue diseñada para simular con exactitud cuánto cuesta operar cada currículo antes de cerrar compromisos institucionales o asesorar en expansión territorial.',
+        ],
+      },
+      {
+        titulo: 'Comparativa de estructuras de costes: A.C.E., LIFEPAC, CLE y Chanak Flex',
+        guion: [
+          'Cada una de las cuatro vías curriculares tiene una estructura de inversión diferente:',
+          '1. A.C.E. (Accelerated Christian Education): Cuadernos consumibles PACE (12 por materia al año, ~60 al año en Elementary). Coste unitario accesible (~$3.50 a $4.50 por PACE en EE. UU.), pero 100% fungible: no se hereda entre hermanos y requiere reposición total anual.',
+          '2. LIFEPAC (Alpha Omega Publications): Estructura por cajas anuales de 10 unidades por materia. Formato muy estructurado con clave de respuestas incluida en el set, con un coste total por curso cerrado.',
+          '3. Christian Light Education (CLE): Cuadernillos LightUnits (~10 por materia), reconocidos por su rigor matemático y fonético incremental. Coste similar a A.C.E., con excelente equilibrio formativo y bíblico.',
+          '4. Chanak Flex (Curricular Híbrido / Digital): Combina recursos en línea, libros de texto reutilizables o plataformas digitales. Su ventaja estratégica primordial es la drástica reducción de aranceles y fletes transfronterizos.',
+        ],
+      },
+      {
+        titulo: 'Variables logísticas: aranceles, envíos internacionales y diagnósticos',
+        guion: [
+          'Un error frecuente en proyectos educativos internacionales es presupuestar los libros al precio de catálogo estadounidense. Para familias e instituciones en España, México, Panamá u otros países, deben considerarse obligatoriamente:',
+          '· Gastos de envío internacional (flete aéreo o marítimo según volumen y peso en papel).',
+          '· Aranceles aduaneros e IVA / impuestos de importación según la legislación del país destino.',
+          '· Kits de diagnóstico inicial (Diagnostic Test Kits), indispensables para ubicar al alumno en el PACE exacto antes de ordenar los materiales del curso.',
+          '· Merma o cuadernos de reposición en caso de desfase en alguna materia específica.',
+        ],
+      },
+      {
+        titulo: 'Uso del simulador interactivo y presentación de propuestas',
+        guion: [
+          'La herramienta interactiva permite seleccionar el currículo, indicar el número de alumnos por etapa, simular el impacto de envíos y generar una propuesta desglosada lista para copiar y adjuntar a planes de viabilidad.',
+          'Recuerda siempre: toda propuesta económica preliminar elaborada para una iglesia, colegio o grupo de familias debe presentarse como estimación y elevarse a Chanak Central para confirmación formal de tarifas antes de cualquier firma.',
+        ],
+      },
+    ],
+    desglose: {
+      video: 0.25,
+      lectura: 0.5,
+      documentos: [
+        { carpeta: '03_INSTITUCIONES', documento: 'Chanak_Curriculos_y_Vias_Academicas.pdf', que: 'Estructuras de costes, formatos curriculares y políticas de adopción.', horas: 0.25 },
+        { carpeta: '08_ACADEMIC_POLICIES', documento: 'Chanak_Curriculum_Approval_Policy.pdf', que: 'Aprobación de vías curriculares y viabilidad económica.', horas: 0.25 },
+      ],
+      practica: 0.75,
+      evidencia: 0.25,
+      kc: 0.25,
+    },
+  },
 }
+

@@ -150,4 +150,36 @@ export const BLOQUE_10 = {
     evidencia:
       'Elige una de las cuatro rutas de especialista y describe en 8–10 líneas un caso con ID (sin datos personales): qué observas, qué ajustas y cuándo derivarías.',
   },
+
+  'T10.6': {
+    resumen:
+      'Evaluador de Costos y Viabilidad Curricular para el rol Estratégico y Dirección: análisis económico comparativo de A.C.E. (PACEs), LIFEPAC (AOP), Christian Light Education (CLE) y Chanak Flex. Variables de importación, fletes, reposición diagnóstica y simulación de escenarios presupuestarios por familia o centro partner.',
+    objetivos: [
+      'Dominar la estructura de costes de los cuatro currículos principales aprobados y sus diferencias logísticas.',
+      'Utilizar el simulador interactivo de costes para calcular presupuestos anuales y márgenes de viabilidad.',
+      'Orientar a representantes territoriales y alianzas sobre el impacto financiero del currículo físico vs. digital.',
+    ],
+    lecciones: [],
+    practica: {
+      situacion:
+        'Una iniciativa partner en España prevé matricular a 12 alumnos de Primaria (Grados 1 a 4) y duda entre utilizar A.C.E. PACEs o Christian Light Education (CLE). Requieren un presupuesto preliminar considerando envíos internacionales y material de diagnóstico.',
+      preguntas: [
+        '¿Cuál es el coste base estimado de consumibles anuales por alumno en cada opción?',
+        '¿Qué coste logístico adicional y arancelario debe presupuestarse al importar material impreso desde EE. UU.?',
+        '¿Qué margen y precio sugerido por estudiante permite cubrir tutoría y sostenibilidad del proyecto?',
+      ],
+      criterio:
+        'Utiliza el simulador de costes para generar la comparativa real; desglosa consumibles, aranceles y envíos; concluye con una recomendación de viabilidad económica fundamentada.',
+    },
+    quiz: [
+      { p: '¿Por qué el Evaluador de Costos pertenece a la Rama Estratégica y Dirección?', opciones: ['Porque los mentores deciden los precios de venta', 'Porque analiza márgenes, viabilidad de alianzas y presupuestos institucionales', 'Porque sustituye las notas del SIS', 'Porque es exclusivo de los profesores de inglés'], correcta: 1, explica: 'El perfil Estratégico evalúa sostenibilidad, costes de implantación y acuerdos institucionales sin mezclar autoridad académica.' },
+      { p: '¿Qué ventaja de coste directo ofrece una vía curricular digital o híbrida frente a una 100% física importada?', opciones: ['Mayor coste de flete internacional', 'Eliminación o reducción drástica de envíos aduaneros y aranceles de importación', 'No requiere tutoría', 'Obliga a comprar 60 cuadernos por año'], correcta: 1, explica: 'Los formatos digitales reducen los costes logísticos transfronterizos y tiempos de despacho aduanero.' },
+      { p: '¿Qué currículo se estructura en 12 worktexts (PACEs) por asignatura al año con coste unitario por cuaderno?', opciones: ['Christian Light Education (CLE)', 'A.C.E. (Accelerated Christian Education)', 'LIFEPAC', 'Chanak Flex'], correcta: 1, explica: 'A.C.E. se organiza en 12 PACEs por materia al año (aprox. 60 PACEs anuales en Elementary).' },
+      { p: '¿Qué factor NO debe olvidarse al calcular el presupuesto de un nuevo alumno en A.C.E. o CLE?', opciones: ['El kit o batería de pruebas de diagnóstico inicial (Diagnostic Test Kit)', 'El uniforme del colegio', 'El coste de la matrícula universitaria', 'El billete de avión a Florida'], correcta: 0, explica: 'El diagnóstico inicial es preceptivo para ubicar el nivel exacto de trabajo antes de pedir los cuadernos.' },
+      { p: 'Si una sede aliada solicita un descuento en cuotas o libros, ¿quién tiene autoridad para autorizarlo?', opciones: ['El mentor local', 'El Representante territorial por su cuenta', 'Únicamente Chanak Central y Dirección', 'La familia'], correcta: 2, explica: 'Los compromisos económicos y precios son competencia exclusiva de Chanak Central y Dirección.' },
+    ],
+    evidencia:
+      'Realiza una simulación en el Evaluador de Costos para un grupo de 10 estudiantes de Secundaria (Middle School). Copia el resumen comparativo generado y redacta un informe de viabilidad de 10 líneas con tu recomendación económica.',
+  },
 }
+

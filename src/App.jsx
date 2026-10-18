@@ -384,7 +384,13 @@ export default function App() {
         {vista.nombre === 'operacion-programas' && <OperacionProgramas inicial={rolesIds.includes('english_teacher') ? 'english' : rolesIds.includes('lifeskills_facilitator') ? 'lifeskills' : 'offcampus'} onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} onVerSIS={() => setVista({ ...vista, nombre: 'coordinacion-sis' })} onVerFamilias={() => setVista({ ...vista, nombre: 'guias-familias' })} onVerEstados={() => setVista({ ...vista, nombre: 'matriz' })} />}
         {vista.nombre === 'coordinacion-sis' && <CoordinacionSIS onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
         {vista.nombre === 'matriz' && <MatrizProgramas onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
-        {vista.nombre === 'estrategia' && <EstrategiaOperativa onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} onVerMatriz={() => setVista({ ...vista, nombre: 'matriz' })} />}
+        {vista.nombre === 'estrategia' && (
+          <EstrategiaOperativa
+            onVolver={() => setVista({ ...vista, nombre: 'dashboard' })}
+            onVerMatriz={() => setVista({ ...vista, nombre: 'matriz' })}
+            onVerComparativa={() => setVista({ ...vista, nombre: 'comparativa-curriculos' })}
+          />
+        )}
         {vista.nombre === 'organigrama' && (
           <Organigrama
             onVolver={() => setVista({ ...vista, nombre: 'dashboard' })}

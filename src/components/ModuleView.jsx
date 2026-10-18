@@ -168,19 +168,19 @@ export default function ModuleView({
         <button className="mt-3 inline-block text-xs font-bold text-teal underline" onClick={onVerCatalogo}>Videoteca y tutoriales oficiales →</button>
       </details>}
 
-      {(moduloId.startsWith('T3.') || moduloId === 'T2.2') && onVerComparativaCurriculos && (
+      {moduloId === 'T10.6' && onVerComparativaCurriculos && (
         <button
           onClick={onVerComparativaCurriculos}
-          className="w-full rounded-2xl bg-gradient-to-r from-teal to-navy p-4 text-left text-sm font-bold text-white shadow-sm flex items-center justify-between transition hover:opacity-95"
+          className="w-full rounded-2xl bg-gradient-to-r from-teal to-navy p-4 text-left text-sm font-bold text-white shadow-sm flex items-center justify-between transition hover:opacity-95 border-2 border-gold/40"
         >
           <div className="flex items-center gap-2.5">
-            <span className="text-xl">⚖️</span>
+            <span className="text-2xl">⚖️</span>
             <div>
-              <div className="text-[11px] uppercase tracking-wider text-gold font-bold">Herramienta para Coordinadores y Mentores</div>
-              <div className="text-sm font-bold text-white">Simulador de Costos y Comparativa: A.C.E., LIFEPAC, CLE y Chanak Flex</div>
+              <div className="text-[11px] uppercase tracking-wider text-gold font-bold">Herramienta de la Rama Estratégica y Dirección</div>
+              <div className="text-sm font-bold text-white">Evaluador de Costos y Ventajas Curriculares · Simulador Interactivo</div>
             </div>
           </div>
-          <span className="shrink-0 text-gold font-bold text-xs">Abrir evaluador →</span>
+          <span className="shrink-0 rounded-xl bg-gold px-3 py-1.5 text-xs font-bold text-navy shadow-sm">Abrir simulador →</span>
         </button>
       )}
 

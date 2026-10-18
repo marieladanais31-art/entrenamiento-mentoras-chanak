@@ -281,7 +281,7 @@ export const BLOQUES = [
     numero: 10,
     titulo: 'Growth, Markets, Partnerships & Systems',
     categoria: 'Crecimiento y sistemas',
-    horas: 8.75,
+    horas: 10.75,
     porRol: true, // rol Estratégico y especialistas; no cuenta para las horas de la ruta base
     modulos: [
       { id: 'T10.1', titulo: 'Market Development & Representation y Plan de Entrada al Mercado a 30 días', horas: horasModulo('T10.1'), modalidad: 'Vídeo + lectura + plan escrito', evaluacion: 'Knowledge Check + plan a 30 días', video: 'V33', fuentes: [], entregable: true },
@@ -289,6 +289,7 @@ export const BLOQUES = [
       { id: 'T10.3', titulo: 'Modelos de personas y alianzas: Voluntario, Contratista y Socio', horas: horasModulo('T10.3'), modalidad: 'Vídeo + lectura + plantillas (sujetas a revisión)', evaluacion: 'Knowledge Check + caso', video: 'V35', fuentes: [] },
       { id: 'T10.4', titulo: 'Sistemas: SIS, Portal y Dual Diploma Portal (práctica y validación)', horas: horasModulo('T10.4'), modalidad: 'Vídeo + práctica con datos ficticios + validación', evaluacion: 'Knowledge Check + validación con Chanak Central', video: 'V36', fuentes: [] },
       { id: 'T10.5', titulo: 'Rutas de especialista: English, Life Skills, lengua local y evaluación educativa', horas: horasModulo('T10.5'), modalidad: 'Vídeo + lectura + caso', evaluacion: 'Knowledge Check + caso', video: 'V37', fuentes: [] },
+      { id: 'T10.6', titulo: 'Evaluador de Costos y Viabilidad Curricular · Simulador A.C.E., LIFEPAC, CLE y Flex', horas: horasModulo('T10.6'), modalidad: 'Lectura + herramienta interactiva de simulación de costos + caso de viabilidad', evaluacion: 'Knowledge Check + caso de presupuestos', video: 'V35', fuentes: ['curriculos', 'currPolicy'] },
     ],
   },
 ]
