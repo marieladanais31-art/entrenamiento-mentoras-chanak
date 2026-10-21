@@ -221,7 +221,7 @@ export async function getRolesDe(userId) {
 
 // Todos los roles (admin): { [perfil_id]: [{ id, rol, territorio, programa }] } o null
 export async function listarRoles() {
-  const { data, error } = await supabase.from('perfil_roles').select('id, perfil_id, rol, funcion, territorio, programa')
+  const { data, error } = await supabase.from('perfil_roles').select('id, perfil_id, rol, funcion, territorio, programa, asignado_por, asignado_en')
   if (error) {
     if (tablaRolesAusente(error.message)) return null
     throw new Error(error.message)

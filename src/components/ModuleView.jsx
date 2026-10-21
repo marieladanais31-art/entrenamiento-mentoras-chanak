@@ -14,7 +14,7 @@ import { traducirModulo, traducirRecursos } from '../data/curriculum.en'
 import { TRONCO_COMUN } from '../data/roles'
 
 // Recorrido del módulo: Vídeo → Lectura → Práctica → Knowledge Check → Evidencia → Completado
-const PASOS = ['video', 'lectura', 'practica', 'quiz', 'evidencia', 'completado']
+const _PASOS = ['video', 'lectura', 'practica', 'quiz', 'evidencia', 'completado']
 
 export default function ModuleView({
   moduloId,
@@ -647,7 +647,7 @@ function Desglose({ d, horas, t }) {
   )
 }
 
-function TarjetaDocumento({ doc, tipo, t }) {
+function TarjetaDocumento({ doc, tipo, t: _t }) {
   const urlExacta = resolverUrlDocumento(doc)
   const urlFolder = urlCarpeta(doc.carpeta)
   const tituloLimpio = (doc.documento || '')
