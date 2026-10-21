@@ -4,7 +4,7 @@ import { asignarRol, quitarRol, actualizarPerfil } from '../lib/backend'
 
 // Asignación formal de roles (ROLE ≠ PERSON). Cada rol activa módulos, sistemas, documentos,
 // evaluaciones y permissions checklist. Los roles de representación exigen territorio (y programa).
-export default function AsignarRoles({ perfil, filas, miId, onRecargar, migrado, funcionesCompromiso }) {
+export default function AsignarRoles({ perfil, filas, miId, onRecargar, migrado, funcionesCompromiso, perfiles = [] }) {
   const [abierto, setAbierto] = useState(false)
   const [grupo, setGrupo] = useState('')
   const [nuevo, setNuevo] = useState('')
@@ -52,6 +52,53 @@ export default function AsignarRoles({ perfil, filas, miId, onRecargar, migrado,
 
   return (
     <div className="w-full pl-11">
+      <section aria-label="Elección y asignaciones de rama" className="my-3 space-y-3 rounded-xl border border-navy/15 bg-white p-4 text-sm text-navy">
+        <h4 className="font-bold">Elección de la persona y roles asignados</h4>
+        <div className="grid gap-4 md:grid-cols-2">
+          <div>
+            <h5 className="font-semibold text-teal">Elección de la persona</h5>
+            {funcionesCompromiso === undefined ? <p>Información de elección no disponible.</p> : solicitud ? (
+              <>
+                <p className="mt-1">{solicitud.funciones.map((f) => ROL_POR_ID[f]?.nombre || f).join(' · ')}</p>
+                <p className="mt-1 text-navy/65">Última elección guardada: {fechaRegistro(solicitud.fecha)}</p>
+                <ul className="mt-2 space-y-1">
+                  {solicitud.funciones.map((f) => <li key={f}>
+                    {ROL_POR_ID[f]?.nombre || f}: <b>{asignados.some((r) => r.rol === f) ? 'Elegida y asignada' : accesoLibre(f) ? 'Activa por acceso libre' : 'Pendiente de confirmación'}</b>
+                  </li>)}
+                </ul>
+              </>
+            ) : <p className="mt-1">Sin elección registrada en «Elige tu rama».</p>}
+          </div>
+          <div>
+            <h5 className="font-semibold text-teal">Roles asignados por Administración</h5>
+            {!migrado ? <p>Información de asignaciones no disponible.</p> : asignados.length ? (
+              <ul className="mt-1 space-y-3">
+                {asignados.map((r) => {
+                  const autor = perfiles.find((p) => p.id === r.asignado_por)
+                  return <li key={r.id}>
+                    <div className="font-semibold">{ROL_POR_ID[r.rol]?.nombre || r.rol}</div>
+                    <div>{r.asignado_por ? `Asignado por: ${autor?.nombre || 'Administrador no disponible'}` : 'Asignación anterior · autor no registrado'}</div>
+                    <div className="text-navy/65">Fecha de asignación: {fechaRegistro(r.asignado_en)}</div>
+                    <div className="text-navy/65">{solicitud?.funciones.includes(r.rol) ? 'Coincide con la elección registrada.' : 'Sin elección de esta función registrada.'}</div>
+                  </li>
+                })}
+              </ul>
+            ) : <p className="mt-1">Sin roles asignados formalmente.</p>}
+          </div>
+        </div>
+        <p className="border-t border-navy/10 pt-2 text-navy/65">La elección y la asignación son registros diferentes. Coincidir no demuestra si la asignación fue una confirmación o un alta directa. Se muestra la última elección guardada, no un historial completo.</p>
+        {solicitud?.datosEstrategico && (
+          <details className="rounded-lg bg-cream p-3">
+            <summary className="cursor-pointer font-semibold">Ver postulación estratégica guardada</summary>
+            <dl className="mt-2 space-y-1">
+              <div><dt className="font-semibold">Proyecto</dt><dd>{PROYECTOS_PRIORIDAD.find((p) => p.id === solicitud.datosEstrategico.proyectoSel)?.titulo || solicitud.datosEstrategico.proyectoSel || 'No indicado'}</dd></div>
+              <div><dt className="font-semibold">Disponibilidad</dt><dd>{solicitud.datosEstrategico.tiempoDisp || 'No indicada'}</dd></div>
+              <div><dt className="font-semibold">Alcance</dt><dd>{solicitud.datosEstrategico.alcance || 'No indicado'}</dd></div>
+              <div><dt className="font-semibold">Aporte</dt><dd className="whitespace-pre-wrap">{solicitud.datosEstrategico.aporte || 'No indicado'}</dd></div>
+            </dl>
+          </details>
+        )}
+      </section>
       <button onClick={() => setAbierto(!abierto)} className="text-xs font-semibold text-teal hover:underline">
         {abierto ? '▾' : '▸'} Roles ({efectivos.length}){derivados ? ' · Mentor por acceso libre' : origen === 'ninguno' ? ' · sin rama activa' : ''}{pendientes.length ? ` · ${pendientes.length} por confirmar` : ''}
         {directo ? ' · contacto directo con menores' : ''}
@@ -179,4 +226,11 @@ export default function AsignarRoles({ perfil, filas, miId, onRecargar, migrado,
       )}
     </div>
   )
+}
+
+function fechaRegistro(valor) {
+  if (!valor) return 'No registrada'
+  const fecha = new Date(valor)
+  if (Number.isNaN(fecha.getTime())) return 'No registrada'
+  return new Intl.DateTimeFormat('es-ES', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'Europe/Madrid' }).format(fecha) + ' (España)'
 }
