@@ -240,7 +240,7 @@ export default function App() {
         esPrimerIngreso={debeCambiarPassword}
         onCompletado={async () => {
           if (perfil?.id) {
-            try { await api.actualizarPerfil(perfil.id, { debe_cambiar_password: false }) } catch (_) {}
+            try { await api.actualizarPerfil(perfil.id, { debe_cambiar_password: false }) } catch (_) { /* El siguiente refresco de sesión mantiene el flujo de acceso. */ }
           }
           const s = await api.getSesion()
           setSesion(s)
