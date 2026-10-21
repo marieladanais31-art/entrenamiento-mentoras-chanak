@@ -138,7 +138,7 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
     })
   }
 
-  async function handleResetPassword(perfil) {
+  async function _handleResetPassword(perfil) {
     const correo = perfil.email || obtenerEmailConocido(perfil.id) || obtenerEmailConocido(perfil.nombre)
     if (!correo) {
       setError(`No se encontró un correo electrónico asociado a ${perfil.nombre}.`)
@@ -916,7 +916,7 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
                     className="w-28 rounded-lg bg-white px-2 py-1 text-xs text-navy"
                   />
                 </div>
-                <AsignarRoles perfil={p} filas={rolesMapa?.[p.id]} miId={miId} onRecargar={onRecargar} migrado={rolesMapa !== null && rolesMapa !== undefined} funcionesCompromiso={compromisosMapa?.[p.id]?.funciones} />
+                <AsignarRoles perfiles={perfiles} perfil={p} filas={rolesMapa?.[p.id]} miId={miId} onRecargar={onRecargar} migrado={rolesMapa !== null && rolesMapa !== undefined} funcionesCompromiso={compromisosMapa ? (compromisosMapa[p.id]?.funciones || []) : undefined} />
               </li>
             )
           })}
@@ -1388,10 +1388,10 @@ function ModalAceptacionCompromiso({ datos, onClose, onImprimir }) {
     },
   ]
 
-  let funcionesLista = []
+  let _funcionesLista = []
   let solicitudRama = null
   if (compromiso?.funciones && Array.isArray(compromiso.funciones)) {
-    funcionesLista = compromiso.funciones.filter((f) => typeof f === 'string')
+    _funcionesLista = compromiso.funciones.filter((f) => typeof f === 'string')
     solicitudRama = compromiso.funciones.find((f) => f && typeof f === 'object' && f.tipo === 'solicitud_rama')
   }
 
