@@ -6,6 +6,7 @@ import * as api from '../lib/backend'
 import { resumenMentora, formatearFecha, iniciales, aplicarEquivalencias } from '../lib/calculos'
 import GestionUsuarias from './GestionUsuarias'
 import GestionCodigos from './GestionCodigos'
+import ActividadAdmin from './ActividadAdmin'
 import { useIdioma } from '../i18n/idioma'
 import { traducirBloques } from '../data/curriculum.en'
 import { ROL_POR_ID, rolesDesdeTipoAcceso } from '../data/roles'
@@ -17,13 +18,17 @@ export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) 
   const [progresos, setProgresos] = useState({})
   const [rolesMapa, setRolesMapa] = useState(undefined) // null = migración de roles pendiente
   const [compromisosMapa, setCompromisosMapa] = useState(undefined)
+  const [actividad, setActividad] = useState([])
+  const [errorActividad, setErrorActividad] = useState('')
   const [cargando, setCargando] = useState(true)
   const [error, setError] = useState('')
 
   const cargar = useCallback(async () => {
     setError('')
     try {
-      const [ps, prs, rm, cm] = await Promise.all([api.listarPerfiles(), api.getProgresoTodas(), api.listarRoles().catch(() => null), api.listarCompromisos().catch(() => null)])
+      const [ps, prs, rm, cm, act] = await Promise.all([api.listarPerfiles(), api.getProgresoTodas(), api.listarRoles().catch(() => null), api.listarCompromisos().catch(() => null), api.listarActividadFormacion().then((filas) => ({ filas })).catch((e) => ({ filas: [], error: e.message }))])
+      setActividad(act.filas)
+      setErrorActividad(act.error || '')
       setPerfiles(ps)
       setProgresos(prs)
       setRolesMapa(rm)
@@ -60,6 +65,7 @@ export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) 
           ['usuarias', `${t('admin.tabUsuarias')}${pendientes ? ` (${pendientes})` : ''}`],
           ['codigos', t('admin.tabCodigos')],
           ['progreso', t('admin.tabProgreso')],
+          ['actividad', 'Actividad y pendientes'],
           ['videos', t('admin.tabVideos')],
           ['retroactivo', t('admin.tabRetroactivo')],
         ].map(([id, texto]) => (
@@ -90,6 +96,8 @@ export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) 
           {pestana === 'usuarias' && (
             <GestionUsuarias perfiles={perfiles} miId={miPerfil.id} onRecargar={cargar} rolesMapa={rolesMapa} compromisosMapa={compromisosMapa} />
           )}
+
+          {pestana === 'actividad' && <ActividadAdmin perfiles={perfiles} progresos={progresos} rolesMapa={rolesMapa} compromisosMapa={compromisosMapa} actividad={actividad} errorActividad={errorActividad} onActualizar={cargar} onVerUsuaria={onVerUsuaria} />}
 
           {pestana === 'codigos' && (
             <GestionCodigos miId={miPerfil.id} />

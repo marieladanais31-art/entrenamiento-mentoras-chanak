@@ -359,13 +359,14 @@ export async function setQuizModulo(usuariaId, moduloId, resultado, previo) {
 export async function getProgresoTodas() {
   const { data, error } = await supabase
     .from('progreso')
-    .select('usuaria_id, modulo_id, estado, fecha_inicio, fecha_completado, notas, quiz, entregable_url, entregable_nombre')
+    .select('usuaria_id, modulo_id, estado, fecha_inicio, fecha_completado, notas, quiz, entregable_url, entregable_nombre, actualizado_en')
   if (error) throw new Error(error.message)
   const porUsuaria = {}
   for (const f of data || []) {
     if (!porUsuaria[f.usuaria_id]) porUsuaria[f.usuaria_id] = { modulos: {} }
     porUsuaria[f.usuaria_id].modulos[f.modulo_id] = {
       estado: f.estado,
+      actualizadoEn: f.actualizado_en,
       fechaInicio: f.fecha_inicio,
       fechaCompletado: f.fecha_completado,
       notas: f.notas,
@@ -533,4 +534,34 @@ function traducirError(mensaje = '') {
   if (m.includes('duplicate') || m.includes('unique')) return 'Ya existe un registro con estos datos.'
   if (m.includes('codigo')) return 'Error con el código de acceso. Inténtalo de nuevo.'
   return mensaje
+}
+
+// Actividad de formación: solo tiempo aproximado, independiente del progreso académico.
+const escriturasActividad = new Map()
+export function registrarActividad(fila) {
+  const datos = { id: fila.id, perfil_id: fila.perfil_id, sesion_id: fila.sesion_id,
+    vista: fila.vista, modulo_id: fila.modulo_id, paso: fila.paso,
+    segundos_activos: fila.segundos_activos, ultima_actividad: fila.ultima_actividad }
+  const anterior = escriturasActividad.get(fila.id) || Promise.resolve()
+  const escritura = anterior.catch(() => {}).then(async () => {
+    const { error } = await supabase.from('actividad_formacion').upsert(datos, { onConflict: 'id' })
+    if (error) throw new Error(error.message)
+  })
+  escriturasActividad.set(fila.id, escritura)
+  void escritura.finally(() => { if (escriturasActividad.get(fila.id) === escritura) escriturasActividad.delete(fila.id) }).catch(() => {})
+  return escritura
+}
+
+export async function listarActividadFormacion() {
+  const filas = []
+  // Orden estable y paginación: no cortar el informe en las primeras 1.000 filas.
+  for (let desde = 0; ; desde += 1000) {
+    const { data, error } = await supabase.from('actividad_formacion')
+      .select('id, perfil_id, sesion_id, vista, modulo_id, paso, segundos_activos, creado_en, ultima_actividad')
+      .order('creado_en', { ascending: true }).order('id', { ascending: true }).range(desde, desde + 999)
+    if (error) throw new Error(error.message)
+    filas.push(...data)
+    if (data.length < 1000) break
+  }
+  return filas
 }
