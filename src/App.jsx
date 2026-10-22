@@ -14,6 +14,7 @@ import HoursLog from './components/HoursLog'
 import Certificado from './components/Certificado'
 import AdminView from './components/AdminView'
 import Glosario from './components/Glosario'
+import useActividadFormacion from './hooks/useActividadFormacion'
 import Organigrama from './components/Organigrama'
 import MatrizProgramas from './components/MatrizProgramas'
 import RolPerfil from './components/RolPerfil'
@@ -57,6 +58,14 @@ export default function App() {
   // El admin puede abrir el panel de otra usuaria; si no, es el suyo
   const idViendo = vista.usuariaId || perfil?.id
   const viendoOtra = esAdmin && idViendo !== perfil?.id
+
+  const [pasoActividad, setPasoActividad] = useState(null)
+  const informarPaso = useCallback((moduloId, paso) => setPasoActividad({ moduloId, paso }), [])
+  useActividadFormacion(perfil?.id, Boolean(sesion?.user?.id === perfil?.id && aprobada && !viendoOtra), {
+    vista: vista.nombre,
+    moduloId: vista.nombre === 'modulo' ? vista.moduloId : null,
+    paso: vista.nombre === 'modulo' && pasoActividad?.moduloId === vista.moduloId ? pasoActividad.paso : null,
+  })
 
   // ── Sesión ──
   useEffect(() => {
@@ -422,6 +431,7 @@ export default function App() {
         )}
         {vista.nombre === 'modulo' && (
           <ModuleView
+            onPasoActividad={informarPaso}
             moduloId={vista.moduloId}
             contexto={vista.contexto}
             progresoModulo={progresoVista.modulos[vista.moduloId]}
