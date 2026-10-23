@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { EVALUACION_MENTORAS, FUENTES_MANUAL, MANUAL_VERSION, PERFILES_OPERATIVOS, UNIDADES_MENTORAS, evaluarManual, leerRegistroManual } from '../data/manualMentoras'
+import { ALCANCE_PERFILES, PROCEDIMIENTOS_MENTORAS, MERITOS_COINS, EVALUACION_MENTORAS, FUENTES_MANUAL, MANUAL_VERSION, PERFILES_OPERATIVOS, UNIDADES_MENTORAS, evaluarManual, leerRegistroManual } from '../data/manualMentoras'
 
 export default function ManualMentoras({ funcionId, progreso, onGuardar, soloLectura = false }) {
   const registro = leerRegistroManual(progreso)
@@ -34,7 +34,8 @@ export default function ManualMentoras({ funcionId, progreso, onGuardar, soloLec
   return <section className="manual-mentoras space-y-5" aria-label="Manual operativo de mentoras">
     <header className="rounded-2xl border border-teal/30 bg-teal/5 p-5">
       <p className="text-sm font-bold text-teal">Actualización operativa · {MANUAL_VERSION}</p>
-      <h2 className="mt-1 text-2xl font-bold text-navy">Manual de la mentora · del plan al seguimiento</h2>
+      <h2 className="mt-1 text-2xl font-bold text-navy">Tres perfiles: Mentor general, Inglés y Life Skills</h2>
+      <p className="mt-3 text-base font-bold">Son funciones distintas. Una persona puede tener varias asignadas, pero ninguna incluye automáticamente las otras dos.</p>
       <p className="mt-3 text-base">Cinco unidades complementarias a tu ruta. Conservan tus módulos y vídeos anteriores. Revisadas contra el código del SIS y Dual Diploma; la disponibilidad de cada función depende del acceso y la configuración vigente.</p>
       <div className="no-print mt-4 flex flex-wrap gap-3">
         <a href="/manuales/manual-mentoras-2026-10.pdf" target="_blank" rel="noreferrer" className="rounded-xl bg-navy px-4 py-3 text-sm font-bold text-white">Descargar manual PDF</a>
@@ -45,12 +46,36 @@ export default function ManualMentoras({ funcionId, progreso, onGuardar, soloLec
       {soloLectura && <p className="mt-2 text-sm font-semibold">Vista de consulta. El avance de otra persona no se modifica desde aquí.</p>}
     </header>
 
+    <section className="rounded-2xl bg-white p-5 shadow-sm" aria-label="Alcance de los tres perfiles">
+      <h3 className="text-xl font-bold text-navy">Qué corresponde a cada perfil</h3>
+      <p className="mt-3 text-base">Esta comparación explica el alcance de las funciones; no concede permisos. Cada persona trabaja con los estudiantes, materias y responsabilidades que tenga asignados.</p>
+      <div className="mt-4 space-y-4">{ALCANCE_PERFILES.map((p) => <article key={p.id} className={`rounded-xl border p-4 ${p.id === funcionId ? 'border-teal bg-teal/5' : 'border-navy/15'}`}>
+        <h4 className="text-lg font-bold">{p.nombre}{p.id === funcionId ? ' · Función que estás consultando' : ''}</h4>
+        <dl className="mt-3 space-y-3 text-base">{[['A quién acompaña', p.acompana], ['Notas y evaluación', p.notas], ['Motivación con coins', p.coins], ['Alertas y comunicación', p.alertas], ['Límite', p.limite]].map(([nombre, texto]) => <div key={nombre}><dt className="font-bold text-teal">{nombre}</dt><dd>{texto}</dd></div>)}</dl>
+      </article>)}</div>
+      <p className="mt-4 text-base"><b>Ejemplo:</b> un mismo alumno puede tener mentor general, profesora de Inglés y mentora de Life Skills. Los especialistas evalúan su área y comunican avances; el mentor general acompaña el conjunto con la familia. Coordinación supervisa y resuelve las decisiones que requieran su autorización.</p>
+    </section>
     <details className="rounded-2xl bg-white p-5 shadow-sm" open>
       <summary className="cursor-pointer text-lg font-bold text-navy">Mi rutina · {perfil.titulo}</summary>
       <p className="mt-3 text-base font-semibold">{perfil.resultado}</p>
       <ol className="mt-3 list-decimal space-y-3 pl-6 text-base">{perfil.pasos.map((p) => <li key={p}>{p}</li>)}</ol>
       <p className="mt-4 rounded-xl bg-gold/15 p-3 text-sm"><b>Límites:</b> {perfil.limites}</p>
     </details>
+
+    <section className="space-y-4" aria-label="Procedimientos paso a paso">
+      <h3 className="text-xl font-bold text-navy">Cómo hacerlo · {perfil.titulo}</h3>
+      {PROCEDIMIENTOS_MENTORAS.map((p) => <details key={p.id} className="rounded-2xl bg-white p-5 shadow-sm" open>
+        <summary className="cursor-pointer text-lg font-bold text-teal">{p.titulo}</summary>
+        <p className="mt-3 text-base"><b>Tu alcance:</b> {p.alcance[funcionId] || p.alcance.mentor}</p>
+        <p className="mt-3 rounded-xl bg-cream p-3 text-base"><b>Dónde:</b> {p.donde}</p>
+        <ol className="mt-4 list-decimal space-y-3 pl-6 text-base">{p.pasos.map((paso) => <li key={paso}>{paso}</li>)}</ol>
+        {p.id === 'coins' && <div className="mt-4 overflow-x-auto"><table className="w-full text-left text-base"><caption className="mb-2 text-left font-bold">Méritos propuestos por el formulario SIS revisado · comprobar catálogo vigente</caption><thead><tr><th className="p-2">Acción comprobada</th><th className="p-2">Coins</th></tr></thead><tbody>{MERITOS_COINS.map(([accion, coins]) => <tr key={accion} className="border-t border-navy/15"><td className="p-2">{accion}</td><td className="p-2 font-bold">+{coins}</td></tr>)}</tbody></table></div>}
+        <h4 className="mt-4 text-base font-bold">Ejemplos para las tres funciones</h4>
+        <ul className="mt-2 list-disc space-y-2 pl-6 text-base">{p.ejemplos.map((e) => <li key={e}>{e}</li>)}</ul>
+        <p className="mt-4 text-base"><b>Comprueba al terminar:</b> {p.verificar}</p>
+        <p className="mt-4 rounded-xl bg-gold/15 p-3 text-base"><b>Permisos y límites:</b> {p.limites}</p>
+      </details>)}
+    </section>
 
     <nav aria-label="Unidades del manual" className="no-print grid gap-2 sm:grid-cols-2">
       {UNIDADES_MENTORAS.map((u, i) => <button key={u.id} aria-current={unidadId === u.id ? 'step' : undefined} onClick={() => { setUnidadId(u.id); setAviso(''); setError('') }} className={`rounded-xl border p-4 text-left text-sm font-bold ${unidadId === u.id ? 'border-navy bg-navy text-white' : 'border-navy/15 bg-white text-navy'}`}>{i + 1}. {u.titulo}{registro.lecturas.includes(u.id) ? ' · Lectura confirmada' : ''}</button>)}

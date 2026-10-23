@@ -15,7 +15,7 @@ from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, PageBreak, KeepTogether, Image
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, PageBreak, KeepTogether, Image, Table, TableStyle
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'output/manual-mentoras'
@@ -34,6 +34,7 @@ styles.add(ParagraphStyle(name='H', parent=styles['Copy'], fontName='ChanakBold'
 styles.add(ParagraphStyle(name='Sub', parent=styles['Copy'], fontName='ChanakBold', fontSize=13, leading=18, spaceBefore=13, spaceAfter=8, keepWithNext=True))
 styles.add(ParagraphStyle(name='Label', parent=styles['Copy'], fontName='ChanakBold', fontSize=9, leading=13, textColor=TEAL, spaceAfter=8))
 styles.add(ParagraphStyle(name='SmallCopy', parent=styles['Copy'], fontSize=8.5, leading=13))
+styles.add(ParagraphStyle(name='ScopeCopy', parent=styles['Copy'], fontSize=10, leading=14, spaceAfter=4))
 story = []
 md = ['# Manual operativo de mentoras Chanak', '\nVersión 2026-10-23. Complemento de la formación; conserva la ruta y vídeos existentes.\n']
 
@@ -70,6 +71,20 @@ for i, text in enumerate(['En training abre Inicio > Mi trabajo > tu función. A
     story.append(p(f'{i}. {text}', 'Step'))
 block('Glosario de trabajo', 'SIS: sistema de información del estudiante y expediente escolar. Core: núcleo académico. Scope & Sequence: alcance y secuencia curricular. PEI: Plan Educativo Individualizado. Mastery Learning: aprendizaje para el dominio. LMS: plataforma de cursos y actividades. Feedback: devolución que indica qué está logrado y cuál es el siguiente paso. Evidencia: archivo o registro verificable del trabajo. Crédito: reconocimiento académico sujeto a reglas y validación, no un contador de actividades.')
 block('Los sistemas y las cuentas', 'Training forma al equipo; SIS conserva el expediente; Portal orienta y aporta recursos; Dual Diploma LMS gestiona su aprendizaje y revisión en otra base. No compartir cuentas. Si un acceso falla, solicitar revisión de la asignación. No introducir datos directamente en Supabase para corregir una pantalla.')
+story.append(PageBreak())
+story.append(p('Tres funciones diferentes', 'H'))
+story.append(p('Mentor general, Profesor de Inglés y Profesor / mentor de Life Skills no son un único puesto. Una persona puede ejercer varias funciones si las tiene asignadas; ser mentor general no le concede automáticamente las otras especialidades ni viceversa.'))
+for alcance in data['ALCANCE_PERFILES']:
+    alcance_story = [p(alcance['nombre'], 'Sub'), p(alcance['acompana'], 'ScopeCopy')]
+    for label, key in [('Notas y evaluación', 'notas'), ('Motivación con coins', 'coins'), ('Alertas y comunicación', 'alertas'), ('Límite', 'limite')]:
+        alcance_story.append(p(label + ': ' + alcance[key], 'ScopeCopy'))
+    story.append(KeepTogether(alcance_story))
+story.append(p('Ejemplo: un alumno puede tener tres personas distintas. Los especialistas enseñan y evalúan su área; el mentor general acompaña el conjunto con la familia; Coordinación supervisa y valida las decisiones de su competencia.'))
+md.extend(['\n## Tres funciones diferentes', 'No son un único puesto. Las asignaciones múltiples deben ser explícitas.'])
+for alcance in data['ALCANCE_PERFILES']:
+    md.append('\n### ' + alcance['nombre'])
+    for key in ['acompana', 'notas', 'coins', 'alertas', 'limite']:
+        md.append(alcance[key])
 for perfil in data['PERFILES_OPERATIVOS']:
     story.append(PageBreak())
     story.append(p('RUTINA DE MI ESPECIALIDAD', 'Label'))
@@ -81,6 +96,32 @@ for perfil in data['PERFILES_OPERATIVOS']:
         md.append(f'{i}. {text}')
     block('Límites de la función', perfil['limites'])
     md.append('\nLímites: ' + perfil['limites'])
+for proc in data['PROCEDIMIENTOS_MENTORAS']:
+    story.append(PageBreak())
+    story.append(p('PROCEDIMIENTO PASO A PASO', 'Label'))
+    story.append(p(proc['titulo'], 'H'))
+    story.append(p('Dónde: ' + proc['donde']))
+    md.extend(['\n## ' + proc['titulo'], 'Dónde: ' + proc['donde']])
+    for alcance in data['ALCANCE_PERFILES']:
+        story.append(p(alcance['nombre'] + ': ' + proc['alcance'][alcance['id']], 'SmallCopy'))
+    for i, paso in enumerate(proc['pasos'], 1):
+        story.append(p(f'{i}. {paso}', 'Step'))
+        md.append(f'{i}. {paso}')
+    if proc['id'] == 'coins':
+        story.append(p('Méritos del formulario SIS revisado', 'Sub'))
+        story.append(p('Comprobar el catálogo vigente y el permiso antes de otorgar. Un examen debe estar superado; no premiar dos veces el mismo hecho.', 'SmallCopy'))
+        filas = [[p('Acción comprobada', 'SmallCopy'), p('Coins', 'SmallCopy')]]
+        filas += [[p(accion, 'SmallCopy'), p('+' + str(coins), 'SmallCopy')] for accion, coins in data['MERITOS_COINS']]
+        tabla = Table(filas, colWidths=[410, 90], repeatRows=1)
+        tabla.setStyle(TableStyle([('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#e4f0ef')), ('VALIGN', (0, 0), (-1, -1), 'TOP'), ('LINEBELOW', (0, 0), (-1, -1), 0.4, colors.HexColor('#d4dfe3')), ('LEFTPADDING', (0, 0), (-1, -1), 8), ('TOPPADDING', (0, 0), (-1, -1), 7)]))
+        story.append(tabla)
+    story.append(p('Ejemplos por función', 'Sub'))
+    for texto in proc['ejemplos']:
+        story.append(p(texto))
+        md.append(texto)
+    block('Comprueba al terminar', proc['verificar'])
+    block('Permisos y límites', proc['limites'])
+    md.extend([proc['verificar'], proc['limites']])
 for unidad in data['UNIDADES_MENTORAS']:
     story.append(PageBreak())
     story.append(p('UNIDAD ' + unidad['id'][1:] + ' / 5', 'Label'))
