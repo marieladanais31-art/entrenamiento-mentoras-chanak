@@ -386,7 +386,7 @@ export default function App() {
             onVerCoordinacion={() => setVista({ ...vista, nombre: 'coordinacion-sis' })}
           />
         )}
-        {vista.nombre === 'mi-funcion' && <MiFuncion funcionId={vista.funcionId} roles={rolesIds} onCambiar={(funcionId) => setVista({ ...vista, funcionId })} onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} manualProgreso={progreso.modulos[MANUAL_ID]} soloLectura={viendoOtra} onGuardarManual={async (registro, quiz) => {
+        {vista.nombre === 'mi-funcion' && <MiFuncion onVerCoordinacion={() => setVista({ ...vista, nombre: 'coordinacion-sis' })} funcionId={vista.funcionId} roles={rolesIds} onCambiar={(funcionId) => setVista({ ...vista, funcionId })} onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} manualProgreso={progreso.modulos[MANUAL_ID]} soloLectura={viendoOtra} onGuardarManual={async (registro, quiz) => {
           if (viendoOtra) throw new Error('Vista de consulta')
           await api.guardarManualMentoras(perfil.id, registro, quiz, progreso.modulos[MANUAL_ID])
           const pr = await api.getProgreso(perfil.id)

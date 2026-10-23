@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import guia from '../data/coordinacionSIS.json'
+import ManualCoordinacion from './ManualCoordinacion'
 
 export default function CoordinacionSIS({ onVolver }) {
   const [vista, setVista] = useState('notas')
@@ -7,7 +8,8 @@ export default function CoordinacionSIS({ onVolver }) {
   const pantalla = guia.pantallas.find(p => p.id === vista)
   return <div className="space-y-4">
     <button onClick={onVolver} className="text-sm font-bold text-teal">← Volver a la formación</button>
-    <header className="rounded-2xl bg-navy p-6 text-cream"><h1 className="text-xl font-bold">{guia.titulo}</h1><p className="mt-2 text-sm">{guia.subtitulo}</p><a href="/formacion/GUIA_COORDINADOR_PANTALLAS_SIS_2026-2027.pdf" download className="mt-4 inline-block text-sm font-bold underline">Descargar guía de las ocho pantallas</a></header>
+    <ManualCoordinacion />
+    <header className="rounded-2xl bg-navy p-6 text-cream"><h2 className="text-xl font-bold">Prácticas con pantallas simuladas</h2><p className="mt-2 text-base">Ejemplos formativos con datos ficticios. El manual anterior describe las once pestañas actuales; estos esquemas simplifican algunas para practicar decisiones.</p></header>
     <p className="rounded-xl border-l-4 border-gold bg-gold/10 p-4 text-sm leading-relaxed">{guia.intro}</p>
     <section className="overflow-hidden rounded-2xl border border-navy/15 bg-white shadow-sm">
       <div className="bg-teal px-5 py-3 text-sm font-bold text-white">Panel del Coordinador · Esquema formativo · Hub y alumno ficticios</div>
