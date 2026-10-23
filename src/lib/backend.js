@@ -1,6 +1,7 @@
 import { supabase, SUPABASE_URL, SUPABASE_ANON_KEY } from './supabase'
 import { createClient } from '@supabase/supabase-js'
 import { grupoDe } from '../data/roles'
+import { MANUAL_ID, MANUAL_VERSION, UNIDADES_MENTORAS, evaluarManual } from '../data/manualMentoras'
 
 // ════════════════════════════════════════════
 // AUTENTICACIÓN
@@ -352,6 +353,28 @@ export async function setQuizModulo(usuariaId, moduloId, resultado, previo) {
     estado: !previo?.estado || previo.estado === 'pendiente' ? 'en_curso' : previo.estado,
     fecha_inicio: previo?.fechaInicio || hoyISO(),
     quiz: resultado,
+  })
+}
+
+// Registro complementario en la tabla de progreso existente. No suma horas ni
+// modifica el catálogo obligatorio; una evaluación formativa no emite certificados.
+export async function guardarManualMentoras(usuariaId, registro, intento, previo) {
+  if (registro?.version !== MANUAL_VERSION) throw new Error('Versión del manual no válida')
+  const lecturas = UNIDADES_MENTORAS.filter((u) => registro.lecturas?.includes(u.id) && registro.casos?.[u.id] === u.caso.correcta).map((u) => u.id)
+  const casos = Object.fromEntries(lecturas.map((id) => [id, registro.casos[id]]))
+  let quiz = previo?.quiz?.version === MANUAL_VERSION ? previo.quiz : null
+  if (intento) {
+    const evaluado = evaluarManual(intento.respuestas || {})
+    if (lecturas.length !== UNIDADES_MENTORAS.length || !evaluado.completas) throw new Error('Completa las cinco lecturas y las quince respuestas')
+    quiz = { ...evaluado, respuestas: intento.respuestas, fecha: new Date().toISOString() }
+  }
+  const terminado = lecturas.length === UNIDADES_MENTORAS.length && quiz?.aprobado === true
+  await upsertProgreso(usuariaId, MANUAL_ID, {
+    estado: terminado ? 'completado' : 'en_curso',
+    fecha_inicio: previo?.fechaInicio || hoyISO(),
+    fecha_completado: terminado ? previo?.fechaCompletado || hoyISO() : null,
+    notas: JSON.stringify({ version: MANUAL_VERSION, lecturas, casos }),
+    quiz,
   })
 }
 

@@ -24,6 +24,7 @@ import CambiarContrasena from './components/CambiarContrasena'
 import CompromisoInicial, { VERSION_COMPROMISO } from './components/CompromisoInicial'
 import EstrategiaOperativa from './components/EstrategiaOperativa'
 import MiFuncion from './components/MiFuncion'
+import { MANUAL_ID } from './data/manualMentoras'
 import VistasSistemaView from './components/VistasSistemaView'
 import ComparativaCurriculos from './components/ComparativaCurriculos'
 import * as api from './lib/backend'
@@ -385,7 +386,12 @@ export default function App() {
             onVerCoordinacion={() => setVista({ ...vista, nombre: 'coordinacion-sis' })}
           />
         )}
-        {vista.nombre === 'mi-funcion' && <MiFuncion funcionId={vista.funcionId} roles={rolesIds} onCambiar={(funcionId) => setVista({ ...vista, funcionId })} onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
+        {vista.nombre === 'mi-funcion' && <MiFuncion funcionId={vista.funcionId} roles={rolesIds} onCambiar={(funcionId) => setVista({ ...vista, funcionId })} onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} manualProgreso={progreso.modulos[MANUAL_ID]} soloLectura={viendoOtra} onGuardarManual={async (registro, quiz) => {
+          if (viendoOtra) throw new Error('Vista de consulta')
+          await api.guardarManualMentoras(perfil.id, registro, quiz, progreso.modulos[MANUAL_ID])
+          const pr = await api.getProgreso(perfil.id)
+          setProgreso(pr)
+        }} />}
         {vista.nombre === 'vistas' && <VistasSistemaView roles={rolesIds} esAdmin={esAdmin} onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
         {vista.nombre === 'catalogo-videos' && <CatalogoVideos onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
         {vista.nombre === 'operativa-sis' && <OperativaSIS onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
