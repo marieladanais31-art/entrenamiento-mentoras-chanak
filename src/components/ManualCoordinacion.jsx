@@ -1,4 +1,5 @@
 import { MANUAL_COORDINACION as manual } from '../data/manualCoordinacion'
+import CoberturaEspecialistas from './CoberturaEspecialistas'
 
 export default function ManualCoordinacion() {
   return <section className="manual-coordinacion space-y-5" aria-label="Manual operativo de Coordinación">
@@ -9,6 +10,7 @@ export default function ManualCoordinacion() {
       <a href="/manuales/manual-coordinacion-sis-2026-10.pdf" target="_blank" rel="noreferrer" className="no-print mt-4 inline-block rounded-xl bg-gold px-5 py-3 text-base font-bold text-navy">Descargar manual completo de Coordinación</a>
       <a href="https://drive.google.com/file/d/1mrK1Ll1_CY93L88uGCFoqQiiY7BNDmAU/view" target="_blank" rel="noreferrer" className="no-print ml-3 mt-4 inline-block rounded-xl border border-cream/40 px-5 py-3 text-base font-bold text-cream">Abrir en Drive</a>
     </header>
+    <CoberturaEspecialistas />
     <section className="rounded-2xl bg-white p-5 shadow-sm">
       <h2 className="text-xl font-bold text-navy">Alcance del cargo</h2>
       <div className="mt-4 grid gap-4 sm:grid-cols-2">{manual.alcance.map((a) => <article key={a.titulo} className="rounded-xl border border-teal/25 p-4"><h3 className="text-lg font-bold text-teal">{a.titulo}</h3><p className="mt-2 text-base">{a.texto}</p></article>)}</div>

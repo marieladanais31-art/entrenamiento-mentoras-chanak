@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import CoberturaEspecialistas from './CoberturaEspecialistas'
 import { ALCANCE_PERFILES, PROCEDIMIENTOS_MENTORAS, MERITOS_COINS, EVALUACION_MENTORAS, FUENTES_MANUAL, MANUAL_VERSION, PERFILES_OPERATIVOS, UNIDADES_MENTORAS, evaluarManual, leerRegistroManual } from '../data/manualMentoras'
 
 export default function ManualMentoras({ funcionId, progreso, onGuardar, soloLectura = false }) {
@@ -46,6 +47,7 @@ export default function ManualMentoras({ funcionId, progreso, onGuardar, soloLec
       {soloLectura && <p className="mt-2 text-sm font-semibold">Vista de consulta. El avance de otra persona no se modifica desde aquí.</p>}
     </header>
 
+    <CoberturaEspecialistas />
     <section className="rounded-2xl bg-white p-5 shadow-sm" aria-label="Alcance de los tres perfiles">
       <h3 className="text-xl font-bold text-navy">Qué corresponde a cada perfil</h3>
       <p className="mt-3 text-base">Esta comparación explica el alcance de las funciones; no concede permisos. Cada persona trabaja con los estudiantes, materias y responsabilidades que tenga asignados.</p>
@@ -91,16 +93,16 @@ export default function ManualMentoras({ funcionId, progreso, onGuardar, soloLec
         <p className="mt-3 text-base leading-relaxed">{s.texto}</p>
         <ol className="mt-3 list-decimal space-y-2 pl-6 text-base">{s.pasos.map((p) => <li key={p}>{p}</li>)}</ol>
       </section>)}
-      <fieldset className="mt-6 rounded-xl border border-teal/30 bg-teal/5 p-4">
+      <fieldset className="no-print mt-6 rounded-xl border border-teal/30 bg-teal/5 p-4">
         <legend className="px-2 text-base font-bold text-navy">Practica una decisión</legend>
         <p className="text-base">{unidad.caso.pregunta}</p>
         <div className="mt-3 space-y-2">{unidad.caso.opciones.map((o, i) => <label key={o} className="flex cursor-pointer items-start gap-3 rounded-lg bg-white p-3 text-base"><input className="mt-1.5" type="radio" name={`caso-${unidad.id}`} checked={casoElegido === i} disabled={soloLectura || guardando} onChange={() => setEleccion({ ...eleccion, [unidad.id]: i })} />{o}</label>)}</div>
         {Number.isInteger(casoElegido) && <p role="status" className="mt-3 text-base"><b>{casoElegido === unidad.caso.correcta ? 'Decisión correcta. ' : 'Revisa tu decisión. '}</b>{unidad.caso.explicacion}</p>}
       </fieldset>
-      <section className="mt-5 rounded-xl bg-cream p-4 text-base"><h4 className="font-bold">Práctica para tu portafolio</h4><p className="mt-2">{unidad.evidencia}</p><p className="mt-2 text-sm">Usa datos ficticios. Presenta la práctica mediante el entregable del módulo correspondiente de tu ruta; confirmar esta lectura no valida una práctica supervisada.</p></section>
+      <section className="no-print mt-5 rounded-xl bg-cream p-4 text-base"><h4 className="font-bold">Práctica para tu portafolio</h4><p className="mt-2">{unidad.evidencia}</p><p className="mt-2 text-sm">Usa datos ficticios. Presenta la práctica mediante el entregable del módulo correspondiente de tu ruta; confirmar esta lectura no valida una práctica supervisada.</p></section>
       <p className="mt-4 text-sm">Conecta con los módulos: {unidad.mapa.join(' · ')}. Se conserva su avance y su evaluación.</p>
       {!soloLectura && <button disabled={guardando || casoElegido !== unidad.caso.correcta} onClick={() => guardar({ lecturas: [...new Set([...registro.lecturas, unidad.id])], casos: { ...registro.casos, [unidad.id]: casoElegido } })} className="no-print mt-5 rounded-xl bg-teal px-5 py-3 text-base font-bold text-white disabled:opacity-50">{guardando ? 'Guardando…' : 'Confirmar lectura y caso resuelto'}</button>}
-    </article> : <section className="rounded-2xl bg-white p-5 shadow-sm sm:p-7">
+    </article> : <section className="no-print rounded-2xl bg-white p-5 shadow-sm sm:p-7">
       <h3 className="text-xl font-bold text-navy">Evaluación del manual operativo</h3>
       <p className="mt-3 text-base">15 preguntas situacionales. Umbral: 85 %; necesitas al menos 13 respuestas correctas de 15 (86,7 %). Primero confirma las cinco lecturas y sus casos. Puedes volver a estudiar y repetir.</p>
       {registro.lecturas.length < 5 && <p className="mt-3 rounded-xl bg-gold/15 p-3 text-base">Te faltan {5 - registro.lecturas.length} lecturas con su caso resuelto antes de entregar la evaluación.</p>}

@@ -1,4 +1,7 @@
+import { COBERTURA_ESPECIALISTAS } from './modalidadesEspecialistas.js'
+
 export const MANUAL_COORDINACION = {
+  cobertura: COBERTURA_ESPECIALISTAS,
   version: '2026-10-23',
   titulo: 'Coordinación académica · Perfil y manual operativo del SIS',
   proposito: 'Que cada estudiante del ámbito asignado tenga un plan vigente, acompañamiento definido, evidencias revisadas y un expediente coherente. La coordinadora supervisa el trabajo académico; no es una administradora global por el nombre de su cargo.',
