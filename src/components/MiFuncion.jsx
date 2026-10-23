@@ -3,11 +3,13 @@ import { FUNCIONES } from '../data/funciones'
 import { VISTA_POR_ID } from '../data/vistasSistema'
 import { ROL_POR_ID, GRUPOS, grupoDe } from '../data/roles'
 import VistaSistema from './VistaSistema'
+import ManualMentoras from './ManualMentoras'
+import { MANUAL_PERFILES } from '../data/manualMentoras'
 
 // «Mi función»: la guía de trabajo de una especialidad. Qué resultado se espera, la rutina
 // (cuándo / qué / dónde), qué hacer en los casos frecuentes y a quién escalar, límites y evidencia,
 // y las vistas del sistema que esa función usa.
-export default function MiFuncion({ funcionId, roles = [], onCambiar, onVolver }) {
+export default function MiFuncion({ funcionId, roles = [], onCambiar, onVolver, manualProgreso, onGuardarManual, soloLectura }) {
   const f = FUNCIONES[funcionId]
   const [vistaAbierta, setVistaAbierta] = useState(f?.vistas?.[0] || null)
   if (!f) return null
@@ -15,7 +17,7 @@ export default function MiFuncion({ funcionId, roles = [], onCambiar, onVolver }
   const grupo = GRUPOS[grupoDe(funcionId)]
 
   return (
-    <div className="space-y-5">
+    <div className="mi-funcion space-y-5">
       <button onClick={onVolver} className="text-sm font-medium text-teal hover:underline">← Volver al panel</button>
 
       <header className="rounded-2xl bg-navy p-6 text-cream shadow-sm">
@@ -32,7 +34,9 @@ export default function MiFuncion({ funcionId, roles = [], onCambiar, onVolver }
         )}
       </header>
 
-      <section className="rounded-2xl bg-white p-5 shadow-sm">
+      {MANUAL_PERFILES.includes(funcionId) && <ManualMentoras key={funcionId} funcionId={funcionId} progreso={manualProgreso} onGuardar={onGuardarManual} soloLectura={soloLectura} />}
+
+      {!MANUAL_PERFILES.includes(funcionId) && <><section className="rounded-2xl bg-white p-5 shadow-sm">
         <h2 className="text-sm font-bold uppercase tracking-wide text-teal">Mi rutina</h2>
         <ol className="mt-3 space-y-2">
           {f.rutina.map((r) => (
@@ -73,9 +77,11 @@ export default function MiFuncion({ funcionId, roles = [], onCambiar, onVolver }
         </section>
       </div>
 
+      </>}
       {f.vistas.length > 0 && (
         <section className="space-y-3">
-          <h2 className="text-sm font-bold uppercase tracking-wide text-teal">Las pantallas que usas</h2>
+          <h2 className="text-sm font-bold uppercase tracking-wide text-teal">Prácticas con pantallas simuladas</h2>
+          <p className="text-sm text-navy/70">Datos ficticios. Para el procedimiento vigente consulta el manual; los sistemas reales pueden haber cambiado de aspecto.</p>
           <div className="flex flex-wrap gap-2">
             {f.vistas.map((id) => (
               <button key={id} onClick={() => setVistaAbierta(id)} className={`rounded-full px-3 py-1.5 text-xs font-bold ${vistaAbierta === id ? 'bg-navy text-cream' : 'bg-white text-navy shadow-sm'}`}>{VISTA_POR_ID[id]?.titulo}</button>

@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { numModulo } from '../data/curriculum'
 import { duracionActividad, fechaActividad } from '../lib/actividad'
 import { resumirPersona } from '../lib/resumenActividad'
+import { MANUAL_ID, MANUAL_VERSION, leerRegistroManual } from '../data/manualMentoras'
 
 const PASOS = { video: 'Vídeo', lectura: 'Lectura', practica: 'Práctica', quiz: 'Evaluación', evidencia: 'Evidencia', completado: 'Pantalla de cierre' }
 
@@ -37,6 +38,10 @@ export default function ActividadAdmin({ perfiles, progresos, rolesMapa, comprom
         <div><dt className="font-semibold text-navy">Último cambio de progreso</dt><dd>{fechaActividad(r.ultimoCambio)}</dd></div>
         <div><dt className="font-semibold text-navy">Módulos iniciados para revisar</dt><dd>{r.atencion}</dd></div>
       </dl>
+      {progresos[perfil.id]?.modulos?.[MANUAL_ID] && <div className="mt-4 rounded-xl border border-teal/25 bg-teal/5 p-4 text-sm">
+        <h5 className="font-bold">Manual operativo de mentoras · complemento de la ruta</h5>
+        <p className="mt-2">Lecturas y casos confirmados: {leerRegistroManual(progresos[perfil.id].modulos[MANUAL_ID]).lecturas.length}/5. Evaluación: {progresos[perfil.id].modulos[MANUAL_ID].quiz?.version === MANUAL_VERSION ? `${progresos[perfil.id].modulos[MANUAL_ID].quiz.aciertos}/15 · ${progresos[perfil.id].modulos[MANUAL_ID].quiz.aprobado ? 'Superada' : 'Pendiente de superar'}` : 'Sin intento de esta versión'}. No equivale a práctica validada ni a certificado oficial.</p>
+      </div>}
       <details className="mt-4 border-t border-navy/10 pt-3">
         <summary className="cursor-pointer font-semibold text-teal">Ver módulos y qué falta</summary>
         <div className="mt-3 space-y-3">{r.modulos.map((m) => <section key={m.id} className="rounded-xl border border-navy/15 p-4 text-sm">
