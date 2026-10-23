@@ -314,7 +314,7 @@ export default function Dashboard({
         <div className="grid gap-3 sm:grid-cols-2">
           {(esMentorOCoord || esEstrategico) && <Acceso icono="👪" titulo="Manuales para familias" sub="Off-Campus y Dual Diploma · PDF y editable" onClick={onVerGuias} tono="navy" />}
           {esMentorOCoord && <Acceso icono="🖥" titulo="Operativa SIS" sub="Matrícula, expediente y familias paso a paso" onClick={onVerOperativa} tono="navy" />}
-          {(esCoord || esAdmin) && <Acceso icono="🧾" titulo="Coordinación SIS" sub="Ocho pantallas y práctica de revisión" onClick={onVerCoordinacion} tono="navy" />}
+          {(esCoord || esAdmin) && <Acceso icono="🧾" titulo="Coordinación SIS" sub="Perfil, once procedimientos y práctica de revisión" onClick={onVerCoordinacion} tono="navy" />}
           {(esEstrategico || esCoord || esAdmin) && <Acceso icono="🌎" titulo="ESA y fondos estatales" sub="Matriz de programas por estado (uso interno)" onClick={onVerMatriz} tono="navy" />}
           {onVerVistas && <Acceso icono="🖥" titulo="Vistas del sistema" sub="SIS, Dual Diploma y Life Skills con datos ficticios" onClick={onVerVistas} tono="teal" />}
           {(esEstrategico || esAdmin) && (

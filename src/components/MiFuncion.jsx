@@ -9,7 +9,7 @@ import { MANUAL_PERFILES } from '../data/manualMentoras'
 // «Mi función»: la guía de trabajo de una especialidad. Qué resultado se espera, la rutina
 // (cuándo / qué / dónde), qué hacer en los casos frecuentes y a quién escalar, límites y evidencia,
 // y las vistas del sistema que esa función usa.
-export default function MiFuncion({ funcionId, roles = [], onCambiar, onVolver, manualProgreso, onGuardarManual, soloLectura }) {
+export default function MiFuncion({ funcionId, roles = [], onCambiar, onVolver, manualProgreso, onGuardarManual, soloLectura, onVerCoordinacion }) {
   const f = FUNCIONES[funcionId]
   const [vistaAbierta, setVistaAbierta] = useState(f?.vistas?.[0] || null)
   if (!f) return null
@@ -33,6 +33,8 @@ export default function MiFuncion({ funcionId, roles = [], onCambiar, onVolver, 
           </div>
         )}
       </header>
+
+      {['coordinator', 'partner_director'].includes(funcionId) && onVerCoordinacion && <section className="rounded-2xl border-2 border-teal/30 bg-white p-5 shadow-sm"><h2 className="text-xl font-bold text-navy">Manual de Coordinación y perfil SIS</h2><p className="mt-3 text-base">Alcance del centro o alianza, supervisión de las tres funciones docentes y once procedimientos: asignaciones, notas, evidencias, PEI, boletines, Dual Diploma, pagos y alertas.</p><button onClick={onVerCoordinacion} className="mt-4 rounded-xl bg-teal px-5 py-3 text-base font-bold text-white">Abrir el manual completo de Coordinación</button></section>}
 
       {MANUAL_PERFILES.includes(funcionId) && <ManualMentoras key={funcionId} funcionId={funcionId} progreso={manualProgreso} onGuardar={onGuardarManual} soloLectura={soloLectura} />}
 
