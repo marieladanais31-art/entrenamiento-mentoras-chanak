@@ -28,10 +28,10 @@ NAVY = colors.HexColor('#133854')
 TEAL = colors.HexColor('#187d7b')
 GOLD = colors.HexColor('#b49a55')
 styles = getSampleStyleSheet()
-styles.add(ParagraphStyle(name='Copy', fontName='Chanak', fontSize=10.5, leading=16, spaceAfter=9, textColor=NAVY, alignment=TA_LEFT))
-styles.add(ParagraphStyle(name='Step', parent=styles['Copy'], leftIndent=13, firstLineIndent=-13, spaceAfter=7))
-styles.add(ParagraphStyle(name='H', parent=styles['Copy'], fontName='ChanakBold', fontSize=21, leading=27, spaceBefore=9, spaceAfter=15))
-styles.add(ParagraphStyle(name='Sub', parent=styles['Copy'], fontName='ChanakBold', fontSize=13, leading=18, spaceBefore=13, spaceAfter=8, keepWithNext=True))
+styles.add(ParagraphStyle(name='Copy', fontName='Chanak', fontSize=10.5, leading=15, spaceAfter=7, textColor=NAVY, alignment=TA_LEFT))
+styles.add(ParagraphStyle(name='Step', parent=styles['Copy'], leftIndent=13, firstLineIndent=-13, spaceAfter=6))
+styles.add(ParagraphStyle(name='H', parent=styles['Copy'], fontName='ChanakBold', fontSize=21, leading=27, spaceBefore=9, spaceAfter=15, keepWithNext=True))
+styles.add(ParagraphStyle(name='Sub', parent=styles['Copy'], fontName='ChanakBold', fontSize=13, leading=18, spaceBefore=11, spaceAfter=7, keepWithNext=True))
 styles.add(ParagraphStyle(name='Label', parent=styles['Copy'], fontName='ChanakBold', fontSize=9, leading=13, textColor=TEAL, spaceAfter=8))
 styles.add(ParagraphStyle(name='SmallCopy', parent=styles['Copy'], fontSize=8.5, leading=13))
 styles.add(ParagraphStyle(name='ScopeCopy', parent=styles['Copy'], fontSize=10, leading=14, spaceAfter=4))
@@ -63,7 +63,7 @@ logo = ROOT / 'public/logo-chanak.png'
 if logo.exists():
     story.append(Image(str(logo), width=82, height=82, hAlign='LEFT'))
 story.extend([Spacer(1, 28), p('FORMACIÓN DEL EQUIPO CHANAK', 'Label'), p('Manual operativo\nde mentoras', 'H'), p('Mentora general · Profesora de Inglés · Life Skills', 'Sub'), Spacer(1, 18), p('Del diagnóstico al plan. De la evidencia a la nota. Del acompañamiento al siguiente paso.'), Spacer(1, 22)])
-block('Qué encontrarás', 'Cinco unidades de lectura, rutinas por especialidad, casos prácticos y una evaluación de 15 decisiones. El manual conecta los contenidos formativos con los nombres y flujos localizados en el código del ecosistema.')
+block('Qué encontrarás', 'Cinco unidades de lectura, rutinas por especialidad y procedimientos de consulta. Los casos prácticos, las actividades de formación y la evaluación se realizan en la app de training. El manual conecta los contenidos formativos con los nombres y flujos localizados en el código del ecosistema.')
 block('Alcance de esta edición', 'Revisión de repositorios al 23 de octubre de 2026. No certifica despliegue, migraciones, permisos de cuentas reales ni acreditación institucional. Portal, Flex y Life Skills tienen cambios en curso. Las diferencias detectadas se señalan para evitar enseñar automatizaciones o permisos no verificados.')
 story.append(PageBreak())
 story.append(p('Cómo utilizar este manual', 'H'))
@@ -71,6 +71,12 @@ for i, text in enumerate(['En training abre Inicio > Mi trabajo > tu función. A
     story.append(p(f'{i}. {text}', 'Step'))
 block('Glosario de trabajo', 'SIS: sistema de información del estudiante y expediente escolar. Core: núcleo académico. Scope & Sequence: alcance y secuencia curricular. PEI: Plan Educativo Individualizado. Mastery Learning: aprendizaje para el dominio. LMS: plataforma de cursos y actividades. Feedback: devolución que indica qué está logrado y cuál es el siguiente paso. Evidencia: archivo o registro verificable del trabajo. Crédito: reconocimiento académico sujeto a reglas y validación, no un contador de actividades.')
 block('Los sistemas y las cuentas', 'Training forma al equipo; SIS conserva el expediente; Portal orienta y aporta recursos; Dual Diploma LMS gestiona su aprendizaje y revisión en otra base. No compartir cuentas. Si un acceso falla, solicitar revisión de la asignación. No introducir datos directamente en Supabase para corregir una pantalla.')
+story.append(PageBreak())
+story.append(p(data['COBERTURA_ESPECIALISTAS']['titulo'], 'H'))
+story.append(p(data['COBERTURA_ESPECIALISTAS']['texto']))
+for programa, estado, detalle in data['COBERTURA_ESPECIALISTAS']['programas']:
+    block(programa + ' - ' + estado, detalle)
+story.append(p(data['COBERTURA_ESPECIALISTAS']['aclaracion']))
 story.append(PageBreak())
 story.append(p('Tres funciones diferentes', 'H'))
 story.append(p('Mentor general, Profesor de Inglés y Profesor / mentor de Life Skills no son un único puesto. Una persona puede ejercer varias funciones si las tiene asignadas; ser mentor general no le concede automáticamente las otras especialidades ni viceversa.'))
@@ -97,7 +103,7 @@ for perfil in data['PERFILES_OPERATIVOS']:
     block('Límites de la función', perfil['limites'])
     md.append('\nLímites: ' + perfil['limites'])
 for proc in data['PROCEDIMIENTOS_MENTORAS']:
-    story.append(PageBreak())
+    story.append(Spacer(1, 18))
     story.append(p('PROCEDIMIENTO PASO A PASO', 'Label'))
     story.append(p(proc['titulo'], 'H'))
     story.append(p('Dónde: ' + proc['donde']))
@@ -115,15 +121,11 @@ for proc in data['PROCEDIMIENTOS_MENTORAS']:
         tabla = Table(filas, colWidths=[410, 90], repeatRows=1)
         tabla.setStyle(TableStyle([('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#e4f0ef')), ('VALIGN', (0, 0), (-1, -1), 'TOP'), ('LINEBELOW', (0, 0), (-1, -1), 0.4, colors.HexColor('#d4dfe3')), ('LEFTPADDING', (0, 0), (-1, -1), 8), ('TOPPADDING', (0, 0), (-1, -1), 7)]))
         story.append(tabla)
-    story.append(p('Ejemplos por función', 'Sub'))
-    for texto in proc['ejemplos']:
-        story.append(p(texto))
-        md.append(texto)
     block('Comprueba al terminar', proc['verificar'])
     block('Permisos y límites', proc['limites'])
     md.extend([proc['verificar'], proc['limites']])
 for unidad in data['UNIDADES_MENTORAS']:
-    story.append(PageBreak())
+    story.append(Spacer(1, 18))
     story.append(p('UNIDAD ' + unidad['id'][1:] + ' / 5', 'Label'))
     story.append(p(unidad['titulo'], 'H'))
     story.append(p('Al terminar: ' + unidad['objetivo']))
@@ -134,15 +136,8 @@ for unidad in data['UNIDADES_MENTORAS']:
         for i, text in enumerate(s['pasos'], 1):
             story.append(p(f'{i}. {text}', 'Step'))
             md.append(f'{i}. {text}')
-    c = unidad['caso']
-    caso_story = [p('Practica una decisión', 'Sub'), p(c['pregunta'])]
-    md.extend(['\n### Caso práctico', c['pregunta']])
-    for i, text in enumerate(c['opciones']):
-        caso_story.append(p(f'{chr(65+i)}. {text}', 'Step'))
-        md.append(f'{chr(65+i)}. {text}')
-    caso_story.extend([p('Decisión razonada', 'Sub'), p(c['explicacion']), p('Práctica para tu portafolio', 'Sub'), p(unidad['evidencia']), p('Módulos relacionados: ' + ', '.join(unidad['mapa']), 'SmallCopy')])
-    story.append(KeepTogether(caso_story))
-    md.extend(['\nDecisión razonada: ' + c['explicacion'], '\nPráctica: ' + unidad['evidencia'], '\nMódulos: ' + ', '.join(unidad['mapa'])])
+    story.append(p('Módulos relacionados: ' + ', '.join(unidad['mapa']), 'SmallCopy'))
+    md.append('Módulos relacionados: ' + ', '.join(unidad['mapa']))
 story.append(PageBreak())
 story.append(p('Plantillas para actuar', 'H'))
 templates = [
@@ -154,17 +149,6 @@ templates = [
 for title, text in templates:
     block(title, text)
     md.extend(['\n### ' + title, text])
-story.append(PageBreak())
-story.append(p('Evaluación de aplicación', 'H'))
-story.append(p('Quince situaciones. Responde en training para guardar tu resultado. Necesitas 13/15 para superar el umbral del 85%. Esta copia es una guía de estudio; no contiene una firma o certificado oficial.'))
-md.append('\n## Evaluación final · 15 preguntas situacionales · mínimo 13/15')
-for n, q in enumerate(data['EVALUACION_MENTORAS'], 1):
-    group = [p(f'{n}. {q["pregunta"]}', 'Sub')]
-    for i, option in enumerate(q['opciones']):
-        group.append(p(f'{chr(65+i)}. {option}', 'Step'))
-    story.append(KeepTogether(group))
-    md.append('\n' + str(n) + '. ' + q['pregunta'])
-    md.extend([f'{chr(65+i)}. {v}' for i, v in enumerate(q['opciones'])])
 story.append(PageBreak())
 story.append(p('Fuentes y mantenimiento', 'H'))
 story.append(p('Esta edición sigue versiones concretas de código. Si cambia una pantalla, el manual se actualiza desde su fuente común antes de sustituir el PDF y grabar el recorrido. Las URL de repositorios privados requieren los permisos correspondientes.'))

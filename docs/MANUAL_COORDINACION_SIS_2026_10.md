@@ -12,7 +12,7 @@ Coordinadoras de centros físicos o virtuales, grupos Off-Campus y programas de 
 
 ## Qué incluye
 
-Alcance del cargo, supervisión del equipo, once pestañas del SIS con pasos y casos, motivación y coins, rutina, registros y lista de cierre. Los ejemplos son ficticios. La revisión de código no certifica permisos efectivos ni despliegue.
+Alcance del cargo, supervisión del equipo, once pestañas del SIS con pasos de operación, motivación y coins, rutina, registros y lista de cierre. Los casos prácticos se realizan únicamente en la app de training. La revisión de código no certifica permisos efectivos ni despliegue.
 
 
 ## Centro o hub físico
@@ -46,6 +46,21 @@ Si aparece Coordinador sin hub asignado, solicita la asignación a Administraci�
 El código muestra un aviso sin hub, pero algunas consultas solo añaden el filtro cuando existe hub_id. No se ha comprobado el aislamiento efectivo de las cuentas en producción; no se enseña ese aviso como garantía de bloqueo.
 
 Confirma aparte tu acceso y estudiantes en Dual Diploma. Tener el mismo correo no significa compartir permisos o sincronizar contraseñas.
+
+
+## Off-Campus - Opcionales
+
+Los especialistas de Inglés y Life Skills se incorporan cuando la familia contrata esos servicios. No se presuponen incluidos por tener matrícula Off-Campus.
+
+
+## Dual Diploma - Incluidos
+
+El programa incluye el acompañamiento de los especialistas de Inglés y Life Skills. Coordinación debe comprobar que cada estudiante tenga los responsables correspondientes asignados.
+
+
+## Servicios sueltos - Contratación independiente
+
+Inglés y Life Skills también pueden contratarse por separado como servicios sueltos, según lo que solicite la familia.
 
 
 ## Mentor general
@@ -124,10 +139,6 @@ Que ningún alumno quede sin responsable y que las especialidades no se confunda
 
 Cierre: Alumno con mentor general definido y especialistas identificados, sin perder al responsable anterior por error.
 
-Caso: Necesitas asignar Inglés y el alumno ya tiene mentora general. ¿Cambias el tutor principal por la profesora de Inglés?
-
-Criterio: No por rutina. Conserva el responsable general y tramita la asignación especializada de Inglés. Si procede una sustitución real, documenta el traspaso.
-
 
 ## 2. Notas
 
@@ -146,10 +157,6 @@ Consultar y gestionar el registro del alumno, asignatura y periodo correctos.
 6. Guarda y comprueba el resultado. Si hay una discrepancia entre archivo, entrada y promedio, resuélvela antes de trasladar el dato al boletín.
 
 Cierre: Notas verificables y pendientes identificados por alumno, materia y trimestre.
-
-Caso: El promedio es alto pero falta la evidencia de una evaluación. ¿Das por terminado el trimestre?
-
-Criterio: No. Comprueba qué nota carece de respaldo, solicita la evidencia o corrección y conserva el pendiente hasta resolverlo.
 
 
 ## 3. Revisar Notas
@@ -170,10 +177,6 @@ Resolver formalmente las propuestas de notas enviadas por familias o tutores.
 
 Cierre: Decisión registrada y responsable informado; no quedan devoluciones sin instrucciones.
 
-Caso: El tutor envió una nota en el trimestre equivocado. ¿Apruebas y ajustas después el boletín?
-
-Criterio: Solicita la corrección del periodo por el flujo de revisión, explica el error y vuelve a revisar el envío corregido antes del cierre.
-
 
 ## 4. Evidencias
 
@@ -192,10 +195,6 @@ Comprobar el trabajo del alumno y su vínculo con la nota.
 6. Si notas y evidencias tienen estados distintos, concilia ambos antes de declarar cerrado el expediente.
 
 Cierre: Archivo revisado, decisión trazable y nota vinculada sin duplicados.
-
-Caso: Apruebas una evidencia y aparece una nueva entrada de nota. ¿La añades también en Notas?
-
-Criterio: No. Comprueba el vínculo ya creado, la nota y el periodo; solo corrige una discrepancia real por el procedimiento autorizado.
 
 
 ## 5. PEI / Eval. M.L.
@@ -216,10 +215,6 @@ Mantener una planificación individual justificada y vigente.
 
 Cierre: Plan coherente con el diagnóstico y el programa, con estado y responsables claros.
 
-Caso: El formulario deja publicar, pero Dirección todavía no ha validado el cambio de vía. ¿Publicas?
-
-Criterio: No. La disponibilidad técnica no equivale a delegación. Conserva la propuesta, documenta el motivo y solicita la validación correspondiente.
-
 
 ## 6. Carga Eval. M.L.
 
@@ -236,10 +231,6 @@ Registrar evaluaciones realizadas sin convertir proyecciones en resultados.
 5. Guarda por el flujo disponible y comprueba el resumen y los errores. Solicita revisión cuando el resultado siga pendiente.
 
 Cierre: Evaluaciones reales registradas una sola vez en el periodo correcto.
-
-Caso: La proyección tiene cuatro evaluaciones y solo se realizaron dos. ¿Qué registras?
-
-Criterio: Las dos realizadas y respaldadas. Las otras conservan su condición de pendientes o se replantean en el PEI con autorización.
 
 
 ## 7. Seguimiento
@@ -260,10 +251,6 @@ Detectar atrasos y organizar apoyos con el equipo.
 
 Cierre: Cada pendiente tiene causa revisada, apoyo, responsable y próxima comprobación.
 
-Caso: La familia entregó hace una semana y sigue apareciendo atraso. ¿Qué haces?
-
-Criterio: Localiza el archivo, revisa el estado y quién debe evaluarlo. Si el retraso es de revisión, organiza esa revisión en lugar de pedir otra entrega a la familia.
-
 
 ## 8. Boletines
 
@@ -282,10 +269,6 @@ Preparar un reporte de periodo fiel al expediente y publicarlo con autorización
 6. Revisa el PDF antes de entregarlo y confirma acceso de la familia por el canal autorizado. Si encuentras un error publicado, tramita una corrección trazable; no sustituyas silenciosamente un documento oficial.
 
 Cierre: Boletín coherente, revisado y publicado o entregado con la autorización correspondiente.
-
-Caso: Un curso aparece escrito en el boletín, pero su nota no está aprobada en el expediente. ¿Lo publicas?
-
-Criterio: No por esa fila escrita. Resuelve la revisión y verifica el respaldo antes de publicar por el circuito institucional.
 
 
 ## 9. Dual Diploma (Descarga & Créditos)
@@ -306,10 +289,6 @@ Supervisar la información del Dual sin confundir SIS, LMS y documentos del cent
 
 Cierre: Créditos y pendientes conciliados por el circuito autorizado, sin duplicados ni promesas de convalidación.
 
-Caso: El LMS tiene un curso aprobado y el SIS todavía no muestra su crédito. ¿Lo añades manualmente?
-
-Criterio: Primero comprueba si corresponde crédito y solicita revisar exportación/importación e identificador. Una copia manual puede duplicar el resultado después.
-
 
 ## 10. Estatus Pagos
 
@@ -326,10 +305,6 @@ Consultar la formalización y derivar incidencias económicas sin invadir Admini
 5. Registra a quién se derivó y cuándo se comprobará la respuesta. No alteres notas, coins o resultados para presionar el pago.
 
 Cierre: Discrepancia remitida al responsable económico y seguimiento definido.
-
-Caso: La familia muestra un justificante, pero el estado sigue Pendiente. ¿Cambias la nota o bloqueas por tu cuenta?
-
-Criterio: No. Remite el justificante a Administración y aplica solo las instrucciones institucionales autorizadas, sin manipular el expediente académico.
 
 
 ## 11. Alertas
@@ -349,10 +324,6 @@ Registrar una incidencia académica útil y comprobar que se atiende.
 6. Verifica después la entrega, corrección o contacto. Si afecta a seguridad o protección, sigue el protocolo específico inmediatamente; no utilices una alerta académica como única respuesta.
 
 Cierre: Alerta concreta registrada, con responsable y comprobación posterior.
-
-Caso: Ya mandaste un aviso, pero no hay respuesta. ¿Consideras cerrado el caso?
-
-Criterio: No. Comprueba registro, canal y situación real; contacta por el procedimiento institucional y escala cuando corresponda.
 
 La coordinadora supervisa que cada mérito tenga un hecho verificable, alumno correcto y reconocimiento no duplicado. El mentor general y los especialistas motivan desde su ámbito; los coins no sustituyen la nota.
 

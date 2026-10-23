@@ -1,4 +1,5 @@
 // Complemento operativo: no sustituye módulos, vídeos ni certificación institucional.
+export { COBERTURA_ESPECIALISTAS } from './modalidadesEspecialistas.js'
 export const MANUAL_VERSION = '2026-10-23'
 export const MANUAL_ID = 'MENTOR_OPERATIVO_2026_10'
 export const MANUAL_UMBRAL = 85
