@@ -4,6 +4,79 @@ export const MANUAL_ID = 'MENTOR_OPERATIVO_2026_10'
 export const MANUAL_UMBRAL = 85
 export const MANUAL_PERFILES = ['mentor', 'english_teacher', 'lifeskills_facilitator']
 
+export const ALCANCE_PERFILES = [
+  { id: 'mentor', nombre: 'Mentor general', acompana: 'Estudiantes y familias asignados; seguimiento del conjunto del plan académico.', notas: 'Revisa avance y registros de las materias del PEI, detecta brechas y coordina con los especialistas. Registra o revisa según el permiso asignado.', coins: 'Reconoce metas, esfuerzo verificable, dominio y hábitos del estudiante asignado, siguiendo el catálogo y evitando duplicados.', alertas: 'Consulta Alertas y puede crear alertas académicas si su cuenta mentor/tutor está habilitada. Da seguimiento a la respuesta de la familia.', limite: 'No asume automáticamente la docencia especializada de Inglés o Life Skills ni las decisiones oficiales de Coordinación.' },
+  { id: 'english_teacher', nombre: 'Profesor de Inglés', acompana: 'Estudiantes y grupos asignados de Inglés, con objetivos y nivel de esa materia.', notas: 'Revisa y evalúa trabajos de Inglés; distingue práctica conversacional de curso acreditable. Comunica dificultades al mentor general.', coins: 'Reconoce logros observables de Inglés, como evaluación superada o pasaje en inglés, cuando dispone del permiso para otorgar coins.', alertas: 'Envía avisos de sus clases desde el seguimiento de Inglés. Si no aparece Crear alerta académica, solicita al mentor general o a Coordinación el registro formal.', limite: 'No modifica notas de otras materias, el plan global o las convalidaciones por ser profesor de Inglés.' },
+  { id: 'lifeskills_facilitator', nombre: 'Profesor / mentor de Life Skills', acompana: 'Estudiantes asignados de Life Skills según edad, etapa y programa.', notas: 'Revisa cápsulas, reflexiones y proyectos de Life Skills. Aplica la rúbrica correspondiente y comunica pendientes al mentor general.', coins: 'Reconoce servicio, aplicación del rasgo y habilidades demostradas. Comprueba movimientos automáticos antes de añadir otros y acompaña la restauración.', alertas: 'Comunica pendientes de proyectos, participación y apoyos de su área. Una alerta formal depende de los permisos de su cuenta; escala si no puede crearla.', limite: 'No cambia notas del core o de Inglés ni convierte coins, participación o restauraciones en una nota académica.' },
+]
+
+export const PROCEDIMIENTOS_MENTORAS = [
+  {
+    id: 'coins', titulo: 'Motivar y otorgar ChanakCoins',
+    donde: 'SIS → Mis Estudiantes → Otorgar Coins, junto al alumno asignado.',
+    alcance: { mentor: 'Reconoce metas y hábitos del plan general, coordinándose con los especialistas para no duplicar.', english_teacher: 'Reconoce logros de Inglés de sus estudiantes asignados; no premia exámenes de otras materias.', lifeskills_facilitator: 'Reconoce aplicación de habilidades, rasgos y servicio de su área; distingue coins automáticas de reconocimiento manual.' },
+    pasos: [
+      'Define una meta alcanzable antes de la actividad: qué hará el alumno, cómo lo comprobarás y qué reconocimiento corresponde. Adáptala a su edad y punto de partida; no uses rankings para avergonzar.',
+      'Comprueba la evidencia y los movimientos existentes. Si el examen o la cápsula ya generó coins, no vuelvas a premiar el mismo hecho. Usa un motivo específico, no solo “por portarte bien”.',
+      'En Mis Estudiantes localiza al alumno y pulsa Otorgar Coins. Revisa el nombre que aparece en el cuadro antes de continuar.',
+      'En Acción (mérito) elige la conducta que realmente ocurrió. El formulario propone una cantidad; compruébala con el catálogo vigente. No modifiques cantidades por iniciativa propia si no estás autorizado.',
+      'Para un examen, completa Examen (materia y PACE) con su referencia exacta. El formulario la exige para evitar duplicar coins de ese examen. Elige examen superado solo cuando haya sido aprobado.',
+      'Revisa Cantidad y Motivo. Ejemplo: “Actos de servicio: ayudó a preparar el material del grupo y dejó el espacio ordenado”. Pulsa Otorgar una sola vez y espera la confirmación.',
+      'Comprueba el movimiento y su estado en la billetera/historial del alumno. Un movimiento pendiente no equivale a saldo disponible. Si da error, verifica antes de reintentar; no pulses repetidamente.',
+      'Devuelve una motivación concreta: “Has terminado la lectura y explicado la idea con tus palabras; eso demuestra constancia. El siguiente paso será…”. Los coins acompañan el aprendizaje, no sustituyen el feedback ni la relación.'
+    ],
+    ejemplos: [
+      'Inglés: el estudiante dice el pasaje del mes en inglés; comprobar que no se registró ya ese mérito y elegir la acción correspondiente.',
+      'Life Skills: el alumno evidencia un acto de servicio; revisar qué hizo y su reflexión antes del reconocimiento.',
+      'Mentor general: el alumno supera una evaluación; verificar nota y referencia y comprobar si el sistema ya otorgó el mérito por examen.'
+    ],
+    verificar: 'El alumno correcto, el motivo verificable, la referencia del examen si aplica y un único movimiento con su estado. No prometer un premio económico o beca por acumular coins.',
+    limites: 'Si no aparece el botón o el servidor deniega la operación, solicitar revisión de la asignación. No usar una cuenta ajena ni editar Supabase. Aunque el formulario admite cantidades negativas, un ajuste requiere la política y autorización correspondientes; no se utiliza como castigo improvisado.'
+  },
+  {
+    id: 'notas', titulo: 'Revisar notas, evidencias y correcciones',
+    donde: 'SIS → Mis Estudiantes → alumno → asignatura y trimestre; pestaña Evidencias para los archivos. En Dual Diploma, Mis estudiantes y entregas del área docente.',
+    alcance: { mentor: 'Revisa la coherencia del conjunto del expediente del alumno asignado y coordina la solución de pendientes.', english_teacher: 'Revisa y califica exclusivamente los trabajos y evaluaciones de Inglés dentro de su asignación.', lifeskills_facilitator: 'Revisa proyectos y evidencias de Life Skills; no traslada automáticamente las rúbricas del LMS al SIS.' },
+    pasos: [
+      'Confirma alumno, programa, asignatura, año y trimestre. No mezcles una nota de otro periodo con el trimestre que vas a revisar.',
+      'Abre las entradas de evaluación y compara cada una con el archivo o actividad: identificación, fecha, nota, observación y legibilidad. Revisa duplicados y devoluciones anteriores.',
+      'Comprueba el promedio de las entradas de esa asignatura. La función revisada calcula su media aritmética: por ejemplo, 80 y 100 producen 90. No confundas este promedio con el indicador global por bloques.',
+      'En el SIS existe además un promedio por bloques 60/20/20 que renormaliza los pesos de los bloques con nota. Un resultado global puede ocultar que un bloque todavía no tiene nota: revisa cada bloque y sus pendientes. Esa cifra no concede créditos ni sustituye la revisión del expediente.',
+      'Distingue Borrador, En revisión, Aprobado, Corrección solicitada y Rechazado. Un número visible puede seguir pendiente de validación. Las notas enviadas o aprobadas están bloqueadas en el formulario ordinario.',
+      'Si falta o no se puede leer la evidencia, solicita una corrección específica. Ejemplo: “Falta la página 2 del examen de Science del Q1; vuelve a subir las dos páginas completas”. No apruebes para quitar el pendiente.',
+      'Si tienes autorización para registrar o revisar, guarda o envía por el flujo correspondiente y comprueba el estado resultante. Una evidencia aprobada puede generar su entrada vinculada: no vuelvas a escribir el mismo examen.',
+      'En Dual Diploma, filtra el alumno y el estado, abre la entrega, aplica el criterio de la unidad, registra feedback y decisión y pulsa Guardar evaluación y feedback. Actualiza y comprueba el resultado. Las convalidaciones y la conciliación de créditos con SIS corresponden a Coordinación.'
+    ],
+    ejemplos: ['Inglés: devolver una grabación que no permite oír la respuesta, indicando cómo repetirla.', 'Life Skills LMS: comprobar la rúbrica completa 40/30/30 del proyecto y el mínimo de aprobación de 80; cápsula completada no equivale a proyecto aprobado.', 'Mentor general: detectar que hay buenas notas en core pero falta la evidencia de Extensión Local; contactar a la familia sin declarar cerrado el trimestre.'],
+    verificar: 'La evidencia abre, la nota corresponde al periodo, no hay duplicados, el estado es correcto y el alumno conoce su siguiente paso.',
+    limites: 'Consultar notas no equivale a poder modificarlas o aprobarlas. La aprobación y publicación del PEI, los boletines oficiales y los créditos siguen la autorización institucional. No crear un crédito manual para ocultar una importación pendiente.'
+  },
+  {
+    id: 'alertas', titulo: 'Enviar alertas y avisos y darles seguimiento',
+    donde: 'SIS → Alertas → Crear alerta académica, si tu rol dispone de ese formulario. Para avisos de Inglés: Clases y Life Skills → Inglés · clases en vivo.',
+    alcance: { mentor: 'Usa la alerta formal para pendientes académicos del estudiante asignado y revisa si la familia puede resolverlos.', english_teacher: 'Usa el aviso de clase para sus destinatarios; solicita una alerta formal al mentor general o Coordinación si su rol no la ofrece.', lifeskills_facilitator: 'Comunica pendientes y apoyos de Life Skills por el canal institucional; solicita el registro formal si su cuenta no permite crearlo.' },
+    pasos: [
+      'Distingue el propósito: un recordatorio de material o clase es un aviso; una entrega vencida o una corrección que requiere seguimiento puede justificar una alerta académica. Una situación de protección se escala de inmediato por su protocolo, no se publica como recordatorio.',
+      'Si tienes el formulario Crear alerta académica, selecciona Estudiante… y verifica la identidad. En Comentario / motivo de la alerta escribe el hecho, periodo, acción solicitada y fecha de revisión.',
+      'Selecciona la prioridad Baja, Media o Alta de acuerdo con la situación real. No uses Alta para todos los recordatorios ni para presionar a una familia.',
+      'Selecciona el destinatario: Padre, Estudiante, Mentor, Coordinador o Admin, según corresponda. Escribe solo los datos necesarios y evita diagnósticos o información sensible en mensajes colectivos.',
+      'Pulsa Crear y después Actualizar. Confirma que se registró; la pantalla revisada puede registrar errores sin mostrarlos claramente al usuario. No des por enviada una alerta solo porque pulsaste el botón.',
+      'Para un aviso de la próxima clase de Inglés, marca los estudiantes destinatarios, escribe material, actividad y fecha en Avisar lo que toca la próxima semana y pulsa Enviar aviso. Revisa la confirmación y el historial de alertas. No promete por sí solo un correo o WhatsApp.',
+      'Deja una fecha para volver a revisar. Comprueba si hubo entrega, corrección o contacto. Si el problema persiste, remite a Coordinación con la evidencia y los apoyos ya ofrecidos; no cierres el caso solo por haber escrito el aviso.'
+    ],
+    ejemplos: ['Alerta: “Q1 · falta la página 2 de Science. Subid el examen completo antes del jueves; revisaré el viernes. Si necesitáis ayuda con el archivo, avisadme”.', 'Aviso de Inglés: “Próxima clase: lectura de Unit 4. Traer cuaderno y terminar actividad 2. El audio se entrega en la actividad asignada”.', 'Life Skills: “El proyecto tiene la reflexión, pero falta evidenciar la aplicación práctica. Necesito una foto o descripción del proceso; contactamos si necesitáis una alternativa”.'],
+    verificar: 'Alumno y destinatario correctos, mensaje registrado y próximo seguimiento acordado. Registrar una alerta no demuestra que el destinatario la haya leído ni que haya recibido un correo.',
+    limites: 'En el código revisado el formulario de alerta formal se habilita para mentor/tutor, coordinación y administración; no se habilita automáticamente para los roles english_teacher o life_skills_teacher. Si falta el alumno en el selector, escala la asignación; no selecciones otro expediente.'
+  }
+]
+
+export const MERITOS_COINS = [
+  ['Examen superado con 100 %', 100], ['Examen superado con menos de 100 %', 50],
+  ['Pasaje del mes en la primera semana', 100], ['Pasaje del mes después de la primera semana', 50],
+  ['Pasaje del mes en inglés', 20], ['Pasaje del mes de abajo hacia arriba', 20],
+  ['Mostrar el rasgo del carácter de la semana', 100], ['Actos de servicio', 20],
+]
+
 export const PERFILES_OPERATIVOS = [
   { id: 'mentor', titulo: 'Mentora general', resultado: 'Familia acompañada, plan individual seguido y expediente verificable.', pasos: [
     'SIS → Mis Estudiantes: confirma alumno, programa, grado estadounidense, año y trimestre. Si falta una asignación, solicita su corrección; no busques otro expediente por un nombre parecido.',
