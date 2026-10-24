@@ -173,6 +173,12 @@ export async function listarPerfiles() {
   return data || []
 }
 
+export async function listarUltimosAccesos() {
+  const { data, error } = await supabase.rpc('admin_ultimos_accesos_formacion')
+  if (error) throw new Error(error.message)
+  return Object.fromEntries((data || []).map(fila => [fila.perfil_id, fila]))
+}
+
 export async function actualizarPerfil(id, cambios) {
   const { error } = await supabase.from('perfiles').update(cambios).eq('id', id)
   if (error) throw new Error(error.message)
