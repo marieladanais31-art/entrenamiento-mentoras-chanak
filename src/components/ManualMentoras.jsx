@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import CoberturaEspecialistas from './CoberturaEspecialistas'
+import IncorporacionMentores from './IncorporacionMentores'
 import { ALCANCE_PERFILES, PROCEDIMIENTOS_MENTORAS, MERITOS_COINS, EVALUACION_MENTORAS, FUENTES_MANUAL, MANUAL_VERSION, PERFILES_OPERATIVOS, UNIDADES_MENTORAS, evaluarManual, leerRegistroManual } from '../data/manualMentoras'
 
 export default function ManualMentoras({ funcionId, progreso, onGuardar, soloLectura = false }) {
@@ -33,13 +34,14 @@ export default function ManualMentoras({ funcionId, progreso, onGuardar, soloLec
   }
 
   return <section className="manual-mentoras space-y-5" aria-label="Manual operativo de mentoras">
+    <IncorporacionMentores />
     <header className="rounded-2xl border border-teal/30 bg-teal/5 p-5">
       <p className="text-sm font-bold text-teal">Actualización operativa · {MANUAL_VERSION}</p>
       <h2 className="mt-1 text-2xl font-bold text-navy">Tres perfiles: Mentor general, Inglés y Life Skills</h2>
       <p className="mt-3 text-base font-bold">Son funciones distintas. Una persona puede tener varias asignadas, pero ninguna incluye automáticamente las otras dos.</p>
       <p className="mt-3 text-base">Cinco unidades complementarias a tu ruta. Conservan tus módulos y vídeos anteriores. Revisadas contra el código del SIS y Dual Diploma; la disponibilidad de cada función depende del acceso y la configuración vigente.</p>
       <div className="no-print mt-4 flex flex-wrap gap-3">
-        <a href="/manuales/manual-mentoras-2026-10.pdf" target="_blank" rel="noreferrer" className="rounded-xl bg-navy px-4 py-3 text-sm font-bold text-white">Descargar manual PDF</a>
+        <a href="/manuales/manual-mentoras-2026-10.pdf" target="_blank" rel="noreferrer" className="rounded-xl bg-navy px-4 py-3 text-sm font-bold text-white">Manual de procedimientos y especialidades</a>
         <a href="https://drive.google.com/file/d/1idL7FWK8mEK8SYGqT-btOvxbaV_suIeg/view" target="_blank" rel="noreferrer" className="rounded-xl border border-teal/30 bg-white px-4 py-3 text-sm font-bold text-teal">Ver documento en Drive</a>
         <button onClick={() => window.print()} className="rounded-xl border border-teal/30 bg-white px-4 py-3 text-sm font-bold text-teal">Imprimir esta unidad</button>
       </div>
