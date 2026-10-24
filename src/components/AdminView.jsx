@@ -7,6 +7,7 @@ import { resumenMentora, formatearFecha, iniciales, aplicarEquivalencias } from 
 import GestionUsuarias from './GestionUsuarias'
 import GestionCodigos from './GestionCodigos'
 import ActividadAdmin from './ActividadAdmin'
+import AccesosAdmin from './AccesosAdmin'
 import { useIdioma } from '../i18n/idioma'
 import { traducirBloques } from '../data/curriculum.en'
 import { ROL_POR_ID, rolesDesdeTipoAcceso } from '../data/roles'
@@ -20,13 +21,17 @@ export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) 
   const [compromisosMapa, setCompromisosMapa] = useState(undefined)
   const [actividad, setActividad] = useState([])
   const [errorActividad, setErrorActividad] = useState('')
+  const [accesosMapa, setAccesosMapa] = useState({})
+  const [errorAccesos, setErrorAccesos] = useState('')
   const [cargando, setCargando] = useState(true)
   const [error, setError] = useState('')
 
   const cargar = useCallback(async () => {
     setError('')
     try {
-      const [ps, prs, rm, cm, act] = await Promise.all([api.listarPerfiles(), api.getProgresoTodas(), api.listarRoles().catch(() => null), api.listarCompromisos().catch(() => null), api.listarActividadFormacion().then((filas) => ({ filas })).catch((e) => ({ filas: [], error: e.message }))])
+      const [ps, prs, rm, cm, act, acc] = await Promise.all([api.listarPerfiles(), api.getProgresoTodas(), api.listarRoles().catch(() => null), api.listarCompromisos().catch(() => null), api.listarActividadFormacion().then((filas) => ({ filas })).catch((e) => ({ filas: [], error: e.message })), api.listarUltimosAccesos().then(mapa => ({ mapa })).catch(e => ({ mapa: {}, error: e.message }))])
+      setAccesosMapa(acc.mapa)
+      setErrorAccesos(acc.error || '')
       setActividad(act.filas)
       setErrorActividad(act.error || '')
       setPerfiles(ps)
@@ -57,12 +62,14 @@ export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) 
         <p className="mt-2 inline-block rounded-full bg-white/10 px-3 py-1 text-[11px] text-cream/80">
           {t('admin.version', { version: VERSION_CURRICULO, fecha: formatearFecha(FECHA_ACTUALIZACION) })}
         </p>
+        <button onClick={() => setPestana('accesos')} className="mt-4 block min-h-12 rounded-xl bg-gold px-5 py-3 text-base font-bold text-navy">Ver últimos accesos de usuarios →</button>
       </div>
 
       {/* Pestañas */}
       <div className="flex gap-1 overflow-x-auto rounded-xl bg-white p-1 shadow-sm">
         {[
           ['usuarias', `${t('admin.tabUsuarias')}${pendientes ? ` (${pendientes})` : ''}`],
+          ['accesos', 'Últimos accesos'],
           ['codigos', t('admin.tabCodigos')],
           ['progreso', t('admin.tabProgreso')],
           ['actividad', 'Actividad y pendientes'],
@@ -94,10 +101,11 @@ export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) 
       ) : (
         <>
           {pestana === 'usuarias' && (
-            <GestionUsuarias perfiles={perfiles} miId={miPerfil.id} onRecargar={cargar} rolesMapa={rolesMapa} compromisosMapa={compromisosMapa} />
+            <GestionUsuarias perfiles={perfiles} miId={miPerfil.id} onRecargar={cargar} rolesMapa={rolesMapa} compromisosMapa={compromisosMapa} accesosMapa={accesosMapa} errorAccesos={errorAccesos} />
           )}
 
           {pestana === 'actividad' && <ActividadAdmin perfiles={perfiles} progresos={progresos} rolesMapa={rolesMapa} compromisosMapa={compromisosMapa} actividad={actividad} errorActividad={errorActividad} onActualizar={cargar} onVerUsuaria={onVerUsuaria} />}
+          {pestana === 'accesos' && <AccesosAdmin perfiles={perfiles} accesosMapa={accesosMapa} errorAccesos={errorAccesos} actividad={actividad} errorActividad={errorActividad} progresos={progresos} rolesMapa={rolesMapa} compromisosMapa={compromisosMapa} onActualizar={cargar} onVerUsuaria={onVerUsuaria} />}
 
           {pestana === 'codigos' && (
             <GestionCodigos miId={miPerfil.id} />
