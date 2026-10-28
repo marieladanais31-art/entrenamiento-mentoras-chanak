@@ -1,17 +1,18 @@
 -- ============================================================
 -- CHANAK ACADEMY · ALTA Y ACTIVACIÓN DIRECTA EN SUPABASE
--- Usuarias: justin@ywamct.com y angela@ywamct.com (YWAM)
+-- Plantilla de alta de usuarias colaboradoras en Supabase
 --
 -- Ejecutar en:
 -- Supabase Dashboard -> SQL Editor -> New Query -> Pegar y dar clic en "Run"
 --
+-- NOTA DE PRIVACIDAD: Sustituir los marcadores <CORREO_USUARIA_...> antes de ejecutar.
 -- Contraseña asignada: Chanak2026*
 -- ============================================================
 
 DO $$
 DECLARE
   v_pass text := crypt('Chanak2026*', gen_salt('bf'));
-  v_users text[] := ARRAY['justin@ywamct.com', 'angela@ywamct.com'];
+  v_users text[] := ARRAY['<CORREO_USUARIA_A>', '<CORREO_USUARIA_B>'];
   v_email text;
   v_id uuid;
   v_nombre text;
@@ -20,21 +21,17 @@ BEGIN
   DELETE FROM public.perfiles 
   WHERE id IN (
     SELECT id FROM auth.users 
-    WHERE lower(email) IN ('jastin@wamct.com', 'angela@wamct.com', 'jastin@ywamct.com')
+    WHERE lower(email) IN ('<CORREO_VARIANTE_1>', '<CORREO_VARIANTE_2>')
   );
   
   DELETE FROM auth.users 
-  WHERE lower(email) IN ('jastin@wamct.com', 'angela@wamct.com', 'jastin@ywamct.com');
+  WHERE lower(email) IN ('<CORREO_VARIANTE_1>', '<CORREO_VARIANTE_2>');
 
-  -- Registrar y activar Justin y Angela
+  -- Registrar y activar usuarias
   FOREACH v_email IN ARRAY v_users
   LOOP
     SELECT id INTO v_id FROM auth.users WHERE lower(email) = lower(v_email);
-    v_nombre := CASE 
-      WHEN lower(v_email) = 'justin@ywamct.com' THEN 'Justin'
-      WHEN lower(v_email) = 'angela@ywamct.com' THEN 'Angela'
-      ELSE initcap(split_part(v_email, '@', 1))
-    END;
+    v_nombre := initcap(split_part(v_email, '@', 1));
     
     IF v_id IS NULL THEN
       v_id := gen_random_uuid();

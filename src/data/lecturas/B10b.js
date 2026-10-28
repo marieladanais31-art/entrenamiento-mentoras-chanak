@@ -194,7 +194,7 @@ export const LECTURAS_B10B = {
       },
     ],
     desglose: {
-      video: 0.25,
+      video: 0,
       lectura: 0.5,
       documentos: [
         { carpeta: '03_INSTITUCIONES', documento: 'Chanak_Curriculos_y_Vias_Academicas.pdf', que: 'Estructuras de costes, formatos curriculares y políticas de adopción.', horas: 0.25 },
@@ -203,6 +203,91 @@ export const LECTURAS_B10B = {
       practica: 0.75,
       evidencia: 0.25,
       kc: 0.25,
+    },
+  },
+
+  'T10.7': {
+    lecciones: [
+      {
+        titulo: 'Fundamentos de la comunicación institucional y redes sociales',
+        guion: [
+          'La estrategia de marketing y redes sociales de Chanak se fundamenta en el testimonio, la veracidad y el servicio a las familias, no en la persuasión comercial agresiva.',
+          'Toda publicación institucional debe reflejar de forma fidedigna la identidad de Chanak International Academy: escuela privada registrada en Florida, con cosmovisión bíblica y metodología de aprendizaje orientado al dominio.',
+          'Transparencia regulatoria y legal: Jamás se debe utilizar lenguaje ambiguo que sugiera homologaciones automáticas universales o validez estatal garantizada en cualquier país sin trámites de convalidación.',
+          'El estatus de acreditación debe expresarse siempre de manera escrupulosa: Candidate for Accreditation ante la Middle States Association (MSA-CESS). No se permite usar «escuela acreditada» hasta que el comité correspondiente emita su resolución formal.',
+        ],
+      },
+      {
+        titulo: 'El embudo de admisiones ético y el acompañamiento familiar',
+        guion: [
+          'El objetivo de los canales digitales (Instagram, YouTube, Facebook, Web) es educar, inspirar y abrir puertas a familias interesadas en la educación cristiana en el hogar o programas internacionales.',
+          'El embudo de admisiones sigue un itinerario pastoral y profesional: primer contacto informativo → entrega de dossier oficial → sesión de orientación y diagnóstico → solicitud formal.',
+          'Se respeta escrupulosamente la decisión familiar: no se aplican técnicas de venta de alta presión, descuentos con cuenta atrás ni llamadas insistentes no deseadas.',
+          'En captación para programas en EE. UU., se incluye invariablemente el recordatorio de que los fondos estatales están sujetos a aprobación de cada estado y se prohíbe prometer que «la beca te lo paga todo».',
+        ],
+      },
+      {
+        titulo: 'Protección de datos, imagen de menores y testimonios',
+        guion: [
+          'Protección absoluta de la intimidad infantil: Está terminantemente prohibido publicar fotografías, vídeos o audios de menores de edad donde sean reconocibles, sin la previa autorización expresa, informada y por escrito de sus progenitores o tutores legales (Media Release Form).',
+          'En redes sociales institucionales, se priorizan imágenes de materiales, proyectos de trabajo, cuadernos, infografías pedagógicas o tomas de planos generales no identificables.',
+          'Los testimonios de familias o mentores deben recoger experiencias reales y autenticadas por el equipo de coordinación, evitando exageraciones sobre resultados académicos inmediatos.',
+        ],
+      },
+    ],
+    desglose: {
+      video: 0,
+      lectura: 0.5,
+      documentos: [
+        { carpeta: '05_ESTRATEGIA', documento: 'Estrategia_Marketing_Guia.pdf', que: 'Guía de estrategia de marketing institucional, redes sociales y captación familiar ética.', horas: 0.4 },
+      ],
+      practica: 0.6,
+      evidencia: 0.15,
+      kc: 0.1,
+    },
+  },
+
+  'T10.8': {
+    lecciones: [
+      {
+        titulo: 'Chanak Foundation y el programa Google Ad Grants',
+        guion: [
+          'Chanak Foundation (chanakfoundation.org) es el brazo filantrópico y sin fines de lucro de la organización, constituido como corporación 501(c)(3) en Estados Unidos.',
+          'Misión de la Fundación: Proporcionar becas de estudio, apoyo pedagógico y materiales a estudiantes y familias en situación de vulnerabilidad o necesidad económica, así como impulsar proyectos educativos comunitarios de Life Skills & Leadership.',
+          'Google for Nonprofits y Google Ad Grants: Es una subvención mensual no monetaria que otorga Google a organizaciones 501(c)(3) aprobadas, consistente en hasta $10,000 USD al mes en crédito publicitario en la red de búsqueda de Google (Google Ads).',
+          'Destino de los fondos: Los anuncios financiados por Ad Grants deben dirigir exclusivamente al dominio oficial de la fundación (chanakfoundation.org) y tener propósitos estrictamente benéficos, educativos o de captación de voluntariado y donaciones.',
+        ],
+      },
+      {
+        titulo: 'Políticas de cumplimiento técnico y mantenimiento de la cuenta',
+        guion: [
+          'Google impone políticas de cumplimiento rigurosas para mantener activa la subvención de Ad Grants; un incumplimiento prolongado causa la suspensión inmediata de la cuenta.',
+          'Métrica clave de CTR: La cuenta debe mantener un porcentaje medio de clics (CTR - Click-Through Rate) de al menos el 5 % mensual. Si el CTR cae por debajo del 5 % durante dos meses consecutivos, la cuenta entra en suspensión temporal.',
+          'Estructura de cuenta obligatoria: Cada campaña debe contener al menos dos grupos de anuncios bien estructurados, con un mínimo de dos anuncios de texto relevantes y cuatro extensiones de anuncio activas.',
+          'Reglas de palabras clave: Están prohibidas las palabras clave genéricas de una sola palabra (ej. «escuela», «becas», «libros»), palabras con nivel de calidad (Quality Score) inferior a 3, y términos que no guarden relación directa con la misión benéfica.',
+          'Geolocalización: Los anuncios deben orientarse geográficamente únicamente a los territorios donde la fundación presta servicio o donde existen audiencias donantes potenciales.',
+        ],
+      },
+      {
+        titulo: 'Estrategia de impacto social y captación solidaria',
+        guion: [
+          'La gestión de Google Ad Grants en Chanak Foundation se organiza en torno a tres ejes fundamentales:',
+          '1. Difusión de Becas de Solidaridad: Atraer a familias que necesitan auxilio escolar y pueden beneficiarse del fondo de ayudas educativas.',
+          '2. Alianzas y Donantes: Conectar con entidades, fundaciones y personas que deseen sembrar recursos para la educación cristiana y proyectos juveniles de liderazgo.',
+          '3. Voluntariado y Mentores Sociales: Convocatoria para profesionales que deseen sumarse como facilitadores voluntarios en iniciativas comunitarias.',
+          'Todo lead captado mediante la web de la fundación se gestiona con respeto absoluto a la privacidad y trazabilidad por parte de la Dirección de Chanak Foundation.',
+        ],
+      },
+    ],
+    desglose: {
+      video: 0,
+      lectura: 0.5,
+      documentos: [
+        { carpeta: '05_ESTRATEGIA', documento: 'Google_Ad_Grants_Guia.pdf', que: 'Guía operativa de gestión de Google Ad Grants para Chanak Foundation y captación de fondos.', horas: 0.4 },
+      ],
+      practica: 0.6,
+      evidencia: 0.15,
+      kc: 0.1,
     },
   },
 }

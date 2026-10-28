@@ -6,8 +6,8 @@ export const seccionesSIS = [
   },
   {
     "id": 1,
-    "title": "Accesos demo recuperados",
-    "text": "Padre: demopadre@asociacioneducafe.org\nEstudiante: demoestudiante@asociacioneducafe.org\nContraseña de ambas cuentas demo: la contraseña se entrega por coordinación (no se publica en la app)\nSon identificadores históricos recuperados del repositorio de formación. Su dominio no cambia al cambiar la marca. Usuarios confirmados activos en el panel administrativo: padre con un hijo vinculado y estudiante con rol student. La cuenta demopadre@chanakacademy.org figura como «no usar», sin hijos vinculados; no utilizarla. Pendiente comprobar inicio de sesión de cada demo y aislamiento de datos en vivo. No son cuentas administrativas. Practicar con datos ficticios y no guardar cambios sobre expedientes reales."
+    "title": "Accesos demo del SIS",
+    "text": "Mentor: demomentor@asociacioneducafe.org\nPadre: demopadre@asociacioneducafe.org\nEstudiante: demoestudiante@asociacioneducafe.org\nLa contraseña se entrega de forma privada por Coordinación. Usa una clave larga y exclusiva.\nUsuarios activos para práctica: mentor con vista de seguimiento, padre con hijo vinculado y estudiante con rol student. La cuenta demopadre@chanakacademy.org figura como «no usar», sin hijos vinculados; no utilizarla. Ninguna es cuenta administrativa central. Practicar siempre con datos ficticios y no modificar expedientes de alumnos reales."
   },
   {
     "id": 2,

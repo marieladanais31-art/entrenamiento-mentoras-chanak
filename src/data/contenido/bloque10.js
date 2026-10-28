@@ -181,5 +181,84 @@ export const BLOQUE_10 = {
     evidencia:
       'Realiza una simulación en el Evaluador de Costos para un grupo de 10 estudiantes de Secundaria (Middle School). Copia el resumen comparativo generado y redacta un informe de viabilidad de 10 líneas con tu recomendación económica.',
   },
+
+  'T10.7': {
+    resumen:
+      'Marketing institucional, redes sociales y captación familiar ética: principios de comunicación transparente, tono bíblico y familiar, embudo de admisiones respetuoso y protección de imagen y datos de menores.',
+    objetivos: [
+      'Aplicar directrices de comunicación veraz sin incurrir en sobrepromesas académicas.',
+      'Gestionar canales de redes sociales alineados con la identidad y valores de Chanak.',
+      'Implementar protocolos de consentimiento y protección de imagen de menores en campañas.',
+    ],
+    lecciones: [
+      {
+        titulo: 'Comunicación veraz y posicionamiento institucional',
+        guion: [
+          'La comunicación de Chanak en redes y medios debe reflejar veracidad total: nunca se promete homologación automática sin auditoría ni acreditación definitiva antes de resolución.',
+          'El tono es inspirador, cercano, educativo y fundamentado en cosmovisión bíblica, evitando tácticas agresivas o alarmismo sobre el sistema escolar.',
+          'Diferenciación de programas: Off-Campus, Dual Diploma y Life Skills se comunican con sus propósitos y alcances específicos.',
+        ],
+      },
+      {
+        titulo: 'Embudo ético y protección de menores',
+        guion: [
+          'El proceso de captación busca orientar honestamente a las familias para discernir si el modelo Chanak se ajusta a su vocación educativa.',
+          'Protección de datos e imagen de menores: está prohibido publicar fotos reconocibles, nombres completos o datos de estudiantes sin autorización expresa y firmada por sus tutores.',
+          'Testimonios y casos de éxito se presentan con iniciales o identificadores ficticios autorizados para resguardar la privacidad familiar.',
+        ],
+      },
+    ],
+    practica: {
+      situacion: 'Se va a lanzar una campaña en redes sociales para familias hispanas en EE. UU. Un colaborador propone un anuncio que dice: «Obtén el diploma escolar de EE. UU. 100 % gratis con fondos estatales en 3 meses».',
+      preguntas: ['¿Qué errores de compliance y comunicación contiene el anuncio?', '¿Cómo redactarías una propuesta ética y autorizada?', '¿Qué elementos de descargo de responsabilidad debes incluir?'],
+      criterio: 'Detecta promesa de gratuidad absoluta, plazo irreal y falta de rigor; propone un texto centrado en excelencia formativa y la cláusula obligatoria de política estatal.',
+    },
+    quiz: [
+      { p: '¿Qué principio rige la captación de familias en Chanak?', opciones: ['Venta agresiva a cualquier coste', 'Orientación honesta, ética y alineada con los valores institucionales', 'Prometer aprobados garantizados', 'Ocultar los precios reales'], correcta: 1, explica: 'La captación se basa en la honestidad, transparencia y acompañamiento familiar.' },
+      { p: '¿Qué se requiere antes de publicar la imagen o testimonio de un estudiante menor?', opciones: ['Consentimiento expreso por escrito de los tutores legales', 'Basta con el permiso verbal del estudiante', 'No hace falta si la foto es bonita', 'Ningún requisito'], correcta: 0, explica: 'La protección de menores exige consentimiento formal por escrito de los tutores legales.' },
+      { p: '¿Cómo debe presentarse el estado de acreditación en publicaciones de marketing?', opciones: ['Como escuela plenamente acreditada', 'Como Candidata a Acreditación ante MSA-CESS, con estatus exacto y honesto', 'Omitiendo cualquier mención regulatoria', 'Acreditada por el gobierno federal'], correcta: 1, explica: 'Se comunica con rigor: Candidate for Accreditation de MSA-CESS.' },
+    ],
+    evidencia: 'Diseña el guion para una publicación institucional de Instagram (copy de 8–10 líneas + 3 hashtags educativos) orientada a familias que buscan educación en casa con valores bíblicos.',
+  },
+
+  'T10.8': {
+    resumen:
+      'Google Ad Grants para Chanak Foundation: gestión ética de la subvención publicitaria de $10,000/mes de Google, políticas de cumplimiento estricto, captación de fondos y becas educativas solidarias.',
+    objetivos: [
+      'Comprender la estructura legal de Chanak Foundation (501(c)(3)) y su elegibilidad para Google Ad Grants.',
+      'Cumplir con los requisitos de la política de Google Ad Grants (mantenimiento de CTR > 5 %, calidad de palabras clave y geolocalización).',
+      'Canalizar tráfico cualificado para captación de donaciones, voluntariado y becas familiares.',
+    ],
+    lecciones: [
+      {
+        titulo: 'Estructura de Chanak Foundation y Google Ad Grants',
+        guion: [
+          'Chanak Foundation (chanakfoundation.org) es una organización sin fines de lucro 501(c)(3) constituida en EE. UU. para promover la educación cristiana accesible y becas para familias en vulnerabilidad.',
+          'Google Ad Grants concede una subvención en especie de hasta $10,000 USD mensuales en publicidad de búsqueda en Google (Google Ads).',
+          'Los anuncios deben dirigir exclusivamente al dominio benéfico aprobado de la fundación y cumplir una misión educativa y social sin ánimo de lucro.',
+        ],
+      },
+      {
+        titulo: 'Políticas de cumplimiento técnico y campañas de impacto',
+        guion: [
+          'Requisitos estrictos de Google Ad Grants: mantener un CTR medio mensual superior al 5 %, estructura de cuenta con al menos dos grupos de anuncios por campaña, y seguimiento de conversiones activo.',
+          'Prohibición de palabras clave genéricas de una sola palabra, de baja calidad o que compitan comercialmente de forma engañosa.',
+          'Campañas principales: difusión del fondo de becas, voluntariado en proyectos comunitarios Life Skills y concienciación sobre educación accesible con valores.',
+        ],
+      },
+    ],
+    practica: {
+      situacion: 'La cuenta de Google Ad Grants de Chanak Foundation registra un CTR del 4.2 % este mes, lo que pone en riesgo de suspensión la subvención de $10,000/mes.',
+      preguntas: ['¿Cuál es el umbral mínimo de CTR exigido por Google Ad Grants?', '¿Qué medidas correctivas inmediatas deben aplicarse en palabras clave y textos de anuncios?', '¿Qué tipo de palabras clave deben pausarse?'],
+      criterio: 'Identifica el requisito de CTR > 5 %; propone pausar palabras genéricas poco relevantes, mejorar extensiones de anuncio y enfocar en términos específicos de misión solidaria.',
+    },
+    quiz: [
+      { p: '¿Cuál es la cuantía mensual de publicidad en especie que otorga el programa Google Ad Grants?', opciones: ['$500 USD', '$10,000 USD mensuales', '$1,000,000 USD', 'Presupuesto ilimitado'], correcta: 1, explica: 'Google Ad Grants otorga hasta $10,000 USD al mes para organizaciones benéficas elegibles.' },
+      { p: '¿Cuál es el CTR (Click-Through Rate) mínimo mensual exigido para mantener activa una cuenta de Google Ad Grants?', opciones: ['1 %', '5 %', '15 %', '0.5 %'], correcta: 1, explica: 'Google exige mantener un CTR medio de al menos el 5 % para no suspender la subvención.' },
+      { p: '¿A qué dominio deben apuntar los anuncios de Google Ad Grants de la fundación?', opciones: ['Cualquier tienda online externa', 'Al dominio aprobado de la entidad sin fines de lucro (chanakfoundation.org)', 'A redes sociales personales', 'A páginas en blanco'], correcta: 1, explica: 'Deben dirigir al dominio benéfico aprobado por Google para la organización.' },
+    ],
+    evidencia: 'Redacta un esquema de campaña publicitaria para Google Ad Grants (1 objetivo benéfico, 2 grupos de anuncios, 5 palabras clave de alta intención y 2 titulares de anuncio con descripciones).',
+  },
 }
+
 

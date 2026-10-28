@@ -325,6 +325,42 @@ export const ESTIMACIONES_MINUTOS = {
     "horas": 2.0,
     "horasAnteriores": 5
   },
+  "T7.3": {
+    "palabras": 2600,
+    "video": 0,
+    "lectura": 30,
+    "documentos": 25,
+    "practica": 35,
+    "evidencia": 15,
+    "kc": 10,
+    "total": 105,
+    "horas": 1.75,
+    "horasAnteriores": 4
+  },
+  "T7.4": {
+    "palabras": 2400,
+    "video": 0,
+    "lectura": 25,
+    "documentos": 20,
+    "practica": 30,
+    "evidencia": 15,
+    "kc": 10,
+    "total": 90,
+    "horas": 1.5,
+    "horasAnteriores": 4
+  },
+  "T7.5": {
+    "palabras": 2550,
+    "video": 0,
+    "lectura": 25,
+    "documentos": 20,
+    "practica": 40,
+    "evidencia": 10,
+    "kc": 10,
+    "total": 105,
+    "horas": 1.75,
+    "horasAnteriores": 4
+  },
   "T8.1": {
     "palabras": 3378,
     "video": 5,
@@ -483,14 +519,38 @@ export const ESTIMACIONES_MINUTOS = {
   },
   "T10.6": {
     "palabras": 2200,
-    "video": 10,
-    "lectura": 20,
+    "video": 0,
+    "lectura": 30,
     "documentos": 15,
     "practica": 45,
     "evidencia": 15,
     "kc": 15,
     "total": 120,
     "horas": 2,
+    "horasAnteriores": 4
+  },
+  "T10.7": {
+    "palabras": 2500,
+    "video": 0,
+    "lectura": 30,
+    "documentos": 25,
+    "practica": 35,
+    "evidencia": 10,
+    "kc": 10,
+    "total": 105,
+    "horas": 1.75,
+    "horasAnteriores": 4
+  },
+  "T10.8": {
+    "palabras": 2400,
+    "video": 0,
+    "lectura": 30,
+    "documentos": 25,
+    "practica": 35,
+    "evidencia": 10,
+    "kc": 10,
+    "total": 105,
+    "horas": 1.75,
     "horasAnteriores": 4
   }
 }

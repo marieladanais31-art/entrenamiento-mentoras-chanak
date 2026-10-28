@@ -143,7 +143,7 @@ export const FUNCIONES = {
     ],
     casos: [
       { si: 'Te piden un descuento', haz: 'No lo concedas: la tarifa directa es la de la web.', escala: 'Dirección (convenios y afiliaciones)' },
-      { si: 'Interés en programas EducaFe', haz: 'Registra el contacto: EducaFe está inactiva hasta febrero 2027.', escala: 'Dirección' },
+      { si: 'Colaboración o programas en España / EducaFe', haz: 'Se gestiona en la ruta Estratégico. Algunas coordinadoras podrán operar desde la Asociación EducaFe. El acuerdo se firma con la entidad donde se trabaje.', escala: 'Dirección de Operaciones (Elías Vidal)' },
     ],
     noHaces: ['Firmar o prometer en nombre de Chanak', 'Afirmar aprobaciones no documentadas', 'Mezclar narrativa Chanak (EE. UU.) y EducaFe (España)'],
     evidencia: ['Registro de contactos', 'Materiales aprobados', 'Informe mensual'],
@@ -178,7 +178,7 @@ export const FUNCIONES = {
       { si: 'Convocatoria española o europea', haz: 'Lenguaje de impacto social y competencias.', escala: 'Dirección decide la entidad que presenta' },
       { si: 'Financiador de EE. UU.', haz: 'Usa la Foundation 501(c)(3) y su documentación.', escala: 'Dirección' },
     ],
-    noHaces: ['Presentar sin revisión de dirección', 'Usar EducaFe (inactiva hasta febrero 2027)'],
+    noHaces: ['Presentar sin revisión de dirección', 'Presentar propuestas en nombre de EducaFe sin aprobación de Dirección de Operaciones'],
     evidencia: ['Ficha de oportunidad', 'Propuesta y presupuesto', 'Acuse e informes'],
     vistas: [],
   },

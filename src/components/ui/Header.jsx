@@ -1,7 +1,7 @@
 import { SelectorIdioma, useIdioma } from '../../i18n/idioma'
 
-export default function Header({ perfil, esAdmin, vista, onNavegar, onSalir }) {
-  const { t } = useIdioma()
+export default function Header({ perfil, esAdmin, vista, onNavegar, onSalir, onAbrirCita }) {
+  const { t, idioma } = useIdioma()
   const boton = (nombre) =>
     `min-h-10 rounded-full px-4 py-2 text-sm font-semibold transition ${
       vista.nombre === nombre ? 'bg-[#4E8A2F] text-white shadow-xs' : 'bg-white/10 text-white/90 hover:bg-white/20'
@@ -20,6 +20,17 @@ export default function Header({ perfil, esAdmin, vista, onNavegar, onSalir }) {
 
         <nav aria-label={t('nav.formacion')} className="flex flex-wrap items-center gap-2 text-sm">
           <SelectorIdioma />
+
+          {onAbrirCita && (
+            <button
+              onClick={onAbrirCita}
+              title={idioma === 'es' ? 'Agendar cita con Administración' : 'Schedule Appointment with Administration'}
+              className="min-h-10 rounded-full bg-[#88C448]/20 border border-[#88C448]/40 px-3.5 py-1.5 text-xs font-bold text-white transition hover:bg-[#88C448]/30 flex items-center gap-1.5"
+            >
+              <span>📅</span>
+              <span>{idioma === 'es' ? 'Agendar cita' : 'Appointment'}</span>
+            </button>
+          )}
 
 
           {esAdmin && (

@@ -41,6 +41,7 @@ export default function Dashboard({
   onVerFuncion,
   onVerVistas,
   onVerComparativaCurriculos,
+  onAbrirCita,
 }) {
   const { t, idioma } = useIdioma()
   const [cambiandoRama, setCambiandoRama] = useState(false)
@@ -127,7 +128,11 @@ export default function Dashboard({
               <Stat n={enCurso} etiqueta={t('panel.enCurso')} color="text-teal" />
               <Stat n={todos.length - completados - enCurso} etiqueta={t('panel.pendientes')} color="text-navy/50" />
             </div>
-            <p className="mt-2 text-[11px] text-navy/50">{fmt(horasHechas)} h de {fmt(horasMeta)} h de referencia en módulos · {todos.length} módulos en tu ruta</p>
+            <p className="mt-2 text-[11px] text-navy/50">
+              {esAdmin
+                ? `${fmt(horasHechas)} h de ${fmt(horasMeta)} h de referencia en módulos · ${todos.length} módulos en tu ruta`
+                : `${completados} de ${todos.length} módulos completados en tu ruta`}
+            </p>
           </div>
         </div>
       </section>
@@ -308,7 +313,7 @@ export default function Dashboard({
           <button onClick={onVerEstrategia} className="w-full rounded-2xl border-2 border-gold bg-white p-5 text-left shadow-sm hover:bg-gold/5">
             <span className="block text-sm font-bold uppercase text-gold">Guía operativa · Estratégico</span>
             <span className="mt-1 block text-xl font-bold text-navy">De la oportunidad al resultado documentado →</span>
-            <span className="mt-2 block text-sm text-navy/70">Grants (subvenciones) · ESA y fondos estatales de EE. UU. · Expansión por país y alianzas institucionales · EducaFe (inactiva hasta feb. 2027)</span>
+            <span className="mt-2 block text-sm text-navy/70">Grants (subvenciones) · ESA y fondos estatales de EE. UU. · Expansión por país y alianzas institucionales · Proyectos comunitarios y convenios</span>
           </button>
         )}
         <div className="grid gap-3 sm:grid-cols-2">
@@ -319,6 +324,9 @@ export default function Dashboard({
           {onVerVistas && <Acceso icono="🖥" titulo="Vistas del sistema" sub="SIS, Dual Diploma y Life Skills con datos ficticios" onClick={onVerVistas} tono="teal" />}
           {(esEstrategico || esAdmin) && (
             <Acceso icono="⚖️" titulo="Evaluador de Costos y Currículos" sub="Simulador de presupuestos y viabilidad A.C.E., LIFEPAC, CLE y Flex" onClick={onVerComparativaCurriculos} tono="teal" />
+          )}
+          {onAbrirCita && (
+            <Acceso icono="📅" titulo="Agendar cita con Administración" sub="Videollamada oficial · Madrid, Miami/NY y Centro" onClick={onAbrirCita} tono="teal" />
           )}
           <Acceso icono="🧭" titulo="Organización y perfiles" sub="Organigrama y funciones de las tres ramas" onClick={onVerOrganigrama} tono="navy" />
           <Acceso icono="▶" titulo="Vídeos oficiales" sub="Presentación y Mastery Learning" onClick={onVerCatalogo} tono="navy" />

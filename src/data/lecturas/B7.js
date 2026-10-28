@@ -162,24 +162,23 @@ export const LECTURAS_B7 = {
         ],
       },
       {
-        titulo: 'Estados aprobados: Utah, Texas, Wyoming y Arizona',
+        titulo: 'Los 7 estados aprobados oficialmente',
         guion: [
-          'Junto a Florida y Alabama, Chanak ha consolidado su aprobación como proveedor de servicios educativos en cuatro estados clave adicionales: Utah, Texas, Wyoming y Arizona. Esta expansión permite a las familias residentes en estos estados acceder a los programas de Chanak utilizando sus fondos y cuentas de ahorro educativo (ESA / Scholarship programs).',
-          'Utah, programa Utah Fits All: Chanak está formalmente aprobada como proveedor en la plataforma Odyssey (con número EIN federal). Las familias participantes pueden seleccionar las ofertas educativas aprobadas de Chanak directamente en el marketplace de Odyssey.',
-          'Texas, programa TEFA (Texas Education Freedom Accounts): Chanak cuenta con estatus de proveedor educativo aprobado en Texas a través de Odyssey. Las familias que reciben fondos TEFA pueden cursar programas académicos con Chanak.',
-          'Wyoming, programa Wyoming ESA (Education Savings Accounts): Chanak ha obtenido la aprobación oficial como Education Service Provider, permitiendo la matriculación de estudiantes del estado bajo su programa de libertad educativa.',
-          'Arizona, programa Arizona ESA (Empowerment Scholarship Account): Chanak está registrada y aprobada ante el Departamento de Educación de Arizona (ADE) y activa para transacciones educativas mediante ClassWallet.',
-          'Otros estados en proceso de gestión: en estados como Arkansas (EFA) y West Virginia (Hope Scholarship), Chanak continúa tramitando su incorporación. Mientras la aprobación formal no esté emitida, se orienta a las familias particulares sin prometer cobro con fondos.',
-          'Consecuencia práctica para la mentora: cuando una familia de Utah, Texas, Wyoming o Arizona consulte, confirmas que Chanak es un proveedor aprobado en sus respectivos programas estatales. Recuerda siempre la regla innegociable: STATE FUNDING ≠ CURRICULUM. Los fondos estatales financian el acceso; el rigor, los estándares y la evaluación de dominio al 80 % los establece y custodia Chanak.',
+          'Chanak cuenta con aprobación oficial como proveedor educativo en 7 estados: Florida (Step Up For Students / EMA), Alabama (CHOOSE Act), Arizona (Arizona ESA), Utah (Utah Fits All), Wyoming (Wyoming ESA), New Hampshire (Education Freedom Accounts - EFA) y South Carolina (Education Scholarship Trust Fund - ESTF).',
+          'En estos 7 estados, las familias residentes elegibles pueden utilizar sus fondos y cuentas de ahorro educativo (ESA o becas estatales) para cursar las ofertas formativas aprobadas de Chanak.',
+          'Texas (TEFA), Arkansas y otros estados continúan en tramitación y no forman parte de los estados aprobados vigentes. Mientras no exista resolución oficial, se orienta a las familias particulares sin prometer cobro con fondos públicos.',
+          'Cláusula obligatoria de política estatal: En toda comunicación institucional o atención a familias, se debe incluir expresamente la siguiente cláusula: «Las familias elegibles pueden solicitar el pago de servicios autorizados con los fondos disponibles de su programa. La aprobación depende del servicio, del estudiante y de las reglas aplicables».',
+          'Ser proveedor aprobado NO equivale a gratuidad universal ni cobertura al 100 %: la disponibilidad de fondos depende del saldo asignado por el estado y de las reglas de gasto elegible de cada departamento.',
+          'Recuerda la regla de oro institucional: STATE FUNDING ≠ CURRICULUM. La financiación estatal facilita el acceso, pero la exigencia, los estándares de dominio al 80 % y la integridad académica los custodia exclusivamente Chanak.',
         ],
       },
       {
-        titulo: "Rol Estratégico en los estados aprobados: captar, facturar y dar seguimiento",
+        titulo: 'Rol Estratégico en los estados aprobados: plataformas, facturación y trazabilidad',
         guion: [
-          "Coordinación y Administración operan con dos plataformas tecnológicas principales en EE. UU.: ClassWallet (para Florida, Alabama y Arizona) y Odyssey (para Texas y Utah). En Wyoming, se aplican los procedimientos oficiales del programa ESA.",
-          "Captación y atención a familias: en Utah, Texas, Wyoming y Arizona se puede comunicar con seguridad que Chanak es proveedor aprobado. Sin embargo, no se promete cobertura total del 100 % ni se fija un saldo sin que la familia verifique su asignación en su propio portal estatal.",
-          "Facturación: las facturas electrónicas deben emitirse con todo el rigor exigido por cada estado: nombre de la entidad (Chanak TrainUp Education, Inc.), nombre del estudiante, adulto responsable, fechas de prestación de servicios, descripción educativa detallada y desglose por concepto. Nunca se utilizan documentos manuscritos ni notas informales.",
-          "Trazabilidad académica: si un estudiante financiado por un programa estatal solicita cambio de centro, baja o graduación, la mentora lo comunica el mismo día a coordinación y lo anota en el SIS, para que Administración cumpla con los plazos de reporte exigidos por cada departamento estatal de educación.",
+          'Coordinación y Administración operan a través de las plataformas tecnológicas oficiales: ClassWallet (para Florida, Alabama y Arizona) y Odyssey (para Utah). En Wyoming, New Hampshire y South Carolina se aplican los portales y procedimientos designados por cada agencia estatal.',
+          'En los 7 estados aprobados se puede comunicar con seguridad la condición de proveedor aprobado, siempre acompañada de la cláusula obligatoria y aclarando que no se fijan saldos ni coberturas sin verificación previa en el portal del estado.',
+          'Facturación electrónica: las facturas deben emitirse con todo el rigor exigido: razón social legal (Chanak TrainUp Education, Inc.), nombre del estudiante, ID, fechas de prestación de servicios, descripción educativa pormenorizada y desglose por concepto. Se prohíben notas manuales o recibos informales.',
+          'Trazabilidad académica: ante cualquier baja, cambio de centro o graduación de un estudiante financiado con fondos estatales, la mentora lo comunica el mismo día a coordinación y lo registra en el SIS, permitiendo a Administración cumplir con los plazos de reporte a las autoridades educativas.',
         ],
       },
     ],
@@ -189,13 +188,113 @@ export const LECTURAS_B7 = {
       documentos: [
         { carpeta: '07_US_PROGRAMS_COMPLIANCE/Alabama', documento: 'Alabama_CHOOSE_ESP_Approved_Status.pdf', que: 'Tabla de estado, formulación autorizada, recuadro «Uso de Virtual School», historial y cuestiones por confirmar.', horas: 0.5 },
         { carpeta: '07_US_PROGRAMS_COMPLIANCE/Alabama', documento: 'Alabama_CHOOSE_Virtual_School_Compliance.pdf', que: 'Requisitos que deben mantenerse, requisitos académicos, registros y reporting (plazos de notificación) y pasos tras la aprobación.', horas: 0.5 },
-        { carpeta: '07_US_PROGRAMS_COMPLIANCE/Alabama', documento: 'Alabama_Standardized_Assessment_Requirements.pdf', que: 'Recuadro «Categoría», tabla de requisitos documentados (incluidos los «no especificado») y propuesta operativa condicionada.', horas: 0.5 },
+        { carpeta: '07_US_PROGRAMS_COMPLIANCE/Alabama', documento: 'Alabama_Standardized_Assessment_Requirements.pdf', que: 'Recuadro «Categoría», tabla de requisitos documentados y propuesta operativa condicionada.', horas: 0.5 },
         { carpeta: '08_ACADEMIC_POLICIES', documento: 'Chanak_State-Specific_Standardized_Assessment_Requirements.pdf', que: 'Principio y tabla de requisitos documentados por estado y programa, con su responsable.', horas: 0.25 },
-        { carpeta: '09_ACADEMIC_FRAMEWORK', documento: 'Chanak_US_State_Assessment_Compliance_Matrix.xlsx', que: 'Todas las filas (Alabama y Florida) y las columnas Assessment Required, Permitted Assessments, Proctor, Reporting y Last Reviewed.', horas: 0.25 },
+        { carpeta: '09_ACADEMIC_FRAMEWORK', documento: 'Chanak_US_State_Assessment_Compliance_Matrix.xlsx', que: 'Matriz consolidada de cumplimiento y pruebas norm-referenced por estado.', horas: 0.25 },
       ],
       practica: 1.5,
       evidencia: 0.5,
       kc: 0.5,
     },
   },
+
+  'T7.3': {
+    lecciones: [
+      {
+        titulo: 'Operativa de marketplaces: Odyssey y ClassWallet',
+        guion: [
+          'La gestión operativa de fondos estatales en EE. UU. se canaliza a través de plataformas tecnológicas especializadas de marketplace escolar.',
+          'Odyssey Marketplace (Utah Fits All): Plataforma donde los padres acceden a su monedero digital, exploran proveedores autorizados y seleccionan las ofertas de servicio de Chanak TrainUp Education, Inc. asociadas a su EIN federal.',
+          'ClassWallet (Alabama CHOOSE, Arizona ESA, Florida EMA): Plataforma para la asignación de fondos, aprobación de órdenes de servicio (Service Orders) y verificación de facturación directa de proveedores autorizados.',
+          'Seguridad y credenciales parentales: La familia es la única titular y operadora de su cuenta en Odyssey y ClassWallet. El personal de Chanak tiene terminantemente prohibido solicitar contraseñas, códigos de verificación o ejecutar acciones en nombre del tutor legal.',
+        ],
+      },
+      {
+        titulo: 'Circuito de cobro: de la reserva parental a la conciliación en el SIS',
+        guion: [
+          'Paso 1: La familia selecciona el servicio autorizado en el marketplace y efectúa la reserva de fondos (Reserve Funds / Order Submission).',
+          'Paso 2: La reserva confirma disponibilidad de crédito pero NO constituye ingreso en la cuenta de Chanak. El estudiante puede comenzar el proceso de inducción académica mientras se tramita la orden.',
+          'Paso 3: Administración recibe la notificación en el portal del marketplace, verifica la prestación del servicio formativo y genera la factura electrónica institucional.',
+          'Paso 4: El programa estatal revisa la factura, valida la elegibilidad y libera la transferencia bancaria hacia Chanak TrainUp Education, Inc.',
+          'Paso 5: Administración concilia el ingreso en el SIS y actualiza el estado financiero del estudiante. Los mentores nunca gestionan cobros ni modifican estados de pago.',
+        ],
+      },
+    ],
+    desglose: {
+      video: 0,
+      lectura: 0.4,
+      documentos: [
+        { carpeta: '07_US_PROGRAMS_COMPLIANCE', documento: 'Admin_Compliance_Guia.pdf', que: 'Guía operativa de administración y cumplimiento para marketplaces Odyssey y ClassWallet.', horas: 0.35 },
+      ],
+      practica: 0.65,
+      evidencia: 0.15,
+      kc: 0.2,
+    },
+  },
+
+  'T7.4': {
+    lecciones: [
+      {
+        titulo: 'El ESA Support Package: componentes y frecuencias',
+        guion: [
+          'Para las familias que acceden mediante cuentas ESA, Chanak ha estructurado el ESA Support Package como un servicio de acompañamiento pedagógico específico y equilibrado.',
+          'Componente 1: Mentoría Académica Quincenal (2 horas al mes). Se estructura en dos sesiones quincenales de 60 minutos (o cuatro de 30 minutos) de seguimiento del PEI, revisión de ritmo, metas y portafolio.',
+          'Componente 2: Life Skills & Leadership Grupal (4 sesiones mensuales de 60 minutos). Se imparte en grupos reducidos por etapas evolutivas (Juniors, Explorer, Builder, Launch).',
+          'Límite de ratio de cohorte: Cada cohorte de Life Skills grupal tiene un máximo estricto de 7 alumnos. Esta limitación garantiza una dinámica participativa, escucha activa y seguimiento personalizado de los retos.',
+        ],
+      },
+      {
+        titulo: 'Límites profesionales y prevención de falsas expectativas',
+        guion: [
+          'Diferenciación frente a tutoría 1 a 1 intensiva: El paquete ESA NO es un servicio de clases particulares diarias individuales, ni cubre apoyo especializado ilimitado de asignaturas.',
+          'Si un alumno requiere refuerzo individual intensivo (ej. tutoría diaria de matemáticas o lectoescritura en inglés), la familia debe solicitar un servicio complementario presupuestado aparte, sujeto a disponibilidad y aprobación del estado.',
+          'Pautas de comunicación para mentores: Nunca afirmes que el paquete «incluye todo lo que haga falta sin coste extra». Explica con claridad y aprecio la estructura de 2h/mes de mentoría y 4h/mes de Life Skills en grupos de hasta 7.',
+          'Cualquier solicitud de horas extra o servicios atípicos se deriva formalmente a Chanak Administration (administration@chanakacademy.org).',
+        ],
+      },
+    ],
+    desglose: {
+      video: 0,
+      lectura: 0.35,
+      documentos: [
+        { carpeta: '10_PEOPLE_ROLES_TRAINING', documento: 'Mentoria_Docencia_Guia.pdf', que: 'Guía de mentoría, docencia y límites de servicio del ESA Support Package.', horas: 0.35 },
+      ],
+      practica: 0.5,
+      evidencia: 0.15,
+      kc: 0.15,
+    },
+  },
+
+  'T7.5': {
+    lecciones: [
+      {
+        titulo: 'Marco contractual: Contratista independiente (Form 1099-NEC) vs Empleo (W-2)',
+        guion: [
+          'Los mentores, tutores y especialistas que prestan servicios para Chanak en Estados Unidos lo hacen en calidad de contratistas independientes (Form 1099-NEC), formalizados mediante contrato de servicios profesionales.',
+          'Diferencia fundamental con W-2: El contratista independiente organiza de forma autónoma su método de trabajo dentro de los estándares de Chanak, aporta sus propios medios y herramientas, y es responsable directo de sus impuestos sobre ingresos y del trabajo por cuenta propia (Self-Employment Tax).',
+          'Documentación fiscal preceptiva: Todo contratista residente en EE. UU. debe entregar debidamente cumplimentado el Form W-9 antes de iniciar su actividad y facturar; colaboradores no residentes aportan el Form W-8BEN correspondiente.',
+          'Chanak emite anualmente el Form 1099-NEC conforme a los umbrales fijados por el IRS para reportar las retribuciones profesionales abonadas.',
+        ],
+      },
+      {
+        titulo: 'Integridad financiera, facturación estatal y privacidad FERPA',
+        guion: [
+          'Política anti-kickback y prohibición de reembolsos: Las leyes estatales reguladoras de los programas ESA prohíben taxativamente a los proveedores acreditados ofrecer descuentos indebidos, devoluciones de fondos en efectivo o compensaciones a las familias. Cualquier infracción acarrea descalificación inmediata y responsabilidades legales.',
+          'Facturación electrónica respaldada: Cada factura emitida a un programa estatal o cuenta ESA debe corresponder a sesiones efectivas registradas con fecha, hora y asistencia en el SIS. Nunca se facturan sesiones no impartidas ni se anticipan meses futuros.',
+          'Cumplimiento de FERPA (Family Educational Rights and Privacy Act): Toda la información académica, evaluaciones diagnósticas, asistencias y circunstancias familiares de los estudiantes son estrictamente confidenciales. Queda prohibido compartir datos de estudiantes con terceros o utilizar nombres en foros públicos.',
+        ],
+      },
+    ],
+    desglose: {
+      video: 0,
+      lectura: 0.4,
+      documentos: [
+        { carpeta: '07_US_PROGRAMS_COMPLIANCE', documento: 'Admin_Compliance_Guia.pdf', que: 'Guía de cumplimiento legal, fiscal, tributario (1099) y privacidad FERPA.', horas: 0.35 },
+      ],
+      practica: 0.65,
+      evidencia: 0.15,
+      kc: 0.2,
+    },
+  },
 }
+

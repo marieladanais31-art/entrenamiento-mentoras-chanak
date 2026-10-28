@@ -2,15 +2,16 @@ import { useMemo, useState } from 'react'
 import { ROL_POR_ID } from '../data/roles'
 import { SelectorIdioma, useIdioma } from '../i18n/idioma'
 
-export const VERSION_COMPROMISO = '2026-10-10-formacion'
+export const VERSION_COMPROMISO = '2026-10-28-trainup'
+export const VERSIONES_VALIDAS = ['2026-10-10-formacion', '2026-10-28-trainup']
 
 const COPIA = {
   es: {
     eyebrow: 'Paso obligatorio antes de comenzar',
     title: 'Acuerdo de participación en la formación',
-    intro: 'Chanak desarrolla sus programas mediante su equipo y alianzas específicas con colegios, centros de aprendizaje y organizaciones. Esta formación te prepara para una posible función. Dirección conserva la versión y la fecha aceptadas.',
-    scope: 'La formación no constituye un contrato de colaboración ni una contratación, y no autoriza a representar a Chanak, acceder a datos de estudiantes o prestar servicios. Cualquier colaboración posterior requiere su propio acuerdo, asignación y requisitos aplicables.',
-    pathways: ['Tronco común: todas las personas empiezan por la misma formación sobre Chanak, sus programas y la protección de menores.', 'Mentor (acceso libre): acompañamiento de estudiantes y familias de Off-Campus y Dual Diploma, clases de inglés y Life Skills, Extensión Local y evaluación educativa.', 'Coordinador: supervisión de mentores y especialistas; incluye director de institución partner. Lo confirma Dirección Académica.', 'Estratégico: familias y matrícula, marketing, ESA y fondos estatales, alianzas y grants. Lo confirma la Dirección de Operaciones y Alianzas.'],
+    intro: 'Chanak TrainUp Education, Inc. es la entidad titular que formaliza acuerdos, certificaciones y programas, contando con Chanak Foundation como su rama no lucrativa. Esta formación interna prepara para una posible función operativa o de voluntariado. Dirección conserva la versión y la fecha aceptadas.',
+    scope: 'La formación no constituye por sí sola una contratación ni una relación laboral, y no autoriza a representar legalmente a la entidad, acceder a datos reservados ni prestar servicios no asignados. Cualquier colaboración posterior requiere definir funciones y formalizar el acuerdo correspondiente con la entidad donde la persona trabaje (Chanak TrainUp Education, Inc. para programas internacionales/EE. UU., o Asociación EducaFe para proyectos territoriales en España).',
+    pathways: ['Tronco común: todas las personas inician por la misma formación institucional, modelo pedagógico y protección de menores.', 'Mentor: acompañamiento a estudiantes y familias (Off-Campus y Dual Diploma), clases de inglés, Life Skills, Extensión Local y evaluación educativa. Mentor se activa al guardar; la asignación de estudiantes la confirma Dirección Académica (Mariela Andrade).', 'Coordinador: supervisión de mentores y especialistas; incluye directores de centros partner. Lo confirma Dirección Académica (Mariela Andrade).', 'Estratégico: familias y matrícula, marketing, fondos estatales (ESA), alianzas y proyectos comunitarios (incluyendo alianzas y proyectos territoriales desde EducaFe). Lo confirma Dirección de Operaciones (Elías Vidal).'],
     role: 'Tu ruta de formación',
     noRole: 'Empezarás por el tronco común y podrás elegir tu rama desde el panel.',
     name: 'Nombre completo',
@@ -33,9 +34,9 @@ const COPIA = {
   en: {
     eyebrow: 'Required step before starting',
     title: 'Training participation agreement',
-    intro: 'Chanak works through its team and specific partnerships with schools, learning centers and organizations. This training prepares you for a possible future function. Administration retains the accepted version and date.',
-    scope: 'Training is not a collaboration or employment agreement and does not authorize you to represent Chanak, access student data or provide services. Any later collaboration requires a separate agreement, assignment and applicable requirements.',
-    pathways: ['Common core: everyone starts with the same training on Chanak, its programs and child protection.', 'Mentor (open access): supporting Off-Campus and Dual Diploma students and families, English and Life Skills classes, Local Extension and educational assessment.', 'Coordinator: supervising mentors and specialists; includes partner institution directors. Confirmed by Academic Direction.', 'Strategic: families and enrollment, marketing, ESA and state funding, partnerships and grants. Confirmed by Operations & Partnerships Direction.'],
+    intro: 'Chanak TrainUp Education, Inc. is the governing entity that signs agreements, issues certificates, and operates programs, with Chanak Foundation as its non-profit branch. This training prepares you for a potential operational or volunteer role. Administration retains the accepted version and date.',
+    scope: 'Training does not by itself constitute an employment or formal engagement contract, nor does it authorize representing the entity, accessing student records, or delivering unauthorized services. Any subsequent collaboration requires executing a formal agreement with the specific entity where the person will serve (Chanak TrainUp Education, Inc. or Asociación EducaFe depending on the territorial scope).',
+    pathways: ['Common core: everyone begins with institutional fundamentals, pedagogical model, and child protection.', 'Mentor: supporting Off-Campus and Dual Diploma students and families, English and Life Skills, Local Extension, and educational assessment. Mentor activates upon saving; student assignments are confirmed by Academic Direction (Mariela Andrade).', 'Coordinator: supervising mentors and specialists; includes partner institution directors. Confirmed by Academic Direction (Mariela Andrade).', 'Strategic: families and enrollment, marketing, state funding (ESA), partnerships, and community projects (including territorial partnerships and projects via EducaFe). Confirmed by Operations Direction (Elías Vidal).'],
     role: 'Your training pathway',
     noRole: 'You will start with the common core and can choose your branch from the dashboard.',
     name: 'Full name',
