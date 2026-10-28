@@ -20,7 +20,7 @@ import RolPerfil from './components/RolPerfil'
 import { rolesEfectivos, solicitudDe } from './data/roles'
 import Header from './components/ui/Header'
 import CambiarContrasena from './components/CambiarContrasena'
-import CompromisoInicial, { VERSION_COMPROMISO } from './components/CompromisoInicial'
+import CompromisoInicial, { VERSIONES_VALIDAS } from './components/CompromisoInicial'
 import EstrategiaOperativa from './components/EstrategiaOperativa'
 import MiFuncion from './components/MiFuncion'
 import VistasSistemaView from './components/VistasSistemaView'
@@ -289,7 +289,7 @@ export default function App() {
     )
   }
 
-  const compromisoVigente = compromiso?.version === VERSION_COMPROMISO
+  const compromisoVigente = VERSIONES_VALIDAS.includes(compromiso?.version)
   if (!compromisoVigente) {
     return (
       <CompromisoInicial

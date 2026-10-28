@@ -258,7 +258,7 @@ export const TEXTOS = {
     'cert.haCompletado': 'ha completado satisfactoriamente el programa de formación',
     'cert.cargaTotal':
       'con una ruta completa de {horas} horas, bitácora y evidencias validadas por dirección.',
-    'cert.legal': "Certificación interna de formación profesional emitida por Chanak TrainUp Education, Inc. (Chanak International Academy · escuela privada registrada en Florida, FLDOE #134620). No constituye título universitario ni acreditación oficial.",
+    'cert.legal': "Certificado de formación interna emitido por Chanak TrainUp Education, Inc. No constituye acreditación institucional, titulación oficial ni autorización para atender estudiantes; esa autorización la concede Dirección mediante asignación escrita.",
     'cert.headLsp': "Head of School",
     'cert.board': 'Board Representative',
     'cert.vistoBueno': 'Visto bueno del Board',
@@ -620,7 +620,7 @@ export const TEXTOS = {
     'cert.haCompletado': 'has successfully completed the training program',
     'cert.cargaTotal':
       'with an estimated workload of {horas} hours for completed modules and mastery-based assessment. Supervised practice requires evidence validation.',
-    'cert.legal': "Internal professional-training certification issued by Chanak TrainUp Education, Inc. (Chanak International Academy · registered private school in Florida, FLDOE #134620). It does not constitute a college degree or official accreditation.",
+    'cert.legal': "Internal training certificate issued by Chanak TrainUp Education, Inc. It does not constitute institutional accreditation, official degree, or authorization to serve students; such authorization is granted by Administration through written assignment.",
     'cert.headLsp': "Head of School",
     'cert.board': 'Board Representative',
     'cert.vistoBueno': 'Board approval',

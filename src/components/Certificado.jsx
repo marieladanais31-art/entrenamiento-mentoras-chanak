@@ -17,10 +17,10 @@ export default function Certificado({ mentora, progreso, nivel, onVolver }) {
     <section className="rounded-2xl bg-white p-5 text-navy shadow-sm space-y-4">
       <button onClick={onVolver} className="text-sm font-bold text-teal hover:underline">← Volver al panel</button>
       <div className="border-b border-navy/10 pb-3">
-        <div className="text-[11px] font-bold uppercase tracking-wider text-teal">Certificación Oficial Interna</div>
+        <div className="text-[11px] font-bold uppercase tracking-wider text-teal">Certificación interna</div>
         <h1 className="mt-1 text-xl font-bold">Certificación pendiente de validación formal</h1>
         <p className="mt-2 text-sm text-navy/75 leading-relaxed">
-          Los certificados son emitidos formalmente por <b>Chanak TrainUp Education, Inc.</b> (Chanak International Academy · FLDOE #134620) como acreditación interna de formación profesional firmada por Dirección.
+          Certificado de formación interna emitido por Chanak TrainUp Education, Inc. No constituye acreditación institucional, titulación oficial ni autorización para atender estudiantes; esa autorización la concede Dirección mediante asignación escrita.
         </p>
       </div>
 
@@ -30,10 +30,10 @@ export default function Certificado({ mentora, progreso, nivel, onVolver }) {
         </div>
         <div className="space-y-2 text-navy/85">
           <p>
-            <b>• Nivel 1 (CHANAK CERTIFIED MENTOR · 180 h):</b> Lo valida y aprueba <b>Dirección Académica (Mariela Andrade)</b>. Requiere: Tronco común + Bloques 1 al 6 completados al 100% con Knowledge Checks ≥ 80%, Bloque 9 (Safeguarding y desarrollo), bitácora de autoestudio y práctica pedagógica documentada.
+            <b>• Nivel 1 (CHANAK CERTIFIED MENTOR · meta de referencia):</b> Lo valida y aprueba <b>Dirección Académica (Mariela Andrade)</b>. Requiere: Tronco común + Bloques 1 al 6 completados al 100% con Knowledge Checks ≥ 80%, Bloque 9 (Safeguarding y desarrollo), bitácora de autoestudio y práctica pedagógica documentada (180 h como meta de referencia).
           </p>
           <p>
-            <b>• Nivel 2 (CHANAK CERTIFIED COORDINATOR · 300 h):</b> Lo valida conjuntamente <b>Dirección Académica (Mariela Andrade)</b> y <b>Dirección de Operaciones (Elías Vidal)</b>. Requiere: Certificación de Mentor activa, Bloque 8 completado, evidencias de supervisión de mentores y proyecto de coordinación de centro.
+            <b>• Nivel 2 (CHANAK CERTIFIED COORDINATOR · meta de referencia):</b> Lo valida conjuntamente <b>Dirección Académica (Mariela Andrade)</b> y <b>Dirección de Operaciones (Elías Vidal)</b>. Requiere: Certificación de Mentor activa, Bloque 8 completado, evidencias de supervisión de mentores y proyecto de coordinación de centro (300 h como meta de referencia).
           </p>
           <p>
             <b>• Rama Estratégica (Formación en Alianzas y Programas):</b> Lo valida <b>Dirección de Operaciones (Elías Vidal)</b> con la entrega del plan de trabajo territorial o propuesta de proyecto.
@@ -42,11 +42,11 @@ export default function Certificado({ mentora, progreso, nivel, onVolver }) {
       </div>
 
       <p className="text-xs text-navy/60 leading-relaxed">
-        Las {r.horas} h mostradas en la app corresponden a la carga modular de actividades formativas. La emisión del diploma oficial requiere la resolución favorable archivada en dirección.
+        Las horas mostradas en la app son una estimación de actividades de módulos, no horas acreditadas. La emisión del certificado requiere la resolución favorable archivada en dirección.
       </p>
 
       <a className="inline-block text-xs font-bold text-teal underline" href="https://drive.google.com/file/d/11l7EomB_1f3qbXIfYmTwKefUgVbiGoTv/view" target="_blank" rel="noreferrer">
-        Consultar plan y protocolo oficial de certificación en Drive →
+        Consultar plan y protocolo de certificación en Drive →
       </a>
     </section>
   )

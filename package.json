@@ -8,7 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint src vite.config.js eslint.config.js",
-    "test": "node scripts/test-video-restrictions.mjs"
+    "test": "node scripts/test-video-restrictions.mjs && node scripts/test-compromiso-version.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.110.8",
