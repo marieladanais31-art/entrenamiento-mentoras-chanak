@@ -73,8 +73,7 @@ function getCuerpoCorreoGeneral() {
 function getCuerpoCorreoIndividual(nombre, correo) {
   const nombreTxt = (nombre || '').trim()
   const saludo = nombreTxt ? `Bendiciones, ${nombreTxt}:` : `Bendiciones:`
-  const esClaudia = (correo || '').toLowerCase() === 'net.amyclau@gmail.com'
-  const claveSugerida = esClaudia ? 'Chanak2026' : 'Chanak2026*'
+  const claveSugerida = 'Chanak2026*'
 
   return (
     `De: ${REMITENTE_OFICIAL} (Chanak International Academy)\n` +
@@ -499,7 +498,7 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
                   type="email"
                   value={emailManualReset}
                   onChange={(e) => setEmailManualReset(e.target.value)}
-                  placeholder="ejemplo@gmail.com"
+                  placeholder="ejemplo@chanakacademy.org"
                   className="flex-1 rounded-xl border border-navy/20 bg-white px-3 py-2 text-xs font-medium text-navy"
                 />
                 <button
@@ -1134,8 +1133,7 @@ function ModalResetCuenta({ datos, onClose, onRecargar }) {
   const [notificacion, setNotificacion] = useState(null)
   const [ocupadoModal, setOcupadoModal] = useState(false)
 
-  const esClaudia = (correo || '').toLowerCase() === 'net.amyclau@gmail.com'
-  const contrasenaSugerida = esClaudia ? 'Chanak2026' : 'Chanak2026*'
+  const contrasenaSugerida = 'Chanak2026*'
 
   const mensajeBienvenida = `Hola ${nombre},\n\nTus credenciales para ingresar a la plataforma de entrenamiento Chanak Academy son:\n\n🔗 Plataforma: https://training.chanakacademy.org/\n📧 Usuario: ${correo || '[Tu correo electrónico]'}\n🔑 Contraseña inicial: ${contrasenaSugerida}\n\nRecomendación de seguridad: Al ingresar por primera vez, podrás actualizar tu contraseña desde tu perfil. Si en cualquier momento deseas restablecerla tú misma, puedes pulsar en "¿Olvidaste tu contraseña?" en la pantalla inicial.\n\n¡Bienvenida a la formación de Chanak International Academy!`
 
@@ -1336,7 +1334,7 @@ WHERE id = (SELECT id FROM auth.users WHERE lower(email) = lower('${correo || ''
               <span>🔑</span> 2. Credenciales Iniciales de Inducción
             </span>
             <span className="text-[10px] font-bold text-navy/60 bg-gold/20 px-2 py-0.5 rounded-full">
-              {esClaudia ? 'Clave Especial Claudia' : 'Clave Estándar 2026-2027'}
+              Clave Estándar 2026-2027
             </span>
           </div>
           <p className="text-xs text-navy/70 leading-relaxed">

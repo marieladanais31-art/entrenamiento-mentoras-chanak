@@ -21,8 +21,7 @@ as $$
     select 1 from auth.users u
     where u.id = auth.uid()
       and lower(u.email) in (
-        'administration@chanakacademy.org',
-        'marieladanais31@gmail.com'
+        'administration@chanakacademy.org'
       )
   );
 $$;
@@ -34,7 +33,8 @@ security definer
 set search_path = public
 stable
 as $$
-  -- Sustituir por el correo exacto de auth.users antes de ejecutar
+  -- Sustituir por el correo exacto de auth.users antes de ejecutar.
+  -- Correo probable: eliasvidal@chanakacademy.org. Confirmar en auth.users antes de ejecutar.
   select exists (
     select 1 from auth.users u
     where u.id = auth.uid()

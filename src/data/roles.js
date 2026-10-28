@@ -719,47 +719,13 @@ export const REPRESENTANTES_PAISES = [
 ]
 
 // ════════════════════════════════════════════════════════════
-// USUARIOS CONOCIDOS (MAPA DE IDENTIDADES Y CORREOS OFICIALES)
+// USUARIOS (GESTIÓN DINÁMICA VÍA SUPABASE / RGPD COMPLIANT)
 // ════════════════════════════════════════════════════════════
-// Permite asociar en el panel administrativo cada perfil con el correo
-// electrónico con el que está registrado y aprobado en Supabase auth.
-export const USUARIOS_CONOCIDOS = [
-  { id: 'abf34eb6-844b-4a6a-8db7-145373c5c888', email: 'administration@chanakacademy.org', nombre: 'Mariela Andrade' },
-  { id: '6ae110ad-b87b-4ecf-8f76-e9f8bd5449cd', email: 'marieladanais31@gmail.com', nombre: 'Mariela Andrade' },
-  { id: 'e794aa52-98c3-4ebf-828f-7f4ae2816019', email: 'florida@chanakacademy.org', nombre: 'Karen Pujols' },
-  { id: '78c8c17c-ec0e-4396-bc1e-6482b09b85a9', email: 'puebla@chanakacademy.org', nombre: 'Karen Vidal' },
-  { id: '6ba7b1a4-19d7-47ea-8c64-74eb73a19c59', email: 'lauravpardoq@outlook.com', nombre: 'Laura V. Pardo Q.' },
-  { id: '3bebc6e1-75b3-40b8-b42c-fb2cb074c9c2', email: 'lauravpardoq@outlook.com', nombre: 'Laura V. Pardo Q.' },
-  { id: 'a3daf3a9-4047-460e-9546-259e0d42de77', email: 'carmen.logos@gmail.com', nombre: 'Carmen Logos' },
-  { id: 'fff687d3-32bd-4aa9-813b-cedfdc495df6', email: 'sonsolesbuenoroige@gmail.com', nombre: 'Sonsoles Bueno Roige' },
-  { id: 'fb02af52-d03c-45dd-ad66-f354a44befe5', email: 'thiareurzua7@gmail.com', nombre: 'Thiare Urzua' },
-  { id: '30d436f3-b56e-4396-aeea-fddfcd1a8848', email: 'celechanquia2016@gmail.com', nombre: 'Cele Chanquia' },
-  { id: 'f89aa157-375a-4d35-aa86-241fdc8e9837', email: 'amedina6003@gmail.com', nombre: 'A. Medina' },
-  { id: 'c29dd182-e1a0-46cc-a05b-02734b4e676a', email: 'net.amyclau@gmail.com', nombre: 'M. Claudia Jimenez' },
-  { id: '4f115d32-4071-4550-ba67-bd36012993e9', email: 'justin@ywamct.com', nombre: 'Justin' },
-  { id: 'e8c2d561-ebf6-4eaf-8833-8030322ad138', email: 'angela@ywamct.com', nombre: 'Angela' },
-  { id: 'cd2d2f03-7688-4331-9341-bfeb31cb3e25', email: 'medalithrosales@jcum.com', nombre: 'Medalith Rosales' },
-  { id: '29858f2e-5762-4adf-9ce6-0f3569c8ead4', email: 'dayanatrillo81@gmail.com', nombre: 'Dayana Trillo' },
-  { id: 'f281eb9d-18b1-4816-8d7a-d23d9bbfac01', email: 'jokaneska@gmail.com', nombre: 'Joaneska Grössl' },
-  { id: '5d6c342a-f488-47d4-a7e4-e36c093478ca', email: 'lucy.dbr@gmail.com', nombre: 'Lucy DBR' },
-  { id: 'dbe32d4d-5e55-4525-84d4-d597190d2af8', email: 'jituvane@gmail.com', nombre: 'Jitendra Dongardive' },
-  { id: 'd7ff67b0-5748-49df-a879-356a27e412ec', email: 'vanejitu@gmail.com', nombre: 'Vane Jitu' },
-  { id: '2728dba3-1176-4db0-8a79-2e3b646e1e58', email: 'leo0pierre@gmail.com', nombre: 'Leo Pierre' },
-  { id: '91bc61f8-ffa8-4eca-a013-0ee8d810dc46', email: 'ydita@chanakacademy.org', nombre: 'Ydita' },
-  { id: '3e82c649-1514-4266-a321-8b02a5ae7790', email: 'eliasvidal@chanakacademy.org', nombre: 'Elias Vidal' },
-]
+// Los correos y accesos se consultan dinámicamente desde la base de datos
+// (tabla auth.users / public.perfiles) y no se almacenan en el repositorio.
+export const USUARIOS_CONOCIDOS = []
 
 export function obtenerEmailConocido(idOEmailONombre) {
   if (!idOEmailONombre) return ''
-  const query = String(idOEmailONombre).trim().toLowerCase()
-  if (query.includes('@')) return query
-  const u = USUARIOS_CONOCIDOS.find(
-    (x) =>
-      (x.id && x.id.toLowerCase() === query) ||
-      (x.email && x.email.toLowerCase() === query) ||
-      (x.nombre && x.nombre.toLowerCase() === query) ||
-      (x.nombre && query.includes(x.nombre.toLowerCase())) ||
-      (x.nombre && x.nombre.toLowerCase().includes(query))
-  )
-  return u?.email || ''
+  return ''
 }

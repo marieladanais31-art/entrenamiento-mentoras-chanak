@@ -48,7 +48,7 @@ function verificarVigencia(compromiso) {
 }
 
 // Caso 5a: Usuaria existente que ya firmó la versión anterior ('2026-10-10-formacion')
-const usuariaExistente = { version: '2026-10-10-formacion', nombre_completo: 'Mariela Andrade', funciones: ['mentor'] };
+const usuariaExistente = { version: '2026-10-10-formacion', nombre_completo: 'Mentora Existente', funciones: ['mentor'] };
 assert.equal(verificarVigencia(usuariaExistente), true, 'Usuaria con versión 2026-10-10-formacion debe ser vigente (no debe volver a firmar ni perder datos)');
 console.log('✓ [Caso 1] Usuaria existente con 2026-10-10-formacion: VIGENTE (sin bloqueo ni pérdida de datos)');
 

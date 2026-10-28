@@ -123,7 +123,7 @@ export default function CitaAdminModal({ abierto, onClose, esAdmin }) {
 
         {esAdmin && (
           <div className="mt-4 rounded-xl border border-amber-300 bg-amber-50/80 p-3 text-xs leading-relaxed text-amber-900">
-            <span className="font-bold">⚠️ Nota para Administración:</span> Los huecos y la disponibilidad mostrada a los usuarios se gestionan desde la configuración de citas de Google Calendar asociada a <code>marieladanais31@gmail.com</code> / <code>administration@chanakacademy.org</code>. Configura allí los tramos horarios que desees ofrecer.
+            <span className="font-bold">⚠️ Nota para Administración:</span> Los huecos y la disponibilidad mostrada a los usuarios se gestionan desde la configuración de citas de Google Calendar asociada a <code>administration@chanakacademy.org</code>. Configura allí los tramos horarios que desees ofrecer.
           </div>
         )}
 
