@@ -242,7 +242,7 @@ export default function App() {
         esPrimerIngreso={debeCambiarPassword}
         onCompletado={async () => {
           if (perfil?.id) {
-            try { await api.actualizarPerfil(perfil.id, { debe_cambiar_password: false }) } catch (_) {}
+            try { await api.actualizarPerfil(perfil.id, { debe_cambiar_password: false }) } catch (_) { /* ignorar */ }
           }
           const s = await api.getSesion()
           setSesion(s)
@@ -382,7 +382,7 @@ export default function App() {
         )}
         {vista.nombre === 'mi-funcion' && <MiFuncion funcionId={vista.funcionId} roles={rolesIds} onCambiar={(funcionId) => setVista({ ...vista, funcionId })} onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
         {vista.nombre === 'vistas' && <VistasSistemaView roles={rolesIds} esAdmin={esAdmin} onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
-        {vista.nombre === 'catalogo-videos' && <CatalogoVideos onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
+        {vista.nombre === 'catalogo-videos' && <CatalogoVideos esAdmin={esAdmin} onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
         {vista.nombre === 'operativa-sis' && <OperativaSIS onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
         {vista.nombre === 'guias-familias' && <GuiasFamilias onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
         {vista.nombre === 'operacion-programas' && <OperacionProgramas inicial={rolesIds.includes('english_teacher') ? 'english' : rolesIds.includes('lifeskills_facilitator') ? 'lifeskills' : 'offcampus'} onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} onVerSIS={() => setVista({ ...vista, nombre: 'coordinacion-sis' })} onVerFamilias={() => setVista({ ...vista, nombre: 'guias-familias' })} onVerEstados={() => setVista({ ...vista, nombre: 'matriz' })} />}

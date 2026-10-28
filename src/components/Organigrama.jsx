@@ -93,7 +93,7 @@ export default function Organigrama({ onVolver, onVerRol }) {
           <span className="text-[11px] font-bold uppercase tracking-wider text-teal">Estructura Territorial Oficial</span>
           <h3 className="mt-1 text-lg font-bold text-navy">🌍 Estructura por Países y Territorios</h3>
           <p className="text-xs text-navy/70 leading-relaxed">
-            EducaFe (España) inactivo hasta febrero 2027 · México en lanzamiento · Panamá en proceso · Estados Unidos (todos los estados con cobertura y fondos).
+            España (proyectos y alianzas territoriales EducaFe en la rama Estratégico) · México en lanzamiento · Panamá en proceso · Estados Unidos (cobertura estatal y fondos ESA).
           </p>
         </div>
 

@@ -66,8 +66,7 @@ export default function EligeRama({ actual = [], datosPrevios = null, onGuardar,
         <div className="text-[12px] font-bold uppercase tracking-[0.18em] text-teal">Paso 2 · Elige tu rama</div>
         <h2 className="mt-1 text-xl font-bold text-navy">¿Cómo puedes participar en Chanak?</h2>
         <p className="mt-1 text-sm leading-relaxed text-navy/70">
-          Puedes marcar más de una opción si vas a combinar funciones. La rama <b>Mentor</b> se activa en cuanto guardas.
-          <b> Coordinador</b> y <b>Estratégico</b> quedan pendientes hasta que los confirme la dirección indicada.
+          Puedes marcar más de una opción si vas a combinar funciones. <b>Mentor</b> y <b>Coordinador</b> los confirma <b>Dirección Académica (Mariela Andrade)</b>; <b>Estratégico</b> lo confirma <b>Dirección de Operaciones (Elías Vidal)</b>.
         </p>
       </div>
 

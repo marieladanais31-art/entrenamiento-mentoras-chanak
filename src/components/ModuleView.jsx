@@ -14,7 +14,7 @@ import { traducirModulo, traducirRecursos } from '../data/curriculum.en'
 import { TRONCO_COMUN } from '../data/roles'
 
 // Recorrido del módulo: Vídeo → Lectura → Práctica → Knowledge Check → Evidencia → Completado
-const PASOS = ['video', 'lectura', 'practica', 'quiz', 'evidencia', 'completado']
+const _PASOS = ['video', 'lectura', 'practica', 'quiz', 'evidencia', 'completado']
 
 export default function ModuleView({
   moduloId,
@@ -282,7 +282,7 @@ export default function ModuleView({
             </ul>
           </div>
         )}
-        {esAdmin && contenido?.desglose && <Desglose d={contenido.desglose} horas={modulo.horas} t={t} />}
+        {esAdmin && contenido?.desglose && <Desglose d={contenido.desglose} horas={modulo.horas} t={t} esAdmin={esAdmin} />}
       </div>
 
       {/* ── Stepper ── */}
@@ -639,7 +639,7 @@ export default function ModuleView({
   )
 }
 
-function Desglose({ d, horas, t }) {
+function Desglose({ d, horas, t, esAdmin }) {
   const fmt = (h) => `${Math.round(h * 60)} min`
   const filas = [
     { k: 'video', icono: '🎬', v: d.video },
@@ -672,7 +672,7 @@ function Desglose({ d, horas, t }) {
   )
 }
 
-function TarjetaDocumento({ doc, tipo, t, esAdmin }) {
+function TarjetaDocumento({ doc, tipo, _t, esAdmin }) {
   const urlExacta = resolverUrlDocumento(doc)
   const urlFolder = urlCarpeta(doc.carpeta)
   const tituloLimpio = (doc.documento || '')

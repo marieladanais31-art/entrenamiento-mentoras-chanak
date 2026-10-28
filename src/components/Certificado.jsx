@@ -14,12 +14,40 @@ export default function Certificado({ mentora, progreso, nivel, onVolver }) {
   const ref = `CHK-${cert.codigo}-${hoy.replace(/-/g, '')}`
 
   if (!(nivel === 2 ? r.elegibleCoordinadora : r.elegibleMentor)) return (
-    <section className="rounded-2xl bg-white p-5 text-navy shadow-sm">
-      <button onClick={onVolver} className="text-sm font-bold text-teal">Volver</button>
-      <h1 className="mt-4 text-xl font-bold">Certificación pendiente de validación formal</h1>
-      <p className="mt-3 text-sm">La meta de esta ruta es {cert.horas} horas. Las {r.horas} h mostradas en el app son una estimación de actividades de módulos; no son horas acreditadas ni una autorización de certificación.</p>
-      <p className="mt-3 text-sm">Presenta bitácora de tiempo real, currículo y práctica supervisada, portafolio y evaluación a dirección. La resolución y firma se archivan antes de emitir el certificado oficial.</p>
-      <a className="mt-4 inline-block text-sm font-bold text-teal underline" href="https://drive.google.com/file/d/11l7EomB_1f3qbXIfYmTwKefUgVbiGoTv/view">Consultar plan y protocolo</a>
+    <section className="rounded-2xl bg-white p-5 text-navy shadow-sm space-y-4">
+      <button onClick={onVolver} className="text-sm font-bold text-teal hover:underline">← Volver al panel</button>
+      <div className="border-b border-navy/10 pb-3">
+        <div className="text-[11px] font-bold uppercase tracking-wider text-teal">Certificación Oficial Interna</div>
+        <h1 className="mt-1 text-xl font-bold">Certificación pendiente de validación formal</h1>
+        <p className="mt-2 text-sm text-navy/75 leading-relaxed">
+          Los certificados son emitidos formalmente por <b>Chanak TrainUp Education, Inc.</b> (Chanak International Academy · FLDOE #134620) como acreditación interna de formación profesional firmada por Dirección.
+        </p>
+      </div>
+
+      <div className="rounded-2xl border border-teal/30 bg-teal/5 p-4 text-xs leading-relaxed space-y-2.5">
+        <div className="font-bold text-teal uppercase tracking-wide flex items-center gap-1.5">
+          <span>📋</span> Protocolo de validación por ramas y evidencias:
+        </div>
+        <div className="space-y-2 text-navy/85">
+          <p>
+            <b>• Nivel 1 (CHANAK CERTIFIED MENTOR · 180 h):</b> Lo valida y aprueba <b>Dirección Académica (Mariela Andrade)</b>. Requiere: Tronco común + Bloques 1 al 6 completados al 100% con Knowledge Checks ≥ 80%, Bloque 9 (Safeguarding y desarrollo), bitácora de autoestudio y práctica pedagógica documentada.
+          </p>
+          <p>
+            <b>• Nivel 2 (CHANAK CERTIFIED COORDINATOR · 300 h):</b> Lo valida conjuntamente <b>Dirección Académica (Mariela Andrade)</b> y <b>Dirección de Operaciones (Elías Vidal)</b>. Requiere: Certificación de Mentor activa, Bloque 8 completado, evidencias de supervisión de mentores y proyecto de coordinación de centro.
+          </p>
+          <p>
+            <b>• Rama Estratégica (Formación en Alianzas y Programas):</b> Lo valida <b>Dirección de Operaciones (Elías Vidal)</b> con la entrega del plan de trabajo territorial o propuesta de proyecto.
+          </p>
+        </div>
+      </div>
+
+      <p className="text-xs text-navy/60 leading-relaxed">
+        Las {r.horas} h mostradas en la app corresponden a la carga modular de actividades formativas. La emisión del diploma oficial requiere la resolución favorable archivada en dirección.
+      </p>
+
+      <a className="inline-block text-xs font-bold text-teal underline" href="https://drive.google.com/file/d/11l7EomB_1f3qbXIfYmTwKefUgVbiGoTv/view" target="_blank" rel="noreferrer">
+        Consultar plan y protocolo oficial de certificación en Drive →
+      </a>
     </section>
   )
 
@@ -69,12 +97,12 @@ export default function Certificado({ mentora, progreso, nivel, onVolver }) {
               <div>
                 <div className="h-10" />
                 <div className="border-t border-navy/40 pt-1.5 text-[12px] font-semibold text-navy">{t('cert.firma1')}</div>
-                <div className="text-[11px] text-navy/50">Chanak International Academy</div>
+                <div className="text-[11px] text-navy/50">Dirección Académica · Chanak International Academy</div>
               </div>
               <div>
                 <div className="h-10" />
                 <div className="border-t border-navy/40 pt-1.5 text-[12px] font-semibold text-navy">{t('cert.firma2')}</div>
-                <div className="text-[11px] text-navy/50">Chanak TrainUp Education, Inc.</div>
+                <div className="text-[11px] text-navy/50">Dirección de Operaciones · Chanak TrainUp Education, Inc.</div>
               </div>
             </div>
 
