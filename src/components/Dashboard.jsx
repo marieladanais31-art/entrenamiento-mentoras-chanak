@@ -177,6 +177,12 @@ export default function Dashboard({
         </section>
       )}
 
+      {(esAdmin || esCoord) && onVerFuncion && <section className="rounded-2xl border border-teal/25 bg-white p-5 shadow-sm">
+        <h2 className="text-lg font-bold text-navy">Manual operativo de mentoras · revisión 23/10</h2>
+        <p className="mt-2 text-sm">Consultar las cinco unidades y las rutinas de cada especialidad.</p>
+        <div className="mt-3 flex flex-wrap gap-2">{[['mentor', 'Mentora general'], ['english_teacher', 'Inglés'], ['lifeskills_facilitator', 'Life Skills']].map(([id, titulo]) => <button key={id} onClick={() => onVerFuncion(id)} className="rounded-xl bg-teal px-4 py-3 text-sm font-bold text-white">{titulo}</button>)}</div>
+      </section>}
+
       {/* PASO 1 · TRONCO COMÚN */}
       <Paso numero={1} titulo="Tronco común · para todas las personas" hechos={troncoHechos} total={troncoIds.length}
         sub="Quién es Chanak, el modelo 60/20/20, Off-Campus, Dual Diploma y Life Skills, safeguarding y protección de datos.">
@@ -313,7 +319,7 @@ export default function Dashboard({
         <div className="grid gap-3 sm:grid-cols-2">
           {(esMentorOCoord || esEstrategico) && <Acceso icono="👪" titulo="Manuales para familias" sub="Off-Campus y Dual Diploma · PDF y editable" onClick={onVerGuias} tono="navy" />}
           {esMentorOCoord && <Acceso icono="🖥" titulo="Operativa SIS" sub="Matrícula, expediente y familias paso a paso" onClick={onVerOperativa} tono="navy" />}
-          {(esCoord || esAdmin) && <Acceso icono="🧾" titulo="Coordinación SIS" sub="Ocho pantallas y práctica de revisión" onClick={onVerCoordinacion} tono="navy" />}
+          {(esCoord || esAdmin) && <Acceso icono="🧾" titulo="Coordinación SIS" sub="Perfil, once procedimientos y práctica de revisión" onClick={onVerCoordinacion} tono="navy" />}
           {(esEstrategico || esCoord || esAdmin) && <Acceso icono="🌎" titulo="ESA y fondos estatales" sub="Matriz de programas por estado (uso interno)" onClick={onVerMatriz} tono="navy" />}
           {onVerVistas && <Acceso icono="🖥" titulo="Vistas del sistema" sub="SIS, Dual Diploma y Life Skills con datos ficticios" onClick={onVerVistas} tono="teal" />}
           {(esEstrategico || esAdmin) && (

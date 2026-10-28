@@ -6,6 +6,8 @@ import * as api from '../lib/backend'
 import { resumenMentora, formatearFecha, iniciales, aplicarEquivalencias, calcularUltimaActividad, formatearUltimaActividad } from '../lib/calculos'
 import GestionUsuarias from './GestionUsuarias'
 import GestionCodigos from './GestionCodigos'
+import ActividadAdmin from './ActividadAdmin'
+import AccesosAdmin from './AccesosAdmin'
 import { useIdioma } from '../i18n/idioma'
 import { traducirBloques } from '../data/curriculum.en'
 import { ROL_POR_ID, rolesDesdeTipoAcceso, obtenerEmailConocido, solicitudDe } from '../data/roles'
@@ -19,13 +21,21 @@ export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) 
   const [rolesMapa, setRolesMapa] = useState(undefined) // null = migración de roles pendiente
   const [compromisosMapa, setCompromisosMapa] = useState(undefined)
   const [modalRespuestas, setModalRespuestas] = useState(null)
+  const [actividad, setActividad] = useState([])
+  const [errorActividad, setErrorActividad] = useState('')
+  const [accesosMapa, setAccesosMapa] = useState({})
+  const [errorAccesos, setErrorAccesos] = useState('')
   const [cargando, setCargando] = useState(true)
   const [error, setError] = useState('')
 
   const cargar = useCallback(async () => {
     setError('')
     try {
-      const [ps, prs, rm, cm] = await Promise.all([api.listarPerfiles(), api.getProgresoTodas(), api.listarRoles().catch(() => null), api.listarCompromisos().catch(() => null)])
+      const [ps, prs, rm, cm, act, acc] = await Promise.all([api.listarPerfiles(), api.getProgresoTodas(), api.listarRoles().catch(() => null), api.listarCompromisos().catch(() => null), api.listarActividadFormacion().then((filas) => ({ filas })).catch((e) => ({ filas: [], error: e.message })), api.listarUltimosAccesos().then(mapa => ({ mapa })).catch(e => ({ mapa: {}, error: e.message }))])
+      setAccesosMapa(acc.mapa)
+      setErrorAccesos(acc.error || '')
+      setActividad(act.filas)
+      setErrorActividad(act.error || '')
       setPerfiles(ps)
       setProgresos(prs)
       setRolesMapa(rm)
@@ -54,14 +64,17 @@ export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) 
         <p className="mt-2 inline-block rounded-full bg-white/10 px-3 py-1 text-[11px] text-cream/80">
           {t('admin.version', { version: VERSION_CURRICULO, fecha: formatearFecha(FECHA_ACTUALIZACION) })}
         </p>
+        <button onClick={() => setPestana('accesos')} className="mt-4 block min-h-12 rounded-xl bg-gold px-5 py-3 text-base font-bold text-navy">Ver últimos accesos de usuarios →</button>
       </div>
 
       {/* Pestañas */}
       <div className="flex gap-1 overflow-x-auto rounded-xl bg-white p-1 shadow-sm">
         {[
           ['usuarias', `${t('admin.tabUsuarias')}${pendientes ? ` (${pendientes})` : ''}`],
+          ['accesos', 'Últimos accesos'],
           ['codigos', t('admin.tabCodigos')],
           ['progreso', t('admin.tabProgreso')],
+          ['actividad', 'Actividad y pendientes'],
           ['videos', t('admin.tabVideos')],
           ['retroactivo', t('admin.tabRetroactivo')],
         ].map(([id, texto]) => (
@@ -98,8 +111,13 @@ export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) 
               compromisosMapa={compromisosMapa}
               progresos={progresos}
               onVerUsuaria={onVerUsuaria}
+              accesosMapa={accesosMapa}
+              errorAccesos={errorAccesos}
             />
           )}
+
+          {pestana === 'actividad' && <ActividadAdmin perfiles={perfiles} progresos={progresos} rolesMapa={rolesMapa} compromisosMapa={compromisosMapa} actividad={actividad} errorActividad={errorActividad} onActualizar={cargar} onVerUsuaria={onVerUsuaria} />}
+          {pestana === 'accesos' && <AccesosAdmin perfiles={perfiles} accesosMapa={accesosMapa} errorAccesos={errorAccesos} actividad={actividad} errorActividad={errorActividad} progresos={progresos} rolesMapa={rolesMapa} compromisosMapa={compromisosMapa} onActualizar={cargar} onVerUsuaria={onVerUsuaria} />}
 
           {pestana === 'codigos' && (
             <GestionCodigos miId={miPerfil.id} />

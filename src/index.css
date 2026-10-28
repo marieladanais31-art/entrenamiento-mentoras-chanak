@@ -44,6 +44,7 @@ body {
 }
 
 @media print {
+  .mi-funcion:has(.manual-mentoras) > :not(.manual-mentoras) { display: none !important; }
   .no-print {
     display: none !important;
   }
@@ -65,6 +66,17 @@ body {
 
 @page {
   margin: 12mm;
+}
+
+@media print {
+  body:has(.manual-mentoras) #root > div > header,
+  body:has(.manual-mentoras) .manual-mentoras ~ *,
+  body:has(.manual-mentoras) .manual-mentoras > details,
+  body:has(.manual-mentoras) .manual-mentoras > header {
+    display: none !important;
+  }
+  .manual-mentoras article { padding: 0; box-shadow: none; }
+  .manual-mentoras section, .manual-mentoras fieldset { break-inside: avoid; }
 }
 
 /* Visible keyboard focus across training screens. */

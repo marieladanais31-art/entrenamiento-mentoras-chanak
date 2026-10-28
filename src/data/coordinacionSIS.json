@@ -1,7 +1,7 @@
 {
   "titulo": "Coordinación · Pantallas SIS",
   "subtitulo": "Ocho vistas y práctica con datos ficticios · Referencia formativa del código actual",
-  "intro": "El coordinador trabaja con los estudiantes de su hub asignado. Sin hub, la carga inicial queda vacía. La ausencia de alumnos se consulta con Administración; no se resuelve concediendo un rol más amplio. Las pantallas ilustradas simplifican los controles para enseñar el recorrido: no son capturas de una sesión autenticada ni reproducen expedientes reales.",
+  "intro": "Trabaja solo con los estudiantes del ámbito asignado. Si falta el hub o aparecen alumnos ajenos, solicita revisión a Administración antes de operar. Los esquemas siguientes son ejemplos con datos ficticios, no capturas de cuentas reales. El manual completo describe el panel actual y sus once pestañas.",
   "pantallas": [
     {
       "id": "notas",
@@ -225,7 +225,8 @@
     "parrafos": [
       "El LMS Dual revisado ofrece Mis estudiantes & Tareas, Cola de revisión completa, ChanakCoins, Feedback y PEI Estudiantes, además del acceso a convalidación.",
       "Revise los alumnos asignados, unidades/evidencias pendientes y documentos a mapear. Convalide solo dentro de su autoridad y conserve la decisión y el expediente de origen.",
-      "No suponga que rol, asignación, contraseña o resultados se sincronizan automáticamente desde SIS. Compruebe las relaciones y las discrepancias antes de comunicar progreso o créditos a la familia."
+      "No suponga que rol, asignación, contraseña o resultados se sincronizan automáticamente desde SIS. Compruebe las relaciones y las discrepancias antes de comunicar progreso o créditos a la familia.",
+      "El flujo revisado LMS → SIS utiliza exportación e importación por identificador SIS; no sincroniza automáticamente todas las notas. Revisar el cruce antes de duplicar un crédito."
     ]
   },
   "rutina": [
@@ -235,9 +236,8 @@
     "En el cierre de periodo: contrastar plan, resultados aprobados, boletín y documentación."
   ],
   "fuentes": [
-    "23_SIS_Progress_Screenshots_Manual.docx (39 imágenes, usado como referencia; imágenes privadas no reproducidas).",
-    "Guías familiares Off-Campus y Dual e instructivos de matrícula aportados por Mariela.",
-    "SIS: CoordinatorDashboard.jsx, ParentDashboard.jsx y StudentDashboard.jsx; revisión del código el 6 octubre 2026.",
-    "LMS Dual: login, familia, estudiante y coordinador; revisión del código el 6 octubre 2026."
+    "SIS: CoordinatorDashboard, GradeReviewPanel, EvidenceReviewPanel, PEIFormFull, TranscriptGenerator, EvaluationTrackingReport, HubDualDiploma y AdminStudentMentors. Revisión 23/10/2026.",
+    "Ruta /coordinator contrastada en App.jsx. Manual operativo ampliado con los procedimientos del panel vigente.",
+    "Las ilustraciones son simulaciones formativas; no acreditan permisos efectivos ni validación de migraciones en producción."
   ]
 }

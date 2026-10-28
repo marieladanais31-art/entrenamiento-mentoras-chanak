@@ -1,6 +1,7 @@
 import { supabase, SUPABASE_URL, SUPABASE_ANON_KEY } from './supabase'
 import { createClient } from '@supabase/supabase-js'
 import { grupoDe } from '../data/roles'
+import { MANUAL_ID, MANUAL_VERSION, UNIDADES_MENTORAS, evaluarManual } from '../data/manualMentoras'
 
 // ════════════════════════════════════════════
 // AUTENTICACIÓN
@@ -172,6 +173,12 @@ export async function listarPerfiles() {
   return data || []
 }
 
+export async function listarUltimosAccesos() {
+  const { data, error } = await supabase.rpc('admin_ultimos_accesos_formacion')
+  if (error) throw new Error(error.message)
+  return Object.fromEntries((data || []).map(fila => [fila.perfil_id, fila]))
+}
+
 export async function actualizarPerfil(id, cambios) {
   const { error } = await supabase.from('perfiles').update(cambios).eq('id', id)
   if (error) throw new Error(error.message)
@@ -221,7 +228,7 @@ export async function getRolesDe(userId) {
 
 // Todos los roles (admin): { [perfil_id]: [{ id, rol, territorio, programa }] } o null
 export async function listarRoles() {
-  const { data, error } = await supabase.from('perfil_roles').select('id, perfil_id, rol, funcion, territorio, programa')
+  const { data, error } = await supabase.from('perfil_roles').select('id, perfil_id, rol, funcion, territorio, programa, asignado_por, asignado_en')
   if (error) {
     if (tablaRolesAusente(error.message)) return null
     throw new Error(error.message)
@@ -356,6 +363,28 @@ export async function setQuizModulo(usuariaId, moduloId, resultado, previo) {
   })
 }
 
+// Registro complementario en la tabla de progreso existente. No suma horas ni
+// modifica el catálogo obligatorio; una evaluación formativa no emite certificados.
+export async function guardarManualMentoras(usuariaId, registro, intento, previo) {
+  if (registro?.version !== MANUAL_VERSION) throw new Error('Versión del manual no válida')
+  const lecturas = UNIDADES_MENTORAS.filter((u) => registro.lecturas?.includes(u.id) && registro.casos?.[u.id] === u.caso.correcta).map((u) => u.id)
+  const casos = Object.fromEntries(lecturas.map((id) => [id, registro.casos[id]]))
+  let quiz = previo?.quiz?.version === MANUAL_VERSION ? previo.quiz : null
+  if (intento) {
+    const evaluado = evaluarManual(intento.respuestas || {})
+    if (lecturas.length !== UNIDADES_MENTORAS.length || !evaluado.completas) throw new Error('Completa las cinco lecturas y las quince respuestas')
+    quiz = { ...evaluado, respuestas: intento.respuestas, fecha: new Date().toISOString() }
+  }
+  const terminado = lecturas.length === UNIDADES_MENTORAS.length && quiz?.aprobado === true
+  await upsertProgreso(usuariaId, MANUAL_ID, {
+    estado: terminado ? 'completado' : 'en_curso',
+    fecha_inicio: previo?.fechaInicio || hoyISO(),
+    fecha_completado: terminado ? previo?.fechaCompletado || hoyISO() : null,
+    notas: JSON.stringify({ version: MANUAL_VERSION, lecturas, casos }),
+    quiz,
+  })
+}
+
 // Progreso de todas las usuarias (solo admin): { usuariaId: {modulos:{…}} }
 export async function getProgresoTodas() {
   const { data, error } = await supabase
@@ -367,13 +396,13 @@ export async function getProgresoTodas() {
     if (!porUsuaria[f.usuaria_id]) porUsuaria[f.usuaria_id] = { modulos: {} }
     porUsuaria[f.usuaria_id].modulos[f.modulo_id] = {
       estado: f.estado,
+      actualizadoEn: f.actualizado_en,
       fechaInicio: f.fecha_inicio,
       fechaCompletado: f.fecha_completado,
       notas: f.notas,
       quiz: f.quiz,
       entregableUrl: f.entregable_url,
       entregableNombre: f.entregable_nombre,
-      actualizadoEn: f.actualizado_en,
     }
   }
   return porUsuaria
@@ -535,4 +564,34 @@ function traducirError(mensaje = '') {
   if (m.includes('duplicate') || m.includes('unique')) return 'Ya existe un registro con estos datos.'
   if (m.includes('codigo')) return 'Error con el código de acceso. Inténtalo de nuevo.'
   return mensaje
+}
+
+// Actividad de formación: solo tiempo aproximado, independiente del progreso académico.
+const escriturasActividad = new Map()
+export function registrarActividad(fila) {
+  const datos = { id: fila.id, perfil_id: fila.perfil_id, sesion_id: fila.sesion_id,
+    vista: fila.vista, modulo_id: fila.modulo_id, paso: fila.paso,
+    segundos_activos: fila.segundos_activos, ultima_actividad: fila.ultima_actividad }
+  const anterior = escriturasActividad.get(fila.id) || Promise.resolve()
+  const escritura = anterior.catch(() => {}).then(async () => {
+    const { error } = await supabase.from('actividad_formacion').upsert(datos, { onConflict: 'id' })
+    if (error) throw new Error(error.message)
+  })
+  escriturasActividad.set(fila.id, escritura)
+  void escritura.finally(() => { if (escriturasActividad.get(fila.id) === escritura) escriturasActividad.delete(fila.id) }).catch(() => {})
+  return escritura
+}
+
+export async function listarActividadFormacion() {
+  const filas = []
+  // Orden estable y paginación: no cortar el informe en las primeras 1.000 filas.
+  for (let desde = 0; ; desde += 1000) {
+    const { data, error } = await supabase.from('actividad_formacion')
+      .select('id, perfil_id, sesion_id, vista, modulo_id, paso, segundos_activos, creado_en, ultima_actividad')
+      .order('creado_en', { ascending: true }).order('id', { ascending: true }).range(desde, desde + 999)
+    if (error) throw new Error(error.message)
+    filas.push(...data)
+    if (data.length < 1000) break
+  }
+  return filas
 }

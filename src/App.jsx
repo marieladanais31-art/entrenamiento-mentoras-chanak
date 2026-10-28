@@ -14,6 +14,7 @@ import HoursLog from './components/HoursLog'
 import Certificado from './components/Certificado'
 import AdminView from './components/AdminView'
 import Glosario from './components/Glosario'
+import useActividadFormacion from './hooks/useActividadFormacion'
 import Organigrama from './components/Organigrama'
 import MatrizProgramas from './components/MatrizProgramas'
 import RolPerfil from './components/RolPerfil'
@@ -23,6 +24,7 @@ import CambiarContrasena from './components/CambiarContrasena'
 import CompromisoInicial, { VERSIONES_VALIDAS } from './components/CompromisoInicial'
 import EstrategiaOperativa from './components/EstrategiaOperativa'
 import MiFuncion from './components/MiFuncion'
+import { MANUAL_ID } from './data/manualMentoras'
 import VistasSistemaView from './components/VistasSistemaView'
 import ComparativaCurriculos from './components/ComparativaCurriculos'
 import CitaAdminModal from './components/CitaAdminModal'
@@ -59,6 +61,14 @@ export default function App() {
   // El admin puede abrir el panel de otra usuaria; si no, es el suyo
   const idViendo = vista.usuariaId || perfil?.id
   const viendoOtra = esAdmin && idViendo !== perfil?.id
+
+  const [pasoActividad, setPasoActividad] = useState(null)
+  const informarPaso = useCallback((moduloId, paso) => setPasoActividad({ moduloId, paso }), [])
+  useActividadFormacion(perfil?.id, Boolean(sesion?.user?.id === perfil?.id && aprobada && !viendoOtra), {
+    vista: vista.nombre,
+    moduloId: vista.nombre === 'modulo' ? vista.moduloId : null,
+    paso: vista.nombre === 'modulo' && pasoActividad?.moduloId === vista.moduloId ? pasoActividad.paso : null,
+  })
 
   // ── Sesión ──
   useEffect(() => {
@@ -242,7 +252,7 @@ export default function App() {
         esPrimerIngreso={debeCambiarPassword}
         onCompletado={async () => {
           if (perfil?.id) {
-            try { await api.actualizarPerfil(perfil.id, { debe_cambiar_password: false }) } catch (_) { /* ignorar */ }
+            try { await api.actualizarPerfil(perfil.id, { debe_cambiar_password: false }) } catch (_) { /* El siguiente refresco de sesión mantiene el flujo de acceso. */ }
           }
           const s = await api.getSesion()
           setSesion(s)
@@ -380,7 +390,12 @@ export default function App() {
             onVerCoordinacion={() => setVista({ ...vista, nombre: 'coordinacion-sis' })}
           />
         )}
-        {vista.nombre === 'mi-funcion' && <MiFuncion funcionId={vista.funcionId} roles={rolesIds} onCambiar={(funcionId) => setVista({ ...vista, funcionId })} onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
+        {vista.nombre === 'mi-funcion' && <MiFuncion onVerCoordinacion={() => setVista({ ...vista, nombre: 'coordinacion-sis' })} funcionId={vista.funcionId} roles={rolesIds} onCambiar={(funcionId) => setVista({ ...vista, funcionId })} onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} manualProgreso={progreso.modulos[MANUAL_ID]} soloLectura={viendoOtra} onGuardarManual={async (registro, quiz) => {
+          if (viendoOtra) throw new Error('Vista de consulta')
+          await api.guardarManualMentoras(perfil.id, registro, quiz, progreso.modulos[MANUAL_ID])
+          const pr = await api.getProgreso(perfil.id)
+          setProgreso(pr)
+        }} />}
         {vista.nombre === 'vistas' && <VistasSistemaView roles={rolesIds} esAdmin={esAdmin} onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
         {vista.nombre === 'catalogo-videos' && <CatalogoVideos esAdmin={esAdmin} onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
         {vista.nombre === 'operativa-sis' && <OperativaSIS onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
@@ -426,6 +441,7 @@ export default function App() {
         )}
         {vista.nombre === 'modulo' && (
           <ModuleView
+            onPasoActividad={informarPaso}
             moduloId={vista.moduloId}
             contexto={vista.contexto}
             progresoModulo={progresoVista.modulos[vista.moduloId]}

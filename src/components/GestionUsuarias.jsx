@@ -12,6 +12,7 @@ import { useIdioma } from '../i18n/idioma'
 import { obtenerEmailConocido, ROL_POR_ID, solicitudDe, PROYECTOS_PRIORIDAD } from '../data/roles'
 import AsignarRoles from './AsignarRoles'
 import ModalRespuestasUsuaria from './ModalRespuestasUsuaria'
+import UltimoInicioSesion from './UltimoInicioSesion'
 
 const PAISES = ['España', 'México', 'Panamá', 'Estados Unidos', 'Otro']
 const PROGRAMAS = ['Off-Campus', 'Dual Diploma', 'Life Skills', 'Partner Learning Center', 'Varios']
@@ -103,7 +104,7 @@ function getCuerpoCorreoIndividual(nombre, correo) {
 }
 
 // Aprobación y gestión de cuentas. Solo visible para admin.
-export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa, compromisosMapa, progresos, onVerUsuaria }) {
+export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa, compromisosMapa, progresos, onVerUsuaria, accesosMapa, errorAccesos }) {
   const { t } = useIdioma()
   const [ocupado, setOcupado] = useState(null)
   const [error, setError] = useState('')
@@ -675,6 +676,7 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
                   <Avatar nombre={p.nombre} />
                   <div className="min-w-0 flex-1">
                     <div className="text-sm font-semibold text-navy">{p.nombre}</div>
+                    <UltimoInicioSesion acceso={accesosMapa?.[p.id]} error={errorAccesos} />
                     <div className="text-xs text-teal font-medium">📧 {correoP || 'Sin email registrado'}</div>
                     <div className="text-[12px] text-navy/50 flex flex-wrap items-center gap-2">
                       <span>{t('usuarias.solicito', { fecha: formatearFecha(p.creado_en?.slice(0, 10)) })}</span>
@@ -778,6 +780,7 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
                   )}
 
                   {/* Correo y botón de resetear contraseña */}
+                  <UltimoInicioSesion acceso={accesosMapa?.[p.id]} error={errorAccesos} />
                   <div className="flex flex-wrap items-center gap-2 mt-0.5">
                     <span className="text-xs font-semibold text-teal bg-teal/10 px-2 py-0.5 rounded-md">
                       📧 {correoActiva || 'Sin email registrado'}
@@ -1004,7 +1007,7 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
                     className="w-28 rounded-lg bg-white px-2 py-1 text-xs text-navy"
                   />
                 </div>
-                <AsignarRoles perfil={p} filas={rolesMapa?.[p.id]} miId={miId} onRecargar={onRecargar} migrado={rolesMapa !== null && rolesMapa !== undefined} funcionesCompromiso={compromisosMapa?.[p.id]?.funciones} />
+                <AsignarRoles perfiles={perfiles} perfil={p} filas={rolesMapa?.[p.id]} miId={miId} onRecargar={onRecargar} migrado={rolesMapa !== null && rolesMapa !== undefined} funcionesCompromiso={compromisosMapa ? (compromisosMapa[p.id]?.funciones || []) : undefined} />
               </li>
             )
           })}
@@ -1033,6 +1036,7 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
                   <Avatar nombre={p.nombre} apagado />
                   <div className="min-w-0 flex-1">
                     <div className="text-sm text-navy/70 font-semibold">{p.nombre}</div>
+                    <UltimoInicioSesion acceso={accesosMapa?.[p.id]} error={errorAccesos} />
                     {correoSusp && <div className="text-xs text-navy/50">📧 {correoSusp}</div>}
                   </div>
                   <button

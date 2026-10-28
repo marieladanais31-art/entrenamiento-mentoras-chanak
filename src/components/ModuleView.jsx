@@ -18,6 +18,7 @@ const _PASOS = ['video', 'lectura', 'practica', 'quiz', 'evidencia', 'completado
 
 export default function ModuleView({
   moduloId,
+  onPasoActividad,
   contexto,
   progresoModulo: p,
   videos,
@@ -80,6 +81,9 @@ export default function ModuleView({
     setPaso(0)
   }, [moduloId])
 
+  const actual = pasosActivos[paso] || pasosActivos[0]
+  useEffect(() => { onPasoActividad?.(moduloId, actual) }, [moduloId, actual, onPasoActividad])
+
   if (!modulo) return null
 
   const quizAprobado = Boolean(p?.quiz?.aprobado)
@@ -122,8 +126,6 @@ export default function ModuleView({
     const idx = pasosActivos.indexOf(nombre)
     if (idx !== -1) await irA(idx)
   }
-
-  const actual = pasosActivos[paso] || pasosActivos[0]
 
   return (
     <div className="space-y-4">

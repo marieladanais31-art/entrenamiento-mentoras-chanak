@@ -105,7 +105,7 @@ export const FUNCIONES = {
       { cuando: 'Martes y jueves', que: 'Revisar Notas y Evidencias: aprueba o solicita corrección con comentario.', donde: 'SIS coordinador · Revisar Notas / Evidencias' },
       { cuando: 'Cada semana', que: 'Cola de revisión, feedback y convalidaciones del Dual Diploma.', donde: 'Dual Diploma Portal · /es/coordinador' },
       { cuando: 'Mensual', que: 'Reunión breve con cada mentor/profesor: casos, calidad del feedback, carga de trabajo.', donde: 'Videollamada + acta' },
-      { cuando: 'Fin de trimestre', que: 'Emite boletines cuando todas las notas están aprobadas; reporta a Chanak Central.', donde: 'SIS coordinador · Boletines' },
+      { cuando: 'Fin de trimestre', que: 'Prepara el boletín con respaldo de notas y evidencias; tramita aprobación y publicación según la delegación de Dirección.', donde: 'SIS coordinador · Boletines' },
     ],
     casos: [
       { si: 'Nota alta sin evidencia', haz: 'Solicita corrección pidiendo la evidencia.', escala: '—' },
@@ -121,7 +121,7 @@ export const FUNCIONES = {
     titulo: 'Director/a de institución partner',
     resultado: 'Su institución opera los programas contratados según el convenio, con su equipo formado y sus informes al día.',
     rutina: [
-      { cuando: 'Al inicio del curso', que: 'Confirma programas contratados, equipo asignado y estudiantes incorporados.', donde: 'SIS (admin limitado a su institución)' },
+      { cuando: 'Al inicio del curso', que: 'Confirma programas contratados, equipo asignado y estudiantes incorporados.', donde: 'SIS (según el ámbito y los permisos asignados a su institución)' },
       { cuando: 'Mensual', que: 'Revisa indicadores e incidencias con su coordinador.', donde: 'SIS · Seguimiento / Dual Diploma Portal' },
       { cuando: 'Trimestral', que: 'Informe a Chanak Central y plan de mejora.', donde: 'Drive · informes autorizados' },
     ],
