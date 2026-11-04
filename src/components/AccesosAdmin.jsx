@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { resumirAccesos } from '../lib/accesos'
+import { resumirAccesos, seguimientoInactividad } from '../lib/accesos'
 import { duracionActividad, fechaActividad } from '../lib/actividad'
 import { resumirPersona } from '../lib/resumenActividad'
 import UltimoInicioSesion from './UltimoInicioSesion'
@@ -8,6 +8,7 @@ export default function AccesosAdmin({ perfiles, accesosMapa, errorAccesos, acti
   const [buscar, setBuscar] = useState('')
   const [filtro, setFiltro] = useState('todos')
   const [actualizando, setActualizando] = useState(false)
+  const [borradorId, setBorradorId] = useState(null)
   const filas = useMemo(() => resumirAccesos(perfiles, accesosMapa, actividad), [perfiles, accesosMapa, actividad])
   const filtroValido = (errorAccesos && filtro === 'sin-inicio') || ((errorAccesos || errorActividad) && filtro === 'siete-dias') ? 'todos' : filtro
   const visibles = filas.filter(f => f.perfil.nombre.toLowerCase().includes(buscar.trim().toLowerCase()) && (filtroValido === 'todos' || filtroValido === 'sin-inicio' && f.sinInicio || filtroValido === 'siete-dias' && f.sinSenalSieteDias))
@@ -19,6 +20,7 @@ export default function AccesosAdmin({ perfiles, accesosMapa, errorAccesos, acti
       <p className="text-sm leading-relaxed text-navy/75">Ordenado por la señal más reciente entre inicio y actividad registrada. Horarios de España. “Sin inicio registrado” no significa que podamos demostrar que nunca entró; “sin medición” tampoco significa que no haya trabajado.</p>
       {errorAccesos && <p role="alert" className="rounded-xl bg-gold/15 p-4 text-base">No se pudieron consultar los inicios de sesión: {errorAccesos}. No se muestran como si fueran cuentas sin acceso.</p>}
       {errorActividad && <p role="alert" className="rounded-xl bg-gold/15 p-4 text-base">La medición de actividad no está disponible. Los inicios de sesión siguen siendo independientes.</p>}
+      <p className="rounded-xl bg-teal/5 p-4 text-base"><b>Seguimiento por inactividad:</b> a los 7 días se propone un recordatorio y a los 14 un contacto personal. Son propuestas para Administración: todavía no se envían correos automáticos. La falta de señal no demuestra que una persona haya abandonado la formación.</p>
       <div className="flex flex-wrap gap-3 text-base">
         <input aria-label="Buscar usuario en accesos" placeholder="Buscar nombre…" value={buscar} onChange={e => setBuscar(e.target.value)} className="min-h-12 flex-1 min-w-0 rounded-xl border border-navy/20 px-4 py-3" />
         <select aria-label="Filtrar últimos accesos" value={filtroValido} onChange={e => setFiltro(e.target.value)} className="min-h-12 rounded-xl border border-navy/20 px-3 py-3"><option value="todos">Todas las cuentas ({perfiles.length})</option><option value="sin-inicio" disabled={!!errorAccesos}>Sin inicio de sesión registrado</option><option value="siete-dias" disabled={!!errorAccesos || !!errorActividad}>Sin señal registrada en 7 días</option></select>
@@ -29,6 +31,7 @@ export default function AccesosAdmin({ perfiles, accesosMapa, errorAccesos, acti
     {visibles.map(f => {
       const p = f.perfil
       const r = resumirPersona(p, progresos[p.id], rolesMapa?.[p.id], compromisosMapa?.[p.id], actividad)
+      const seguimiento = seguimientoInactividad(f, { errorAccesos, errorActividad, completo: r.total > 0 && r.completados >= r.total })
       return <article key={p.id} className="rounded-2xl bg-white p-5 shadow-sm">
         <div className="flex flex-wrap items-start justify-between gap-3"><div><h4 className="text-xl font-bold text-navy">{p.nombre}</h4><p className="mt-1 text-sm text-navy/70">{p.estado}{p.pais ? ` · ${p.pais}` : ''}</p></div><button onClick={() => onVerUsuaria(p.id, p.nombre, p.id_interno)} className="min-h-11 rounded-xl bg-navy/5 px-4 py-3 font-bold text-navy">Abrir su avance</button></div>
         <UltimoInicioSesion acceso={accesosMapa?.[p.id]} error={errorAccesos} />
@@ -38,6 +41,11 @@ export default function AccesosAdmin({ perfiles, accesosMapa, errorAccesos, acti
           <div><dt className="font-bold">Avance guardado</dt><dd className="mt-1">{r.completados}/{r.total} módulos ({r.porcentaje} %)</dd></div>
           <div><dt className="font-bold">Último cambio de progreso</dt><dd className="mt-1">{fechaActividad(r.ultimoCambio)}</dd></div>
         </dl>
+        <div className="mt-4 rounded-xl bg-navy/5 p-4 text-base">
+          <p><b>Seguimiento sugerido:</b> {seguimiento.texto}</p>
+          {seguimiento.borrador && <button onClick={() => setBorradorId(borradorId === p.id ? null : p.id)} className="mt-3 min-h-11 rounded-xl border border-teal/30 bg-white px-4 py-3 font-bold text-teal">{borradorId === p.id ? 'Cerrar borrador' : 'Preparar recordatorio · no enviar'}</button>}
+          {borradorId === p.id && seguimiento.borrador && <div className="mt-3"><label htmlFor={`recordatorio-${p.id}`} className="font-bold">Borrador para revisar y copiar</label><textarea id={`recordatorio-${p.id}`} readOnly value={seguimiento.borrador} rows={6} className="mt-2 w-full rounded-xl border border-navy/20 bg-white p-3" /><p className="mt-2 text-sm">Confirma destinatario y situación antes de enviarlo. Este botón no realiza ningún envío.</p></div>}
+        </div>
       </article>
     })}
     {!visibles.length && <p className="rounded-xl bg-white p-5 text-base">No hay cuentas con este filtro.</p>}

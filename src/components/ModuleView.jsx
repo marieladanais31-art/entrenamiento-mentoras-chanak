@@ -1,3 +1,4 @@
+import ActualizacionOperativa from './ActualizacionOperativa'
 import { useState, useEffect } from 'react'
 import { getModulo, RECURSOS_GENERALES, FUENTES, numModulo, urlCarpeta, resolverUrlDocumento, clasificarDocumento } from '../data/curriculum'
 import { getContenido } from '../data/contenido'
@@ -354,6 +355,7 @@ export default function ModuleView({
             </div>
           )}
 
+          <ActualizacionOperativa moduloId={moduloId} />
           <div className="space-y-6">
             {contenido.lecciones.map((lec, i) => (
               <article key={i} className="rounded-2xl border border-navy/10 bg-cream/20 p-5 sm:p-6 transition hover:border-navy/20">

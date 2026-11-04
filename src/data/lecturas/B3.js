@@ -150,7 +150,7 @@ export const LECTURAS_B3 = {
         guion: [
           'En LIFEPAC, el adulto responsable en el hogar trabaja con la Teacher’s Guide, que contiene las claves de respuestas, actividades complementarias y exámenes alternativos.',
           'La custodia de las claves es esencial: la Teacher’s Guide debe estar siempre guardada fuera del alcance del alumno para garantizar la integridad de los Self-Tests y Unit Tests.',
-          'La mentora revisa semanalmente el ritmo de avance en los worktexts, valida las evidencias remitidas por la familia y registra las calificaciones oficiales en el SIS.',
+          'La familia supervisa el ritmo semanal de los worktexts. La mentora general revisa el conjunto en la reunión mensual acordada y registra o revisa evidencias y calificaciones según sus permisos; cualquier seguimiento adicional depende del servicio contratado.',
         ],
       },
     ],

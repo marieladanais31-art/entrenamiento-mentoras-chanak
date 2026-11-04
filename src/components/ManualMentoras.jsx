@@ -1,3 +1,4 @@
+import ActualizacionOperativa from './ActualizacionOperativa'
 import { useState } from 'react'
 import CoberturaEspecialistas from './CoberturaEspecialistas'
 import IncorporacionMentores from './IncorporacionMentores'
@@ -35,6 +36,7 @@ export default function ManualMentoras({ funcionId, progreso, onGuardar, soloLec
 
   return <section className="manual-mentoras space-y-5" aria-label="Manual operativo de mentoras">
     <IncorporacionMentores />
+    <ActualizacionOperativa funcionId={funcionId} />
     <header className="rounded-2xl border border-teal/30 bg-teal/5 p-5">
       <p className="text-sm font-bold text-teal">Actualización operativa · {MANUAL_VERSION}</p>
       <h2 className="mt-1 text-2xl font-bold text-navy">Tres perfiles: Mentor general, Inglés y Life Skills</h2>
