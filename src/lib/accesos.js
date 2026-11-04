@@ -21,3 +21,13 @@ export function resumirAccesos(perfiles, accesosMapa, actividad, ahora = Date.no
       sinSenalSieteDias: ultimaSenal !== null && ahora - ultimaSenal >= 7 * 86400000 }
   }).sort((a, b) => (b.ultimaSenal ?? -Infinity) - (a.ultimaSenal ?? -Infinity) || a.perfil.nombre.localeCompare(b.perfil.nombre))
 }
+
+// Propuesta de seguimiento para revisión humana; no envía correos.
+export function seguimientoInactividad(fila, { errorAccesos = false, errorActividad = false, completo = false, ahora = Date.now() } = {}) {
+  if (errorAccesos || errorActividad || !fila.consultado) return { nivel: 'sin-datos', texto: 'Datos insuficientes para valorar inactividad.' }
+  if (fila.perfil.estado !== 'aprobada' || fila.perfil.rol === 'admin' || completo) return { nivel: 'excluido', texto: 'Sin recordatorio propuesto: cuenta no activa, administrativa o formación completada.' }
+  if (fila.ultimaSenal === null) return { nivel: 'sin-senal', texto: 'Sin señal disponible: confirmar primero si recibió y pudo usar el acceso.' }
+  const dias = Math.floor((ahora - fila.ultimaSenal) / 86400000)
+  if (dias < 7) return { nivel: 'reciente', dias, texto: 'Tiene una señal reciente; sin recordatorio propuesto.' }
+  return { nivel: dias >= 14 ? 'catorce-dias' : 'siete-dias', dias, texto: `${dias} días sin señal registrada. ${dias >= 14 ? 'Proponer contacto personal para ofrecer ayuda.' : 'Proponer un recordatorio amable.'}`, borrador: `Bendiciones, ${fila.perfil.nombre}. Te escribimos para saber cómo vas con la formación Chanak. Puedes continuar en https://training.chanakacademy.org/. Si tienes alguna dificultad de acceso o necesitas apoyo para retomar, responde a este mensaje y te ayudamos. Un abrazo, Formación Chanak.` }
+}

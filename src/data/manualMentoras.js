@@ -76,6 +76,8 @@ export const MERITOS_COINS = [
   ['Pasaje del mes en la primera semana', 100], ['Pasaje del mes después de la primera semana', 50],
   ['Pasaje del mes en inglés', 20], ['Pasaje del mes de abajo hacia arriba', 20],
   ['Mostrar el rasgo del carácter de la semana', 100], ['Actos de servicio', 20],
+  ['Participación Life Skills', 50], ['Cápsula / reto', 30],
+  ['Proyecto / Capstone / BOLD', 100], ['Hábito devocional semanal', 20],
 ]
 
 export const PERFILES_OPERATIVOS = [
