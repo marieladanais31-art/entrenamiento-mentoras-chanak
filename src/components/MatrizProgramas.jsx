@@ -36,10 +36,13 @@ export default function MatrizProgramas({ onVolver }) {
         <h2 className="mt-1 text-xl font-bold text-navy">Estados y programas · Servicios de Chanak</h2>
         <p className="mt-2 text-sm leading-relaxed text-navy/70">
           Catálogo oficial de fondos educativos estatales y becas de elección escolar (School Choice) aprobados para Chanak International Academy.
-          Estados aprobados activos: <b>Florida</b> (Step Up EMA / PEP & FES-UA), <b>Utah</b> (Odyssey UFA), <b>Wyoming</b> (Odyssey ESA), <b>Arizona</b> (ClassWallet ESA), <b>Alabama</b> (ClassWallet CHOOSE Act), <b>South Carolina</b> (ClassWallet ESTF), <b>New Hampshire</b> (ClassWallet EFA) y <b>Texas</b> (Odyssey TEFA · Aprobado / Casi seguro).
+          Estados aprobados activos (7): <b>Florida</b> (Step Up EMA / PEP & FES-UA), <b>Alabama</b> (ClassWallet CHOOSE Act), <b>Arizona</b> (ClassWallet ESA), <b>Utah</b> (Odyssey UFA), <b>Wyoming</b> (Wyoming ESA), <b>New Hampshire</b> (ClassWallet EFA) y <b>South Carolina</b> (ClassWallet ESTF). <i>Texas (Odyssey TEFA) se encuentra actualmente en tramitación.</i>
         </p>
+        <div className="mt-2 rounded-lg bg-teal/10 p-2.5 text-xs font-medium text-navy/90 border border-teal/20">
+          📌 <b>Cláusula de política estatal obligatoria:</b> «Las familias elegibles pueden solicitar el pago de servicios autorizados con los fondos disponibles de su programa. La aprobación depende del servicio, del estudiante y de las reglas aplicables».
+        </div>
 
-        {/* Barra de Accesos Directos a los 8 Programas Estatales Clave */}
+        {/* Barra de Accesos Directos a los Programas Estatales Clave */}
         <div className="mt-4 rounded-xl border-2 border-teal/30 bg-teal/5 p-4 space-y-2">
           <div className="text-xs font-bold uppercase tracking-wider text-teal">
             🔗 Enlaces Oficiales Directos · Programas Estatales Clave (Direct Pay)
@@ -105,9 +108,9 @@ export default function MatrizProgramas({ onVolver }) {
               href="https://educationfreedom.texas.gov/providers-vendors/"
               target="_blank"
               rel="noreferrer"
-              className="rounded-lg bg-gold/30 px-3 py-1.5 font-bold text-navy border border-gold hover:bg-gold hover:text-navy transition shadow-xs"
+              className="rounded-lg bg-cream px-3 py-1.5 font-bold text-navy/70 border border-navy/20 hover:bg-navy/10 transition shadow-xs"
             >
-              🤠 Texas (TEFA · Aprobado / Casi seguro) ↗
+              🤠 Texas (TEFA · En tramitación) ↗
             </a>
           </div>
         </div>

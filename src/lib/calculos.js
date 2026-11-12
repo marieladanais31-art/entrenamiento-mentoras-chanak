@@ -180,3 +180,60 @@ export function urlEmbed(url = '') {
   if (/\/(embed|preview)(\?|$|\/)/.test(u)) return { tipo: 'embed', url: u }
   return { tipo: 'link', url: u }
 }
+
+// Calcula la fecha y hora más reciente de actividad o conexión de una persona:
+// combina progreso de módulos (actualizadoEn, fechaCompletado, fechaInicio),
+// aceptación y actualización del compromiso, y creación del perfil.
+export function calcularUltimaActividad(perfil, progresoUsuaria, compromiso) {
+  const fechas = []
+  if (perfil?.creado_en) {
+    const t = new Date(perfil.creado_en).getTime()
+    if (!isNaN(t)) fechas.push(t)
+  }
+  if (compromiso?.actualizado_en) {
+    const t = new Date(compromiso.actualizado_en).getTime()
+    if (!isNaN(t)) fechas.push(t)
+  }
+  if (compromiso?.aceptado_en) {
+    const t = new Date(compromiso.aceptado_en).getTime()
+    if (!isNaN(t)) fechas.push(t)
+  }
+  const mods = progresoUsuaria?.modulos || {}
+  for (const m of Object.values(mods)) {
+    if (m.actualizadoEn) {
+      const t = new Date(m.actualizadoEn).getTime()
+      if (!isNaN(t)) fechas.push(t)
+    }
+    if (m.fechaCompletado) {
+      const t = new Date(m.fechaCompletado).getTime()
+      if (!isNaN(t)) fechas.push(t)
+    }
+    if (m.fechaInicio) {
+      const t = new Date(m.fechaInicio).getTime()
+      if (!isNaN(t)) fechas.push(t)
+    }
+  }
+  if (!fechas.length) return null
+  return new Date(Math.max(...fechas)).toISOString()
+}
+
+// Formatea la última actividad en tiempo relativo y legible (ej: "Hoy a las 13:17", "Hace 2 horas")
+export function formatearUltimaActividad(iso) {
+  if (!iso) return 'Sin actividad registrada'
+  const d = new Date(iso)
+  if (isNaN(d.getTime())) return '—'
+  const ahora = new Date()
+  const diffMs = ahora.getTime() - d.getTime()
+  const diffMin = Math.floor(diffMs / (1000 * 60))
+  const diffHoras = Math.floor(diffMin / 60)
+  const diffDias = Math.floor(diffHoras / 24)
+
+  const horaMin = d.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })
+  if (diffMin < 2) return 'Ahora mismo'
+  if (diffMin < 60) return `Hace ${diffMin} min`
+  if (diffDias === 0 && d.getDate() === ahora.getDate()) return `Hoy a las ${horaMin}`
+  if (diffDias <= 1 && d.getDate() === ahora.getDate() - 1) return `Ayer a las ${horaMin}`
+  if (diffDias < 7) return `Hace ${diffDias} días (${d.toLocaleDateString('es-ES', { day: 'numeric', month: 'short' })} ${horaMin})`
+  return `${d.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' })} ${horaMin}`
+}
+

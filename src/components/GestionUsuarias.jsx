@@ -7,10 +7,11 @@ import {
   resetearProgresoUsuaria,
   resetearCompromisoUsuaria,
 } from '../lib/backend'
-import { formatearFecha, iniciales } from '../lib/calculos'
+import { formatearFecha, iniciales, calcularUltimaActividad, formatearUltimaActividad } from '../lib/calculos'
 import { useIdioma } from '../i18n/idioma'
-import { obtenerEmailConocido } from '../data/roles'
+import { obtenerEmailConocido, ROL_POR_ID, solicitudDe, PROYECTOS_PRIORIDAD } from '../data/roles'
 import AsignarRoles from './AsignarRoles'
+import ModalRespuestasUsuaria from './ModalRespuestasUsuaria'
 import UltimoInicioSesion from './UltimoInicioSesion'
 
 const PAISES = ['España', 'México', 'Panamá', 'Estados Unidos', 'Otro']
@@ -72,8 +73,7 @@ function getCuerpoCorreoGeneral() {
 function getCuerpoCorreoIndividual(nombre, correo) {
   const nombreTxt = (nombre || '').trim()
   const saludo = nombreTxt ? `Bendiciones, ${nombreTxt}:` : `Bendiciones:`
-  const esClaudia = (correo || '').toLowerCase() === 'net.amyclau@gmail.com'
-  const claveSugerida = esClaudia ? 'Chanak2026' : 'Chanak2026*'
+  const claveSugerida = 'Chanak2026*'
 
   return (
     `De: ${REMITENTE_OFICIAL} (Chanak International Academy)\n` +
@@ -103,7 +103,7 @@ function getCuerpoCorreoIndividual(nombre, correo) {
 }
 
 // Aprobación y gestión de cuentas. Solo visible para admin.
-export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa, compromisosMapa, accesosMapa, errorAccesos }) {
+export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa, compromisosMapa, progresos, onVerUsuaria, accesosMapa, errorAccesos }) {
   const { t } = useIdioma()
   const [ocupado, setOcupado] = useState(null)
   const [error, setError] = useState('')
@@ -115,6 +115,7 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
   const [copiadoId, setCopiadoId] = useState(null)
   const [modalCompromiso, setModalCompromiso] = useState(null)
   const [modalReset, setModalReset] = useState(null)
+  const [modalRespuestas, setModalRespuestas] = useState(null)
   const [mostrandoBuscadorReset, setMostrandoBuscadorReset] = useState(false)
   const [emailManualReset, setEmailManualReset] = useState('')
 
@@ -497,7 +498,7 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
                   type="email"
                   value={emailManualReset}
                   onChange={(e) => setEmailManualReset(e.target.value)}
-                  placeholder="ejemplo@gmail.com"
+                  placeholder="ejemplo@chanakacademy.org"
                   className="flex-1 rounded-xl border border-navy/20 bg-white px-3 py-2 text-xs font-medium text-navy"
                 />
                 <button
@@ -842,6 +843,58 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
                       </span>
                     )}
                   </div>
+
+                  {/* Última actividad / conexión */}
+                  {(() => {
+                    const ultActIso = calcularUltimaActividad(p, progresos?.[p.id], compromisosMapa?.[p.id])
+                    return (
+                      <div className="flex items-center gap-1.5 text-[11px] text-navy/65 mt-1" title={ultActIso ? new Date(ultActIso).toLocaleString('es-ES') : ''}>
+                        <span>🕐</span>
+                        <span className="font-semibold text-navy/70">Última actividad:</span>
+                        <b className="text-navy">{formatearUltimaActividad(ultActIso)}</b>
+                      </div>
+                    )
+                  })()}
+
+                  {/* Rama elegida tras Tronco Común */}
+                  {(() => {
+                    const sol = solicitudDe(compromisosMapa?.[p.id]?.funciones)
+                    if (sol) {
+                      const rolesTxt = (sol.funciones || [])
+                        .map((f) => ROL_POR_ID[f]?.nombreEs || ROL_POR_ID[f]?.nombre || f)
+                        .join(' + ')
+                      return (
+                        <div className="mt-1.5 rounded-xl border border-teal/30 bg-teal/5 p-2 text-xs text-navy">
+                          <div className="flex flex-wrap items-center justify-between gap-1">
+                            <span className="font-bold text-teal flex items-center gap-1.5">
+                              <span>🎯</span> Rama elegida: <span className="text-navy font-bold">{rolesTxt || 'Rama registrada'}</span>
+                            </span>
+                            {sol.fecha && (
+                              <span className="text-[10px] text-navy/60 bg-white/80 px-2 py-0.5 rounded-md border border-navy/10">
+                                Solicitada: {formatearFecha(sol.fecha.slice(0, 10))}
+                              </span>
+                            )}
+                          </div>
+                          {sol.datosEstrategico && (
+                            <div className="text-[11px] text-navy/75 mt-1 pt-1 border-t border-teal/15">
+                              {sol.datosEstrategico.proyectoSel && (
+                                <span>Proyecto: <b>{PROYECTOS_PRIORIDAD?.find((x) => x.id === sol.datosEstrategico.proyectoSel)?.titulo || sol.datosEstrategico.proyectoSel}</b> · </span>
+                              )}
+                              {sol.datosEstrategico.alcance && <span>Alcance: <b>{sol.datosEstrategico.alcance}</b> · </span>}
+                              {sol.datosEstrategico.tiempoDisp && <span>Tiempo: <b>{sol.datosEstrategico.tiempoDisp}</b></span>}
+                            </div>
+                          )}
+                        </div>
+                      )
+                    }
+                    return (
+                      <div className="text-[11px] text-navy/55 mt-1 flex items-center gap-1.5 bg-slate-50 px-2 py-1 rounded-lg border border-slate-200">
+                        <span>⏳</span>
+                        <span>Tronco Común en curso · Pendiente de elegir rama formativa</span>
+                      </div>
+                    )
+                  })()}
+
                   {compromisosMapa !== undefined && (
                     <div className="mt-1 flex flex-wrap items-center gap-2">
                       <span className={`text-xs font-semibold ${compromisosMapa?.[p.id] ? 'text-teal' : 'text-gold'}`}>
@@ -859,6 +912,40 @@ export default function GestionUsuarias({ perfiles, miId, onRecargar, rolesMapa,
                       </button>
                     </div>
                   )}
+
+                  {/* Botón de inspeccionar respuestas y notas escritas */}
+                  {(() => {
+                    const pMods = progresos?.[p.id]?.modulos || {}
+                    const nRespuestas = Object.values(pMods).filter((m) => m && (m.notas?.trim() || m.quiz || m.entregableUrl)).length
+                    const nNotas = Object.values(pMods).filter((m) => m && m.notas?.trim()).length
+                    return (
+                      <div className="mt-2 flex flex-wrap items-center gap-2">
+                        <button
+                          type="button"
+                          onClick={() => setModalRespuestas({ perfil: p, correo: correoActiva, compromiso: compromisosMapa?.[p.id], progreso: progresos?.[p.id] })}
+                          className={`rounded-lg px-2.5 py-1 text-xs font-bold transition shadow-xs inline-flex items-center gap-1.5 ${
+                            nNotas > 0
+                              ? 'bg-teal text-white hover:bg-teal/90'
+                              : 'bg-navy/5 text-navy hover:bg-navy/10 border border-navy/10'
+                          }`}
+                          title="Ver todas las respuestas escritas, notas de práctica, reflexiones y tests de esta usuaria"
+                        >
+                          <span>📝</span>
+                          {nNotas > 0 ? `Ver Respuestas Escritas (${nNotas})` : `Expediente de Respuestas (${nRespuestas})`}
+                        </button>
+                        {onVerUsuaria && (
+                          <button
+                            type="button"
+                            onClick={() => onVerUsuaria(p.id, p.nombre, p.id_interno)}
+                            className="rounded-lg bg-navy/5 px-2.5 py-1 text-xs font-semibold text-navy hover:bg-navy/10 transition"
+                            title="Abrir vista de módulos de esta usuaria"
+                          >
+                            👁️ Ver en su panel
+                          </button>
+                        )}
+                      </div>
+                    )
+                  })()}
                 </div>
 
                 {p.id !== miId && (
@@ -1023,6 +1110,16 @@ WHERE p.id = u.id;`}
           onRecargar={onRecargar}
         />
       )}
+
+      {modalRespuestas && (
+        <ModalRespuestasUsuaria
+          perfil={modalRespuestas.perfil}
+          correo={modalRespuestas.correo}
+          progreso={modalRespuestas.progreso || progresos?.[modalRespuestas.perfil?.id]}
+          compromiso={modalRespuestas.compromiso || compromisosMapa?.[modalRespuestas.perfil?.id]}
+          onCerrar={() => setModalRespuestas(null)}
+        />
+      )}
     </section>
   )
 }
@@ -1036,8 +1133,7 @@ function ModalResetCuenta({ datos, onClose, onRecargar }) {
   const [notificacion, setNotificacion] = useState(null)
   const [ocupadoModal, setOcupadoModal] = useState(false)
 
-  const esClaudia = (correo || '').toLowerCase() === 'net.amyclau@gmail.com'
-  const contrasenaSugerida = esClaudia ? 'Chanak2026' : 'Chanak2026*'
+  const contrasenaSugerida = 'Chanak2026*'
 
   const mensajeBienvenida = `Hola ${nombre},\n\nTus credenciales para ingresar a la plataforma de entrenamiento Chanak Academy son:\n\n🔗 Plataforma: https://training.chanakacademy.org/\n📧 Usuario: ${correo || '[Tu correo electrónico]'}\n🔑 Contraseña inicial: ${contrasenaSugerida}\n\nRecomendación de seguridad: Al ingresar por primera vez, podrás actualizar tu contraseña desde tu perfil. Si en cualquier momento deseas restablecerla tú misma, puedes pulsar en "¿Olvidaste tu contraseña?" en la pantalla inicial.\n\n¡Bienvenida a la formación de Chanak International Academy!`
 
@@ -1238,7 +1334,7 @@ WHERE id = (SELECT id FROM auth.users WHERE lower(email) = lower('${correo || ''
               <span>🔑</span> 2. Credenciales Iniciales de Inducción
             </span>
             <span className="text-[10px] font-bold text-navy/60 bg-gold/20 px-2 py-0.5 rounded-full">
-              {esClaudia ? 'Clave Especial Claudia' : 'Clave Estándar 2026-2027'}
+              Clave Estándar 2026-2027
             </span>
           </div>
           <p className="text-xs text-navy/70 leading-relaxed">

@@ -39,6 +39,7 @@ export const LECTURAS_B1 = {
       video: 0.15,
       lectura: 0.25,
       documentos: [
+        { carpeta: '01_INSTITUCIONAL', documento: 'Tronco_Comun_Induccion.pdf', que: 'Guía oficial de Tronco Común e Inducción Chanak: visión, programas y marco operativo.', horas: 0.5 },
         { carpeta: '01_INSTITUCIONAL', documento: 'Chanak_Dossier_Institucional_Master_2026-2027.pdf', que: 'Visión, misión, propósito y perfil de egreso Chanak.', horas: 0.5 },
       ],
       practica: 0.5,
@@ -72,7 +73,7 @@ export const LECTURAS_B1 = {
         guion: [
           'El Dossier Master presenta cuatro referencias que conviene no confundir: un registro estatal, un proceso de acreditación, un estatus fiscal y un sello de transparencia. Florida DOE #134620 es el registro de Chanak como escuela privada ante el Florida Department of Education: es un registro, no una acreditación. Nonprofit 501(c)(3) es el estatus fiscal federal de la entidad titular. Candid Gold 2026 es un sello de transparencia institucional en Candid y no es una acreditación educativa.',
           'La cuarta referencia es MSA-CESS Candidate: Chanak es candidata a la acreditación ante la Commission on Secondary Schools de Middle States. Es la única de las cuatro que se refiere a acreditación, y precisamente por eso es la que más errores provoca. Se trata con detalle en la lección siguiente. La regla general es sencilla: cada respaldo se nombra por lo que es, nunca se suman ni se presentan como equivalentes, y ninguno de ellos convierte a Chanak en «escuela acreditada».',
-          'En Estados Unidos existen además estados vigentes en programas estatales: en Florida, la oferta «Matrícula» de Chanak TrainUp Education Inc. está aprobada en el Marketplace EMA de Step Up For Students, y en Alabama Chanak es CHOOSE Approved Education Service Provider (ESP). Recuerda que la financiación estatal no es currículo: estos programas no deciden el currículo de Chanak, y los servicios elegibles, fondos y requisitos dependen de las reglas de cada programa. El detalle se estudia en el Bloque 7.',
+          'En Estados Unidos existen además 7 estados con programas aprobados para Chanak: Florida (Step Up / EMA · Matrícula), Alabama (CHOOSE Act · ESP), Arizona (ESA), Utah (Utah Fits All), Wyoming (Education Savings Program), New Hampshire (EFA) y South Carolina (ESTF). Recuerda siempre la regla innegociable: la financiación estatal no es currículo (STATE FUNDING ≠ CURRICULUM). La cláusula oficial establece: «Las familias elegibles pueden solicitar el pago de servicios autorizados con los fondos disponibles de su programa. La aprobación depende del servicio, del estudiante y de las reglas aplicables». El detalle se estudia en el Bloque 7.',
         ],
       },
       {
@@ -393,6 +394,7 @@ export const LECTURAS_B1 = {
       video: 0.25,
       lectura: 0.5,
       documentos: [
+        { carpeta: '10_PEOPLE_ROLES_TRAINING/08_OPERATIVA_ACADEMICA', documento: 'Mentoria_Docencia_Guia.pdf', que: 'Guía oficial de mentoría y docencia: funciones, límites de autoridad y relación con familias.', horas: 0.5 },
         { carpeta: '08_ACADEMIC_POLICIES', documento: 'Chanak_Credit_Recognition_Policy.pdf', que: '«Principios», «Fuentes de crédito», «Documentación requerida» y «Revisión de una resolución».', horas: 0.5 },
         { carpeta: '08_ACADEMIC_POLICIES', documento: 'Chanak_Curriculum_Approval_Policy.pdf', que: '«Clasificación vigente para comunicación», «Procedimiento de revisión» y estados del SIS en «Relación con los sistemas».', horas: 0.5 },
         { carpeta: '08_ACADEMIC_POLICIES', documento: 'Chanak_Academic_Certification_Policy.pdf', que: '«Arquitectura de programas» e «Integridad académica».', horas: 0.5 },

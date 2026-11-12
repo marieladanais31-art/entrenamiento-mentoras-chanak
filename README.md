@@ -58,11 +58,11 @@ Un módulo se completa tras aprobar su Knowledge Check (80 %, reintentos ilimita
 Google Vids o cualquier URL) en `videoUrl` de `src/data/videos.js`, o desde **Admin → Vídeos**
 (la URL guardada en Supabase tiene prioridad y no requiere desplegar).
 
-## Separación Chanak / EducaFe
+## Entidad titular y marco institucional
 
-La ruta oficial (Mentor → Coordinator) es **Chanak Training**. El área **EducaFe / Partner
-Training** es formación complementaria de una entidad colaboradora independiente; no es un nivel
-de certificación de Chanak ni un departamento de Chanak.
+- **Entidad firmante y certificadora:** **Chanak TrainUp Education, Inc.** es la entidad jurídica titular que formaliza acuerdos, convenios y certificaciones oficiales de Chanak International Academy. **Chanak Foundation** es su rama no lucrativa.
+- **Asociación EducaFe:** Se mantiene integrada como opción dentro de la ruta **Estratégico**. Algunas coordinadoras podrán colaborar o prestar servicios a través de EducaFe para proyectos territoriales y comunitarios en España.
+- **Firma de acuerdos:** Todo acuerdo de colaboración, voluntariado o servicio se suscribe formalmente con la entidad correspondiente donde la persona trabaje (Chanak TrainUp Education, Inc. para programas internacionales/EE. UU., o Asociación EducaFe para actividades locales en España).
 
 ## Administración
 

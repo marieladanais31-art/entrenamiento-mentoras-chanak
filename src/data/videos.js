@@ -30,7 +30,7 @@ export const CATEGORIAS_VIDEO = [
 const DEFINICIONES_VIDEO = [
   // ── Fundamentos ──
   {
-    id: 'V00', orden: 0, bloque: 'Fundamentos', modulo: 'T1.0', duracion: '6 min', videoUrl: '/videos/presentacion_general.mp4',
+    id: 'V00', orden: 0, bloque: 'Fundamentos', modulo: 'T1.0', duracion: '6 min', videoUrl: '',
     titulo: 'Introducción general: visión de Chanak y las tres áreas de involucramiento',
     descripcion: 'Bienvenida institucional, visión de Chanak International Academy y panorama de las tres áreas de involucramiento: Académica y Mentoría, Coordinación y Desarrollo Estratégico.',
     guion: [

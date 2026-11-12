@@ -21,12 +21,13 @@ import RolPerfil from './components/RolPerfil'
 import { rolesEfectivos, solicitudDe } from './data/roles'
 import Header from './components/ui/Header'
 import CambiarContrasena from './components/CambiarContrasena'
-import CompromisoInicial, { VERSION_COMPROMISO } from './components/CompromisoInicial'
+import CompromisoInicial, { VERSIONES_VALIDAS } from './components/CompromisoInicial'
 import EstrategiaOperativa from './components/EstrategiaOperativa'
 import MiFuncion from './components/MiFuncion'
 import { MANUAL_ID } from './data/manualMentoras'
 import VistasSistemaView from './components/VistasSistemaView'
 import ComparativaCurriculos from './components/ComparativaCurriculos'
+import CitaAdminModal from './components/CitaAdminModal'
 import * as api from './lib/backend'
 import { getModulo } from './data/curriculum'
 import { aplicarEquivalencias } from './lib/calculos'
@@ -38,6 +39,7 @@ export default function App() {
   const [sesion, setSesion] = useState(null) // sesión de Supabase
   const [perfil, setPerfil] = useState(null) // { id, nombre, rol, estado }
   const [vista, setVista] = useState({ nombre: 'dashboard' })
+  const [citaAbierta, setCitaAbierta] = useState(false)
 
   // Datos de la usuaria que se está viendo (una mentora ve solo los suyos)
   const [progreso, setProgreso] = useState({ modulos: {} })
@@ -297,7 +299,7 @@ export default function App() {
     )
   }
 
-  const compromisoVigente = compromiso?.version === VERSION_COMPROMISO
+  const compromisoVigente = VERSIONES_VALIDAS.includes(compromiso?.version)
   if (!compromisoVigente) {
     return (
       <CompromisoInicial
@@ -324,6 +326,7 @@ export default function App() {
         vista={vista}
         onNavegar={setVista}
         onSalir={() => api.salir()}
+        onAbrirCita={() => setCitaAbierta(true)}
       />
 
 
@@ -378,6 +381,7 @@ export default function App() {
             onVerFuncion={(funcionId) => setVista({ ...vista, nombre: 'mi-funcion', funcionId })}
             onVerVistas={() => setVista({ ...vista, nombre: 'vistas' })}
             onVerComparativaCurriculos={() => setVista({ ...vista, nombre: 'comparativa-curriculos' })}
+            onAbrirCita={() => setCitaAbierta(true)}
           />
         )}
         {vista.nombre === 'comparativa-curriculos' && (
@@ -393,7 +397,7 @@ export default function App() {
           setProgreso(pr)
         }} />}
         {vista.nombre === 'vistas' && <VistasSistemaView roles={rolesIds} esAdmin={esAdmin} onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
-        {vista.nombre === 'catalogo-videos' && <CatalogoVideos onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
+        {vista.nombre === 'catalogo-videos' && <CatalogoVideos esAdmin={esAdmin} onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
         {vista.nombre === 'operativa-sis' && <OperativaSIS onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
         {vista.nombre === 'guias-familias' && <GuiasFamilias onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} />}
         {vista.nombre === 'operacion-programas' && <OperacionProgramas inicial={rolesIds.includes('english_teacher') ? 'english' : rolesIds.includes('lifeskills_facilitator') ? 'lifeskills' : 'offcampus'} onVolver={() => setVista({ ...vista, nombre: 'dashboard' })} onVerSIS={() => setVista({ ...vista, nombre: 'coordinacion-sis' })} onVerFamilias={() => setVista({ ...vista, nombre: 'guias-familias' })} onVerEstados={() => setVista({ ...vista, nombre: 'matriz' })} />}
@@ -493,6 +497,11 @@ export default function App() {
         )}
       </main>
       <Glosario />
+      <CitaAdminModal
+        abierto={citaAbierta}
+        onClose={() => setCitaAbierta(false)}
+        esAdmin={esAdmin}
+      />
     </div>
   )
 }

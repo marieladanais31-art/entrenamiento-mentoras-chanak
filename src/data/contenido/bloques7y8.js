@@ -40,20 +40,21 @@ export const BLOQUES_7_8 = {
 
   'T7.2': {
     resumen:
-      'Estados aprobados adicionales: Utah (Fits All), Texas (TEFA), Wyoming (ESA) y Arizona (ESA), junto con la matriz de evaluación y pruebas estandarizadas por estado.',
+      'Los 7 estados aprobados: Florida (Step Up / EMA), Alabama (CHOOSE Act), Arizona (ESA), Utah (Utah Fits All), Wyoming (ESA), New Hampshire (EFA) y South Carolina (ESTF). Matriz de evaluación y pruebas estandarizadas por estado.',
     objetivos: [
-      'Identificar los programas aprobados en Utah, Texas, Wyoming y Arizona.',
-      'Operar con las plataformas asociadas (Odyssey y ClassWallet).',
+      'Identificar los 7 estados y programas oficialmente aprobados para Chanak.',
+      'Aplicar la cláusula obligatoria de política estatal a toda consulta de familias.',
+      'Diferenciar aprobación de proveedor frente a cobertura del 100 % o gratuidad.',
       'Consultar y aplicar los requisitos de pruebas estandarizadas por estado (Categoría C).',
     ],
     lecciones: [
       {
-        titulo: 'Utah, Texas, Wyoming y Arizona aprobados',
+        titulo: 'Los 7 estados aprobados oficialmente',
         guion: [
-          'Utah Fits All: Chanak es proveedor educativo aprobado en Odyssey (servicios formativos y académicos).',
-          'Texas TEFA (Texas Education Freedom Accounts): Chanak cuenta con estatus de proveedor aprobado en la plataforma Odyssey.',
-          'Wyoming ESA: Chanak es proveedor educativo aprobado para familias participantes de Education Savings Accounts en Wyoming.',
-          'Arizona ESA: Chanak cuenta con registro de proveedor aprobado ante el Departamento de Educación de Arizona (ADE / ClassWallet).',
+          'Chanak cuenta con aprobación oficial como proveedor en 7 estados: Florida (Step Up For Students / EMA), Alabama (CHOOSE Act / ClassWallet), Arizona (Arizona ESA / ClassWallet), Utah (Utah Fits All / Odyssey), Wyoming (Wyoming ESA), New Hampshire (EFA) y South Carolina (ESTF).',
+          'Texas (TEFA), Arkansas y otros estados continúan en tramitación; no se presentan como aprobados hasta confirmación oficial.',
+          'Cláusula obligatoria: «Las familias elegibles pueden solicitar el pago de servicios autorizados con los fondos disponibles de su programa. La aprobación depende del servicio, del estudiante y de las reglas aplicables».',
+          'Ser proveedor aprobado NO garantiza cobertura total ni financiación del 100 %: la disponibilidad depende de los fondos asignados a la familia y las reglas del estado.',
         ],
       },
       {
@@ -65,16 +66,134 @@ export const BLOQUES_7_8 = {
       },
     ],
     practica: {
-      situacion: 'Una familia de Texas o Utah pregunta si puede pagar la colegiatura de Chanak con su cuenta estatal de Odyssey y si su hijo debe tomar un examen estatal.',
-      preguntas: ['¿Está aprobado Chanak en Texas y Utah?', '¿A través de qué plataforma se procesa?', '¿Quién fija los requisitos de examen estatal?'],
-      criterio: 'Chanak está aprobado en Texas TEFA y Utah Fits All vía Odyssey. Las pruebas externas dependen de la normativa del programa del estado y se derivan a la matriz oficial.',
+      situacion: 'Una familia de Utah o New Hampshire pregunta si tener la beca significa que Chanak es 100 % gratuito y si pueden pagar cualquier servicio.',
+      preguntas: ['¿Qué estados están formalmente aprobados?', '¿Qué cláusula obligatoria debes comunicarles?', '¿Cubre la beca automáticamente cualquier servicio?'],
+      criterio: 'Cita los 7 estados aprobados; incluye la cláusula obligatoria sobre fondos y servicios autorizados; aclara que la aprobación depende del servicio y reglas aplicables.',
     },
     quiz: [
-      { p: '¿A través de qué plataforma se gestionan los pagos de Texas TEFA y Utah Fits All?', opciones: ['PayPal', 'Odyssey', 'Western Union', 'Cheque escolar manual'], correcta: 1, explica: 'Tanto Texas TEFA como Utah Fits All operan con Odyssey.' },
-      { p: '¿Están aprobados Wyoming ESA y Arizona ESA para Chanak?', opciones: ['No, están rechazados', 'Sí, Chanak figura como proveedor aprobado en ambos estados', 'Solo para universidades', 'Solo presencial'], correcta: 1, explica: 'Chanak cuenta con aprobación en Wyoming ESA y Arizona ESA.' },
+      { p: '¿Cuáles son los 7 estados con aprobación oficial de Chanak?', opciones: ['Florida, Alabama, Arizona, Utah, Wyoming, New Hampshire y South Carolina', 'Texas, California, Florida y Nueva York', 'Todos los 50 estados de EE. UU.', 'Solo Florida y Texas'], correcta: 0, explica: 'Los 7 estados aprobados son FL, AL, AZ, UT, WY, NH y SC. Texas TEFA sigue en tramitación.' },
+      { p: '¿Qué afirma la cláusula obligatoria que debe citarse ante familias?', opciones: ['Que Chanak garantiza beca completa', 'Que las familias elegibles pueden solicitar pago de servicios autorizados según fondos, estudiante y reglas aplicables', 'Que las pruebas estandarizadas son voluntarias en todos los estados', 'Que el estado diseña el currículo'], correcta: 1, explica: 'La cláusula aclara que la aprobación depende del servicio, del estudiante y de las reglas del programa.' },
       { p: '¿Las pruebas estatales externas (Nivel C) sustituyen la evaluación de dominio al 80 % de Chanak?', opciones: ['Sí, totalmente', 'No: la evaluación interna de dominio permanece invariable', 'Solo en primaria', 'Solo si saca sobresaliente'], correcta: 1, explica: 'STATE FUNDING ≠ CURRICULUM: la evaluación de dominio es la constante de Chanak.' },
     ],
-    evidencia: 'Resume en una tabla de 4 filas los estados aprobados de este módulo, su programa y plataforma.',
+    evidencia: 'Resume en una tabla de 7 filas los estados aprobados, su programa y plataforma de tramitación.',
+  },
+
+  'T7.3': {
+    resumen:
+      'Plataformas operativas Odyssey y ClassWallet: cómo funcionan los marketplaces estatales, reserva de fondos por la familia, facturación electrónica por Administración y conciliación de cobros.',
+    objetivos: [
+      'Navegar los circuitos operativos de Odyssey (Utah) y ClassWallet (Alabama, Arizona, Florida).',
+      'Diferenciar la reserva de fondos de la familia de la facturación y cobro real.',
+      'Aplicar los controles administrativos para evitar cobros dobles o errores de facturación.',
+    ],
+    lecciones: [
+      {
+        titulo: 'Marketplaces Odyssey y ClassWallet',
+        guion: [
+          'Odyssey gestiona programas como Utah Fits All: la familia selecciona los servicios educativos autorizados y reserva fondos en el marketplace.',
+          'ClassWallet opera en Alabama CHOOSE, Arizona ESA y Florida EMA: interfaz para asignación de órdenes de servicio y gestión de proveedores acreditados.',
+          'La familia gestiona directamente sus credenciales y autorizaciones parentales; el personal de Chanak nunca solicita ni manipula contraseñas familiares.',
+        ],
+      },
+      {
+        titulo: 'Ciclo de facturación y conciliación',
+        guion: [
+          'La reserva familiar en Odyssey o ClassWallet NO equivale a ingreso recibido: Administración genera la factura formal desglosada tras la prestación del servicio.',
+          'Las facturas deben incluir: razón social exacta (Chanak TrainUp Education, Inc.), nombre del alumno, ID, periodo de prestación y concepto formativo aprobado.',
+          'Cualquier discrepancia de saldo se concilia entre Administración y el marketplace correspondiente sin alterar la actividad académica del alumno.',
+        ],
+      },
+    ],
+    practica: {
+      situacion: 'Una familia de Utah te dice que ya «dio a pagar» en Odyssey pero en el SIS su estado no aparece como pagado.',
+      preguntas: ['¿Qué diferencia hay entre reservar en el marketplace y confirmar cobro en el SIS?', '¿Qué le explicas a la familia sin generar alarma?', '¿A quién escalas la verificación?'],
+      criterio: 'Distingue reserva de fondos de confirmación bancaria; aclara con amabilidad que Administración concilia la factura en Odyssey; deriva a administration@chanakacademy.org.',
+    },
+    quiz: [
+      { p: '¿Qué plataforma tecnológica gestiona Utah Fits All?', opciones: ['Odyssey', 'ClassWallet', 'Stripe directo', 'Venmo'], correcta: 0, explica: 'Utah Fits All utiliza Odyssey como marketplace oficial.' },
+      { p: '¿Puede un mentor solicitar la clave de ClassWallet u Odyssey a una familia para agilizar un trámite?', opciones: ['Sí, si la familia da permiso', 'No, nunca: la familia opera su propia cuenta y custodia sus credenciales', 'Solo en fin de semana', 'Solo para soporte técnico'], correcta: 1, explica: 'El acceso a plataformas estatales es personal e intransferible de la familia.' },
+      { p: '¿Cuándo se considera completado el pago de un servicio estatal en el SIS?', opciones: ['En cuanto la familia dice que reservó', 'Cuando Administración concilia la orden de servicio y confirma la recepción de los fondos', 'Al iniciar el curso escolar', 'Automáticamente al matricularse'], correcta: 1, explica: 'Se requiere conciliación administrativa de la orden de servicio y pago.' },
+    ],
+    evidencia: 'Elabora un diagrama de flujo en texto (5 pasos) describiendo el camino desde la reserva familiar en Odyssey/ClassWallet hasta la conciliación en el SIS.',
+  },
+
+  'T7.4': {
+    resumen:
+      'ESA Support Package y límites de servicio: mentoría quincenal (2h/mes), Life Skills grupal (4x60 min/mes, máx. 7 estudiantes por cohorte) y prevención estricta de sobrepromesas de tutoría 1 a 1 ilimitada.',
+    objetivos: [
+      'Definir con exactitud las horas y componentes del ESA Support Package.',
+      'Mantener el límite de ratio de cohorte en Life Skills (máximo 7 alumnos por grupo).',
+      'Establecer límites profesionales claros frente a peticiones de tutoría individual ilimitada.',
+    ],
+    lecciones: [
+      {
+        titulo: 'Estructura del ESA Support Package',
+        guion: [
+          'El paquete de apoyo para estudiantes con fondos ESA consta de: 2 horas mensuales de mentoría académica quincenal (2 sesiones de 60 min o 4 de 30 min).',
+          '4 sesiones mensuales de 60 minutos de Life Skills & Leadership en formato grupal reducido.',
+          'El tamaño máximo de cohorte para Life Skills grupal es de 7 estudiantes, garantizando participación activa y atención cercana.',
+        ],
+      },
+      {
+        titulo: 'Límites de servicio y prevención de sobrepromesas',
+        guion: [
+          'El paquete ESA NO incluye tutoría individualizada intensiva 1 a 1 ilimitada ni clases particulares diarias de recuperación.',
+          'Si una familia requiere horas adicionales de tutoría o apoyo psicopedagógico, se gestiona como servicio complementario presupuestado aparte, sujeto a aprobación.',
+          'Nunca asegures que el paquete cubre «todo lo que el niño necesite sin límite»: el contrato define el alcance exacto de horas y entregables.',
+        ],
+      },
+    ],
+    practica: {
+      situacion: 'Una familia con fondos ESA en Arizona exige que la mentora dé clases particulares diarias de 1 hora de matemáticas a su hijo porque «el estado paga el paquete completo».',
+      preguntas: ['¿Qué incluye y qué no incluye el ESA Support Package?', '¿Cuál es el tamaño de cohorte y la frecuencia de mentoría?', '¿Cómo reconduces la conversación con la familia?'],
+      criterio: 'Recuerda el alcance: 2h/mes mentoría quincenal y 4x60min Life Skills en grupo de máx 7; explica que la tutoría diaria no está incluida y ofrece derivar para cotizar servicios extra.',
+    },
+    quiz: [
+      { p: '¿Cuántas horas de mentoría académica mensual incluye el ESA Support Package?', opciones: ['10 horas semanales', '2 horas al mes (quincenales)', 'Ilimitadas', 'Solo 15 minutos al año'], correcta: 1, explica: 'Incluye 2 horas al mes estructuradas quincenalmente.' },
+      { p: '¿Cuál es el límite máximo de estudiantes por cohorte en Life Skills grupal del paquete ESA?', opciones: ['25 estudiantes', '15 estudiantes', '7 estudiantes', 'No hay límite'], correcta: 2, explica: 'El límite fijado para mantener la calidad y seguimiento es de 7 estudiantes.' },
+      { p: '¿Qué debes responder si una familia pide tutoría individual diaria dentro de su paquete ESA estándar?', opciones: ['Aceptar para no perder al cliente', 'Aclarar que excede el alcance del paquete y remitir a Administración para valorar servicios adicionales', 'Dar la clase sin registrarla', 'Cancelar la matrícula'], correcta: 1, explica: 'Se aclaran los límites del paquete y se deriva a Administración si requieren servicios adicionales.' },
+    ],
+    evidencia: 'Redacta un correo modelo de 8–10 líneas explicando con claridad y calidez a una familia ESA los componentes exactos de su paquete de apoyo y sus límites de horas.',
+  },
+
+  'T7.5': {
+    resumen:
+      'Compliance legal, fiscal y contractual en EE. UU.: estatus de contratista independiente (Form 1099-NEC / W-9 vs W-2), facturación electrónica transparente, estricta prohibición de reembolsos indebidos y cumplimiento de FERPA.',
+    objetivos: [
+      'Diferenciar la relación contractual de contratista independiente (1099) frente a empleo directo (W-2).',
+      'Cumplir con las obligaciones de facturación y soporte documental exigidas por los departamentos estatales.',
+      'Aplicar la prohibición absoluta de devolución de fondos o incentivos directos a familias.',
+      'Salvaguardar la confidencialidad de los expedientes de estudiantes bajo los estándares FERPA.',
+    ],
+    lecciones: [
+      {
+        titulo: 'Contratista independiente (1099) vs Empleo (W-2)',
+        guion: [
+          'Los mentores y especialistas que colaboran bajo contratos de servicios en EE. UU. operan en régimen de contratista independiente (Form 1099-NEC), no como empleados W-2.',
+          'Cada contratista aporta su Form W-9 (o W-8BEN si reside en el extranjero), emite facturas por servicios efectivamente prestados y es responsable de sus propias obligaciones tributarias.',
+          'Chanak no retiene impuestos de nómina ni asume beneficios laborales salvo que exista un contrato laboral explícito formalizado por escrito.',
+        ],
+      },
+      {
+        titulo: 'Compliance financiero y privacidad FERPA',
+        guion: [
+          'Prohibición de rebajas o reembolsos de fondos estatales: está terminantemente prohibido ofrecer devolver dinero en efectivo, cupones o compensaciones a familias que paguen con fondos estatales (anti-kickback policy).',
+          'Toda factura emitida a un programa estatal debe reflejar servicios reales impartidos, con fecha, registro en el SIS y firma de conformidad.',
+          'Bajo la ley FERPA, los expedientes académicos, diagnósticos y notas son estrictamente confidenciales: nunca se divulgan a terceros sin consentimiento parental informado.',
+        ],
+      },
+    ],
+    practica: {
+      situacion: 'Un mentor consulta si puede emitir una factura global por adelantado de todo el semestre para cobrar antes, y si Chanak le enviará un formulario W-2 a final de año.',
+      preguntas: ['¿Bajo qué régimen fiscal operan los mentores en EE. UU. (1099 vs W-2)?', '¿Se pueden facturar servicios antes de su prestación efectiva?', '¿Qué documento fiscal se utiliza?'],
+      criterio: 'Aclara régimen de contratista independiente (1099-NEC / W-9); explica que la facturación debe corresponder a servicios efectivamente prestados y verificables en el SIS.',
+    },
+    quiz: [
+      { p: '¿Qué régimen contractual y fiscal aplica habitualmente a los mentores colaboradores en EE. UU.?', opciones: ['Contratista independiente (Form 1099-NEC / W-9)', 'Empleado indefinido W-2 con jornada fija', 'Funcionario público del estado', 'Voluntariado no remunerado obligatorio'], correcta: 0, explica: 'Se colabora como contratista independiente con Form 1099-NEC / W-9.' },
+      { p: '¿Qué establece la normativa estatal sobre ofrecer comisiones o devolución de dinero a familias con fondos públicos?', opciones: ['Está permitido como estrategia de ventas', 'Está terminantemente prohibido (prohibición de kickbacks o reparto de fondos)', 'Se permite si la familia lo solicita por escrito', 'Solo en Florida'], correcta: 1, explica: 'Los programas estatales prohíben de forma estricta cualquier devolución o reparto de fondos con las familias.' },
+      { p: '¿Qué ley federal de EE. UU. protege la privacidad de los registros y expedientes académicos de los estudiantes?', opciones: ['FERPA (Family Educational Rights and Privacy Act)', 'HIPAA', 'GDPR únicamente', 'Clean Air Act'], correcta: 0, explica: 'FERPA regula la privacidad y confidencialidad de los expedientes educativos en EE. UU.' },
+    ],
+    evidencia: 'Elabora un decálogo de 5 normas de oro sobre compliance fiscal, facturación veraz y protección de datos FERPA para nuevos mentores.',
   },
 
   'T8.1': {

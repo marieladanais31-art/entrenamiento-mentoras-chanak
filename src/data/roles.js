@@ -33,9 +33,9 @@ const B2 = ['T2.1', 'T2.2', 'T2.3', 'T2.4']
 const B3 = ['T3.1', 'T3.2', 'T3.2b', 'T3.2c', 'T3.3', 'T3.4']
 const B4 = ['T4.1', 'T4.2', 'T4.3', 'T4.4']
 const B5 = ['T5.1', 'T5.2', 'T5.3']
-const B7 = ['T7.1', 'T7.2']
+const B7 = ['T7.1', 'T7.2', 'T7.3', 'T7.4', 'T7.5']
 const B8 = ['T8.1', 'T8.2', 'T8.3', 'T8.4']
-const B10_ESTRATEGICO = ['T10.1', 'T10.2', 'T10.3', 'T10.6']
+const B10_ESTRATEGICO = ['T10.1', 'T10.2', 'T10.3', 'T10.6', 'T10.7', 'T10.8']
 
 // Sistemas y recursos
 export const SISTEMAS = {
@@ -213,7 +213,7 @@ export const ROLES = [
     modalidades: [],
     modulos: [...TRONCO_COMUN, 'T2.4', ...B7, ...B10_ESTRATEGICO],
     sistemas: { DRIVE: 'según asignación', ESTADO: 'según territorio o programa' },
-    domina: ['Apertura de mercado', 'ESA y fondos estatales de EE. UU.', 'Programas EducaFe (inactivos hasta febrero 2027)', 'Google Ads y difusión', 'Grants', 'Empresas y ONG', 'Iglesias y alianzas comunitarias'],
+    domina: ['Apertura de mercado', 'ESA y fondos estatales de EE. UU.', 'Alianzas y convenios comunitarios', 'Google Ads y difusión', 'Grants', 'Empresas y ONG', 'Iglesias y proyectos sociales'],
     escala: ['Precios, contratos, publicaciones de pago, solicitudes y compromisos institucionales → Chanak Central'],
     documentos: ['Strategic Operating Guide', '30-Day Market Entry Plan', 'Grant Opportunity Sheet'],
     checklist: ['Rol asignado formalmente', 'Territorio o proyecto indicado', 'Chanak Core', 'Límites de autoridad', 'Guía operativa estratégica'],
@@ -349,8 +349,8 @@ export const ROLES = [
 //  · Estratégico → todos los demás (representación, familias, alianzas, grants y proyectos, registros)
 export const GRUPOS = {
   mentor: { id: 'mentor', icono: '👩‍🏫', nombre: 'Mentor', nombreEn: 'Mentor', descripcion: 'Acompañamiento integral a familias y estudiantes de Off-Campus y Dual Diploma desde su inicio. Incluye tutoría pedagógica, clases de inglés y de Life Skills, Extensión Local y evaluación educativa.', funcionPorDefecto: 'mentor', acceso: 'libre' },
-  coordinator: { id: 'coordinator', icono: '🎯', nombre: 'Coordinador', nombreEn: 'Coordinator', descripcion: 'Supervisa a mentores y especialistas (SIS, PEI, evidencias, calidad e incidencias de Off-Campus y Dual Diploma). Incluye director de institución partner.', funcionPorDefecto: 'coordinator', acceso: 'confirmacion', confirma: 'Dirección Académica' },
-  estrategico: { id: 'estrategico', icono: '🤝', nombre: 'Estratégico', nombreEn: 'Strategic', descripcion: 'Grants (subvenciones), programas de becas y fondos estatales de EE. UU. (ESA), alianzas institucionales y representación territorial por país (España, México, Panamá, USA; EducaFe inactivo hasta feb. 2027).', funcionPorDefecto: 'strategic_general', acceso: 'confirmacion', confirma: 'Dirección de Operaciones y Alianzas (Elías Vidal)' },
+  coordinator: { id: 'coordinator', icono: '🎯', nombre: 'Coordinador', nombreEn: 'Coordinator', descripcion: 'Supervisa a mentores y especialistas (SIS, PEI, evidencias, calidad e incidencias de Off-Campus y Dual Diploma). Incluye director de institución partner.', funcionPorDefecto: 'coordinator', acceso: 'confirmacion', confirma: 'Dirección Académica (Mariela Andrade)' },
+  estrategico: { id: 'estrategico', icono: '🤝', nombre: 'Estratégico', nombreEn: 'Strategic', descripcion: 'Grants (subvenciones), programas de becas y fondos estatales de EE. UU. (ESA), alianzas institucionales y representación territorial por país (Estados Unidos, España, México, Panamá; convenios comunitarios según acuerdos vigentes).', funcionPorDefecto: 'strategic_general', acceso: 'confirmacion', confirma: 'Dirección de Operaciones (Elías Vidal)' },
 }
 const GRUPO_DE_FUNCION = {
   mentor: 'mentor', english_teacher: 'mentor', lifeskills_facilitator: 'mentor', local_language: 'mentor', assessment_specialist: 'mentor',
@@ -624,10 +624,10 @@ export const REPRESENTANTES_PAISES = [
         funcion: 'Representantes JCUM España y Alianzas Institucionales',
       },
       {
-        territorio: '3. Educafe',
-        representantes: ['Asociación EducaFe (Inactiva)'],
-        funcion: 'Inactivo hasta febrero 2027 · Programas, cuotas y convenios locales en pausa',
-        inactivo: true,
+        territorio: '3. EducaFe (España)',
+        representantes: ['Asociación EducaFe (Entidad colaboradora independiente)'],
+        funcion: 'Proyectos comunitarios y alianzas locales gestionados directamente por Dirección',
+        inactivo: false,
       },
     ],
   },
