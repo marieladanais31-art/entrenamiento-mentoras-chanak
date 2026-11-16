@@ -57,7 +57,6 @@ export default function RutaClara({ progreso, troncoIds, ramaIds, roles, grupos,
   const sigue = totalIds.find((id) => modulos[id]?.estado === 'en_curso' && !terminados(modulos, id))
     || inicioIds.find((id) => !terminados(modulos, id))
     || totalIds.find((id) => !terminados(modulos, id))
-  const areasActivas = AREAS.filter((a) => grupos.includes(a.id))
   return (
     <section className="space-y-4 rounded-2xl border border-teal/20 bg-cream/70 p-4 shadow-sm sm:p-5" aria-label="Tu ruta y tu avance">
       <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
