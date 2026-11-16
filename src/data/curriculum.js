@@ -115,6 +115,7 @@ export const BIBLIOTECA = [
 ]
 
 export const RECURSOS_GENERALES = [
+  { nombre: 'Manual Microschool & Academic Partnerships · revisión noviembre 2026', url: 'https://docs.google.com/document/d/15bLpxLEzw2Oxu9lDKtq0uhqT8ePknh6sLkLDqPwHkZk/edit', descripcion: 'Producto estratégico activo: captación de instituciones, modelos Chanak-Operated y Partner Learning Center, ruta de viabilidad, permisos, formación, ESA y control de calidad.' },
   { nombre: 'Política operativa 2026-11 · En revisión interna', url: POLITICA_OPERATIVA_NOV_2026_URL, descripcion: 'Nueva referencia del entrenamiento: dos planes Off-Campus, matrícula anual, pagos privados/ESA, atención bilingüe y límites de servicios. Verificar aprobación de Dirección antes de usar como política pública.' },
   {
     nombre: 'SIS Chanak — Registro académico oficial (entorno de práctica)',
@@ -176,7 +177,7 @@ export const BLOQUES = [
       { id: 'T2.1', titulo: 'Off-Campus: Guided Homeschool y Full Enrollment', horas: horasModulo('T2.1'), modalidad: 'Vídeo + dossier de familias', evaluacion: 'Knowledge Check + caso', video: 'V05', fuentes: ['offcampus', 'master'] },
       { id: 'T2.2', titulo: 'Dual Diploma: rutas, créditos y homologación', horas: horasModulo('T2.2'), modalidad: 'Vídeo + dossier Dual Diploma', evaluacion: 'Knowledge Check + caso', video: 'V06', fuentes: ['dual', 'dualInst', 'creditPolicy'] },
       { id: 'T2.3', titulo: 'Life Skills & Leadership', horas: horasModulo('T2.3'), modalidad: 'Vídeo + dossier Life Skills', evaluacion: 'Knowledge Check + caso', video: 'V07', fuentes: ['lifeskills', 'ss'] },
-      { id: 'T2.4', titulo: 'Partner Learning Center, Certificación Institucional y diferencias entre programas', horas: horasModulo('T2.4'), modalidad: 'Vídeo + dossiers institucionales', evaluacion: 'Knowledge Check + caso', video: 'V08', fuentes: ['alianzas', 'plc', 'certPolicy', 'contratos'] },
+      { id: 'T2.4', titulo: 'Microschools & Academic Partnerships: captación y modelos', horas: horasModulo('T2.4'), modalidad: 'Vídeo + dossiers institucionales', evaluacion: 'Knowledge Check + caso', video: 'V08', fuentes: ['alianzas', 'plc', 'certPolicy', 'contratos'] },
     ],
   },
   {
