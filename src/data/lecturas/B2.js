@@ -7,6 +7,16 @@ export const LECTURAS_B2 = {
   'T2.1': {
     lecciones: [
       {
+        titulo: 'Actualización obligatoria · noviembre 2026: dos planes de Off-Campus',
+        guion: [
+          'Off-Campus comprende DOS planes disponibles para todos los países: Guided Homeschool, donde la familia dirige el aprendizaje y recibe mentoría mensual familiar, diagnóstico, PEI, acceso a plataformas y seguimiento; y Full Enrollment – Guided Virtual School, con matrícula escolar completa, tres sesiones sincrónicas semanales de ELA, mentoría semanal directa al estudiante y Life Skills sincrónico. Ambos permiten currículos A.C.E., LIFEPAC, Christian Light Education y Chanak Flex tras revisión del PEI.',
+          'No describas Guided Homeschool como equivalente a Full Enrollment ni prometas en el plan económico sesiones ELA en vivo. La atención comercial y de orientación se ofrece en español e inglés según disponibilidad del personal. El estudiante y la familia deben conocer quién asume la rutina y cómo se documentan las evidencias. Los expedientes y diplomas se rigen por la matrícula y las políticas de Chanak, no simplemente por la compra de apoyo académico.',
+          'La matrícula de Full Enrollment es anual: US$295 e incluye diagnóstico inicial, Plan Educativo Individualizado e inducción del estudiante y familia. No es reembolsable salvo derechos imperativos de la jurisdicción y reglas de los programas ESA. K–5 tiene diez mensualidades de US$275 (total US$3.045), grados 6–8 diez de US$320 (US$3.495) y grados 9–12 diez de US$365 (US$3.945). En pago trimestral son cuatro cuotas de US$687,50, US$800 o US$912,50, respectivamente, más la única matrícula anual. Esta escala base aplica a todos los países, expresada en USD y con equivalencias comerciales locales aprobadas.',
+          'En Estados Unidos se ofrece pago privado o por ESA cuando el producto, el alumno y la vía de facturación estén autorizados. Para ClassWallet la presentación trimestral es preferente cuando lo permiten sus normas. Arizona no tiene un precio Premium online independiente: cualquier Premium se estudiará posteriormente para servicio presencial Microschool. El apostillado, las traducciones y los envíos internacionales son servicios adicionales cotizados.',
+          'Esta actualización prevalece sobre descripciones de un único plan o precios anteriores en el resto de las lecturas. Antes de atender familias comprueba el catálogo documental vigente de Drive y el contrato correspondiente.',
+        ],
+      },
+      {
         titulo: 'Qué es Off-Campus (Homeschool Guiado) y por qué importa',
         guion: [
           'Off-Campus (Homeschool Guiado) es el programa educativo K–12 de Chanak para estudiantes que realizan su educación desde casa bajo el marco académico, el seguimiento y el registro de Chanak International Academy. En esta modalidad, Chanak funciona como la escuela estadounidense principal del estudiante: diagnostica, planifica, supervisa, evalúa y documenta. Chanak es una escuela privada registrada en Florida (FLDOE #134620). Para ti, como mentor o coordinador, esta definición no es un eslogan: marca lo que te corresponde. Si Chanak es la escuela, tú representas a la escuela ante la familia, y lo que registras en el SIS forma parte del expediente oficial del estudiante.',
