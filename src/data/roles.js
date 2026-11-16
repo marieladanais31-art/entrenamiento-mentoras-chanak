@@ -26,8 +26,8 @@ export const MODULOS_SAFEGUARDING_AWARENESS = ['T6.1']
 
 export const CORE = ['T1.0', 'T1.1', 'T1.2', 'T1.3', 'T1.4']
 // TRONCO COMÚN (todas las personas, antes de elegir rama): identidad Chanak, los tres programas
-// que opera Chanak (Off-Campus, Dual Diploma, Life Skills), safeguarding y protección de datos.
-export const PROGRAMAS_CHANAK = ['T2.1', 'T2.2', 'T2.3']
+// que opera Chanak (Off-Campus, Dual Diploma, Microschools) y Life Skills, safeguarding y protección de datos.
+export const PROGRAMAS_CHANAK = ['T2.1', 'T2.2', 'T2.4', 'T2.3']
 export const TRONCO_COMUN = [...CORE, ...PROGRAMAS_CHANAK, 'T6.1', 'T6.2']
 const B2 = ['T2.1', 'T2.2', 'T2.3', 'T2.4']
 const B3 = ['T3.1', 'T3.2', 'T3.2b', 'T3.2c', 'T3.3', 'T3.4']
@@ -348,9 +348,9 @@ export const ROLES = [
 // Coordinador lo confirma Dirección Académica; Estratégico, Dirección de Operaciones y Alianzas (Elías).
 //  · Estratégico → todos los demás (representación, familias, alianzas, grants y proyectos, registros)
 export const GRUPOS = {
-  mentor: { id: 'mentor', icono: '👩‍🏫', nombre: 'Mentor', nombreEn: 'Mentor', descripcion: 'Acompañamiento integral a familias y estudiantes de Off-Campus y Dual Diploma desde su inicio. Incluye tutoría pedagógica, clases de inglés y de Life Skills, Extensión Local y evaluación educativa.', funcionPorDefecto: 'mentor', acceso: 'libre' },
-  coordinator: { id: 'coordinator', icono: '🎯', nombre: 'Coordinador', nombreEn: 'Coordinator', descripcion: 'Supervisa a mentores y especialistas (SIS, PEI, evidencias, calidad e incidencias de Off-Campus y Dual Diploma). Incluye director de institución partner.', funcionPorDefecto: 'coordinator', acceso: 'confirmacion', confirma: 'Dirección Académica' },
-  estrategico: { id: 'estrategico', icono: '🤝', nombre: 'Estratégico', nombreEn: 'Strategic', descripcion: 'Grants (subvenciones), programas de becas y fondos estatales de EE. UU. (ESA), alianzas institucionales y representación territorial por país (España, México, Panamá, USA; EducaFe inactivo hasta feb. 2027).', funcionPorDefecto: 'strategic_general', acceso: 'confirmacion', confirma: 'Dirección de Operaciones y Alianzas (Elías Vidal)' },
+  mentor: { id: 'mentor', icono: '👩‍🏫', nombre: 'Mentor', nombreEn: 'Mentor', descripcion: 'Acompañamiento a estudiantes y familias de Off-Campus, Dual Diploma y Microschools cuando exista asignación. Incluye tutoría pedagógica, clases de inglés y de Life Skills, Extensión Local y evaluación educativa.', funcionPorDefecto: 'mentor', acceso: 'libre' },
+  coordinator: { id: 'coordinator', icono: '🎯', nombre: 'Coordinador', nombreEn: 'Coordinator', descripcion: 'Supervisa mentores, especialistas y Microschools (SIS, PEI, evidencias, safeguarding, calidad e incidencias). Incluye director de institución partner.', funcionPorDefecto: 'coordinator', acceso: 'confirmacion', confirma: 'Dirección Académica' },
+  estrategico: { id: 'estrategico', icono: '🤝', nombre: 'Estratégico', nombreEn: 'Strategic', descripcion: 'Microschool Development & Partnerships, captación bilingüe de familias, ESA y fondos estatales, marketing, embajadores, grants y representación territorial. Foundation mantiene su propia acción social.', funcionPorDefecto: 'strategic_general', acceso: 'confirmacion', confirma: 'Dirección de Operaciones y Alianzas (Elías Vidal)' },
 }
 const GRUPO_DE_FUNCION = {
   mentor: 'mentor', english_teacher: 'mentor', lifeskills_facilitator: 'mentor', local_language: 'mentor', assessment_specialist: 'mentor',

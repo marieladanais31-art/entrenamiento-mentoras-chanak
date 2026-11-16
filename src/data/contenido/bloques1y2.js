@@ -79,7 +79,7 @@ export const BLOQUES_1_2 = {
         titulo: 'Cuatro respaldos que no se deben confundir',
         guion: [
           'Florida DOE #134620: registro estatal como escuela privada. Es un registro, no una acreditación.',
-          'MSA-CESS Candidate: Chanak es candidata a la acreditación de Middle States; la decisión de la Comisión está prevista para noviembre de 2026. Nunca digas «acreditada» hasta que exista una decisión oficial.',
+          'MSA-CESS: la dirección ha comunicado la aprobación de la acreditación por votación de la Comisión en noviembre de 2026. La carta formal, el alcance definitivo y las normas de uso de marca están pendientes de cotejo. No crear ni utilizar un sello acreditado sin autorización.',
           'Nonprofit 501(c)(3): estatus fiscal federal de la entidad titular. Candid Gold 2026: sello de transparencia institucional, no una acreditación educativa.',
           'Organizaciones como la entidad colaboradora independiente en España son entidades colaboradoras con personalidad jurídica propia. No son departamentos de Chanak ni forman parte de su jerarquía académica.',
         ],
@@ -94,10 +94,10 @@ export const BLOQUES_1_2 = {
         '¿A quién avisas de que hay información pública incorrecta?',
       ],
       criterio:
-        'Respuesta correcta: «Chanak es MSA-CESS Candidate; la decisión está prevista para noviembre de 2026». entidad colaboradora independiente es una entidad colaboradora independiente. La información pública errónea se comunica a Chanak Central.',
+        'Respuesta correcta: «Chanak ha recibido comunicación de aprobación de acreditación MSA-CESS; carta formal y autorización de marca pendientes». Una entidad colaboradora conserva su personalidad jurídica. La información pública errónea se comunica a Chanak Central.',
     },
     quiz: [
-      { p: '¿Cómo debe describirse hoy el estatus de Chanak ante Middle States?', opciones: ['Acreditada por MSA-CESS', 'MSA-CESS Candidate', 'Acreditación provisional', 'Miembro pleno de MSA'], correcta: 1, explica: 'Chanak es candidata; la decisión de la Comisión está prevista para noviembre de 2026.' },
+      { p: '¿Qué comunica Chanak sobre MSA-CESS mientras espera la carta formal?', opciones: ['Los socios quedan acreditados automáticamente', 'Se comunicó aprobación; carta formal y autorización de marca pendientes', 'La candidatura sigue sin decisión', 'Podemos fabricar un sello provisional'], correcta: 1, explica: 'La aprobación fue comunicada a Dirección; debe cotejarse la carta y no usar sello no autorizado.' },
       { p: 'Un colegio pregunta si el registro FLDOE #134620 es una acreditación. ¿Qué respondes?', opciones: ['Sí, es la acreditación estatal', 'No: es el registro de Chanak como escuela privada en Florida', 'Sí, equivale a MSA', 'Es un número fiscal'], correcta: 1, explica: 'El FLDOE #134620 es un registro estatal, no una acreditación.' },
       { p: 'En una presentación alguien llama a entidad colaboradora independiente «el departamento de Chanak en España». ¿Qué corriges?', opciones: ['Nada, es correcto', 'Que entidad colaboradora independiente es una entidad colaboradora independiente', 'Que entidad colaboradora independiente es el campus de Chanak', 'Que entidad colaboradora independiente emite los diplomas'], correcta: 1, explica: 'entidad colaboradora independiente tiene personalidad jurídica propia; no es un departamento ni un nivel jerárquico de Chanak.' },
       { p: '¿Qué es Candid Gold 2026?', opciones: ['Una acreditación educativa', 'Un sello de transparencia institucional', 'Una licencia del Ministerio', 'Un premio académico'], correcta: 1, explica: 'Candid Gold es transparencia institucional, no acreditación.' },
@@ -360,42 +360,56 @@ export const BLOQUES_1_2 = {
 
   'T2.4': {
     resumen:
-      'Además de los programas para familias, Chanak trabaja con instituciones. Conocer las diferencias evita prometer cosas equivocadas: el Partner Learning Center y la Certificación Institucional son relaciones distintas, con instrumentos y tarifas distintos.',
+      'Microschool & Academic Partnerships es una de las tres rutas estratégicas activas de Chanak. El mentor distingue el modelo presencial, la institución colaboradora, la matrícula de cada estudiante y la acreditación propia de Chanak.',
     objetivos: [
-      'Diferenciar las cuatro vías de colaboración institucional.',
-      'Explicar Partner Learning Center frente a Certificación Institucional.',
-      'Identificar el instrumento contractual de cada relación.',
+      'Presentar Microschool como oferta comercial prioritaria junto a Off-Campus y Dual Diploma.',
+      'Distinguir una Chanak-Operated Microschool de un Partner Learning Center.',
+      'Orientar un interesado al proceso de precalificación, viabilidad, acuerdos, formación y autorización.',
+      'Comunicar correctamente los límites de acreditación MSA-CESS, permisos locales y financiación ESA.',
     ],
     lecciones: [
       {
-        titulo: 'Cuatro vías institucionales',
+        titulo: 'Microschool: producto activo para comunidades y organizaciones',
         guion: [
-          'Vía 1 · Colaboración académica y certificación: evaluación, auditoría, registro y documentación para centros aprobados (Vía A con currículo revisado por Chanak; Vía B con revisión reforzada).',
-          'Vía 2 · Dual Diploma Institucional: el colegio ofrece la ruta estadounidense a sus estudiantes sin sustituir su currículo.',
-          'Vía 3 · Educación en casa y plataforma: solo donde la ley local lo permite y la institución tiene autorización.',
-          'Vía 4 · Partner Learning Center (Sede afiliada): una entidad local implementa un centro presencial Chanak bajo la supervisión de Chanak Central.',
+          'Chanak promociona ahora tres rutas principales: Off-Campus, Dual Diploma y Microschool & Academic Partnerships. Microschool permite organizar grupos pequeños presenciales con aprendizaje individualizado, Mastery Learning, marco 60/20/20, coordinador formado y seguimiento institucional.',
+          'Se ofrece a iglesias, colegios, asociaciones, cooperativas y comunidades organizadas, normalmente con una comunidad de unas diez familias o más. Una comunidad de 5 a 30 estudiantes es un rango orientativo de aula, no una autorización ni garantía de viabilidad.',
+          'Microschool no sustituye el programa académico individual: cada alumno puede tener una modalidad autorizada y un contrato específico; un centro de apoyo presencial no implica por sí mismo diploma ni créditos.',
         ],
       },
       {
-        titulo: 'Partner Learning Center vs Certificación Institucional',
+        titulo: 'Dos modelos de operación y la ruta del socio',
         guion: [
-          'Certificación Institucional: el centro mantiene su identidad y su programa; Chanak evalúa la evidencia. Convenio de Colaboración Académica: alta de US$500 + tarifa por estudiante según la tabla aprobada vigente. Nunca es la compra de un diploma ni de créditos.',
-          'Partner Learning Center: la entidad conserva su personalidad jurídica y puede implementar el modelo Chanak autorizado. Acuerdo Marco: cuota inicial de US$3,500, renovación anual de US$800 y US$40 por estudiante. Materiales, shipping, servicios especiales y licencias externas se facturan aparte.',
-          'Ninguna de las dos es una franquicia ni un campus independiente. Las condiciones se entregan siempre por escrito antes de formalizar; el mentor no negocia condiciones.',
+          'Chanak-Operated Microschool: Chanak opera directamente la sede cuando ha confirmado las condiciones aplicables. Partner Learning Center: otra entidad legalmente constituida opera el local y el personal mediante un acuerdo que define el programa autorizado y las obligaciones locales.',
+          'La ruta es: registro del interesado → precalificación del representante y comunidad → reunión institucional → viabilidad y presupuesto → revisión legal y acuerdo → formación y configuración del SIS → autorización escrita y apertura supervisada.',
+          'El responsable de captación documenta país, figura jurídica, comunidad, espacio, personal, protección de menores y siguiente paso. Solo Dirección de Alianzas y Dirección Académica pueden confirmar alcance, tarifas y autorización.',
+        ],
+      },
+      {
+        titulo: 'Acreditación, ESA y condiciones económicas: decir lo verificable',
+        guion: [
+          'La acreditación MSA-CESS corresponde a Chanak dentro de su alcance acreditado: un Partner Learning Center no obtiene automáticamente una acreditación independiente, ni puede presentarse como campus acreditado sin autorización expresa y cobertura comprobada.',
+          'En Estados Unidos, los fondos ESA dependen de la elegibilidad de familia y servicio y del sistema de cada estado. No prometer que todas las plataformas autorizan cobro centralizado o pagos a operadores locales; ClassWallet, Odyssey y Step Up mantienen procesos distintos.',
+          'Las tarifas de asociación se comunican en propuesta institucional escrita, después de estudiar el proyecto. Los importes de dossiers antiguos no son una tabla universal aprobada; un mentor nunca negocia cuotas ni promete rentabilidad.',
         ],
       },
     ],
     practica: {
-      situacion: 'Un colegio te dice: «Queremos pagar para que nuestros alumnos reciban el diploma estadounidense sin cambiar nada de lo que hacemos».',
-      preguntas: ['¿Qué parte de la frase es incompatible con Chanak?', '¿Qué vías podrían encajar y qué exigen?', '¿A quién derivas la conversación?'],
-      criterio: 'La certificación no es compra de diploma: exige evidencia y auditoría. Encajaría la Vía 1 o la Vía 2 según el caso. Se deriva a la dirección de alianzas.',
+      situacion: 'Una iglesia con 12 familias y un local en España quiere abrir una Microschool con el nombre Chanak el mes próximo; pregunta si la acreditación de Chanak reemplaza los permisos y si puede cobrar fondos ESA.',
+      preguntas: [
+        '¿Cómo clasificas el interés y qué datos debes registrar?',
+        '¿Qué pasos deben completarse antes de anunciar una apertura?',
+        '¿Cómo diferencias MSA-CESS, la licencia local y los fondos ESA?',
+        '¿A quién remites permisos, costes y condiciones del acuerdo?',
+      ],
+      criterio: 'La alianza se puede evaluar ahora, pero ni la marca ni la apertura ni el uso de ESA están autorizados automáticamente. Se registra el lead y se deriva a Dirección de Alianzas y coordinación académica.',
     },
     quiz: [
-      { p: '¿Cuál es la estructura económica aprobada del Partner Learning Center?', opciones: ['US$500 + tabla vigente', 'US$3,500 inicial + US$800 renovación anual + US$40 por estudiante', 'US$40 al mes y US$180 de matrícula', 'Gratuito'], correcta: 1, explica: 'Es la estructura 2026–2027 recogida en la adenda del Acuerdo Marco.' },
-      { p: '¿Qué incluye la Certificación Institucional?', opciones: ['La compra del diploma', 'Evaluación, auditoría, registro y documentación académica con evidencia', 'Una franquicia', 'Un campus Chanak'], correcta: 1, explica: 'Nunca es compra de diploma ni de créditos.' },
-      { p: '¿Qué instrumento rige un Partner Learning Center?', opciones: ['El Convenio de Colaboración Académica', 'El Acuerdo Marco de Implementación', 'Un contrato de franquicia', 'Ninguno'], correcta: 1, explica: 'Vía 4 = Acuerdo Marco.' },
-      { p: 'Un director pide un descuento en la cuota inicial. ¿Qué haces?', opciones: ['Lo concedes', 'No negocias: derivas a la dirección de alianzas', 'Le dices que no existe cuota', 'Le ofreces la certificación gratis'], correcta: 1, explica: 'Las condiciones económicas no son competencia del mentor.' },
+      { p: '¿Qué posición comercial tiene Microschool en Chanak?', opciones: ['Proyecto inactivo para 2027', 'Una de las tres rutas estratégicas activas', 'Solo un servicio de familias individuales', 'Un descuento de Off-Campus'], correcta: 1, explica: 'Microschool está al mismo nivel comercial que Off-Campus y Dual Diploma.' },
+      { p: '¿Qué entidad opera un Partner Learning Center?', opciones: ['Siempre el estado de Florida', 'La entidad local autorizada, con su propia personalidad jurídica', 'Automáticamente DBU', 'Cada familia individual sin acuerdos'], correcta: 1, explica: 'El operador local asume sus obligaciones contractuales y regulatorias.' },
+      { p: '¿Una alianza acredita automáticamente el local por MSA-CESS?', opciones: ['Sí, sin trámites', 'No: debe verificarse el alcance y la autorización institucional correspondiente', 'Solo en España', 'Solo si tiene 10 familias'], correcta: 1, explica: 'La acreditación de Chanak no concede automáticamente acreditación independiente a sus socios.' },
+      { p: '¿Quién aprueba las tarifas y la apertura del socio?', opciones: ['El mentor', 'La dirección competente de Chanak mediante propuesta y autorización escrita', 'La familia más antigua', 'El coordinador sin revisión'], correcta: 1, explica: 'Condiciones y autorización se documentan por escrito.' },
+      { p: '¿Puede el mentor garantizar cobro centralizado con todos los ESA?', opciones: ['Sí', 'No: depende del estado, servicio y mecanismo de pago autorizado', 'Siempre que exista una iglesia', 'Solo con el logo MSA'], correcta: 1, explica: 'Cada administrador ESA tiene reglas propias.' },
     ],
-    evidencia: 'Haz una tabla de 4 filas comparando Certificación Institucional y Partner Learning Center.',
+    evidencia: 'Prepara una ficha de precalificación de Microschool y una respuesta por escrito a una iglesia interesada, sin inventar permisos ni tarifas.',
   },
 }

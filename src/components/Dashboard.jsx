@@ -10,6 +10,7 @@ import { useIdioma } from '../i18n/idioma'
 import { traducirBloques } from '../data/curriculum.en'
 import RutaRoles from './RutaRoles'
 import PlanFormacion from './PlanFormacion'
+import RutaClara from './RutaClara'
 
 // Inicio → Paso 1 Tronco común → Paso 2 Elige tu rama → Paso 3 Tu ruta → Módulo
 export default function Dashboard({
@@ -111,6 +112,19 @@ export default function Dashboard({
         </p>
       </section>
 
+      {/* Ruta guiada: progreso real por etapa y función; preserva el progreso histórico */}
+      <RutaClara
+        progreso={progreso}
+        troncoIds={troncoIds}
+        ramaIds={ramaIds}
+        roles={roles}
+        grupos={grupos}
+        onAbrirModulo={onAbrirModulo}
+        onVerProgramas={onVerProgramas}
+        onVerEstrategia={onVerEstrategia}
+        viendoOtra={viendoOtra}
+      />
+
       {/* Cabecera de progreso de SU ruta */}
       <section className="rounded-2xl bg-white p-5 shadow-sm">
         <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-center">
@@ -180,7 +194,7 @@ export default function Dashboard({
 
       {/* PASO 1 · TRONCO COMÚN */}
       <Paso numero={1} titulo="Tronco común · para todas las personas" hechos={troncoHechos} total={troncoIds.length}
-        sub="Quién es Chanak, el modelo 60/20/20, Off-Campus, Dual Diploma y Life Skills, safeguarding y protección de datos.">
+        sub="Quién es Chanak, el modelo 60/20/20, Off-Campus, Dual Diploma, Microschools y Life Skills, safeguarding y protección de datos.">
         <ListaModulos ids={troncoIds} mods={mods} esTronco onAbrirModulo={onAbrirModulo} />
         {directo && <p className="mt-2 text-[11px] text-navy/55">Incluye Desarrollo infantil y adolescente (Bloque 9), obligatorio por tener contacto directo con menores.</p>}
       </Paso>
@@ -301,14 +315,14 @@ export default function Dashboard({
           <button onClick={onVerProgramas} className="w-full rounded-2xl border-2 border-teal bg-white p-5 text-left shadow-sm hover:bg-teal/5">
             <span className="block text-sm font-bold uppercase text-teal">Guía operativa · Mentor y Coordinador</span>
             <span className="mt-1 block text-xl font-bold text-navy">Atender estudiantes y acompañar familias →</span>
-            <span className="mt-2 block text-sm text-navy/70">Off-Campus · Dual Diploma · Clases de inglés · Clases de Life Skills</span>
+            <span className="mt-2 block text-sm text-navy/70">Off-Campus · Dual Diploma · Microschools · Inglés · Life Skills</span>
           </button>
         )}
         {esEstrategico && (
           <button onClick={onVerEstrategia} className="w-full rounded-2xl border-2 border-gold bg-white p-5 text-left shadow-sm hover:bg-gold/5">
             <span className="block text-sm font-bold uppercase text-gold">Guía operativa · Estratégico</span>
             <span className="mt-1 block text-xl font-bold text-navy">De la oportunidad al resultado documentado →</span>
-            <span className="mt-2 block text-sm text-navy/70">Grants (subvenciones) · ESA y fondos estatales de EE. UU. · Expansión por país y alianzas institucionales · EducaFe (inactiva hasta feb. 2027)</span>
+            <span className="mt-2 block text-sm text-navy/70">Microschools y alianzas · admisiones y familias · ESA y fondos estatales · marketing · grants</span>
           </button>
         )}
         <div className="grid gap-3 sm:grid-cols-2">
