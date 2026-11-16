@@ -114,30 +114,30 @@ export const BLOQUES_7_8 = {
 
   'T8.2': {
     resumen:
-      'Coordinar un Partner Learning Center exige conocer el Acuerdo Marco: qué hace la entidad local, qué hace Chanak Central y cómo se comunican.',
-    objetivos: ['Distinguir responsabilidades de la entidad local y de Chanak.', 'Aplicar requisitos de personal, SIS y protección.', 'Explicar la estructura económica sin negociarla.'],
+      'Coordinar una Microschool activa exige distinguir una sede operada por Chanak de un Partner Learning Center, gestionar sus permisos y formar al equipo antes de abrir.',
+    objetivos: ['Distinguir responsabilidades de la entidad local y de Chanak.', 'Aplicar requisitos de personal, SIS y protección.', 'Explicar la ruta de captación, evaluación y acuerdo sin negociar tarifas no aprobadas.'],
     lecciones: [
       {
-        titulo: 'Responsabilidades según el Acuerdo Marco',
+        titulo: 'Microschool como producto estratégico: dos figuras operativas',
         guion: [
-          'Chanak: marco académico y curricular, estándares, criterios de evaluación y promoción, formación y certificación, sistemas, supervisión y calidad, documentación académica, autorización de programas y uso del nombre.',
+          'La red de Microschools es una línea estratégica comercial activa. Existen sedes propias Chanak-Operated y sedes Partner Learning Center operadas por una entidad local con personalidad jurídica propia, solo bajo programas y acuerdos autorizados.',
           'Entidad local: cumplimiento legal y permisos, instalaciones, selección y contratación del personal, protección de estudiantes y datos, uso obligatorio del SIS, información veraz y facilitar las revisiones de calidad.',
-          'Coordinadores y mentores deben completar y mantener vigente la formación y certificación de Chanak antes de atender estudiantes.',
+          'Coordinadores y mentores deben completar y mantener vigente la formación y certificación de Chanak antes de atender estudiantes. El operador local debe demostrar instalaciones, personal, seguros, safeguarding y licencias aplicables antes de la autorización de apertura.',
         ],
       },
       {
-        titulo: 'Lo que el acuerdo no es y su economía',
+        titulo: 'Permisos, acuerdos y facturación de la sede',
         guion: [
           'No es una autorización gubernamental, ni una licencia educativa, ni una franquicia, ni una joint venture, ni una autorización automática para abrir varias sedes. Cada nueva sede requiere autorización expresa y escrita.',
-          'Estructura económica 2026–2027 (adenda económica al Acuerdo Marco): cuota inicial US$3,500, renovación anual US$800 y US$40 por estudiante. Materiales, shipping, servicios especiales y licencias externas aparte.',
-          'El coordinador informa y deriva; las condiciones las fija Chanak por escrito.',
+          'Las tarifas de socio y los cargos locales requieren propuesta y anexos escritos aprobados para cada proyecto: no usar una antigua tabla de alta, renovación o cuota por alumno como tarifa universal vigente. Los materiales, seguros, personal, licencias y otras partidas se presupuestan de manera diferenciada.',
+          'El coordinador documenta la precalificación, la viabilidad, los permisos y la formación. Administración confirma si una operación con fondos ESA es elegible: las vías ClassWallet, Odyssey y Step Up son distintas; no garantizar cobro centralizado ni redistribución a socios.',
         ],
       },
     ],
     practica: {
-      situacion: 'La junta de una iglesia que opera un Partner Learning Center quiere abrir un segundo grupo en otra ciudad «con el mismo acuerdo» y contratar a una persona que aún no ha hecho la formación.',
-      preguntas: ['¿Se puede abrir con el mismo acuerdo?', '¿Puede atender estudiantes esa persona?', '¿Qué comunicas a Chanak Central?'],
-      criterio: 'Cada sede requiere autorización expresa; nadie atiende estudiantes sin formación/certificación; se comunica por escrito a Chanak Central.',
+      situacion: 'Una iglesia interesada tiene doce familias, un local aún sin verificar y desea abrir una segunda sede, utilizar el logo MSA y cobrar ESA antes de firmar el acuerdo.',
+      preguntas: ['¿Qué información registras en la ficha de precalificación?', '¿Qué autorizaciones y formación faltan?', '¿Qué promesas no puedes hacer sobre MSA-CESS y ESA?'],
+      criterio: 'Cada sede requiere revisión legal, acuerdo, formación, seguridad y autorización escrita; no hereda acreditación independiente ni elegibilidad ESA automática.',
     },
     quiz: [
       { p: '¿El Acuerdo Marco autoriza abrir varias sedes automáticamente?', opciones: ['Sí', 'No: cada sede requiere autorización expresa y escrita', 'Solo en el mismo país', 'Solo con más alumnos'], correcta: 1, explica: 'No hay autorización automática.' },
