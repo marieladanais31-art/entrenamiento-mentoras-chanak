@@ -356,21 +356,25 @@ export default function ModuleView({
           )}
 
           <ActualizacionOperativa moduloId={moduloId} />
-          <div className="space-y-6">
+          <div className="mb-4 rounded-xl border border-teal/25 bg-white p-4 text-sm text-navy/75">
+            <b className="text-navy">Lectura por partes.</b> Lee un tema cada vez; los demás permanecen disponibles para profundizar.
+            No se elimina ningún contenido de la certificación.
+          </div>
+          <div className="space-y-3">
             {contenido.lecciones.map((lec, i) => (
-              <article key={i} className="rounded-2xl border border-navy/10 bg-cream/20 p-5 sm:p-6 transition hover:border-navy/20">
-                <header className="mb-4 flex items-center gap-3 border-b border-navy/10 pb-3">
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-teal text-xs font-bold text-white shadow-xs">
-                    {i + 1}
-                  </span>
-                  <h4 className="text-base sm:text-lg font-bold text-navy tracking-tight">{lec.titulo}</h4>
-                </header>
-                <div className="space-y-4 sm:space-y-4.5">
+              <details key={i} open={i === 0} className="group rounded-2xl border border-navy/10 bg-cream/20 p-4 sm:p-5">
+                <summary className="flex cursor-pointer list-none items-center gap-3 font-bold text-navy">
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-teal text-xs text-white">{i + 1}</span>
+                  <span className="flex-1 text-sm sm:text-base">{lec.titulo}</span>
+                  <span className="text-xs text-teal group-open:hidden">Abrir +</span>
+                  <span className="hidden text-xs text-teal group-open:inline">Cerrar −</span>
+                </summary>
+                <div className="mt-4 space-y-4 border-t border-navy/10 pt-4">
                   {lec.guion.map((par, j) => (
                     <ParrafoLectura key={j} texto={par} />
                   ))}
                 </div>
-              </article>
+              </details>
             ))}
           </div>
 
