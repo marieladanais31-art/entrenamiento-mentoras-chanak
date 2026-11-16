@@ -10,7 +10,7 @@ import ActividadAdmin from './ActividadAdmin'
 import AccesosAdmin from './AccesosAdmin'
 import { useIdioma } from '../i18n/idioma'
 import { traducirBloques } from '../data/curriculum.en'
-import { ROL_POR_ID, rolesDesdeTipoAcceso } from '../data/roles'
+import { ROL_POR_ID, rolesDesdeTipoAcceso, TRONCO_COMUN, MODULOS_DESARROLLO, modulosObligatorios, tieneContactoDirecto } from '../data/roles'
 
 export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) {
   const { t, idioma } = useIdioma()
@@ -122,7 +122,15 @@ export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) 
                   const asignados = (rolesMapa?.[p.id] || []).map((x) => x.rol)
                   const rolesP = asignados.length ? [...new Set(asignados)] : rolesDesdeTipoAcceso(p.tipo_acceso)
                   const r = resumenMentora(aplicarEquivalencias(progresos[p.id] || { modulos: {} }), { roles: rolesP, contactoMenores: p.contacto_menores ?? null })
-                  const pct = Math.min(100, Math.round((r.horas / r.metaHorasModulos) * 100))
+                  const pct = r.metaHorasModulos > 0 ? Math.min(100, Math.round((r.horas / r.metaHorasModulos) * 100)) : 0
+                  const progresoIndividual = aplicarEquivalencias(progresos[p.id] || { modulos: {} }).modulos || {}
+                  const terminado = (id) => ['completado', 'reconocido'].includes(progresoIndividual[id]?.estado)
+                  const troncoPersona = [...new Set([...TRONCO_COMUN, ...(tieneContactoDirecto(rolesP, p.contacto_menores ?? null) ? MODULOS_DESARROLLO : [])])]
+                  const rutaPersona = [...new Set(modulosObligatorios(rolesP, p.contacto_menores ?? null))]
+                  const especializacionPersona = rutaPersona.filter(id => !troncoPersona.includes(id))
+                  const avanceTronco = troncoPersona.filter(terminado).length
+                  const avanceRama = especializacionPersona.filter(terminado).length
+                  const pendientesPersona = rutaPersona.filter(id => !terminado(id)).length
                   return (
                     <div key={p.id} className="rounded-2xl bg-white p-4 shadow-sm">
                       <div className="flex items-center gap-3">
@@ -160,6 +168,17 @@ export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) 
                           style={{ width: `${pct}%` }}
                         />
                       </div>
+                      <div className="mt-3 grid grid-cols-2 gap-2 text-xs text-navy/75">
+                        <div className="rounded-lg bg-cream p-2">
+                          <div className="font-bold text-navy">Tronco común</div>
+                          <div className="mt-0.5 tabular-nums">{avanceTronco}/{troncoPersona.length}</div>
+                        </div>
+                        <div className="rounded-lg bg-cream p-2">
+                          <div className="font-bold text-navy">Especialización</div>
+                          <div className="mt-0.5 tabular-nums">{avanceRama}/{especializacionPersona.length}</div>
+                        </div>
+                      </div>
+                      <p className="mt-2 text-xs font-semibold text-navy/70">{pendientesPersona ? `${pendientesPersona} módulos pendientes de su ruta` : 'Ruta de módulos completa; revisar prácticas y certificación'}</p>
                       {(r.elegibleMentor || r.elegibleCoordinadora) && (
                         <button
                           onClick={() =>
