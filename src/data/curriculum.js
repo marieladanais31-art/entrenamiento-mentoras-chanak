@@ -17,7 +17,7 @@ import { horasModulo } from './tiempos'
 // ============================================================
 
 export const VERSION_CURRICULO = 'training-2026-2027'
-export const FECHA_ACTUALIZACION = '2026-10-06'
+export const FECHA_ACTUALIZACION = '2026-11-16'
 
 export const NIVEL_1_HORAS = 180 // meta de la ruta completa, confirmada por dirección
 export const HORAS_MODULOS_N1 = 41.5 // estimación de actividades de los bloques 1–6
@@ -171,7 +171,7 @@ export const BLOQUES = [
     categoria: 'Programas',
     horas: 7,
     modulos: [
-      { id: 'T2.1', titulo: 'Off-Campus (Homeschool Guiado)', horas: horasModulo('T2.1'), modalidad: 'Vídeo + dossier de familias', evaluacion: 'Knowledge Check + caso', video: 'V05', fuentes: ['offcampus', 'master'] },
+      { id: 'T2.1', titulo: 'Off-Campus: Guided Homeschool y Full Enrollment', horas: horasModulo('T2.1'), modalidad: 'Vídeo + dossier de familias', evaluacion: 'Knowledge Check + caso', video: 'V05', fuentes: ['offcampus', 'master'] },
       { id: 'T2.2', titulo: 'Dual Diploma: rutas, créditos y homologación', horas: horasModulo('T2.2'), modalidad: 'Vídeo + dossier Dual Diploma', evaluacion: 'Knowledge Check + caso', video: 'V06', fuentes: ['dual', 'dualInst', 'creditPolicy'] },
       { id: 'T2.3', titulo: 'Life Skills & Leadership', horas: horasModulo('T2.3'), modalidad: 'Vídeo + dossier Life Skills', evaluacion: 'Knowledge Check + caso', video: 'V07', fuentes: ['lifeskills', 'ss'] },
       { id: 'T2.4', titulo: 'Partner Learning Center, Certificación Institucional y diferencias entre programas', horas: horasModulo('T2.4'), modalidad: 'Vídeo + dossiers institucionales', evaluacion: 'Knowledge Check + caso', video: 'V08', fuentes: ['alianzas', 'plc', 'certPolicy', 'contratos'] },
