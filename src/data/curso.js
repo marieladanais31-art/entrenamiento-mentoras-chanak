@@ -1,3 +1,4 @@
+import { POLITICA_FORMACION } from './politicaFormacion2026'
 // ============================================================
 // Información general de la formación 2026–2027
 // ============================================================
@@ -8,7 +9,7 @@ export const CURSO = {
   nivel1: 'Nivel 1 · CHANAK CERTIFIED MENTOR · 180 h de ruta completa',
   nivel2: 'Nivel 2 · CHANAK CERTIFIED COORDINATOR · 300 h acumuladas',
   resumen:
-    'Formación oficial de Chanak International Academy (Chanak TrainUp Education, Inc. · escuela privada registrada en Florida, FLDOE #134620 · MSA-CESS Candidate) para las personas que acompañan estudiantes y coordinan centros. Enseña cómo funciona y se opera Chanak realmente (incluidos los roles —un rol describe una función, no necesariamente una persona—, el organigrama funcional y el Operational Glossary): el modelo 60/20/20, el marco académico orientado al dominio, los programas Off-Campus (Homeschool Guiado), Dual Diploma y Life Skills & Leadership, las vías curriculares, el Scope & Sequence K–12, la evaluación, el reconocimiento de créditos, el SIS, el Portal y el Dual Diploma Portal, el safeguarding, la Extensión Local y, cuando el rol lo requiere, los programas estatales de EE. UU. La fuente oficial es la documentación 2026–2027 (versión FINAL).',
+    'Formación oficial de Chanak International Academy (Chanak TrainUp Education, Inc. · escuela privada registrada en Florida, FLDOE #134620 · MSA-CESS: aprobación comunicada, carta formal y autorización de marca pendientes) para las personas que acompañan estudiantes y coordinan centros. Enseña cómo funciona y se opera Chanak realmente (incluidos los roles —un rol describe una función, no necesariamente una persona—, el organigrama funcional y el Operational Glossary): el modelo 60/20/20, el marco académico orientado al dominio, los programas Off-Campus en dos planes (Guided Homeschool y Full Enrollment), Dual Diploma y Life Skills & Leadership, las vías curriculares, el Scope & Sequence K–12, la evaluación, el reconocimiento de créditos, el SIS, el Portal y el Dual Diploma Portal, el safeguarding, la Extensión Local y, cuando el rol lo requiere, los programas estatales de EE. UU. La fuente oficial es la documentación 2026–2027 (versión FINAL).',
   dirigidoA:
     'Todo el equipo Chanak. Tronco común para todas las personas y, después, tres ramas: Mentor (acceso libre: Off-Campus y Dual Diploma, inglés, Life Skills, Extensión Local y evaluación educativa), Coordinador (incluye director de institución partner; lo confirma Dirección Académica) y Estratégico (lo confirma la Dirección de Operaciones y Alianzas) (familias, marketing, ESA y fondos estatales, alianzas, grants y programas EducaFe, inactivos hasta febrero de 2027).',
   objetivos: [
@@ -53,3 +54,6 @@ export const CURSO = {
     'El Bloque 9 (Child & Adolescent Development, Psychology & Educational Accompaniment) es transversal y obligatorio para todo rol con contacto directo con menores; se integra en la formación común sin doble cómputo; sin él no se completa la ruta ni se emite el certificado. El Bloque 7 (USA State Programs / Compliance) es un módulo por rol: lo completan quienes atienden familias o servicios vinculados a programas estatales de EE. UU. Su integración en la bitácora depende de la función y evita doble cómputo.',
   umbralAprobacion: 0.8,
 }
+
+// Referencia única para el bloque operativo y las actualizaciones editoriales.
+export const MODELO_VIGENTE_FORMACION = POLITICA_FORMACION
