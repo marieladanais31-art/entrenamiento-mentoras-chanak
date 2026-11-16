@@ -143,7 +143,7 @@ export const BLOQUES_7_8 = {
       { p: '¿El Acuerdo Marco autoriza abrir varias sedes automáticamente?', opciones: ['Sí', 'No: cada sede requiere autorización expresa y escrita', 'Solo en el mismo país', 'Solo con más alumnos'], correcta: 1, explica: 'No hay autorización automática.' },
       { p: '¿Quién contrata al personal local?', opciones: ['Chanak', 'La entidad local', 'MSA', 'El estado'], correcta: 1, explica: 'Relación laboral con la entidad local.' },
       { p: '¿Qué es obligatorio antes de atender estudiantes?', opciones: ['Nada', 'Formación y certificación Chanak vigente', 'Un título de máster', 'Un año de experiencia'], correcta: 1, explica: 'Requisito previo e indispensable.' },
-      { p: '¿Cuál es la estructura económica del PLC 2026–2027?', opciones: ['US$40/mes + US$180 matrícula', 'US$3,500 + US$800 anual + US$40 por estudiante', 'US$500 + tabla', 'Gratuito'], correcta: 1, explica: 'Según la adenda económica al Acuerdo Marco.' },
+      { p: '¿Cómo conoce el socio el precio de su Microschool?', opciones: ['Usa siempre la tarifa del antiguo dossier', 'Recibe propuesta contractual aprobada según modelo, servicios y jurisdicción', 'Negocia con cualquier mentor', 'Es gratuito por usar fondos ESA'], correcta: 1, explica: 'La oferta institucional es individual y se confirma por escrito; no existe precio universal público aprobado.' },
     ],
     evidencia: 'Haz un mapa de responsabilidades (entidad local / Chanak Central) de tu centro o de un centro ejemplo.',
   },
