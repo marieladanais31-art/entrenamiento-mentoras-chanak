@@ -50,6 +50,7 @@ export const FUENTES = {
 // Sustituyen a los antiguos cuadernos de NotebookLM: cada módulo enlaza a la carpeta exacta.
 const DRIVE = (id) => `https://drive.google.com/drive/folders/${id}`
 export const CARPETA_FINAL_URL = DRIVE('1bPAuhY8-YhHBmUPpqUahXACC_bH_BqxT')
+export const POLITICA_OPERATIVA_NOV_2026_URL = 'https://docs.google.com/document/d/16puYrTbPaxlkFp2mJlfNcBDDo9vtjUZ3QDQFNjrwIgU/edit'
 export const CARPETAS_DRIVE = {
   '10_PEOPLE_ROLES_TRAINING/08_OPERATIVA_ACADEMICA': DRIVE('1fSscAWCQ-FFGae-ocBrc6qxzxugoTZbD'),
   '01_INSTITUCIONAL': DRIVE('1KbhzvvpIgASo5koXhpAqPs3IsYgPoDuU'),
@@ -114,6 +115,7 @@ export const BIBLIOTECA = [
 ]
 
 export const RECURSOS_GENERALES = [
+  { nombre: 'Política operativa 2026-11 · En revisión interna', url: POLITICA_OPERATIVA_NOV_2026_URL, descripcion: 'Nueva referencia del entrenamiento: dos planes Off-Campus, matrícula anual, pagos privados/ESA, atención bilingüe y límites de servicios. Verificar aprobación de Dirección antes de usar como política pública.' },
   {
     nombre: 'SIS Chanak — Registro académico oficial (entorno de práctica)',
     url: 'https://sis.chanakacademy.org/',
