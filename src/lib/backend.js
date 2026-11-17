@@ -594,3 +594,53 @@ export async function listarActividadFormacion() {
   }
   return filas
 }
+
+
+// ════════════════════════════════════════════
+// CERTIFICACIÓN FORMAL — no inferir horas ni validez desde módulos
+// Autorización de acciones y RLS aplicadas en Supabase.
+// ════════════════════════════════════════════
+export async function listarCertificacionesFormales(perfilId = null) {
+  let q = supabase.from('certificaciones_formacion')
+    .select('id,perfil_id,nivel,version_curriculo,estado,horas_validadas,practicas_validadas,evaluacion_validada,menores_verificado,observaciones,solicitado_en,revisado_por,revisado_en,codigo_verificacion')
+    .order('solicitado_en', { ascending: false })
+  if (perfilId) q = q.eq('perfil_id', perfilId)
+  const { data, error } = await q
+  if (error) throw new Error(error.message)
+  return data || []
+}
+
+export async function solicitarCertificacionFormal(perfilId, nivel, versionCurriculo) {
+  const { data, error } = await supabase.from('certificaciones_formacion').insert({
+    perfil_id: perfilId,
+    nivel,
+    version_curriculo: versionCurriculo,
+    estado: 'solicitada',
+  }).select('*').single()
+  if (error) throw new Error(error.message)
+  return data
+}
+
+export async function revisarCertificacionFormal(id, revision) {
+  // El servidor verifica rol administrador mediante RLS. Nunca permitir
+  // aprobación sin horas verificadas, prácticas, evaluación y safeguarding.
+  const allowed = ['en_revision', 'aprobada', 'rechazada']
+  if (!allowed.includes(revision.estado)) throw new Error('Estado de revisión inválido')
+  const cambios = {
+    estado: revision.estado,
+    horas_validadas: Math.max(0, Number(revision.horas_validadas) || 0),
+    practicas_validadas: revision.practicas_validadas === true,
+    evaluacion_validada: revision.evaluacion_validada === true,
+    menores_verificado: revision.menores_verificado === true,
+    observaciones: String(revision.observaciones || '').slice(0, 3000),
+    revisado_en: new Date().toISOString(),
+  }
+  const { data: auth } = await supabase.auth.getUser()
+  if (!auth?.user?.id) throw new Error('Sesión no válida')
+  cambios.revisado_por = auth.user.id
+  const { data, error } = await supabase
+    .from('certificaciones_formacion')
+    .update(cambios).eq('id', id).select('*').single()
+  if (error) throw new Error(error.message)
+  return data
+}
