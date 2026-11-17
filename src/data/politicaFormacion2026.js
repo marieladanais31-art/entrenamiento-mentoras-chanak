@@ -8,7 +8,7 @@ export const POLITICA_FORMACION = {
     nombre: 'Chanak International Academy',
     entidad: 'Chanak TrainUp Education, Inc.',
     floridaCode: '134620',
-    msa: 'Aprobación comunicada; carta y normas de uso del sello pendientes de verificación documental',
+    msa: 'Accredited MSA-CESS K–12 · ONOA 6 noviembre 2026 · vigente hasta 1 enero 2034 · MSA FL175',
     dbu: 'Miembro de Dallas Baptist University Global Community; no implica admisión ni créditos universitarios automáticos',
   },
   planes: [

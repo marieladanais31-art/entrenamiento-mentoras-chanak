@@ -79,7 +79,7 @@ export const BLOQUES_1_2 = {
         titulo: 'Cuatro respaldos que no se deben confundir',
         guion: [
           'Florida DOE #134620: registro estatal como escuela privada. Es un registro, no una acreditación.',
-          'MSA-CESS: la dirección ha comunicado la aprobación de la acreditación por votación de la Comisión en noviembre de 2026. La carta formal, el alcance definitivo y las normas de uso de marca están pendientes de cotejo. No crear ni utilizar un sello acreditado sin autorización.',
+          'MSA-CESS: la ONOA oficial fechada el 6 de noviembre de 2026 acredita a Chanak International Academy K–12 hasta el 1 de enero de 2034. Código FL175. Usar únicamente la marca Accredited aprobada por MSA.',
           'Nonprofit 501(c)(3): estatus fiscal federal de la entidad titular. Candid Gold 2026: sello de transparencia institucional, no una acreditación educativa.',
           'Organizaciones como la entidad colaboradora independiente en España son entidades colaboradoras con personalidad jurídica propia. No son departamentos de Chanak ni forman parte de su jerarquía académica.',
         ],
@@ -94,10 +94,10 @@ export const BLOQUES_1_2 = {
         '¿A quién avisas de que hay información pública incorrecta?',
       ],
       criterio:
-        'Respuesta correcta: «Chanak ha recibido comunicación de aprobación de acreditación MSA-CESS; carta formal y autorización de marca pendientes». Una entidad colaboradora conserva su personalidad jurídica. La información pública errónea se comunica a Chanak Central.',
+        'Respuesta correcta: «Chanak International Academy está acreditada por MSA-CESS K–12 desde el 6 de noviembre de 2026; vigencia hasta 1 de enero de 2034». Una entidad colaboradora conserva su personalidad jurídica. La información pública errónea se comunica a Chanak Central.',
     },
     quiz: [
-      { p: '¿Qué comunica Chanak sobre MSA-CESS mientras espera la carta formal?', opciones: ['Los socios quedan acreditados automáticamente', 'Se comunicó aprobación; carta formal y autorización de marca pendientes', 'La candidatura sigue sin decisión', 'Podemos fabricar un sello provisional'], correcta: 1, explica: 'La aprobación fue comunicada a Dirección; debe cotejarse la carta y no usar sello no autorizado.' },
+      { p: '¿Qué confirma la carta oficial ONOA de MSA-CESS sobre Chanak?', opciones: ['Todos los socios quedan acreditados', 'Acreditación institucional K–12 concedida el 6 nov. 2026, vigente hasta 1 ene. 2034', 'La escuela sigue candidata', 'La universidad DBU emite el diploma'], correcta: 1, explica: 'La ONOA confirma K–12, MSA FL175 y vigencia hasta 1 de enero de 2034. No transfiere acreditación a terceros.' },
       { p: 'Un colegio pregunta si el registro FLDOE #134620 es una acreditación. ¿Qué respondes?', opciones: ['Sí, es la acreditación estatal', 'No: es el registro de Chanak como escuela privada en Florida', 'Sí, equivale a MSA', 'Es un número fiscal'], correcta: 1, explica: 'El FLDOE #134620 es un registro estatal, no una acreditación.' },
       { p: 'En una presentación alguien llama a entidad colaboradora independiente «el departamento de Chanak en España». ¿Qué corriges?', opciones: ['Nada, es correcto', 'Que entidad colaboradora independiente es una entidad colaboradora independiente', 'Que entidad colaboradora independiente es el campus de Chanak', 'Que entidad colaboradora independiente emite los diplomas'], correcta: 1, explica: 'entidad colaboradora independiente tiene personalidad jurídica propia; no es un departamento ni un nivel jerárquico de Chanak.' },
       { p: '¿Qué es Candid Gold 2026?', opciones: ['Una acreditación educativa', 'Un sello de transparencia institucional', 'Una licencia del Ministerio', 'Un premio académico'], correcta: 1, explica: 'Candid Gold es transparencia institucional, no acreditación.' },
