@@ -6,6 +6,7 @@ import * as api from '../lib/backend'
 import { resumenMentora, formatearFecha, iniciales, aplicarEquivalencias } from '../lib/calculos'
 import GestionUsuarias from './GestionUsuarias'
 import GestionCodigos from './GestionCodigos'
+import RevisionCertificaciones from './RevisionCertificaciones'
 import ActividadAdmin from './ActividadAdmin'
 import AccesosAdmin from './AccesosAdmin'
 import { useIdioma } from '../i18n/idioma'
@@ -72,6 +73,7 @@ export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) 
           ['accesos', 'Últimos accesos'],
           ['codigos', t('admin.tabCodigos')],
           ['progreso', t('admin.tabProgreso')],
+          ['certificaciones', '🎓 Certificaciones'],
           ['actividad', 'Actividad y pendientes'],
           ['videos', t('admin.tabVideos')],
           ['retroactivo', t('admin.tabRetroactivo')],
@@ -208,6 +210,13 @@ export default function AdminView({ miPerfil, onVerUsuaria, onVerCertificado }) 
               </div>
             </section>
           )}
+
+          {pestana === 'certificaciones' && <RevisionCertificaciones
+            perfiles={perfiles}
+            progresos={progresos}
+            rolesMapa={rolesMapa}
+            onVerCertificado={onVerCertificado}
+          />}
 
           {pestana === 'videos' && <GestionVideos />}
 
