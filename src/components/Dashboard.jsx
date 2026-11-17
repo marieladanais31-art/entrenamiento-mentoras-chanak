@@ -10,6 +10,7 @@ import { useIdioma } from '../i18n/idioma'
 import { traducirBloques } from '../data/curriculum.en'
 import RutaRoles from './RutaRoles'
 import PlanFormacion from './PlanFormacion'
+import SolicitudCertificacion from './SolicitudCertificacion'
 import RutaClara from './RutaClara'
 
 // Inicio → Paso 1 Tronco común → Paso 2 Elige tu rama → Paso 3 Tu ruta → Módulo
@@ -351,6 +352,12 @@ export default function Dashboard({
           ♻️ {t('panel.reconocidos', { n: r.reconocidos })}
         </p>
       )}
+
+      {/* Certificación formal: solicitud y estado validados por Dirección */}
+      {esMentorOCoord && <SolicitudCertificacion
+        perfilId={mentora.id} progreso={progreso} roles={roles}
+        contactoMenores={contactoMenores} soloLectura={viendoOtra}
+      />}
 
       {/* Certificación */}
       {r.elegibleCoordinadora ? (
