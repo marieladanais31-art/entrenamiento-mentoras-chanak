@@ -1,23 +1,37 @@
-import { resumenMentora, formatearFecha } from '../lib/calculos'
+import { formatearFecha } from '../lib/calculos'
+import { useEffect, useState } from 'react'
+import * as api from '../lib/backend'
 import { CURSO } from '../data/curso'
 import { VERSION_CURRICULO } from '../data/curriculum'
 import { useIdioma } from '../i18n/idioma'
 
 // Certificado imprimible (A4 horizontal).
 // nivel: 1 → CHANAK CERTIFIED MENTOR (180 h) · 2 → CHANAK CERTIFIED COORDINATOR (300 h)
-export default function Certificado({ mentora, progreso, nivel, onVolver }) {
+export default function Certificado({ mentora, nivel, onVolver }) {
   const { t } = useIdioma()
-  const r = resumenMentora(progreso)
+  const [registro, setRegistro] = useState(null)
+  const [cargando, setCargando] = useState(true)
+  const [error, setError] = useState('')
+  useEffect(() => {
+    let activo = true
+    setCargando(true)
+    setError('')
+    api.listarCertificacionesFormales(mentora.id)
+      .then((items) => { if (activo) setRegistro(items.find((x) => x.nivel === nivel && x.version_curriculo === VERSION_CURRICULO && x.estado === 'aprobada') || null) })
+      .catch((e) => { if (activo) setError(e.message) })
+      .finally(() => { if (activo) setCargando(false) })
+    return () => { activo = false }
+  }, [mentora.id, nivel])
   const cert = CURSO.certificaciones[nivel - 1] || CURSO.certificaciones[0]
-  const hoy = new Date().toISOString().slice(0, 10)
+  const fechaEmision = registro?.revisado_en?.slice(0,10) || ''
   const idInterno = mentora.idInterno || (mentora.id ? String(mentora.id).slice(0, 8).toUpperCase() : '')
-  const ref = `CHK-${cert.codigo}-${hoy.replace(/-/g, '')}`
+  const ref = registro?.codigo_verificacion || ''
 
-  if (!(nivel === 2 ? r.elegibleCoordinadora : r.elegibleMentor)) return (
+  if (cargando || !registro || error) return (
     <section className="rounded-2xl bg-white p-5 text-navy shadow-sm">
       <button onClick={onVolver} className="text-sm font-bold text-teal">Volver</button>
-      <h1 className="mt-4 text-xl font-bold">Certificación pendiente de validación formal</h1>
-      <p className="mt-3 text-sm">La meta de esta ruta es {cert.horas} horas. Las {r.horas} h mostradas en el app son una estimación de actividades de módulos; no son horas acreditadas ni una autorización de certificación.</p>
+      <h1 className="mt-4 text-xl font-bold">{cargando ? 'Comprobando certificación…' : 'Certificación pendiente de validación formal'}</h1>
+      <p className="mt-3 text-sm">{error ? `No se pudo verificar la autorización: ${error}` : `Este certificado exige ${cert.horas} horas reales, prácticas revisadas, evaluación y aprobación expresa por Dirección. El progreso de módulos no equivale a certificación.`}</p>
       <p className="mt-3 text-sm">Presenta bitácora de tiempo real, currículo y práctica supervisada, portafolio y evaluación a dirección. La resolución y firma se archivan antes de emitir el certificado oficial.</p>
       <a className="mt-4 inline-block text-sm font-bold text-teal underline" href="https://drive.google.com/file/d/11l7EomB_1f3qbXIfYmTwKefUgVbiGoTv/view">Consultar plan y protocolo</a>
     </section>
@@ -56,7 +70,7 @@ export default function Certificado({ mentora, progreso, nivel, onVolver }) {
               <br />
               <b className="text-navy">Chanak · Formación del Equipo Chanak 2026–2027</b>
               <br />
-              {t('cert.cargaTotal', { horas: cert.horas })}
+              {t('cert.cargaTotal', { horas: Number(registro.horas_validadas) })}
             </p>
 
             <div className="mx-auto mt-6 max-w-md rounded-xl border-2 border-gold/40 bg-gold/8 px-5 py-3">
@@ -78,8 +92,9 @@ export default function Certificado({ mentora, progreso, nivel, onVolver }) {
               </div>
             </div>
 
+            <p className="mt-4 text-xs text-navy/70">Autorizado por Dirección Académica · Registro institucional: {ref}</p>
             <div className="mt-8 flex flex-wrap items-end justify-between gap-3 border-t border-navy/10 pt-3 text-[11px] text-navy/45">
-              <span>{t('cert.expedido', { fecha: formatearFecha(hoy), horas: r.horas })}</span>
+              <span>{t('cert.expedido', { fecha: formatearFecha(fechaEmision), horas: Number(registro.horas_validadas) })}</span>
               <span>{idInterno && `ID ${idInterno} · `}Ref. {ref} · {VERSION_CURRICULO}</span>
             </div>
             <p className="mt-2 text-[10px] leading-relaxed text-navy/40">{t('cert.legal')}</p>
