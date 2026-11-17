@@ -115,6 +115,8 @@ export const BIBLIOTECA = [
 ]
 
 export const RECURSOS_GENERALES = [
+  { nombre: 'ONOA MSA-CESS · Acreditación oficial K–12 · 06-11-2026', url: 'https://docs.google.com/document/d/1KE3vsxYrwqLPg5Ge1bRHfGXH_olu79KSdxF2MP47tTs/export?format=pdf', descripcion: 'Acreditación otorgada K–12; expira 1 enero 2034; código MSA FL175; informe intermedio 1 diciembre 2030.' },
+  { nombre: 'Declaración institucional y logos acreditados MSA-CESS', url: 'https://docs.google.com/document/d/13_3MUBOiO0s7TitXv3l7iyZuOs8P9avcizv5fIRIoqo/edit', descripcion: 'Fuente oficial vigente y alcance; prohíbe usar Candidate y acreditar automáticamente sedes partner.' },
   { nombre: 'Protocolo de certificación y validación de horas · Noviembre 2026', url: 'https://docs.google.com/document/d/15Jf4000qvlbNR2w95-ZhS1ENa1G4Y0q9g83tkMb1PIE/edit', descripcion: 'Solicitud, revisión de Dirección, bitácora de horas, prácticas, safeguarding, certificaciones Mentor 180 h y Coordinator 300 h.' },
   { nombre: 'Auditoría de ecosistema SIS, Flex, Life Skills, Extensión Local y English · Noviembre 2026', url: 'https://docs.google.com/document/d/1ydOcGEXPiUdmQhnksIHioFUpKLuy_zxvO2hb8-rT-TU/edit', descripcion: 'Qué hace cada app, integración propuesta SIS como acceso único, hallazgos de Chanak Flex y pruebas pendientes. No implica SSO ya implementado.' },
   { nombre: 'Familias y estudiantes · Manual SIS · borrador noviembre 2026', url: 'https://drive.google.com/file/d/1Y6VE3uyQ4FOAyZzYhFr_92yftl7LctWN/view', descripcion: 'Manual basado en vistas y componentes del repositorio; mapas esquemáticos, pendiente validación con captura de sesión demo.' },
