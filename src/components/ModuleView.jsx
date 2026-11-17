@@ -65,11 +65,14 @@ export default function ModuleView({
       ? { url: videoDef.videoUrl, subtitulos: videoDef.subtitulos, nota: '' }
       : null
 
-  // Solo los módulos con vídeo real muestran el paso de vídeo; los demás van directo a lectura
+  // El Tronco Común comprueba comprensión mediante Knowledge Check, sin casos
+  // ni entrega adicional. Las especializaciones conservan prácticas y evidencias.
+  // NO se altera la calificación ni el historial de módulos ya completados.
+  const esModuloTroncal = TRONCO_COMUN.includes(moduloId)
   const tieneVideo = Boolean(video?.url)
-  const pasosActivos = tieneVideo
-    ? ['video', 'lectura', 'practica', 'quiz', 'evidencia', 'completado']
-    : ['lectura', 'practica', 'quiz', 'evidencia', 'completado']
+  const pasosActivos = esModuloTroncal
+    ? (tieneVideo ? ['video', 'lectura', 'quiz', 'completado'] : ['lectura', 'quiz', 'completado'])
+    : (tieneVideo ? ['video', 'lectura', 'practica', 'quiz', 'evidencia', 'completado'] : ['lectura', 'practica', 'quiz', 'evidencia', 'completado'])
 
   const [paso, setPaso] = useState(0)
   const [fecha, setFecha] = useState(() => new Date().toISOString().slice(0, 10))
@@ -148,6 +151,13 @@ export default function ModuleView({
         )}
       </div>
 
+      {esModuloTroncal && (
+        <div className="rounded-xl border border-teal/25 bg-teal/5 p-4 text-sm leading-relaxed text-navy">
+          <b>Tronco Común · Comprender y avanzar.</b> Lee o visualiza el contenido y aprueba la comprobación de conocimientos.
+          No necesitas entregar casos ni evidencias en esta etapa; las prácticas se realizan en tu especialización.
+          La formación obligatoria de protección de menores sigue siendo requisito antes de funciones con estudiantes.
+        </div>
+      )}
       {vistasDeModulo(moduloId).length > 0 && (
         <details open className="rounded-2xl border-2 border-teal/40 bg-white p-4 shadow-sm">
           <summary className="cursor-pointer text-sm font-bold text-teal">🖥 Así se ve en el sistema · {vistasDeModulo(moduloId).length} pantalla(s)</summary>
@@ -378,12 +388,12 @@ export default function ModuleView({
             ))}
           </div>
 
-          <Siguiente onClick={() => irPaso('practica')} t={t} />
+          <Siguiente onClick={() => irPaso(esModuloTroncal ? 'quiz' : 'practica')} t={t} />
         </Seccion>
       )}
 
-      {/* ── 3 · Práctica ── */}
-      {actual === 'practica' && contenido?.practica && (
+      {/* ── 3 · Práctica (solo rama/especialización) ── */}
+      {!esModuloTroncal && actual === 'practica' && contenido?.practica && (
         <Seccion titulo={`🛠 ${t('paso.practica')}`} sub={t('modulo.practicaSub')}>
           <div className="rounded-xl border-l-4 border-gold bg-gold/8 px-4 py-3 text-sm leading-relaxed text-navy">
             <b>{t('modulo.situacion')}:</b> {contenido.practica.situacion}
@@ -433,12 +443,12 @@ export default function ModuleView({
           ) : (
             <Seccion titulo={t('quiz.titulo')}><p className="text-sm text-navy/60">—</p></Seccion>
           )}
-          <Siguiente onClick={() => irPaso('evidencia')} t={t} />
+          <Siguiente onClick={() => irPaso(esModuloTroncal ? 'completado' : 'evidencia')} t={t} />
         </>
       )}
 
       {/* ── 5 · Evidencia ── */}
-      {actual === 'evidencia' && (
+      {!esModuloTroncal && actual === 'evidencia' && (
         <Seccion titulo={`📁 ${t('paso.evidencia')}`}>
           {contenido?.evidencia && (
             <p className="rounded-xl bg-cream px-4 py-3 text-sm leading-relaxed text-navy/80">

@@ -21,13 +21,16 @@ export const BLOQUE_10 = {
         '¿Qué registras y a quién escalas?',
       ],
       criterio:
-        'Explica el estado real (en proceso/en revisión) con la documentación vigente, sin garantizar; aclara que no puedes modificar precios y traslada la petición a Chanak Central; registra el contacto con fecha y siguiente paso.',
+        'Explica el estado institucional y el alcance documental verificado, sin atribuir acreditación automática a socios; aclara que no puedes modificar precios y traslada la petición a Chanak Central; registra el contacto con fecha y siguiente paso.',
     },
     quiz: [
+      { p: 'En una reunión con familias, ¿cuál es el enfoque adecuado de venta Chanak?', opciones: ['Prometer diploma y descuentos', 'Escuchar necesidades, presentar producto y condiciones autorizadas, y acordar próximo paso', 'Solicitar contraseña del SIS', 'Decir que ESA cubre todo'], correcta: 1, explica: 'La venta es consultiva, bilingüe y basada en prestaciones verificadas.' },
+      { p: '¿Qué debe verificar un embajador antes de registrar un referido?', opciones: ['Solo que conozca a la persona', 'Consentimiento, acuerdo y materiales vigentes; incentivos transparentes si existen', 'Pedir acceso al expediente escolar', 'Ofrecer comisión garantizada'], correcta: 1, explica: 'El consentimiento y la autorización comercial son obligatorios.' },
+      { p: '¿Qué significa liderazgo de servicio en un proyecto Chanak?', opciones: ['Que cualquiera puede firmar', 'Fijar metas responsables, escuchar, acompañar y escalar decisiones fuera de rol', 'Eliminar seguimiento', 'Imponer tareas sin formación'], correcta: 1, explica: 'La autoridad es proporcional al rol y el avance se documenta.' },
       { p: '¿Quién puede modificar un precio durante una conversación con una familia?', opciones: ['La Representante, si lo ve razonable', 'Nadie en terreno; se traslada a Chanak Central', 'El contratista', 'La iglesia colaboradora'], correcta: 1, explica: 'Los precios los decide la dirección; un Representante no puede modificarlos.' },
       { p: 'Un trámite está «en revisión». ¿Cómo lo comunicas?', opciones: ['Como aprobado, para ganar tiempo', 'Como «en revisión», sin garantizar resultado', 'No lo mencionas nunca', 'Como acreditado'], correcta: 1, explica: 'Lo no confirmado se dice en proceso o en revisión, nunca como aprobado.' },
       { p: '¿Qué puede recibir un contratista contratado en una plataforma como Fiverr?', opciones: ['Acceso al SIS para ver expedientes', 'Datos de familias para personalizar anuncios', 'Un encargo escrito con alcance, plazo y entregables, y ningún dato de estudiantes', 'Las claves del correo institucional'], correcta: 2, explica: 'El contratista trabaja con encargo escrito y sin accesos ni datos personales.' },
-      { p: '¿Cómo debe aparecer el programa en los materiales comerciales de España?', opciones: ['Off-Campus', 'Off-Campus (Homeschool Guiado)', 'Escuela acreditada', 'Cualquiera de las anteriores'], correcta: 1, explica: 'La regla es usar siempre «Off-Campus (Homeschool Guiado)» y los precios en euros.' },
+      { p: '¿Cómo se describen correctamente las modalidades Off-Campus para España?', opciones: ['Solo Full Enrollment', 'Guided Homeschool y Full Enrollment', 'Solo Microschool', 'Un curso de inglés'], correcta: 1, explica: 'La regla es usar siempre «Off-Campus (Homeschool Guiado)» y los precios en euros.' },
       { p: 'En la semana 4 del plan de 30 días, ¿qué se hace?', opciones: ['Prometer matrículas a la dirección', 'Revisar resultados con Chanak Central y decidir si se continúa, ajusta o pausa', 'Firmar acuerdos locales', 'Cerrar sin registrar'], correcta: 1, explica: 'La semana 4 es de revisión, corrección y decisión, con constancia escrita.' },
     ],
     evidencia:
