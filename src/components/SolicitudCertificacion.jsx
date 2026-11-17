@@ -12,11 +12,12 @@ export default function SolicitudCertificacion({ perfilId, progreso, roles = [],
   const esCoordinador = rolesActuales.includes('coordinator') || rolesActuales.includes('partner_director')
   const esMentor = esCoordinador || rolesActuales.includes('mentor')
   const mods = progreso?.modulos || {}
-  const ruta = useMemo(
-    () => [...new Set(modulosObligatorios(esCoordinador ? ['coordinator'] : ['mentor'], contactoMenores))]
-      .filter((id) => Boolean(getModulo(id))),
-    [esCoordinador, contactoMenores]
-  )
+  const rutas = useMemo(() => Object.fromEntries([1, 2].map((nivel) => [
+    nivel,
+    [...new Set(modulosObligatorios(nivel === 2 ? ['coordinator'] : ['mentor'], contactoMenores))]
+      .filter((id) => Boolean(getModulo(id)))
+  ])), [contactoMenores])
+  const ruta = rutas[esCoordinador ? 2 : 1]
   const pendientes = ruta.filter((id) => mods[id]?.estado !== 'completado')
   const porcentaje = ruta.length ? Math.round(100 * (ruta.length - pendientes.length) / ruta.length) : 0
   const directo = tieneContactoDirecto(rolesActuales, contactoMenores)
@@ -53,7 +54,8 @@ export default function SolicitudCertificacion({ perfilId, progreso, roles = [],
       {[1, ...(esCoordinador ? [2] : [])].map((nivel) => {
         const registro = registros.find((x) => x.nivel === nivel && x.version_curriculo === VERSION_CURRICULO)
         const titulo = nivel === 1 ? 'Certified Mentor · 180 h' : 'Certified Coordinator · 300 h acumuladas'
-        const puedeSolicitar = !registro && pendientes.length === 0 && !soloLectura
+        const faltantesNivel = rutas[nivel].filter((id) => mods[id]?.estado !== 'completado')
+        const puedeSolicitar = !registro && faltantesNivel.length === 0 && !soloLectura
         return <div key={nivel} className="mt-3 rounded-xl border border-navy/10 bg-cream/50 p-3">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <strong className="text-sm text-navy">{titulo}</strong>
@@ -61,7 +63,7 @@ export default function SolicitudCertificacion({ perfilId, progreso, roles = [],
           </div>
           {registro?.observaciones && <p className="mt-2 text-xs text-navy/70">Observaciones de Dirección: {registro.observaciones}</p>}
           {registro?.estado === 'aprobada' && <p className="mt-2 text-sm text-teal">✓ Certificación aprobada · {registro.codigo_verificacion} · {Number(registro.horas_validadas)} horas validadas</p>}
-          {!registro && <p className="mt-2 text-xs text-navy/65">{puedeSolicitar ? 'Terminaste los módulos exigidos. Solicita revisión de prácticas y bitácora.' : 'Continúa la ruta y aprueba los módulos antes de solicitar revisión.'}</p>}
+          {!registro && <p className="mt-2 text-xs text-navy/65">{puedeSolicitar ? 'Terminaste los módulos exigidos. Solicita revisión de prácticas y bitácora.' : `Quedan ${faltantesNivel.length} módulos exigidos antes de solicitar la revisión.`}</p>}
           {puedeSolicitar && <button disabled={ocupado} className="mt-2 rounded-lg bg-navy px-3 py-2 text-xs font-bold text-white disabled:opacity-50" onClick={() => solicitar(nivel)}>Solicitar validación institucional →</button>}
         </div>
       })}
