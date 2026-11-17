@@ -284,8 +284,18 @@ export const BLOQUES_1_2 = {
       'Explicar la auditoría del expediente y el Plan de Ruta.',
       'Presentar el valor de cada materia Chanak.',
       'Responder correctamente sobre homologación y sobre rutas de 2, 3 o 4 años.',
+      'Distinguir SIS institucional del portal de aprendizaje Dual Diploma y los puntos de conciliación.',
     ],
     lecciones: [
+      {
+        titulo: 'La ruta comercial y operativa de Dual Diploma en ocho etapas',
+        guion: [
+          'Dual Diploma es uno de los tres productos estratégicos de Chanak, junto con Off-Campus y Microschool. El estudiante sigue en su colegio local, recibe auditoría de créditos y estudia una ruta estadounidense de Grades 9–12. No sustituye el diploma del país.',
+          'Flujo de trabajo: (1) consulta; (2) expediente y evaluación inicial; (3) auditoría y resolución escrita de créditos; (4) Plan de Ruta y matrícula; (5) acceso SIS y Portal Dual; (6) inducción; (7) seguimiento académico; (8) transcript y diploma tras validar requisitos.',
+          'El SIS custodia el expediente institucional y el Portal Dual Diploma gestiona actividades y entregas. Son dos sistemas distintos: el mentor no presume sincronización automática, comprueba el estudiante asignado y deriva discrepancias a coordinación.',
+          'La pertenencia de Chanak a DBU Global Community no asegura ingreso en DBU, becas o créditos universitarios. Los Honors, si se ofrecen, deben ser asignaturas aprobadas dentro de una ruta formal. Apostilla, traducción y envío internacional se cotizan aparte cuando proceda.',
+        ],
+      },
       {
         titulo: 'Auditoría, créditos y Plan de Ruta',
         guion: [
@@ -309,6 +319,8 @@ export const BLOQUES_1_2 = {
       criterio: 'Plan de recuperación con fechas, registro en el SIS y aviso a coordinación si afecta al Plan de Ruta. Homologación: explicación aprobada, sin presentarla como requisito.',
     },
     quiz: [
+      { p: '¿Dónde se mantiene el expediente académico institucional de un alumno Dual Diploma?', opciones: ['Solo en el email de la familia', 'En el SIS oficial de Chanak, con seguimiento pedagógico en el Portal Dual', 'Únicamente en el Portal Dual Diploma', 'En la cuenta DBU'], correcta: 1, explica: 'SIS y Portal Dual tienen propósitos distintos y se deben conciliar.' },
+      { p: '¿Qué significa la pertenencia a DBU Global Community?', opciones: ['Admisión automática', 'Relación institucional; las oportunidades concretas requieren sus propios requisitos y acuerdos', 'Créditos universitarios automáticos', 'Homologación garantizada'], correcta: 1, explica: 'La membresía no sustituye procesos académicos ni acuerdos universitarios.' },
       { p: 'Una familia pregunta: «¿Cómo se determina si la ruta es de 2, 3 o 4 años?». ¿Qué respondes?', opciones: ['La elige la familia', 'Chanak prepara un Plan de Ruta individual tras revisar expediente, inglés y créditos reconocibles', 'Siempre son 4 años', 'Depende solo de la edad'], correcta: 1, explica: 'La duración depende del punto de entrada, créditos pendientes y viabilidad de la carga.' },
       { p: '¿Hay que homologar el diploma para participar en el Dual Diploma?', opciones: ['Sí, siempre', 'No; solo si una autoridad concreta lo requiere para un uso específico', 'Sí, antes de graduarse', 'Lo hace el mentor'], correcta: 1, explica: 'La homologación no es un requisito normal del programa.' },
       { p: '¿El reconocimiento de créditos es automático?', opciones: ['Sí, se convierten las notas', 'No: se decide en la auditoría individual y se comunica por escrito', 'Sí, 18 créditos para todos', 'Depende del mentor'], correcta: 1, explica: 'Siempre por auditoría y evidencia.' },
