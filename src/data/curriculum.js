@@ -115,6 +115,7 @@ export const BIBLIOTECA = [
 ]
 
 export const RECURSOS_GENERALES = [
+  { nombre: 'Dual Diploma · Guía operativa de Training y SIS (revisión noviembre 2026)', url: 'https://docs.google.com/document/d/1sPwWrVJPgDzxS_BHRXF8SKqjprCxXbfynMeWc4y62GI/edit', descripcion: 'Guía de las ocho etapas desde consulta, créditos y Plan de Ruta hasta seguimiento, transcript y diploma. Pendiente de validar conexiones reales SIS–Dual LMS.' },
   { nombre: 'Manual Microschool & Academic Partnerships · revisión noviembre 2026', url: 'https://docs.google.com/document/d/15bLpxLEzw2Oxu9lDKtq0uhqT8ePknh6sLkLDqPwHkZk/edit', descripcion: 'Producto estratégico activo: captación de instituciones, modelos Chanak-Operated y Partner Learning Center, ruta de viabilidad, permisos, formación, ESA y control de calidad.' },
   { nombre: 'Política operativa 2026-11 · En revisión interna', url: POLITICA_OPERATIVA_NOV_2026_URL, descripcion: 'Nueva referencia del entrenamiento: dos planes Off-Campus, matrícula anual, pagos privados/ESA, atención bilingüe y límites de servicios. Verificar aprobación de Dirección antes de usar como política pública.' },
   {
