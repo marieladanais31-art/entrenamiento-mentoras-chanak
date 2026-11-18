@@ -171,27 +171,7 @@ export default function Dashboard({
         </button>
       )}
 
-      {/* MI TRABAJO · guía operativa de cada función activa */}
-      {roles.some((id) => FUNCIONES[id]) && onVerFuncion && (
-        <section className="rounded-2xl border-2 border-gold bg-white p-5 shadow-sm">
-          <div className="text-[12px] font-bold uppercase tracking-[0.18em] text-gold">Mi trabajo</div>
-          <p className="mt-1 text-sm text-navy/70">Tu rutina, qué hacer en cada caso, a quién escalar y las pantallas que usas.</p>
-          <div className="mt-3 grid gap-2 sm:grid-cols-2">
-            {roles.filter((id) => FUNCIONES[id]).map((id) => (
-              <button key={id} onClick={() => onVerFuncion(id)} className="rounded-xl bg-cream px-4 py-3 text-left hover:bg-gold/15">
-                <span className="block text-sm font-bold text-navy">{FUNCIONES[id].titulo} →</span>
-                <span className="block text-xs text-navy/60">{FUNCIONES[id].rutina.length} tareas de rutina · {FUNCIONES[id].casos.length} casos</span>
-              </button>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {(esAdmin || esCoord) && onVerFuncion && <section className="rounded-2xl border border-teal/25 bg-white p-5 shadow-sm">
-        <h2 className="text-lg font-bold text-navy">Manual operativo de mentoras · revisión 23/10</h2>
-        <p className="mt-2 text-sm">Consultar las cinco unidades y las rutinas de cada especialidad.</p>
-        <div className="mt-3 flex flex-wrap gap-2">{[['mentor', 'Mentora general'], ['english_teacher', 'Inglés'], ['lifeskills_facilitator', 'Life Skills']].map(([id, titulo]) => <button key={id} onClick={() => onVerFuncion(id)} className="rounded-xl bg-teal px-4 py-3 text-sm font-bold text-white">{titulo}</button>)}</div>
-      </section>}
+      <p className="rounded-xl border border-teal/25 bg-white px-4 py-3 text-sm text-navy/75"><b>Tu formación obligatoria está aquí:</b> completa primero el Paso 1, confirma tu rama en el Paso 2 y continúa por el Paso 3. Los recursos complementarios aparecen después y no alteran tu progreso.</p>
 
       {/* PASO 1 · TRONCO COMÚN */}
       <Paso numero={1} titulo="Tronco común · para todas las personas" hechos={troncoHechos} total={troncoIds.length}
@@ -309,9 +289,34 @@ export default function Dashboard({
         </Paso>
       )}
 
+      {/* MI TRABAJO · guía operativa de cada función activa */}
+      {roles.some((id) => FUNCIONES[id]) && onVerFuncion && (
+        <section className="rounded-2xl border-2 border-gold bg-white p-5 shadow-sm">
+          <div className="text-[12px] font-bold uppercase tracking-[0.18em] text-gold">Mi trabajo</div>
+          <p className="mt-1 text-sm text-navy/70">Tu rutina, qué hacer en cada caso, a quién escalar y las pantallas que usas.</p>
+          <div className="mt-3 grid gap-2 sm:grid-cols-2">
+            {roles.filter((id) => FUNCIONES[id]).map((id) => (
+              <button key={id} onClick={() => onVerFuncion(id)} className="rounded-xl bg-cream px-4 py-3 text-left hover:bg-gold/15">
+                <span className="block text-sm font-bold text-navy">{FUNCIONES[id].titulo} →</span>
+                <span className="block text-xs text-navy/60">{FUNCIONES[id].rutina.length} tareas de rutina · {FUNCIONES[id].casos.length} casos</span>
+              </button>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {(esAdmin || esCoord) && onVerFuncion && <section className="rounded-2xl border border-teal/25 bg-white p-5 shadow-sm">
+        <h2 className="text-lg font-bold text-navy">Manual operativo de mentoras · revisión 23/10</h2>
+        <p className="mt-2 text-sm">Consultar las cinco unidades y las rutinas de cada especialidad.</p>
+        <div className="mt-3 flex flex-wrap gap-2">{[['mentor', 'Mentora general'], ['english_teacher', 'Inglés'], ['lifeskills_facilitator', 'Life Skills']].map(([id, titulo]) => <button key={id} onClick={() => onVerFuncion(id)} className="rounded-xl bg-teal px-4 py-3 text-sm font-bold text-white">{titulo}</button>)}</div>
+      </section>}
+
+
       {/* Herramientas de la rama */}
-      <section className="space-y-3">
-        <h3 className="font-bold text-navy">Herramientas de trabajo</h3>
+      <details className="rounded-2xl bg-white p-4 shadow-sm">
+        <summary className="cursor-pointer font-bold text-navy">📚 Recursos complementarios y herramientas de trabajo (consulta opcional)</summary>
+        <p className="mt-2 text-sm text-navy/65">Estos materiales apoyan tu labor y no sustituyen ni cuentan como módulos del tronco común o de tu ruta de certificación.</p>
+        <div className="mt-4 space-y-3">
         {esMentorOCoord && (
           <button onClick={onVerProgramas} className="w-full rounded-2xl border-2 border-teal bg-white p-5 text-left shadow-sm hover:bg-teal/5">
             <span className="block text-sm font-bold uppercase text-teal">Guía operativa · Mentor y Coordinador</span>
@@ -340,7 +345,8 @@ export default function Dashboard({
           <Acceso icono="📘" titulo={t('panel.presentacion')} sub={t('panel.presentacionSub')} onClick={onVerCurso} tono="teal" />
           <Acceso icono="📋" titulo={t('panel.registroHoras')} sub={t('panel.registroHorasSub', { horas: r.horas })} onClick={onVerHoras} tono="teal" />
         </div>
-      </section>
+        </div>
+      </details>
 
       {/* Avance por rol y sistemas */}
       {roles.length > 0 && (
@@ -373,8 +379,8 @@ export default function Dashboard({
       )}
 
       {/* Biblioteca práctica de documentos oficiales (Drive) */}
-      <details className="rounded-2xl bg-white p-4 shadow-sm">
-        <summary className="cursor-pointer text-sm font-bold text-navy">📂 {t('panel.biblioteca')}</summary>
+      {esAdmin && <details className="rounded-2xl bg-white p-4 shadow-sm">
+        <summary className="cursor-pointer text-sm font-bold text-navy">🔒 Biblioteca documental interna · solo administración</summary>
         <p className="mt-2 text-xs text-navy/60">{t('panel.bibliotecaSub')}</p>
         <ul className="mt-3 space-y-2.5">
           {BIBLIOTECA.map((b) => (
@@ -386,7 +392,7 @@ export default function Dashboard({
           ))}
         </ul>
         <a href={CARPETA_FINAL_URL} target="_blank" rel="noreferrer" className="mt-3 inline-block text-xs font-semibold text-teal hover:underline">{t('panel.bibliotecaTodo')} →</a>
-      </details>
+      </details>}
 
       {/* Administración: catálogo completo de bloques */}
       {esAdmin && (
