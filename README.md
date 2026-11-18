@@ -3,15 +3,17 @@
 > Comprender el modelo. Acompañar con criterio. Documentar con excelencia.
 
 Aplicación web interna de **Chanak International Academy** (Chanak TrainUp Education, Inc. ·
-escuela privada registrada en Florida, FLDOE #134620 · MSA-CESS Candidate) para formar a
+escuela privada registrada en Florida, FLDOE #134620 · acreditada por MSA-CESS (6 de noviembre de 2026)) para formar a
 mentores y coordinadores y registrar su progreso. Enseña cómo funciona y se opera Chanak:
 no es un curso para preparar una visita de acreditación.
 
 **Producción:** https://training.chanakacademy.org
-**Versión de currículo:** `training-2026-2027` (actualizado el 2 de octubre de 2026)
+**Versión de currículo:** `training-2026-2027` (requiere revisión integral de contenidos frente a las políticas vigentes de noviembre de 2026)
 **Fuente oficial del contenido:** carpeta `CHANAK_DOCUMENTOS_2026-2027_FINAL`
 (01_INSTITUCIONAL, 02_FAMILIAS, 03_INSTITUCIONES, 07_US_PROGRAMS_COMPLIANCE,
 08_ACADEMIC_POLICIES, 09_ACADEMIC_FRAMEWORK · K–12 Scope & Sequence).
+
+**Fuentes de referencia viva:** https://www.chanakacademy.org (programas y comunicación oficial) y https://sis.chanakacademy.org (registro académico y operación por roles). Las bibliotecas de Drive y herramientas de consulta no sustituyen la ruta obligatoria. La actualización de la interfaz no equivale a validación académica de todos los módulos.
 
 ## Ruta de certificación
 
