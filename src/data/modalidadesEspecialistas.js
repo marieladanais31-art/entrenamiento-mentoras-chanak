@@ -2,7 +2,7 @@ export const COBERTURA_ESPECIALISTAS = {
   titulo: 'Inglés y Life Skills: cobertura según el programa',
   texto: 'El acompañamiento del especialista de Inglés y el del especialista de Life Skills son servicios diferenciados. Su cobertura depende del programa del estudiante, no del cargo de su mentor general.',
   programas: [
-    ['Off-Campus', 'Opcionales', 'Los especialistas de Inglés y Life Skills se incorporan cuando la familia contrata esos servicios. No se presuponen incluidos por tener matrícula Off-Campus.'],
+    ['Off-Campus', 'Opcionales', 'Los especialistas de Inglés y Life Skills se incorporan cuando el plan los incluye o la familia los contrata por separado. Comprueba la modalidad y la asignación antes de ofrecer una clase.'],
     ['Dual Diploma', 'Incluidos', 'El programa incluye el acompañamiento de los especialistas de Inglés y Life Skills. Coordinación debe comprobar que cada estudiante tenga los responsables correspondientes asignados.'],
     ['Servicios sueltos', 'Contratación independiente', 'Inglés y Life Skills también pueden contratarse por separado como servicios sueltos, según lo que solicite la familia.'],
   ],
