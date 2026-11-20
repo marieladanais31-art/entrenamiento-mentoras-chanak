@@ -107,7 +107,8 @@
           "Registre fecha, evaluación, resultado propuesto y observaciones verificables según los campos disponibles. Adjunte el enlace a la evidencia de Drive autorizada para la revisión. Abra el enlace con la cuenta institucional y compruebe que el equipo asignado puede consultarlo.",
           "Conserve una evidencia legible y completa. Nombre orientativo: ID_ESTUDIANTE_MATERIA_EVALUACION_FECHA. Evite nombres completos en carpetas de circulación amplia y no haga públicos los documentos.",
           "Enviar no equivale a aprobar. Espere la revisión de coordinación. Si se pide corrección, responda a la observación en el mismo registro o por el mecanismo habilitado; no duplique toda la entrega.",
-          "Si el registro enviado o aprobado no permite edición, solicite revisión. No sustituya por otro una nota ya aprobada ni interprete una propuesta como resultado oficial."
+          "Si el registro enviado o aprobado no permite edición, solicite revisión. No sustituya por otro una nota ya aprobada ni interprete una propuesta como resultado oficial.",
+          "Para Extensión Local, consulte el catálogo según el país y grado; compruebe en Evaluaciones & Evidencias qué entrega corresponde. En Flex, revise el resultado de la unidad en la app y después verifique si se asentó la nota oficial en SIS. En Life Skills, compruebe por separado participación, feedback, ChanakCoins y estado de evidencia."
         ],
         "tabla": [
           [
@@ -289,7 +290,8 @@
           "Distinga trabajo guardado, enviado, en revisión, corrección solicitada y aprobado. Consulte el feedback y corrija el mismo entregable mediante la acción disponible; no duplique archivos o solicitudes sin necesidad.",
           "Una actividad marcada como completada puede describir progreso de estudio, no aprobación académica final. Ante la duda, consulte el estado evaluativo y al responsable.",
           "La familia ayuda a organizar y a comprender instrucciones, sin realizar el trabajo ni suplantar al alumno. Las evaluaciones siguen las condiciones comunicadas por coordinación.",
-          "No registren otra nota en SIS para compensar una entrega pendiente del LMS. Informen la discrepancia con ID y evidencias para que el equipo determine el registro pertinente."
+          "No registren otra nota en SIS para compensar una entrega pendiente del LMS. Informen la discrepancia con ID y evidencias para que el equipo determine el registro pertinente.",
+          "Para aportar un boletín del colegio presencial, confirme con Coordinación el canal habilitado para su expediente antes de cargarlo. Evite enviarlo por varios sistemas o por canales personales."
         ],
         "tabla": [
           [

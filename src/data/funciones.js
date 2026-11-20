@@ -27,7 +27,7 @@ export const FUNCIONES = {
     ],
     noHaces: ['Cambiar la vía curricular o el PEI aprobado', 'Subir una nota sin evidencia', 'Hablar de precios o descuentos', 'Diagnosticar (solo observas y documentas)'],
     evidencia: ['Notas y evidencias en el SIS', 'Registro de intervenciones', 'Acta breve de cada mentoría familiar'],
-    vistas: ['sis-tutor-estudiantes', 'sis-notas', 'sis-carga-ml', 'sis-evidencias', 'sis-pei', 'sis-alertas', 'sis-familia', 'dual-estudiante'],
+    vistas: ['sis-tutor-estudiantes', 'sis-notas', 'sis-evidencias', 'sis-pei', 'sis-alertas', 'sis-familia', 'dual-estudiante'],
   },
   english_teacher: {
     titulo: 'Profesor/a de inglés',
