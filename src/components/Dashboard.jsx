@@ -11,7 +11,6 @@ import { traducirBloques } from '../data/curriculum.en'
 import RutaRoles from './RutaRoles'
 import PlanFormacion from './PlanFormacion'
 import SolicitudCertificacion from './SolicitudCertificacion'
-import RutaClara from './RutaClara'
 
 // Inicio → Paso 1 Tronco común → Paso 2 Elige tu rama → Paso 3 Tu ruta → Módulo
 export default function Dashboard({
@@ -75,8 +74,6 @@ export default function Dashboard({
   const todos = [...new Set([...troncoIds, ...ramaIds])]
   const completados = todos.filter(hecho).length
   const enCurso = todos.filter((id) => mods[id]?.estado === 'en_curso').length
-  const horasMeta = sumaHoras(todos)
-  const horasHechas = sumaHoras(todos.filter(hecho))
 
   const siguienteId =
     todos.find((id) => mods[id]?.estado === 'en_curso') ||
@@ -113,23 +110,10 @@ export default function Dashboard({
         </p>
       </section>
 
-      {/* Ruta guiada: progreso real por etapa y función; preserva el progreso histórico */}
-      <RutaClara
-        progreso={progreso}
-        troncoIds={troncoIds}
-        ramaIds={ramaIds}
-        roles={roles}
-        grupos={grupos}
-        onAbrirModulo={onAbrirModulo}
-        onVerProgramas={onVerProgramas}
-        onVerEstrategia={onVerEstrategia}
-        viendoOtra={viendoOtra}
-      />
-
       {/* Cabecera de progreso de SU ruta */}
       <section className="rounded-2xl bg-white p-5 shadow-sm">
         <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-center">
-          <ProgressRing valor={horasHechas} meta={horasMeta || 1} />
+          <ProgressRing valor={completados} meta={todos.length || 1} />
           <div className="flex-1 text-center sm:text-left">
             <h2 className="text-xl font-bold text-navy">{mentora.nombre}</h2>
             <p className="text-sm text-navy/60">
@@ -142,7 +126,6 @@ export default function Dashboard({
               <Stat n={enCurso} etiqueta={t('panel.enCurso')} color="text-teal" />
               <Stat n={todos.length - completados - enCurso} etiqueta={t('panel.pendientes')} color="text-navy/50" />
             </div>
-            <p className="mt-2 text-[11px] text-navy/50">{fmt(horasHechas)} h de {fmt(horasMeta)} h de referencia en módulos · {todos.length} módulos en tu ruta</p>
           </div>
         </div>
       </section>
@@ -408,11 +391,6 @@ export default function Dashboard({
     </div>
   )
 }
-
-function sumaHoras(ids) {
-  return ids.reduce((s, id) => s + (getModulo(id)?.horas || 0), 0)
-}
-const fmt = (n) => (Math.round(n * 100) / 100).toLocaleString('es-ES')
 
 function Paso({ numero, titulo, sub, hechos, total, children }) {
   const pct = total ? Math.round((hechos / total) * 100) : 0
