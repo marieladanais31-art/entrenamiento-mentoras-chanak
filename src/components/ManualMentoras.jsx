@@ -43,8 +43,6 @@ export default function ManualMentoras({ funcionId, progreso, onGuardar, soloLec
       <p className="mt-3 text-base font-bold">Son funciones distintas. Una persona puede tener varias asignadas, pero ninguna incluye automáticamente las otras dos.</p>
       <p className="mt-3 text-base">Cinco unidades complementarias a tu ruta. Conservan tus módulos y vídeos anteriores. Revisadas contra el código del SIS y Dual Diploma; la disponibilidad de cada función depende del acceso y la configuración vigente.</p>
       <div className="no-print mt-4 flex flex-wrap gap-3">
-        <a href="/manuales/manual-mentoras-2026-10.pdf" target="_blank" rel="noreferrer" className="rounded-xl bg-navy px-4 py-3 text-sm font-bold text-white">Manual de procedimientos y especialidades</a>
-        <a href="https://drive.google.com/file/d/1idL7FWK8mEK8SYGqT-btOvxbaV_suIeg/view" target="_blank" rel="noreferrer" className="rounded-xl border border-teal/30 bg-white px-4 py-3 text-sm font-bold text-teal">Ver documento en Drive</a>
         <button onClick={() => window.print()} className="rounded-xl border border-teal/30 bg-white px-4 py-3 text-sm font-bold text-teal">Imprimir esta unidad</button>
       </div>
       <p className="mt-3 text-sm">Lecturas confirmadas: {registro.lecturas.length}/5 · Evaluación guardada: {quizGuardado ? `${quizGuardado.aciertos}/${quizGuardado.total} · ${quizGuardado.aprobado ? 'superada' : 'pendiente de superar'}` : 'sin intento registrado'}.</p>
