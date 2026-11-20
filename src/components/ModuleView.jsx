@@ -1,5 +1,4 @@
 import ActualizacionOperativa from './ActualizacionOperativa'
-import { RECURSOS_FORMATIVOS } from '../data/recursosFormativos'
 import { useState, useEffect } from 'react'
 import { getModulo, RECURSOS_GENERALES, FUENTES, numModulo, urlCarpeta, resolverUrlDocumento, clasificarDocumento } from '../data/curriculum'
 import { getContenido } from '../data/contenido'
@@ -359,30 +358,7 @@ export default function ModuleView({
             </ul>
           </div>
 
-          {/* Documentación y lecturas oficiales del módulo */}
-          {contenido.desglose?.documentos?.length > 0 && (
-            <div className="mb-6">
-              <BloqueDocumentos documentos={contenido.desglose.documentos} t={t} />
-            </div>
-          )}
-
-          {RECURSOS_FORMATIVOS[moduloId]?.length > 0 && (
-            <section className="mb-6 rounded-2xl border-2 border-teal/30 bg-white p-4 sm:p-5">
-              <div className="text-xs font-bold uppercase tracking-wider text-teal">Material aplicado a esta lección</div>
-              <h3 className="mt-1 text-base font-bold text-navy">Estudia el procedimiento dentro de tu formación</h3>
-              <p className="mt-1 text-xs leading-relaxed text-navy/65">Son materiales de trabajo en revisión, no versiones aprobadas para entregar a familias o instituciones. Esta lectura forma parte del estudio del módulo, pero no añade horas ni evaluaciones automáticas.</p>
-              <div className="mt-3 space-y-3">
-                {RECURSOS_FORMATIVOS[moduloId].map((recurso) => (
-                  <article key={recurso.url} className="rounded-xl border border-navy/10 bg-cream/50 p-3">
-                    <a href={recurso.url} target="_blank" rel="noreferrer" className="text-sm font-bold text-teal underline">{recurso.titulo} ↗</a>
-                    <p className="mt-1 text-sm text-navy/75">{recurso.objetivo}</p>
-                    <p className="mt-2 text-xs font-semibold text-navy/55">{recurso.estado}</p>
-                  </article>
-                ))}
-              </div>
-            </section>
-          )}
-          <ActualizacionOperativa moduloId={moduloId} />
+          {moduloId !== 'T2.2' && <ActualizacionOperativa moduloId={moduloId} />}
           <div className="mb-4 rounded-xl border border-teal/25 bg-white p-4 text-sm text-navy/75">
             <b className="text-navy">Lectura por partes.</b> Lee un tema cada vez; los demás permanecen disponibles para profundizar.
             No se elimina ningún contenido de la certificación.
@@ -404,6 +380,13 @@ export default function ModuleView({
               </details>
             ))}
           </div>
+
+          {/* Documentación y lecturas oficiales del módulo */}
+          {contenido.desglose?.documentos?.length > 0 && (
+            <details className="mb-6"><summary className="cursor-pointer font-bold text-teal">Documentos de consulta</summary>
+              <BloqueDocumentos documentos={contenido.desglose.documentos} t={t} />
+            </details>
+          )}
 
           <Siguiente onClick={() => irPaso(esModuloTroncal ? 'quiz' : 'practica')} t={t} />
         </Seccion>
