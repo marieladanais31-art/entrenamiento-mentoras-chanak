@@ -246,10 +246,11 @@ export const LECTURAS_B3 = {
         ],
       },
       {
-        titulo: 'Dónde está en Drive',
+        titulo: 'Chanak Flex · de la unidad al expediente',
         guion: [
-          'Abre CHANAK_DOCUMENTOS_2026-2027_FINAL › 03_INSTITUCIONES › Chanak_Curriculos_y_Vias_Academicas.pdf. Lee «Chanak Flex y otros materiales» con su recuadro «Un material debe ser», «Cómo evalúa Chanak una vía curricular» (los ocho criterios), «Cómo se demuestra el aprendizaje», la comparación «Chanak reconoce créditos por evidencia y dominio demostrado», «Estados de una vía curricular» y, si trabajas con centros, «Certificación institucional: Vía A y Vía B».',
-          'En 08_ACADEMIC_POLICIES › Chanak_Curriculum_Approval_Policy.pdf, lee «Procedimiento de revisión» y «Relación con los sistemas»; es la base de cualquier nota de escalado sobre vías. En 08_ACADEMIC_POLICIES › Chanak_Credit_Recognition_Policy.pdf, lee «Principios» y «Fuentes de crédito», para saber qué decir cuando una familia pregunte qué pasa con lo que ya ha hecho. Si te llega el caso de un centro con currículo propio, consulta además Chanak_Academic_Certification_Policy.pdf, apartado «Vía B · Currículo no revisado previamente».',
+          'Chanak Flex utiliza unidades de aprendizaje (CLU) dentro de la ruta que el estudiante tiene asignada. En el SIS, una unidad sugerida sirve para orientar la planificación. Verifica que la materia, el nivel y la unidad correspondan al PEI antes de orientar a la familia.',
+          'El estudiante realiza la unidad y aporta la evidencia por el canal indicado. Comprueba el estado de revisión y aplica el procedimiento de evaluación supervisada del programa. Terminar una unidad, contestar un cuestionario o enviar una evidencia no concede por sí solo una nota oficial ni un crédito.',
+          'Si la familia quiere cambiar de currículo, reporta la solicitud y los motivos. Coordinación valida el cambio cuando corresponda. El mentor conserva la trazabilidad en el SIS.',
         ],
       },
       {
